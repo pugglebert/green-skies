@@ -5,6 +5,7 @@ public class MyObject {
     private int quantity;
 
     public MyObject(String description, int quantity){
+        System.out.println("Hi there");
         this.description = description;
         this.quantity = quantity;
     }
