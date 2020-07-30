@@ -15,7 +15,7 @@ public class App
         System.out.println("Hello Nathan Huynh ");
         System.out.println("Hayley Krippner");
         System.out.println("Tom He");
-        System.out.println("Grace Hanlon");
+        System.out.println("seng202.team1.Grace Hanlon");
         System.out.println("Ella Johnson");
         System.out.println("Enyang Zhang");
 
