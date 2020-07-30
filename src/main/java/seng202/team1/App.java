@@ -14,6 +14,7 @@ public class App
 
         System.out.println("Hello Nathan Huynh");
         System.out.println("Hayley Krippner");
+        System.out.println("Ella Johnson");
 
         MyObject myObject = new MyObject("chair", 3);
         Gson gson = new Gson();
