@@ -11,7 +11,7 @@ public class App
 
     public static void main( String[] args )
     {
-        System.out.println("Hello Seng202 team 1");
+        System.out.println("Hello Nathan Huynh");
 
         MyObject myObject = new MyObject("chair", 3);
         Gson gson = new Gson();
