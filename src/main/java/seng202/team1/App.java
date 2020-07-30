@@ -12,9 +12,10 @@ public class App
     public static void main( String[] args )
     {
 
-        System.out.println("Hello Nathan Huynh");
+        System.out.println("Hello Nathan Huynh ");
         System.out.println("Hayley Krippner");
-        System.out.println("Ella Johnson");
+        System.out.println("Tom He");
+        System.out.println("Grace Hanlon");
 
         MyObject myObject = new MyObject("chair", 3);
         Gson gson = new Gson();
