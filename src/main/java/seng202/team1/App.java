@@ -19,5 +19,7 @@ public class App
 
         System.out.println("myObject =" + myObject);
         System.out.println("myObject stringyied = " + jsonString);
+
+        System.out.println("Goodbye");
     }
 }
