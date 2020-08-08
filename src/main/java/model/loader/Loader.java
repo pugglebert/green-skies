@@ -1,6 +1,7 @@
 package model.loader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class Loader {
     /** Calls checkFileType. Opens file. Seperates lines in file into ArrayList of Strings. Instantiates Parser.
      * @param fileName name of the file to be opened
      */
-    public void openFile(String fileName) {
+    public void openFile(String fileName, String dataType) {
 
         try {
             checkFileType(fileName);
@@ -40,13 +41,18 @@ public class Loader {
 
         lines = new ArrayList<String>();
         File file = new File(fileName);
-        Scanner scanner = new Scanner(file);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         while (scanner.hasNextLine()); {
             lines.add(scanner.nextLine());
         }
 
-        parser = new Parser(lines);
+        parser = new Parser(lines, dataType);
     }
 
     /**

@@ -6,7 +6,7 @@ public class Parser {
     ArrayList<String> dataFile;
     String dataType;
 
-    private Parser (ArrayList<String> dataFile, String dataType){
+    public Parser (ArrayList<String> dataFile, String dataType){
         this.dataFile = dataFile;
         this.dataType = dataType;
     }
