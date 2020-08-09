@@ -20,50 +20,114 @@ public class Loader {
 
 
     /** Expected file extension*/
-    private String csvExtension = "csv";
-    private ArrayList<String> lines;
+    private ArrayList<String> supportedExtensions;
     private Parser parser;
 
+    /** Adds extensions for supported fileTypes to supportedExtensions. */
     public Loader() {
-
+        supportedExtensions = new ArrayList<String>();
+        supportedExtensions.add("csv");
+        supportedExtensions.add("txt");
+        supportedExtensions.add("dat");
     }
 
-    /** Calls checkFileType. Opens file. Seperates lines in file into ArrayList of Strings. Instantiates Parser.
-     * @param fileName name of the file to be opened
+    /**
+     * Checks if file extension matches supported file types.
+     * @param fileName Name of file to be checked.
+     * @throws FileSystemException If file extension does not match one of supported formats
+     * @throws IllegalArgumentException If file has no extension
      */
-    public void openFile(String fileName, String dataType) {
-
-        try {
-            checkFileType(fileName);
-        } catch (FileSystemException e) {
-            System.out.println(e.getMessage()); //Change later, just for debugging
+    public void checkFileType(String fileName) throws FileSystemException, IllegalArgumentException {
+        String extension = getFileExtension(fileName);
+        if (extension.isEmpty()) {
+            throw new IllegalArgumentException("Address does not contain file extension.");
+        } if (! supportedExtensions.contains(extension)) {
+            throw new FileSystemException("Unsupported file type", extension, "Only CSV files can be processed.");
         }
+    }
 
-        lines = new ArrayList<String>();
+    /**
+     * Opens file, reads each line and appends it to an ArrayList.
+     * @param fileName Name of file to read from.
+     * @return An ArrayList of a String for each line in the file.
+     */
+    public ArrayList<String> openFile(String fileName) throws FileNotFoundException {
+
+        ArrayList<String> lines = new ArrayList<String>();
         File file = new File(fileName);
         Scanner scanner = null;
+
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw e;
         }
 
         while (scanner.hasNextLine()); {
             lines.add(scanner.nextLine());
         }
 
-        parser = new Parser(lines, dataType);
+        scanner.close();
+
+        return lines;
     }
 
     /**
-     * Checks if file extension is csv.
-     * @param fileName Name of file to be checked.
-     * @throws FileSystemException
+     * Constructs a parser of the relevant type.
+     * @param dataType The type of data to be procesed.
+     * @param lines An ArrayList of Strings of data to be processed by the parser.
      */
-    public void checkFileType(String fileName) throws FileSystemException {
-        String extension = getFileExtension(fileName);
-        if (extension != csvExtension) {
-            throw new FileSystemException("Unsupported file type. Only CSV files can be processed.");
+    public void constructParser(String dataType, ArrayList lines) throws IllegalArgumentException{
+        switch (dataType) {
+            case "airport" :
+                parser = new AirportParser(lines);
+                break;
+            case "airline" :
+                parser = new AirlineParser(lines);
+                break;
+            case "route" :
+                parser = new RouteParser(lines);
+                break;
+            case "flight" :
+                parser = new FlightParser(lines);
+                break;
+            default :
+                throw new IllegalArgumentException("Datatype must be one of: airline, airport, flight, route.");
         }
+    }
+
+    /** Process a file by calling checkFileType, openFile and constructParser.
+     * @param fileName Name of the file to be opened.
+     * @param dataType The type of data in the file (one of airport, airline, flight or route).
+     */
+    public void loadFile(String fileName, String dataType) {
+
+        if (fileName.isEmpty()) {
+            IllegalArgumentException e = new IllegalArgumentException("Filename cannot be empty.");
+            System.out.println(e.getMessage());
+            return;
+        } else if (dataType.isEmpty()) {
+            IllegalArgumentException e = new IllegalArgumentException("Datatype cannot be empty.");
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        try {
+            checkFileType(fileName);
+        } catch (FileSystemException | IllegalArgumentException e) {
+            System.out.println(e.getMessage()); //Change later, just for debugging
+            return;
+        }
+
+        ArrayList<String> lines;
+
+        try {
+            lines = openFile(fileName);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        constructParser(dataType, lines);
     }
 }

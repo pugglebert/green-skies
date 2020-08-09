@@ -28,7 +28,8 @@ public class LoaderTest {
         try {
             loader.checkFileType("badFile.jpg");
             fail();
-        } catch (FileSystemException e) { }
+        } catch (FileSystemException e) {
+        }
     }
 
     @Test
@@ -37,6 +38,7 @@ public class LoaderTest {
         try {
             loader.checkFileType("goodFile.csv");
         } catch (FileSystemException e) {
+            System.out.println(e.getMessage());
             fail();
         }
     }
