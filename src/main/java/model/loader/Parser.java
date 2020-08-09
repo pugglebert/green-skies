@@ -8,7 +8,6 @@ public abstract class Parser {
 
     public Parser (ArrayList<String> dataFile){
         this.dataFile = dataFile;
-
     }
 
 

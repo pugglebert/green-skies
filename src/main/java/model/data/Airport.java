@@ -1,18 +1,18 @@
 package model.data;
 
 public class Airport {
-    int airportID;
-    String name;
-    String city;
-    String country;
-    String IATA;
-    String ICAO;
-    float latitude;
-    float longitude;
-    int altitude;
-    float timezone;
-    String DST;
-    String dataBaseTimeZone;
+    public int airportID;
+    public String name;
+    public String city;
+    public String country;
+    public String IATA;
+    public String ICAO;
+    public float latitude;
+    public float longitude;
+    public int altitude;
+    public float timezone;
+    public String DST;
+    public String dataBaseTimeZone;
 
     public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude, float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
         this.airportID = airportID;
