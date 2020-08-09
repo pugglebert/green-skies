@@ -2,9 +2,9 @@ package model.loader;
 
 import java.util.ArrayList;
 
-public class Parser {
-    ArrayList<String> dataFile;
-    String dataType;
+public abstract class Parser {
+    private ArrayList<String> dataFile;
+    private String dataType;
 
     public Parser (ArrayList<String> dataFile, String dataType){
         this.dataFile = dataFile;
@@ -13,5 +13,6 @@ public class Parser {
 
 
 
+    private void dataValidater(){};
 
 }
