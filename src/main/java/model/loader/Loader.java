@@ -31,24 +31,8 @@ public class Loader {
         supportedExtensions.add("dat");
     }
 
-    /** Calls checkFileType. Opens file. Seperates lines in file into ArrayList of Strings. Instantiates Parser.
-     * @param fileName name of the file to be opened
-     */
-    public void loadFile(String fileName, String dataType) {
-
-        try {
-            checkFileType(fileName);
-        } catch (FileSystemException e) {
-            System.out.println(e.getMessage()); //Change later, just for debugging
-        }
-
-        ArrayList<String> lines = openFile(fileName);
-
-        constructParser(dataType, lines);
-    }
-
     /**
-     * Checks if file extension is csv.
+     * Checks if file extension matches supported file types.
      * @param fileName Name of file to be checked.
      * @throws FileSystemException
      */
@@ -59,6 +43,11 @@ public class Loader {
         }
     }
 
+    /**
+     * Opens file, reads each line and appends it to an ArrayList.
+     * @param fileName Name of file to read from.
+     * @return An ArrayList of a String for each line in the file.
+     */
     public ArrayList<String> openFile(String fileName) {
 
         ArrayList<String> lines = new ArrayList<String>();
@@ -78,6 +67,11 @@ public class Loader {
         return lines;
     }
 
+    /**
+     * Constructs a parser of the relevant type.
+     * @param dataType The type of data to be procesed.
+     * @param lines An ArrayList of Strings of data to be processed by the parser.
+     */
     public void constructParser(String dataType, ArrayList lines) {
         switch (dataType) {
             case "airport" :
@@ -93,5 +87,22 @@ public class Loader {
                 parser = new FlightParser(lines);
                 break;
         }
+    }
+
+    /** Process a file by calling checkFileType, openFile and constructParser.
+     * @param fileName Name of the file to be opened.
+     * @param dataType The type of data in the file (one of airport, airline, flight or route).
+     */
+    public void loadFile(String fileName, String dataType) {
+
+        try {
+            checkFileType(fileName);
+        } catch (FileSystemException e) {
+            System.out.println(e.getMessage()); //Change later, just for debugging
+        }
+
+        ArrayList<String> lines = openFile(fileName);
+
+        constructParser(dataType, lines);
     }
 }
