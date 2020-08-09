@@ -31,6 +31,10 @@ public class Loader {
         supportedExtensions.add("dat");
     }
 
+    protected Parser getParser() {
+        return parser;
+    }
+
     /**
      * Checks if file extension matches supported file types.
      * @param fileName Name of file to be checked.
@@ -63,7 +67,7 @@ public class Loader {
             throw e;
         }
 
-        while (scanner.hasNextLine()); {
+        while (scanner.hasNextLine()) {
             lines.add(scanner.nextLine());
         }
 
@@ -78,6 +82,7 @@ public class Loader {
      * @param lines An ArrayList of Strings of data to be processed by the parser.
      */
     protected void constructParser(String dataType, ArrayList lines) throws IllegalArgumentException{
+
         switch (dataType) {
             case "airport" :
                 parser = new AirportParser(lines);
@@ -94,6 +99,7 @@ public class Loader {
             default :
                 throw new IllegalArgumentException("Datatype must be one of: airline, airport, flight, route.");
         }
+
     }
 
     /** Process a file by calling checkFileType, openFile and constructParser.
