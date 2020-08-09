@@ -31,7 +31,7 @@ public class LoaderTest {
     /** Test that checkFileType throws an exception when called with a filename with an invalid extension */
     public void testCheckFileTypeInvalidFileName() {
         try {
-            loader.checkFileType("badFile.jpg");
+            loader.checkFileType("/home/cosc/student/egj21/Documents/SENG202/badFile.jpg");
             fail();
         } catch (Exception e) {
         }
@@ -41,7 +41,7 @@ public class LoaderTest {
     /** Test that checkFileType doesn't throw an exception when called with a filename with a valid extension */
     public void testCheckFileTypeValidFileName() {
         try {
-            loader.checkFileType("goodFile.csv");
+            loader.checkFileType("/home/cosc/student/egj21/Documents/SENG202/goodFile.csv");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             fail();
@@ -52,7 +52,7 @@ public class LoaderTest {
     /** Test that checkFileType throws an exception when called with a file with no extension */
     public void testCheckFileTypeNoExtension() {
         try {
-            loader.checkFileType("noExtension");
+            loader.checkFileType("/home/cosc/student/egj21/Documents/SENG202/airportsTest");
             fail();
         } catch (Exception e) {
         }

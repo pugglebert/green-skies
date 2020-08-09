@@ -80,6 +80,7 @@ public class Loader {
      * Constructs a parser of the relevant type.
      * @param dataType The type of data to be procesed.
      * @param lines An ArrayList of Strings of data to be processed by the parser.
+     * @throws IllegalArgumentException Thrown if datatype is not one of airline, airport, flight or route.
      */
     protected void constructParser(String dataType, ArrayList lines) throws IllegalArgumentException{
 
@@ -102,7 +103,8 @@ public class Loader {
 
     }
 
-    /** Process a file by calling checkFileType, openFile and constructParser.
+    /** Checks if filename and datatype fields are empty. If they aren't, processes file by calling checkFileType,
+     * openFile and constructParser.
      * @param fileName Name of the file to be opened.
      * @param dataType The type of data in the file (one of airport, airline, flight or route).
      */
@@ -121,7 +123,7 @@ public class Loader {
         try {
             checkFileType(fileName);
         } catch (FileSystemException | IllegalArgumentException e) {
-            System.out.println(e.getMessage()); //Change later, just for debugging
+            System.out.println(e.getMessage());
             return;
         }
 
