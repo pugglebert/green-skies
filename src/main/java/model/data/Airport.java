@@ -1,5 +1,6 @@
 package model.data;
 
+@// TODO: 9/08/2020 Change public to private 
 public class Airport {
     public int airportID;
     public String name;
