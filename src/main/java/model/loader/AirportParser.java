@@ -22,13 +22,11 @@ public class AirportParser extends Parser {
                 Airport airport = new Airport(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], Float.parseFloat(line[6]), Float.parseFloat(line[7]), Integer.parseInt(line[8]), Float.parseFloat(line[9]), line[10], line[11]);
                 airports.add(airport);
             } catch(Exception e) {
-                // data type not matches
-                System.out.println("Error: 100");
+                System.out.println("Unknown Error.");
             }
 
         } else {
-            // invalide
-            System.out.println("Error: 101");
+            System.out.println("Unable to insert data.");
         }
         }
 //    }
@@ -39,24 +37,39 @@ public class AirportParser extends Parser {
             // airport ID Duplication check
             try{
                 if(airport.airportID == Integer.parseInt(line[0])){
+                    System.out.println("Duplicated airport ID.");
                     return false;
                     }
             } catch (Exception e){
-                System.out.println("Error: 100");
+                System.out.println("Unknown type of airport ID.");
             }
 
             // airport name check
             if(!airport.name.matches("[a-zA-Z ]+")){
+                System.out.println("Unknown type of airport name.");
                 return false;
             }
 
             //airport city check
             if(!airport.city.matches("[a-zA-Z ]+")){
+                System.out.println("Unknown type of airport city.");
                 return false;
             }
 
+            //airport country check
+            //ISO 3166-1 codes not implemented
+            if(!airport.country.matches("[a-zA-Z ]+")){
+                System.out.println("Unknown type of airport country.");
+                return false;
+            }
 
+            //airport IATA check
+            if(!airport.IATA.matches("[a-zA-Z]+" || )){
+                System.out.println("Unknown type of airport IATA.");
+                return false;
+            }
         }
+        System.out.println("Data validated.");
         return true;
     }
 
