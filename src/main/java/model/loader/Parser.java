@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 public abstract class Parser {
     private ArrayList<String> dataFile;
-    private String dataType;
 
-    public Parser (ArrayList<String> dataFile, String dataType){
+
+    public Parser (ArrayList<String> dataFile){
         this.dataFile = dataFile;
-        this.dataType = dataType;
+
     }
 
+    private void validateEntry(){};
 
+    private void ValidateLine(){};
 
-    private void dataValidater(){};
+    private void parseLine(){};
 
+    private void parseEntry(){};
 }
