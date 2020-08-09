@@ -14,7 +14,8 @@ public class Airport {
     public String DST;
     public String dataBaseTimeZone;
 
-    public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude, float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
+    public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude,
+                   float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
         this.airportID = airportID;
         this.name = name;
         this.city = city;

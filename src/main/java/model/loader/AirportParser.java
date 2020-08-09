@@ -15,13 +15,15 @@ public class AirportParser extends Parser {
         dataParse();
     }
 
-    private void dataParse(){
+    protected void dataParse(){
         for (String dataLine: dataFile){
             String[] line= dataLine.split(",");
 
             if (validater(line)){
                 try{
-                    Airport airport = new Airport(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], Float.parseFloat(line[6]), Float.parseFloat(line[7]), Integer.parseInt(line[8]), Float.parseFloat(line[9]), line[10], line[11]);
+                    Airport airport = new Airport(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4],
+                            line[5], Float.parseFloat(line[6]), Float.parseFloat(line[7]), Integer.parseInt(line[8]),
+                            Float.parseFloat(line[9]), line[10], line[11]);
                     airports.add(airport);
                 } catch(Exception e) {
                     System.out.println("Unknown Error.");
