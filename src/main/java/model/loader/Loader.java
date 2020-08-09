@@ -20,18 +20,21 @@ public class Loader {
 
 
     /** Expected file extension*/
-    private String csvExtension = "csv";
-    private ArrayList<String> lines;
+    private ArrayList<String> supportedExtensions;
     private Parser parser;
 
+    /** Adds extensions for supported fileTypes to supportedExtensions. */
     public Loader() {
-
+        supportedExtensions = new ArrayList<String>();
+        supportedExtensions.add("csv");
+        supportedExtensions.add("txt");
+        supportedExtensions.add("dat");
     }
 
     /** Calls checkFileType. Opens file. Seperates lines in file into ArrayList of Strings. Instantiates Parser.
      * @param fileName name of the file to be opened
      */
-    public void openFile(String fileName, String dataType) {
+    public void loadFile(String fileName, String dataType) {
 
         try {
             checkFileType(fileName);
@@ -39,9 +42,29 @@ public class Loader {
             System.out.println(e.getMessage()); //Change later, just for debugging
         }
 
-        lines = new ArrayList<String>();
+        ArrayList<String> lines = openFile(fileName);
+
+        constructParser(dataType, lines);
+    }
+
+    /**
+     * Checks if file extension is csv.
+     * @param fileName Name of file to be checked.
+     * @throws FileSystemException
+     */
+    public void checkFileType(String fileName) throws FileSystemException {
+        String extension = getFileExtension(fileName);
+        if (! supportedExtensions.contains(extension)) {
+            throw new FileSystemException("Unsupported file type", extension, "Only CSV files can be processed.");
+        }
+    }
+
+    public ArrayList<String> openFile(String fileName) {
+
+        ArrayList<String> lines = new ArrayList<String>();
         File file = new File(fileName);
         Scanner scanner = null;
+
         try {
             scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
@@ -52,18 +75,23 @@ public class Loader {
             lines.add(scanner.nextLine());
         }
 
-        parser = new Parser(lines, dataType);
+        return lines;
     }
 
-    /**
-     * Checks if file extension is csv.
-     * @param fileName Name of file to be checked.
-     * @throws FileSystemException
-     */
-    public void checkFileType(String fileName) throws FileSystemException {
-        String extension = getFileExtension(fileName);
-        if (extension != csvExtension) {
-            throw new FileSystemException("Unsupported file type. Only CSV files can be processed.");
+    public void constructParser(String dataType, ArrayList lines) {
+        switch (dataType) {
+            case "airport" :
+                parser = new AirportParser(lines);
+                break;
+            case "airline" :
+                parser = new AirlineParser(lines);
+                break;
+            case "route" :
+                parser = new RouteParser(lines);
+                break;
+            case "flight" :
+                parser = new FlightParser(lines);
+                break;
         }
     }
 }
