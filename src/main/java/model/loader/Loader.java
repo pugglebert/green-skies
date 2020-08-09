@@ -37,7 +37,7 @@ public class Loader {
      * @throws FileSystemException If file extension does not match one of supported formats
      * @throws IllegalArgumentException If file has no extension
      */
-    public void checkFileType(String fileName) throws FileSystemException, IllegalArgumentException {
+    protected void checkFileType(String fileName) throws FileSystemException, IllegalArgumentException {
         String extension = getFileExtension(fileName);
         if (extension.isEmpty()) {
             throw new IllegalArgumentException("Address does not contain file extension.");
@@ -51,7 +51,7 @@ public class Loader {
      * @param fileName Name of file to read from.
      * @return An ArrayList of a String for each line in the file.
      */
-    public ArrayList<String> openFile(String fileName) throws FileNotFoundException {
+    protected ArrayList<String> openFile(String fileName) throws FileNotFoundException {
 
         ArrayList<String> lines = new ArrayList<String>();
         File file = new File(fileName);
@@ -77,7 +77,7 @@ public class Loader {
      * @param dataType The type of data to be procesed.
      * @param lines An ArrayList of Strings of data to be processed by the parser.
      */
-    public void constructParser(String dataType, ArrayList lines) throws IllegalArgumentException{
+    protected void constructParser(String dataType, ArrayList lines) throws IllegalArgumentException{
         switch (dataType) {
             case "airport" :
                 parser = new AirportParser(lines);
