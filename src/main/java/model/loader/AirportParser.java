@@ -7,12 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AirportParser implements Parser {
+public class AirportParser extends Parser {
     private final Set<Airport> airports = new HashSet<>();
-    private final List<String> dataFile;
 
     public AirportParser(List<String> dataFile) {
-        this.dataFile = dataFile;
+        super(dataFile);
         dataParse();
     }
 

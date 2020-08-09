@@ -1,11 +1,17 @@
 package model.loader;
 
-public interface Parser {
+import java.util.List;
 
+public abstract class Parser {
+    public final List<String> dataFile;
 
-    private void dataParse(){}
+    public Parser(List<String> dataFile) {
+        this.dataFile = dataFile;
+    }
 
-    private void validater(){}
+    public void dataParse(){}
+
+    public void validater(){}
 
 
 }
