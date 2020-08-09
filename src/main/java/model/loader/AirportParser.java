@@ -1,22 +1,25 @@
 package model.loader;
 
-import model.data.Airline;
 import model.data.Airport;
+
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class AirportParser extends Parser {
-    private HashSet<Airport> airports;
+public class AirportParser implements Parser {
+    private final Set<Airport> airports = new HashSet<>();
+    private final List<String> dataFile;
 
-    public AirportParser(ArrayList<String> dataFile) {
-        super(dataFile);
+    public AirportParser(List<String> dataFile) {
+        this.dataFile = dataFile;
+        dataParse();
     }
 
     private void dataParse(){
         for (String dataLine: dataFile){
             String[] line= dataLine.split(",");
-//        String dataline = "4,Nadzab,Nadzab,Papua New Guinea,LAE,AYNZ,-6.569828,146.726242,239,10,U,Pacific/Port_Moresby";
-//        String[] line = dataline.split(",");
+
             if (validater(line)){
                 try{
                     Airport airport = new Airport(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], Float.parseFloat(line[6]), Float.parseFloat(line[7]), Integer.parseInt(line[8]), Float.parseFloat(line[9]), line[10], line[11]);
@@ -124,7 +127,11 @@ public class AirportParser extends Parser {
         return true;
     }
 
-    public HashSet<Airport> getAirports() {
+    /**
+     * Getter for airports
+     * @return An hashset contains all airport objects
+     */
+    public Set<Airport> getAirports() {
         return airports;
     }
 
