@@ -34,7 +34,7 @@ public class AirportParser extends Parser {
         }
     }
 
-    public boolean validater(String[] line) {
+    protected boolean validater(String[] line) {
         // airport ID Duplication check
         for(Airport airport: airports){
             try{

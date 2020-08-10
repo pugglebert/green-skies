@@ -9,9 +9,9 @@ public abstract class Parser {
         this.dataFile = dataFile;
     }
 
-    protected void dataParse(){}
+    protected abstract void dataParse();
 
-    public abstract boolean validater(String[] line);
+    protected abstract boolean validater(String[] line);
 }
 
 

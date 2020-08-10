@@ -8,6 +8,11 @@ public class FlightParser extends Parser {
     }
 
     @Override
+    protected void dataParse() {
+
+    }
+
+    @Override
     public boolean validater(String[] line) {
         return false;
     }
