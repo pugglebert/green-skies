@@ -2,7 +2,6 @@ package model.loader;
 
 import model.data.Airport;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +34,7 @@ public class AirportParser extends Parser {
         }
     }
 
-    private Boolean validater(String[] line) {
+    public boolean validater(String[] line) {
         // airport ID Duplication check
         for(Airport airport: airports){
             try{

@@ -19,20 +19,26 @@ public class AirlineParser extends Parser{
     public void dataParse(){
         for (String dataLine: dataFile){
             String[] line= dataLine.split(",");
-
-            if (validater(line)){
+// need if(validate(line))
+            if(validater(line)){
                 try{
-                    Airline airline = new Airline(Integer.parseInt(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7]) )
+                    Airline airline = new Airline(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], line[6], Boolean.parseBoolean(line[7]));
                     ;
                 }
                 catch (Exception e){
-                    ;
                 }
             }
         }
     }
 
-    protected Boolean validater(String[] line){}
+
+    public boolean validater(String[] line) {
+        return false;
+    }
+
+
+
+
 
 
 
