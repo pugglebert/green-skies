@@ -2,7 +2,6 @@ package model.loader;
 
 
 import model.data.Airline;
-import model.data.Airport;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,9 +22,10 @@ public class AirlineParser extends Parser{
             if(validater(line)){
                 try{
                     Airline airline = new Airline(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], line[6], Boolean.parseBoolean(line[7]));
-                    ;
+
                 }
                 catch (Exception e){
+
                 }
             }
         }
