@@ -8,7 +8,7 @@ public class RouteParser extends Parser {
     }
 
     @Override
-    protected void dataParse() {
+    protected void dataParser() {
 
     }
 
