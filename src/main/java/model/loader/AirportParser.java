@@ -38,7 +38,7 @@ public class AirportParser extends Parser {
         // airport ID Duplication check
         for(Airport airport: airports){
             try{
-                if(airport.airportID == Integer.parseInt(line[0])){
+                if(airport.getAirportID() == Integer.parseInt(line[0])){
                     System.out.println("Duplicated airport ID.");
                     return false;
                     }

@@ -31,7 +31,7 @@ public class LoaderTest {
     /** Test that checkFileType throws an exception when called with a filename with an invalid extension */
     public void testCheckFileTypeInvalidFileName() {
         try {
-            loader.checkFileType("/home/cosc/student/egj21/Documents/SENG202/badFile.jpg");
+            loader.checkFileType("../TestFile/badFile.jpg");
             fail();
         } catch (Exception e) {
         }
@@ -41,7 +41,7 @@ public class LoaderTest {
     /** Test that checkFileType doesn't throw an exception when called with a filename with a valid extension */
     public void testCheckFileTypeValidFileName() {
         try {
-            loader.checkFileType("/home/cosc/student/egj21/Documents/SENG202/goodFile.csv");
+            loader.checkFileType("../TestFile/goodFile.csv");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             fail();
@@ -52,7 +52,7 @@ public class LoaderTest {
     /** Test that checkFileType throws an exception when called with a file with no extension */
     public void testCheckFileTypeNoExtension() {
         try {
-            loader.checkFileType("/home/cosc/student/egj21/Documents/SENG202/airportsTest");
+            loader.checkFileType("../TestFile/airportsTest");
             fail();
         } catch (Exception e) {
         }
@@ -65,7 +65,7 @@ public class LoaderTest {
         ArrayList<String> actualLines = new ArrayList<String>();
 
         try {
-            actualLines = loader.openFile("/home/cosc/student/egj21/Documents/SENG202/airportsTest.csv");
+            actualLines = loader.openFile("../TestFile/airportsTest.csv");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             fail();
@@ -79,7 +79,7 @@ public class LoaderTest {
     /** Test that openFile throws an exception when a file cannot be found */
     public void testOpenFileNotFound() {
         try {
-            ArrayList<String> lines = loader.openFile("/home/cosc/student/egj21/Documents/SENG202/doesntExist.csv");
+            ArrayList<String> lines = loader.openFile("../TestFile/doesntExist.csv");
             fail();
         } catch (Exception e) {
         }
@@ -113,7 +113,7 @@ public class LoaderTest {
     @Test
     /** Test that no parser is constructed if loadFile is called with an empty string for the datatype parameter */
     public void testLoadFileEmptyDatatype() {
-        loader.loadFile("/home/cosc/student/egj21/Documents/SENG202/airportsTest.csv", "");
+        loader.loadFile("../TestFile/airportsTest.csv", "");
         assertNull(loader.getParser());
     }
 
@@ -122,7 +122,7 @@ public class LoaderTest {
     public void testLoadFileValid() {
 
         try {
-            loader.loadFile("/home/cosc/student/egj21/Documents/SENG202/airportsTest.csv", "airport");
+            loader.loadFile("../TestFile/airportsTest.csv", "airport");
         } catch (Exception e) {
             System.out.println();
             fail();

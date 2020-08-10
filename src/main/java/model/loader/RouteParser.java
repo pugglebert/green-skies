@@ -6,4 +6,9 @@ public class RouteParser extends Parser {
     public RouteParser(ArrayList<String> dataFile) {
         super(dataFile);
     }
+
+    @Override
+    public boolean validater(String[] line) {
+        return false;
+    }
 }

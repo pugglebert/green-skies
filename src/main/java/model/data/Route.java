@@ -13,7 +13,6 @@ public class Route {
 
     public Route(String airlineName, int airlineID, String sourceAirport, int sourceAirportID, String destinationAirport,
                    int destinationAirportID, String codeShare, int numOfStops, int equipment) {
-        this.airportID = airportID;
         this.airlineID = airlineID;
         this.sourceAirport = sourceAirport;
         this.sourceAirportID = sourceAirportID;
