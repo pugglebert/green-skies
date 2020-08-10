@@ -6,18 +6,31 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The sub-class Parser for airport. AirportParser class receives a list of airport data, validates
+ * each of the data line and create airport object. Then put the object into a hashSet for return
+ * value.
+ *
+ * @author Enyang Zhang(Lambert)
+ * @version 1.0
+ * @since 2020-08-09
+ */
 public class AirportParser extends Parser {
-    private final Set<Airport> airports = new HashSet<>();
+    private final Set<Airport> airports = new HashSet<>(); //Processed air
 
+    /**
+     * Constructor of AirportParser, it will start dataParse method as well.
+     * @param dataFile is the list contains one line of datafile per element.
+     */
     public AirportParser(List<String> dataFile) {
         super(dataFile);
         dataParse();
     }
 
+    @Override
     protected void dataParse(){
         for (String dataLine: dataFile){
             String[] line= dataLine.split(",");
-
             if (validater(line)){
                 try{
                     Airport airport = new Airport(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4],
@@ -34,6 +47,7 @@ public class AirportParser extends Parser {
         }
     }
 
+    @Override
     protected boolean validater(String[] line) {
         // airport ID Duplication check
         for(Airport airport: airports){

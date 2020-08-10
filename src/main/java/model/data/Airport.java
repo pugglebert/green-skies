@@ -1,6 +1,11 @@
 package model.data;
 
-// TODO: 9/10/2020 getter for all attributes
+/**
+ * The Airport class for containing all data for one specific airport.
+ * @author Enyang Zhang(Lambert)
+ * @version 1.1
+ * @since 2020-08-09
+ */
 public class Airport {
     private final int airportID;
     private final String name;
@@ -15,6 +20,9 @@ public class Airport {
     private final String DST;
     private final String dataBaseTimeZone;
 
+    /**
+     * constructor for airport. Passes current airport data to attributes
+     */
     public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude,
                    float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
         this.airportID = airportID;
@@ -33,9 +41,97 @@ public class Airport {
 
     /**
      * Getter for airport ID
-     * @return airportID
+     * @return airport ID
      */
     public int getAirportID(){
         return airportID;
+    }
+
+    /**
+     * Getter for airport name
+     * @return airport name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Getter for airport city
+     * @return airport city
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * Getter for airport country
+     * @return airport country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * Getter for airport IATA
+     * @return airport IATA
+     */
+    public String getIATA() {
+        return IATA;
+    }
+
+    /**
+     * Getter for airport ICAO
+     * @return airport ICAO
+     */
+    public String getICAO() {
+        return ICAO;
+    }
+
+    /**
+     * Getter for airport latitude
+     * @return airport latitude
+     */
+    public float getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * Getter for airport longitude
+     * @return airport longitude
+     */
+    public float getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * Getter for airport altitude
+     * @return airport altitude
+     */
+    public int getAltitude() {
+        return altitude;
+    }
+
+    /**
+     * Getter for airport timezone
+     * @return airport timezone
+     */
+    public float getTimezone() {
+        return timezone;
+    }
+
+    /**
+     * Getter for airport DST
+     * @return airport DST
+     */
+    public String getDST() {
+        return DST;
+    }
+
+    /**
+     * Getter for airport dataBaseTimeZone
+     * @return airport dataBaseTimeZone
+     */
+    public String getDataBaseTimeZone() {
+        return dataBaseTimeZone;
     }
 }
