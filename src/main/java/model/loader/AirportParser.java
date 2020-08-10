@@ -30,6 +30,7 @@ public class AirportParser extends Parser {
      */
     public AirportParser(List<String> dataFile) {
         super(dataFile);
+
         /**
          * AirportParser Error code:
          * 100: not enough parameters
@@ -46,8 +47,10 @@ public class AirportParser extends Parser {
          * 111: invalid timezone
          * 112: invalid DST
          * 113: invalid database timezone
+         * 114: invalid unknown error
+         * 115: number of failed insertions
          */
-        errorCollectionInitializer(13);
+        errorCollectionInitializer(15);
         dataParser();
     }
 
@@ -62,16 +65,15 @@ public class AirportParser extends Parser {
             String[] line= dataLine.replaceAll("\"","").split(",");
             if (validater(line)){
                 try{
-                    Airport airport = new Airport(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4],
-                            line[5], Float.parseFloat(line[6]), Float.parseFloat(line[7]), Integer.parseInt(line[8]),
-                            Float.parseFloat(line[9]), line[10], line[11]);
+                    Airport airport = new Airport(Integer.parseInt(line[airportID]), line[name], line[city], line[country], line[IATA],
+                            line[ICAO], Float.parseFloat(line[latitude]), Float.parseFloat(line[longtitude]), Integer.parseInt(line[altitude]),
+                            Float.parseFloat(line[timezone]), line[DST], line[dataBaseTimeZone]);
                     airports.add(airport);
                 } catch(Exception e) {
-                    System.out.println("Unknown Error."); // all possible known errors will be caught in validater
+                    errorCounter(14);
                 }
-
             } else {
-                System.out.println("Unable to insert data.");
+                errorCounter(15);
             }
         }
     }
@@ -208,7 +210,7 @@ public class AirportParser extends Parser {
      */
     private boolean isIATAValid(String IATA){
         //airport IATA check
-        if(!IATA.equalsIgnoreCase("null") || !IATA.equalsIgnoreCase("unknown")){
+        if(!IATA.equalsIgnoreCase("null") && !IATA.equalsIgnoreCase("unknown")){
             if(!IATA.matches("[a-zA-Z]+" ) || IATA.length() != 3 ){
                 errorCounter(106);
                 return false;
@@ -224,7 +226,7 @@ public class AirportParser extends Parser {
      */
     private boolean isICAOValid(String ICAO){
         //airport ICAO check
-        if(ICAO.toLowerCase().equals("null") || ICAO.toLowerCase().equals("unknown")){
+        if(!ICAO.equalsIgnoreCase("null") && !ICAO.equalsIgnoreCase("unknown")){
             if(!ICAO.matches("[a-zA-Z]+" ) || ICAO.length() != 4 ){
                 errorCounter(107);
                 return false;
@@ -286,8 +288,12 @@ public class AirportParser extends Parser {
      */
     private boolean isTZValid(String timeZone){
         try{
-            Float.parseFloat(timeZone);
-            return true;
+
+            if(-12 < Float.parseFloat(timeZone) && Float.parseFloat(timeZone) < 12){
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e){
             errorCounter(111);
             return false;
