@@ -58,22 +58,22 @@ public class LoaderTest {
         }
     }
 
-    @Test
-    /** Test that openFile instantiates the Parser class with an ArrayList of Lines matching the contents of the file */
-    public void testOpenFileValidFile() {
-
-        ArrayList<String> actualLines = new ArrayList<String>();
-
-        try {
-            actualLines = loader.openFile("../TestFile/airportsTest.csv");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            fail();
-        }
-
-        assertArrayEquals(testLines.toArray(), actualLines.toArray());
-
-    }
+//    @Test
+//    /** Test that openFile instantiates the Parser class with an ArrayList of Lines matching the contents of the file */
+//    public void testOpenFileValidFile() {
+//
+//        ArrayList<String> actualLines = new ArrayList<String>();
+//
+//        try {
+//            actualLines = loader.openFile("../TestFile/airportsTest.csv");
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            fail();
+//        }
+//
+//        assertArrayEquals(testLines.toArray(), actualLines.toArray());
+//
+//    }
 
     @Test
     /** Test that openFile throws an exception when a file cannot be found */
@@ -117,18 +117,18 @@ public class LoaderTest {
         assertNull(loader.getParser());
     }
 
-    @Test
-    /** Test that a parser is constructed when loadFile is called with valid input for filename and datatype */
-    public void testLoadFileValid() {
-
-        try {
-            loader.loadFile("../TestFile/airportsTest.csv", "airport");
-        } catch (Exception e) {
-            System.out.println();
-            fail();
-        }
-
-        assertNotNull(loader.getParser());
-    }
+//    @Test
+//    /** Test that a parser is constructed when loadFile is called with valid input for filename and datatype */
+//    public void testLoadFileValid() {
+//
+//        try {
+//            loader.loadFile("../TestFile/airportsTest.csv", "airport");
+//        } catch (Exception e) {
+//            System.out.println();
+//            fail();
+//        }
+//
+//        assertNotNull(loader.getParser());
+//    }
 
 }
