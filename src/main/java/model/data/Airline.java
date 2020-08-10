@@ -12,13 +12,13 @@ public class Airline {
 
     public Airline(int airlineID, String airlineName, String airportAlias, String IATA, String ICAO,
                    String airlineCallsign, String country, Boolean activeStatus) {
-        this.airportID = airportID;
+        this.airlineID = airlineID;
         this.airlineName = airlineName;
         this.airportAlias = airportAlias;
         this.IATA = IATA;
         this.ICAO = ICAO;
         this.airlineCallsign = airlineCallsign;
         this.country = country;
-        this.codeShare = activeStatus;
+        this.activeStatus = activeStatus;
     }
 }

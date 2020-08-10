@@ -11,7 +11,7 @@ public abstract class Parser {
 
     protected void dataParse(){}
 
-    protected void validater(){}
+    protected boolean validater(String[] line){}
 
 
 }
