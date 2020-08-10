@@ -50,7 +50,7 @@ public class AirportParser extends Parser {
          * 114: invalid unknown error
          * 115: number of failed insertions
          */
-        errorCollectionInitializer(15);
+        errorCollectionInitializer(16);
         dataParser();
     }
 
@@ -70,10 +70,10 @@ public class AirportParser extends Parser {
                             Float.parseFloat(line[timezone]), line[DST], line[dataBaseTimeZone]);
                     airports.add(airport);
                 } catch(Exception e) {
-                    errorCounter(14);
+                    errorCounter(114);
                 }
             } else {
-                errorCounter(15);
+                errorCounter(115);
             }
         }
     }

@@ -116,18 +116,16 @@ public class LoaderTest {
         assertNull(loader.getParser());
     }
 
-/*    @Test
-    *//** Test that a parser is constructed when loadFile is called with valid input for filename and datatype *//*
-    public void testLoadFileValid() {
-
-        try {
-            loader.loadFile("../TestFile/airportsTest.csv", "airport");
-        } catch (Exception e) {
-            System.out.println();
-            fail();
-        }
-
-        assertNotNull(loader.getParser());
-    }*/
+//    @Test
+//    /** Test that a parser is constructed when loadFile is called with valid input for filename and datatype*/
+//    public void testLoadFileValid() {
+//
+//        try {
+//            loader.loadFile("../TestFile/airportsTest.csv", "airport");
+//        } catch (Exception e) {
+//            System.out.println();
+//        }
+//        assertNotNull(loader.getParser());
+//    }
 
 }
