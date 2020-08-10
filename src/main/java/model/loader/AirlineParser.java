@@ -12,10 +12,10 @@ public class AirlineParser extends Parser{
 
     public AirlineParser(ArrayList<String> dataFile) {
         super(dataFile);
-        dataParse();
+        dataParser();
     }
 
-    public void dataParse(){
+    public void dataParser(){
         for (String dataLine: dataFile){
             String[] line= dataLine.split(",");
 // need if(validate(line))
