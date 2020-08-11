@@ -51,7 +51,7 @@ public abstract class Parser {
         try{
             errorCollection.put(key, errorCollection.get(key)+1);
         } catch (Exception e){
-            System.out.println("key not found");
+            System.out.println(key + " key not found");
         }
     }
 

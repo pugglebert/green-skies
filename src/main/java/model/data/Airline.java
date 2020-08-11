@@ -1,12 +1,12 @@
 package model.data;
+
 /**
- * The Airline class for containing all data for one specific airline.
- * @author Nathan Huynh
- * @version 1.1
- * @since 2020-08-09
+ * The Airline class which contains all data for one unique airline.
+ * @author Hayley Krippner
+ * @version 1.2
+ * @since 2020-08-11
  */
 public class Airline {
-
     private final int airlineID;
     private final String airlineName;
     private final String airlineAlias;
@@ -17,7 +17,7 @@ public class Airline {
     private final Boolean activeStatus;
 
     /**
-     * Constructor of Airline class
+     * The Airline constructor.
      */
     public Airline(int airlineID, String airlineName, String airlineAlias, String IATA, String ICAO,
                    String airlineCallsign, String country, Boolean activeStatus) {
@@ -32,59 +32,66 @@ public class Airline {
     }
 
     /**
-     * @return airline ID
+     * Getter for the Airline's ID.
+     * @return airlineID.
      */
-    public int getAirlineID() {
+    public int getAirlineID(){
         return airlineID;
     }
 
     /**
-     * @return airline name
+     * Getter for the name of the Airline.
+     * @return airlineName.
      */
-    public String getAirlineName() {
+    public int getAirlineName(){
         return airlineName;
     }
 
     /**
-     * @return airpline alias
+     * Getter for the alias of the Airline.
+     * @return airlineName.
      */
-    public String airlineAlias() {
-        return airlineAlias;
+    public int getAirlineName(){
+        return airlineName;
     }
 
     /**
-     * @return airline IATA (2 chars)
+     * Getter for the IATA of the Airline.
+     * @return IATA.
      */
-    public String getIATA() {
+    public int getIATA(){
         return IATA;
     }
 
     /**
-     * @return airline ICAO (3 chars)
+     * Getter for the ICAO of the Airline.
+     * @return ICAO.
      */
-    public String getICAO() {
+    public int getICAO(){
         return ICAO;
     }
 
     /**
-     * @return airline Callsign
+     * Getter for the callsign of the Airline.
+     * @return airlineCallsign.
      */
-    public String getAirlineCallsign() {
+    public int getAirlineCallsign(){
         return airlineCallsign;
     }
 
     /**
-     * @return country
+     * Getter for the country of origin of the Airline.
+     * @return country.
      */
-    public String getCountry() {
+    public int getCountry(){
         return country;
     }
 
     /**
-     * @return active status of the airline
+     * Getter for the whether the Airline is active or not.
+     * @return activeStatus.
      */
-    public Boolean getActiveStatus() {
+    public int getActiveStatus(){
         return activeStatus;
     }
 }
-
