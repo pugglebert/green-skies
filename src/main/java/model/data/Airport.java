@@ -1,10 +1,10 @@
 package model.data;
 
 /**
- * The Airport class for containing all data for one specific airport.
- * @author Enyang Zhang(Lambert)
- * @version 1.1
- * @since 2020-08-09
+ * The Airport class which contains all data for one unique airport.
+ * @author Hayley Krippner
+ * @version 1.2
+ * @since 2020-08-11
  */
 public class Airport {
     private final int airportID;
@@ -21,7 +21,7 @@ public class Airport {
     private final String dataBaseTimeZone;
 
     /**
-     * constructor for airport. Passes current airport data to attributes
+     * The Airport constructor.
      */
     public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude,
                    float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
@@ -40,96 +40,96 @@ public class Airport {
     }
 
     /**
-     * Getter for airport ID
-     * @return airport ID
+     * Getter for the Airport's ID.
+     * @return airportID.
      */
     public int getAirportID(){
         return airportID;
     }
 
     /**
-     * Getter for airport name
-     * @return airport name
+     * Getter for the name of the Airport.
+     * @return name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Getter for airport city
-     * @return airport city
+     * Getter for the city the Airport is in.
+     * @return city.
      */
     public String getCity() {
         return city;
     }
 
     /**
-     * Getter for airport country
-     * @return airport country
+     * Getter for the country the Airport is in.
+     * @return country.
      */
     public String getCountry() {
         return country;
     }
 
     /**
-     * Getter for airport IATA
-     * @return airport IATA
+     * Getter for the IATA of the Airport.
+     * @return IATA.
      */
     public String getIATA() {
         return IATA;
     }
 
     /**
-     * Getter for airport ICAO
-     * @return airport ICAO
+     * Getter for the ICAO of the Airport.
+     * @return ICAO.
      */
     public String getICAO() {
         return ICAO;
     }
 
     /**
-     * Getter for airport latitude
-     * @return airport latitude
+     * Getter for latitude of the Airport.
+     * @return latitude.
      */
     public float getLatitude() {
         return latitude;
     }
 
     /**
-     * Getter for airport longitude
-     * @return airport longitude
+     * Getter for the longitude of the airport.
+     * @return longitude.
      */
     public float getLongitude() {
         return longitude;
     }
 
     /**
-     * Getter for airport altitude
-     * @return airport altitude
+     * Getter for the altitude of the airport.
+     * @return altitude.
      */
     public int getAltitude() {
         return altitude;
     }
 
     /**
-     * Getter for airport timezone
-     * @return airport timezone
+     * Getter for the timezone of the Airport.
+     * @return timezone.
      */
     public float getTimezone() {
         return timezone;
     }
 
     /**
-     * Getter for airport DST
-     * @return airport DST
+     * Getter for the DST of the airport.
+     * @return DST.
      */
     public String getDST() {
         return DST;
     }
 
     /**
-     * Getter for airport dataBaseTimeZone
-     * @return airport dataBaseTimeZone
+     * Getter for the dataBaseTimeZone of the Airport.
+     * @return dataBaseTimeZone.
      */
     public String getDataBaseTimeZone() {
         return dataBaseTimeZone;
