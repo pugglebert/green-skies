@@ -33,7 +33,7 @@ public class Flight {
      * Getter for the Flight's ID.
      * @return flightID.
      */
-    public int getFlightID(){
+    public String getFlightID(){
         return flightID;
     }
 
@@ -57,7 +57,7 @@ public class Flight {
      * Getter for the altitude of the Fight.
      * @return altitude.
      */
-    public String getAltitude() {
+    public int getAltitude() {
         return altitude;
     }
 
@@ -65,7 +65,7 @@ public class Flight {
      * Getter for the position of the Fight.
      * @return position.
      */
-    public String getPosition() {
+    public int getPosition() {
         return position;
     }
 
@@ -73,7 +73,7 @@ public class Flight {
      * Getter for the distance travelled during the Fight.
      * @return distance.
      */
-    public String getDistance() {
+    public int getDistance() {
         return distance;
     }
 

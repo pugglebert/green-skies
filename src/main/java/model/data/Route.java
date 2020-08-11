@@ -37,7 +37,7 @@ public class Route {
      * Getter for the name of the airline of that is used during the Flight.
      * @return airlineID.
      */
-    public int getAirlineName(){
+    public String getAirlineName(){
         return airlineName;
     }
 
@@ -53,7 +53,7 @@ public class Route {
      * Getter for the name of the source airport of the Flight.
      * @return sourceAirport.
      */
-    public int getSourceAirport(){
+    public String getSourceAirport(){
         return sourceAirport;
     }
 
@@ -69,7 +69,7 @@ public class Route {
      * Getter for the name of the destination airport of the Flight.
      * @return destinationAirport.
      */
-    public int getDestinationAirport(){
+    public String getDestinationAirport(){
         return destinationAirport;
     }
 
@@ -85,7 +85,7 @@ public class Route {
      * Getter for the codeShare for the Flight.
      * @return codeShare.
      */
-    public int getCodeShare(){
+    public String getCodeShare(){
         return codeShare;
     }
 
