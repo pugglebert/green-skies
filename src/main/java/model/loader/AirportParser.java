@@ -13,9 +13,9 @@ import java.util.Set;
  * each of the data line and create airport object. Then put the object into a hashSet for return
  * value.
  *
- * @author Enyang Zhang(Lambert)
- * @version 2.0
- * @since 2020-08-09
+ * @author Hayley Krippner
+ * @version 2.1
+ * @since 2020-08-11
  */
 public class AirportParser extends Parser {
     //Processed airport data
@@ -79,9 +79,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Validates the data in one line is valid or not
-     * @param line String list contains 11 data for airport attributes
-     * @return true if the data line is valid, false if the data line is not expected
+     * Validates the data in one line is valid or not.
+     * @param line String list contains 11 data for airport attributes.
+     * @return true if the data line is valid, false if the data line is not expected.
      */
     @Override
     protected boolean validater(String[] line) {
@@ -143,9 +143,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if id is valid
-     * @param id airport id as a string
-     * @return true if valid, false if invalid
+     * Check if id is valid.
+     * @param id airport id as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isIdValid(String id){
         // airport ID Duplication check
@@ -164,9 +164,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if name is valid
-     * @param name airport name as a string
-     * @return true if valid, false if invalid
+     * Check if name is valid.
+     * @param name airport name as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isNameValid(String name){
         if(!name.matches("[a-zA-Z ]+")){
@@ -177,9 +177,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if city is valid
-     * @param city airport city as a string
-     * @return true if valid, false if invalid
+     * Check if city is valid.
+     * @param city airport city as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isCityValid(String city){
         if(!city.matches("[a-zA-Z ]+")){
@@ -190,9 +190,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if country is valid
-     * @param country airport country as a string
-     * @return true if valid, false if invalid
+     * Check if country is valid.
+     * @param country airport country as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isCountryValid(String country){
         //ISO 3166-1 codes not implemented
@@ -204,9 +204,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if IATA is valid
-     * @param IATA airport IATA as a string
-     * @return true if valid, false if invalid
+     * Check if IATA is valid.
+     * @param IATA airport IATA as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isIATAValid(String IATA){
         //airport IATA check
@@ -220,9 +220,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if ICAO is valid
-     * @param ICAO airport ICAO as a string
-     * @return true if valid, false if invalid
+     * Check if ICAO is valid.
+     * @param ICAO airport ICAO as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isICAOValid(String ICAO){
         //airport ICAO check
@@ -236,9 +236,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if latitude is valid
-     * @param lat airport latitude as a string
-     * @return true if valid, false if invalid
+     * Check if latitude is valid.
+     * @param lat airport latitude as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isLatValid(String lat){
         //airport Latitude check
@@ -252,9 +252,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if longitude is valid
-     * @param lon airport longitude as a string
-     * @return true if valid, false if invalid
+     * Check if longitude is valid.
+     * @param lon airport longitude as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isLonValid(String lon){
         try{
@@ -267,9 +267,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if altitude is valid
-     * @param alt airport altitude as a string
-     * @return true if valid, false if invalid
+     * Check if altitude is valid.
+     * @param alt airport altitude as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isAltValid(String alt){
         try{
@@ -282,9 +282,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if timeZone is valid
-     * @param timeZone airport timeZone as a string
-     * @return true if valid, false if invalid
+     * Check if timeZone is valid.
+     * @param timeZone airport timeZone as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isTZValid(String timeZone){
         try{
@@ -301,9 +301,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if DST is valid
-     * @param DST airport DST as a string
-     * @return true if valid, false if invalid
+     * Check if DST is valid.
+     * @param DST airport DST as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isDSTValid(String DST){
         if(!DST.matches("[EASOZNU]+" ) || DST.length() != 1 ){
@@ -314,9 +314,9 @@ public class AirportParser extends Parser {
     }
 
     /**
-     * Check if DBTZ is valid
-     * @param DBTZ airport DBTZ as a string
-     * @return true if valid, false if invalid
+     * Check if DBTZ is valid.
+     * @param DBTZ airport DBTZ as a string.
+     * @return true if valid, false if invalid.
      */
     private boolean isDBTZValid(String DBTZ){
         if(!DBTZ.matches("[a-zA-Z/a-zA-Z_]+" )){
@@ -328,7 +328,7 @@ public class AirportParser extends Parser {
 
     /**
      * Getter for airports
-     * @return An hashset contains all airport objects
+     * @return A hashset contains all airport objects.
      */
     public Set<Airport> getAirports() {
         return airports;
