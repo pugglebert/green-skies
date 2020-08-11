@@ -43,7 +43,7 @@ public class Airline {
      * Getter for the name of the Airline.
      * @return airlineName.
      */
-    public int getAirlineName(){
+    public String getAirlineName(){
         return airlineName;
     }
 
@@ -51,7 +51,7 @@ public class Airline {
      * Getter for the alias of the Airline.
      * @return airlineName.
      */
-    public int getAirlineName(){
+    public String getairlineAlias(){
         return airlineName;
     }
 
@@ -59,7 +59,7 @@ public class Airline {
      * Getter for the IATA of the Airline.
      * @return IATA.
      */
-    public int getIATA(){
+    public String getIATA(){
         return IATA;
     }
 
@@ -67,7 +67,7 @@ public class Airline {
      * Getter for the ICAO of the Airline.
      * @return ICAO.
      */
-    public int getICAO(){
+    public String getICAO(){
         return ICAO;
     }
 
@@ -75,7 +75,7 @@ public class Airline {
      * Getter for the callsign of the Airline.
      * @return airlineCallsign.
      */
-    public int getAirlineCallsign(){
+    public String getAirlineCallsign(){
         return airlineCallsign;
     }
 
@@ -83,7 +83,7 @@ public class Airline {
      * Getter for the country of origin of the Airline.
      * @return country.
      */
-    public int getCountry(){
+    public String getCountry(){
         return country;
     }
 
@@ -91,7 +91,7 @@ public class Airline {
      * Getter for the whether the Airline is active or not.
      * @return activeStatus.
      */
-    public int getActiveStatus(){
+    public boolean getActiveStatus(){
         return activeStatus;
     }
 }
