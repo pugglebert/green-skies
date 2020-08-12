@@ -1,9 +1,6 @@
 package model.loader;
 
 import model.data.Airport;
-
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,6 +46,10 @@ public class AirportParser extends Parser {
          * 113: invalid database timezone
          * 114: invalid unknown error
          * 115: number of failed insertions
+         *
+         * 116: invalid alias
+         * 117: invalid callsign
+         * 118: invalid activestatus
          */
         errorCollectionInitializer(16);
         dataParser();
