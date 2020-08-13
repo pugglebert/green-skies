@@ -1,5 +1,9 @@
 package controller.main;
 
+import java.awt.*;
+import javafx.fxml.FXML;
+
+
 /**
  * The controller class which contains the controls for the UploadDataView.
  * @author Hayley Krippner
@@ -7,5 +11,10 @@ package controller.main;
  * @since 2020-08-13
  */
 public class UploadDataController {
+
+    @FXML
+    private DropdownButton dataType;
+    @FXML
+    private Button browseButton;
 
 }
