@@ -8,25 +8,25 @@ package model.data;
  */
 public class Airline {
     private final int airlineID;
-    private final String airlineName;
-    private final String airlineAlias;
+    private final String name;
+    private final String alias;
     private final String IATA;
     private final String ICAO;
-    private final String airlineCallsign;
+    private final String callsign;
     private final String country;
     private final Boolean activeStatus;
 
     /**
      * The Airline constructor.
      */
-    public Airline(int airlineID, String airlineName, String airlineAlias, String IATA, String ICAO,
-                   String airlineCallsign, String country, Boolean activeStatus) {
+    public Airline(int airlineID, String name, String alias, String IATA, String ICAO,
+                   String callsign, String country, Boolean activeStatus) {
         this.airlineID = airlineID;
-        this.airlineName = airlineName;
-        this.airlineAlias = airlineAlias;
+        this.name = name;
+        this.alias = alias;
         this.IATA = IATA;
         this.ICAO = ICAO;
-        this.airlineCallsign = airlineCallsign;
+        this.callsign = callsign;
         this.country = country;
         this.activeStatus = activeStatus;
     }
@@ -43,8 +43,8 @@ public class Airline {
      * Getter for the name of the Airline.
      * @return airlineName.
      */
-    public String getAirlineName(){
-        return airlineName;
+    public String getName(){
+        return name;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Airline {
      * @return airlineName.
      */
     public String getairlineAlias(){
-        return airlineName;
+        return name;
     }
 
     /**
@@ -75,8 +75,8 @@ public class Airline {
      * Getter for the callsign of the Airline.
      * @return airlineCallsign.
      */
-    public String getAirlineCallsign(){
-        return airlineCallsign;
+    public String getCallsign(){
+        return callsign;
     }
 
     /**
