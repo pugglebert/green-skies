@@ -1,11 +1,14 @@
-package controller.main;
+package view;
 
-/**
- * The controller class which contains the controls for the WelcomeView.
- * @author Hayley Krippner
- * @version 1.0
- * @since 2020-08-13
- */
 public class WelcomeController {
 
+    //Method to handle the event for continuing to the main screen of the application.
+    public void continueToMainScreen() {
+
+    }
+
+    //Method to handle the event for continuing to the info screen of the application.
+    public void toInfoScreen() {
+
+    }
 }
