@@ -1,4 +1,6 @@
-package view;
+package controller.main;
+
+import controller.main.GreenSkiesApplication;
 
 public class Main {
 
