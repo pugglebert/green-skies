@@ -1,4 +1,4 @@
-package view;
+package controller.main;
 
 public class WelcomeController {
 
