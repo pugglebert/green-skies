@@ -15,13 +15,13 @@ public class Route {
     private final int destinationAirportID;
     private final String codeShare;
     private final int numOfStops;
-    private final String equipment;
+    private final String[] equipment;
 
     /**
      * The Route constructor.
      */
     public Route(String airlineName, int airlineID, String sourceAirport, int sourceAirportID, String destinationAirport,
-                   int destinationAirportID, String codeShare, int numOfStops, String equipment) {
+                   int destinationAirportID, String codeShare, int numOfStops, String[] equipment) {
         this.airlineName = airlineName;
         this.airlineID = airlineID;
         this.sourceAirport = sourceAirport;
@@ -101,7 +101,7 @@ public class Route {
      * Getter for the equipment used during the Flight.
      * @return equipment.
      */
-    public String getEquipment(){
+    public String[] getEquipment(){
         return equipment;
     }
 }
