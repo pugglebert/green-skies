@@ -1,0 +1,61 @@
+Index: src/main/java/model/loader/AirlineParser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.loader;\r\n\r\n\r\nimport model.data.Airline;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashSet;\r\nimport java.util.Set;\r\n\r\npublic class AirlineParser extends Parser{\r\n    private Set<Airline> airlines = new HashSet<>();\r\n\r\n    public AirlineParser(ArrayList<String> dataFile) {\r\n        super(dataFile);\r\n        dataParse();\r\n    }\r\n\r\n    public void dataParse(){\r\n        for (String dataLine: dataFile){\r\n            String[] line= dataLine.split(\",\");\r\n// need if(validate(line))\r\n            if(validater(line)){\r\n                try{\r\n                    Airline airline = new Airline(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], line[6], Boolean.parseBoolean(line[7]));\r\n\r\n                }\r\n                catch (Exception e){\r\n\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n    public boolean validater(String[] line) {\r\n        return false;\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/model/loader/AirlineParser.java	(revision 6062ae1041c948f8cdec5cc9fb67cabe651b7ccc)
++++ src/main/java/model/loader/AirlineParser.java	(date 1597037240089)
+@@ -7,7 +7,7 @@
+ import java.util.HashSet;
+ import java.util.Set;
+ 
+-public class AirlineParser extends Parser{
++public class AirlineParser extends Parser {
+     private Set<Airline> airlines = new HashSet<>();
+ 
+     public AirlineParser(ArrayList<String> dataFile) {
+@@ -15,18 +15,22 @@
+         dataParse();
+     }
+ 
+-    public void dataParse(){
+-        for (String dataLine: dataFile){
+-            String[] line= dataLine.split(",");
++    public void dataParse() {
++        for (String dataLine : dataFile) {
++            String[] line = dataLine.split(",");
+ // need if(validate(line))
+-            if(validater(line)){
+-                try{
+-                    Airline airline = new Airline(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], line[6], Boolean.parseBoolean(line[7]));
++            if (validater(line)) {
++                try {
++                    Airline airline = new Airline(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5],
++                            line[6], Boolean.parseBoolean(line[7]));
++                    airlines.add(airline);
++                } catch (Exception e) {
++                    System.out.println("Error in parsing and adding new airline, recheck parse input and airlines array");
+ 
+                 }
+-                catch (Exception e){
++            } else {
++                System.out.println("Can not parse line. Unable to insert data");
+ 
+-                }
+             }
+         }
+     }
+@@ -37,11 +41,4 @@
+     }
+ 
+ 
+-
+-
+-
+-
+-
+-
+-
+ }
