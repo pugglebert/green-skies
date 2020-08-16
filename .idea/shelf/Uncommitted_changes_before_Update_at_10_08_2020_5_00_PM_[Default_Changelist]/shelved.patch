@@ -1,0 +1,70 @@
+Index: src/main/java/model/data/Airport.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.data;\r\n\r\n@// TODO: 9/08/2020 Change public to private \r\npublic class Airport {\r\n    public int airportID;\r\n    public String name;\r\n    public String city;\r\n    public String country;\r\n    public String IATA;\r\n    public String ICAO;\r\n    public float latitude;\r\n    public float longitude;\r\n    public int altitude;\r\n    public float timezone;\r\n    public String DST;\r\n    public String dataBaseTimeZone;\r\n\r\n    public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude,\r\n                   float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){\r\n        this.airportID = airportID;\r\n        this.name = name;\r\n        this.city = city;\r\n        this.country = country;\r\n        this.IATA = IATA;\r\n        this.ICAO = ICAO;\r\n        this.latitude = latitude;\r\n        this.longitude = longitude;\r\n        this.altitude = altitude;\r\n        this.timezone = timezone;\r\n        this.DST = DST;\r\n        this.dataBaseTimeZone = dataBaseTimeZone;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/model/data/Airport.java	(revision f2b157d0c017b41579e3f39a0629b8b066523353)
++++ src/main/java/model/data/Airport.java	(date 1597035345316)
+@@ -1,6 +1,6 @@
+ package model.data;
+ 
+-@// TODO: 9/08/2020 Change public to private 
++// TODO: 9/08/2020 Change public to private
+ public class Airport {
+     public int airportID;
+     public String name;
+Index: src/main/java/model/loader/AirlineParser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.loader;\r\n\r\n\r\nimport model.data.Airline;\r\nimport model.data.Airport;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashSet;\r\nimport java.util.Set;\r\n\r\npublic class AirlineParser extends Parser{\r\n    private Set<Airline> airlines = new HashSet<>();\r\n\r\n    public AirlineParser(ArrayList<String> dataFile) {\r\n        super(dataFile);\r\n        dataParse();\r\n    }\r\n\r\n    public void dataParse(){\r\n        for (String dataLine: dataFile){\r\n            String[] line= dataLine.split(\",\");\r\n// need if(validate(line))\r\n            if(validater(line)){\r\n                try{\r\n                    Airline airline = new Airline(Integer.parseInt(line[0]), line[1], line[2], line[3], line[4], line[5], line[6], Boolean.parseBoolean(line[7]));\r\n                    ;\r\n                }\r\n                catch (Exception e){\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n    public boolean validater(String[] line) {\r\n        return false;\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/model/loader/AirlineParser.java	(revision f2b157d0c017b41579e3f39a0629b8b066523353)
++++ src/main/java/model/loader/AirlineParser.java	(date 1597035345322)
+@@ -2,7 +2,6 @@
+ 
+ 
+ import model.data.Airline;
+-import model.data.Airport;
+ 
+ import java.util.ArrayList;
+ import java.util.HashSet;
+Index: src/main/java/model/loader/RouteParser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.loader;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class RouteParser extends Parser {\r\n    public RouteParser(ArrayList<String> dataFile) {\r\n        super(dataFile);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/model/loader/RouteParser.java	(revision f2b157d0c017b41579e3f39a0629b8b066523353)
++++ src/main/java/model/loader/RouteParser.java	(date 1597026308000)
+@@ -6,4 +6,8 @@
+     public RouteParser(ArrayList<String> dataFile) {
+         super(dataFile);
+     }
++
++    public boolean validater(String[] line) {
++        return false;
++    }
+ }
+Index: src/test/java/model/data/StorageTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.data;\r\n\r\nimport static org.junit.Assert.*;\r\n\r\npublic class StorageTest {\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/model/data/StorageTest.java	(revision f2b157d0c017b41579e3f39a0629b8b066523353)
++++ src/test/java/model/data/StorageTest.java	(date 1597026237000)
+@@ -1,7 +1,5 @@
+ package model.data;
+ 
+-import static org.junit.Assert.*;
+-
+ public class StorageTest {
+ 
+ }
+\ No newline at end of file
