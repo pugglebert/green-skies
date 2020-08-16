@@ -1,0 +1,71 @@
+Index: src/main/java/model/data/Airline.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.data;\n\npublic class Airline {\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/model/data/Airline.java	(revision b1691103e49a6322484a8a12c8b7754b2f4a768d)
++++ src/main/java/model/data/Airline.java	(date 1597017370981)
+@@ -1,4 +1,14 @@
+ package model.data;
+ 
+ public class Airline {
++    public int airlineID;
++    public String name;
++    public String alias;
++    public String IATA;
++    public String ICAO;
++    public String callsign;
++    public String country;
++    public boolean active;
++
++    public Airline( int airline)
+ }
+Index: src/main/java/model/loader/AirlineParser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model.loader;\n\n\nimport java.util.ArrayList;\n\npublic class AirlineParser extends Parser{\n    public AirlineParser(ArrayList<String> dataFile) {\n        super(dataFile);\n    }\n\n    private ArrayList<String> airLineLine;\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/model/loader/AirlineParser.java	(revision b1691103e49a6322484a8a12c8b7754b2f4a768d)
++++ src/main/java/model/loader/AirlineParser.java	(date 1597017806492)
+@@ -1,14 +1,36 @@
+ package model.loader;
+ 
+ 
++import model.data.Airline;
++import model.data.Airport;
++
+ import java.util.ArrayList;
++import java.util.HashSet;
++import java.util.Set;
+ 
+ public class AirlineParser extends Parser{
++    private Set<Airline> airlines = new HashSet<>();
++
+     public AirlineParser(ArrayList<String> dataFile) {
+         super(dataFile);
++        dataParse();
++    }
++
++    public void dataParse(){
++        for (String dataLine: dataFile){
++            String[] line = dataLine.split(',');
++
++            if (validater(Line)){
++                try{
++                    ;
++                }
++                catch (Exception)
++            }
++        }
+     }
+ 
+-    private ArrayList<String> airLineLine;
++
++
+ 
+ 
+ }
