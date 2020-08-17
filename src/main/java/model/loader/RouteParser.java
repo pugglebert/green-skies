@@ -1,5 +1,6 @@
 package model.loader;
 
+import model.data.DataType;
 import model.data.Route;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.Set;
 public class RouteParser extends Parser {
 
     /** Processed route data */
-    private final Set<Route> routes = new HashSet<>();
+    private final Set<DataType> routes = new HashSet<>();
 
     /** Alphabetical name to represent line index */
     private final int airline = 0,
@@ -219,7 +220,7 @@ public class RouteParser extends Parser {
      * Returns the set of Route objects created from the data file
      * @return Hashset of Route objects
      */
-    protected Set<Route> getRoutes() {
+    public Set<DataType> getData() {
         return routes;
     }
 

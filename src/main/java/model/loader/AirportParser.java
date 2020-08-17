@@ -1,6 +1,8 @@
 package model.loader;
 
 import model.data.Airport;
+import model.data.DataType;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +18,7 @@ import java.util.Set;
  */
 public class AirportParser extends Parser {
     //Processed airport data
-    private final Set<Airport> airports = new HashSet<>();
+    private final Set<DataType> airports = new HashSet<>();
     //Alphabetical name to represent line index
     private final int airportID = 0, name = 1, city = 2, country = 3, IATA = 4, ICAO = 5, latitude = 6, longtitude = 7,
             altitude = 8, timezone = 9, DST = 10, dataBaseTimeZone = 11;
@@ -150,8 +152,9 @@ public class AirportParser extends Parser {
      */
     private boolean isIdValid(String id){
         // airport ID Duplication check
-        for(Airport airport: airports){
+        for(DataType data: airports){
             try{
+                Airport airport = (Airport) data;
                 if(airport.getAirportID() == Integer.parseInt(id)){
                     errorCounter(101);
                     return false;
@@ -331,7 +334,8 @@ public class AirportParser extends Parser {
      * Getter for airports
      * @return A hashset contains all airport objects.
      */
-    public Set<Airport> getAirports() {
+    @Override
+    public Set<DataType> getData() {
         return airports;
     }
 

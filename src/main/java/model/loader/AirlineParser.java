@@ -1,6 +1,7 @@
 package model.loader;
 
 import model.data.Airline;
+import model.data.DataType;
 
 import java.util.List;
 import java.util.HashSet;
@@ -8,7 +9,7 @@ import java.util.Set;
 
 public class AirlineParser extends Parser {
   // Processed airlines data
-  private final Set<Airline> airlines = new HashSet<>();
+  private final Set<DataType> airlines = new HashSet<>();
   // Alphabetical name to represent line index
   private final int airlineID=0, name=1, alias = 2, IATA=3, ICAO=4, callsign=5, country=6, activeStatus=7;
   public AirlineParser(List<String> dataFile) {
@@ -106,8 +107,9 @@ public class AirlineParser extends Parser {
    */
   private boolean isIdValid(String airlineID) {
     // airline ID Duplication check
-    for (Airline airline : airlines) {
+    for (DataType data : airlines) {
       try {
+        Airline airline = (Airline) data;
         if (airline.getAirlineID() == Integer.parseInt(airlineID)) {
           errorCounter(101);
           return false;
@@ -233,7 +235,7 @@ public class AirlineParser extends Parser {
    *
    * @return A hashset contains all airline objects.
    */
-  public Set<Airline> getAirlines() {
+  public Set<DataType> getData() {
     return airlines;
   }
 }
