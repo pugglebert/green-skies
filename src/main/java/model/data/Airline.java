@@ -6,7 +6,7 @@ package model.data;
  * @version 1.2
  * @since 2020-08-11
  */
-public class Airline {
+public class Airline implements DataType {
     private final int airlineID;
     private final String name;
     private final String alias;
