@@ -1,8 +1,11 @@
 package model.loader;
 
+import model.data.DataType;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class Parser {
     protected final List<String> dataFile;
@@ -24,6 +27,9 @@ public abstract class Parser {
 
     /**Abstract class of validater.*/
     protected abstract boolean validater(String[] line);
+
+    /**Abstract method getData */
+    public abstract Set<DataType> getData();
 
     /**
      * Getter for error collection.
@@ -54,6 +60,7 @@ public abstract class Parser {
             System.out.println(key + " key not found");
         }
     }
+    //todo can we add overlapped method to this super class?????
 
 }
 

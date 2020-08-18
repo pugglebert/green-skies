@@ -1,6 +1,7 @@
 package model.loader;
 
 import model.data.Airline;
+import model.data.DataType;
 
 import java.util.List;
 import java.util.HashSet;
@@ -8,9 +9,17 @@ import java.util.Set;
 
 public class AirlineParser extends Parser {
   // Processed airlines data
-  private final Set<Airline> airlines = new HashSet<>();
+  private final Set<DataType> airlines = new HashSet<>();
   // Alphabetical name to represent line index
-  private final int airlineID=0, name=1, alias = 2, IATA=3, ICAO=4, callsign=5, country=6, activeStatus=7;
+  private final int airlineID = 0,
+          name = 1,
+          alias = 2,
+          IATA = 3,
+          ICAO = 4,
+          callsign = 5,
+          country = 6,
+          activeStatus = 7;
+
   public AirlineParser(List<String> dataFile) {
     super(dataFile);
     /**
@@ -29,10 +38,9 @@ public class AirlineParser extends Parser {
      * 111: invalid timezone
      * 112: invalid DST
      * 113: invalid database timezone
-     * 114: invalid unknown error
-     * 115: number of failed insertions
+     * 114: invalid unknown error 115: number of failed insertions
      *
-     * 116: invalid alias
+     * <p>116: invalid alias
      * 117: invalid callsign
      * 118: invalid activestatus
      */
@@ -46,9 +54,16 @@ public class AirlineParser extends Parser {
       // need if(validate(line))
       if (validater(line)) {
         try {
-          Airline airline = new Airline(
-                  Integer.parseInt(line[airlineID]), line[name], line[alias], line[IATA], line[ICAO],
-                  line[callsign], line[country], Boolean.parseBoolean(line[activeStatus]));
+          Airline airline =
+                  new Airline(
+                          Integer.parseInt(line[airlineID]),
+                          line[name],
+                          line[alias],
+                          line[IATA],
+                          line[ICAO],
+                          line[callsign],
+                          line[country],
+                          Boolean.parseBoolean(line[activeStatus]));
           airlines.add(airline);
         } catch (Exception e) {
           errorCounter(114);
@@ -64,36 +79,36 @@ public class AirlineParser extends Parser {
     if (line.length != 8) {
       errorCounter(100);
     }
-    
-    if (!isIdValid(line[airlineID])){
+
+    if (!isIdValid(line[airlineID])) {
       isValid = false;
     }
 
-    if (!isNameValid(line[name])){
+    if (!isNameValid(line[name])) {
       isValid = false;
     }
 
-    if (!isAliasValid(line[alias])){
+    if (!isAliasValid(line[alias])) {
       isValid = false;
     }
 
-    if (!isIATAValid(line[IATA])){
+    if (!isIATAValid(line[IATA])) {
       isValid = false;
     }
 
-    if (!isICAOValid(line[ICAO])){
+    if (!isICAOValid(line[ICAO])) {
       isValid = false;
     }
 
-    if (!isCallsignValid(line[callsign])){
+    if (!isCallsignValid(line[callsign])) {
       isValid = false;
     }
 
-    if (!isCountryValid(line[country])){
+    if (!isCountryValid(line[country])) {
       isValid = false;
     }
-    
-    if (!isActiveStatusValid(line[activeStatus])){
+
+    if (!isActiveStatusValid(line[activeStatus])) {
       isValid = false;
     }
     return isValid;
@@ -106,8 +121,9 @@ public class AirlineParser extends Parser {
    */
   private boolean isIdValid(String airlineID) {
     // airline ID Duplication check
-    for (Airline airline : airlines) {
+    for (DataType data : airlines) {
       try {
+        Airline airline = (Airline) data;
         if (airline.getAirlineID() == Integer.parseInt(airlineID)) {
           errorCounter(101);
           return false;
@@ -141,7 +157,7 @@ public class AirlineParser extends Parser {
    * @return true if valid, false if invalid.
    */
   private boolean isAliasValid(String alias) {
-    if (!alias.matches("[a-zA-Z ]+")) {
+    if (!alias.matches("(([a-zA-Z][ ]?)+)|(\\\\N)")) {
       errorCounter(116);
       return false;
     }
@@ -190,7 +206,7 @@ public class AirlineParser extends Parser {
    */
   private boolean isCallsignValid(String callsign) {
     // airline callsign check
-    if (!callsign.matches("[a-zA-Z]+")) {
+    if (!callsign.matches("(([A-Z][ ]?)+)|$")) {
       errorCounter(117);
       return false;
     }
@@ -210,22 +226,20 @@ public class AirlineParser extends Parser {
       return false;
     }
     return true;
-    }
+  }
 
-    /**
-     * Check if activeStatus is valid.
-     *
-     * @param activeStatus as a string.
-     * @return true if valid, false if invalid.
-     */
+  /**
+   * Check if activeStatus is valid.
+   *
+   * @param activeStatus as a string.
+   * @return true if valid, false if invalid.
+   */
   private boolean isActiveStatusValid(String activeStatus) {
-    try {
-      Boolean.parseBoolean(activeStatus.toLowerCase());
-      return true;
-    } catch (Exception e) {
+    if (!activeStatus.matches("[YN]")) {
       errorCounter(118);
       return false;
     }
+    return true;
   }
 
   /**
@@ -233,7 +247,7 @@ public class AirlineParser extends Parser {
    *
    * @return A hashset contains all airline objects.
    */
-  public Set<Airline> getAirlines() {
+  public Set<DataType> getData() {
     return airlines;
   }
 }
