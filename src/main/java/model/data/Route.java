@@ -3,7 +3,7 @@ package model.data;
 /**
  * The Route class for containing all data for one unique flight route.
  * @author Hayley Krippner
- * @version 1.1
+ * @version 1.0
  * @since 2020-08-11
  */
 public class Route {

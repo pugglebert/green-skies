@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="769.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
+   <children>
+      <TableView fx:id="tableView" layoutX="21.0" layoutY="71.0" prefHeight="309.0" prefWidth="1152.0">
+        <columns>
+          <TableColumn fx:id="flightIDColumn" prefWidth="117.0" text="Flight ID " />
+          <TableColumn fx:id="typeColumn" prefWidth="94.0" text="Type" />
+            <TableColumn fx:id="airportsViaColumn" prefWidth="122.0" text="Airports Via" />
+            <TableColumn fx:id="altitudeColumn" prefWidth="136.0" text="Altitude" />
+            <TableColumn fx:id="positionColumn" prefWidth="153.0" text="Position" />
+            <TableColumn fx:id="distanceColumn" minWidth="0.0" prefWidth="164.0" text="Distance" />
+            <TableColumn fx:id="flightNameColumn" minWidth="0.0" prefWidth="116.0" text="Flight Name" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
