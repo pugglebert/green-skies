@@ -14,13 +14,29 @@ public abstract class Parser {
    * */
   protected Map<Integer, Integer> errorCollection = new HashMap<>();
 
+  /** The number of error codes for each parser type. */
+  protected int numCodes;
+
+  /** Arraylist of meaning of error codes, where each index corresponds to an error code. */
+  protected String[] errorLookup;
+
+  /** The total number of errors found while parsing the file. */
+  private int totalErrors = 0;
+
     /**
      * Constructor of Paser class.
      * @param dataFile passed from loader, contains all data from datafile, one line per element in the list.
      */
-    public Parser(List<String> dataFile) {
+    public Parser(List<String> dataFile, int numCodes) {
         this.dataFile = dataFile;
+        this.numCodes = numCodes;
+        errorCollectionInitializer(numCodes);
+        errorLookup = new String[numCodes];
+        initErrorLookup();
     }
+
+    /** Initialize errorLookup with message for each error code */
+    protected abstract void initErrorLookup();
 
     /**Abstract class of dataPasrser.*/
     protected abstract void dataParser();
@@ -43,8 +59,8 @@ public abstract class Parser {
      * Initialize error code key in errorCollection.
      * @param errorCodeNum number of error code that are expected to be generated in hashmap
      */
-    protected void errorCollectionInitializer(int errorCodeNum){
-        for (int i = 100; i < errorCodeNum + 100; i++){
+    private void errorCollectionInitializer(int errorCodeNum){
+        for (int i = 0; i < errorCodeNum; i++){
             errorCollection.put(i, 0);
         }
     }
@@ -56,10 +72,27 @@ public abstract class Parser {
     protected void errorCounter(int key){
         try{
             errorCollection.put(key, errorCollection.get(key)+1);
+            totalErrors++;
         } catch (Exception e){
             System.out.println(key + " key not found");
         }
     }
+
+    /**
+     * Create and return a message detailing the errors found in the file
+     * @return String with information about error types in fiile
+     */
+    public String getErrorMessage() {
+        String errorMessage = String.format("File uploaded with %d invalid lines rejected\n", totalErrors);
+        String template  = "Error [%d] %s: %d occurances\n";
+        for (int i = 0; i < numCodes; i++) {
+            if (errorCollection.get(i) > 0) {
+                errorMessage += String.format(template, i, errorLookup[i], errorCollection.get(i));
+            }
+        }
+        return errorMessage;
+    }
+
     //todo can we add overlapped method to this super class?????
 
 }
