@@ -64,27 +64,32 @@ public class RouteParser extends Parser {
     @Override
     protected void dataParser() {
         for (String dataLine : dataFile) {
-            String[] line = dataLine.replaceAll("\"", "").split(",");
-            if (validater(line)) {
-                try {
-                    Route route =
-                            new Route(
-                                    line[airline],
-                                    Integer.parseInt(line[airlineID]),
-                                    line[sourceAirport],
-                                    Integer.parseInt(line[sourceAirportID]),
-                                    line[destinationAirport],
-                                    Integer.parseInt(line[destinationAirportID]),
-                                    line[codeshare],
-                                    Integer.parseInt(line[stops]),
-                                    line[equipment].split(" "));
-                    routes.add(route);
-                } catch (Exception e) {
-                    errorCounter(11);
-                }
-            } else {
+          parseLine(dataLine);
+        }
+    }
+
+    protected void parseLine(String dataLine) {
+        dataLine = dataLine.replace("\n","").replace("\r","");
+        String[] line = dataLine.replaceAll("\"", "").split(",");
+        if (validater(line)) {
+            try {
+                Route route =
+                        new Route(
+                                line[airline],
+                                Integer.parseInt(line[airlineID]),
+                                line[sourceAirport],
+                                Integer.parseInt(line[sourceAirportID]),
+                                line[destinationAirport],
+                                Integer.parseInt(line[destinationAirportID]),
+                                line[codeshare],
+                                Integer.parseInt(line[stops]),
+                                line[equipment].split(" "));
+                routes.add(route);
+            } catch (Exception e) {
                 errorCounter(11);
             }
+        } else {
+            errorCounter(11);
         }
     }
 

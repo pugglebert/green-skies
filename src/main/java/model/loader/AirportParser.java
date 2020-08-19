@@ -68,7 +68,7 @@ public class AirportParser extends Parser {
             if (validater(line)){
                 try{
                     Airport airport = new Airport(Integer.parseInt(line[airportID]), line[name], line[city], line[country], line[IATA],
-                            line[ICAO], Float.parseFloat(line[latitude]), Float.parseFloat(line[longtitude]), Integer.parseInt(line[altitude]),
+                            line[ICAO], Double.parseDouble(line[latitude]), Double.parseDouble(line[longtitude]), Integer.parseInt(line[altitude]),
                             Float.parseFloat(line[timezone]), line[DST], line[dataBaseTimeZone]);
                     airports.add(airport);
                 } catch(Exception e) {

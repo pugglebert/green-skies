@@ -1,11 +1,13 @@
 package model.loader;
 
+import model.data.Airport;
 import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +20,7 @@ public class LoaderTest {
     private Loader loader;
     private Storage storage;
     private ArrayList<String> testLines;
+    private HashSet<Airport> testAirports;
 
     @Before
     public void setUp() {
@@ -106,30 +109,39 @@ public class LoaderTest {
 
     //TODO rewrite these tests so that they work without the getParser method
     //TODO additional tests for adding data to storage
-//    @Test
-//    /** Test that no parser is constructed if loadFile is called with an empty string for the filename parameter */
-//    public void testLoadFileEmptyFilename() {
-//        loader.loadFile("", "airport");
-//        assertNull(loader.getParser());
-//    }
+    @Test
+    /** Test that loadFile returns correct error message if called with an empty string for the filename parameter */
+    public void testLoadFileEmptyFilename() {
+        String message = loader.loadFile("", "airport");
+        assertEquals("Filename cannot be empty.", message);
+    }
 
-//    @Test
-//    /** Test that no parser is constructed if loadFile is called with an empty string for the datatype parameter */
-//    public void testLoadFileEmptyDatatype() {
-//        loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "");
-//        assertNull(loader.getParser());
-//    }
+    @Test
+    /** Test that no parser is constructed if loadFile is called with an empty string for the datatype parameter */
+    public void testLoadFileEmptyDatatype() {
+        String message = loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "");
+        assertEquals("Datatype cannot be empty.", message);
+    }
 
-//    @Test
-//    /** Test that a parser is constructed when loadFile is called with valid input for filename and datatype*/
-//    public void testLoadFileValid() {
+    @Test
+    /** Test that a expected data is stored in Storage when loadFile is called with valid input for filename and datatype*/
+    public void testLoadFileValid() {
+        testAirports = new HashSet<>();
+        testAirports.add(new Airport(1,"Goroka Airport","Goroka","Papua New Guinea","GKA",
+                "AYGA",-6.081689834590001,145.391998291,5282,10,"U",
+                "Pacific/Port_Moresby"));
+        testAirports.add(new Airport(2,"Madang Airport","Madang","Papua New Guinea","MAG",
+                "AYMD",-5.20707988739,145.789001465,20,10,"U","Pacific/Port_Moresby"));
+        testAirports.add(new Airport(3,"Mount Hagen Kagamuga Airport","Mount Hagen","Papua New Guinea","HGU","AYMH",
+                -5.826789855957031,144.29600524902344,5388,10,"U","Pacific/Port_Moresby"));
 
-//        try {
-//            loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "airport");
-//        } catch (Exception e) {
-//            System.out.println();
-//        }
-//        assertNotNull(loader.getParser());
-//     }
+        try {
+            loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "airport");
+        } catch (Exception e) {
+            System.out.println();
+        }
+
+        //assertArrayEquals(testAirports.toArray(), storage.getAirports().toArray());
+     }
 
 }

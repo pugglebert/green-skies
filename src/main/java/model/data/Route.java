@@ -1,5 +1,7 @@
 package model.data;
 
+import java.util.Arrays;
+
 /**
  * The Route class for containing all data for one unique flight route.
  * @author Hayley Krippner
@@ -103,5 +105,17 @@ public class Route implements DataType {
      */
     public String[] getEquipment(){
         return equipment;
+    }
+
+    public boolean equals(Route another) {
+        return (this.airlineName.equals(another.getAirlineName()) &&
+                this.airlineID == another.getAirlineID() &&
+                this.sourceAirport.equals(another.getSourceAirport()) &&
+                this.sourceAirportID == another.getSourceAirportID() &&
+                this.destinationAirport.equals(another.getDestinationAirport()) &&
+                this.destinationAirportID == another.getDestinationAirportID() &&
+                this.codeShare.equals(another.getCodeShare()) &&
+                this.numOfStops == another.getNumOfStops() &&
+                Arrays.equals(this.equipment, another.getEquipment()));
     }
 }

@@ -1,23 +1,30 @@
 package model.loader;
 
+import model.data.DataType;
+import model.data.Route;
 import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
 public class RouteParserTest {
 
     private RouteParser routeParser;
+    private ArrayList<String> lines;
 
     @Before
     public void setup() {
         Loader loader = new Loader(new Storage());
         try {
-            ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/routesTest.csv");
+            lines = loader.openFile("../seng202_project/src/test/java/TestFiles/routesTest.csv");
             routeParser = new RouteParser(lines);
         } catch (FileNotFoundException e) {
             fail();
@@ -245,5 +252,20 @@ public class RouteParserTest {
     public void isEquipmentValidEmptyTest() {
         assertFalse(routeParser.isEquipmentValid(""));
     }
+
+    @Test
+    /*Verify that when parseLine is called with a valid route, that route is added to routes */
+    public void parseRouteValidLineTest() {
+        ArrayList<String> testLines = new ArrayList<String>();
+        RouteParser testParser = new RouteParser(testLines);
+        testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
+        Route expectedRoute = new Route("2B",410,"AER",2965,"KZN",
+                2990,"",0, "CR2".split(","));
+        assertEquals(1, testParser.getData().size());
+        Route actualRoute = (Route) testParser.getData().toArray()[0];
+        assertTrue((expectedRoute.equals(actualRoute)));
+    }
+
+
 
 }

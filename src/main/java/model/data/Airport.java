@@ -13,8 +13,8 @@ public class Airport implements DataType {
     private final String country;
     private final String IATA;
     private final String ICAO;
-    private final float latitude;
-    private final float longitude;
+    private final double latitude;
+    private final double longitude;
     private final int altitude;
     private final float timezone;
     private final String DST;
@@ -23,8 +23,8 @@ public class Airport implements DataType {
     /**
      * The Airport constructor.
      */
-    public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude,
-                   float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
+    public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, double latitude,
+                   double longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
         this.airportID = airportID;
         this.name = name;
         this.city = city;
@@ -91,7 +91,7 @@ public class Airport implements DataType {
      * Getter for latitude of the Airport.
      * @return latitude.
      */
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -99,7 +99,7 @@ public class Airport implements DataType {
      * Getter for the longitude of the airport.
      * @return longitude.
      */
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
