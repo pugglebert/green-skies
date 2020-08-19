@@ -93,38 +93,32 @@ public class Loader {
             case "route" :
                 parser = new RouteParser(lines);
                 break;
-            case "flight" :
-                parser = new FlightParser(lines);
-                break;
             default :
-                throw new IllegalArgumentException("Datatype must be one of: airline, airport, flight, route.");
+                throw new IllegalArgumentException("Datatype must be one of: airline, airport, route.");
         }
 
         return parser;
     }
 
     /** Checks if filename and datatype fields are empty. If they aren't, processes file by calling checkFileType,
-     * openFile and constructParser.
+     * openFile and constructParser. If an error occurs while trying to open the file, returns a message about the
+     * error. Otherwise, returns message abount number of rejected lines from file.
      * @param fileName Name of the file to be opened.
      * @param dataType The type of data in the file (one of airport, airline, flight or route).
+     * @return Error information string.
      */
-    public void loadFile(String fileName, String dataType) {
+    public String loadFile(String fileName, String dataType) {
 
         if (fileName.isEmpty()) {
-            IllegalArgumentException e = new IllegalArgumentException("Filename cannot be empty.");
-            System.out.println(e.getMessage());
-            return;
+            return "Filename cannot be empty.";
         } else if (dataType.isEmpty()) {
-            IllegalArgumentException e = new IllegalArgumentException("Datatype cannot be empty.");
-            System.out.println(e.getMessage());
-            return;
+            return "Datatype cannot be empty.";
         }
 
         try {
             checkFileType(fileName);
         } catch (FileSystemException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return;
+            return e.getMessage();
         }
 
         ArrayList<String> lines;
@@ -132,12 +126,13 @@ public class Loader {
         try {
             lines = openFile(fileName);
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            return;
+            return e.getMessage();
         }
 
         Parser parser = constructParser(dataType, lines);
         Set<DataType> data = parser.getData();
         storage.setData(data, dataType);
+
+        return parser.getErrorMessage();
     }
 }
