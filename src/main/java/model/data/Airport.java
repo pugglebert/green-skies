@@ -6,7 +6,7 @@ package model.data;
  * @version 1.2
  * @since 2020-08-11
  */
-public class Airport {
+public class Airport implements DataType {
     private final int airportID;
     private final String name;
     private final String city;

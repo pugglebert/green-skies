@@ -43,10 +43,11 @@
       <artifactId>guava</artifactId>
       <version>29.0-jre</version>
     </dependency>
+
     <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-fxml</artifactId>
-      <version>11.0.2</version>
+      <groupId>com.google.googlejavaformat</groupId>
+      <artifactId>google-java-format</artifactId>
+      <version>1.8</version>
     </dependency>
 
   </dependencies>
@@ -84,6 +85,15 @@
         <version>0.0.4</version>
         <configuration>
           <mainClass>HelloFX</mainClass>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <release>11</release>
         </configuration>
       </plugin>
     </plugins>

@@ -6,7 +6,7 @@ package model.data;
  * @version 1.0
  * @since 2020-08-11
  */
-public class Route {
+public class Route implements DataType {
     private final String airlineName;
     private final int airlineID;
     private final String sourceAirport;

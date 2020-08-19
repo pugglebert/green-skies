@@ -1,10 +1,14 @@
 package model.loader;
 
+import model.data.DataType;
+import model.data.Storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 import static com.google.common.io.Files.getFileExtension;
 
@@ -20,19 +24,16 @@ public class Loader {
 
 
     /** Expected file extension*/
-    private ArrayList<String> supportedExtensions;
-    private Parser parser;
+    private final ArrayList<String> supportedExtensions;
+    private Storage storage;
 
     /** Adds extensions for supported fileTypes to supportedExtensions. */
-    public Loader() {
-        supportedExtensions = new ArrayList<String>();
+    public Loader(Storage storage) {
+        this.storage = storage;
+        supportedExtensions = new ArrayList<>();
         supportedExtensions.add("csv");
         supportedExtensions.add("txt");
         supportedExtensions.add("dat");
-    }
-
-    protected Parser getParser() {
-        return parser;
     }
 
     /**
@@ -57,15 +58,11 @@ public class Loader {
      */
     protected ArrayList<String> openFile(String fileName) throws FileNotFoundException {
 
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
         File file = new File(fileName);
-        Scanner scanner = null;
+        Scanner scanner;
 
-        try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            throw e;
-        }
+        scanner = new Scanner(file);
 
         while (scanner.hasNextLine()) {
             lines.add(scanner.nextLine());
@@ -82,7 +79,9 @@ public class Loader {
      * @param lines An ArrayList of Strings of data to be processed by the parser.
      * @throws IllegalArgumentException Thrown if datatype is not one of airline, airport, flight or route.
      */
-    protected void constructParser(String dataType, ArrayList lines) throws IllegalArgumentException{
+    protected Parser constructParser(String dataType, ArrayList<String> lines) throws IllegalArgumentException{
+
+        Parser parser;
 
         switch (dataType) {
             case "airport" :
@@ -101,6 +100,7 @@ public class Loader {
                 throw new IllegalArgumentException("Datatype must be one of: airline, airport, flight, route.");
         }
 
+        return parser;
     }
 
     /** Checks if filename and datatype fields are empty. If they aren't, processes file by calling checkFileType,
@@ -136,6 +136,8 @@ public class Loader {
             return;
         }
 
-        constructParser(dataType, lines);
+        Parser parser = constructParser(dataType, lines);
+        Set<DataType> data = parser.getData();
+        storage.setData(data, dataType);
     }
 }

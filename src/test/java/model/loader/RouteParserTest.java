@@ -1,5 +1,6 @@
 package model.loader;
 
+import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class RouteParserTest {
 
     @Before
     public void setup() {
-        Loader loader = new Loader();
+        Loader loader = new Loader(new Storage());
         try {
             ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/routesTest.csv");
             routeParser = new RouteParser(lines);
