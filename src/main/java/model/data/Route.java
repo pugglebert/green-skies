@@ -107,15 +107,21 @@ public class Route implements DataType {
         return equipment;
     }
 
-    public boolean equals(Route another) {
-        return (this.airlineName.equals(another.getAirlineName()) &&
-                this.airlineID == another.getAirlineID() &&
-                this.sourceAirport.equals(another.getSourceAirport()) &&
-                this.sourceAirportID == another.getSourceAirportID() &&
-                this.destinationAirport.equals(another.getDestinationAirport()) &&
-                this.destinationAirportID == another.getDestinationAirportID() &&
-                this.codeShare.equals(another.getCodeShare()) &&
-                this.numOfStops == another.getNumOfStops() &&
-                Arrays.equals(this.equipment, another.getEquipment()));
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Route) {
+            Route another = (Route) o;
+            return (this.airlineName.equals(another.getAirlineName()) &&
+                    this.airlineID == another.getAirlineID() &&
+                    this.sourceAirport.equals(another.getSourceAirport()) &&
+                    this.sourceAirportID == another.getSourceAirportID() &&
+                    this.destinationAirport.equals(another.getDestinationAirport()) &&
+                    this.destinationAirportID == another.getDestinationAirportID() &&
+                    this.codeShare.equals(another.getCodeShare()) &&
+                    this.numOfStops == another.getNumOfStops() &&
+                    Arrays.equals(this.equipment, another.getEquipment()));
+        } else {
+            return false;
+        }
     }
 }

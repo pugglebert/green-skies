@@ -1,13 +1,17 @@
 package model.loader;
 
 import model.data.Airport;
+import model.data.DataType;
+import model.data.Route;
 import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -117,7 +121,7 @@ public class LoaderTest {
     }
 
     @Test
-    /** Test that no parser is constructed if loadFile is called with an empty string for the datatype parameter */
+    /** Test that loadFile returns correct error message if called with an empty string for the datatype parameter */
     public void testLoadFileEmptyDatatype() {
         String message = loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "");
         assertEquals("Datatype cannot be empty.", message);
@@ -126,22 +130,31 @@ public class LoaderTest {
     @Test
     /** Test that a expected data is stored in Storage when loadFile is called with valid input for filename and datatype*/
     public void testLoadFileValid() {
-        testAirports = new HashSet<>();
-        testAirports.add(new Airport(1,"Goroka Airport","Goroka","Papua New Guinea","GKA",
-                "AYGA",-6.081689834590001,145.391998291,5282,10,"U",
-                "Pacific/Port_Moresby"));
-        testAirports.add(new Airport(2,"Madang Airport","Madang","Papua New Guinea","MAG",
-                "AYMD",-5.20707988739,145.789001465,20,10,"U","Pacific/Port_Moresby"));
-        testAirports.add(new Airport(3,"Mount Hagen Kagamuga Airport","Mount Hagen","Papua New Guinea","HGU","AYMH",
-                -5.826789855957031,144.29600524902344,5388,10,"U","Pacific/Port_Moresby"));
+        Set<DataType> testRoutes = new HashSet<>();
+        testRoutes.add(new Route("2B",410,"AER",2965,"KZN",2990,"",0,"CR2".split(" ")));
+        testRoutes.add(new Route("2B",410,"ASF",2966,"KZN",2990,"",0,"CR2".split(" ")));
+        testRoutes.add(new Route("2B",410,"ASF",2966,"MRV",2962,"",0,"CR2".split(" ")));
 
         try {
-            loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "airport");
+            loader.loadFile("../seng202_project/src/test/java/TestFiles/routesTest.csv", "route");
         } catch (Exception e) {
             System.out.println();
         }
 
-        //assertArrayEquals(testAirports.toArray(), storage.getAirports().toArray());
+        assertEquals(testRoutes.size(), storage.getRoutes().size());
+
+        for (DataType actualData: storage.getRoutes()) {
+            Route actualRoute = (Route) actualData;
+            boolean setsEqual = false;
+            for (DataType expectedData: testRoutes) {
+                Route expectedRoute = (Route) expectedData;
+                if (expectedRoute.equals(actualRoute)) {
+                    setsEqual = true;
+                    break;
+                }
+            }
+            assertTrue(setsEqual);
+        }
      }
 
 }

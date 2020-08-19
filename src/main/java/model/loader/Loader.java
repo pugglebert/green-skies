@@ -85,15 +85,27 @@ public class Loader {
 
         switch (dataType) {
             case "airport" :
-                parser = new AirportParser(lines);
+                try {
+                    parser = new AirportParser(lines);
+                } catch (RuntimeException e) {
+                    throw e;
+                }
                 break;
             case "airline" :
-                parser = new AirlineParser(lines);
+                try {
+                    parser = new AirlineParser(lines);
+                } catch (RuntimeException e) {
+                    throw e;
+                }
                 break;
             case "route" :
-                parser = new RouteParser(lines);
+                try {
+                    parser = new RouteParser(lines);
+                } catch (RuntimeException e) {
+                    throw e;
+                }
                 break;
-            default :
+            default:
                 throw new IllegalArgumentException("Datatype must be one of: airline, airport, route.");
         }
 
@@ -129,7 +141,14 @@ public class Loader {
             return e.getMessage();
         }
 
-        Parser parser = constructParser(dataType, lines);
+        Parser parser;
+
+        try {
+            parser = constructParser(dataType, lines);
+        } catch (RuntimeException e) {
+            return e.getMessage();
+        }
+
         Set<DataType> data = parser.getData();
         storage.setData(data, dataType);
 
