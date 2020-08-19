@@ -3,9 +3,7 @@ package model.loader;
 import model.data.DataType;
 import model.data.Route;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class to process route data which has been extracted from a file by Loader class.
@@ -32,26 +30,31 @@ public class RouteParser extends Parser {
             equipment = 8;
 
     /**
-     * Initializes error collection and calls dataParser method to begin processing data
-     * AirportParser Error code:
-     * 100: not enough parameters
-     * 101: invalide airline code
-     * 102: invalid airline id number
-     * 103: invalid source airport code
-     * 104: invalid source airport id
-     * 105: invalid destination airport code
-     * 106: invalid destination airport id
-     * 107: invalid codeshare value
-     * 108: invalid number of stops
-     * 109: invalid equipment code
-     * 110: invalid unknown error
-     * 111: number of failed insertions
-     * @param dataFile ArrayList of a string for each line in the file
+     * Initializes error collection and calls dataParser method to begin processing data.
+     * @param dataFile ArrayList of a string for each line in the file.
      */
     public RouteParser(ArrayList<String> dataFile) {
-        super(dataFile);
-        errorCollectionInitializer(16);
+        super(dataFile, 12);
         dataParser();
+    }
+
+    @Override
+    /**
+     * Initializes error lookup array with message for each error code.
+     */
+    protected void initErrorLookup() {
+        errorLookup[0] = "Not enough parameters";
+        errorLookup[1] = "Invalid airline code";
+        errorLookup[2] = "Invalid airline ID";
+        errorLookup[3] = "Invalid source airport code";
+        errorLookup[4] = "Invalid source airport ID";
+        errorLookup[5] = "Invalid destination airport code";
+        errorLookup[6] = "Invalid destination airport ID";
+        errorLookup[7] = "Invalid value for codeshare";
+        errorLookup[8] = "Invalid value for number of stops";
+        errorLookup[9] = "Invalid equipment code";
+        errorLookup[10] = "Unknown error";
+        errorLookup[11] = "Failed insertion";
     }
 
     /**
@@ -77,10 +80,10 @@ public class RouteParser extends Parser {
                                     line[equipment].split(" "));
                     routes.add(route);
                 } catch (Exception e) {
-                    errorCounter(110);
+                    errorCounter(11);
                 }
             } else {
-                errorCounter(111);
+                errorCounter(11);
             }
         }
     }
@@ -95,52 +98,52 @@ public class RouteParser extends Parser {
     public boolean validater(String[] line) {
         boolean isValid = true;
         if (line.length != 9) {
-            errorCounter(100);
+            errorCounter(0);
             return false;
         }
 
         if (!isAirlineValid(line[airline])) {
-            errorCounter(101);
+            errorCounter(1);
             isValid = false;
         }
 
         if (!isAirlineIDValid(line[airlineID])) {
-            errorCounter(102);
+            errorCounter(2);
             isValid = false;
         }
 
         if (!isAirportValid(line[sourceAirport])) {
-            errorCounter(103);
+            errorCounter(3);
             isValid = false;
         }
 
         if (!isAirportIDValid(line[sourceAirportID])) {
-            errorCounter(104);
+            errorCounter(4);
             isValid = false;
         }
 
         if (!isAirportValid(line[destinationAirport])) {
-            errorCounter(105);
+            errorCounter(5);
             isValid = false;
         }
 
         if (!isAirportIDValid(line[destinationAirportID])) {
-            errorCounter(106);
+            errorCounter(6);
             isValid = false;
         }
 
         if (!isCodeshareValid(line[codeshare])) {
-            errorCounter(107);
+            errorCounter(7);
             isValid = false;
         }
 
         if (!isStopsValid(line[stops])) {
-            errorCounter(108);
+            errorCounter(8);
             isValid = false;
         }
 
         if (!isEquipmentValid(line[equipment])) {
-            errorCounter(109);
+            errorCounter(9);
             isValid = false;
         }
 

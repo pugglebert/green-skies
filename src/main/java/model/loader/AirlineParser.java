@@ -21,7 +21,7 @@ public class AirlineParser extends Parser {
           activeStatus = 7;
 
   public AirlineParser(List<String> dataFile) {
-    super(dataFile);
+    super(dataFile, 12);
     /**
      * AirportParser Error code:
      * 100: not enough parameters
@@ -44,8 +44,26 @@ public class AirlineParser extends Parser {
      * 117: invalid callsign
      * 118: invalid activestatus
      */
-    errorCollectionInitializer(117);
     dataParser();
+  }
+
+  @Override
+  /**
+   * Initializes error lookup array with message for each error code.
+   */
+  protected void initErrorLookup() {
+    errorLookup[0] = "Not enough parameters";
+    errorLookup[1] = "Duplicate airline";
+    errorLookup[2] = "Invalid airline ID";
+    errorLookup[3] = "Invalid airport name";
+    errorLookup[4] = "Invalid ailias";
+    errorLookup[5] = "Invalid IATA code";
+    errorLookup[6] = "Invalid ICAO code";
+    errorLookup[7] = "Invalid callsign";
+    errorLookup[8] = "Invalid country";
+    errorLookup[9] = "Invalid status";
+    errorLookup[10] = "Unknown error";
+    errorLookup[11] = "Failed insertion";
   }
 
   public void dataParser() {
@@ -66,10 +84,10 @@ public class AirlineParser extends Parser {
                           Boolean.parseBoolean(line[activeStatus]));
           airlines.add(airline);
         } catch (Exception e) {
-          errorCounter(114);
+          errorCounter(10);
         }
       } else {
-        errorCounter(115);
+        errorCounter(11);
       }
     }
   }
@@ -77,7 +95,7 @@ public class AirlineParser extends Parser {
   protected boolean validater(String[] line) {
     boolean isValid = true;
     if (line.length != 8) {
-      errorCounter(100);
+      errorCounter(0);
     }
 
     if (!isIdValid(line[airlineID])) {
@@ -125,11 +143,11 @@ public class AirlineParser extends Parser {
       try {
         Airline airline = (Airline) data;
         if (airline.getAirlineID() == Integer.parseInt(airlineID)) {
-          errorCounter(101);
+          errorCounter(1);
           return false;
         }
       } catch (Exception e) {
-        errorCounter(102);
+        errorCounter(2);
         return false;
       }
     }
@@ -144,7 +162,7 @@ public class AirlineParser extends Parser {
    */
   private boolean isNameValid(String name) {
     if (!name.matches("[a-zA-Z ]+")) {
-      errorCounter(103);
+      errorCounter(3);
       return false;
     }
     return true;
@@ -158,7 +176,7 @@ public class AirlineParser extends Parser {
    */
   private boolean isAliasValid(String alias) {
     if (!alias.matches("(([a-zA-Z][ ]?)+)|(\\\\N)")) {
-      errorCounter(116);
+      errorCounter(4);
       return false;
     }
     return true;
@@ -174,7 +192,7 @@ public class AirlineParser extends Parser {
     // airline IATA check
     if (!IATA.equalsIgnoreCase("null") && !IATA.equalsIgnoreCase("unknown")) {
       if (!IATA.matches("[a-zA-Z]+") || IATA.length() != 2) {
-        errorCounter(106);
+        errorCounter(5);
         return false;
       }
     }
@@ -191,7 +209,7 @@ public class AirlineParser extends Parser {
     // airline ICAO check
     if (!ICAO.equalsIgnoreCase("null") && !ICAO.equalsIgnoreCase("unknown")) {
       if (!ICAO.matches("[a-zA-Z]+") || ICAO.length() != 3) {
-        errorCounter(107);
+        errorCounter(6);
         return false;
       }
     }
@@ -207,7 +225,7 @@ public class AirlineParser extends Parser {
   private boolean isCallsignValid(String callsign) {
     // airline callsign check
     if (!callsign.matches("(([A-Z][ ]?)+)|$")) {
-      errorCounter(117);
+      errorCounter(7);
       return false;
     }
     return true;
@@ -222,7 +240,7 @@ public class AirlineParser extends Parser {
   private boolean isCountryValid(String country) {
     // ISO 3166-1 codes not implemented
     if (!country.matches("[a-zA-Z ]+")) {
-      errorCounter(105);
+      errorCounter(8);
       return false;
     }
     return true;
@@ -236,7 +254,7 @@ public class AirlineParser extends Parser {
    */
   private boolean isActiveStatusValid(String activeStatus) {
     if (!activeStatus.matches("[YN]")) {
-      errorCounter(118);
+      errorCounter(9);
       return false;
     }
     return true;

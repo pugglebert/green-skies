@@ -28,7 +28,7 @@ public class AirportParser extends Parser {
      * @param dataFile is the list contains one line of datafile per element.
      */
     public AirportParser(List<String> dataFile) {
-        super(dataFile);
+        super(dataFile, 16);
 
         /**
          * AirportParser Error code:
@@ -53,7 +53,6 @@ public class AirportParser extends Parser {
          * 117: invalid callsign
          * 118: invalid activestatus
          */
-        errorCollectionInitializer(16);
         dataParser();
     }
 
@@ -73,13 +72,34 @@ public class AirportParser extends Parser {
                             Float.parseFloat(line[timezone]), line[DST], line[dataBaseTimeZone]);
                     airports.add(airport);
                 } catch(Exception e) {
-                    errorCounter(114);
+                    errorCounter(14);
                 }
             } else {
-                errorCounter(115);
+                errorCounter(15);
             }
         }
     }
+
+    @Override
+    /** Initialize the error messages for each error code */
+    protected void initErrorLookup() {
+        errorLookup[0] = "Not enough parameters";
+        errorLookup[1] = "Duplicate airport ID";
+        errorLookup[2] = "Invalid airport ID";
+        errorLookup[3] = "Invalid airport name";
+        errorLookup[4] = "Invalid airport city";
+        errorLookup[5] = "Invalid airport country";
+        errorLookup[6] = "Invalid IATA code";
+        errorLookup[7] = "Invalid ICAO code";
+        errorLookup[8] = "Invalid lattitude";
+        errorLookup[9] = "Invalid longitude";
+        errorLookup[10] = "Invalid altitude";
+        errorLookup[11] = "Invalid timezone";
+        errorLookup[12] = "Invalid DST";
+        errorLookup[13] = "Invalid database timezone";
+        errorLookup[14] = "Unknown error";
+        errorLookup[15] = "Failed insertion";
+     }
 
     /**
      * Validates the data in one line is valid or not.
@@ -90,7 +110,7 @@ public class AirportParser extends Parser {
     protected boolean validater(String[] line) {
         boolean isValid = true;
         if (line.length != 12){
-            errorCounter(100);
+            errorCounter(0);
             isValid = false;
         }
 
@@ -156,11 +176,11 @@ public class AirportParser extends Parser {
             try{
                 Airport airport = (Airport) data;
                 if(airport.getAirportID() == Integer.parseInt(id)){
-                    errorCounter(101);
+                    errorCounter(1);
                     return false;
                 }
             } catch (Exception e){
-                    errorCounter(102);
+                    errorCounter(2);
                     return false;
             }
         }
@@ -174,7 +194,7 @@ public class AirportParser extends Parser {
      */
     private boolean isNameValid(String name){
         if(!name.matches("[a-zA-Z ]+")){
-            errorCounter(103);
+            errorCounter(3);
             return false;
         }
         return true;
@@ -187,7 +207,7 @@ public class AirportParser extends Parser {
      */
     private boolean isCityValid(String city){
         if(!city.matches("[a-zA-Z ]+")){
-            errorCounter(104);
+            errorCounter(4);
             return false;
         }
         return true;
@@ -201,7 +221,7 @@ public class AirportParser extends Parser {
     private boolean isCountryValid(String country){
         //ISO 3166-1 codes not implemented
         if(!country.matches("[a-zA-Z ]+")){
-            errorCounter(105);
+            errorCounter(5);
             return false;
         }
         return true;
@@ -216,7 +236,7 @@ public class AirportParser extends Parser {
         //airport IATA check
         if(!IATA.equalsIgnoreCase("null") && !IATA.equalsIgnoreCase("unknown")){
             if(!IATA.matches("[a-zA-Z]+" ) || IATA.length() != 3 ){
-                errorCounter(106);
+                errorCounter(6);
                 return false;
                 }
         }
@@ -232,7 +252,7 @@ public class AirportParser extends Parser {
         //airport ICAO check
         if(!ICAO.equalsIgnoreCase("null") && !ICAO.equalsIgnoreCase("unknown")){
             if(!ICAO.matches("[a-zA-Z]+" ) || ICAO.length() != 4 ){
-                errorCounter(107);
+                errorCounter(7);
                 return false;
             }
         }
@@ -250,7 +270,7 @@ public class AirportParser extends Parser {
             Float.parseFloat(lat);
             return true;
         } catch (Exception e){
-            errorCounter(108);
+            errorCounter(8);
             return false;
         }
     }
@@ -265,7 +285,7 @@ public class AirportParser extends Parser {
             Float.parseFloat(lon);
             return true;
         } catch (Exception e){
-            errorCounter(109);
+            errorCounter(9);
             return false;
         }
     }
@@ -280,7 +300,7 @@ public class AirportParser extends Parser {
             Integer.parseInt(alt);
             return true;
         } catch (Exception e){
-            errorCounter(110);
+            errorCounter(10);
             return false;
         }
     }
@@ -299,7 +319,7 @@ public class AirportParser extends Parser {
                 return false;
             }
         } catch (Exception e){
-            errorCounter(111);
+            errorCounter(11);
             return false;
         }
     }
@@ -311,7 +331,7 @@ public class AirportParser extends Parser {
      */
     private boolean isDSTValid(String DST){
         if(!DST.matches("[EASOZNU]+" ) || DST.length() != 1 ){
-            errorCounter(112);
+            errorCounter(12);
             return false;
         }
         return true;
@@ -324,7 +344,7 @@ public class AirportParser extends Parser {
      */
     private boolean isDBTZValid(String DBTZ){
         if(!DBTZ.matches("[a-zA-Z/a-zA-Z_]+" )){
-            errorCounter(113);
+            errorCounter(13);
             return false;
         }
         return true;
