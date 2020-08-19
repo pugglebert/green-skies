@@ -69,26 +69,26 @@ public class RouteParserTest {
 
     @Test
     /* Verify that isAirportIDValid returns true when tested with a numeric string of length 4 */
-    public void isAirportIDValidLengthFourTest() {
-        assertTrue(routeParser.isAirportIDValid("1234"));
+    public void isAirportIDValidLengthFiveTest() {
+        assertTrue(routeParser.isAirportIDValid("12345"));
     }
 
     @Test
     /*Verify that isAirportIDValid returns true when tested with a numeric string of lenght less than 4 */
-    public void isAirportIDValidLessThanFourTest() {
+    public void isAirportIDValidLessThanFiveTest() {
         assertTrue(routeParser.isAirportIDValid("9"));
     }
 
     @Test
-    /*Verify that isAirportIDValid returns true when tested with the null string \N */
+    /*Verify that isAirportIDValid returns false when tested with the null string \N */
     public void isAirportIDValidNullTest() {
-        assertTrue(routeParser.isAirportIDValid("\\N"));
+        assertFalse(routeParser.isAirportIDValid("\\N"));
     }
 
     @Test
     /*Verify that isAirportIDValid returns false when tested with a string of length greater than four*/
-    public void isAirportIDValidGreaterThanFourTest() {
-        assertFalse(routeParser.isAirportIDValid("53256"));
+    public void isAirportIDValidGreaterThanFiveTest() {
+        assertFalse(routeParser.isAirportIDValid("593256"));
     }
 
     @Test
@@ -261,9 +261,14 @@ public class RouteParserTest {
         testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
         Route expectedRoute = new Route("2B",410,"AER",2965,"KZN",
                 2990,"",0, "CR2".split(","));
-        assertEquals(1, testParser.getData().size());
-        Route actualRoute = (Route) testParser.getData().toArray()[0];
-        assertTrue((expectedRoute.equals(actualRoute)));
+        Route[] expectedArray = new Route[1];
+        expectedArray[0] = expectedRoute;
+        assertArrayEquals(expectedArray, testParser.getData().toArray());
+    }
+
+    @Test
+    public void parseRouteInvalidLineTest() {
+
     }
 
 

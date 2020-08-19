@@ -34,8 +34,12 @@ public class RouteParser extends Parser {
      * @param dataFile ArrayList of a string for each line in the file.
      */
     public RouteParser(ArrayList<String> dataFile) {
-        super(dataFile, 12);
-        dataParser();
+        super(dataFile, 11);
+        try {
+            dataParser();
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
 
     @Override
@@ -54,7 +58,6 @@ public class RouteParser extends Parser {
         errorLookup[8] = "Invalid value for number of stops";
         errorLookup[9] = "Invalid equipment code";
         errorLookup[10] = "Unknown error";
-        errorLookup[11] = "Failed insertion";
     }
 
     /**
@@ -64,13 +67,15 @@ public class RouteParser extends Parser {
     @Override
     protected void dataParser() {
         for (String dataLine : dataFile) {
-          parseLine(dataLine);
+            if (totalErrors > 100) {
+                throw new RuntimeException("File rejected: more than 100 lines contain errors");
+            }
+            parseLine(dataLine);
         }
     }
 
     protected void parseLine(String dataLine) {
-        dataLine = dataLine.replace("\n","").replace("\r","");
-        String[] line = dataLine.replaceAll("\"", "").split(",");
+        String[] line = dataLine.split(",");
         if (validater(line)) {
             try {
                 Route route =
@@ -86,10 +91,8 @@ public class RouteParser extends Parser {
                                 line[equipment].split(" "));
                 routes.add(route);
             } catch (Exception e) {
-                errorCounter(11);
+                errorCounter(10);
             }
-        } else {
-            errorCounter(11);
         }
     }
 
@@ -105,6 +108,18 @@ public class RouteParser extends Parser {
         if (line.length != 9) {
             errorCounter(0);
             return false;
+        }
+
+        if (line[airlineID].equals("\\N")) {
+            line[airlineID] = "0";
+        }
+
+        if (line[sourceAirportID].equals("\\N")) {
+            line[sourceAirportID] = "0";
+        }
+
+        if (line[destinationAirportID].equals("\\N")) {
+            line[destinationAirportID] = "0";
         }
 
         if (!isAirlineValid(line[airline])) {
@@ -170,7 +185,7 @@ public class RouteParser extends Parser {
      * @return true if string matches openflights format, false otherwise
      */
     protected boolean isAirportIDValid(String airportID) {
-        return (airportID.length() <= 4 && airportID.matches("[0-9]+")) || airportID.equals("\\N");
+        return (airportID.length() <= 5 && airportID.matches("[0-9]+"));
     }
 
     /**

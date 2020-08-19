@@ -21,7 +21,7 @@ public abstract class Parser {
   protected String[] errorLookup;
 
   /** The total number of errors found while parsing the file. */
-  private int totalErrors = 0;
+  protected int totalErrors = 0;
 
     /**
      * Constructor of Paser class.
