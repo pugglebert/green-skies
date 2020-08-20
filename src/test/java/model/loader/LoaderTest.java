@@ -7,9 +7,7 @@ import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.file.FileSystemException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -97,7 +95,7 @@ public class LoaderTest {
     @Test
     /** Test that constructParser instantiates a parser of the correct datatype when called with a valid datatype */
     public void testConstructParserValid() {
-        Parser testParser = loader.constructParser("airport", testLines);
+        Parser testParser = loader.constructParser("Airport", testLines);
         assertTrue(testParser instanceof AirportParser);
     }
 
@@ -136,7 +134,7 @@ public class LoaderTest {
         testRoutes.add(new Route("2B",410,"ASF",2966,"MRV",2962,"",0,"CR2".split(" ")));
 
         try {
-            loader.loadFile("../seng202_project/src/test/java/TestFiles/routesTest.csv", "route");
+            loader.loadFile("../seng202_project/src/test/java/TestFiles/routesTest.csv", "Route");
         } catch (Exception e) {
             System.out.println();
         }

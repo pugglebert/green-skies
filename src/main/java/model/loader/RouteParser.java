@@ -47,7 +47,7 @@ public class RouteParser extends Parser {
      * Initializes error lookup array with message for each error code.
      */
     protected void initErrorLookup() {
-        errorLookup[0] = "Not enough parameters";
+        errorLookup[0] = "Wrong number of parameters";
         errorLookup[1] = "Invalid airline code";
         errorLookup[2] = "Invalid airline ID";
         errorLookup[3] = "Invalid source airport code";
@@ -104,70 +104,74 @@ public class RouteParser extends Parser {
      */
     @Override
     public boolean validater(String[] line) {
-        boolean isValid = true;
         if (line.length != 9) {
             errorCounter(0);
             return false;
         }
 
-        if (line[airlineID].equals("\\N")) {
-            line[airlineID] = "0";
-        }
+        changeNulls(line);
 
-        if (line[sourceAirportID].equals("\\N")) {
-            line[sourceAirportID] = "0";
-        }
-
-        if (line[destinationAirportID].equals("\\N")) {
-            line[destinationAirportID] = "0";
-        }
 
         if (!isAirlineValid(line[airline])) {
             errorCounter(1);
-            isValid = false;
+            return false;
         }
 
         if (!isAirlineIDValid(line[airlineID])) {
             errorCounter(2);
-            isValid = false;
+            return false;
         }
 
         if (!isAirportValid(line[sourceAirport])) {
             errorCounter(3);
-            isValid = false;
+            return false;
         }
 
         if (!isAirportIDValid(line[sourceAirportID])) {
             errorCounter(4);
-            isValid = false;
+            return false;
         }
 
         if (!isAirportValid(line[destinationAirport])) {
             errorCounter(5);
-            isValid = false;
+            return false;
         }
 
         if (!isAirportIDValid(line[destinationAirportID])) {
             errorCounter(6);
-            isValid = false;
+            return false;
         }
 
         if (!isCodeshareValid(line[codeshare])) {
             errorCounter(7);
-            isValid = false;
+            return false;
         }
 
         if (!isStopsValid(line[stops])) {
             errorCounter(8);
-            isValid = false;
+            return false;
         }
 
         if (!isEquipmentValid(line[equipment])) {
             errorCounter(9);
-            isValid = false;
+            return false;
         }
 
-        return isValid;
+        return true;
+    }
+
+    private void changeNulls(String[] line) {
+            if (line[airlineID].equals("\\N")) {
+                line[airlineID] = "0";
+            }
+
+            if (line[sourceAirportID].equals("\\N")) {
+                line[sourceAirportID] = "0";
+            }
+
+            if (line[destinationAirportID].equals("\\N")) {
+                line[destinationAirportID] = "0";
+            }
     }
 
     /**

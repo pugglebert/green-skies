@@ -30,11 +30,11 @@ public class Storage {
     public Set<DataType> getRoutes() {return routes;}
 
     public void setData(Set<DataType> data, String type) {
-        if (type.matches("airline")) {
+        if (type.matches("Airline")) {
             airlines = data;
-        } else if (type.matches("airport")) {
+        } else if (type.matches("Airport")) {
             airports = data;
-        } else if (type.matches("route")) {
+        } else if (type.matches("Route")) {
             routes = data;
         } else {
             throw new IllegalArgumentException("Type must be airline, airport or route");

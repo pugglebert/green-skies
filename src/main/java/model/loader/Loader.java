@@ -84,21 +84,21 @@ public class Loader {
         Parser parser;
 
         switch (dataType) {
-            case "airport" :
+            case "Airport" :
                 try {
                     parser = new AirportParser(lines);
                 } catch (RuntimeException e) {
                     throw e;
                 }
                 break;
-            case "airline" :
+            case "Airline" :
                 try {
                     parser = new AirlineParser(lines);
                 } catch (RuntimeException e) {
                     throw e;
                 }
                 break;
-            case "route" :
+            case "Route" :
                 try {
                     parser = new RouteParser(lines);
                 } catch (RuntimeException e) {
