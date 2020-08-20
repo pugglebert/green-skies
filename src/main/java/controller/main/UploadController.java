@@ -1,6 +1,5 @@
 package controller.main;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,23 +12,20 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.data.Storage;
+import model.loader.Loader;
 
 import java.io.File;
 import java.io.IOException;
 
-public class UploadController extends Application {
+public class UploadController {
 
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml"));
-        primaryStage.setTitle("Welcome");
-        primaryStage.setScene(new Scene(root, 1024, 640));
-        primaryStage.show();
-    }
+    //Initialize storage space for selected file
+    public final Storage storage = new Storage();
+    public final Loader loader = new Loader(storage);
 
     ObservableList<String> dataTypeList = FXCollections.
-            observableArrayList("Airport", "Route", "Airline");
-
+            observableArrayList("Airport", "route", "airline");
 
     @FXML
     private ChoiceBox dataTypeSelect;
@@ -39,16 +35,36 @@ public class UploadController extends Application {
     private Text fileErrorText;
     @FXML
     private Button nextButton;
-    @FXML
+
+
+//    public UploadController(Main main){
+//        this.main = main;
+//    }
+
     public void initialize(){
         dataTypeSelect.getItems().addAll(dataTypeList);
     }
 
+
     //opens file browser when button pushed
     public void browseFiles() {
+
         FileChooser fileChooser = new FileChooser(); //opens a file local file browser
         File selectedFile = fileChooser.showOpenDialog(null);
+
+        String fileType = dataTypeSelect.getValue().toString();
+        String stringFile = selectedFile.toString();
+
         if (selectedFile != null){  // check a file has been selected
+            try{
+            String resultString = loader.loadFile(stringFile, fileType);
+            fileErrorText.setText(resultString);
+            fileErrorText.setVisible(true);
+
+            }
+            catch (Exception e){
+                //@TODO Display error message
+            }
             fileView.getItems().add(selectedFile.getName());
             nextButton.setVisible(true); //'Next' button pops up if a valid file has been selected
         } else{
@@ -56,6 +72,7 @@ public class UploadController extends Application {
 
         }
     }
+
 
     //take user back to the welcome screen in case of wanting to see info screen
     public void backToWelcome() throws IOException {
@@ -67,10 +84,5 @@ public class UploadController extends Application {
         stage.show(); // time for performing
     }
 
-
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 
 }
