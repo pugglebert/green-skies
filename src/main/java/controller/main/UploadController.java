@@ -25,7 +25,7 @@ public class UploadController {
     public final Loader loader = new Loader(storage);
 
     ObservableList<String> dataTypeList = FXCollections.
-            observableArrayList("Airport", "route", "airline");
+            observableArrayList("Airport", "Route", "Airline");
 
     @FXML
     private ChoiceBox dataTypeSelect;
