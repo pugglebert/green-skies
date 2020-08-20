@@ -1,9 +1,11 @@
 # Default ignored files
 /shelf/
-/.idea/libraries
+.idea/libraries
+.idea/workspace.xml 
+.idea/tasks.xml
+.idea/vcs.xml
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
 target/
-dependency-reduced-pom.xml
-/.idea/
+
