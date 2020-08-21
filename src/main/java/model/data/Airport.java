@@ -2,9 +2,9 @@ package model.data;
 
 /**
  * The Airport class which contains all data for one unique airport.
- * @author Hayley Krippner
- * @version 1.2
- * @since 2020-08-11
+ * @author Enyang Zhang
+ * @version 1.3
+ * @since 2020-08-21
  */
 public class Airport implements DataType {
     private final int airportID;

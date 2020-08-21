@@ -3,6 +3,7 @@ package model.loader;
 import model.data.Airport;
 import model.data.DataType;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,9 +13,9 @@ import java.util.Set;
  * each of the data line and create airport object. Then put the object into a hashSet for return
  * value.
  *
- * @author Hayley Krippner
- * @version 2.1
- * @since 2020-08-11
+ * @author Enyang Zhang(Lambert)
+ * @version 2.2
+ * @since 2020-08-21
  */
 public class AirportParser extends Parser {
     //Processed airport data
@@ -359,4 +360,16 @@ public class AirportParser extends Parser {
         return airports;
     }
 
+//  public static void main(String[] args) {
+//        ArrayList<String> testLines;
+//        testLines = new ArrayList<String>();
+//        testLines.add("1,\"Goroka\",\"Goroka\",\"Papua New Guinea\",\"GKA\",\"AYGA\",-6.081689,145.391881,5282,10,\"U\",\"Pacific/Port_Moresby\"");
+//        testLines.add("2,\"Madang\",\"Madang\",\"Papua New Guinea\",\"MAG\",\"AYMD\",-5.207083,145.7887,20,10,\"U\",\"Pacific/Port_Moresby\"");
+//        testLines.add("3,\"Mount Hagen\",\"Mount Hagen\",\"Papua New Guinea\",\"HGU\",\"AYMH\",-5.826789,144.295861,5388,10,\"U\",\"Pacific/Port_Moresby\"");
+//         AirportParser air = new AirportParser(testLines);
+//         for(DataType airs: air.getData()){
+//             System.out.println(airs);
+//
+//        }
+//    }
 }
