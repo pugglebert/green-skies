@@ -1,5 +1,5 @@
 # Default ignored files
-/shelf/
+.idea/shelf/
 .idea/libraries
 .idea/workspace.xml 
 .idea/tasks.xml
