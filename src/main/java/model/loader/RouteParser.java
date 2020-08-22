@@ -160,7 +160,7 @@ public class RouteParser extends Parser {
         return true;
     }
 
-    private void changeNulls(String[] line) {
+    protected void changeNulls(String[] line) {
             if (line[airlineID].equals("\\N")) {
                 line[airlineID] = "0";
             }
