@@ -35,6 +35,8 @@ public class UploadController {
     private Text fileErrorText;
     @FXML
     private Button nextButton;
+    @FXML
+    private Button backButton;
 
 
 //    public UploadController(Main main){
@@ -76,12 +78,13 @@ public class UploadController {
 
     //take user back to the welcome screen in case of wanting to see info screen
     public void backToWelcome() throws IOException {
-        Stage stage = new Stage(); // create a stage for scene
-        Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml")); // load welcome.fxml
-        Scene scene = new Scene(root, 1024, 640);  // apply stuff wanna show to scene
-        stage.setResizable(false);
-        stage.setScene(scene);  // set up scene
-        stage.show(); // time for performing
+        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
+        stage.close();  // close current window
+        Stage stage1 = new Stage();  //create new stage
+        Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml")); //reopen welcome.fxml
+        Scene scene = new Scene(root);   //add thing to scene
+        stage1.setScene(scene);
+        stage1.show();
     }
 
 
