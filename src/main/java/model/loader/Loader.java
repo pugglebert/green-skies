@@ -119,18 +119,18 @@ public class Loader {
      * @param dataType The type of data in the file (one of airport, airline, flight or route).
      * @return Error information string.
      */
-    public String loadFile(String fileName, String dataType) {
+    public String loadFile(String fileName, String dataType) throws FileSystemException, FileNotFoundException {
 
         if (fileName.isEmpty()) {
-            return "Filename cannot be empty.";
+            throw new RuntimeException("Filename cannot be empty.");
         } else if (dataType.isEmpty()) {
-            return "Datatype cannot be empty.";
+            throw new RuntimeException("Datatype cannot be empty.");
         }
 
         try {
             checkFileType(fileName);
         } catch (FileSystemException | IllegalArgumentException e) {
-            return e.getMessage();
+            throw e;
         }
 
         ArrayList<String> lines;
@@ -138,7 +138,7 @@ public class Loader {
         try {
             lines = openFile(fileName);
         } catch (FileNotFoundException e) {
-            return e.getMessage();
+            throw e;
         }
 
         Parser parser;
@@ -146,7 +146,7 @@ public class Loader {
         try {
             parser = constructParser(dataType, lines);
         } catch (RuntimeException e) {
-            return e.getMessage();
+            throw e;
         }
 
         Set<DataType> data = parser.getData();

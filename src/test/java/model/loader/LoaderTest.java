@@ -114,15 +114,22 @@ public class LoaderTest {
     @Test
     /** Test that loadFile returns correct error message if called with an empty string for the filename parameter */
     public void testLoadFileEmptyFilename() {
-        String message = loader.loadFile("", "airport");
-        assertEquals("Filename cannot be empty.", message);
+        try {
+            String message = loader.loadFile("", "airport");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Filename cannot be empty.", e.getMessage());
+        }
     }
 
     @Test
     /** Test that loadFile returns correct error message if called with an empty string for the datatype parameter */
     public void testLoadFileEmptyDatatype() {
-        String message = loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "");
-        assertEquals("Datatype cannot be empty.", message);
+        try {
+            String message = loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "");
+        } catch (Exception e) {
+            assertEquals("Datatype cannot be empty.", e.getMessage());
+        }
     }
 
     @Test
@@ -136,7 +143,7 @@ public class LoaderTest {
         try {
             loader.loadFile("../seng202_project/src/test/java/TestFiles/routesTest.csv", "Route");
         } catch (Exception e) {
-            System.out.println();
+            fail();
         }
 
         assertEquals(testRoutes.size(), storage.getRoutes().size());
