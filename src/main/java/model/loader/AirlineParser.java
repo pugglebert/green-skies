@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class AirlineParser extends Parser {
   // Processed airlines data
-  private final Set<DataType> airlines = new HashSet<>();
+//  private final Set<DataType> airlines = new HashSet<>();
   // Alphabetical name to represent line index
   private final int airlineID = 0,
       name = 1,
@@ -73,7 +73,7 @@ public class AirlineParser extends Parser {
                   line[callsign],
                   line[country],
                   Boolean.parseBoolean(line[activeStatus]));
-          airlines.add(airline);
+          parserData.add(airline);
 
         } catch (Exception e) {
           errorCounter(10);
@@ -140,7 +140,7 @@ public class AirlineParser extends Parser {
   private boolean isIdValid(String airlineID) {
 
     // airline ID Duplication check
-    for (DataType data : airlines) {
+    for (DataType data : parserData) {
 
       try {
         Airline airline = (Airline) data;
@@ -264,14 +264,14 @@ public class AirlineParser extends Parser {
     return true;
   }
 
-  /**
-   * Getter for airlines
-   *
-   * @return A hashset contains all airline objects.
-   */
-  public Set<DataType> getData() {
-    return airlines;
-  }
+//  /**
+//   * Getter for airlines
+//   *
+//   * @return A hashset contains all airline objects.
+//   */
+//  public Set<DataType> getData() {
+//    return airlines;
+//  }
 
 //  public static void main(String[] args) throws Exception {
 //    ArrayList<String> testLines;

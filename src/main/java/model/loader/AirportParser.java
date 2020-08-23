@@ -14,12 +14,13 @@ import java.util.Set;
  * value.
  *
  * @author Enyang Zhang(Lambert)
- * @version 2.2
- * @since 2020-08-21
+ * @version 2.3
+ * @since 2020-08-22
  */
 public class AirportParser extends Parser {
     //Processed airport data
-    private final Set<DataType> airports = new HashSet<>();
+//    private final Set<DataType> airports = new HashSet<>();
+
     //Alphabetical name to represent line index
     private final int airportID = 0, name = 1, city = 2, country = 3, IATA = 4, ICAO = 5, latitude = 6, longtitude = 7,
             altitude = 8, timezone = 9, DST = 10, dataBaseTimeZone = 11;
@@ -65,13 +66,14 @@ public class AirportParser extends Parser {
     protected void dataParser(){
 
         for (String dataLine: dataFile){
-            String[] line= dataLine.replaceAll("\"","").split(",");
+      // TODO: 23/08/20 figure out if replaceAll "\" is needed
+     String[] line = dataLine.replaceAll("\"", "").split(",");
             if (validater(line)){
                 try{
                     Airport airport = new Airport(Integer.parseInt(line[airportID]), line[name], line[city], line[country], line[IATA],
                             line[ICAO], Double.parseDouble(line[latitude]), Double.parseDouble(line[longtitude]), Integer.parseInt(line[altitude]),
                             Float.parseFloat(line[timezone]), line[DST], line[dataBaseTimeZone]);
-                    airports.add(airport);
+                    parserData.add(airport);
                 } catch(Exception e) {
                     errorCounter(14);
                 }
@@ -173,7 +175,7 @@ public class AirportParser extends Parser {
      */
     private boolean isIdValid(String id){
         // airport ID Duplication check
-        for(DataType data: airports){
+        for(DataType data: parserData){
             try{
                 Airport airport = (Airport) data;
                 if(airport.getAirportID() == Integer.parseInt(id)){
@@ -351,13 +353,13 @@ public class AirportParser extends Parser {
         return true;
     }
 
-    /**
-     * Getter for airports
-     * @return A hashset contains all airport objects.
-     */
-    @Override
-    public Set<DataType> getData() {
-        return airports;
-    }
 
+//    /**
+//     * Getter for airports
+//     * @return A hashset contains all airport objects.
+//     */
+//    @Override
+//    public Set<DataType> getData() {
+//        return parserData;
+//    }
 }

@@ -11,12 +11,12 @@ import java.util.*;
  * attributes determined by the data in the line. If the line contains an error this is added to the ErrorCounter
  * and the parser moves onto the next line without creating a route object.
  * @author Ella Johnson
- * @since 11/08/20
+ * @since 11/08/22
  */
 public class RouteParser extends Parser {
 
     /** Processed route data */
-    private final Set<DataType> routes = new HashSet<>();
+//    private final Set<DataType> routes = new HashSet<>();
 
     /** Alphabetical name to represent line index */
     private final int airline = 0,
@@ -89,7 +89,7 @@ public class RouteParser extends Parser {
                                 line[codeshare],
                                 Integer.parseInt(line[stops]),
                                 line[equipment].split(" "));
-                routes.add(route);
+                parserData.add(route);
             } catch (Exception e) {
                 errorCounter(10);
             }
@@ -243,12 +243,12 @@ public class RouteParser extends Parser {
         return true;
     }
 
-    /**
-     * Returns the set of Route objects created from the data file
-     * @return Hashset of Route objects
-     */
-    public Set<DataType> getData() {
-        return routes;
-    }
+//    /**
+//     * Returns the set of Route objects created from the data file
+//     * @return Hashset of Route objects
+//     */
+//    public Set<DataType> getData() {
+//        return parserData;
+//    }
 
 }
