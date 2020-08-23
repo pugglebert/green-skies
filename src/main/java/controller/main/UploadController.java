@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.data.DataType;
+import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
 
@@ -62,6 +64,10 @@ public class UploadController {
             String resultString = loader.loadFile(stringFile, fileType);
             fileErrorText.setText(resultString);
             fileErrorText.setVisible(true);
+            for (DataType line: Storage.getRoutes()){
+                Route test = (Route) line;
+                System.out.println(test.getAirlineID());
+                }
 
             }
             catch (Exception e){
@@ -94,6 +100,32 @@ public class UploadController {
         stage.close();  // close current window
         Stage stage1 = new Stage(); // create new stage
         Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
+        Scene scene = new Scene(root);   //add thing to scene
+        stage1.setScene(scene);
+        stage1.show();
+    }
+
+    //take user back to the welcome screen in case of wanting to see info screen
+    public void toAirportDataView() throws IOException {
+        // TODO: 23/08/20 how to close it with routeData as a button instead of menuitem
+
+        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
+        stage.close();  // close current window
+        Stage stage1 = new Stage(); // create new stage
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //reopen welcome.fxml
+        Scene scene = new Scene(root);   //add thing to scene
+        stage1.setScene(scene);
+        stage1.show();
+    }
+
+    //take user back to the welcome screen in case of wanting to see info screen
+    public void toAirlineDataView() throws IOException {
+        // TODO: 23/08/20 how to close it with routeData as a button instead of menuitem
+
+        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
+        stage.close();  // close current window
+        Stage stage1 = new Stage(); // create new stage
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //reopen welcome.fxml
         Scene scene = new Scene(root);   //add thing to scene
         stage1.setScene(scene);
         stage1.show();

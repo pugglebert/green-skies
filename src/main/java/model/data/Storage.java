@@ -10,24 +10,24 @@ import java.util.Set;
  */
 public class Storage {
 
-    private Set<DataType> airlines;
-    private Set<DataType> airports;
-    private Set<DataType> routes;
+    private static Set<DataType> airlines;
+    private static Set<DataType> airports;
+    private static Set<DataType> routes;
 
     /**
      * @return a set of Airline objects from the currently open file cast as Datatype objects.
      */
-    public Set<DataType> getAirlines() {return airlines;}
+    public static Set<DataType> getAirlines() {return airlines;}
 
     /**
      * @return a set of Airport objects from the currently open file cast as Datatype objects.
      */
-    public Set<DataType> getAirports() {return airports;}
+    public static Set<DataType> getAirports() {return airports;}
 
     /**
      * @return a set of Route object from the currently open file cast as Datatype objects.
      */
-    public Set<DataType> getRoutes() {return routes;}
+    public static Set<DataType> getRoutes() {return routes;}
 
     public void setData(Set<DataType> data, String type) {
         if (type.matches("Airline")) {

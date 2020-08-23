@@ -16,6 +16,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 <AnchorPane prefHeight="769.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
@@ -42,7 +55,13 @@
                </Menu>
                <Menu mnemonicParsing="false" text="View Data">
                    <items>
-                       <MenuItem mnemonicParsing="false" text="Route Data" />
+                       <MenuItem fx:id="routeData" mnemonicParsing="false" onAction="#toRouteDataView" text="Route Data" />
+                   </items>
+                   <items>
+                       <MenuItem fx:id="airportData" mnemonicParsing="false" onAction="#toAirportDataView" text="Airport Data" />
+                   </items>
+                   <items>
+                       <MenuItem fx:id="airlineData" mnemonicParsing="false" onAction="#toAirlineDataView" text="Airline Data" />
                    </items>
                </Menu>
                <Menu mnemonicParsing="false" text="Help">

@@ -71,6 +71,12 @@
             <items>
               <MenuItem fx:id="routeData" mnemonicParsing="false" onAction="#toRouteDataView" text="Route Data" />
             </items>
+              <items>
+                  <MenuItem fx:id="airportData" mnemonicParsing="false" onAction="#toAirportDataView" text="Airport Data" />
+              </items>
+              <items>
+                  <MenuItem fx:id="airlineData" mnemonicParsing="false" onAction="#toAirlineDataView" text="Airline Data" />
+              </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>

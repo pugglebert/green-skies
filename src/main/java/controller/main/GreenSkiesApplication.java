@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class GreenSkiesApplication extends Application {
-
+    // unneeded code; Used for testing for routeDataView page
 //    @Override
 //    public void start(Stage stage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml"));
 //        Scene scene = new Scene(root);
 //        stage.setScene(scene);
 //        stage.show();
