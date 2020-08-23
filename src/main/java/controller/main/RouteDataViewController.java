@@ -3,12 +3,14 @@ package controller.main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.data.Route;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 //@TODO: should RouteDataViewController implement an inteface Initializable?
@@ -19,7 +21,7 @@ import java.util.ResourceBundle;
  * @version 1.0
  * @since 2020-08-19
  */
-public class RouteDataViewController {
+public class RouteDataViewController implements Initializable {
 
     //configure the table
     @FXML
@@ -43,7 +45,12 @@ public class RouteDataViewController {
     @FXML
     private TableColumn<Route, String[]> equipmentColumn;
 
-/**
+
+//    public RouteDataViewController(){
+//        getRoutes()
+//    }
+
+    /**
  * Initializes the controller class.
  */
 //@Override
@@ -60,19 +67,24 @@ public void initialize(URL url, ResourceBundle rb) {
     equipmentColumn.setCellValueFactory(new PropertyValueFactory<Route, String[]>("equipment"));
 
     //load data
-//    tableView.setItems(getRoutes());
+    tableView.setItems(getRoutes());
 }
-//
-//    /**
-//     * This method will return an ObservableList of Route objects
-//     */
-//    public ObservableList<Route>  getRoutes()
-//    {
-//        ObservableList<Route> routes = FXCollections.observableArrayList();
-//        routes.add(new Route('A', 1234, 'B', 4567, 'C', 8910, 'a', 2, {"hello", 'temp'})); //@TODO: need to provide specific values into Route()
+
+    /**
+     * This method will return an ObservableList of Route objects
+     */
+    public ObservableList<Route>  getRoutes()
+    {
+        ObservableList<Route> routes = FXCollections.observableArrayList();
+        String[] test = {"abvc"};
+        routes.add(new Route("A", 1234, "B", 4567, "C", 8910, "a", 2, test)); //@TODO: need to provide specific values into Route()
 //        routes.add(new Route()); //@TODO: need to provide specific values into Route()
 //        routes.add(new Route()); //@TODO: need to provide specific values into Route()
-//
-//        return routes;
+
+        return routes;
+    }
+
+//    public static void main(String[] args) {
+//        launch(args);
 //    }
 }
