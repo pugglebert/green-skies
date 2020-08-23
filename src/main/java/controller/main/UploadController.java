@@ -6,9 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -37,6 +35,8 @@ public class UploadController {
     private Button nextButton;
     @FXML
     private Button backButton;
+    @FXML
+    private MenuItem routeData;
 
 
 //    public UploadController(Main main){
@@ -75,7 +75,6 @@ public class UploadController {
         }
     }
 
-
     //take user back to the welcome screen in case of wanting to see info screen
     public void backToWelcome() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
@@ -87,5 +86,17 @@ public class UploadController {
         stage1.show();
     }
 
+    //take user back to the welcome screen in case of wanting to see info screen
+    public void toRouteDataView() throws IOException {
+    // TODO: 23/08/20 how to close it with routeData as a button instead of menuitem
+
+        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
+        stage.close();  // close current window
+        Stage stage1 = new Stage(); // create new stage
+        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
+        Scene scene = new Scene(root);   //add thing to scene
+        stage1.setScene(scene);
+        stage1.show();
+    }
 
 }

@@ -67,9 +67,9 @@
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="View Data">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="routeData" mnemonicParsing="false" onAction="#toRouteDataView" text="Route Data" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

@@ -10,25 +10,25 @@ import java.io.IOException;
 
 public class GreenSkiesApplication extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+//    @Override
+//    public void start(Stage stage) throws Exception {
+//        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
+//        Scene scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
 
     /**
      * TODO: uncomment to run welcome page (later)
      * @param args
      */
-//    @Override
-//    public void start(Stage primaryStage) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
-//        primaryStage.setTitle("Welcome");
-//        primaryStage.setScene(new Scene(root, 1024, 640));
-//        primaryStage.show();
-//    }
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
+        primaryStage.setTitle("Welcome");
+        primaryStage.setScene(new Scene(root, 1024, 640));
+        primaryStage.show();
+    }
 
 
 
