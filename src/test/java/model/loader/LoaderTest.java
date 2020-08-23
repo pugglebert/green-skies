@@ -74,7 +74,6 @@ public class LoaderTest {
         try {
             actualLines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             fail();
         }
 
@@ -109,8 +108,6 @@ public class LoaderTest {
         }
     }
 
-    //TODO rewrite these tests so that they work without the getParser method
-    //TODO additional tests for adding data to storage
     @Test
     /** Test that loadFile returns correct error message if called with an empty string for the filename parameter */
     public void testLoadFileEmptyFilename() {
