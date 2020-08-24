@@ -15,9 +15,6 @@ import java.util.*;
  */
 public class RouteParser extends Parser {
 
-    /** Processed route data */
-//    private final Set<DataType> routes = new HashSet<>();
-
     /** Alphabetical name to represent line index */
     private final int airline = 0,
             airlineID = 1,

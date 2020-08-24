@@ -1,5 +1,8 @@
 package model.loader;
 
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
+import model.data.DataList;
 import model.data.DataType;
 
 import java.util.*;
@@ -14,20 +17,15 @@ public abstract class Parser {
   /** The number of error codes for each parser type. */
   protected int numCodes;
 
-  /** Arraylist of meaning of error codes for Airport Parser, where each index corresponds to an error code. */
+  /** Arraylist of meaning of error codes for Parser, where each index corresponds to an error code. */
   protected String[] errorLookup;
-
-//  /** Arraylist of meaning of error codes for Airline Parser, where each index corresponds to an error code. */
-//  protected String[] errorLookupAirLine;
-//
-//  /** Arraylist of meaning of error codes for Route Parser, where each index corresponds to an error code. */
-//  protected String[] errorLookupRoute;
 
   /** The total number of errors found while parsing the file. */
   protected int totalErrors = 0;
 
   /** The set contains airport, Airline, route for each sub-parser.*/
-  protected final Set<DataType> parserData = new HashSet<>();
+  protected final ObservableList<DataType> parserData = new DataList<>();
+
 
     /**
      * Constructor of Paser class.
@@ -38,8 +36,6 @@ public abstract class Parser {
         this.numCodes = numCodes;
         errorCollectionInitializer(numCodes);
         errorLookup = new String[numCodes];
-//        errorLookupRoute = new String[numCodes];
-//        errorLookupAirLine = new String[numCodes];
         initErrorLookup();
     }
 
@@ -53,7 +49,7 @@ public abstract class Parser {
     protected abstract boolean validater(String[] line);
 
     /**Getter returning processed data result for all sub-parsers. */
-    public Set<DataType> getData(){
+    public ObservableList<DataType> getData(){
         return parserData;
     };
 

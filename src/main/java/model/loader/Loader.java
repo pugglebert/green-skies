@@ -1,5 +1,6 @@
 package model.loader;
 
+import javafx.collections.ObservableList;
 import model.data.DataType;
 import model.data.Storage;
 
@@ -149,7 +150,7 @@ public class Loader {
             throw e;
         }
 
-        Set<DataType> data = parser.getData();
+        ObservableList<DataType> data = parser.getData();
         storage.setData(data, dataType);
 
         return parser.getErrorMessage();

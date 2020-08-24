@@ -1,5 +1,8 @@
 package model.data;
 
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -10,26 +13,26 @@ import java.util.Set;
  */
 public class Storage {
 
-    private static Set<DataType> airlines;
-    private static Set<DataType> airports;
-    private static Set<DataType> routes;
+    private static ObservableList<DataType> airlines;
+    private static ObservableList<DataType> airports;
+    private static ObservableList<DataType> routes;
 
     /**
      * @return a set of Airline objects from the currently open file cast as Datatype objects.
      */
-    public static Set<DataType> getAirlines() {return airlines;}
+    public static ObservableList<DataType> getAirlines() {return airlines;}
 
     /**
      * @return a set of Airport objects from the currently open file cast as Datatype objects.
      */
-    public static Set<DataType> getAirports() {return airports;}
+    public static ObservableList<DataType> getAirports() {return airports;}
 
     /**
      * @return a set of Route object from the currently open file cast as Datatype objects.
      */
-    public static Set<DataType> getRoutes() {return routes;}
+    public static ObservableList<DataType> getRoutes() {return routes;}
 
-    public void setData(Set<DataType> data, String type) {
+    public void setData(ObservableList<DataType> data, String type) {
         if (type.matches("Airline")) {
             airlines = data;
         } else if (type.matches("Airport")) {
