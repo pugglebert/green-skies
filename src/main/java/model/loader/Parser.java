@@ -60,9 +60,9 @@ public abstract class Parser {
 
     /**
      * Initialize error code key in errorCollection.
-     * @param errorCodeNum number of error code that are expected to be generated in hashmap
+     * @param errorCodeNum number of error code that are expected to be generated in hashmap1
      */
-    private void errorCollectionInitializer(int errorCodeNum){
+    protected void errorCollectionInitializer(int errorCodeNum){
         for (int i = 0; i < errorCodeNum; i++){
             errorCollection.put(i, 0);
         }
@@ -76,8 +76,7 @@ public abstract class Parser {
         try{
             errorCollection.put(key, errorCollection.get(key)+1);
             totalErrors++;
-        } catch (Exception e){
-            System.out.println(key + " key not found");
+        } catch (NullPointerException e) {
         }
     }
 
