@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
 
@@ -56,6 +57,8 @@ public class RouteDataViewController implements Initializable {
     @FXML
     private Button backButton;
 
+    private Storage storage;
+
     /**
  * Initializes the controller class.
  */
@@ -75,13 +78,11 @@ public void initialize(URL url, ResourceBundle rb) {
     // load data by taking the route hashset and converting it to an ArrayList to convert it to
     // ObservableArrayList.
     // TODO: 23/08/20 Change datatype in Storage class into ArrayList
-    List<Route> list = new ArrayList<Route>((HashSet) Storage.getRoutes());
+    //List<Route> list = new ArrayList<Route>((HashSet) Storage.getRoutes());
     // TODO: 23/08/20 Find a cleaner way to convert list to observableList
-    ObservableList<Route> routes = FXCollections.observableArrayList();
-    for (Route entry: list){
-        routes.add(entry);
-    }
-    tableView.setItems((ObservableList) routes);
+    //ObservableList<Route> routes = FXCollections.observableArrayList();
+    ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
+    tableView.setItems(routes);
 }
 
     /**

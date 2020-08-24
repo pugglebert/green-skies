@@ -64,7 +64,7 @@ public class UploadController {
             String resultString = loader.loadFile(stringFile, fileType);
             fileErrorText.setText(resultString);
             fileErrorText.setVisible(true);
-            for (DataType line: Storage.getRoutes()){
+            for (DataType line: storage.getRoutes()){
                 Route test = (Route) line;
                 System.out.println(test.getAirlineID());
                 }

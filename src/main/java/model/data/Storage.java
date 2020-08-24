@@ -1,8 +1,10 @@
 package model.data;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,32 +15,43 @@ import java.util.Set;
  */
 public class Storage {
 
-    private static ObservableList<DataType> airlines;
-    private static ObservableList<DataType> airports;
-    private static ObservableList<DataType> routes;
+    private static List<Airline> airlines = new ArrayList<>();
+    private static List<Airport> airports = new ArrayList<>();
+    private static List<Route> routes = new ArrayList();
 
     /**
      * @return a set of Airline objects from the currently open file cast as Datatype objects.
      */
-    public static ObservableList<DataType> getAirlines() {return airlines;}
+    public List<Airline> getAirlines() {return airlines;}
 
     /**
      * @return a set of Airport objects from the currently open file cast as Datatype objects.
      */
-    public static ObservableList<DataType> getAirports() {return airports;}
+    public List<Airport> getAirports() {return airports;}
 
     /**
      * @return a set of Route object from the currently open file cast as Datatype objects.
      */
-    public static ObservableList<DataType> getRoutes() {return routes;}
+    public List<Route> getRoutes() {return routes;}
 
-    public void setData(ObservableList<DataType> data, String type) {
+    public void setData(List<DataType> data, String type) {
+
         if (type.matches("Airline")) {
-            airlines = data;
+
+            for (DataType entry : data) {
+                Airline airline = (Airline) entry;
+                airlines.add(airline);
+            }
         } else if (type.matches("Airport")) {
-            airports = data;
+            for (DataType entry : data) {
+                Airport airport = (Airport) entry;
+                airports.add(airport);
+            }
         } else if (type.matches("Route")) {
-            routes = data;
+            for (DataType entry : data) {
+                Route route = (Route) entry;
+                routes.add(route);
+            }
         } else {
             throw new IllegalArgumentException("Type must be airline, airport or route");
         }

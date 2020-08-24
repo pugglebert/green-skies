@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -150,7 +151,7 @@ public class Loader {
             throw e;
         }
 
-        ObservableList<DataType> data = parser.getData();
+        List<DataType> data = parser.getData();
         storage.setData(data, dataType);
 
         return parser.getErrorMessage();

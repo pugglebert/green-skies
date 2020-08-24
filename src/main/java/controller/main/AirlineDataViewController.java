@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.data.Airline;
 import model.data.Airline;
+import model.data.DataType;
 import model.data.Storage;
 
 import java.io.IOException;
@@ -55,6 +56,8 @@ public class AirlineDataViewController implements Initializable {
     @FXML
     private Button backButton;
 
+    private Storage storage;
+
     /**
      * Initializes the controller class.
      */
@@ -74,13 +77,10 @@ public class AirlineDataViewController implements Initializable {
         // load data by taking the Airline hashset and converting it to an ArrayList to convert it to
         // ObservableArrayList.
         // TODO: 23/08/20 Change datatype in Storage class into ArrayList
-        List<Airline> list = new ArrayList<Airline>((HashSet) Storage.getAirlines());
+        // List<Airline> list = new ArrayList<Airline>((HashSet) Storage.getAirlines());
         // TODO: 23/08/20 Find a cleaner way to convert list to observableList
-        ObservableList<Airline> airlines = FXCollections.observableArrayList();
-        for (Airline entry: list){
-            airlines.add(entry);
-        }
-        tableView.setItems((ObservableList) airlines);
+        ObservableList<Airline> airlines = FXCollections.observableList(storage.getAirlines());
+        tableView.setItems(airlines);
     }
 //
 //    /**

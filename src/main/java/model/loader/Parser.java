@@ -1,8 +1,5 @@
 package model.loader;
 
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
-import model.data.DataList;
 import model.data.DataType;
 
 import java.util.*;
@@ -24,7 +21,7 @@ public abstract class Parser {
   protected int totalErrors = 0;
 
   /** The set contains airport, Airline, route for each sub-parser.*/
-  protected final ObservableList<DataType> parserData = new DataList<>();
+  protected final List<DataType> parserData = new ArrayList<>();
 
 
     /**
@@ -49,7 +46,7 @@ public abstract class Parser {
     protected abstract boolean validater(String[] line);
 
     /**Getter returning processed data result for all sub-parsers. */
-    public ObservableList<DataType> getData(){
+    public List<DataType> getData(){
         return parserData;
     };
 
