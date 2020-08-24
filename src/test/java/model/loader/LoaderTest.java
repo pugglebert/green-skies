@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -129,34 +130,24 @@ public class LoaderTest {
         }
     }
 
-    @Test
-    /** Test that a expected data is stored in Storage when loadFile is called with valid input for filename and datatype*/
-    public void testLoadFileValid() {
-        Set<DataType> testRoutes = new HashSet<>();
-        testRoutes.add(new Route("2B",410,"AER",2965,"KZN",2990,"",0,"CR2".split(" ")));
-        testRoutes.add(new Route("2B",410,"ASF",2966,"KZN",2990,"",0,"CR2".split(" ")));
-        testRoutes.add(new Route("2B",410,"ASF",2966,"MRV",2962,"",0,"CR2".split(" ")));
+  @Test
+  /**
+   * Test that a expected data is stored in Storage when loadFile is called with valid input for
+   * filename and datatype
+   */
+  public void testLoadFileValid() {
+    List<DataType> testRoutes = new ArrayList<>();
+    testRoutes.add(new Route("2B", 410, "AER", 2965, "KZN", 2990, "", 0, "CR2".split(" ")));
+    testRoutes.add(new Route("2B", 410, "ASF", 2966, "KZN", 2990, "", 0, "CR2".split(" ")));
+    testRoutes.add(new Route("2B", 410, "ASF", 2966, "MRV", 2962, "", 0, "CR2".split(" ")));
 
-        try {
-            loader.loadFile("../seng202_project/src/test/java/TestFiles/routesTest.csv", "Route");
-        } catch (Exception e) {
-            fail();
-        }
+    try {
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/routesTest.csv", "Route");
+    } catch (Exception e) {
+      fail();
+    }
 
-        assertEquals(testRoutes.size(), storage.getRoutes().size());
-
-        for (DataType actualData: storage.getRoutes()) {
-            Route actualRoute = (Route) actualData;
-            boolean setsEqual = false;
-            for (DataType expectedData: testRoutes) {
-                Route expectedRoute = (Route) expectedData;
-                if (expectedRoute.equals(actualRoute)) {
-                    setsEqual = true;
-                    break;
-                }
-            }
-            assertTrue(setsEqual);
-        }
-     }
+    //assertArrayEquals(testRoutes, storage.getRoutes());
+  }
 
 }
