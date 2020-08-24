@@ -38,17 +38,18 @@ public class UploadController {
     @FXML
     private Button backButton;
     @FXML
-    private MenuItem routeData;
+    private Button btnUpload;
+    @FXML
+    private Button btnRouteDataView;
+    @FXML
+    private Button btnAirportDataView;
+    @FXML
+    private Button btnAirlineDataView;
 
-
-//    public UploadController(Main main){
-//        this.main = main;
-//    }
 
     public void initialize(){
         dataTypeSelect.getItems().addAll(dataTypeList);
     }
-
 
     //opens file browser when button pushed
     public void browseFiles() {
@@ -75,6 +76,9 @@ public class UploadController {
             }
             fileView.getItems().add(selectedFile.getName());
             nextButton.setVisible(true); //'Next' button pops up if a valid file has been selected
+
+            //Create the view raw data controllers
+
         } else{
             fileErrorText.setVisible(true);
 
@@ -92,11 +96,20 @@ public class UploadController {
         stage1.show();
     }
 
-    //take user back to the welcome screen in case of wanting to see info screen
-    public void toRouteDataView() throws IOException {
-    // TODO: 23/08/20 how to close it with routeData as a button instead of menuitem
+    //take user back to the upload screen
+    public void toUploadData() throws IOException {
+        Stage stage = (Stage) btnUpload.getScene().getWindow();   //get current window
+        stage.close();  // close current window
+        Stage stage1 = new Stage(); // create new stage
+        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //reopen welcome.fxml
+        Scene scene = new Scene(root);   //add thing to scene
+        stage1.setScene(scene);
+        stage1.show();
+    }
 
-        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
+    //take user back to the route data view
+    public void toRouteDataView() throws IOException {
+        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();   //get current window
         stage.close();  // close current window
         Stage stage1 = new Stage(); // create new stage
         Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
@@ -105,11 +118,9 @@ public class UploadController {
         stage1.show();
     }
 
-    //take user back to the welcome screen in case of wanting to see info screen
+    //take user back to the airport data view
     public void toAirportDataView() throws IOException {
-        // TODO: 23/08/20 how to close it with routeData as a button instead of menuitem
-
-        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
+        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();   //get current window
         stage.close();  // close current window
         Stage stage1 = new Stage(); // create new stage
         Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //reopen welcome.fxml
@@ -118,11 +129,9 @@ public class UploadController {
         stage1.show();
     }
 
-    //take user back to the welcome screen in case of wanting to see info screen
+    //take user back to the airline data view screen
     public void toAirlineDataView() throws IOException {
-        // TODO: 23/08/20 how to close it with routeData as a button instead of menuitem
-
-        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
+        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();   //get current window
         stage.close();  // close current window
         Stage stage1 = new Stage(); // create new stage
         Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //reopen welcome.fxml
