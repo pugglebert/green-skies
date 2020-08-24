@@ -21,8 +21,8 @@ import java.io.IOException;
 public class UploadController {
 
     //Initialize storage space for selected file
-    public final Storage storage = new Storage();
-    public final Loader loader = new Loader(storage);
+    private final Storage storage = Main.getStorage();
+    private final Loader loader = Main.getLoader();
 
     ObservableList<String> dataTypeList = FXCollections.
             observableArrayList("Airport", "Route", "Airline");

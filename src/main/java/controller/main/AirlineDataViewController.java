@@ -56,7 +56,7 @@ public class AirlineDataViewController implements Initializable {
     @FXML
     private Button backButton;
 
-    private Storage storage;
+    private Storage storage = Main.getStorage();
 
     /**
      * Initializes the controller class.
