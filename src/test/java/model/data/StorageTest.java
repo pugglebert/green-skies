@@ -55,7 +55,7 @@ public class StorageTest {
     public void setDataAirportUnchangedTest() {
         List<DataType> testAirlines = createAirlineSet();
         storage.setData(testAirlines, "Airline");
-        //assertNull(storage.getAirports());
+        assertArrayEquals((new ArrayList<Airport>()).toArray(), storage.getAirports().toArray());
     }
 
     /**
@@ -65,7 +65,7 @@ public class StorageTest {
     public void setDataRouteUnchangedTest() {
         List<DataType> testAirlines = createAirlineSet();
         storage.setData(testAirlines, "Airline");
-        //assertNull(storage.getRoutes());
+        assertArrayEquals((new ArrayList<Route>()).toArray(), storage.getRoutes().toArray());
     }
 
     /**

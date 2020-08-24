@@ -15,9 +15,9 @@ import java.util.Set;
  */
 public class Storage {
 
-    private static List<Airline> airlines = new ArrayList<>();
-    private static List<Airport> airports = new ArrayList<>();
-    private static List<Route> routes = new ArrayList();
+    private List<Airline> airlines = new ArrayList<>();
+    private List<Airport> airports = new ArrayList<>();
+    private List<Route> routes = new ArrayList();
 
     /**
      * @return a set of Airline objects from the currently open file cast as Datatype objects.

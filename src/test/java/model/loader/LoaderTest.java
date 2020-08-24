@@ -147,7 +147,7 @@ public class LoaderTest {
       fail();
     }
 
-    //assertArrayEquals(testRoutes, storage.getRoutes());
+    assertArrayEquals(testRoutes.toArray(), storage.getRoutes().toArray());
   }
 
 }
