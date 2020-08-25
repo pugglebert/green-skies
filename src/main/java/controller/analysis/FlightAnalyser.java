@@ -19,13 +19,25 @@ public class FlightAnalyser {
 
         private final double radius = 6371e3;   //radius of earth;
 
+        private double distance;   //must use in KM
+
+        private double FuelUsed;
+
+        private final int seatsOccupancy = 333;   //number of passengers;
+
+        private final double Co2OfOneGramFuel = 3.15;  //in gram
+
+        private final int CruisingSpeed = 910;   //km per hour
 
 
-        public FlightAnalyser(double Latitude1, double Longitude1, double Latitude2, double Longitude2) {
+        public FlightAnalyser(double Latitude1, double Longitude1, double Latitude2, double Longitude2, double airlaneDistance) {
             this.LatitudeExample1 = Latitude1;
             this.LongitudeExample1 = Longitude1;
             this.LatitudeExample2 = Latitude2;
             this.LongitudeExample2 = Longitude2;
+            this.distance = airlaneDistance;
+
+
 
         }
 
@@ -44,16 +56,42 @@ public class FlightAnalyser {
             return distance/1000;   //distance in kilometers
         }
 
-        public static void main(String[] args) {
-            double Lati1 = 40.689202777778;
-            double Lati2 = 38.889069444444;
-            double Long1 = -74.044219444444;
-            double Long2 = -77.034502777778;
-            FlightAnalyser e1 = new FlightAnalyser(Lati1, Long1, Lati2, Long2);
+        public double calculateCarbonEmission(double distance){
+            FuelUsed = 59.6;  //fuel in tonns
 
-            System.out.println(e1.calculatedistance(Lati1, Long1, Lati2, Long2));
+            double FuelPerPassenger = (FuelUsed / (distance*seatsOccupancy))*1000000;   //fuel use per passenger per km
 
+            double Co2PerPassengerPerKm = FuelPerPassenger*Co2OfOneGramFuel;  //co2 emissions per passenger km in gram
+
+            double Co2Hour = (Co2PerPassengerPerKm*CruisingSpeed)/1000;   //how much Co2 genate per hour in kg
+
+            double flytime = distance / CruisingSpeed;  // in hour
+
+            double finalCo2 =  flytime*Co2Hour;
+
+            return finalCo2;  // in kg
 
         }
+
+        public static void main(String[] args) {
+            double Lati1 =40.689202777778;
+            double Long1 =-74.044219444444;
+            double Lati2 = 38.889069444444;
+            double Long2 = -77.034502777778;
+            int disatnce = 5556;
+            FlightAnalyser f1 = new FlightAnalyser(Lati1, Long1, Lati2, Long2, disatnce);
+            System.out.println(f1.calculateCarbonEmission(disatnce));
+
+        }
+
+
+
+
+
+
+
+
+
+
 
 }
