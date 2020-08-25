@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="785.0" prefWidth="1369.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
    <children>
-      <TableView fx:id="tableView" layoutX="173.0" layoutY="243.0" prefHeight="492.0" prefWidth="1184.0">
+      <TableView fx:id="tableView" layoutX="181.0" layoutY="274.0" prefHeight="500.0" prefWidth="1126.0">
         <columns>
           <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name" />
           <TableColumn fx:id="airlineIDColumn" prefWidth="94.0" text="Airline ID" />
@@ -19,11 +19,11 @@
             <TableColumn fx:id="destinationAirportColumn" prefWidth="153.0" text="Destination Airport" />
             <TableColumn fx:id="destinationAirportIDColumn" minWidth="0.0" prefWidth="164.0" text="Destination Airport ID" />
             <TableColumn fx:id="codeShareColumn" minWidth="0.0" prefWidth="116.0" text="Code Share" />
-            <TableColumn fx:id="numOfStopsColumn" minWidth="0.0" prefWidth="150.0" text="Number of Stops" />
-            <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="132.0" text="Equipment" />
+            <TableColumn fx:id="numOfStopsColumn" minWidth="0.0" prefWidth="131.0" text="Number of Stops" />
+            <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="94.0" text="Equipment" />
         </columns>
       </TableView>
-      <VBox prefHeight="785.0" prefWidth="160.0" style="-fx-background-color: #007f5f;">
+      <VBox prefHeight="800.0" prefWidth="160.0" style="-fx-background-color: #007f5f;">
          <children>
             <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Upload Data" textFill="WHITE">
                <font>

@@ -16,17 +16,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//@TODO: should AirlineDataViewController implement an inteface Initializable?
-
 /**
  * The controller class which contains the controls for the airline data view.
  * @author Hayley Krippner
  * @version 1.0
- * @since 2020-08-19
+ * @since 2020-08-26
  */
 public class AirlineDataViewController implements Initializable {
 
-    //configure the table
+    //Configure the TableView.
     @FXML
     private TableView<Airline> tableView;
     @FXML
@@ -58,70 +56,80 @@ public class AirlineDataViewController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url The URL used.
+     * @param rb The resource bundle used.
      */
-//@Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Set up the columns in the TableView.
+        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
+        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+        airlineAliasColumn.setCellValueFactory(new PropertyValueFactory<>("airlineAlias"));
+        airlineIATAColumn.setCellValueFactory(new PropertyValueFactory<>("airlineIATA"));
+        ICAOColumn.setCellValueFactory(new PropertyValueFactory<>("ICAO"));
+        callsignColumn.setCellValueFactory(new PropertyValueFactory<>("callsign"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
+        activeStatusColumn.setCellValueFactory(new PropertyValueFactory<>("activeStatus"));
 
-        //set up the columns in the table
-        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<Airline, Integer>("airlineID"));
-        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineName"));
-        airlineAliasColumn.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineAlias"));
-        airlineIATAColumn.setCellValueFactory(new PropertyValueFactory<Airline, String>("airlineIATA"));
-        ICAOColumn.setCellValueFactory(new PropertyValueFactory<Airline, String>("ICAO"));
-        callsignColumn.setCellValueFactory(new PropertyValueFactory<Airline, String>("callsign"));
-        countryColumn.setCellValueFactory(new PropertyValueFactory<Airline, String>("country"));
-        activeStatusColumn.setCellValueFactory(new PropertyValueFactory<Airline, Boolean>("activeStatus"));
-
-        // load data by taking the Airline hashset and converting it to an ArrayList to convert it to
-        // ObservableArrayList.
-        // TODO: 23/08/20 Change datatype in Storage class into ArrayList
-        // List<Airline> list = new ArrayList<Airline>((HashSet) Storage.getAirlines());
-        // TODO: 23/08/20 Find a cleaner way to convert list to observableList
+        //Load data by taking the Airline ArrayList and converting it to an ObservableArrayList.
         ObservableList<Airline> airlines = FXCollections.observableList(storage.getAirlines());
         tableView.setItems(airlines);
     }
 
-    //take user back to the upload screen
+    /**
+     * This method closes the View Airline Data page and opens the Upload Data page.
+     * @throws IOException
+     */
     public void toUploadData() throws IOException {
-        Stage stage = (Stage) btnUpload.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnUpload.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //open the Upload Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the route data view
+    /**
+     * This method closes the View Airline Data page and opens the View Route Data page.
+     * @throws IOException
+     */
     public void toRouteDataView() throws IOException {
-        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //open the View Route Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the airport data view
+    /**
+     * This method closes the View Airline Data page and opens the View Airport Data page.
+     * @throws IOException
+     */
     public void toAirportDataView() throws IOException {
-        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open the View Airport Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the airline data view screen
+    /**
+     * This method closes the View Airline Data page and opens the View Airline Data page.
+     * @throws IOException
+     */
     public void toAirlineDataView() throws IOException {
-        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
+
 }

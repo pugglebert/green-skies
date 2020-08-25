@@ -17,14 +17,19 @@ import model.loader.Loader;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The controller class which contains the controls for the upload data view.
+ * @author Grace Hanlon, Hayley Krippner
+ * @version 1.0
+ * @since 2020-08-26
+ */
 public class UploadController {
 
-    //Initialize storage space for selected file
+    //Initialize storage space for selected file.
     private final Storage storage = Main.getStorage();
     private final Loader loader = Main.getLoader();
 
-    ObservableList<String> dataTypeList = FXCollections.
-            observableArrayList("Airport", "Route", "Airline");
+    ObservableList<String> dataTypeList = FXCollections.observableArrayList("Airport", "Route", "Airline");
 
     @FXML
     private ChoiceBox dataTypeSelect;
@@ -45,12 +50,16 @@ public class UploadController {
     @FXML
     private Button btnAirlineDataView;
 
-
+    /**
+     * This method adds the data types from dataTypeList to the dataTypeSelect list.
+     */
     public void initialize(){
         dataTypeSelect.getItems().addAll(dataTypeList);
     }
 
-    //opens file browser when button pushed
+    /**
+     * This method opens the user's file browser when the 'browse' button is clicked.
+     */
     public void browseFiles() {
 
         FileChooser fileChooser = new FileChooser(); //opens a file local file browser
@@ -68,75 +77,85 @@ public class UploadController {
                 Route test = (Route) line;
                 System.out.println(test.getAirlineID());
                 }
-
             }
             catch (Exception e){
                 //@TODO Display error message
             }
             fileView.getItems().add(selectedFile.getName());
             nextButton.setVisible(true); //'Next' button pops up if a valid file has been selected
-
-            //Create the view raw data controllers
-
         } else{
             fileErrorText.setVisible(true);
-
         }
     }
 
-    //take user back to the welcome screen in case of wanting to see info screen
+    /**
+     * This method closes the Upload Data page and opens the Welcome page.
+     * @throws IOException
+     */
     public void backToWelcome() throws IOException {
-        Stage stage = (Stage) backButton.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage();  //create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml")); //open the Welcome page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the upload screen
+    /**
+     * This method closes the Upload Data page and opens the Upload Data page.
+     * @throws IOException
+     */
     public void toUploadData() throws IOException {
-        Stage stage = (Stage) btnUpload.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnUpload.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //open the Upload Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the route data view
+    /**
+     * This method closes the Upload Data page and opens the View Route Data page.
+     * @throws IOException
+     */
     public void toRouteDataView() throws IOException {
-        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //open the View Route Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the airport data view
+    /**
+     * This method closes the Upload Data page and opens the View Airport Data page.
+     * @throws IOException
+     */
     public void toAirportDataView() throws IOException {
-        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open viewAirportData.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open the View Airport Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the airline data view screen
+    /**
+     * This method closes the Upload Data page and opens the View Airline Data page.
+     * @throws IOException
+     */
     public void toAirlineDataView() throws IOException {
-        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
 }

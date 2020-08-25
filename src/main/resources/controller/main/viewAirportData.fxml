@@ -8,25 +8,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="785.0" prefWidth="1369.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirportDataViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1489.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirportDataViewController">
     <children>
-        <TableView fx:id="tableView" layoutX="173.0" layoutY="243.0" prefHeight="492.0" prefWidth="1184.0">
+        <TableView fx:id="tableView" layoutX="177.0" layoutY="250.0" prefHeight="534.0" prefWidth="1283.0">
             <columns>
               <TableColumn fx:id="airportIDColumn" prefWidth="117.0" text="Airport ID" />
-              <TableColumn fx:id="nameColumn" prefWidth="94.0" text="Airport Name" />
-                <TableColumn fx:id="cityColumn" prefWidth="122.0" text="City" />
-                <TableColumn fx:id="countryColumn" prefWidth="122.0" text="Coutry" />
-                <TableColumn fx:id="IATAColumn" prefWidth="136.0" text="IATA" />
-                <TableColumn fx:id="ICAOColumn" prefWidth="153.0" text="ICAO" />
-                <TableColumn fx:id="latitudeColumn" minWidth="0.0" prefWidth="164.0" text="Latitude" />
-                <TableColumn fx:id="longitudeColumn" minWidth="0.0" prefWidth="116.0" text="Longitude" />
-                <TableColumn fx:id="altitudeColumn" minWidth="0.0" prefWidth="150.0" text="Altitude" />
-                <TableColumn fx:id="timezoneColumn" minWidth="0.0" prefWidth="99.0" text="Timezone" />
-                <TableColumn fx:id="DSTColumn" minWidth="0.0" prefWidth="99.0" text="DST" />
-                <TableColumn fx:id="dataBaseTimeZoneColumn" minWidth="0.0" prefWidth="99.0" text="Database Time Zone" />
+              <TableColumn fx:id="nameColumn" prefWidth="125.0" text="Airport Name" />
+                <TableColumn fx:id="cityColumn" prefWidth="91.0" text="City" />
+                <TableColumn fx:id="countryColumn" prefWidth="96.0" text="Coutry" />
+                <TableColumn fx:id="IATAColumn" prefWidth="77.0" text="IATA" />
+                <TableColumn fx:id="ICAOColumn" prefWidth="110.0" text="ICAO" />
+                <TableColumn fx:id="latitudeColumn" minWidth="0.0" prefWidth="96.0" text="Latitude" />
+                <TableColumn fx:id="longitudeColumn" minWidth="0.0" prefWidth="99.0" text="Longitude" />
+                <TableColumn fx:id="altitudeColumn" minWidth="0.0" prefWidth="79.0" text="Altitude" />
+                <TableColumn fx:id="timezoneColumn" minWidth="0.0" prefWidth="97.0" text="Timezone" />
+                <TableColumn fx:id="DSTColumn" minWidth="0.0" prefWidth="111.0" text="DST" />
+                <TableColumn fx:id="dataBaseTimeZoneColumn" minWidth="0.0" prefWidth="185.0" text="Database Time Zone" />
             </columns>
         </TableView>
-        <VBox prefHeight="785.0" prefWidth="160.0" style="-fx-background-color: #007f5f;">
+        <VBox prefHeight="800.0" prefWidth="160.0" style="-fx-background-color: #007f5f;">
             <children>
                 <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Upload Data" textFill="WHITE">
                     <font>
@@ -55,66 +55,3 @@
         </VBox>
     </children>
 </AnchorPane>
-
-
-        <!--<?xml version="1.0" encoding="UTF-8"?>-->
-
-<!--<?import javafx.geometry.Insets?>-->
-<!--<?import javafx.scene.control.Button?>-->
-<!--<?import javafx.scene.control.TableColumn?>-->
-<!--<?import javafx.scene.control.TableView?>-->
-<!--<?import javafx.scene.layout.AnchorPane?>-->
-<!--<?import javafx.scene.layout.VBox?>-->
-<!--<?import javafx.scene.text.Font?>-->
-
-<!--<?import javafx.scene.control.MenuBar?>-->
-<!--<?import javafx.scene.control.Menu?>-->
-<!--<?import javafx.scene.control.MenuItem?>-->
-<!--<AnchorPane prefHeight="769.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">-->
-<!--&lt;!&ndash;   <children>&ndash;&gt;-->
-<!--&lt;!&ndash;      <TableView fx:id="tableView" layoutX="21.0" layoutY="71.0" prefHeight="309.0" prefWidth="1152.0">&ndash;&gt;-->
-<!--&lt;!&ndash;        <columns>&ndash;&gt;-->
-<!--&lt;!&ndash;          <TableColumn fx:id="airportIDColumn" prefWidth="117.0" text="Airport ID" />&ndash;&gt;-->
-<!--&lt;!&ndash;          <TableColumn fx:id="nameColumn" prefWidth="94.0" text="Airport Name" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="cityColumn" prefWidth="122.0" text="City" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="coutryColumn" prefWidth="122.0" text="Coutry" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="IATAColumn" prefWidth="136.0" text="IATA" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="ICAOColumn" prefWidth="153.0" text="ICAO" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="latitudeColumn" minWidth="0.0" prefWidth="164.0" text="Latitude" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="longitudeColumn" minWidth="0.0" prefWidth="116.0" text="Longitude" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="altitudeColumn" minWidth="0.0" prefWidth="150.0" text="Altitude" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="timezoneColumn" minWidth="0.0" prefWidth="99.0" text="Timezone" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="DSTColumn" minWidth="0.0" prefWidth="99.0" text="DST" />&ndash;&gt;-->
-<!--&lt;!&ndash;            <TableColumn fx:id="dataBaseTimeZoneColumn" minWidth="0.0" prefWidth="99.0" text="dataBaseTimeZone" />&ndash;&gt;-->
-
-<!--&lt;!&ndash;        </columns>&ndash;&gt;-->
-<!--&lt;!&ndash;      </TableView>&ndash;&gt;-->
-<!--&lt;!&ndash;      <VBox prefHeight="785.0" prefWidth="160.0" style="-fx-background-color: #007f5f;">&ndash;&gt;-->
-<!--&lt;!&ndash;           <children>&ndash;&gt;-->
-<!--&lt;!&ndash;               <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Upload Data" textFill="WHITE">&ndash;&gt;-->
-<!--&lt;!&ndash;                   <font>&ndash;&gt;-->
-<!--&lt;!&ndash;                       <Font name="Arial" size="18.0" />&ndash;&gt;-->
-<!--&lt;!&ndash;                   </font>&ndash;&gt;-->
-<!--&lt;!&ndash;                   <VBox.margin>&ndash;&gt;-->
-<!--&lt;!&ndash;                       <Insets top="20.0" />&ndash;&gt;-->
-<!--&lt;!&ndash;                   </VBox.margin>&ndash;&gt;-->
-<!--&lt;!&ndash;               </Button>&ndash;&gt;-->
-<!--&lt;!&ndash;               <Button fx:id="btnRouteDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toRouteDataView" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="View Routes" textFill="WHITE">&ndash;&gt;-->
-<!--&lt;!&ndash;                   <font>&ndash;&gt;-->
-<!--&lt;!&ndash;                       <Font name="Arial" size="18.0" />&ndash;&gt;-->
-<!--&lt;!&ndash;                   </font>&ndash;&gt;-->
-<!--&lt;!&ndash;               </Button>&ndash;&gt;-->
-<!--&lt;!&ndash;               <Button fx:id="btnAirportDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirportDataView" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="View Airports" textFill="WHITE">&ndash;&gt;-->
-<!--&lt;!&ndash;                   <font>&ndash;&gt;-->
-<!--&lt;!&ndash;                       <Font name="Arial" size="18.0" />&ndash;&gt;-->
-<!--&lt;!&ndash;                   </font>&ndash;&gt;-->
-<!--&lt;!&ndash;               </Button>&ndash;&gt;-->
-<!--&lt;!&ndash;               <Button fx:id="btnAirlineDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirlineDataView" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="View Airlines" textFill="WHITE">&ndash;&gt;-->
-<!--&lt;!&ndash;                   <font>&ndash;&gt;-->
-<!--&lt;!&ndash;                       <Font name="Arial" size="18.0" />&ndash;&gt;-->
-<!--&lt;!&ndash;                   </font>&ndash;&gt;-->
-<!--&lt;!&ndash;               </Button>&ndash;&gt;-->
-<!--&lt;!&ndash;           </children>&ndash;&gt;-->
-<!--&lt;!&ndash;       </VBox>&ndash;&gt;-->
-<!--&lt;!&ndash;   </children>&ndash;&gt;-->
-<!--</AnchorPane>-->

@@ -20,11 +20,11 @@ import java.util.ResourceBundle;
  * The controller class which contains the controls for the route data view.
  * @author Hayley Krippner
  * @version 1.0
- * @since 2020-08-24
+ * @since 2020-08-26
  */
 public class RouteDataViewController implements Initializable {
 
-    //configure the table
+    //Configure the TableView.
     @FXML
     private TableView<Route> tableView;
     @FXML
@@ -58,71 +58,81 @@ public class RouteDataViewController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url The URL used.
+     * @param rb The resource bundle used.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //set up the columns in the table
-        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("airlineName"));
-        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("airlineID"));
-        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("sourceAirport"));
-        sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("sourceAirportID"));
-        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("destinationAirport"));
-        destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("destinationAirportID"));
-        codeShareColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("codeShare"));
-        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("numOfStops"));
-        equipmentColumn.setCellValueFactory(new PropertyValueFactory<Route, String[]>("equipment"));
+        //Set up the columns in the TableView.
+        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
+        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
+        sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirportID"));
+        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
+        destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirportID"));
+        codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
+        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
+        equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipment"));
 
-        // load data by taking the route hashset and converting it to an ArrayList to convert it to
-        // ObservableArrayList.
-        // TODO: 23/08/20 Change datatype in Storage class into ArrayList
-        //List<Route> list = new ArrayList<Route>((HashSet) Storage.getRoutes());
-        // TODO: 23/08/20 Find a cleaner way to convert list to observableList
-        //ObservableList<Route> routes = FXCollections.observableArrayList();
+        //Load data by taking the Route ArrayList and converting it to an ObservableArrayList.
         ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
         tableView.setItems(routes);
     }
 
-    //take user back to the upload screen
+    /**
+     * This method closes the View Route Data page and opens the Upload Data page.
+     * @throws IOException
+     */
     public void toUploadData() throws IOException {
-        Stage stage = (Stage) btnUpload.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnUpload.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //open the Upload Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the route data view
+    /**
+     * This method closes the View Route Data page and opens the View Route Data page.
+     * @throws IOException
+     */
     public void toRouteDataView() throws IOException {
-        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //open the View Route Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the airport data view
+    /**
+     * This method closes the View Route Data page and opens the View Airport Data page.
+     * @throws IOException
+     */
     public void toAirportDataView() throws IOException {
-        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open the View Airport Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the airline data view screen
+    /**
+     * This method closes the View Route Data page and opens the View Airline Data page.
+     * @throws IOException
+     */
     public void toAirlineDataView() throws IOException {
-        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
+
 }
