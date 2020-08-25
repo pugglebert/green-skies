@@ -9,19 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.data.Airline;
-import model.data.Airline;
-import model.data.DataType;
 import model.data.Storage;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.ResourceBundle;
 
 //@TODO: should AirlineDataViewController implement an inteface Initializable?

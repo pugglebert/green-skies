@@ -57,30 +57,30 @@ public class RouteDataViewController implements Initializable {
     private Storage storage = Main.getStorage();
 
     /**
- * Initializes the controller class.
- */
-//@Override
-public void initialize(URL url, ResourceBundle rb) {
-    //set up the columns in the table
-    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("airlineName"));
-    airlineIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("airlineID"));
-    sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("sourceAirport"));
-    sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("sourceAirportID"));
-    destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("destinationAirport"));
-    destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("destinationAirportID"));
-    codeShareColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("codeShare"));
-    numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("numOfStops"));
-    equipmentColumn.setCellValueFactory(new PropertyValueFactory<Route, String[]>("equipment"));
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //set up the columns in the table
+        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("airlineName"));
+        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("airlineID"));
+        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("sourceAirport"));
+        sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("sourceAirportID"));
+        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("destinationAirport"));
+        destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("destinationAirportID"));
+        codeShareColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("codeShare"));
+        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("numOfStops"));
+        equipmentColumn.setCellValueFactory(new PropertyValueFactory<Route, String[]>("equipment"));
 
-    // load data by taking the route hashset and converting it to an ArrayList to convert it to
-    // ObservableArrayList.
-    // TODO: 23/08/20 Change datatype in Storage class into ArrayList
-    //List<Route> list = new ArrayList<Route>((HashSet) Storage.getRoutes());
-    // TODO: 23/08/20 Find a cleaner way to convert list to observableList
-    //ObservableList<Route> routes = FXCollections.observableArrayList();
-    ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
-    tableView.setItems(routes);
-}
+        // load data by taking the route hashset and converting it to an ArrayList to convert it to
+        // ObservableArrayList.
+        // TODO: 23/08/20 Change datatype in Storage class into ArrayList
+        //List<Route> list = new ArrayList<Route>((HashSet) Storage.getRoutes());
+        // TODO: 23/08/20 Find a cleaner way to convert list to observableList
+        //ObservableList<Route> routes = FXCollections.observableArrayList();
+        ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
+        tableView.setItems(routes);
+    }
 
     //take user back to the upload screen
     public void toUploadData() throws IOException {

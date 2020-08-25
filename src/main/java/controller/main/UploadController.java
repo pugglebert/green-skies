@@ -14,7 +14,6 @@ import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -123,7 +122,7 @@ public class UploadController {
         Stage stage = (Stage) btnAirportDataView.getScene().getWindow();   //get current window
         stage.close();  // close current window
         Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //reopen welcome.fxml
+        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open viewAirportData.fxml
         Scene scene = new Scene(root);   //add thing to scene
         stage1.setScene(scene);
         stage1.show();
