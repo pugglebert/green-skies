@@ -116,6 +116,18 @@ public class SearcherTest {
   }
 
   /**
+   * Verify that when searchRoutes is called with a searchTerm which matches a term in the file but is in a different,
+   * an arrayList containing the matching entry is returned.
+   */
+  @Test
+  public void searchRoutesCaseSensitiveTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    expectedResults.add(new Route("2B",410,"GYD",2922,"NBC",6969,"",0,"CR2".split(" ")));
+    ArrayList<Route> results = Searcher.searchRoutes("gyd", "Source", storage.getRoutes());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
    * Verify that when searchAirports is called with a search term that matches no terms in the file, a RuntimeException
    * is thrown.
    */
@@ -190,6 +202,18 @@ public class SearcherTest {
   }
 
   /**
+   * Verify that when searchAirports is called with a searchTerm which matches a term in the file but is in a different,
+   * an arrayList containing the matching entry is returned.
+   */
+  @Test
+  public void searchAirportsCaseSensitiveTest() {
+    ArrayList<Airport> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airport(6,"Wewak Intl","Wewak","Papua New Guinea","WWK","AYWK",-3.583828,143.669186,19,10,"U","Pacific/Port_Moresby"));
+    ArrayList<Airport> results = Searcher.searchAirports("WEWAK INTL", "Name", storage.getAirports());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
    * Verify that when searchAirlines is called with a search term that matches no terms in the file, a RuntimeException
    * is thrown.
    */
@@ -260,6 +284,18 @@ public class SearcherTest {
     ArrayList<Airline> expectedResults = new ArrayList<>();
     expectedResults.add(new Airline(21179,"Thai Vietjet Air","","","TVJ","THAIVIET JET","Thailand",true));
     ArrayList<Airline> results = Searcher.searchAirlines("TVJ", "ICAO", storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when searchAirlines is called with a searchTerm which matches a term in the file but is in a different,
+   * an arrayList containing the matching entry is returned.
+   */
+  @Test
+  public void searchAirlinesCaseSensitiveTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airline(29,"Askari Aviation","\\N","4K","AAS","AL-AAS","Pakistan",true));
+    ArrayList<Airline> results = Searcher.searchAirlines("askari aviation", "Name", storage.getAirlines());
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
