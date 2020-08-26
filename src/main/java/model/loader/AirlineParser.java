@@ -3,13 +3,11 @@ package model.loader;
 import model.data.Airline;
 import model.data.DataType;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class AirlineParser extends Parser {
   // Processed airlines data
-//  private final Set<DataType> airlines = new HashSet<>();
+  //  private final Set<DataType> airlines = new HashSet<>();
   // Alphabetical name to represent line index
   private final int airlineID = 0,
       name = 1,
@@ -20,6 +18,7 @@ public class AirlineParser extends Parser {
       country = 6,
       activeStatus = 7;
 
+  // todo add error count
   public AirlineParser(List<String> dataFile) {
     super(dataFile, 12);
 
@@ -55,24 +54,27 @@ public class AirlineParser extends Parser {
   public void dataParser() {
 
     for (String dataLine : dataFile) {
-      dataLine = dataLine.replaceAll("[\"]", "");
+      dataLine = dataLine.replaceAll("[\"]", ""); // remove double quote
       String[] line = dataLine.split(",");
-
-      //System.out.println("array: " + Arrays.toString((line)));
+      //System.out.println(Arrays.toString(line));
 
       if (validater(line)) {
 
         try {
+          boolean active = false;
+          if (line[activeStatus].matches("Y")) {
+            active = true;
+          }
           Airline airline =
-              new Airline(
-                  Integer.parseInt(line[airlineID]),
-                  line[name],
-                  line[alias],
-                  line[IATA],
-                  line[ICAO],
-                  line[callsign],
-                  line[country],
-                  Boolean.parseBoolean(line[activeStatus]));
+                  new Airline(
+                          Integer.parseInt(line[airlineID]),
+                          line[name],
+                          line[alias],
+                          line[IATA],
+                          line[ICAO],
+                          line[callsign],
+                          line[country],
+                          active);
           parserData.add(airline);
 
         } catch (Exception e) {
@@ -211,10 +213,10 @@ public class AirlineParser extends Parser {
 
     // airline ICAO check
 
-      if (!ICAO.matches("(\\\\N)|(N/A)|([A-Z0-9]{3})|(^$)")) {
-        errorCounter(6);
-        return false;
-      }
+    if (!ICAO.matches("(\\\\N)|(N/A)|([A-Z0-9]{3})|(^$)")) {
+      errorCounter(6);
+      return false;
+    }
 
     return true;
   }
@@ -264,28 +266,29 @@ public class AirlineParser extends Parser {
     return true;
   }
 
-//  /**
-//   * Getter for airlines
-//   *
-//   * @return A hashset contains all airline objects.
-//   */
-//  public Set<DataType> getData() {
-//    return airlines;
-//  }
+  //  /**
+  //   * Getter for airlines
+  //   *
+  //   * @return A hashset contains all airline objects.
+  //   */
+  //  public Set<DataType> getData() {
+  //    return airlines;
+  //  }
 
-//  public static void main(String[] args) throws Exception {
-//    ArrayList<String> testLines;
-//    testLines = new ArrayList<String>();
-//
-//    BufferedReader br = new BufferedReader(new FileReader("src/test/java/TestFiles/airlines.csv"));
-//    int count = 0;
-//    String line = "";
-//    br.readLine(); // header
-//    while ((line = br.readLine()) != null && count < 1000) {
-//      testLines.add(line);
-//      //count++;
-//    }
-//
-//    AirlineParser parser = new AirlineParser(testLines);
-//  }
+  //  public static void main(String[] args) throws Exception {
+  //    ArrayList<String> testLines;
+  //    testLines = new ArrayList<String>();
+  //
+  //    BufferedReader br = new BufferedReader(new
+  // FileReader("src/test/java/TestFiles/airlines.csv"));
+  //    int count = 0;
+  //    String line = "";
+  //    br.readLine(); // header
+  //    while ((line = br.readLine()) != null && count < 1000) {
+  //      testLines.add(line);
+  //      //count++;
+  //    }
+  //
+  //    AirlineParser parser = new AirlineParser(testLines);
+  //  }
 }
