@@ -1,5 +1,6 @@
 package controller.analysis;
 
+import model.data.Airline;
 import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
@@ -31,6 +32,7 @@ public class SearcherTest {
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/SearcherRoutesTest.csv", "Route");
       loader.loadFile("../seng202_project/src/test/java/TestFiles/SearcherAirportsTest.csv", "Airport");
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/SearcherAirlinesTest.csv", "Airline");
     } catch (FileSystemException | FileNotFoundException e) {
       e.printStackTrace();
     }
@@ -168,7 +170,7 @@ public class SearcherTest {
   }
 
   /**
-   * Verify that searchRoutes can return the correct entry when that entry is towards the end of a file over 10,000
+   * Verify that searchAirports can return the correct entry when that entry is towards the end of a file over 8,000
    * lines long.
    */
   @Test
@@ -184,6 +186,80 @@ public class SearcherTest {
     ArrayList<Airport> expectedResults = new ArrayList<>();
     expectedResults.add(new Airport(9428,"Bessemer","Bessemer","United States","EKY","KEKY",33.1876,-86.5558,700,-6,"A","America/Chicago"));
     ArrayList<Airport> results = Searcher.searchAirports("Bessemer", "Name", storage.getAirports());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when searchAirlines is called with a search term that matches no terms in the file, a RuntimeException
+   * is thrown.
+   */
+  @Test
+  public void searchAirlinesNoMatchTest() {
+    try {
+      Searcher.searchAirlines("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "IATA", storage.getAirlines());
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that when searchAirlines is called with a search term that matches one entry in the file, an arrayList
+   * containing just that entry is returned.
+   */
+  @Test
+  public void searchAirlinesOneMatchTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airline(29,"Askari Aviation","\\N","4K","AAS","AL-AAS","Pakistan",true));
+    ArrayList<Airline> results = Searcher.searchAirlines("Askari Aviation", "Name", storage.getAirlines());
+    //assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when searchAirlines is called with a search term that matches multiple entries in the file, an arrayList
+   * containing all those entries in the same order they appear in the file is returned.
+   */
+  @Test
+  public void searchAirlinesMultipleMatchTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airline(5,"213 Flight Unit","\\N","","TFU","","Russia",false));
+    expectedResults.add(new Airline(6,"223 Flight Unit State Airline","\\N","","CHD","CHKALOVSK-AVIA","Russia",false));
+    expectedResults.add(new Airline(7,"224th Flight Unit","\\N","","TTF","CARGO UNIT","Russia",false));
+    expectedResults.add(new Airline(41,"Abakan-Avia","\\N","","ABG","ABAKAN-AVIA","Russia",false));
+    ArrayList<Airline> results = Searcher.searchAirlines("Russia", "Country", storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when an illegal search type is passed into searchAirlines it raises an IllegalArgumentException.
+   */
+  @Test
+  public void searchAirlinesIllegalTypeTest() {
+    try {
+      Searcher.searchAirlines("Russia", "Airport", storage.getAirlines());
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that searchAirlines can return the correct entry when that entry is towards the end of a file over 6,000
+   * lines long.
+   */
+  @Test
+  public void searchAirlinesLongFileTest(){
+    storage = new Storage();
+    loader = new Loader(storage);
+    try {
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail();
+    }
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airline(21179,"Thai Vietjet Air","","","TVJ","THAIVIET JET","Thailand",false));
+    ArrayList<Airline> results = Searcher.searchAirlines("TVJ", "ICAO", storage.getAirlines());
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
