@@ -52,7 +52,7 @@ public class Airline implements DataType {
      * @return airlineName.
      */
     public String getairlineAlias(){
-        return name;
+        return alias;
     }
 
     /**
@@ -93,5 +93,22 @@ public class Airline implements DataType {
      */
     public boolean getActiveStatus(){
         return activeStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Airline) {
+            Airline another = (Airline) o;
+            return (this.airlineID == another.getAirlineID()) &&
+                    this.name.equals(another.getName()) &&
+                    this.alias.equals(another.getairlineAlias()) &&
+                    this.IATA.equals(another.getIATA()) &&
+                    this.ICAO.equals(another.getICAO()) &&
+                    this.callsign.equals(another.getCallsign()) &&
+                    this.country.equals(another.getCountry()) &&
+                    this.activeStatus == another.getActiveStatus();
+        } else {
+            return false;
+        }
     }
 }
