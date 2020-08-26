@@ -1,5 +1,7 @@
 package model.data;
 
+import java.util.Arrays;
+
 /**
  * The Airport class which contains all data for one unique airport.
  * @author Enyang Zhang
@@ -133,5 +135,26 @@ public class Airport implements DataType {
      */
     public String getDataBaseTimeZone() {
         return dataBaseTimeZone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Airport) {
+            Airport another = (Airport) o;
+            return (this.airportID == another.getAirportID()) &&
+                    this.name.equals(another.getName()) &&
+                    this.city.equals(another.getCity()) &&
+                    this.country.equals(another.getCountry()) &&
+                    this.IATA.equals(another.getIATA()) &&
+                    this.ICAO.equals(another.getICAO()) &&
+                    Math.abs(this.latitude - another.getLatitude()) < 0.0000001 &&
+                    Math.abs(this.longitude - another.getLongitude()) < 0.0000001 &&
+                    this.altitude == another.getAltitude() &&
+                    Math.abs(this.timezone - another.getTimezone()) < 0.0000001 &&
+                    this.DST.equals(another.getDST()) &&
+                    this.dataBaseTimeZone.equals(another.getDataBaseTimeZone());
+        } else {
+            return false;
+        }
     }
 }

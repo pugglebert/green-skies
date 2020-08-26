@@ -1,5 +1,6 @@
 package controller.analysis;
 
+import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
@@ -29,6 +30,7 @@ public class SearcherTest {
     loader = new Loader(storage);
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/SearcherRoutesTest.csv", "Route");
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/SearcherAirportsTest.csv", "Airport");
     } catch (FileSystemException | FileNotFoundException e) {
       e.printStackTrace();
     }
@@ -111,6 +113,78 @@ public class SearcherTest {
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
+  /**
+   * Verify that when searchAirports is called with a search term that matches no terms in the file, a RuntimeException
+   * is thrown.
+   */
+  @Test
+  public void searchAirportsNoMatchTest() {
+    try {
+      Searcher.searchAirports("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ICAO", storage.getAirports());
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+  }
 
+  /**
+   * Verify that when searchAirports is called with a search term that matches one entry in the file, an arrayList
+   * containing just that entry is returned.
+   */
+  @Test
+  public void searchAirportsOneMatchTest() {
+    ArrayList<Airport> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airport(6,"Wewak Intl","Wewak","Papua New Guinea","WWK","AYWK",-3.583828,143.669186,19,10,"U","Pacific/Port_Moresby"));
+    ArrayList<Airport> results = Searcher.searchAirports("WWK", "IATA", storage.getAirports());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when searchAirports is called with a search term that matches multiple entries in the file, an arrayList
+   * containing all those entries in the same order they appear in the file is returned.
+   */
+  @Test
+  public void searchAirportsMultipleMatchTest() {
+    ArrayList<Airport> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airport(7,"Narsarsuaq","Narssarssuaq","Greenland","UAK","BGBW",61.160517,-45.425978,112,-3,"E","America/Godthab"));
+    expectedResults.add(new Airport(8,"Nuuk","Godthaab","Greenland","GOH","BGGH",64.190922,-51.678064,283,-3,"E","America/Godthab"));
+    expectedResults.add(new Airport(9,"Sondre Stromfjord","Sondrestrom","Greenland","SFJ","BGSF",67.016969,-50.689325,165,-3,"E","America/Godthab"));
+    expectedResults.add(new Airport(10,"Thule Air Base","Thule","Greenland","THU","BGTL",76.531203,-68.703161,251,-4,"E","America/Thule"));
+    ArrayList<Airport> results = Searcher.searchAirports("Greenland", "Country", storage.getAirports());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when an illegal search type is passed into searchAirports it raises an IllegalArgumentException.
+   */
+  @Test
+  public void searchAirportsIllegalTypeTest() {
+    try {
+      Searcher.searchAirports("Greenland", "Airline", storage.getAirports());
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that searchRoutes can return the correct entry when that entry is towards the end of a file over 10,000
+   * lines long.
+   */
+  @Test
+  public void searchAirportsLongFileTest(){
+    storage = new Storage();
+    loader = new Loader(storage);
+    try {
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail();
+    }
+    ArrayList<Airport> expectedResults = new ArrayList<>();
+    expectedResults.add(new Airport(9428,"Bessemer","Bessemer","United States","EKY","KEKY",33.1876,-86.5558,700,-6,"A","America/Chicago"));
+    ArrayList<Airport> results = Searcher.searchAirports("Bessemer", "Name", storage.getAirports());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
 
 }
