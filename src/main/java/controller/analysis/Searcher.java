@@ -45,7 +45,7 @@ public class Searcher {
                 default:
                     throw new IllegalArgumentException("Search type must be one of: Name, Country, IATA, ICAO.");
             }
-            if (attribute.equals(searchTerm)) {
+            if (attribute.toLowerCase().equals(searchTerm.toLowerCase())) {
                 matches.add(entry);
             }
         }
@@ -82,7 +82,7 @@ public class Searcher {
                 default:
                     throw new IllegalArgumentException("Search type must be one of: Name, Country, IATA, ICAO.");
             }
-            if (attribute.equals(searchTerm)) {
+            if (attribute.toLowerCase().equals(searchTerm.toLowerCase())) {
                 matches.add(entry);
             }
         }
@@ -116,7 +116,7 @@ public class Searcher {
                 default:
                     throw new IllegalArgumentException("Search type must be one of: Airline, Source, Destination.");
             }
-            if (attribute.equals(searchTerm)) {
+            if (attribute.toLowerCase().equals(searchTerm.toLowerCase())) {
                 matches.add(entry);
             }
         }
