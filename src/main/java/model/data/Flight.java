@@ -86,17 +86,4 @@ public class Flight {
     public String getFlightName() {
         return flightName;
     }
-
-    @Override
-    public String toString() {
-        return "Flight{" +
-                "flightID='" + flightID + '\'' +
-                ", type='" + type + '\'' +
-                ", airportsVia='" + airportsVia + '\'' +
-                ", altitude=" + altitude +
-                ", position=" + position +
-                ", distance=" + distance +
-                ", flightName='" + flightName + '\'' +
-                '}';
-    }
 }

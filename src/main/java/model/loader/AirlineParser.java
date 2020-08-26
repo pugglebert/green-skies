@@ -87,48 +87,49 @@ public class AirlineParser extends Parser {
   }
 
   protected boolean validater(String[] line) {
+
     boolean isValid = true;
     if (line.length != 8) {
       errorCounter(0);
     }
 
     if (!isIdValid(line[airlineID])) {
-      System.out.println("ID " + line[airlineID]);
+//      System.out.println("ID " + line[airlineID]);
       isValid = false;
     }
 
     if (!isNameValid(line[name])) {
-      System.out.println("name " + line[name]);
+//      System.out.println("name " + line[name]);
       isValid = false;
     }
 
     if (!isAliasValid(line[alias])) {
-      System.out.println("alias " + line[alias]);
+//      System.out.println("alias " + line[alias]);
       isValid = false;
     }
 
     if (!isIATAValid(line[IATA])) {
-      System.out.println("IATA " + line[IATA]);
+//      System.out.println("IATA " + line[IATA]);
       isValid = false;
     }
 
     if (!isICAOValid(line[ICAO])) {
-      System.out.println("ICAO " + line[ICAO]);
+//      System.out.println("ICAO " + line[ICAO]);
       isValid = false;
     }
 
     if (!isCallsignValid(line[callsign])) {
-      System.out.println("callsign " + line[callsign]);
+//      System.out.println("callsign " + line[callsign]);
       isValid = false;
     }
 
     if (!isCountryValid(line[country])) {
-      System.out.println("country " + line[country]);
+//      System.out.println("country " + line[country]);
       isValid = false;
     }
 
     if (!isActiveStatusValid(line[activeStatus])) {
-      System.out.println("activeStatus " + line[activeStatus]);
+//      System.out.println("activeStatus " + line[activeStatus]);
       isValid = false;
     }
     return isValid;
@@ -141,12 +142,12 @@ public class AirlineParser extends Parser {
    */
   private boolean isIdValid(String airlineID) {
 
-    // airline ID Duplication check
+    // airline ID Duplication and Negative check
     for (DataType data : parserData) {
 
       try {
         Airline airline = (Airline) data;
-        if (airline.getAirlineID() == Integer.parseInt(airlineID) && airline.getAirlineID() >= 0) {
+        if (airline.getAirlineID() == Integer.parseInt(airlineID) || Integer.parseInt(airlineID) <= 0) {
           errorCounter(1);
           return false;
         }
