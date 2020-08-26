@@ -212,7 +212,7 @@ public class SearcherTest {
     ArrayList<Airline> expectedResults = new ArrayList<>();
     expectedResults.add(new Airline(29,"Askari Aviation","\\N","4K","AAS","AL-AAS","Pakistan",true));
     ArrayList<Airline> results = Searcher.searchAirlines("Askari Aviation", "Name", storage.getAirlines());
-    //assertArrayEquals(expectedResults.toArray(), results.toArray());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
   /**
@@ -258,7 +258,7 @@ public class SearcherTest {
       fail();
     }
     ArrayList<Airline> expectedResults = new ArrayList<>();
-    expectedResults.add(new Airline(21179,"Thai Vietjet Air","","","TVJ","THAIVIET JET","Thailand",false));
+    expectedResults.add(new Airline(21179,"Thai Vietjet Air","","","TVJ","THAIVIET JET","Thailand",true));
     ArrayList<Airline> results = Searcher.searchAirlines("TVJ", "ICAO", storage.getAirlines());
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
