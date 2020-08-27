@@ -221,12 +221,12 @@ public class AirlineParserTest {
 
   @Test
   public void dataParser() {
-    Airline temp2 = (Airline) parser.parserData.get(0);
-    Assert.assertEquals("Unknown", temp2.getName());
-    Airline temp0 = (Airline) parser.parserData.get(1);
-    Assert.assertEquals("Private flight", temp0.getName());
-    Airline temp1 = (Airline) parser.parserData.get(2);
-    Assert.assertEquals("135 Airways", temp1.getName());
+    Airline temp0 = (Airline) parser.parserData.get(0);
+    Assert.assertNull(temp0);
+    Airline temp1 = (Airline) parser.parserData.get(1);
+    Assert.assertEquals("Private flight", temp1.getName());
+    Airline temp2 = (Airline) parser.parserData.get(2);
+    Assert.assertEquals("135 Airways", temp2.getName());
   }
 
   @Test
