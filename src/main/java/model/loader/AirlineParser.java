@@ -77,7 +77,6 @@ public class AirlineParser extends Parser {
         errorCounter(11);
       }
     }
-    System.out.println(parserData);
   }
 
   /**
