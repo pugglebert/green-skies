@@ -21,16 +21,6 @@ public class AirlineParser extends Parser {
   // todo add error count
   public AirlineParser(List<String> dataFile) {
     super(dataFile, 12);
-
-    /**
-     * AirportParser Error code: 100: not enough parameters 101: airport id exists 102: invalid id
-     * number 103: invalid airport name 104: invalid airport city 105: invalid airport country 106:
-     * invalid airport IATA code 107: invalid airport ICAO code 108: invalid latitude 109: invalid
-     * lontitude 110: invalid altitude 111: invalid timezone 112: invalid DST 113: invalid database
-     * timezone 114: invalid unknown error 115: number of failed insertions
-     *
-     * <p>116: invalid alias 117: invalid callsign 118: invalid activestatus
-     */
     dataParser();
   }
 
@@ -56,9 +46,10 @@ public class AirlineParser extends Parser {
     for (String dataLine : dataFile) {
       dataLine = dataLine.replaceAll("[\"]", ""); // remove double quote
       String[] line = dataLine.split(",");
-      //System.out.println(Arrays.toString(line));
+//      System.out.println(Arrays.toString(line));
 
       if (validater(line)) {
+        // System.out.println(Arrays.toString(line));
 
         try {
           boolean active = false;
@@ -75,13 +66,51 @@ public class AirlineParser extends Parser {
                           line[callsign],
                           line[country],
                           active);
-          parserData.add(airline);
+
+          // parserData.add(airline);
+          addAirLine(parserData, airline.getAirlineID(), airline);
 
         } catch (Exception e) {
           errorCounter(10);
         }
       } else {
         errorCounter(11);
+      }
+    }
+    System.out.println(parserData);
+  }
+
+  /**
+   * add airline to index matches with airLineID.
+   * First check if there are any airline currently sit at index. If it is null then replace with airline param.
+   * If parserset size is too small then init it with null value.
+   * If there is an airline at index then check if the airline is the same with the one we want to add.
+   * If it is the same then treat as duplicate (do nothing)
+   * If is is not then add to error
+   *
+   * @param parserData the superclass list
+   * @param airlineID  airline ID we want to add
+   * @param airline    Airline Object we wanted to add
+   */
+  private void addAirLine(List parserData, int airlineID, Airline airline) {
+    int attemp = 3; // maximum attemp
+    while (attemp > 0) {
+      attemp--;
+      try {
+        Airline arrayItem = (Airline) parserData.get(airlineID);
+        if (arrayItem == null) {
+          parserData.set(airlineID, airline);
+        } else if (arrayItem.equals(airline)) {
+          errorCounter(1); // Have the same airline
+        } else {
+          errorCounter(11); // Airline exist with same ID
+        }
+
+      } catch (
+              IndexOutOfBoundsException e) { // size is smaller than ID then init array with null value
+        for (int i = 0; i < airlineID - parserData.size() + 1; i++) {
+          parserData.add(null);
+        }
       }
     }
   }
@@ -94,42 +123,42 @@ public class AirlineParser extends Parser {
     }
 
     if (!isIdValid(line[airlineID])) {
-//      System.out.println("ID " + line[airlineID]);
+      //      System.out.println("ID " + line[airlineID]);
       isValid = false;
     }
 
     if (!isNameValid(line[name])) {
-//      System.out.println("name " + line[name]);
+      //      System.out.println("name " + line[name]);
       isValid = false;
     }
 
     if (!isAliasValid(line[alias])) {
-//      System.out.println("alias " + line[alias]);
+      //      System.out.println("alias " + line[alias]);
       isValid = false;
     }
 
     if (!isIATAValid(line[IATA])) {
-//      System.out.println("IATA " + line[IATA]);
+      //      System.out.println("IATA " + line[IATA]);
       isValid = false;
     }
 
     if (!isICAOValid(line[ICAO])) {
-//      System.out.println("ICAO " + line[ICAO]);
+      //      System.out.println("ICAO " + line[ICAO]);
       isValid = false;
     }
 
     if (!isCallsignValid(line[callsign])) {
-//      System.out.println("callsign " + line[callsign]);
+      //      System.out.println("callsign " + line[callsign]);
       isValid = false;
     }
 
     if (!isCountryValid(line[country])) {
-//      System.out.println("country " + line[country]);
+      //      System.out.println("country " + line[country]);
       isValid = false;
     }
 
     if (!isActiveStatusValid(line[activeStatus])) {
-//      System.out.println("activeStatus " + line[activeStatus]);
+      //      System.out.println("activeStatus " + line[activeStatus]);
       isValid = false;
     }
     return isValid;
@@ -143,19 +172,26 @@ public class AirlineParser extends Parser {
   private boolean isIdValid(String airlineID) {
 
     // airline ID Duplication and Negative check
-    for (DataType data : parserData) {
-
-      try {
+    try {
+      if (Integer.parseInt(airlineID) <= 0) {
+        errorCounter(1);
+        return false;
+      }
+      for (DataType data : parserData) {
+        if (data == null) {
+          continue;
+        }
         Airline airline = (Airline) data;
-        if (airline.getAirlineID() == Integer.parseInt(airlineID) || Integer.parseInt(airlineID) <= 0) {
+        if (airline.getAirlineID() == Integer.parseInt(airlineID)) {
           errorCounter(1);
           return false;
         }
-      } catch (Exception e) {
-        errorCounter(2);
-        return false;
       }
+    } catch (Exception e) {
+      errorCounter(2);
+      return false;
     }
+
     return true;
   }
 
@@ -267,29 +303,18 @@ public class AirlineParser extends Parser {
     return true;
   }
 
-  //  /**
-  //   * Getter for airlines
-  //   *
-  //   * @return A hashset contains all airline objects.
-  //   */
-  //  public Set<DataType> getData() {
-  //    return airlines;
-  //  }
-
-  //  public static void main(String[] args) throws Exception {
-  //    ArrayList<String> testLines;
-  //    testLines = new ArrayList<String>();
-  //
-  //    BufferedReader br = new BufferedReader(new
-  // FileReader("src/test/java/TestFiles/airlines.csv"));
-  //    int count = 0;
-  //    String line = "";
-  //    br.readLine(); // header
-  //    while ((line = br.readLine()) != null && count < 1000) {
-  //      testLines.add(line);
-  //      //count++;
-  //    }
-  //
-  //    AirlineParser parser = new AirlineParser(testLines);
-  //  }
+//  public static void main(String[] args) throws Exception {
+//    ArrayList<String> testLines;
+//    testLines = new ArrayList<String>();
+//
+//    BufferedReader br = new BufferedReader(new FileReader("src/test/java/TestFiles/airlines.csv"));
+//    int count = 0;
+//    String line = "";
+//    br.readLine(); // header
+//    while ((line = br.readLine()) != null && count < 2) {
+//      testLines.add(line);
+//      count++;
+//    }
+//    AirlineParser parser = new AirlineParser(testLines);
+//  }
 }
