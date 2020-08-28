@@ -157,5 +157,4 @@ public class UploadController {
         newStage.setScene(scene);
         newStage.show();
     }
-
 }
