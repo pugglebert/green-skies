@@ -135,11 +135,13 @@ public class FlightAnalyser {
             return distance/1000;   //distance in kilometers
         }
 
-        public double campareDisdance(){
+        public double compareDisdance(){
             return Math.abs(totalDistancePath1-totalDistancePath2);
        }
-        //------------------------------------------------------------
-        public double calculateCarbonEmission(double distance){
+  // ------------------------------------------------------------
+  // TODO: 28/08/20 emission comparison and test case
+
+        public double calculateCarbonEmission(double distance) {
             FuelUsed = distance * 12 / 1250  ;//fuel in tonns
 
             double FuelPerPassenger = (FuelUsed / (distance*seatsOccupancy))*1000000;   //fuel use per passenger per km
