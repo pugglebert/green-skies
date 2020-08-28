@@ -160,7 +160,7 @@ public class FlightAnalyser {
 
 
 
-        public static void main(String[] args) throws FileNotFoundException, FileSystemException {
+//        public static void main(String[] args) throws FileNotFoundException, FileSystemException {
 //            double Lati1 =40.689202777778;
 //            double Long1 =-74.044219444444;
 //            double Lati2 = 38.889069444444;
@@ -168,24 +168,24 @@ public class FlightAnalyser {
 //            int disatnce = 5556;
 //            FlightAnalyser f1 = new FlightAnalyser(Lati1, Long1, Lati2, Long2);
 //            System.out.println(f1.calculateCarbonEmission(disatnce));
-            Storage storage = new Storage();
-            Loader loader = new Loader(storage);
-            loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
-            System.out.println(storage.getAirports());
-            ArrayList<String> path1 = new ArrayList<>();
-            ArrayList<String> path2 = new ArrayList<>();
-
-            path1.add("AER");
-            path1.add("KZN");
-            path1.add("ASF");
-            path2.add("AER");
-            path2.add("KZN");
-            path2.add("CEK");
+//            Storage storage = new Storage();
+//            Loader loader = new Loader(storage);
+//            loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
+//            System.out.println(storage.getAirports());
+//            ArrayList<String> path1 = new ArrayList<>();
+//            ArrayList<String> path2 = new ArrayList<>();
+//
+//            path1.add("AER");
+//            path1.add("KZN");
+//            path1.add("ASF");
+//            path2.add("AER");
 //            path2.add("KZN");
-            FlightAnalyser fa = new FlightAnalyser(path1, path2, storage);
-            System.out.println(fa.totalDistancePath1);
-            System.out.println(fa.totalDistancePath2);
-        }
+//            path2.add("CEK");
+//            path2.add("KZN");
+//            FlightAnalyser fa = new FlightAnalyser(path1, path2, storage);
+//            System.out.println(fa.totalDistancePath1);
+//            System.out.println(fa.totalDistancePath2);
+//        }
 
 
 
