@@ -14,13 +14,13 @@ public class Filterer {
 
     private Searcher searcher;
 
-    /**
-     * Constructer for Filterer.
-     * @param searcher, the Searcher used to search for specific data records that match a given criteria.
-     */
-    public Filterer(Searcher searcher) {
-        this.searcher = searcher;
-    }
+//    /**
+//     * Constructer for Filterer.
+//     * @param searcher, the Searcher used to search for specific data records that match a given criteria.
+//     */
+//    public Filterer(Searcher searcher) {
+//        this.searcher = searcher;
+//    }
 
     /**
    * Filters airport data to get the airport records that contain the desired filter entries.
@@ -38,16 +38,27 @@ public class Filterer {
         String filterTermType = entry.getKey();
         String filterTerm = entry.getValue();
         individualLists.add(searcher.searchAirports(filterTerm, filterTermType, airports));
+
+        for (int index = 0; index < individualLists.size(); index++){
+
+            System.out.println(individualLists.get(index).toString());
         }
+
+    }
 
     ArrayList<Airport> filteredAirports = individualLists.get(0); //set up with first group of airport records.
-    //Iterate through the indivual lists and take the intersection of the Airport records.
-    int filteredAirportsSize = individualLists.size() - 1;
-    for (int index = 1; index < filteredAirportsSize; index++) {
-        // removes the elements from the current search return list that are not contained filteredAirports
-        filteredAirports.retainAll(individualLists.get(index));
+    if (individualLists.size() > 1) {
+        //Iterate through the indivual lists and take the intersection of the Airport records.
+        int filteredAirportsSize = individualLists.size() - 1;
+        for (int index = 1; index < filteredAirportsSize; index++) {
+            // removes the elements from the current search return list that are not contained filteredAirports
+            filteredAirports.retainAll(individualLists.get(index));
+            }
         }
 
+    if (filteredAirports.isEmpty()) {
+        throw new RuntimeException("No entries match your filter term(s).");
+      }
     return filteredAirports;
     }
 

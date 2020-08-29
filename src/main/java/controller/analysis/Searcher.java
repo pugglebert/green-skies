@@ -2,11 +2,7 @@ package controller.analysis;
 
 import model.data.Airline;
 import model.data.Airport;
-import model.data.DataType;
 import model.data.Route;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
