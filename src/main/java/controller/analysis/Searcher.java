@@ -65,9 +65,10 @@ public class Searcher {
     public static ArrayList<Airline> searchAirlines(String searchTerm, String type, List<Airline> airlines) {
         ArrayList<Airline> matches = new ArrayList<Airline>();
         for (Airline entry : airlines) {
-            String attribute = "";
-            switch (type) {
-                case "Name" :
+            if (entry != null) {
+                String attribute = "";
+                switch (type) {
+                    case "Name":
                     attribute = entry.getName();
                     break;
                 case "Country":
@@ -80,10 +81,12 @@ public class Searcher {
                     attribute = entry.getICAO();
                     break;
                 default:
-                    throw new IllegalArgumentException("Search type must be one of: Name, Country, IATA, ICAO.");
-            }
-            if (attribute.toLowerCase().equals(searchTerm.toLowerCase())) {
-                matches.add(entry);
+                    throw new IllegalArgumentException(
+                    "Search type must be one of: Name, Country, IATA, ICAO.");
+                }
+                if (attribute.toLowerCase().equals(searchTerm.toLowerCase())) {
+                    matches.add(entry);
+                }
             }
         }
         if (matches.isEmpty()) {

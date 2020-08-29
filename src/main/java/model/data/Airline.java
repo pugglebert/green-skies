@@ -111,15 +111,28 @@ public class Airline implements DataType {
     return activeStatus;
   }
 
-  public boolean equals(Airline another) {
-    return (this.airlineID == another.getAirlineID())
-            && this.name.equals(another.getName())
-            && this.alias.equals(another.getairlineAlias())
-            && this.IATA.equals(another.getIATA())
-            && this.ICAO.equals(another.getICAO())
-            && this.callsign.equals(another.getCallsign())
-            && this.country.equals(another.getCountry())
-            && this.activeStatus == another.getActiveStatus();
+  /**
+   * Returns true if all another is instance of airline and has all the same attributes
+   * as this airline, false otherwise..
+   * @param o any object to check equality against.
+   * @return true if objects are equal, false otherwise.
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof Airline) {
+      Airline another = (Airline) o;
+      return (this.airlineID == another.getAirlineID())
+          && this.name.equals(another.getName())
+          && this.alias.equals(another.getairlineAlias())
+          && this.IATA.equals(another.getIATA())
+          && this.ICAO.equals(another.getICAO())
+          && this.callsign.equals(another.getCallsign())
+          && this.country.equals(another.getCountry())
+          && this.activeStatus == another.getActiveStatus();
+    }
+    else {
+      return false;
+    }
   }
 
   @Override //TODO delete this
@@ -128,6 +141,8 @@ public class Airline implements DataType {
   public String toString() {
     return "Airline{" +
             "airlineID=" + airlineID +
-            ", name='" + name;
+            ", name='" + name +
+            ", IATA=" + IATA +
+            ", ICAO=" + ICAO;
   }
 }
