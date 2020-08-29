@@ -1,5 +1,7 @@
 package model.data;
 
+import javafx.scene.control.CheckBox;
+
 import java.util.Arrays;
 
 /**
@@ -124,4 +126,17 @@ public class Route implements DataType {
             return false;
         }
     }
+
+    //TODO check again
+    private CheckBox select;
+
+    public CheckBox getSelect() {
+        return select;
+    }
+
+    public void setSelect(CheckBox select) {
+        this.select = select;
+    }
+
+
 }

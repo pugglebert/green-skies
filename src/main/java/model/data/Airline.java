@@ -122,12 +122,4 @@ public class Airline implements DataType {
             && this.activeStatus == another.getActiveStatus();
   }
 
-  @Override //TODO delete this
-  /*testing purpose
-   * */
-  public String toString() {
-    return "Airline{" +
-            "airlineID=" + airlineID +
-            ", name='" + name;
-  }
 }

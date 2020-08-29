@@ -8,10 +8,10 @@ import java.io.File;
 import java.util.List;
 
 public class FlightHistory {
-  private final List<Route> buffer;
+  public final List<Route> buffer;
 
   public FlightHistory() {
-    String fileDir = "src/test/java/TestFiles/routesTest.csv";//openFile(); //TODO using getFileDir()
+    String fileDir = "src/test/java/TestFiles/routes.csv";//openFile(); //TODO using getFileDir()
     this.buffer = processFile(fileDir);
   }
 
