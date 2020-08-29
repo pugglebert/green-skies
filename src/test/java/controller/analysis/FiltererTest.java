@@ -15,20 +15,6 @@ import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
-//@TODO: test for successful single filter term
-//@TODO: test for successful two filter terms
-//@TODO: test for successful three filter terms
-//@TODO: for all the above, test with files where there is one record, two records and non-successful records in between
-//@TODO: test for two filter terms where one record has first and another record has the second and niether are added
-//@TODO: test for three filter terms where one record has first, another record has the second and another record has
-// the none are added
-//@TODO: test for single filter term and nothing returned
-//@TODO: test for two filter terms and nothing returned
-//@TODO: test for three filter term and nothing returned
-
-//TODO:@Repeat for all each data type.
-
-
 /**
  * Unit test for Filterer class.
  * @author Hayley Krippner
@@ -40,6 +26,8 @@ public class FiltererTest {
   private Storage storage;
   private Loader loader;
   private Filterer filterer;
+
+  //----------------------------------------- Testing for filtering Airports -------------------------------------------
 
   @Before
   public void setUp() {
@@ -87,8 +75,8 @@ public class FiltererTest {
   }
 
   /**
-   * Verify that when filterAirports is called with a name, country and IATA filter terms that matches one entry in the file,
-   * an arrayList containing just that entry is returned.
+   * Verify that when filterAirports is called with a name, country and IATA filter terms that matches one entry in the
+   * file an arrayList containing just that entry is returned.
    */
   @Test
   public void filterAirportsThreeTermsOneRecordTest() {
@@ -106,12 +94,12 @@ public class FiltererTest {
 
 
   /**
-   * Verify that when filterAirports is called with a filter term that matches multiple entries in the file, an arrayList
-   * containing all of those entries is returned. This tests data which does not contain a subset of the filter terms
-   * i.e. all terms appear in each matching record.
+   * Verify that when filterAirports is called with a filter term that matches multiple entries in the file, an
+   * arrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
    */
   @Test
-  public void filterAirportsOneMatchManyRecordsTest() {
+  public void filterAirportsOneTermManyRecordsTest() {
     ArrayList<Airport> expectedResults = new ArrayList<>();
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Country", "Greenland");
@@ -126,12 +114,12 @@ public class FiltererTest {
 
 
   /**
-   * Verify that when filterAirports is called with two filter terms that matches multiple entries in the file, an arrayList
-   * containing all of those entries is returned. This tests data which does not contain a subset of the filter terms
-   * i.e. all terms appear in each matching record.
+   * Verify that when filterAirports is called with two filter terms that match multiple entries in the file, an
+   * ArrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
    */
   @Test
-  public void filterAirportsTwoMatchManyRecordsTest() {
+  public void filterAirportsTwoTermsManyRecordsTest() {
     ArrayList<Airport> expectedResults = new ArrayList<>();
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Name", "Akureyri");
@@ -156,7 +144,7 @@ public class FiltererTest {
    * i.e. all terms appear in each matching record.
    */
   @Test
-  public void filterAirportsThreeMatchManyRecordsTest() {
+  public void filterAirportsThreeTermsManyRecordsTest() {
     ArrayList<Airport> expectedResults = new ArrayList<>();
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Name", "Sault Ste Marie");
@@ -172,318 +160,39 @@ public class FiltererTest {
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
-//TODO: up to here. Need to debug as this test failed!
   /**
-   * Verify that when filterAirports is called with two filter terms and there are two records in the data storage
-   * where the first record's name attribute matches the filter's name and the second record's country matches the
-   * filter's country,
+   * Verify that when filterAirports is called with two filter terms and there are two records in the data storage where
+   * the first record's name attribute matches the filter's name and the second record's country matches the filter's
+   * country, then no records are returned and a RuntimeException exception gets thrown.
    */
   @Test
-  public void filterAirportsTwoMatchNoRecordsTest() {
-    ArrayList<Airport> expectedResults = new ArrayList<>();
-    HashMap<String, String> testFilterTerms = new HashMap<>();
-    testFilterTerms.put("Name", "Manihiki Island Airport");
-    testFilterTerms.put("Country", "Cook Islands");
-    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
-    assertArrayEquals(expectedResults.toArray(), results.toArray());
-  }
-
-
-
-//
-//  /**
-//   * Verify that when searchAirports is called with a search term that matches one entry in the file, an arrayList
-//   * containing just that entry is returned.
-//   * Test File: #1
-//   */
-//  @Test
-//  public void filterAirportsTwoDataTypesNoMatchesTest() {
-//    ArrayList<Airport> expectedResults = new ArrayList<>();
-//    HashMap<String, String> testFilterTerms = new HashMap<>();
-//    testFilterTerms.put("Name", "Wellington");
-//    testFilterTerms.put("Country", "England");
-//    expectedResults.add(new Airport(1,"Wellington","Goroka","Papua New Guinea","GKA",
-//            "AYGA",-6.081689,145.391881,5282,10,"U",
-//            "Pacific/Port_Moresby"));
-//    expectedResults.add(new Airport(2,"Madang","Madang","England","MAG","AYMD",
-//            -5.207083,145.7887,20,10,"U","Pacific/Port_Moresby"));
-//    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-
-
-
-//  /**
-//   * Verify that when filterAirports is called with a two filter terms that have no intersecting records in the file,
-//   * a RuntimeException is thrown.
-//   */
-//  @Test
-//  public void filterAirportsNoMatchTwoValuesTest() {
-//    try {
-//        HashMap<String, String> testFilterTerms = new HashMap<>();
-//        testFilterTerms.put("Name", "Wellington");
-//        testFilterTerms.put("Country", "England");
-//        filterer.filterAirports(testFilterTerms, storage.getAirports());
-//        fail();
-//    } catch (RuntimeException e) {
-//      assertTrue(true);
-//    }
-//  }
-
-
-
-
-
-//  /**
-//   * Verify that when searchAirports is called with a search term that matches one entry in the file, an arrayList
-//   * containing just that entry is returned.
-//   */
-//  @Test
-//  public void searchAirportsOneMatchTest() {
-//    ArrayList<Airport> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airport(6,"Wewak Intl","Wewak","Papua New Guinea","WWK","AYWK",-3.583828,143.669186,19,10,"U","Pacific/Port_Moresby"));
-//    ArrayList<Airport> results = Searcher.searchAirports("WWK", "IATA", storage.getAirports());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when searchAirports is called with a search term that matches multiple entries in the file, an arrayList
-//   * containing all those entries in the same order they appear in the file is returned.
-//   */
-//  @Test
-//  public void searchAirportsMultipleMatchTest() {
-//    ArrayList<Airport> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airport(7,"Narsarsuaq","Narssarssuaq","Greenland","UAK","BGBW",61.160517,-45.425978,112,-3,"E","America/Godthab"));
-//    expectedResults.add(new Airport(8,"Nuuk","Godthaab","Greenland","GOH","BGGH",64.190922,-51.678064,283,-3,"E","America/Godthab"));
-//    expectedResults.add(new Airport(9,"Sondre Stromfjord","Sondrestrom","Greenland","SFJ","BGSF",67.016969,-50.689325,165,-3,"E","America/Godthab"));
-//    expectedResults.add(new Airport(10,"Thule Air Base","Thule","Greenland","THU","BGTL",76.531203,-68.703161,251,-4,"E","America/Thule"));
-//    ArrayList<Airport> results = Searcher.searchAirports("Greenland", "Country", storage.getAirports());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when an illegal search type is passed into searchAirports it raises an IllegalArgumentException.
-//   */
-//  @Test
-//  public void searchAirportsIllegalTypeTest() {
-//    try {
-//      Searcher.searchAirports("Greenland", "Airline", storage.getAirports());
-//      fail();
-//    } catch (IllegalArgumentException e) {
-//      assertTrue(true);
-//    }
-//  }
-//
-//  /**
-//   * Verify that searchAirports can return the correct entry when that entry is towards the end of a file over 8,000
-//   * lines long.
-//   */
-//  @Test
-//  public void searchAirportsLongFileTest(){
-//    storage = new Storage();
-//    loader = new Loader(storage);
-//    try {
-//      loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
-//    } catch (Exception e) {
-//      System.out.println(e.getMessage());
-//      fail();
-//    }
-//    ArrayList<Airport> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airport(9428,"Bessemer","Bessemer","United States","EKY","KEKY",33.1876,-86.5558,700,-6,"A","America/Chicago"));
-//    ArrayList<Airport> results = Searcher.searchAirports("Bessemer", "Name", storage.getAirports());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when searchAirports is called with a searchTerm which matches a term in the file but is in a different,
-//   * an arrayList containing the matching entry is returned.
-//   */
-//  @Test
-//  public void searchAirportsCaseSensitiveTest() {
-//    ArrayList<Airport> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airport(6,"Wewak Intl","Wewak","Papua New Guinea","WWK","AYWK",-3.583828,143.669186,19,10,"U","Pacific/Port_Moresby"));
-//    ArrayList<Airport> results = Searcher.searchAirports("WEWAK INTL", "Name", storage.getAirports());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-
-
-
-
-
-//  /**
-//   * Verify that when searchRoutes is called with a search term that matches no terms in the file, a RuntimeException
-//   * is thrown.
-//   */
-//  @Test
-//  public void searchRoutesNoMatchTest() {
-//    try {
-//      Searcher.searchRoutes("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "Airline", storage.getRoutes());
-//      fail();
-//    } catch (RuntimeException e) {
-//      assertTrue(true);
-//    }
-//  }
-//
-//  /**
-//   * Verify that when searchRoutes is called with a search term that matches one entry in the file, an arrayList
-//   * containing just that entry is returned.
-//   */
-//  @Test
-//  public void searchRoutesOneMatchTest() {
-//    ArrayList<Route> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Route("2B",410,"GYD",2922,"NBC",6969,"",0,"CR2".split(" ")));
-//    ArrayList<Route> results = Searcher.searchRoutes("GYD", "Source", storage.getRoutes());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when searchRoutes is called with a search term that matches multiple entries in the file, an arrayList
-//   * containing all those entries in the same order they appear in the file is returned.
-//   */
-//  @Test
-//  public void searchRoutesMultipleMatchTest() {
-//    ArrayList<Route> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Route("2B",410,"DME",4029,"NBC",6969,"",0,"CR2".split(" ")));
-//    expectedResults.add(new Route("2B",410,"GYD",2922,"NBC",6969,"",0,"CR2".split(" ")));
-//    expectedResults.add(new Route("2B",410,"LED",2948,"NBC",6969,"",0,"CR2".split(" ")));
-//    expectedResults.add(new Route("2B",410,"SVX",2975,"NBC",6969,"",0,"CR2".split(" ")));
-//    ArrayList<Route> results = Searcher.searchRoutes("NBC", "Destination", storage.getRoutes());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when an illegal search type is passed into searchRoutes it raises an IllegalArgumentException.
-//   */
-//  @Test
-//  public void searchRoutesIllegalTypeTest() {
-//    try {
-//      Searcher.searchRoutes("NBC", "Country", storage.getRoutes());
-//      fail();
-//    } catch (IllegalArgumentException e) {
-//      assertTrue(true);
-//    }
-//  }
-//
-//  /**
-//   * Verify that searchRoutes can return the correct entry when that entry is towards the end of a file over 10,000
-//   * lines long.
-//   */
-//  @Test
-//  public void searchRoutesLongFileTest(){
-//    storage = new Storage();
-//    loader = new Loader(storage);
-//    try {
-//      loader.loadFile("../seng202_project/src/test/java/TestFiles/routes.csv", "Route");
-//    } catch (Exception e) {
-//      System.out.println(e.getMessage());
-//      fail();
-//    }
-//    ArrayList<Route> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Route("YO",16150,"HME",238,"LGW",502,"Y",0,"320".split(" ")));
-//    expectedResults.add(new Route("YO",16150,"LGW",502,"HME",238,"Y",0,"320".split(" ")));
-//    expectedResults.add(new Route("YO",16150,"MCM",4264,"NCE",1354,"",0,"NDE".split(" ")));
-//    expectedResults.add(new Route("YO",16150,"NCE",1354,"MCM",4264,"",0,"NDE".split(" ")));
-//    ArrayList<Route> results = Searcher.searchRoutes("YO", "Airline", storage.getRoutes());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when searchRoutes is called with a searchTerm which matches a term in the file but is in a different,
-//   * an arrayList containing the matching entry is returned.
-//   */
-//  @Test
-//  public void searchRoutesCaseSensitiveTest() {
-//    ArrayList<Route> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Route("2B",410,"GYD",2922,"NBC",6969,"",0,"CR2".split(" ")));
-//    ArrayList<Route> results = Searcher.searchRoutes("gyd", "Source", storage.getRoutes());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-
-
-//  /**
-//   * Verify that when searchAirlines is called with a search term that matches no terms in the file, a RuntimeException
-//   * is thrown.
-//   */
-//  @Test
-//  public void searchAirlinesNoMatchTest() {
-//    try {
-//      Searcher.searchAirlines("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "IATA", storage.getAirlines());
-//      fail();
-//    } catch (RuntimeException e) {
-//      assertTrue(true);
-//    }
-//  }
-//
-//  /**
-//   * Verify that when searchAirlines is called with a search term that matches one entry in the file, an arrayList
-//   * containing just that entry is returned.
-//   */
-//  @Test
-//  public void searchAirlinesOneMatchTest() {
-//    ArrayList<Airline> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airline(29,"Askari Aviation","\\N","4K","AAS","AL-AAS","Pakistan",true));
-//    ArrayList<Airline> results = Searcher.searchAirlines("Askari Aviation", "Name", storage.getAirlines());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when searchAirlines is called with a search term that matches multiple entries in the file, an arrayList
-//   * containing all those entries in the same order they appear in the file is returned.
-//   */
-//  @Test
-//  public void searchAirlinesMultipleMatchTest() {
-//    ArrayList<Airline> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airline(5,"213 Flight Unit","\\N","","TFU","","Russia",false));
-//    expectedResults.add(new Airline(6,"223 Flight Unit State Airline","\\N","","CHD","CHKALOVSK-AVIA","Russia",false));
-//    expectedResults.add(new Airline(7,"224th Flight Unit","\\N","","TTF","CARGO UNIT","Russia",false));
-//    expectedResults.add(new Airline(41,"Abakan-Avia","\\N","","ABG","ABAKAN-AVIA","Russia",false));
-//    ArrayList<Airline> results = Searcher.searchAirlines("Russia", "Country", storage.getAirlines());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when an illegal search type is passed into searchAirlines it raises an IllegalArgumentException.
-//   */
-//  @Test
-//  public void searchAirlinesIllegalTypeTest() {
-//    try {
-//      Searcher.searchAirlines("Russia", "Airport", storage.getAirlines());
-//      fail();
-//    } catch (IllegalArgumentException e) {
-//      assertTrue(true);
-//    }
-//  }
-//
-//  /**
-//   * Verify that searchAirlines can return the correct entry when that entry is towards the end of a file over 6,000
-//   * lines long.
-//   */
-//  @Test
-//  public void searchAirlinesLongFileTest(){
-//    storage = new Storage();
-//    loader = new Loader(storage);
-//    try {
-//      loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
-//    } catch (Exception e) {
-//      System.out.println(e.getMessage());
-//      fail();
-//    }
-//    ArrayList<Airline> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airline(21179,"Thai Vietjet Air","","","TVJ","THAIVIET JET","Thailand",true));
-//    ArrayList<Airline> results = Searcher.searchAirlines("TVJ", "ICAO", storage.getAirlines());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-//
-//  /**
-//   * Verify that when searchAirlines is called with a searchTerm which matches a term in the file but is in a different,
-//   * an arrayList containing the matching entry is returned.
-//   */
-//  @Test
-//  public void searchAirlinesCaseSensitiveTest() {
-//    ArrayList<Airline> expectedResults = new ArrayList<>();
-//    expectedResults.add(new Airline(29,"Askari Aviation","\\N","4K","AAS","AL-AAS","Pakistan",true));
-//    ArrayList<Airline> results = Searcher.searchAirlines("askari aviation", "Name", storage.getAirlines());
-//    assertArrayEquals(expectedResults.toArray(), results.toArray());
-//  }
-
+  public void filterAirportsTwoTermsNoRecordsTest() {
+      try {
+      HashMap<String, String> testFilterTerms = new HashMap<>();
+      testFilterTerms.put("Name", "Santa Maria Pub Cpt G Allan Hancock Airport");
+      testFilterTerms.put("Country", "USA");
+      filterer.filterAirports(testFilterTerms, storage.getAirports());
+      fail();
+      } catch (RuntimeException e) {
+        assertTrue(true);
+      }
 }
+    /**
+     * Verify that when filterAirports is called with two filter terms and there is only one record in
+     * the data storage where the first record's name attribute matches the filter's name and the
+     * second record's country matches the filter's country, then just this record is returned.
+     */
+    @Test
+    public void filterAirportsTwoTermsTwoIncorrectOneRecordTest() {
+        ArrayList<Airport> expectedResults = new ArrayList<>();
+        HashMap<String, String> testFilterTerms = new HashMap<>();
+        testFilterTerms.put("Name", "Mangaia Island Airport");
+        testFilterTerms.put("Country", "Cook Islands");
+        ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+        expectedResults.add(new Airport(5864,"Mangaia Island Airport","Mangaia Island",
+                "Cook Islands","MGS","NCMG",-21.8956, -157.905,45,
+                -10,"U","Pacific/Rarotonga"));
+        assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+}
+

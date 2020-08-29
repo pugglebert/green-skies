@@ -14,14 +14,6 @@ public class Filterer {
 
     private Searcher searcher;
 
-//    /**
-//     * Constructer for Filterer.
-//     * @param searcher, the Searcher used to search for specific data records that match a given criteria.
-//     */
-//    public Filterer(Searcher searcher) {
-//        this.searcher = searcher;
-//    }
-
     /**
    * Filters airport data to get the airport records that contain the desired filter entries.
    *
@@ -38,23 +30,32 @@ public class Filterer {
         String filterTermType = entry.getKey();
         String filterTerm = entry.getValue();
         individualLists.add(searcher.searchAirports(filterTerm, filterTermType, airports));
-
-        for (int index = 0; index < individualLists.size(); index++){
-
-            System.out.println(individualLists.get(index).toString());
-        }
-
     }
 
-    ArrayList<Airport> filteredAirports = individualLists.get(0); //set up with first group of airport records.
-    if (individualLists.size() > 1) {
-        //Iterate through the indivual lists and take the intersection of the Airport records.
-        int filteredAirportsSize = individualLists.size() - 1;
-        for (int index = 1; index < filteredAirportsSize; index++) {
-            // removes the elements from the current search return list that are not contained filteredAirports
-            filteredAirports.retainAll(individualLists.get(index));
-            }
-        }
+      //    if (filterTerms.size() == 1) {
+      //set up with first group of airport records.
+      ArrayList<Airport> filteredAirports = individualLists.get(0);
+//
+//    } else if (filterTerms.size() > 1) {
+//        filteredAirports = individualLists.get(0); //set up with first group of airport records.
+
+        // Iterate through the indivual lists and take the intersection of the Airport records.
+      int filteredAirportsSize = individualLists.size();
+      for (int index = 1; index < filteredAirportsSize; index++) {
+        // removes the elements from the current search return list that are not contained
+          ArrayList<Airport> priorIntersectionArray = filteredAirports;
+          System.out.println(filteredAirports);
+          filteredAirports.retainAll(individualLists.get(index));
+//          if (priorIntersectionArray == filteredAirports){ //no change so no entries in common.
+//            ArrayList<Airport> emptyArray = new ArrayList<>();
+//              filteredAirports = emptyArray;
+//          }
+
+
+        //filteredAirports.retainAll(individualLists.get(index));
+      }
+      // }
+
 
     if (filteredAirports.isEmpty()) {
         throw new RuntimeException("No entries match your filter term(s).");
@@ -63,3 +64,8 @@ public class Filterer {
     }
 
 }
+
+//        for (int index = 0; index < individualLists.size(); index++){
+//
+//        System.out.println(individualLists.get(index).toString());
+//        }
