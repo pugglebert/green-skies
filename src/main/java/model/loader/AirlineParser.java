@@ -68,7 +68,7 @@ public class AirlineParser extends Parser {
                           active);
 
           // parserData.add(airline);
-          addAirLine(parserData, airline.getAirlineID(), airline);
+          addAirLine(airline.getAirlineID(), airline);
 
         } catch (Exception e) {
           errorCounter(10);
@@ -79,19 +79,7 @@ public class AirlineParser extends Parser {
     }
   }
 
-  /**
-   * add airline to index matches with airLineID.
-   * First check if there are any airline currently sit at index. If it is null then replace with airline param.
-   * If parserset size is too small then init it with null value.
-   * If there is an airline at index then check if the airline is the same with the one we want to add.
-   * If it is the same then treat as duplicate (do nothing)
-   * If is is not then add to error
-   *
-   * @param parserData the superclass list
-   * @param airlineID  airline ID we want to add
-   * @param airline    Airline Object we wanted to add
-   */
-  private void addAirLine(List parserData, int airlineID, Airline airline) {
+  /*private void addAirLine(List parserData, int airlineID, Airline airline) {
     int attemp = 3; // maximum attemp
     while (attemp > 0) {
       attemp--;
@@ -101,6 +89,7 @@ public class AirlineParser extends Parser {
           parserData.set(airlineID, airline);
         } else if (arrayItem.equals(airline)) {
           errorCounter(1); // Have the same airline
+          System.out.println("ID " + airlineID);
         } else {
           errorCounter(11); // Airline exist with same ID
         }
@@ -112,7 +101,38 @@ public class AirlineParser extends Parser {
         }
       }
     }
+  }*/
+
+  /**
+   * add airline to index matches with airLineID.
+   * First check if there are any airline currently sit at index. If it is null then replace with airline param.
+   * If parserset size is too small then init it with null value.
+   * If there is an airline at index then check if the airline is the same with the one we want to add.
+   * If it is the same then treat as duplicate (do nothing)
+   * If is is not then add to error
+   *
+   * @param airlineID  airline ID we want to add
+   * @param airline    Airline Object we wanted to add
+   */
+  private void addAirLine(int airlineID, Airline airline) {
+    if (airlineID >= parserData.size()) {
+      int i = parserData.size();
+      while (i < airlineID + 2) {
+        parserData.add(null);
+        i++;
+      }
+    }
+    if (parserData.get(airlineID) == null) {
+      parserData.set(airlineID, airline);
+    } else if (parserData.get(airlineID).equals(airline)) {
+      errorCounter(1); // Have the same airline
+    } else {
+      errorCounter(11); // Airline exist with same ID
+    }
+
   }
+
+
 
   protected boolean validater(String[] line) {
 

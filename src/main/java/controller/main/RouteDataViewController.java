@@ -1,5 +1,6 @@
 package controller.main;
 
+import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,10 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.data.Airline;
 import model.data.Route;
 import model.data.Storage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -53,7 +56,16 @@ public class RouteDataViewController implements Initializable {
     private Button btnAirportDataView;
     @FXML
     private Button btnAirlineDataView;
+    @FXML
+    private ChoiceBox<String> searchTypeSelection;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private Label errorText;
 
+    private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
     private Storage storage = Main.getStorage();
 
     /**
@@ -77,6 +89,9 @@ public class RouteDataViewController implements Initializable {
         //Load data by taking the Route ArrayList and converting it to an ObservableArrayList.
         ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
         tableView.setItems(routes);
+
+        //Set choice box to list of potential search types
+        searchTypeSelection.setItems(searchTypes);
     }
 
     /**
@@ -133,6 +148,33 @@ public class RouteDataViewController implements Initializable {
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
+    }
+
+    /**
+     * Checks users search for errors and displays an error message if any are present. If no errors
+     * are present, calls searchRoutes method from searcher class and upldates table to display
+     * results of search.
+     */
+    public void search() {
+        String searchType = searchTypeSelection.getValue();
+        String searchTerm = searchBar.getText();
+        if (searchType == null) {
+            errorText.setText("Select a search type to proceed.");
+            errorText.setVisible(true);
+        } else if (searchTerm == null) {
+            errorText.setText("Select a search type to proceed.");
+            errorText.setVisible(true);
+        } else {
+            try {
+                ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getRoutes());
+                tableView.setItems(FXCollections.observableList(results));
+                errorText.setVisible(false);
+            } catch (RuntimeException e) {
+                errorText.setText(e.getMessage());
+                errorText.setVisible(true);
+            }
+        }
+
     }
 
 }

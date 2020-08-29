@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -276,11 +277,12 @@ public class SearcherTest {
     storage = new Storage();
     loader = new Loader(storage);
     try {
-      loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
+      String message = loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     } catch (Exception e) {
       System.out.println(e.getMessage());
       fail();
     }
+    List<Airline> airlines = storage.getAirlines();
     ArrayList<Airline> expectedResults = new ArrayList<>();
     expectedResults.add(new Airline(21179,"Thai Vietjet Air","","","TVJ","THAIVIET JET","Thailand",true));
     ArrayList<Airline> results = Searcher.searchAirlines("TVJ", "ICAO", storage.getAirlines());
