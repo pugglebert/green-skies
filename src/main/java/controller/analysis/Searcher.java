@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for searching data for entry which matches specific search term
+ * Class for searching data for entry which matches specific search term.
  * @author Ella Johnson, Hayley Krippner
  * @since 26/08/20
  * @version 1.0

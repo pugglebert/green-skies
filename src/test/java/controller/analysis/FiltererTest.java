@@ -7,18 +7,16 @@ import model.data.Storage;
 import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import static org.junit.Assert.*;
 
 /**
  * Unit test for Filterer class.
  * @author Hayley Krippner
- * @since 29/08/2020
+ * @since 30/08/2020
  * @version 1.0
  */
 public class FiltererTest {
@@ -27,8 +25,6 @@ public class FiltererTest {
   private Loader loader;
   private Filterer filterer;
 
-  //----------------------------------------- Testing for filtering Airports -------------------------------------------
-
   @Before
   public void setUp() {
     storage = new Storage();
@@ -36,13 +32,17 @@ public class FiltererTest {
     filterer = new Filterer();
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/FiltererAirportsTest.csv", "Airport");
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/FiltererAirlinesTest.csv", "Airline");
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/FiltererRoutesTest.csv", "Route");
     } catch (FileSystemException | FileNotFoundException e) {
       e.printStackTrace();
     }
   }
 
+  //----------------------------------------- Testing for filtering Airports -------------------------------------------
+
   /**
-   * Verify that when filterAirports is called with a filter term that matches one entry in the file, an arrayList
+   * Verify that when filterAirports is called with a filter term that matches one entry in the file, an ArrayList
    * containing just that entry is returned.
    */
   @Test
@@ -58,8 +58,8 @@ public class FiltererTest {
   }
 
   /**
-   * Verify that when filterAirports is called with a name and country filter terms that matches one entry in the file,
-   * an arrayList containing just that entry is returned.
+   * Verify that when filterAirports is called with a name and country filter terms that match one entry in the file,
+   * an ArrayList containing just that entry is returned.
    */
   @Test
   public void filterAirportsTwoTermsOneRecordTest() {
@@ -75,8 +75,8 @@ public class FiltererTest {
   }
 
   /**
-   * Verify that when filterAirports is called with a name, country and IATA filter terms that matches one entry in the
-   * file an arrayList containing just that entry is returned.
+   * Verify that when filterAirports is called with a name, country and IATA filter terms that match one entry in the
+   * file, an ArrayList containing just that entry is returned.
    */
   @Test
   public void filterAirportsThreeTermsOneRecordTest() {
@@ -95,7 +95,7 @@ public class FiltererTest {
 
   /**
    * Verify that when filterAirports is called with a filter term that matches multiple entries in the file, an
-   * arrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * ArrayList containing all of those entries is returned. This tests data which does not contain a subset of the
    * filter terms i.e. all terms appear in each matching record.
    */
   @Test
@@ -139,7 +139,7 @@ public class FiltererTest {
   }
 
   /**
-   * Verify that when filterAirports is called with three filter terms that matches multiple entries in the file, an arrayList
+   * Verify that when filterAirports is called with three filter terms that matches multiple entries in the file, an ArrayList
    * containing all of those entries is returned. This tests data which does not contain a subset of the filter terms
    * i.e. all terms appear in each matching record.
    */
@@ -178,9 +178,9 @@ public class FiltererTest {
       }
 }
     /**
-     * Verify that when filterAirports is called with two filter terms and there is only one record in
-     * the data storage where the first record's name attribute matches the filter's name and the
-     * second record's country matches the filter's country, then just this record is returned.
+     * Verify that when filterAirports is called with two filter terms and there is only one record in the data storage
+     * where the first record's name attribute matches the filter's name and the second record's country matches the
+     * filter's country, then just this record is returned in an ArrayList.
      */
     @Test
     public void filterAirportsTwoTermsTwoIncorrectOneRecordTest() {
@@ -194,5 +194,347 @@ public class FiltererTest {
                 -10,"U","Pacific/Rarotonga"));
         assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
-}
 
+  //----------------------------------------- Testing for filtering Airlines -------------------------------------------
+
+  /**
+   * Verify that when filterAirlines is called with a filter term that matches one entry in the file, an ArrayList
+   * containing just that entry is returned.
+   */
+  @Test
+  public void filterAirlinesOneTermOneRecordTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Name", "Private flight");
+    expectedResults.add(new Airline(1,"Private flight","\\N","-","N/A","",
+            "",true));
+    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  //@TODO: complete this test once the active status option has been added into the Searcher class.
+//  /**
+//   * Verify that when filterAirlines is called with a filter term that matches one entry in the file, an ArrayList
+//   * containing just that entry is returned.
+//   */
+//  @Test
+//  public void filterAirlinesOneTermOneRecordActiveStatusTest() {
+//    ArrayList<Airline> expectedResults = new ArrayList<>();
+//    HashMap<String, String> testFilterTerms = new HashMap<>();
+//    testFilterTerms.put("Active Status", "Y");
+//    expectedResults.add(new Airline(1,"Exclusive flight","\\N","-","N/A","",
+//            "",true));
+//    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+//    assertArrayEquals(expectedResults.toArray(), results.toArray());
+//  }
+
+  /**
+   * Verify that when filterAirlines is called with a name and country filter terms that matches one entry in the file,
+   * an ArrayList containing just that entry is returned.
+   */
+  @Test
+  public void filterAirlinesTwoTermsOneRecordTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Name", "1Time Airline");
+    testFilterTerms.put("Country", "South Africa");
+    expectedResults.add(new Airline(3,"1Time Airline","\\N","1T","RNX","NEXTIME",
+            "South Africa",true));
+    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterAirlines is called with a name, country and IATA filter terms that matches one entry in the
+   * file an ArrayList containing just that entry is returned.
+   */
+  @Test
+  public void filterAirlinesThreeTermsOneRecordTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Name", "40-Mile Air");
+    testFilterTerms.put("Country", "United States");
+    testFilterTerms.put("IATA", "Q5");
+    expectedResults.add(new Airline(10,"40-Mile Air","\\N","Q5","MLA","MILE-AIR",
+            "United States",true));
+    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterAirlines is called with a filter term that matches multiple entries in the file, an
+   * arrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
+   */
+  @Test
+  public void filterAirlinesOneTermManyRecordsTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Country", "Russia");
+    expectedResults.add(new Airline(5,"213 Flight Unit","\\N","","TFU","",
+            "Russia",false));
+    expectedResults.add(new Airline(6,"223 Flight Unit State Airline","\\N","","CHD",
+            "CHKALOVSK-AVIA","Russia",false));
+    expectedResults.add(new Airline(7,"224th Flight Unit","\\N","","TTF",
+            "CARGO UNIT","Russia",false));
+    expectedResults.add(new Airline(52,"Hot Air","\\N","","TFU","","Russia",
+            false));
+    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterAirlines is called with two filter terms that match multiple entries in the file, an
+   * ArrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
+   */
+  @Test
+  public void filterAirlinesTwoTermsManyRecordsTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Name", "ABX Air");
+    testFilterTerms.put("Country", "United States");
+    expectedResults.add(new Airline(50,"ABX Air","\\N","GB","ABX","ABEX",
+            "United States",false));
+    expectedResults.add(new Airline(53,"ABX Air","\\N","HB","ABX","ABEX",
+            "United States",false));
+    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+
+  /**
+   * Verify that when filterAirlines is called with three filter terms that matches multiple entries in the file, an
+   * ArrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
+   */
+  @Test
+  public void filterAirlinesThreeTermsManyRecordsTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Name", "Antrak Air");
+    testFilterTerms.put("Country", "Ghana");
+    testFilterTerms.put("ICAO", "ABV");
+    expectedResults.add(new Airline(48,"Antrak Air","\\N","04","ABV","ANTRAK",
+            "Ghana",false));
+    expectedResults.add(new Airline(55,"Antrak Air","\\N","06","ABV","ANTRAK",
+            "Ghana",false));
+    expectedResults.add(new Airline(56,"Antrak Air","\\N","05","ABV","ANTRAK",
+            "Ghana",false));
+    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterAirlines is called with one filter term and there are no records which match this term, then
+   * no records are returned and a RuntimeException exception gets thrown.
+   */
+  @Test
+  public void filterAirlinesOneTermNoRecordsTest() {
+    try {
+      HashMap<String, String> testFilterTerms = new HashMap<>();
+      testFilterTerms.put("Name", "England International");
+      filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that when filterAirlines is called with two filter terms and there are no records which match both of these
+   * terms, then no records are returned and a RuntimeException exception gets thrown.
+   */
+  @Test
+  public void filterAirlinesTwoTermsNoRecordsTest() {
+    try {
+      HashMap<String, String> testFilterTerms = new HashMap<>();
+      testFilterTerms.put("Name", "France Airlines");
+      testFilterTerms.put("Country", "France");
+      filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that when filterAirlines is called with two filter terms and there is only one record in the data storage
+   * where the first record's name attribute matches the filter's name and the second record's country matches the
+   * filter's country, then just this record is returned in an ArrayList.
+   */
+  @Test
+  public void filterAirlinesTwoTermsTwoIncorrectOneRecordTest() {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Name", "Aerial First");
+    testFilterTerms.put("Country", "Finland");
+    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    expectedResults.add(new Airline(54,"Aerial First","\\N","","ABF","SKYWINGS",
+            "Finland",false));
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  //----------------------------------------- Testing for filtering Routes -------------------------------------------
+
+  /**
+   * Verify that when filterRoutes is called with a filter term that matches one entry in the file, an ArrayList
+   * containing just that entry is returned.
+   */
+  @Test
+  public void filterRoutesOneTermOneRecordTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Airline", "2H");
+    expectedResults.add(new Route("2H",1654,"IKT",2937,"ODO",8944,"",0,"AN4".split(" ")));
+    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterRoutes is called with source and destination filter terms that matches one entry in the file,
+   * an ArrayList containing just that entry is returned.
+   */
+  @Test
+  public void filterRoutesTwoTermsOneRecordTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Source", "SVX");
+    testFilterTerms.put("Destination", "OVC");
+    expectedResults.add(new Route("2W",410,"SVX",2975,"OVC",
+            4078,"",0,"CR2".split(" ")));
+    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+
+  /**
+   * Verify that when filterRoutes is called with an airline, source and destination filter terms that matches one
+   * entry in the file an ArrayList containing just that entry is returned.
+   */
+  @Test
+  public void filterRoutesThreeTermsOneRecordTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Airline", "2V");
+    testFilterTerms.put("Source", "SVY");
+    testFilterTerms.put("Destination", "OVB");
+    expectedResults.add(new Route("2V",410,"SVY",2975,"OVB",
+            4078,"",0,"CR2".split(" ")));
+    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+
+  /**
+   * Verify that when filterRoutes is called with a filter term that matches multiple entries in the file, an
+   * arrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
+   */
+  @Test
+  public void filterRoutesOneTermManyRecordsTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Destination", "KZN");
+    expectedResults.add(new Route("2B",410,"AER",2965,"KZN",
+            2991,"",0,"CR2".split(" ")));
+    expectedResults.add(new Route("2B",410,"ASF",2966,"KZN",
+            2990,"",0,"CR2".split(" ")));
+    expectedResults.add(new Route("2B",410,"ASF",2966,"KZN",
+            2962,"",0,"CR2".split(" ")));
+    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterRoutes is called with two filter terms that match multiple entries in the file, an
+   * ArrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
+   */
+  @Test
+  public void filterRoutesTwoTermsManyRecordsTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Source", "CEK");
+    testFilterTerms.put("Destination", "NBC");
+    expectedResults.add(new Route("2B",410,"CEK",2968,"NBC",
+            4078,"",0,"CR2".split(" ")));
+    expectedResults.add(new Route("2B",410,"CEK",4029,"NBC",
+            6969,"",0,"CR2".split(" ")));
+    expectedResults.add(new Route("2B",410,"CEK",4029,"NBC",
+            6160,"",0,"CR2".split(" ")));
+    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterRoutes is called with three filter terms that matches multiple entries in the file, an
+   * ArrayList containing all of those entries is returned. This tests data which does not contain a subset of the
+   * filter terms i.e. all terms appear in each matching record.
+   */
+  @Test
+  public void filterRoutesThreeTermsManyRecordsTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Airline", "2A");
+    testFilterTerms.put("Source", "SVH");
+    testFilterTerms.put("Destination", "OPP");
+    expectedResults.add(new Route("2A",411,"SVH",2976,"OPP",
+            4079,"",0,"CR2".split(" ")));
+    expectedResults.add(new Route("2A",411,"SVH",2976,"OPP",
+            4080,"",0,"CR2".split(" ")));
+    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that when filterRoutes is called with one filter term and there are no records which match this term, then
+   * no records are returned and a RuntimeException exception gets thrown.
+   */
+  @Test
+  public void filterRoutesOneTermNoRecordsTest() {
+    try {
+      HashMap<String, String> testFilterTerms = new HashMap<>();
+      testFilterTerms.put("Airline", "2M");
+      filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that when filterRoutes is called with two filter terms and there are no records which match both of these
+   * terms, then no records are returned and a RuntimeException exception gets thrown.
+   */
+  @Test
+  public void filterRoutesTwoTermsNoRecordsTest() {
+    try {
+      HashMap<String, String> testFilterTerms = new HashMap<>();
+      testFilterTerms.put("Airline", "2X");
+      testFilterTerms.put("Destination", "FRC");
+      filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that when filterRoutes is called with two filter terms and there is only one record in the data storage
+   * where the first record's airline attribute matches the filter's airline and the second record's source matches the
+   * filter's source, then just this record is returned in an ArrayList.
+   */
+  @Test
+  public void filterRoutesTwoTermsTwoIncorrectOneRecordTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    HashMap<String, String> testFilterTerms = new HashMap<>();
+    testFilterTerms.put("Airline", "2K");
+    testFilterTerms.put("Source", "HTA");
+    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    expectedResults.add(new Route("2K",1654,"HTA",2935,"IKT",
+            2937,"",0,"AN4".split(" ")));
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+}
