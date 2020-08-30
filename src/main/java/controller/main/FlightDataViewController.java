@@ -57,11 +57,10 @@ public class FlightDataViewController implements Initializable {
 
 
     //TODO delete this
-    public void main() throws Exception {
+    public void toBeAdded() throws Exception {
         test = new FlightHistory();
         routes = FXCollections.observableList(test.getBuffer());
         FlightTable.setItems(routes);
-        System.out.println("added");
     }
 
 
@@ -125,6 +124,7 @@ public class FlightDataViewController implements Initializable {
             }
         }
         this.routes.removeAll(entriesToRemove);
+        System.out.println("route to add: " + this.routes);
     }
 }
 
