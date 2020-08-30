@@ -50,12 +50,16 @@ public class FlightDataViewController implements Initializable {
     public Button btnAirlineDataView;
     @FXML
     public Button addTest;
+    @FXML
+    public Button comfirmButton;
+    FlightHistory test;
+    ObservableList<Route> routes;
 
 
     //TODO delete this
     public void main() throws Exception {
-        FlightHistory test = new FlightHistory();
-        ObservableList<Route> routes = FXCollections.observableList(test.buffer);
+        test = new FlightHistory();
+        routes = FXCollections.observableList(test.getBuffer());
         FlightTable.setItems(routes);
         System.out.println("added");
     }
@@ -72,7 +76,6 @@ public class FlightDataViewController implements Initializable {
         codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
         numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
         equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipment"));
-
     }
 
     /**
@@ -113,5 +116,15 @@ public class FlightDataViewController implements Initializable {
 
     }
 
+
+    public void confirm() {
+        ObservableList<Route> entriesToRemove = FXCollections.observableArrayList();
+        for (Route route : this.routes) {
+            if (!route.getSelect().isSelected()) {
+                entriesToRemove.add(route);
+            }
+        }
+        this.routes.removeAll(entriesToRemove);
+    }
 }
 

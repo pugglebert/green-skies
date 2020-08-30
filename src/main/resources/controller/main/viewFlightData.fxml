@@ -60,5 +60,7 @@
       </TableView>
       <Button fx:id="addTest" layoutX="692.0" layoutY="114.0" mnemonicParsing="false" onAction="#main"
               text="Add test case"/>
+      <Button fx:id="comfirmButton" layoutX="582.0" layoutY="139.0" mnemonicParsing="false" onAction="#confirm"
+              text="Confirm"/>
    </children>
 </AnchorPane>

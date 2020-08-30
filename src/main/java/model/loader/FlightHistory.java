@@ -8,24 +8,25 @@ import java.io.File;
 import java.util.List;
 
 public class FlightHistory {
-  public final List<Route> buffer;
+  private final List<Route> buffer;
 
   public FlightHistory() {
-    String fileDir = "src/test/java/TestFiles/routes.csv";//openFile(); //TODO using getFileDir()
+    String fileDir =
+            "src/test/java/TestFiles/routesTest.csv"; // openFile(); //TODO using getFileDir()
     this.buffer = processFile(fileDir);
   }
 
   public String getFileDir() {
     FileChooser fileChooser = new FileChooser(); // opens a file local file browser
     File selectedFile = fileChooser.showOpenDialog(null); // TODO add window, implement to open
-    String fileDir = selectedFile.toString(); //file dir name
+    String fileDir = selectedFile.toString(); // file dir name
     return fileDir;
   }
 
   public List<Route> processFile(String fileDir) {
     String errorMessage;
     Storage storage = new Storage();
-    Loader loader = new Loader(storage); //buffer storage
+    Loader loader = new Loader(storage); // buffer storage
 
     try {
       errorMessage = loader.loadFile(fileDir, "Route");
@@ -35,6 +36,10 @@ public class FlightHistory {
       e.printStackTrace();
     }
     return storage.getRoutes();
+  }
+
+  public List<Route> getBuffer() {
+    return this.buffer;
   }
 
   public static void main(String[] args) {
