@@ -20,6 +20,7 @@ public class Route implements DataType {
     private final String codeShare;
     private final int numOfStops;
     private final String[] equipment;
+    private CheckBox select; //TODO check again
 
     /**
      * The Route constructor.
@@ -35,6 +36,7 @@ public class Route implements DataType {
         this.codeShare = codeShare;
         this.numOfStops = numOfStops;
         this.equipment = equipment;
+        this.select = new CheckBox();
     }
 
     /**
@@ -127,8 +129,6 @@ public class Route implements DataType {
         }
     }
 
-    //TODO check again
-    private CheckBox select;
 
     public CheckBox getSelect() {
         return select;
