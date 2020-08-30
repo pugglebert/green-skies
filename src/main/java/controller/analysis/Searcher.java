@@ -2,16 +2,12 @@ package controller.analysis;
 
 import model.data.Airline;
 import model.data.Airport;
-import model.data.DataType;
 import model.data.Route;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for searching data for entry which matches specific search term
+ * Class for searching data for entry which matches specific search term.
  * @author Ella Johnson, Hayley Krippner
  * @since 26/08/20
  * @version 1.0
