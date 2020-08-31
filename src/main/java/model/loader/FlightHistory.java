@@ -5,14 +5,13 @@ import model.data.Route;
 import model.data.Storage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlightHistory {
   private final List<Route> buffer;
 
-  public FlightHistory() {
-    String fileDir =
-            "src/test/java/TestFiles/routesTest.csv"; // openFile(); //TODO using getFileDir()
+  public FlightHistory(String fileDir) {
     this.buffer = processFile(fileDir);
   }
 
@@ -38,11 +37,21 @@ public class FlightHistory {
     return storage.getRoutes();
   }
 
+  public void removeUnchecked() {
+    List<Route> entriesToRemove = new ArrayList();
+    for (Route route : buffer) {
+      if (!route.getSelect().isSelected()) {
+        entriesToRemove.add(route);
+      }
+    }
+    buffer.removeAll(entriesToRemove);
+  }
+
   public List<Route> getBuffer() {
     return this.buffer;
   }
 
-  public static void main(String[] args) {
-    FlightHistory test = new FlightHistory();
-  }
+//  public static void main(String[] args) {
+//    FlightHistory test = new FlightHistory();
+//  }
 }

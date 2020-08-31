@@ -1,11 +1,7 @@
 package model.data;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Class to keep track of all the data currently open files
@@ -34,7 +30,7 @@ public class Storage {
      */
     public List<Route> getRoutes() {return routes;}
 
-    public void setData(List<DataType> data, String type) {
+    public void setData(List<? extends DataType> data, String type) {
 
         if (type.matches("Airline")) {
 

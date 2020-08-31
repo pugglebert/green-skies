@@ -5,13 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #303030;"
+<AnchorPane fx:id="anchorPane" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #303030;"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.main.FlightDataViewController">
    <children>
       <TableView fx:id="FlightTable" layoutX="181.0" layoutY="225.0" prefHeight="500.0" prefWidth="1177.0">
          <columns>
-            <TableColumn fx:id="addColumn" prefWidth="50.0" text="Add"/>
             <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name"/>
             <TableColumn fx:id="airlineIDColumn" prefWidth="94.0" text="Airline ID"/>
             <TableColumn fx:id="sourceAirportColumn" prefWidth="122.0" text="Source Airport"/>
@@ -59,9 +58,7 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="addTest" layoutX="692.0" layoutY="114.0" mnemonicParsing="false" onAction="#toBeAdded"
-              text="Add test case"/>
-      <Button fx:id="comfirmButton" layoutX="582.0" layoutY="139.0" mnemonicParsing="false" onAction="#confirm"
-              text="Confirm"/>
+      <Button fx:id="browseButton" layoutX="898.0" layoutY="102.0" mnemonicParsing="false" onAction="#browseFile"
+              text="Browse"/>
    </children>
 </AnchorPane>
