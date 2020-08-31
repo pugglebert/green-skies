@@ -36,14 +36,18 @@ public class Route implements DataType {
         this.codeShare = codeShare;
         this.numOfStops = numOfStops;
         this.equipment = equipment;
+    }
+
+    public void initCheckBox() {
         this.select = new CheckBox();
     }
 
     /**
      * Getter for the name of the airline of that is used during the Flight.
+     *
      * @return airlineID.
      */
-    public String getAirlineName(){
+    public String getAirlineName() {
         return airlineName;
     }
 
@@ -138,5 +142,7 @@ public class Route implements DataType {
         this.select = select;
     }
 
-
+//    public static void main(String[] args){
+//        Route test = new Route("dsf", 12, "asd", 45, "asd",123,"asd",32, new String[]{"21"});
+//    }
 }
