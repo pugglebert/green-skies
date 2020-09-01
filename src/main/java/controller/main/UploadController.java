@@ -85,7 +85,7 @@ public class UploadController {
             }
         }
         catch (Exception e){
-            //String errorString = loader.loadFile(stringFile, fileType);
+            //make dialog box visible and show the exception message
             errorBox.setVisible(true);
             errorBox.setContentText(e.getMessage());
         }
