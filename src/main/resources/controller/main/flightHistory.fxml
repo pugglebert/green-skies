@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
    <children>
       <TableView fx:id="tableView" layoutX="181.0" layoutY="274.0" prefHeight="500.0" prefWidth="1126.0">
-        <columns>
+         <columns>
             <TableColumn fx:id="addColumn" prefWidth="50.0" text="Add"/>
-          <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name" />
-          <TableColumn fx:id="airlineIDColumn" prefWidth="94.0" text="Airline ID" />
+            <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name" />
+            <TableColumn fx:id="airlineIDColumn" prefWidth="94.0" text="Airline ID" />
             <TableColumn fx:id="sourceAirportColumn" prefWidth="122.0" text="Source Airport" />
             <TableColumn fx:id="sourceAirportIDColumn" prefWidth="136.0" text="Source Airport ID" />
             <TableColumn fx:id="destinationAirportColumn" prefWidth="153.0" text="Destination Airport" />
@@ -19,7 +19,7 @@
             <TableColumn fx:id="codeShareColumn" minWidth="0.0" prefWidth="116.0" text="Code Share" />
             <TableColumn fx:id="numOfStopsColumn" minWidth="0.0" prefWidth="131.0" text="Number of Stops" />
             <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="94.0" text="Equipment" />
-        </columns>
+         </columns>
       </TableView>
       <VBox prefHeight="800.0" prefWidth="160.0" style="-fx-background-color: #007f5f;">
          <children>
@@ -46,11 +46,11 @@
                   <Font name="Arial" size="18.0" />
                </font>
             </Button>
-             <Button fx:id="btnFlightHistory" alignment="CENTER" mnemonicParsing="false" onAction="#toFlightHistory" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Flight History" textFill="WHITE">
-                 <font>
-                     <Font name="Arial" size="18.0" />
-                 </font>
-             </Button>
+            <Button fx:id="btnFlightHistory" alignment="CENTER" mnemonicParsing="false" onAction="#toFlightHistory" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Flight History" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
       <Button fx:id="searchButton" layoutX="1033.0" layoutY="182.0" mnemonicParsing="false" onAction="#search" text="Search" />
@@ -61,6 +61,5 @@
             <Font size="18.0" />
          </font>
       </Label>
-       <Button fx:id="AddButton" layoutX="362.0" layoutY="584.0" mnemonicParsing="false" onAction="#addDataToHistory" text="Add"/>
    </children>
 </AnchorPane>

@@ -47,7 +47,7 @@ public class FlightAnalyser {
         private double totalEmissionPath1 = 0;
 
         private double totalEmissionPath2 = 0;
-
+    // TODO: 1/09/2020 add checking route validation 
     /**
      * Constructor of FlightAnalyser which starts processing and calculation.
      * @param path1 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path1.

@@ -14,23 +14,42 @@ public class Storage {
     private List<Airline> airlines = new ArrayList<>();
     private List<Airport> airports = new ArrayList<>();
     private List<Route> routes = new ArrayList();
+    private List<Route> history = new ArrayList();
 
     /**
-     * @return a set of Airline objects from the currently open file cast as Datatype objects.
+     * @return a list of Airline objects from the currently open file cast as Datatype objects.
      */
     public List<Airline> getAirlines() {return airlines;}
 
     /**
-     * @return a set of Airport objects from the currently open file cast as Datatype objects.
+     * @return a list of Airport objects from the currently open file cast as Datatype objects.
      */
     public List<Airport> getAirports() {return airports;}
 
     /**
-     * @return a set of Route object from the currently open file cast as Datatype objects.
+     * @return a list of Route object from the currently open file cast as Datatype objects.
      */
     public List<Route> getRoutes() {return routes;}
 
-    public void setData(List<? extends DataType> data, String type) {
+    /**
+     * @return a list of routes in the user's history.
+     */
+    public List<Route> getHistory() {return history;}
+
+    /**
+     * Add an arrayList of routes to the history list.
+     * @param routes an arrayList of routes.
+     */
+    public void addToHistory(ArrayList<Route> routes) {
+        history.addAll(routes);
+    }
+
+    /**
+     * Add a list of data from a file to storage.
+     * @param data the list of data.
+     * @param type type of data to be stored.
+     */
+    public void setData(List<DataType> data, String type) {
 
         if (type.matches("Airline")) {
 
