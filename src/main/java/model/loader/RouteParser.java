@@ -3,9 +3,7 @@ package model.loader;
 import model.data.DataType;
 import model.data.Route;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class to process route data which has been extracted from a file by Loader class.
@@ -13,12 +11,9 @@ import java.util.Set;
  * attributes determined by the data in the line. If the line contains an error this is added to the ErrorCounter
  * and the parser moves onto the next line without creating a route object.
  * @author Ella Johnson
- * @since 11/08/20
+ * @since 11/08/22
  */
 public class RouteParser extends Parser {
-
-    /** Processed route data */
-    private final Set<DataType> routes = new HashSet<>();
 
     /** Alphabetical name to represent line index */
     private final int airline = 0,
@@ -32,26 +27,34 @@ public class RouteParser extends Parser {
             equipment = 8;
 
     /**
-     * Initializes error collection and calls dataParser method to begin processing data
-     * AirportParser Error code:
-     * 100: not enough parameters
-     * 101: invalide airline code
-     * 102: invalid airline id number
-     * 103: invalid source airport code
-     * 104: invalid source airport id
-     * 105: invalid destination airport code
-     * 106: invalid destination airport id
-     * 107: invalid codeshare value
-     * 108: invalid number of stops
-     * 109: invalid equipment code
-     * 110: invalid unknown error
-     * 111: number of failed insertions
-     * @param dataFile ArrayList of a string for each line in the file
+     * Initializes error collection and calls dataParser method to begin processing data.
+     * @param dataFile ArrayList of a string for each line in the file.
      */
     public RouteParser(ArrayList<String> dataFile) {
-        super(dataFile);
-        errorCollectionInitializer(16);
-        dataParser();
+        super(dataFile, 11);
+        try {
+            dataParser();
+        } catch (RuntimeException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    /**
+     * Initializes error lookup array with message for each error code.
+     */
+    protected void initErrorLookup() {
+        errorLookup[0] = "Wrong number of parameters";
+        errorLookup[1] = "Invalid airline code";
+        errorLookup[2] = "Invalid airline ID";
+        errorLookup[3] = "Invalid source airport code";
+        errorLookup[4] = "Invalid source airport ID";
+        errorLookup[5] = "Invalid destination airport code";
+        errorLookup[6] = "Invalid destination airport ID";
+        errorLookup[7] = "Invalid value for codeshare";
+        errorLookup[8] = "Invalid value for number of stops";
+        errorLookup[9] = "Invalid equipment code";
+        errorLookup[10] = "Unknown error";
     }
 
     /**
@@ -61,26 +64,31 @@ public class RouteParser extends Parser {
     @Override
     protected void dataParser() {
         for (String dataLine : dataFile) {
-            String[] line = dataLine.replaceAll("\"", "").split(",");
-            if (validater(line)) {
-                try {
-                    Route route =
-                            new Route(
-                                    line[airline],
-                                    Integer.parseInt(line[airlineID]),
-                                    line[sourceAirport],
-                                    Integer.parseInt(line[sourceAirportID]),
-                                    line[destinationAirport],
-                                    Integer.parseInt(line[destinationAirportID]),
-                                    line[codeshare],
-                                    Integer.parseInt(line[stops]),
-                                    line[equipment].split(" "));
-                    routes.add(route);
-                } catch (Exception e) {
-                    errorCounter(110);
-                }
-            } else {
-                errorCounter(111);
+            if (totalErrors > 100) {
+                throw new RuntimeException("File rejected: more than 100 lines contain errors");
+            }
+            parseLine(dataLine);
+        }
+    }
+
+    protected void parseLine(String dataLine) {
+        String[] line = dataLine.split(",");
+        if (validater(line)) {
+            try {
+                Route route =
+                        new Route(
+                                line[airline],
+                                Integer.parseInt(line[airlineID]),
+                                line[sourceAirport],
+                                Integer.parseInt(line[sourceAirportID]),
+                                line[destinationAirport],
+                                Integer.parseInt(line[destinationAirportID]),
+                                line[codeshare],
+                                Integer.parseInt(line[stops]),
+                                line[equipment].split(" "));
+                parserData.add(route);
+            } catch (Exception e) {
+                errorCounter(10);
             }
         }
     }
@@ -93,58 +101,74 @@ public class RouteParser extends Parser {
      */
     @Override
     public boolean validater(String[] line) {
-        boolean isValid = true;
         if (line.length != 9) {
-            errorCounter(100);
+            errorCounter(0);
             return false;
         }
 
+        changeNulls(line);
+
+
         if (!isAirlineValid(line[airline])) {
-            errorCounter(101);
-            isValid = false;
+            errorCounter(1);
+            return false;
         }
 
         if (!isAirlineIDValid(line[airlineID])) {
-            errorCounter(102);
-            isValid = false;
+            errorCounter(2);
+            return false;
         }
 
         if (!isAirportValid(line[sourceAirport])) {
-            errorCounter(103);
-            isValid = false;
+            errorCounter(3);
+            return false;
         }
 
         if (!isAirportIDValid(line[sourceAirportID])) {
-            errorCounter(104);
-            isValid = false;
+            errorCounter(4);
+            return false;
         }
 
         if (!isAirportValid(line[destinationAirport])) {
-            errorCounter(105);
-            isValid = false;
+            errorCounter(5);
+            return false;
         }
 
         if (!isAirportIDValid(line[destinationAirportID])) {
-            errorCounter(106);
-            isValid = false;
+            errorCounter(6);
+            return false;
         }
 
         if (!isCodeshareValid(line[codeshare])) {
-            errorCounter(107);
-            isValid = false;
+            errorCounter(7);
+            return false;
         }
 
         if (!isStopsValid(line[stops])) {
-            errorCounter(108);
-            isValid = false;
+            errorCounter(8);
+            return false;
         }
 
         if (!isEquipmentValid(line[equipment])) {
-            errorCounter(109);
-            isValid = false;
+            errorCounter(9);
+            return false;
         }
 
-        return isValid;
+        return true;
+    }
+
+    protected void changeNulls(String[] line) {
+            if (line[airlineID].equals("\\N")) {
+                line[airlineID] = "0";
+            }
+
+            if (line[sourceAirportID].equals("\\N")) {
+                line[sourceAirportID] = "0";
+            }
+
+            if (line[destinationAirportID].equals("\\N")) {
+                line[destinationAirportID] = "0";
+            }
     }
 
     /**
@@ -162,7 +186,7 @@ public class RouteParser extends Parser {
      * @return true if string matches openflights format, false otherwise
      */
     protected boolean isAirportIDValid(String airportID) {
-        return (airportID.length() <= 4 && airportID.matches("[0-9]+")) || airportID.equals("\\N");
+        return (airportID.length() <= 5 && airportID.matches("[0-9]+"));
     }
 
     /**
@@ -216,12 +240,12 @@ public class RouteParser extends Parser {
         return true;
     }
 
-    /**
-     * Returns the set of Route objects created from the data file
-     * @return Hashset of Route objects
-     */
-    public Set<DataType> getData() {
-        return routes;
-    }
+//    /**
+//     * Returns the set of Route objects created from the data file
+//     * @return Hashset of Route objects
+//     */
+//    public Set<DataType> getData() {
+//        return parserData;
+//    }
 
 }

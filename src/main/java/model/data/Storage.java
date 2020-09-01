@@ -1,6 +1,7 @@
 package model.data;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to keep track of all the data currently open files
@@ -10,32 +11,43 @@ import java.util.Set;
  */
 public class Storage {
 
-    private Set<DataType> airlines;
-    private Set<DataType> airports;
-    private Set<DataType> routes;
+    private List<Airline> airlines = new ArrayList<>();
+    private List<Airport> airports = new ArrayList<>();
+    private List<Route> routes = new ArrayList();
 
     /**
      * @return a set of Airline objects from the currently open file cast as Datatype objects.
      */
-    public Set<DataType> getAirlines() {return airlines;}
+    public List<Airline> getAirlines() {return airlines;}
 
     /**
      * @return a set of Airport objects from the currently open file cast as Datatype objects.
      */
-    public Set<DataType> getAirports() {return airports;}
+    public List<Airport> getAirports() {return airports;}
 
     /**
      * @return a set of Route object from the currently open file cast as Datatype objects.
      */
-    public Set<DataType> getRoutes() {return routes;}
+    public List<Route> getRoutes() {return routes;}
 
-    public void setData(Set<DataType> data, String type) {
-        if (type.matches("airline")) {
-            airlines = data;
-        } else if (type.matches("airport")) {
-            airports = data;
-        } else if (type.matches("route")) {
-            routes = data;
+    public void setData(List<? extends DataType> data, String type) {
+
+        if (type.matches("Airline")) {
+
+            for (DataType entry : data) {
+                Airline airline = (Airline) entry;
+                airlines.add(airline);
+            }
+        } else if (type.matches("Airport")) {
+            for (DataType entry : data) {
+                Airport airport = (Airport) entry;
+                airports.add(airport);
+            }
+        } else if (type.matches("Route")) {
+            for (DataType entry : data) {
+                Route route = (Route) entry;
+                routes.add(route);
+            }
         } else {
             throw new IllegalArgumentException("Type must be airline, airport or route");
         }

@@ -1,11 +1,16 @@
 package model.loader;
 
+import model.data.Airport;
+import model.data.DataType;
+import model.data.Route;
 import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.file.FileSystemException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +23,7 @@ public class LoaderTest {
     private Loader loader;
     private Storage storage;
     private ArrayList<String> testLines;
+    private HashSet<Airport> testAirports;
 
     @Before
     public void setUp() {
@@ -69,7 +75,6 @@ public class LoaderTest {
         try {
             actualLines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             fail();
         }
 
@@ -90,7 +95,7 @@ public class LoaderTest {
     @Test
     /** Test that constructParser instantiates a parser of the correct datatype when called with a valid datatype */
     public void testConstructParserValid() {
-        Parser testParser = loader.constructParser("airport", testLines);
+        Parser testParser = loader.constructParser("Airport", testLines);
         assertTrue(testParser instanceof AirportParser);
     }
 
@@ -104,32 +109,45 @@ public class LoaderTest {
         }
     }
 
-    //TODO rewrite these tests so that they work without the getParser method
-    //TODO additional tests for adding data to storage
-//    @Test
-//    /** Test that no parser is constructed if loadFile is called with an empty string for the filename parameter */
-//    public void testLoadFileEmptyFilename() {
-//        loader.loadFile("", "airport");
-//        assertNull(loader.getParser());
-//    }
+    @Test
+    /** Test that loadFile returns correct error message if called with an empty string for the filename parameter */
+    public void testLoadFileEmptyFilename() {
+        try {
+            String message = loader.loadFile("", "airport");
+            fail();
+        } catch (Exception e) {
+            assertEquals("Filename cannot be empty.", e.getMessage());
+        }
+    }
 
-//    @Test
-//    /** Test that no parser is constructed if loadFile is called with an empty string for the datatype parameter */
-//    public void testLoadFileEmptyDatatype() {
-//        loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "");
-//        assertNull(loader.getParser());
-//    }
+    @Test
+    /** Test that loadFile returns correct error message if called with an empty string for the datatype parameter */
+    public void testLoadFileEmptyDatatype() {
+        try {
+            String message = loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "");
+        } catch (Exception e) {
+            assertEquals("Datatype cannot be empty.", e.getMessage());
+        }
+    }
 
-//    @Test
-//    /** Test that a parser is constructed when loadFile is called with valid input for filename and datatype*/
-//    public void testLoadFileValid() {
+  @Test
+  /**
+   * Test that a expected data is stored in Storage when loadFile is called with valid input for
+   * filename and datatype
+   */
+  public void testLoadFileValid() {
+    List<DataType> testRoutes = new ArrayList<>();
+    testRoutes.add(new Route("2B", 410, "AER", 2965, "KZN", 2990, "", 0, "CR2".split(" ")));
+    testRoutes.add(new Route("2B", 410, "ASF", 2966, "KZN", 2990, "", 0, "CR2".split(" ")));
+    testRoutes.add(new Route("2B", 410, "ASF", 2966, "MRV", 2962, "", 0, "CR2".split(" ")));
 
-//        try {
-//            loader.loadFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv", "airport");
-//        } catch (Exception e) {
-//            System.out.println();
-//        }
-//        assertNotNull(loader.getParser());
-//     }
+    try {
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/routesTest.csv", "Route");
+    } catch (Exception e) {
+      fail();
+    }
+
+    assertArrayEquals(testRoutes.toArray(), storage.getRoutes().toArray());
+  }
 
 }

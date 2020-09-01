@@ -20,32 +20,40 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * The controller class which contains the controls for the airline data view.
+ * The controller class which contains the controls for the airport data view.
  * @author Hayley Krippner
  * @version 1.0
  * @since 2020-08-26
  */
-public class AirlineDataViewController implements Initializable {
+public class AirportDataViewController implements Initializable {
 
     //Configure the TableView.
     @FXML
-    private TableView<Airline> tableView;
+    private TableView<Airport> tableView;
     @FXML
-    private TableColumn<Airline, Integer> airlineIDColumn;
+    private TableColumn<Airport, Integer> airportIDColumn;
     @FXML
-    private TableColumn<Airline, String> airlineNameColumn;
+    private TableColumn<Airport, String> nameColumn;
     @FXML
-    private TableColumn<Airline, String> airlineAliasColumn;
+    private TableColumn<Airport, String> cityColumn;
     @FXML
-    private TableColumn<Airline, String> airlineIATAColumn;
+    private TableColumn<Airport, String> countryColumn;
     @FXML
-    private TableColumn<Airline, String> ICAOColumn;
+    private TableColumn<Airport, String> IATAColumn;
     @FXML
-    private TableColumn<Airline, String> callsignColumn;
+    private TableColumn<Airport, String> ICAOColumn;
     @FXML
-    private TableColumn<Airline, String> countryColumn;
+    private TableColumn<Airport, Double> latitudeColumn;
     @FXML
-    private TableColumn<Airline, Boolean> activeStatusColumn;
+    private TableColumn<Airport, Double> longitudeColumn;
+    @FXML
+    private TableColumn<Airport, Integer> altitudeColumn;
+    @FXML
+    private TableColumn<Airport, Float> timezoneColumn;
+    @FXML
+    private TableColumn<Airport, String> DSTColumn;
+    @FXML
+    private TableColumn<Airport, String> dataBaseTimeZoneColumn;
     @FXML
     private Button btnUpload;
     @FXML
@@ -74,25 +82,30 @@ public class AirlineDataViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Set up the columns in the TableView.
-        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
-        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
-        airlineAliasColumn.setCellValueFactory(new PropertyValueFactory<>("airlineAlias"));
-        airlineIATAColumn.setCellValueFactory(new PropertyValueFactory<>("airlineIATA"));
-        ICAOColumn.setCellValueFactory(new PropertyValueFactory<>("ICAO"));
-        callsignColumn.setCellValueFactory(new PropertyValueFactory<>("callsign"));
+        airportIDColumn.setCellValueFactory(new PropertyValueFactory<>("airportID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
-        activeStatusColumn.setCellValueFactory(new PropertyValueFactory<>("activeStatus"));
+        IATAColumn.setCellValueFactory(new PropertyValueFactory<>("IATA"));
+        ICAOColumn.setCellValueFactory(new PropertyValueFactory<>("ICAO"));
+        latitudeColumn.setCellValueFactory(new PropertyValueFactory<>("latitude"));
+        longitudeColumn.setCellValueFactory(new PropertyValueFactory<>("longitude"));
+        altitudeColumn.setCellValueFactory(new PropertyValueFactory<>("altitude"));
+        timezoneColumn.setCellValueFactory(new PropertyValueFactory<>("timezone"));
+        DSTColumn.setCellValueFactory(new PropertyValueFactory<>("DST"));
+        dataBaseTimeZoneColumn.setCellValueFactory(new PropertyValueFactory<>("dataBaseTimeZone"));
 
-        //Load data by taking the Airline ArrayList and converting it to an ObservableArrayList.
-        ObservableList<Airline> airlines = FXCollections.observableList(storage.getAirlines());
-        tableView.setItems(airlines);
+        //Load data by taking the Airport ArrayList and converting it to an ObservableArrayList.
+        ObservableList<Airport> airports = FXCollections.observableList(storage.getAirports());
+        tableView.setItems(airports);
 
         //Set choice box to list of potential search types
         searchTypeSelection.setItems(searchTypes);
+
     }
 
     /**
-     * This method closes the View Airline Data page and opens the Upload Data page.
+     * This method closes the View Airport Data page and opens the Upload Data page.
      * @throws IOException
      */
     public void toUploadData() throws IOException {
@@ -106,7 +119,7 @@ public class AirlineDataViewController implements Initializable {
     }
 
     /**
-     * This method closes the View Airline Data page and opens the View Route Data page.
+     * This method closes the View Airport Data page and opens the View Route Data page.
      * @throws IOException
      */
     public void toRouteDataView() throws IOException {
@@ -120,7 +133,7 @@ public class AirlineDataViewController implements Initializable {
     }
 
     /**
-     * This method closes the View Airline Data page and opens the View Airport Data page.
+     * This method closes the View Airport Data page and opens the View Airport Data page.
      * @throws IOException
      */
     public void toAirportDataView() throws IOException {
@@ -134,7 +147,7 @@ public class AirlineDataViewController implements Initializable {
     }
 
     /**
-     * This method closes the View Airline Data page and opens the View Airline Data page.
+     * This method closes the View Airport Data page and opens the View Airline Data page.
      * @throws IOException
      */
     public void toAirlineDataView() throws IOException {
@@ -149,7 +162,7 @@ public class AirlineDataViewController implements Initializable {
 
     /**
      * Checks users search for errors and displays an error message if any are present. If no errors
-     * are present, calls searchAirlines method from searcher class and upldates table to display
+     * are present, calls searchAirports method from searcher class and upldates table to display
      * results of search.
      */
     public void search() {
@@ -163,7 +176,7 @@ public class AirlineDataViewController implements Initializable {
             errorText.setVisible(true);
         } else {
             try {
-                ArrayList<Airline> results = Searcher.searchAirlines(searchTerm, searchType, storage.getAirlines());
+                ArrayList<Airport> results = Searcher.searchAirports(searchTerm, searchType, storage.getAirports());
                 tableView.setItems(FXCollections.observableList(results));
                 errorText.setVisible(false);
             } catch (RuntimeException e) {

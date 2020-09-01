@@ -19,15 +19,10 @@ public class HelpController {
     {
         Stage stage = (Stage) BackButton.getScene().getWindow();   //get current window
         stage.close();  // close current window
-
         Stage stage1 = new Stage();
-
         Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
-
         Scene scene = new Scene(root);
-
         stage1.setScene(scene);
-
         stage1.show();
 
 

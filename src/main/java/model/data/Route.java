@@ -1,9 +1,13 @@
 package model.data;
 
+import javafx.scene.control.CheckBox;
+
+import java.util.Arrays;
+
 /**
  * The Route class for containing all data for one unique flight route.
  * @author Hayley Krippner
- * @version 1.1
+ * @version 1.0
  * @since 2020-08-11
  */
 public class Route implements DataType {
@@ -16,6 +20,7 @@ public class Route implements DataType {
     private final String codeShare;
     private final int numOfStops;
     private final String[] equipment;
+    private CheckBox select; //TODO check again
 
     /**
      * The Route constructor.
@@ -33,11 +38,16 @@ public class Route implements DataType {
         this.equipment = equipment;
     }
 
+    public void initCheckBox() {
+        this.select = new CheckBox();
+    }
+
     /**
      * Getter for the name of the airline of that is used during the Flight.
+     *
      * @return airlineID.
      */
-    public String getAirlineName(){
+    public String getAirlineName() {
         return airlineName;
     }
 
@@ -104,4 +114,35 @@ public class Route implements DataType {
     public String[] getEquipment(){
         return equipment;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Route) {
+            Route another = (Route) o;
+            return (this.airlineName.equals(another.getAirlineName()) &&
+                    this.airlineID == another.getAirlineID() &&
+                    this.sourceAirport.equals(another.getSourceAirport()) &&
+                    this.sourceAirportID == another.getSourceAirportID() &&
+                    this.destinationAirport.equals(another.getDestinationAirport()) &&
+                    this.destinationAirportID == another.getDestinationAirportID() &&
+                    this.codeShare.equals(another.getCodeShare()) &&
+                    this.numOfStops == another.getNumOfStops() &&
+                    Arrays.equals(this.equipment, another.getEquipment()));
+        } else {
+            return false;
+        }
+    }
+
+
+    public CheckBox getSelect() {
+        return select;
+    }
+
+    public void setSelect(CheckBox select) {
+        this.select = select;
+    }
+
+//    public static void main(String[] args){
+//        Route test = new Route("dsf", 12, "asd", 45, "asd",123,"asd",32, new String[]{"21"});
+//    }
 }
