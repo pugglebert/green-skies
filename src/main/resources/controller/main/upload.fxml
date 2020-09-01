@@ -3,7 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -105,7 +107,7 @@
 <!--    </children>-->
 <!--</AnchorPane>-->
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1400.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1400.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.3785400390625" minWidth="10.0" prefWidth="248.39752197265625" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.3785400390625" minWidth="10.0" prefWidth="248.39752197265625" />
@@ -139,9 +141,9 @@
             </GridPane.margin>
         </Button>
         <ListView fx:id="fileView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-        <Text fx:id="fileErrorText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT A FILE TO CONTINUE" visible="false" wrappingWidth="233.138671875" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+        <Text fx:id="fileErrorText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT A FILE TO CONTINUE" wrappingWidth="238.138671875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
             <GridPane.margin>
-                <Insets left="50.0" right="50.0" top="50.0" />
+                <Insets bottom="100.0" left="50.0" right="50.0" top="50.0" />
             </GridPane.margin>
             <font>
                 <Font size="18.0" />
@@ -179,5 +181,13 @@
                 </Button>
             </children>
         </VBox>
+      <DialogPane fx:id="errorBox" headerText="Error message " prefHeight="239.0" prefWidth="334.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+         <buttonTypes>
+            <ButtonType fx:constant="OK" />
+         </buttonTypes>
+         <GridPane.margin>
+            <Insets left="20.0" right="20.0" top="100.0" />
+         </GridPane.margin>
+      </DialogPane>
     </children>
 </GridPane>
