@@ -14,9 +14,10 @@ import model.data.Storage;
 import model.loader.FlightHistory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class RouteAddDialogController implements Initializable {
+public class SurpriseTool2 implements Initializable {
 
   @FXML
   public Button AddButton;
@@ -47,11 +48,11 @@ public class RouteAddDialogController implements Initializable {
   private ObservableList<Route> routes;
   private String fileDir;
 
-  public void setParent(FlightDataViewController parent) {
+  public void setParent(SurpriseTool parent) {
     this.parent = parent;
   }
 
-  private FlightDataViewController parent;
+  private SurpriseTool parent;
 
   public void setFileDir(String fileDir) {
     this.fileDir = fileDir;
@@ -72,9 +73,9 @@ public class RouteAddDialogController implements Initializable {
 
     Storage storage = Main.getStorage();
 
-    storage.setData(buffer.getBuffer(), "Route");
+    storage.addToHistory((ArrayList<Route>) buffer.getBuffer());
 
-    parent.updateTable();
+    //parent.updateTable();
 
     //TODo pass data back
     Stage stage = (Stage) AddButton.getScene().getWindow();

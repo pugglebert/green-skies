@@ -49,6 +49,8 @@ public class UploadController {
     private Button btnAirportDataView;
     @FXML
     private Button btnAirlineDataView;
+    @FXML
+    private Button btnFlightHistory;
 
     /**
      * This method adds the data types from dataTypeList to the dataTypeSelect list.
@@ -153,6 +155,20 @@ public class UploadController {
         stage.close();
         Stage newStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
+    }
+
+    /**
+     * This method closes the Upload Data page and opens the View Airline Data page.
+     * @throws IOException
+     */
+    public void toFlightHistory() throws IOException {
+        Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("flightHistory.fxml")); //open the View Airline Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();

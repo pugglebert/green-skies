@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.Pane?>
 <Pane prefHeight="687.0" prefWidth="1292.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controller.main.RouteAddDialogController">
+      fx:controller="controller.main.SurpriseTool2">
    <children>
       <TableView fx:id="FlightTable" prefHeight="500.0" prefWidth="1177.0">
          <columns>
