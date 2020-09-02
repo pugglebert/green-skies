@@ -14,6 +14,7 @@ import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class UploadController {
     @FXML
     private ListView fileView;
     @FXML
-    private Text fileErrorText;
+    private Text fileAcceptedText;
     @FXML
     private Button nextButton;
     @FXML
@@ -51,8 +52,6 @@ public class UploadController {
     private Button btnAirportDataView;
     @FXML
     private Button btnAirlineDataView;
-    @FXML
-    private DialogPane errorBox;
 
 
     /**
@@ -73,25 +72,27 @@ public class UploadController {
         String fileType = dataTypeSelect.getValue().toString();
         String stringFile = selectedFile.toString();
 
+        Alert a = new Alert(Alert.AlertType.NONE);
+
         try{
-            //loadFile returns a String when the file is accepted, with the number of rejected lines
+            //try loadFile returns a String (fileAccceptedText) when the file is accepted, with the number of rejected lines
             String resultString = loader.loadFile(stringFile, fileType);
-            fileErrorText.setText(resultString);
-            fileErrorText.setVisible(true);
+            fileAcceptedText.setText(resultString);
+            fileAcceptedText.setVisible(true);
+            fileView.getItems().add(selectedFile.getName());
+            nextButton.setVisible(true); //'Next' button pops up if a valid file has been selected
 
         for (DataType line: storage.getRoutes()){
             Route test = (Route) line;
             System.out.println(test.getAirlineID());
             }
         }
+        //catches errors in uploading file and alerts user by displaying the error message in an error box
         catch (Exception e){
-            //make dialog box visible and show the exception message
-            errorBox.setVisible(true);
-            errorBox.setContentText(e.getMessage());
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText(e.getMessage());
+            a.show();
         }
-
-        fileView.getItems().add(selectedFile.getName());
-        nextButton.setVisible(true); //'Next' button pops up if a valid file has been selected
 //
     }
 

@@ -141,7 +141,7 @@
             </GridPane.margin>
         </Button>
         <ListView fx:id="fileView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-        <Text fx:id="fileErrorText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT A FILE TO CONTINUE" wrappingWidth="238.138671875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+        <Text fx:id="fileAcceptedText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="238.138671875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
             <GridPane.margin>
                 <Insets bottom="100.0" left="50.0" right="50.0" top="50.0" />
             </GridPane.margin>
