@@ -54,7 +54,7 @@ public class FlightAnalyser {
      * @param path2 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path2.
      * @param storage Storage contains all information about airports, routes, and airlines.
      */
-    private FlightAnalyser(ArrayList<String> path1, ArrayList<String> path2, Storage storage) {
+    public FlightAnalyser(ArrayList<String> path1, ArrayList<String> path2, Storage storage) {
         this.path1 = path1;
         this.path2 = path2;
         this.airports = storage.getAirports();
@@ -211,5 +211,6 @@ public class FlightAnalyser {
     public double getTotalDistancePath2(){
         return totalDistancePath2;
     }
+
 
 }

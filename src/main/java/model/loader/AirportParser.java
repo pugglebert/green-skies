@@ -89,9 +89,9 @@ public class AirportParser extends Parser {
     @Override
     protected void dataParser() {
         for (String dataLine : dataFile) {
-            if (totalErrors > 100) {
-                throw new RuntimeException("File rejected: more than 100 lines contain errors");
-            }
+//            if (totalErrors > 100) {
+//                throw new RuntimeException("File rejected: more than 100 lines contain errors");
+//            }
             parseLine(dataLine);
         }
     }
