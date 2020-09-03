@@ -89,7 +89,9 @@ public class AirportParser extends Parser {
     @Override
     protected void dataParser() {
         for (String dataLine : dataFile) {
-            if (totalErrors > 100) {
+            if (totalErrors > 200) {
+                System.out.println(getErrorMessage());
+                System.out.println(dataLine);
                 throw new RuntimeException("File rejected: more than 100 lines contain errors");
             }
             parseLine(dataLine);
@@ -111,8 +113,8 @@ public class AirportParser extends Parser {
                 } catch(Exception e) {
                     errorCounter(14);
                 }
-            } else {
-                errorCounter(15);
+//            } else {
+//                errorCounter(15);
             }
 
     }
@@ -211,7 +213,7 @@ public class AirportParser extends Parser {
      * @return true if valid, false if invalid.
      */
     protected boolean isNameValid(String name){
-        if(!name.matches("[a-zA-Z ]+")){
+        if(!name.matches("[a-zA-Z0-9 .'()/-]+")){
             errorCounter(3);
             return false;
         }
@@ -224,7 +226,7 @@ public class AirportParser extends Parser {
      * @return true if valid, false if invalid.
      */
     protected boolean isCityValid(String city){
-        if(!city.matches("[a-zA-Z ]+")){
+        if(!city.matches("[a-zA-Z0-9 .'()/-]+")){
             errorCounter(4);
             return false;
         }
@@ -238,7 +240,7 @@ public class AirportParser extends Parser {
      */
     protected boolean isCountryValid(String country){
         //ISO 3166-1 codes not implemented
-        if(!country.matches("[a-zA-Z ]+")){
+        if(!country.matches("[a-zA-Z .'()/-]+")){
             errorCounter(5);
             return false;
         }
@@ -252,8 +254,9 @@ public class AirportParser extends Parser {
      */
     protected boolean isIATAValid(String IATA){
         //airport IATA check
-        if(!IATA.equalsIgnoreCase("null") && !IATA.equalsIgnoreCase("unknown")){
-            if(!IATA.matches("[a-zA-Z]+" ) || IATA.length() != 3 ){
+        if(!IATA.equalsIgnoreCase("null") && !IATA.equalsIgnoreCase("unknown") &&
+                !IATA.equalsIgnoreCase("")){
+            if(!IATA.matches("[a-zA-Z0-9]+" ) || IATA.length() != 3 ){
                 errorCounter(6);
                 return false;
                 }
@@ -268,8 +271,9 @@ public class AirportParser extends Parser {
      */
     protected boolean isICAOValid(String ICAO){
         //airport ICAO check
-        if(!ICAO.equalsIgnoreCase("null") && !ICAO.equalsIgnoreCase("unknown")){
-            if(!ICAO.matches("[a-zA-Z]+" ) || ICAO.length() != 4 ){
+        if(!ICAO.equalsIgnoreCase("null") && !ICAO.equalsIgnoreCase("unknown") &&
+                !ICAO.equalsIgnoreCase("\\N") && !ICAO.equalsIgnoreCase("")){
+            if(!ICAO.matches("[a-zA-Z0-9]+" ) || ICAO.length() != 4 ){
                 errorCounter(7);
                 return false;
             }
@@ -349,7 +353,6 @@ public class AirportParser extends Parser {
      */
     protected boolean isDSTValid(String DST){
         if(!DST.matches("[EASOZNU]+" ) || DST.length() != 1 ){
-            errorCounter(12);
             return false;
         }
         return true;
@@ -361,9 +364,12 @@ public class AirportParser extends Parser {
      * @return true if valid, false if invalid.
      */
     protected boolean isDBTZValid(String DBTZ){
-        if(!DBTZ.matches("[a-zA-Z/a-zA-Z_]+" )){
-            errorCounter(13);
-            return false;
+        if (!DBTZ.equalsIgnoreCase("\\N")) {
+            if(!DBTZ.matches("[a-zA-Z-/a-zA-Z-_]+")){
+                errorCounter(13);
+                System.out.println(DBTZ);
+                return false;
+            }
         }
         return true;
     }
