@@ -90,8 +90,6 @@ public class AirportParser extends Parser {
     protected void dataParser() {
         for (String dataLine : dataFile) {
             if (totalErrors > 200) {
-                System.out.println(getErrorMessage());
-                System.out.println(dataLine);
                 throw new RuntimeException("File rejected: more than 100 lines contain errors");
             }
             parseLine(dataLine);
