@@ -14,8 +14,11 @@ import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileSystemException;
 
 /**
  * The controller class which contains the controls for the upload data view.
@@ -36,7 +39,7 @@ public class UploadController {
     @FXML
     private ListView fileView;
     @FXML
-    private Text fileErrorText;
+    private Text fileAcceptedText;
     @FXML
     private Button nextButton;
     @FXML
@@ -49,8 +52,7 @@ public class UploadController {
     private Button btnAirportDataView;
     @FXML
     private Button btnAirlineDataView;
-    @FXML
-    private Button btnFlightHistory;
+
 
     /**
      * This method adds the data types from dataTypeList to the dataTypeSelect list.
@@ -62,7 +64,7 @@ public class UploadController {
     /**
      * This method opens the user's file browser when the 'browse' button is clicked.
      */
-    public void browseFiles() {
+    public void browseFiles() throws FileNotFoundException, FileSystemException {
 
         FileChooser fileChooser = new FileChooser(); //opens a file local file browser
         File selectedFile = fileChooser.showOpenDialog(null);
@@ -70,24 +72,28 @@ public class UploadController {
         String fileType = dataTypeSelect.getValue().toString();
         String stringFile = selectedFile.toString();
 
-        if (selectedFile != null){  // check a file has been selected
-            try{
+        Alert a = new Alert(Alert.AlertType.NONE);
+
+        try{
+            //try loadFile returns a String (fileAccceptedText) when the file is accepted, with the number of rejected lines
             String resultString = loader.loadFile(stringFile, fileType);
-            fileErrorText.setText(resultString);
-            fileErrorText.setVisible(true);
-            for (DataType line: storage.getRoutes()){
-                Route test = (Route) line;
-                System.out.println(test.getAirlineID());
-                }
-            }
-            catch (Exception e){
-                //@TODO Display error message
-            }
+            fileAcceptedText.setText(resultString);
+            fileAcceptedText.setVisible(true);
             fileView.getItems().add(selectedFile.getName());
             nextButton.setVisible(true); //'Next' button pops up if a valid file has been selected
-        } else{
-            fileErrorText.setVisible(true);
+
+        for (DataType line: storage.getRoutes()){
+            Route test = (Route) line;
+            System.out.println(test.getAirlineID());
+            }
         }
+        //catches errors in uploading file and alerts user by displaying the error message in an error box
+        catch (Exception e){
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setContentText(e.getMessage());
+            a.show();
+        }
+//
     }
 
     /**
@@ -155,20 +161,6 @@ public class UploadController {
         stage.close();
         Stage newStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
-        Scene scene = new Scene(root);
-        newStage.setScene(scene);
-        newStage.show();
-    }
-
-    /**
-     * This method closes the Upload Data page and opens the View Airline Data page.
-     * @throws IOException
-     */
-    public void toFlightHistory() throws IOException {
-        Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
-        stage.close();
-        Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("flightHistory.fxml")); //open the View Airline Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
