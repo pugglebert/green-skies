@@ -18,6 +18,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Superclass for all data view pages. All such pages contain a table of data, tools for searching
+ * and filtering that data, and a navigation bar which can be used to navigate to other pages.
+ * @author Ella Johnson.
+ * @since 04/09/20
+ * @version 1.0
+ */
 public abstract class DataViewController implements Initializable {
 
     @FXML

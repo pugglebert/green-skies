@@ -20,6 +20,8 @@ public class Route implements DataType {
     private final String codeShare;
     private final int numOfStops;
     private final String[] equipment;
+    private double emissions;
+    private double distance;
     private CheckBox select; //TODO check again
 
     /**
@@ -113,6 +115,40 @@ public class Route implements DataType {
      */
     public String[] getEquipment(){
         return equipment;
+    }
+
+    /**
+     * Getter for the total carbon emissions of the route.
+     * @return a double for the amount of CO2 if it has been calculated, or null if it has not.
+     * yet been calculated.
+     */
+    public double getEmissions() {
+        return emissions;
+    }
+
+    /**
+     * Setter for the total carbon emissions of the route.
+     * @param emissions a double for the emissions calculated for that route.
+     */
+    public void setEmissions(double emissions) {
+        this.emissions = emissions;
+    }
+
+    /**
+     * Getter for the total distance of the route.
+     * @return null if distance has not yet been calculated, otherwise returns a double for
+     * the distance the route covers.
+     */
+    public double getDistance() {
+        return distance;
+    }
+
+    /**
+     * Set distance to the value calculated.
+     * @param distance a double for the distance calculated.
+     */
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     @Override
