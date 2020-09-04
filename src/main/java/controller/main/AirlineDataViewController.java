@@ -4,17 +4,9 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import model.data.Airline;
-import model.data.Airport;
-import model.data.Storage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,9 +15,10 @@ import java.util.ResourceBundle;
  * The controller class which contains the controls for the airline data view.
  * @author Hayley Krippner
  * @version 1.0
- * @since 2020-08-26
+ * @since 04/09/20
  */
-public class AirlineDataViewController extends DataViewController{
+
+public class AirlineDataViewController extends DataViewController {
 
     //Configure the TableView.
     @FXML

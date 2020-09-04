@@ -5,26 +5,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.data.Route;
 import model.data.Storage;
-import model.loader.FlightHistory;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class FlightHistoryController implements Initializable {
+/**
+ * The controller class which contains the controls for the airline data view.
+ * @author Hayley Krippner, Nathan Huynh
+ * @version 1.0
+ * @since 04/09/20
+ */
+public class FlightHistoryController extends SideNavBarController {
 
   //Configure the TableView.
   @FXML
@@ -101,81 +100,82 @@ public class FlightHistoryController implements Initializable {
     searchTypeSelection.setItems(searchTypes);
   }
 
-  /**
-   * This method closes the View Route Data page and opens the Upload Data page.
-   * @throws IOException
-   */
-  public void toUploadData() throws IOException {
-    Stage stage = (Stage) btnUpload.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //open the Upload Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.show();
-  }
-
-  /**
-   * This method closes the View Route Data page and opens the View Route Data page.
-   * @throws IOException
-   */
-  public void toRouteDataView() throws IOException {
-    Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //open the View Route Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.show();
-  }
-
-  /**
-   * This method closes the View Route Data page and opens the View Airport Data page.
-   * @throws IOException
-   */
-  public void toAirportDataView() throws IOException {
-    Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open the View Airport Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.show();
-  }
-
-  /**
-   * This method closes the View Route Data page and opens the View Airline Data page.
-   * @throws IOException
-   */
-  public void toAirlineDataView() throws IOException {
-    Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.show();
-  }
-
-  /**
-   * This method closes the Upload Data page and opens the View Airline Data page.
-   * @throws IOException
-   */
-  public void toFlightHistory() throws IOException {
-    Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("flightHistory.fxml")); //open the View Airline Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.show();
-  }
-
-  /**
-   * Checks users search for errors and displays an error message if any are present. If no errors
-   * are present, calls searchRoutes method from searcher class and upldates table to display
-   * results of search.
-   */
+  //TODO: remove the code below once the super class SideNavBarController works
+//  /**
+//   * This method closes the View Route Data page and opens the Upload Data page.
+//   * @throws IOException
+//   */
+//  public void toUploadData() throws IOException {
+//    Stage stage = (Stage) btnUpload.getScene().getWindow();
+//    stage.close();
+//    Stage newStage = new Stage();
+//    Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //open the Upload Data page
+//    Scene scene = new Scene(root);
+//    newStage.setScene(scene);
+//    newStage.show();
+//  }
+//
+//  /**
+//   * This method closes the View Route Data page and opens the View Route Data page.
+//   * @throws IOException
+//   */
+//  public void toRouteDataView() throws IOException {
+//    Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
+//    stage.close();
+//    Stage newStage = new Stage();
+//    Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //open the View Route Data page
+//    Scene scene = new Scene(root);
+//    newStage.setScene(scene);
+//    newStage.show();
+//  }
+//
+//  /**
+//   * This method closes the View Route Data page and opens the View Airport Data page.
+//   * @throws IOException
+//   */
+//  public void toAirportDataView() throws IOException {
+//    Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
+//    stage.close();
+//    Stage newStage = new Stage();
+//    Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open the View Airport Data page
+//    Scene scene = new Scene(root);
+//    newStage.setScene(scene);
+//    newStage.show();
+//  }
+//
+//  /**
+//   * This method closes the View Route Data page and opens the View Airline Data page.
+//   * @throws IOException
+//   */
+//  public void toAirlineDataView() throws IOException {
+//    Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
+//    stage.close();
+//    Stage newStage = new Stage();
+//    Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
+//    Scene scene = new Scene(root);
+//    newStage.setScene(scene);
+//    newStage.show();
+//  }
+//
+//  /**
+//   * This method closes the Upload Data page and opens the View Airline Data page.
+//   * @throws IOException
+//   */
+//  public void toFlightHistory() throws IOException {
+//    Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
+//    stage.close();
+//    Stage newStage = new Stage();
+//    Parent root = FXMLLoader.load(getClass().getResource("flightHistory.fxml")); //open the View Airline Data page
+//    Scene scene = new Scene(root);
+//    newStage.setScene(scene);
+//    newStage.show();
+//  }
+//
+//  /**
+//   * Checks users search for errors and displays an error message if any are present. If no errors
+//   * are present, calls searchRoutes method from searcher class and upldates table to display
+//   * results of search.
+//   */
   public void search() {
     String searchType = searchTypeSelection.getValue();
     String searchTerm = searchBar.getText();

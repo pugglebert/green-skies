@@ -5,17 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.data.Airline;
 import model.data.Route;
-import model.data.Storage;
 import model.loader.FlightHistory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -120,6 +116,9 @@ public class RouteDataViewController extends DataViewController {
     private FlightHistory buffer;
     private ObservableList<Route> routes;
 
+
+    //TODO: remove this code.
+
     /*add checkbox to mark which route user wanted to add*/
 //    public void addCheckboxAndDisplay() {
 //        buffer = new FlightHistory(this.fileDir);
@@ -141,7 +140,7 @@ public class RouteDataViewController extends DataViewController {
 
         Main.getStorage().getHistory().addAll(temp);
 
-
+//TODO: remove this code.
         //parent.updateTable();
 
         //TODo pass data back

@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+//TODO:remove later!
 public class SurpriseTool implements Initializable {
 
   @FXML
