@@ -14,17 +14,9 @@ import java.io.IOException;
  * @since 04/09/20
  */
 public class GreenSkiesApplication extends Application {
-    // unneeded code; Used for testing for routeDataView page
-//    @Override
-//    public void start(Stage stage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml"));
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//    }
 
     /**
-     * TODO: uncomment to run welcome page (later)
+     * TODO: comment method
      * @param primaryStage, the primary stage used.
      */
     @Override

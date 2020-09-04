@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * TODO: write method comment
+ */
 public class WelcomeController {
 
     //Method to handle the event for continuing to the main screen of the application.

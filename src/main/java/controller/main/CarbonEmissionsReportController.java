@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
  * @since 04/09/20
  */
 public class CarbonEmissionsReportController extends SideNavBarController  {
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
