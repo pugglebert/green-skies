@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
  * @version 1.0
  * @since 04/09/20
  */
-public class FlightHistoryController extends SideNavBarController {
+public class FlightHistoryController extends DataViewController {
 
   //Configure the TableView.
   @FXML
@@ -98,6 +98,11 @@ public class FlightHistoryController extends SideNavBarController {
 
     //Set choice box to list of potential search types
     searchTypeSelection.setItems(searchTypes);
+  }
+
+  @Override
+  public void searchByDataType(String searchTerm, String searchType) {
+
   }
 
   //TODO: remove the code below once the super class SideNavBarController works

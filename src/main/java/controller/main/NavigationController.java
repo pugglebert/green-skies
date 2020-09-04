@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-//TODO: update comment.
+//TODO: update comment. What is this used for? (HK 4/9/2020)
 /**
  *
  * @author jwright

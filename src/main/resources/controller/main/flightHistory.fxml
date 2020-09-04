@@ -8,13 +8,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
+<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
    <children>
-      <TableView fx:id="tableView" layoutX="181.0" layoutY="274.0" prefHeight="500.0" prefWidth="1126.0">
+      <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
          <columns>
             <TableColumn fx:id="addColumn" prefWidth="50.0" text="Add" />
             <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name" />
@@ -28,7 +29,7 @@
             <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="94.0" text="Equipment" />
          </columns>
       </TableView>
-      <VBox prefHeight="800.0" prefWidth="218.0" style="-fx-background-color: #116754;">
+      <VBox prefHeight="800.0" prefWidth="162.0" style="-fx-background-color: #116754;">
          <children>
             <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0" style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
@@ -43,7 +44,7 @@
                   <Font name="Tahoma" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnAirportDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirportDataView" prefHeight="88.0" prefWidth="227.0" style="-fx-background-color: #00aa88;" text="Analyse Airport Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnAirportDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirportDataView" prefHeight="88.0" prefWidth="227.0" style="-fx-background-color: transparent;" text="Analyse Airport Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Tahoma" size="22.0" />
                </font>
@@ -53,7 +54,7 @@
                   <Font name="Tahoma" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnFlightHistory" alignment="CENTER" mnemonicParsing="false" onAction="#toFlightHistory" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Flight History" textFill="WHITE">
+            <Button fx:id="btnFlightHistory" alignment="CENTER" mnemonicParsing="false" onAction="#toFlightHistory" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: #00aa88;" text="Flight History" textFill="WHITE">
                <font>
                   <Font name="Tahoma" size="22.0" />
                </font>
@@ -63,7 +64,7 @@
                   <Font name="Tahoma" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnMapOfAirports" alignment="CENTER" mnemonicParsing="false" onAction="#toMapOfAirports" prefHeight="78.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Map of Airports " textFill="WHITE" wrapText="true">
+            <Button fx:id="btnMapOfAirports" alignment="CENTER" mnemonicParsing="false" onAction="#toMapOfAirports" prefHeight="78.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Map of Airports " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Tahoma" size="22.0" />
                </font>
@@ -75,14 +76,15 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="searchButton" layoutX="1033.0" layoutY="182.0" mnemonicParsing="false" onAction="#search" text="Search" />
-      <TextField fx:id="searchBar" layoutX="344.0" layoutY="182.0" prefHeight="25.0" prefWidth="673.0" />
-      <ChoiceBox fx:id="searchTypeSelection" layoutX="177.0" layoutY="182.0" prefWidth="150.0" />
-      <Label fx:id="errorText" layoutX="180.0" layoutY="216.0" prefHeight="25.0" prefWidth="905.0" textFill="RED">
+      <Button fx:id="searchButton" layoutX="705.0" layoutY="185.0" mnemonicParsing="false" onAction="#search" text="Search" />
+      <TextField fx:id="searchBar" layoutX="346.0" layoutY="185.0" prefHeight="31.0" prefWidth="337.0" />
+      <ChoiceBox fx:id="searchTypeSelection" layoutX="199.0" layoutY="185.0" prefHeight="31.0" prefWidth="132.0" />
+      <Label fx:id="errorText" layoutX="238.0" layoutY="216.0" prefHeight="27.0" prefWidth="846.0" textFill="RED" visible="false">
          <font>
             <Font size="18.0" />
-         </font>
-      </Label>
-      <Text fill="WHITE" layoutX="686.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flight History" />
+         </font></Label>
+      <Pane layoutX="162.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;" />
+      <Button fx:id="filterOptionsButton" layoutX="844.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
+      <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
    </children>
 </AnchorPane>
