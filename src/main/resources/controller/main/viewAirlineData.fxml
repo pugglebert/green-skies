@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirlineDataViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirlineDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
             <columns>
@@ -81,8 +73,15 @@
             <font>
                 <Font size="18.0" />
             </font></Label>
-        <Pane layoutX="162.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;" />
+        <Pane layoutX="162.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;">
+         <children>
+            <Label layoutX="42.0" layoutY="110.0" text="Country" />
+            <Label layoutX="204.0" layoutY="110.0" text="Active" />
+         </children></Pane>
         <Button fx:id="filterOptionsButton" layoutX="844.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
         <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
+      <ChoiceBox layoutX="199.0" layoutY="129.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="365.0" layoutY="129.0" prefWidth="150.0" />
+      <Button layoutX="529.0" layoutY="129.0" mnemonicParsing="false" text="Apply Filters" />
     </children>
 </AnchorPane>
