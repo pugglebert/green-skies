@@ -12,6 +12,7 @@ import model.data.Airport;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -55,8 +56,8 @@ public class AirportDataViewController extends DataViewController {
     private ChoiceBox<String> citySelection;
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-    private final ObservableList<String> countries = FXCollections.observableArrayList("Any");
-    private final ObservableList<String> cities = FXCollections.observableArrayList("Any");
+    private ObservableList<String> countries;
+    private ObservableList<String> cities;
 
     /**
      * Initializes the controller class.
@@ -85,7 +86,13 @@ public class AirportDataViewController extends DataViewController {
 
         //Setup choice boxes
         searchTypeSelection.setItems(searchTypes);
+        List<String> tempCountries = storage.getAirportCountries();
+        tempCountries.add("Any");
+        countries = FXCollections.observableArrayList(tempCountries);
         countrySelection.setItems(countries);
+        List<String> tempCities = storage.getAirportCities();
+        tempCities.add("Any");
+        cities = FXCollections.observableArrayList(tempCities);
         citySelection.setItems(cities);
 
         //Add filter choice boxes to hashmap with filter type as key

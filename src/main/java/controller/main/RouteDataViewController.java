@@ -62,9 +62,9 @@ public class RouteDataViewController extends DataViewController {
     private ChoiceBox<String> destinationSelection;
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
-    private final ObservableList<String> airlines = FXCollections.observableArrayList("Any");
-    private final ObservableList<String> sources = FXCollections.observableArrayList("Any");
-    private final ObservableList<String> destinations = FXCollections.observableArrayList("Any");
+    private ObservableList<String> airlines;
+    private ObservableList<String> sources;
+    private ObservableList<String> destinations;
 
 
     public RouteDataViewController() {
@@ -100,8 +100,17 @@ public class RouteDataViewController extends DataViewController {
 
         //Setup choice boxes
         searchTypeSelection.setItems(searchTypes);
+        List<String> tempAirlines = storage.getRouteAirlines();
+        tempAirlines.add("Any");
+        airlines = FXCollections.observableArrayList(tempAirlines);
         airlineSelection.setItems(airlines);
+        List<String> tempSources = storage.getRouteSources();
+        tempSources.add("Any");
+        sources = FXCollections.observableArrayList(tempSources);
         airlineSelection.setItems(sources);
+        List<String> tempDestinations = storage.getRouteDestinations();
+        tempDestinations.add("Any");
+        destinations = FXCollections.observableArrayList(tempDestinations);
         airlineSelection.setItems(destinations);
 
         //Add choice boxes to hashmap with filter type as key

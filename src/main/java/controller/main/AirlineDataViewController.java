@@ -11,6 +11,7 @@ import model.data.Airline;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -38,7 +39,7 @@ public class AirlineDataViewController extends DataViewController {
 
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-  private final ObservableList<String> countries = FXCollections.observableArrayList("Any");
+  private ObservableList<String> countries;
   private final ObservableList<String> activeStatuses =
       FXCollections.observableArrayList("Any", "True", "False");
 
@@ -66,6 +67,9 @@ public class AirlineDataViewController extends DataViewController {
 
     // Setup choice boxes
     searchTypeSelection.setItems(searchTypes);
+    List<String> tempCountries = storage.getAirlineCounties();
+    tempCountries.add("Any");
+    countries = FXCollections.observableArrayList(tempCountries);
     countrySelection.setItems(countries);
     activeSelection.setItems(activeStatuses);
 
