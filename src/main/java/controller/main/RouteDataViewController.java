@@ -1,5 +1,6 @@
 package controller.main;
 
+import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import model.loader.FlightHistory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -52,8 +54,18 @@ public class RouteDataViewController extends DataViewController {
     private TableColumn<Route, String[]> equipmentColumn;
     @FXML
     private Button btnFlightHistory;
+    @FXML
+    private ChoiceBox<String> airlineSelection;
+    @FXML
+    private ChoiceBox<String> sourceSelection;
+    @FXML
+    private ChoiceBox<String> destinationSelection;
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
+    private final ObservableList<String> airlines = FXCollections.observableArrayList("Any");
+    private final ObservableList<String> sources = FXCollections.observableArrayList("Any");
+    private final ObservableList<String> destinations = FXCollections.observableArrayList("Any");
+
 
     public RouteDataViewController() {
     }
@@ -86,8 +98,16 @@ public class RouteDataViewController extends DataViewController {
 
         tableView.setItems(routes);
 
-        //Set choice box to list of potential search types
+        //Setup choice boxes
         searchTypeSelection.setItems(searchTypes);
+        airlineSelection.setItems(airlines);
+        airlineSelection.setItems(sources);
+        airlineSelection.setItems(destinations);
+
+        //Add choice boxes to hashmap with filter type as key
+        filterSelectionBoxes.put("Airline", airlineSelection);
+        filterSelectionBoxes.put("Source", sourceSelection);
+        filterSelectionBoxes.put("Destination", destinationSelection);
     }
 
     /**
@@ -149,4 +169,9 @@ public class RouteDataViewController extends DataViewController {
 
     }
 
+    public void filterByDataType(HashMap<String, String> filterTerms) {
+        Filterer filterer = new Filterer();
+        ArrayList<Route> results = filterer.filterRoutes(filterTerms, storage.getRoutes());
+        tableView.setItems(FXCollections.observableList(results));
+    }
 }

@@ -38,6 +38,9 @@ public class Searcher {
                 case "ICAO":
                     attribute = entry.getICAO();
                     break;
+                case "City":
+                    attribute = entry.getCity();
+                    break;
                 default:
                     throw new IllegalArgumentException("Search type must be one of: Name, Country, IATA, ICAO.");
             }

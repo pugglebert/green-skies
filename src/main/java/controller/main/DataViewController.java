@@ -1,5 +1,6 @@
 package controller.main;
 
+import controller.analysis.Filterer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.stage.Stage;
 import model.data.Storage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -37,12 +40,21 @@ public abstract class DataViewController extends SideNavBarController {
     protected Button searchButton;
     @FXML
     protected Label errorText;
+    @FXML
+    protected Button filterButton;
+    @FXML
+    protected Label filterErrorText;
 
     protected ObservableList<String> searchTypes;
+    protected HashMap<String, ChoiceBox<String>> filterSelectionBoxes = new HashMap<>();
     protected final Storage storage = Main.getStorage();
+
+    protected DataViewController() {
+    }
 
     public abstract void initialize(URL url, ResourceBundle rb);
     public abstract void searchByDataType(String searchTerm, String searchType);
+    public abstract void filterByDataType(HashMap<String, String> filterTerms);
 
     /**
      * Checks users search for errors and displays an error message if any are present. If no errors
@@ -67,6 +79,22 @@ public abstract class DataViewController extends SideNavBarController {
             }
         }
 
+    }
+
+    public void applyFilters() {
+        HashMap<String, String> filterTerms = new HashMap();
+        for (String filterType : filterSelectionBoxes.keySet()) {
+            ChoiceBox<String> filterTerm = filterSelectionBoxes.get(filterType);
+            if (!filterTerm.getValue().equals("Any")){
+                filterTerms.put(filterType, filterTerm.getValue());
+            }
+        }
+        try {
+            filterByDataType(filterTerms);
+        } catch (RuntimeException e) {
+            filterErrorText.setText(e.getMessage());
+            filterErrorText.setVisible(true);
+        }
     }
 
     public void filterOptions() {
