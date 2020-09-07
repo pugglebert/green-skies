@@ -14,12 +14,6 @@ import java.util.*;
  */
 public class Filterer {
 
-    private Searcher searcher;
-
-  public Filterer() {
-    this.searcher = new Searcher();
-  }
-
     /**
    * Filters airport data to get the Airport records that contain the desired filter entries.
    *
@@ -28,14 +22,14 @@ public class Filterer {
    * @param airports a List of Airports to filter.
    * @return an ArrayList of the Airports that are filtered based on the filter terms.
    */
-  public ArrayList<Airport> filterAirports(HashMap<String, String> filterTerms, List<Airport> airports) {
+  public static ArrayList<Airport> filterAirports(HashMap<String, String> filterTerms, List<Airport> airports) {
 
     ArrayList<ArrayList<Airport>> individualLists = new ArrayList<>();
     //Iterate through and perform a search for each term and add these lists to an overall list.
     for (Map.Entry<String, String> entry : filterTerms.entrySet()) {
         String filterTermType = entry.getKey();
         String filterTerm = entry.getValue();
-        individualLists.add(searcher.searchAirports(filterTerm, filterTermType, airports));
+        individualLists.add(Searcher.searchAirports(filterTerm, filterTermType, airports));
     }
 
     ArrayList<Airport> filteredAirports = individualLists.get(0);
@@ -62,14 +56,14 @@ public class Filterer {
      * @param airlines a List of Airlines to filter.
      * @return an ArrayList of the Airlines that are filtered based on the filter terms.
      */
-    public ArrayList<Airline> filterAirlines(HashMap<String, String> filterTerms, List<Airline> airlines) {
+    public static ArrayList<Airline> filterAirlines(HashMap<String, String> filterTerms, List<Airline> airlines) {
 
         ArrayList<ArrayList<Airline>> individualLists = new ArrayList<>();
         //Iterate through and perform a search for each term and add these lists to an overall list.
         for (Map.Entry<String, String> entry : filterTerms.entrySet()) {
             String filterTermType = entry.getKey();
             String filterTerm = entry.getValue();
-            individualLists.add(searcher.searchAirlines(filterTerm, filterTermType, airlines));
+            individualLists.add(Searcher.searchAirlines(filterTerm, filterTermType, airlines));
         }
 
         ArrayList<Airline> filteredAirlines = individualLists.get(0);
@@ -96,14 +90,14 @@ public class Filterer {
      * @param routes a List of Routes to filter.
      * @return an ArrayList of the Routes that are filtered based on the filter terms.
      */
-    public ArrayList<Route> filterRoutes(HashMap<String, String> filterTerms, List<Route> routes) {
+    public static ArrayList<Route> filterRoutes(HashMap<String, String> filterTerms, List<Route> routes) {
 
         ArrayList<ArrayList<Route>> individualLists = new ArrayList<>();
         //Iterate through and perform a search for each term and add these lists to an overall list.
         for (Map.Entry<String, String> entry : filterTerms.entrySet()) {
             String filterTermType = entry.getKey();
             String filterTerm = entry.getValue();
-            individualLists.add(searcher.searchRoutes(filterTerm, filterTermType, routes));
+            individualLists.add(Searcher.searchRoutes(filterTerm, filterTermType, routes));
         }
 
         ArrayList<Route> filteredRoutes = individualLists.get(0);

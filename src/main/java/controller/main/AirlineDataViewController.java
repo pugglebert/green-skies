@@ -88,9 +88,13 @@ public class AirlineDataViewController extends DataViewController {
     tableView.setItems(FXCollections.observableList(results));
   }
 
+  /**
+   * Calls filterAirlines method of Filterer class and sets table to display results.
+   * @param filterTerms A hashmap where the key is the filter type and the value is the term
+   *                    the filter should match.
+   */
   public void filterByDataType(HashMap<String, String> filterTerms) {
-    Filterer filterer = new Filterer();
-    ArrayList<Airline> results = filterer.filterAirlines(filterTerms, storage.getAirlines());
+    ArrayList<Airline> results = Filterer.filterAirlines(filterTerms, storage.getAirlines());
     tableView.setItems(FXCollections.observableList(results));
   }
 }

@@ -178,9 +178,13 @@ public class RouteDataViewController extends DataViewController {
 
     }
 
+    /**
+     * Calls filterRoutes method of Filterer class and sets table to display results.
+     * @param filterTerms A hashmap where the key is the type of filter and the value is the
+     *                    term the filter should match.
+     */
     public void filterByDataType(HashMap<String, String> filterTerms) {
-        Filterer filterer = new Filterer();
-        ArrayList<Route> results = filterer.filterRoutes(filterTerms, storage.getRoutes());
+        ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getRoutes());
         tableView.setItems(FXCollections.observableList(results));
     }
 }

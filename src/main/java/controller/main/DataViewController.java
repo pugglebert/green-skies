@@ -81,6 +81,10 @@ public abstract class DataViewController extends SideNavBarController {
 
     }
 
+    /**
+     * Gets filter type and term to match from choiceboxes, then calls filterByDataType if no errors occur or displays
+     * an error message if there is an error.
+     */
     public void applyFilters() {
         HashMap<String, String> filterTerms = new HashMap();
         for (String filterType : filterSelectionBoxes.keySet()) {
