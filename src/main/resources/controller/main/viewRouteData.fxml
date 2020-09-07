@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
             <columns>
@@ -73,19 +73,24 @@
        <ChoiceBox fx:id="searchTypeSelection" layoutX="199.0" layoutY="185.0" prefHeight="31.0" prefWidth="132.0" />
        <Label fx:id="errorText" layoutX="238.0" layoutY="216.0" prefHeight="27.0" prefWidth="846.0" textFill="RED" visible="false">
            <font>
-               <Font size="18.0" />
+               <Font size="14.0" />
            </font></Label>
        <Pane layoutX="163.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;">
          <children>
-            <Label layoutX="50.0" layoutY="111.0" text="Airline" />
-            <Label layoutX="188.0" layoutY="111.0" text="Source" />
-            <Label layoutX="337.0" layoutY="110.0" text="Destination" />
+            <Label layoutX="50.0" layoutY="95.0" text="Airline" />
+            <Label layoutX="188.0" layoutY="96.0" text="Source" />
+            <Label layoutX="337.0" layoutY="99.0" text="Destination" />
          </children></Pane>
        <Button fx:id="filterOptionsButton" layoutX="844.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
        <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
-      <ChoiceBox layoutX="199.0" layoutY="129.0" prefHeight="26.0" prefWidth="132.0" />
-      <ChoiceBox layoutX="346.0" layoutY="129.0" prefHeight="26.0" prefWidth="132.0" />
-      <ChoiceBox layoutX="494.0" layoutY="129.0" prefHeight="26.0" prefWidth="132.0" />
-      <Button layoutX="640.0" layoutY="130.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Apply Filters" />
+      <ChoiceBox layoutX="199.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
+      <ChoiceBox layoutX="346.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
+      <ChoiceBox layoutX="494.0" layoutY="120.0" prefHeight="26.0" prefWidth="132.0" />
+      <Button layoutX="640.0" layoutY="119.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Apply Filters" />
+      <Label layoutX="213.0" layoutY="146.0" text="Filter error message goes here" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

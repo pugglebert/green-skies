@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirportDataViewController">
+<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirportDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
             <columns>
@@ -79,13 +79,17 @@
          </font></Label>
       <Pane layoutX="163.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;">
          <children>
-            <Label layoutX="39.0" layoutY="112.0" text="Country" />
-            <Label layoutX="204.0" layoutY="111.0" text="City" />
+            <Label layoutX="39.0" layoutY="97.0" text="Country" />
+            <Label layoutX="204.0" layoutY="97.0" text="City" />
          </children></Pane>
       <Button fx:id="filterOptionsButton" layoutX="844.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
       <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
-      <ChoiceBox layoutX="199.0" layoutY="129.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="365.0" layoutY="129.0" prefWidth="150.0" />
-      <Button layoutX="535.0" layoutY="129.0" mnemonicParsing="false" text="Apply Filters" />
+      <ChoiceBox layoutX="199.0" layoutY="116.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="365.0" layoutY="117.0" prefWidth="150.0" />
+      <Button layoutX="535.0" layoutY="117.0" mnemonicParsing="false" text="Apply Filters" />
+      <Label layoutX="199.0" layoutY="146.0" text="Filter error message" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
     </children>
 </AnchorPane>
