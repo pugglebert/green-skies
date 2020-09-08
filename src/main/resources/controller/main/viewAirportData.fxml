@@ -87,7 +87,7 @@
       <ChoiceBox fx:id="countrySelection" layoutX="199.0" layoutY="116.0" prefWidth="150.0" />
       <ChoiceBox fx:id="citySelection" layoutX="365.0" layoutY="117.0" prefWidth="150.0" />
       <Button fx:id="filterButton" layoutX="535.0" layoutY="117.0" mnemonicParsing="false" onAction="#applyFilters" text="Apply Filters" />
-      <Label fx:id="filterErrorText" layoutX="199.0" layoutY="146.0" text="Filter error message" textFill="RED">
+      <Label fx:id="filterErrorText" layoutX="199.0" layoutY="146.0" text="Filter error message" textFill="RED" visible="false">
          <font>
             <Font size="14.0" />
          </font></Label>
