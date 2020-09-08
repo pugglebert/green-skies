@@ -22,6 +22,7 @@ public class Route implements DataType {
     private final String[] equipment;
     private double emissions;
     private double distance;
+    private int timesTaken = 0;
     private CheckBox select; //TODO check again
 
     /**
@@ -151,6 +152,23 @@ public class Route implements DataType {
         this.distance = distance;
     }
 
+    /**
+     * Get the number of times that the user has recorded taking this flight.
+     */
+    public int getTimesTake() {return timesTaken;}
+
+    /**
+     * Set timesTaken to the given value.
+     * @param timesTaken the value to set timesTaken to.
+     */
+    public void setTimesTaken(int timesTaken) {this.timesTaken = timesTaken;}
+
+    /**
+     * Returns true if object has the same attributes as the Route from which the method is called,
+     * false otherwise.
+     * @param o object to be compared to the route calling the method.
+     * @return true if the two objects attributes are the same, false if there are any differences.
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof Route) {
