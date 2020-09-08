@@ -15,6 +15,7 @@ import model.data.Storage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -105,6 +106,10 @@ public class FlightHistoryController extends DataViewController {
 
   }
 
+  @Override
+  public void filterByDataType(HashMap<String, String> filterTerms) {
+
+  }
   /**
    * Checks users search for errors and displays an error message if any are present. If no errors
    * are present, calls searchRoutes method from searcher class and upldates table to display

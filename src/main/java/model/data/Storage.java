@@ -104,15 +104,20 @@ public class Storage {
 
             for (DataType entry : data) {
                 Airline airline = (Airline) entry;
-                airlines.add(airline);
-                airlineCountries.add(airline.getCountry());
+                if (airline != null) {
+                    airlines.add(airline);
+                    airlineCountries.add(airline.getCountry());
+                }
+
             }
         } else if (type.matches("Airport")) {
             for (DataType entry : data) {
                 Airport airport = (Airport) entry;
                 airports.add(airport);
-                airportCountries.add(airport.getCountry());
-                airportCities.add(airport.getCity());
+                if (airport != null) {
+                    airportCountries.add(airport.getCountry());
+                    airportCities.add(airport.getCity());
+                }
             }
         } else if (type.matches("Route")) {
             for (DataType entry : data) {

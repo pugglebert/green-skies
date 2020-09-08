@@ -83,11 +83,11 @@
          </children></Pane>
        <Button fx:id="filterOptionsButton" layoutX="844.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
        <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
-      <ChoiceBox layoutX="199.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
-      <ChoiceBox layoutX="346.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
-      <ChoiceBox layoutX="494.0" layoutY="120.0" prefHeight="26.0" prefWidth="132.0" />
-      <Button layoutX="640.0" layoutY="119.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Apply Filters" />
-      <Label layoutX="213.0" layoutY="146.0" text="Filter error message goes here" textFill="RED">
+      <ChoiceBox fx:id="airlineSelection" layoutX="199.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
+      <ChoiceBox fx:id="sourceSelection" layoutX="346.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
+      <ChoiceBox fx:id="destinationSelection" layoutX="494.0" layoutY="120.0" prefHeight="26.0" prefWidth="132.0" />
+      <Button fx:id="filterButton" layoutX="640.0" layoutY="119.0" mnemonicParsing="false" onAction="#applyFilters" prefHeight="26.0" prefWidth="125.0" text="Apply Filters" />
+      <Label fx:id="filterErrorText" layoutX="213.0" layoutY="146.0" text="Filter error message goes here" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
