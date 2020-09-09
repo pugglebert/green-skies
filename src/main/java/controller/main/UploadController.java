@@ -34,6 +34,7 @@ public class UploadController extends SideNavBarController {
     private final Storage storage = Main.getStorage();
     private final Loader loader = Main.getLoader();
 
+    //Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
     ObservableList<String> dataTypeList = FXCollections.observableArrayList("Airport", "Route", "Airline");
 
     @FXML
