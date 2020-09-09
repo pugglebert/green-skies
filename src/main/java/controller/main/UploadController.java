@@ -50,7 +50,8 @@ public class UploadController extends SideNavBarController {
     /**
      * This method adds the data types from dataTypeList to the dataTypeSelect list.
      */
-    public void initialize(){
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
         dataTypeSelect.getItems().addAll(dataTypeList);
     }
 
@@ -102,10 +103,5 @@ public class UploadController extends SideNavBarController {
         newStage.setScene(scene);
         newStage.show();
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-    }
-
+    
 }
