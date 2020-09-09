@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+//TODO: update comment. What is this used for? (HK 4/9/2020)
 /**
  *
  * @author jwright
@@ -21,6 +22,7 @@ public class NavigationController extends Application {
     }
 
     /**
+     * TODO: comment method
      * @param args the command line arguments
      */
     public static void main(String[] args) {

@@ -155,5 +155,6 @@ public class Loader {
         storage.setData(data, dataType);
 
         return parser.getErrorMessage();
+
     }
 }

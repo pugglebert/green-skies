@@ -1,6 +1,5 @@
 package controller.main;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +9,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The controller class which contains the controls for the help page on the welcome page.
+ * @author Tom He.
+ * @version 1.0
+ * @since 04/09/20
+ */
 public class HelpController {
 
     @FXML
@@ -24,13 +29,6 @@ public class HelpController {
         Scene scene = new Scene(root);
         stage1.setScene(scene);
         stage1.show();
-
-
-
-
-
-
-
 
     }
 }

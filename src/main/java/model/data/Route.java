@@ -1,5 +1,7 @@
 package model.data;
 
+import javafx.scene.control.CheckBox;
+
 import java.util.Arrays;
 
 /**
@@ -18,6 +20,10 @@ public class Route implements DataType {
     private final String codeShare;
     private final int numOfStops;
     private final String[] equipment;
+    private double emissions;
+    private double distance;
+    private int timesTaken = 0;
+    private CheckBox select; //TODO check again
 
     /**
      * The Route constructor.
@@ -35,11 +41,16 @@ public class Route implements DataType {
         this.equipment = equipment;
     }
 
+    public void initCheckBox() {
+        this.select = new CheckBox();
+    }
+
     /**
      * Getter for the name of the airline of that is used during the Flight.
+     *
      * @return airlineID.
      */
-    public String getAirlineName(){
+    public String getAirlineName() {
         return airlineName;
     }
 
@@ -107,6 +118,57 @@ public class Route implements DataType {
         return equipment;
     }
 
+    /**
+     * Getter for the total carbon emissions of the route.
+     * @return a double for the amount of CO2 if it has been calculated, or null if it has not.
+     * yet been calculated.
+     */
+    public double getEmissions() {
+        return emissions;
+    }
+
+    /**
+     * Setter for the total carbon emissions of the route.
+     * @param emissions a double for the emissions calculated for that route.
+     */
+    public void setEmissions(double emissions) {
+        this.emissions = emissions;
+    }
+
+    /**
+     * Getter for the total distance of the route.
+     * @return null if distance has not yet been calculated, otherwise returns a double for
+     * the distance the route covers.
+     */
+    public double getDistance() {
+        return distance;
+    }
+
+    /**
+     * Set distance to the value calculated.
+     * @param distance a double for the distance calculated.
+     */
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    /**
+     * Get the number of times that the user has recorded taking this flight.
+     */
+    public int getTimesTake() {return timesTaken;}
+
+    /**
+     * Set timesTaken to the given value.
+     * @param timesTaken the value to set timesTaken to.
+     */
+    public void setTimesTaken(int timesTaken) {this.timesTaken = timesTaken;}
+
+    /**
+     * Returns true if object has the same attributes as the Route from which the method is called,
+     * false otherwise.
+     * @param o object to be compared to the route calling the method.
+     * @return true if the two objects attributes are the same, false if there are any differences.
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof Route) {
@@ -124,4 +186,17 @@ public class Route implements DataType {
             return false;
         }
     }
+
+
+    public CheckBox getSelect() {
+        return select;
+    }
+
+    public void setSelect(CheckBox select) {
+        this.select = select;
+    }
+
+//    public static void main(String[] args){
+//        Route test = new Route("dsf", 12, "asd", 45, "asd",123,"asd",32, new String[]{"21"});
+//    }
 }

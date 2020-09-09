@@ -1,39 +1,29 @@
 package controller.main;
 
+import controller.analysis.Filterer;
+import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import model.data.Airline;
 import model.data.Airport;
-import model.data.Route;
-import model.data.Storage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-
-//@TODO: should AirlineDataViewController implement an inteface Initializable?
 
 /**
  * The controller class which contains the controls for the airport data view.
  * @author Hayley Krippner
  * @version 1.0
- * @since 2020-08-19
+ * @since 04/09/20
  */
-public class AirportDataViewController implements Initializable {
+public class AirportDataViewController extends DataViewController {
 
-    //configure the table
+    //Configure the TableView.
     @FXML
     private TableView<Airport> tableView;
     @FXML
@@ -49,9 +39,9 @@ public class AirportDataViewController implements Initializable {
     @FXML
     private TableColumn<Airport, String> ICAOColumn;
     @FXML
-    private TableColumn<Airport, Float> latitudeColumn;
+    private TableColumn<Airport, Double> latitudeColumn;
     @FXML
-    private TableColumn<Airport, Float> longitudeColumn;
+    private TableColumn<Airport, Double> longitudeColumn;
     @FXML
     private TableColumn<Airport, Integer> altitudeColumn;
     @FXML
@@ -61,86 +51,73 @@ public class AirportDataViewController implements Initializable {
     @FXML
     private TableColumn<Airport, String> dataBaseTimeZoneColumn;
     @FXML
-    private Button btnUpload;
+    private ChoiceBox<String> countrySelection;
     @FXML
-    private Button btnRouteDataView;
-    @FXML
-    private Button btnAirportDataView;
-    @FXML
-    private Button btnAirlineDataView;
+    private ChoiceBox<String> citySelection;
+
+    private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
+    private ObservableList<String> countries;
+    private ObservableList<String> cities;
 
     /**
      * Initializes the controller class.
+     * @param url The URL used.
+     * @param rb The resource bundle used.
      */
-//@Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //set up the columns in the table
-        airportIDColumn.setCellValueFactory(new PropertyValueFactory<Airport, Integer>("airportID"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("name"));
-        cityColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("city"));
-        countryColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("country"));
-        IATAColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("IATA"));
-        ICAOColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("ICAO"));
-        latitudeColumn.setCellValueFactory(new PropertyValueFactory<Airport, Float>("latitude"));
-        longitudeColumn.setCellValueFactory(new PropertyValueFactory<Airport, Float>("longitude"));
-        altitudeColumn.setCellValueFactory(new PropertyValueFactory<Airport, Integer>("altitude"));
-        timezoneColumn.setCellValueFactory(new PropertyValueFactory<Airport, Float>("timezone"));
-        DSTColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("DST"));
-        dataBaseTimeZoneColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("dataBaseTimeZone"));
+        //Set up the columns in the TableView.
+        airportIDColumn.setCellValueFactory(new PropertyValueFactory<>("airportID"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
+        IATAColumn.setCellValueFactory(new PropertyValueFactory<>("IATA"));
+        ICAOColumn.setCellValueFactory(new PropertyValueFactory<>("ICAO"));
+        latitudeColumn.setCellValueFactory(new PropertyValueFactory<>("latitude"));
+        longitudeColumn.setCellValueFactory(new PropertyValueFactory<>("longitude"));
+        altitudeColumn.setCellValueFactory(new PropertyValueFactory<>("altitude"));
+        timezoneColumn.setCellValueFactory(new PropertyValueFactory<>("timezone"));
+        DSTColumn.setCellValueFactory(new PropertyValueFactory<>("DST"));
+        dataBaseTimeZoneColumn.setCellValueFactory(new PropertyValueFactory<>("dataBaseTimeZone"));
 
-//        // load data by taking the route hashset and converting it to an ArrayList to convert it to
-//        // ObservableArrayList.
-//        // TODO: 23/08/20 Change datatype in Storage class into ArrayList
-//        List<Airport> list = new ArrayList<Airport>((HashSet) Storage.getAirports());
-//        // TODO: 23/08/20 Find a cleaner way to convert list to observableList
-//        ObservableList<Airport> airports = FXCollections.observableArrayList();
-//        for (Airport entry: list){
-//            airports.add(entry);
-//        }
-//        tableView.setItems((ObservableList) airports);
+        //Load data by taking the Airport ArrayList and converting it to an ObservableArrayList.
+        ObservableList<Airport> airports = FXCollections.observableList(storage.getAirports());
+        tableView.setItems(airports);
+
+        //Setup choice boxes
+        searchTypeSelection.setItems(searchTypes);
+        List<String> tempCountries = storage.getAirportCountries();
+        tempCountries.add("Any");
+        countries = FXCollections.observableArrayList(tempCountries);
+        countrySelection.setItems(countries);
+        List<String> tempCities = storage.getAirportCities();
+        tempCities.add("Any");
+        cities = FXCollections.observableArrayList(tempCities);
+        citySelection.setItems(cities);
+
+        //Add filter choice boxes to hashmap with filter type as key
+        filterSelectionBoxes.put("Country", countrySelection);
+        filterSelectionBoxes.put("City", citySelection);
+
     }
 
-    //take user back to the upload screen
-    public void toUploadData() throws IOException {
-        Stage stage = (Stage) btnUpload.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+    /**
+     * Calls searchAirports method from searcher class and upldates table to display
+     * results of search.
+     */
+    public void searchByDataType(String searchTerm, String searchType) {
+        ArrayList<Airport> results = Searcher.searchAirports(searchTerm, searchType, storage.getAirports());
+        tableView.setItems(FXCollections.observableList(results));
     }
 
-    //take user back to the route data view
-    public void toRouteDataView() throws IOException {
-        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+    /**
+     * Calls filterAirports method of Filterer class and sets table to display results.
+     * @param filterTerms A hashmap where the key is the filter type and the value is the term
+     *                    the filter should match.
+     */
+    public void filterByDataType(HashMap<String, String> filterTerms) {
+        ArrayList<Airport> results = Filterer.filterAirports(filterTerms, storage.getAirports());
+        tableView.setItems(FXCollections.observableList(results));
     }
 
-    //take user back to the airport data view
-    public void toAirportDataView() throws IOException {
-        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
-    }
-
-    //take user back to the airline data view screen
-    public void toAirlineDataView() throws IOException {
-        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
-    }
 }

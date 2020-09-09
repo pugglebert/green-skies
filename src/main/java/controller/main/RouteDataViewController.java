@@ -1,32 +1,39 @@
 package controller.main;
 
+import controller.analysis.Filterer;
+import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.data.Route;
-import model.data.Storage;
+import model.loader.FlightHistory;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
  * The controller class which contains the controls for the route data view.
  * @author Hayley Krippner
  * @version 1.0
- * @since 2020-08-24
+ * @since 2020-08-26
  */
-public class RouteDataViewController implements Initializable {
+public class RouteDataViewController extends DataViewController {
 
-    //configure the table
+
+    //Configure the TableView.
     @FXML
     private TableView<Route> tableView;
+    @FXML
+    private TableColumn<Route, Boolean> addColumn;
     @FXML
     private TableColumn<Route, String> airlineNameColumn;
     @FXML
@@ -46,83 +53,138 @@ public class RouteDataViewController implements Initializable {
     @FXML
     private TableColumn<Route, String[]> equipmentColumn;
     @FXML
-    private Button btnUpload;
+    private Button btnFlightHistory;
     @FXML
-    private Button btnRouteDataView;
+    private ChoiceBox<String> airlineSelection;
     @FXML
-    private Button btnAirportDataView;
+    private ChoiceBox<String> sourceSelection;
     @FXML
-    private Button btnAirlineDataView;
+    private ChoiceBox<String> destinationSelection;
 
-    private Storage storage = Main.getStorage();
+    private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
+    private ObservableList<String> airlines;
+    private ObservableList<String> sources;
+    private ObservableList<String> destinations;
+
+
+    public RouteDataViewController() {
+    }
 
     /**
- * Initializes the controller class.
- */
-//@Override
-public void initialize(URL url, ResourceBundle rb) {
-    //set up the columns in the table
-    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("airlineName"));
-    airlineIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("airlineID"));
-    sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("sourceAirport"));
-    sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("sourceAirportID"));
-    destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("destinationAirport"));
-    destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("destinationAirportID"));
-    codeShareColumn.setCellValueFactory(new PropertyValueFactory<Route, String>("codeShare"));
-    numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<Route, Integer>("numOfStops"));
-    equipmentColumn.setCellValueFactory(new PropertyValueFactory<Route, String[]>("equipment"));
+     * Initializes the controller class.
+     * @param url The URL used.
+     * @param rb The resource bundle used.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //Set up the columns in the TableView.
+        addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
+        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
+        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
+        sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirportID"));
+        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
+        destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirportID"));
+        codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
+        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
+        equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipment"));
 
-    // load data by taking the route hashset and converting it to an ArrayList to convert it to
-    // ObservableArrayList.
-    // TODO: 23/08/20 Change datatype in Storage class into ArrayList
-    //List<Route> list = new ArrayList<Route>((HashSet) Storage.getRoutes());
-    // TODO: 23/08/20 Find a cleaner way to convert list to observableList
-    //ObservableList<Route> routes = FXCollections.observableArrayList();
-    ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
-    tableView.setItems(routes);
-}
+        //Load data by taking the Route ArrayList and converting it to an ObservableArrayList.
+        for (Route route: storage.getRoutes()){
+            route.initCheckBox();
+        }
+        ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
 
-    //take user back to the upload screen
-    public void toUploadData() throws IOException {
-        Stage stage = (Stage) btnUpload.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+
+        tableView.setItems(routes);
+
+        //Setup choice boxes
+        searchTypeSelection.setItems(searchTypes);
+        List<String> tempAirlines = storage.getRouteAirlines();
+        tempAirlines.add("Any");
+        airlines = FXCollections.observableArrayList(tempAirlines);
+        airlineSelection.setItems(airlines);
+        List<String> tempSources = storage.getRouteSources();
+        tempSources.add("Any");
+        sources = FXCollections.observableArrayList(tempSources);
+        airlineSelection.setItems(sources);
+        List<String> tempDestinations = storage.getRouteDestinations();
+        tempDestinations.add("Any");
+        destinations = FXCollections.observableArrayList(tempDestinations);
+        airlineSelection.setItems(destinations);
+
+        //Add choice boxes to hashmap with filter type as key
+        filterSelectionBoxes.put("Airline", airlineSelection);
+        filterSelectionBoxes.put("Source", sourceSelection);
+        filterSelectionBoxes.put("Destination", destinationSelection);
     }
 
-    //take user back to the route data view
-    public void toRouteDataView() throws IOException {
-        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+    /**
+     * This method closes the Upload Data page and opens the View Airline Data page.
+     * @throws IOException
+     */
+    public void toFlightHistory() throws IOException {
+        Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("flightHistory.fxml")); //open the View Airline Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.show();
     }
 
-    //take user back to the airport data view
-    public void toAirportDataView() throws IOException {
-        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+    /**
+     * Calls searchRoutes method from searcher class and upldates table to display
+     * results of search.
+     */
+    public void searchByDataType(String searchTerm, String searchType) {
+        ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getRoutes());
+        tableView.setItems(FXCollections.observableList(results));
     }
 
-    //take user back to the airline data view screen
-    public void toAirlineDataView() throws IOException {
-        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();   //get current window
-        stage.close();  // close current window
-        Stage stage1 = new Stage(); // create new stage
-        Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //reopen welcome.fxml
-        Scene scene = new Scene(root);   //add thing to scene
-        stage1.setScene(scene);
-        stage1.show();
+    private FlightHistory buffer;
+    private ObservableList<Route> routes;
+
+
+    //TODO: remove this code.
+
+    /*add checkbox to mark which route user wanted to add*/
+//    public void addCheckboxAndDisplay() {
+//        buffer = new FlightHistory(this.fileDir);
+//        for (Route route : buffer.getBuffer()) {
+//            route.initCheckBox();
+//        }
+//        routes = FXCollections.observableList(buffer.getBuffer());
+//        FlightTable.setItems(routes);
+//    }
+
+    public void addDataToHistory() { //TODO slow on entire data list (maybe add listener to checkbox)
+        List<Route> temp = new ArrayList<Route>();
+        for (Route route : Main.getStorage().getRoutes()){
+            if (route.getSelect().isSelected()){
+                temp.add(route);
+
+            }
+        }
+
+        Main.getStorage().getHistory().addAll(temp);
+
+//TODO: remove this code.
+        //parent.updateTable();
+
+        //TODo pass data back
+//        Stage stage = (Stage) AddButton.getScene().getWindow();
+//        stage.close();
+
+    }
+
+    /**
+     * Calls filterRoutes method of Filterer class and sets table to display results.
+     * @param filterTerms A hashmap where the key is the type of filter and the value is the
+     *                    term the filter should match.
+     */
+    public void filterByDataType(HashMap<String, String> filterTerms) {
+        ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getRoutes());
+        tableView.setItems(FXCollections.observableList(results));
     }
 }

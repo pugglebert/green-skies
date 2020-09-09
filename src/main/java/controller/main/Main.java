@@ -3,6 +3,12 @@ package controller.main;
 import model.data.Storage;
 import model.loader.Loader;
 
+/**
+ * The controller class which contains the controls for the main.
+ * @author Hayley Krippner, Ella Johnson.
+ * @version 1.0
+ * @since 04/09/20
+ */
 public class Main {
 
     private static Storage storage = new Storage();

@@ -69,6 +69,7 @@ public class Flight {
         return position;
     }
 
+
     /**
      * Getter for the distance travelled during the Fight.
      * @return distance.
@@ -79,9 +80,12 @@ public class Flight {
 
     /**
      * Getter for the name of the Fight.
+     *
      * @return flightName.
      */
     public String getFlightName() {
         return flightName;
     }
+
+
 }
