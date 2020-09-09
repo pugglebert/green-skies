@@ -55,6 +55,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); //open the Upload Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 
@@ -70,6 +71,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml")); //open the View Route Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 
@@ -84,6 +86,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml")); //open the View Airport Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 
@@ -98,6 +101,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml")); //open the View Airline Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 
@@ -112,6 +116,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("flightHistory.fxml")); //open the View Airline Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 
@@ -126,6 +131,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("carbonEmissionsReport.fxml")); //open the View Airline Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 
@@ -140,6 +146,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("mapOfAirports.fxml")); //open the View Airline Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 
@@ -154,6 +161,7 @@ public abstract class SideNavBarController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("graphs.fxml")); //open the View Airline Data page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
 

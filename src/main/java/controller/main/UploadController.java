@@ -101,7 +101,8 @@ public class UploadController extends SideNavBarController {
         Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml")); //open the Welcome page
         Scene scene = new Scene(root);
         newStage.setScene(scene);
+        newStage.setMaximized(true);
         newStage.show();
     }
-    
+
 }

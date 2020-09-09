@@ -86,19 +86,26 @@ public abstract class DataViewController extends SideNavBarController {
      * an error message if there is an error.
      */
     public void applyFilters() {
+        filterErrorText.setVisible(false);
         HashMap<String, String> filterTerms = new HashMap();
         for (String filterType : filterSelectionBoxes.keySet()) {
             ChoiceBox<String> filterTerm = filterSelectionBoxes.get(filterType);
-            if (!filterTerm.getValue().equals("Any")){
+            if (filterTerm.getValue() != null && !filterTerm.getValue().equals("Any")){
                 filterTerms.put(filterType, filterTerm.getValue());
             }
         }
-        try {
-            filterByDataType(filterTerms);
-        } catch (RuntimeException e) {
-            filterErrorText.setText(e.getMessage());
+        if (filterTerms.size() > 0) {
+            try {
+                filterByDataType(filterTerms);
+            } catch (RuntimeException e) {
+                filterErrorText.setText(e.getMessage());
+                filterErrorText.setVisible(true);
+            }
+        } else {
+            filterErrorText.setText("No filter conditions selected");
             filterErrorText.setVisible(true);
         }
+
     }
 
     public void filterOptions() {

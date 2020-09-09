@@ -17,9 +17,10 @@ public class WelcomeController {
     public void continueToMainScreen(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("upload.fxml")); // load upload.fxml
-        Scene scene = new Scene(root, 1024, 640);  // apply stuff wanna show to scene
+        Scene scene = new Scene(root/*, 1024, 640*/);  // apply stuff wanna show to scene
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);  // set up scene
+        window.setMaximized(true);
         window.show(); // time for performing
 
     }
@@ -28,9 +29,10 @@ public class WelcomeController {
     public void toInfoScreen(ActionEvent event) throws IOException {
         // TODO change to "help.fxml" this is debug
         Parent root = FXMLLoader.load(getClass().getResource("help.fxml")); // load help.fxml
-        Scene scene = new Scene(root, 1024, 640);  // apply stuff wanna show to scene
+        Scene scene = new Scene(root/*, 1024, 640*/);  // apply stuff wanna show to scene
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);  // set up scene
+        window.setMaximized(true);
         window.show(); // time for performing
 
     }
