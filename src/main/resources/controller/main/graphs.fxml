@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.GraphsController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.GraphsController">
    <children>
       <Text layoutX="262.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphs To Be Implemented Here" />
 
