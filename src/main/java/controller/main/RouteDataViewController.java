@@ -107,11 +107,11 @@ public class RouteDataViewController extends DataViewController {
         List<String> tempSources = storage.getRouteSources();
         tempSources.add("Any");
         sources = FXCollections.observableArrayList(tempSources);
-        airlineSelection.setItems(sources);
+        sourceSelection.setItems(sources);
         List<String> tempDestinations = storage.getRouteDestinations();
         tempDestinations.add("Any");
         destinations = FXCollections.observableArrayList(tempDestinations);
-        airlineSelection.setItems(destinations);
+        destinationSelection.setItems(destinations);
 
         //Add choice boxes to hashmap with filter type as key
         filterSelectionBoxes.put("Airline", airlineSelection);
