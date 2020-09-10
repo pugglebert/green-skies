@@ -40,7 +40,6 @@ public class AirportParser extends Parser {
      * 113: invalid database timezone
      * 114: invalid unknown error
      * 115: number of failed insertions
-     *
      * 116: invalid alias
      * 117: invalid callsign
      * 118: invalid activestatus

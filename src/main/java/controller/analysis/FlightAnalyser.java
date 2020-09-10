@@ -1,6 +1,7 @@
 package controller.analysis;
 
 import model.data.Airport;
+import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
 import java.awt.*;
@@ -18,45 +19,54 @@ import java.util.List;
  */
 public class FlightAnalyser {
 
-        private final double radius = 6371e3;   //radius of earth;
+    private final double radius = 6371e3;   //radius of earth;
 
-        private double distance;   //must use in KM
+    private double distance;   //must use in KM
 
-        private double FuelUsed;
+    private double FuelUsed;
 
-        private final int seatsOccupancy = 333;   //number of passengers;
+    private final int seatsOccupancy = 333;   //number of passengers;
 
-        private final double Co2OfOneGramFuel = 3.15;  //in gram
+    private final double Co2OfOneGramFuel = 3.15;  //in gram
 
-        private final int CruisingSpeed = 910;   //km per hour
+    private final int CruisingSpeed = 910;   //km per hour
 
-        private  ArrayList<String> path1 = new ArrayList<String>();
+    private Route route1;
 
-        private  ArrayList<String> path2 = new ArrayList<String>();
+    private Route route2;
 
-        private List<Airport> airports = new ArrayList<Airport>();
+    private ArrayList<String> path1 = new ArrayList<String>();
 
-        private ArrayList<ArrayList<Double>> path1Coords = new ArrayList<>();
+    private ArrayList<String> path2 = new ArrayList<String>();
 
-        private ArrayList<ArrayList<Double>> path2Coords = new ArrayList<>();
+    private List<Airport> airports = new ArrayList<Airport>();
 
-        private double totalDistancePath1 = 0;
+    private ArrayList<ArrayList<Double>> path1Coords = new ArrayList<>();
 
-        private double totalDistancePath2 = 0;
+    private ArrayList<ArrayList<Double>> path2Coords = new ArrayList<>();
 
-        private double totalEmissionPath1 = 0;
+    private double totalDistancePath1 = 0;
 
-        private double totalEmissionPath2 = 0;
-    // TODO: 1/09/2020 add checking route validation 
+    private double totalDistancePath2 = 0;
+
+    private double totalEmissionPath1 = 0;
+
+    private double totalEmissionPath2 = 0;
+    // TODO: 1/09/2020 add checking route validation
     /**
      * Constructor of FlightAnalyser which starts processing and calculation.
-     * @param path1 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path1.
-     * @param path2 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path2.
+     * @param route1 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path1.
+     * @param route2 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path2.
      * @param storage Storage contains all information about airports, routes, and airlines.
      */
-    public FlightAnalyser(ArrayList<String> path1, ArrayList<String> path2, Storage storage) {
-        this.path1 = path1;
-        this.path2 = path2;
+    public FlightAnalyser(Route route1, Route route2, Storage storage) {
+        this.route1 = route1;
+        this.route2 = route2;
+        this.path1.add(route1.getSourceAirport());
+        this.path1.add(route1.getDestinationAirport());
+        this.path2.add(route2.getSourceAirport());
+        this.path2.add(route2.getDestinationAirport());
+
         this.airports = storage.getAirports();
         processsPath();
         calculateTotalDistance();
@@ -66,18 +76,18 @@ public class FlightAnalyser {
     /**
      * Process two arraylist path1 and path2, loop through the airports data and put coordinates of each airport which
      * is contained in the path into arraylist path1coords and path2coords.
-    */
+     */
     private void processsPath(){
-            for(String airportCode: path1){
-                for(Airport airport: airports){
-                    if(airport.getIATA().equals(airportCode)){
-                        ArrayList<Double> coord = new ArrayList<>();
-                        coord.add(airport.getLatitude());
-                        coord.add(airport.getLongitude());
-                        path1Coords.add(coord);
-                    }
+        for(String airportCode: path1){
+            for(Airport airport: airports){
+                if(airport.getIATA().equals(airportCode)){
+                    ArrayList<Double> coord = new ArrayList<>();
+                    coord.add(airport.getLatitude());
+                    coord.add(airport.getLongitude());
+                    path1Coords.add(coord);
                 }
             }
+        }
         for(String airportCode: path2){
             for(Airport airport: airports){
                 if(airport.getIATA().equals(airportCode)){
@@ -138,9 +148,9 @@ public class FlightAnalyser {
      * start calculate two paths' total carbon emission.
      */
     private void calculatePathsEmission(){
-            this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
-            this.totalEmissionPath2 = calculateCarbonEmission(totalDistancePath2);
-        }
+        this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
+        this.totalEmissionPath2 = calculateCarbonEmission(totalDistancePath2);
+    }
 
     /**
      * Calculate carbon emission between two airports.
@@ -162,7 +172,7 @@ public class FlightAnalyser {
 
         return finalCo2;  // in kg
     }
-  // TODO: 29/08/20 comfirm what need to do with compare distance and compare emission.
+    // TODO: 29/08/20 comfirm what need to do with compare distance and compare emission.
 
     /**
      * Compare distance between two paths by getting absolute number of their difference.
