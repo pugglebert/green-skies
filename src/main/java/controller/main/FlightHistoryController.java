@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -68,6 +69,13 @@ public class FlightHistoryController extends DataViewController {
   private Button searchButton;
   @FXML
   private Label errorText;
+  @FXML
+  private ChoiceBox<String> airlineSelection;
+  @FXML
+  private ChoiceBox<String> sourceSelection;
+  @FXML
+  private ChoiceBox<String> destinationSelection;
+
 
   private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
   private Storage storage = Main.getStorage();
@@ -100,17 +108,42 @@ public class FlightHistoryController extends DataViewController {
 
     //Set choice box to list of potential search types
     searchTypeSelection.setItems(searchTypes);
+
+    //Set up choice boxes for filter options
+    List<String> tempAirlines = storage.getRouteAirlines();
+    tempAirlines.add("Any");
+    airlineSelection.setItems(FXCollections.observableArrayList(tempAirlines));
+    List<String> tempSources = storage.getRouteSources();
+    tempSources.add("Any");
+    sourceSelection.setItems(FXCollections.observableArrayList(tempSources));
+    List<String> tempDestinations = storage.getRouteDestinations();
+    tempDestinations.add("Any");
+    destinationSelection.setItems(FXCollections.observableArrayList(tempDestinations));
+
+    //Add choice boxes to hashmap with filter type as key
+    filterSelectionBoxes.put("Airline", airlineSelection);
+    filterSelectionBoxes.put("Source", sourceSelection);
+    filterSelectionBoxes.put("Destination", destinationSelection);
   }
 
+  /**
+   * Searches history for routes which match the search type and term and displays them in the table view.
+   * @param searchTerm String to match attributes to.
+   * @param searchType String representing attribute to check for matches.
+   */
   @Override
   public void searchByDataType(String searchTerm, String searchType) {
-    ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getRoutes());
+    ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getHistory());
     tableView.setItems(FXCollections.observableList(results));
   }
 
+  /**
+   * Filters history to routes that match the filter types and terms and displays them in the tableview.
+   * @param filterTerms a hashmap fo terms to match and their corresponding attribute.
+   */
   @Override
   public void filterByDataType(HashMap<String, String> filterTerms) {
-    ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getRoutes());
+    ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getHistory());
     tableView.setItems(FXCollections.observableList(results));
   }
 
@@ -134,30 +167,4 @@ public class FlightHistoryController extends DataViewController {
     tableView.setItems(FXCollections.observableList(storage.getHistory()));
   }
 
-  /**
-   * Checks users search for errors and displays an error message if any are present. If no errors
-   * are present, calls searchRoutes method from searcher class and upldates table to display
-   * results of search.
-   */
-  public void search() {
-    String searchType = searchTypeSelection.getValue();
-    String searchTerm = searchBar.getText();
-    if (searchType == null) {
-      errorText.setText("Select a search type to proceed.");
-      errorText.setVisible(true);
-    } else if (searchTerm == null) {
-      errorText.setText("Select a search type to proceed.");
-      errorText.setVisible(true);
-    } else {
-      try {
-        ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getRoutes());
-        tableView.setItems(FXCollections.observableList(results));
-        errorText.setVisible(false);
-      } catch (RuntimeException e) {
-        errorText.setText(e.getMessage());
-        errorText.setVisible(true);
-      }
-    }
-
-  }
 }
