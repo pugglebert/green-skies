@@ -187,4 +187,24 @@ public class RouteDataViewController extends DataViewController {
         ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getRoutes());
         tableView.setItems(FXCollections.observableList(results));
     }
+
+    /**
+     * Clear filter choices and display all routes in table view.
+     */
+    @Override
+    public void clearFilter() {
+        for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
+            filterBox.setValue(null);
+        }
+        tableView.setItems(FXCollections.observableList(storage.getRoutes()));
+    }
+
+    /**
+     * Clear search bar and display all routes in table view.
+     */
+    @Override
+    public void clearSearch() {
+        searchBar.setText(null);
+        tableView.setItems(FXCollections.observableList(storage.getRoutes()));
+    }
 }

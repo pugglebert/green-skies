@@ -68,7 +68,7 @@
                </Button>
            </children>
        </VBox>
-       <Button fx:id="searchButton" layoutX="705.0" layoutY="185.0" mnemonicParsing="false" onAction="#search" text="Search" />
+       <Button fx:id="searchButton" layoutX="705.0" layoutY="185.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="60.0" text="Search" />
        <TextField fx:id="searchBar" layoutX="346.0" layoutY="185.0" prefHeight="31.0" prefWidth="337.0" />
        <ChoiceBox fx:id="searchTypeSelection" layoutX="199.0" layoutY="185.0" prefHeight="31.0" prefWidth="132.0" />
        <Label fx:id="errorText" layoutX="238.0" layoutY="216.0" prefHeight="27.0" prefWidth="846.0" textFill="RED" visible="false">
@@ -81,7 +81,7 @@
             <Label layoutX="188.0" layoutY="96.0" text="Source" />
             <Label layoutX="337.0" layoutY="99.0" text="Destination" />
          </children></Pane>
-       <Button fx:id="filterOptionsButton" layoutX="844.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
+       <Button fx:id="filterOptionsButton" layoutX="945.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
        <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
       <ChoiceBox fx:id="airlineSelection" layoutX="199.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
       <ChoiceBox fx:id="sourceSelection" layoutX="346.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
@@ -92,5 +92,7 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Button fx:id="clearFilterButton" layoutX="780.0" layoutY="121.0" mnemonicParsing="false" onAction="#clearFilter" prefHeight="25.0" prefWidth="78.0" text="Clear Filters" />
+      <Button fx:id="clearSearchButton" layoutX="778.0" layoutY="185.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear Search" />
    </children>
 </AnchorPane>

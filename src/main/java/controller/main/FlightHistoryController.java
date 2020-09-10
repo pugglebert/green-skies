@@ -1,5 +1,6 @@
 package controller.main;
 
+import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -103,13 +104,36 @@ public class FlightHistoryController extends DataViewController {
 
   @Override
   public void searchByDataType(String searchTerm, String searchType) {
-
+    ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getRoutes());
+    tableView.setItems(FXCollections.observableList(results));
   }
 
   @Override
   public void filterByDataType(HashMap<String, String> filterTerms) {
-
+    ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getRoutes());
+    tableView.setItems(FXCollections.observableList(results));
   }
+
+  /**
+   * Clear filter choices and display all history in table view.
+   */
+  @Override
+  public void clearFilter() {
+    for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
+      filterBox.setValue(null);
+    }
+    tableView.setItems(FXCollections.observableList(storage.getHistory()));
+  }
+
+  /**
+   * Clear search bar and display all history in table view.
+   */
+  @Override
+  public void clearSearch() {
+    searchBar.setText(null);
+    tableView.setItems(FXCollections.observableList(storage.getHistory()));
+  }
+
   /**
    * Checks users search for errors and displays an error message if any are present. If no errors
    * are present, calls searchRoutes method from searcher class and upldates table to display
