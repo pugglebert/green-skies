@@ -1,6 +1,7 @@
 package controller.analysis;
 
 import model.data.Airport;
+import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
 import org.junit.Before;
@@ -19,6 +20,11 @@ public class FlightAnalyserTest {
     Loader loader ;
     ArrayList<String> path1;
     ArrayList<String> path2;
+    String[] rubbish1;
+    String[] rubbish2;
+
+    Route route1 = new Route("Air Inter Gabon", 219, "AER", 2965, "KZN" , 2990, "dont know", 0,  rubbish1);
+    Route route2 = new Route("Air Cess", 55, "ASF", 2966, "SVX", 2975, "dont know", 0, rubbish2);
     FlightAnalyser analyser;
     List<Airport> airport;
     private final double radius = 6371e3;
@@ -28,7 +34,6 @@ public class FlightAnalyserTest {
     /**
      *
      */
-    @Test
     public void findCoordinate() {
 
         airport = new ArrayList<>() ;
@@ -47,7 +52,7 @@ public class FlightAnalyserTest {
 
         while(i < path2.size()) {
             int j = 0;
-                while(j < airport.size()) {
+            while(j < airport.size()) {
                 if(path2.get(i).equals(airport.get(j).getIATA()) || path2.get(i).equals(airport.get(j).getICAO())){
                     listOfAirportPath2.add(airport.get(j));
 
@@ -56,18 +61,18 @@ public class FlightAnalyserTest {
             }
             i++;
         }
-        double path1Distance1 = calculatedistance(listOfAirportPath1.get(0).getLatitude(), listOfAirportPath1.get(0).getLongitude(), listOfAirportPath1.get(1).getLatitude(), listOfAirportPath1.get(1).getLongitude());
-        double path1Distance2 = calculatedistance(listOfAirportPath1.get(1).getLatitude(), listOfAirportPath1.get(1).getLongitude(), listOfAirportPath1.get(2).getLatitude(), listOfAirportPath1.get(2).getLongitude());
 
+        System.out.println(listOfAirportPath1);
+
+        System.out.println(listOfAirportPath2);
+        double path1Distance1 = calculatedistance(listOfAirportPath1.get(0).getLatitude(), listOfAirportPath1.get(0).getLongitude(), listOfAirportPath1.get(1).getLatitude(), listOfAirportPath1.get(1).getLongitude());
 
         double path2Distance1 = calculatedistance(listOfAirportPath2.get(0).getLatitude(), listOfAirportPath2.get(0).getLongitude(), listOfAirportPath2.get(1).getLatitude(), listOfAirportPath2.get(1).getLongitude());
-        double path2Distance2 = calculatedistance(listOfAirportPath2.get(1).getLatitude(), listOfAirportPath2.get(1).getLongitude(), listOfAirportPath2.get(2).getLatitude(), listOfAirportPath2.get(2).getLongitude());
-        distance1 = path1Distance1 + path1Distance2;
-        distance2 = path2Distance1 + path2Distance2;
+        distance1 = path1Distance1;
+        distance2 = path2Distance1;
+        System.out.println(distance1);
+        System.out.println(distance2);
 
-        FlightAnalyser analyser = new FlightAnalyser(path1, path2, storage);
-        assertEquals(path1Distance1+path1Distance2, analyser.getTotalDistancePath1(), 0.0);
-        assertEquals(path2Distance1+path2Distance2, analyser.getTotalDistancePath2(), 0.0);
     }
 
     /**
@@ -77,7 +82,7 @@ public class FlightAnalyserTest {
      */
     private double calculateCarbonEmission(double distance) {
 
-         double radius = 6371e3;   //radius of earth;
+        double radius = 6371e3;   //radius of earth;
 
 
 
@@ -124,45 +129,43 @@ public class FlightAnalyserTest {
         loader = new Loader(storage);
         loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
 
-        path1 = new ArrayList();
+
+        path1 = new ArrayList<>();
 
         path2   = new ArrayList<>();
 
-        path1.add("AER");
-        path1.add("KZN");
-        path1.add("ASF");
+        path1.add(route1.getSourceAirport());
+        path1.add(route1.getDestinationAirport());
 
-        path2.add("NBC");
-        path2.add("DME");
-        path2.add("KZN");
+        path2.add(route2.getSourceAirport());
+        path2.add(route2.getDestinationAirport());
+        System.out.println(path1);
+        System.out.println(path2);
 
-        analyser = new FlightAnalyser(path1, path2, storage);
+        findCoordinate();
+        analyser = new FlightAnalyser(route1, route2, storage);
     }
 
     @Test
     public void isDistancePath1Correct(){
         double path1Distance = analyser.getTotalDistancePath1();
-        assertEquals(2547.25576865941, path1Distance, 0.0);
-      }
+        assertEquals(distance1, path1Distance, 0.0);
+    }
 
     @Test
     public void isDistancePath2Correct(){
         double path2Distance = analyser.getTotalDistancePath2();
- ;
-        assertEquals(1608.4319442023736, path2Distance, 0.0);
+
+        assertEquals(distance2, path2Distance, 0.0);
     }
 
     @Test
     public void isEmissionPath1Correct(){
-        double path1Emission = analyser.getPath1Emission();
-        findCoordinate();
         assertEquals(calculateCarbonEmission(distance1), analyser.getPath1Emission(), 0.0);
 
     }
     @Test
     public void isEmissionPath2Correct(){
-        double path1Emission = analyser.getPath1Emission();
-        findCoordinate();
         assertEquals(calculateCarbonEmission(distance2), analyser.getPath2Emission(), 0.0);
 
     }
