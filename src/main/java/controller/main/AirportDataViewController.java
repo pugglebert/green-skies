@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 /**
  * The controller class which contains the controls for the airport data view.
- * @author Hayley Krippner
+ * @author Hayley Krippner, Ella Johnson
  * @version 1.0
  * @since 04/09/20
  */
@@ -118,6 +118,26 @@ public class AirportDataViewController extends DataViewController {
     public void filterByDataType(HashMap<String, String> filterTerms) {
         ArrayList<Airport> results = Filterer.filterAirports(filterTerms, storage.getAirports());
         tableView.setItems(FXCollections.observableList(results));
+    }
+
+    /**
+     * Clear filter choices and display all airports in table view.
+     */
+    @Override
+    public void clearFilter() {
+        for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
+            filterBox.setValue(null);
+        }
+        tableView.setItems(FXCollections.observableList(storage.getAirports()));
+    }
+
+    /**
+     * Clear search bar and display all airports in table view.
+     */
+    @Override
+    public void clearSearch() {
+        searchBar.setText(null);
+        tableView.setItems(FXCollections.observableList(storage.getAirports()));
     }
 
 }

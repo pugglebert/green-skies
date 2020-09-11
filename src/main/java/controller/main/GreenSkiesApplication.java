@@ -24,6 +24,7 @@ public class GreenSkiesApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
         primaryStage.setTitle("Welcome");
         primaryStage.setScene(new Scene(root, 1024, 640));
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
     public static void main(String[] args) {

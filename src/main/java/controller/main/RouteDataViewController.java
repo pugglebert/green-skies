@@ -107,11 +107,11 @@ public class RouteDataViewController extends DataViewController {
         List<String> tempSources = storage.getRouteSources();
         tempSources.add("Any");
         sources = FXCollections.observableArrayList(tempSources);
-        airlineSelection.setItems(sources);
+        sourceSelection.setItems(sources);
         List<String> tempDestinations = storage.getRouteDestinations();
         tempDestinations.add("Any");
         destinations = FXCollections.observableArrayList(tempDestinations);
-        airlineSelection.setItems(destinations);
+        destinationSelection.setItems(destinations);
 
         //Add choice boxes to hashmap with filter type as key
         filterSelectionBoxes.put("Airline", airlineSelection);
@@ -186,5 +186,25 @@ public class RouteDataViewController extends DataViewController {
     public void filterByDataType(HashMap<String, String> filterTerms) {
         ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getRoutes());
         tableView.setItems(FXCollections.observableList(results));
+    }
+
+    /**
+     * Clear filter choices and display all routes in table view.
+     */
+    @Override
+    public void clearFilter() {
+        for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
+            filterBox.setValue(null);
+        }
+        tableView.setItems(FXCollections.observableList(storage.getRoutes()));
+    }
+
+    /**
+     * Clear search bar and display all routes in table view.
+     */
+    @Override
+    public void clearSearch() {
+        searchBar.setText(null);
+        tableView.setItems(FXCollections.observableList(storage.getRoutes()));
     }
 }

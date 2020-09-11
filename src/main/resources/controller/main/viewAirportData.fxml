@@ -82,7 +82,7 @@
             <Label layoutX="39.0" layoutY="97.0" text="Country" />
             <Label layoutX="204.0" layoutY="97.0" text="City" />
          </children></Pane>
-      <Button fx:id="filterOptionsButton" layoutX="844.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
+      <Button fx:id="filterOptionsButton" layoutX="952.0" layoutY="182.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
       <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
       <ChoiceBox fx:id="countrySelection" layoutX="199.0" layoutY="116.0" prefWidth="150.0" />
       <ChoiceBox fx:id="citySelection" layoutX="365.0" layoutY="117.0" prefWidth="150.0" />
@@ -91,5 +91,7 @@
          <font>
             <Font size="14.0" />
          </font></Label>
+      <Button fx:id="clearFilterButton" layoutX="636.0" layoutY="117.0" mnemonicParsing="false" onAction="#clearFilter" prefHeight="25.0" prefWidth="82.0" text="Clear Filters" />
+      <Button fx:id="clearSearchButton" layoutX="775.0" layoutY="185.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear Search" />
     </children>
 </AnchorPane>

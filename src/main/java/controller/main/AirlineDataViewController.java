@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the airline data view.
  *
- * @author Hayley Krippner
+ * @author Hayley Krippner, Ella Johnson
  * @version 1.0
  * @since 04/09/20
  */
@@ -96,5 +96,25 @@ public class AirlineDataViewController extends DataViewController {
   public void filterByDataType(HashMap<String, String> filterTerms) {
     ArrayList<Airline> results = Filterer.filterAirlines(filterTerms, storage.getAirlines());
     tableView.setItems(FXCollections.observableList(results));
+  }
+
+  /**
+   * Clear filter choices and display all airlines in table view.
+   */
+  @Override
+  public void clearFilter() {
+    for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
+      filterBox.setValue(null);
+    }
+    tableView.setItems(FXCollections.observableList(storage.getAirlines()));
+  }
+
+  /**
+   * Clear search bar and display all airlines in table view.
+   */
+  @Override
+  public void clearSearch() {
+    searchBar.setText(null);
+    tableView.setItems(FXCollections.observableList(storage.getAirlines()));
   }
 }

@@ -44,6 +44,10 @@ public abstract class DataViewController extends SideNavBarController {
     protected Button filterButton;
     @FXML
     protected Label filterErrorText;
+    @FXML
+    protected Button clearFilterButton;
+    @FXML
+    protected Button clearSearchButton;
 
     protected ObservableList<String> searchTypes;
     protected HashMap<String, ChoiceBox<String>> filterSelectionBoxes = new HashMap<>();
@@ -55,6 +59,8 @@ public abstract class DataViewController extends SideNavBarController {
     public abstract void initialize(URL url, ResourceBundle rb);
     public abstract void searchByDataType(String searchTerm, String searchType);
     public abstract void filterByDataType(HashMap<String, String> filterTerms);
+    public abstract void clearFilter();
+    public abstract void clearSearch();
 
     /**
      * Checks users search for errors and displays an error message if any are present. If no errors
@@ -86,19 +92,26 @@ public abstract class DataViewController extends SideNavBarController {
      * an error message if there is an error.
      */
     public void applyFilters() {
+        filterErrorText.setVisible(false);
         HashMap<String, String> filterTerms = new HashMap();
         for (String filterType : filterSelectionBoxes.keySet()) {
             ChoiceBox<String> filterTerm = filterSelectionBoxes.get(filterType);
-            if (!filterTerm.getValue().equals("Any")){
+            if (filterTerm.getValue() != null && !filterTerm.getValue().equals("Any")){
                 filterTerms.put(filterType, filterTerm.getValue());
             }
         }
-        try {
-            filterByDataType(filterTerms);
-        } catch (RuntimeException e) {
-            filterErrorText.setText(e.getMessage());
+        if (filterTerms.size() > 0) {
+            try {
+                filterByDataType(filterTerms);
+            } catch (RuntimeException e) {
+                filterErrorText.setText(e.getMessage());
+                filterErrorText.setVisible(true);
+            }
+        } else {
+            filterErrorText.setText("No filter conditions selected");
             filterErrorText.setVisible(true);
         }
+
     }
 
     public void filterOptions() {

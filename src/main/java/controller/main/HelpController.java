@@ -28,6 +28,7 @@ public class HelpController {
         Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
         Scene scene = new Scene(root);
         stage1.setScene(scene);
+        stage1.setMaximized(true);
         stage1.show();
 
     }
