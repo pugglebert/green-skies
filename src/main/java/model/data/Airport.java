@@ -1,20 +1,22 @@
 package model.data;
 
+import java.util.Arrays;
+
 /**
  * The Airport class which contains all data for one unique airport.
- * @author Hayley Krippner
- * @version 1.2
- * @since 2020-08-11
+ * @author Enyang Zhang
+ * @version 1.3
+ * @since 2020-08-21
  */
-public class Airport {
+public class Airport implements DataType {
     private final int airportID;
     private final String name;
     private final String city;
     private final String country;
     private final String IATA;
     private final String ICAO;
-    private final float latitude;
-    private final float longitude;
+    private final double latitude;
+    private final double longitude;
     private final int altitude;
     private final float timezone;
     private final String DST;
@@ -23,8 +25,8 @@ public class Airport {
     /**
      * The Airport constructor.
      */
-    public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, float latitude,
-                   float longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
+    public Airport(int airportID, String name, String city, String country, String IATA, String ICAO, double latitude,
+                   double longitude, int altitude, float timezone, String DST, String dataBaseTimeZone){
         this.airportID = airportID;
         this.name = name;
         this.city = city;
@@ -91,7 +93,7 @@ public class Airport {
      * Getter for latitude of the Airport.
      * @return latitude.
      */
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -99,7 +101,7 @@ public class Airport {
      * Getter for the longitude of the airport.
      * @return longitude.
      */
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -133,5 +135,26 @@ public class Airport {
      */
     public String getDataBaseTimeZone() {
         return dataBaseTimeZone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Airport) {
+            Airport another = (Airport) o;
+            return (this.airportID == another.getAirportID()) &&
+                    this.name.equals(another.getName()) &&
+                    this.city.equals(another.getCity()) &&
+                    this.country.equals(another.getCountry()) &&
+                    this.IATA.equals(another.getIATA()) &&
+                    this.ICAO.equals(another.getICAO()) &&
+                    Math.abs(this.latitude - another.getLatitude()) < 0.0000001 &&
+                    Math.abs(this.longitude - another.getLongitude()) < 0.0000001 &&
+                    this.altitude == another.getAltitude() &&
+                    Math.abs(this.timezone - another.getTimezone()) < 0.0000001 &&
+                    this.DST.equals(another.getDST()) &&
+                    this.dataBaseTimeZone.equals(another.getDataBaseTimeZone());
+        } else {
+            return false;
+        }
     }
 }

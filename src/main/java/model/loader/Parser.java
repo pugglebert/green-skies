@@ -1,8 +1,8 @@
 package model.loader;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import model.data.DataType;
+
+import java.util.*;
 
 public abstract class Parser {
     protected final List<String> dataFile;
@@ -11,19 +11,44 @@ public abstract class Parser {
    * */
   protected Map<Integer, Integer> errorCollection = new HashMap<>();
 
+  /** The number of error codes for each parser type. */
+  protected int numCodes;
+
+  /** Arraylist of meaning of error codes for Parser, where each index corresponds to an error code. */
+  protected String[] errorLookup;
+
+  /** The total number of errors found while parsing the file. */
+  protected int totalErrors = 0;
+
+  /** The set contains airport, Airline, route for each sub-parser.*/
+  protected final List<DataType> parserData = new ArrayList<>();
+
+
     /**
      * Constructor of Paser class.
      * @param dataFile passed from loader, contains all data from datafile, one line per element in the list.
      */
-    public Parser(List<String> dataFile) {
+    public Parser(List<String> dataFile, int numCodes) {
         this.dataFile = dataFile;
+        this.numCodes = numCodes;
+        errorCollectionInitializer(numCodes);
+        errorLookup = new String[numCodes];
+        initErrorLookup();
     }
+
+    /** Initialize errorLookup with message for each error code */
+    protected abstract void initErrorLookup();
 
     /**Abstract class of dataPasrser.*/
     protected abstract void dataParser();
 
     /**Abstract class of validater.*/
     protected abstract boolean validater(String[] line);
+
+    /**Getter returning processed data result for all sub-parsers. */
+    public List<DataType> getData(){
+        return parserData;
+    };
 
     /**
      * Getter for error collection.
@@ -35,10 +60,10 @@ public abstract class Parser {
 
     /**
      * Initialize error code key in errorCollection.
-     * @param errorCodeNum number of error code that are expected to be generated in hashmap
+     * @param errorCodeNum number of error code that are expected to be generated in hashmap1
      */
     protected void errorCollectionInitializer(int errorCodeNum){
-        for (int i = 100; i < errorCodeNum + 100; i++){
+        for (int i = 0; i < errorCodeNum; i++){
             errorCollection.put(i, 0);
         }
     }
@@ -50,9 +75,24 @@ public abstract class Parser {
     protected void errorCounter(int key){
         try{
             errorCollection.put(key, errorCollection.get(key)+1);
-        } catch (Exception e){
-            System.out.println(key + " key not found");
+            totalErrors++;
+        } catch (NullPointerException e) {
         }
+    }
+
+    /**
+     * Create and return a message detailing the errors found in the file
+     * @return String with information about error types in fiile
+     */
+    public String getErrorMessage() {
+        String errorMessage = String.format("File uploaded with %d invalid lines rejected\n", totalErrors);
+        String template  = "Error [%d] %s: %d occurances\n";
+        for (int i = 0; i < numCodes; i++) {
+            if (errorCollection.get(i) > 0) {
+                errorMessage += String.format(template, i, errorLookup[i], errorCollection.get(i));
+            }
+        }
+        return errorMessage;
     }
 
 }
