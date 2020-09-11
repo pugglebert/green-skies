@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.data.DataType;
@@ -16,10 +15,9 @@ import model.data.Storage;
 import model.loader.Loader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.FileSystemException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -42,10 +40,6 @@ public class UploadController extends SideNavBarController {
     @FXML
     private ListView fileView;
     @FXML
-    private Text fileAcceptedText;
-    @FXML
-    private Button nextButton;
-    @FXML
     private Button backButton;
 
     /**
@@ -59,7 +53,7 @@ public class UploadController extends SideNavBarController {
     /**
      * This method opens the user's file browser when the 'browse' button is clicked.
      */
-    public void browseFiles() throws FileNotFoundException, FileSystemException {
+    public void browseFiles() {
 
         FileChooser fileChooser = new FileChooser(); //opens a file local file browser
         File selectedFile = fileChooser.showOpenDialog(null);
@@ -67,26 +61,40 @@ public class UploadController extends SideNavBarController {
         String fileType = dataTypeSelect.getValue().toString();
         String stringFile = selectedFile.toString();
 
-        Alert a = new Alert(Alert.AlertType.NONE);
-
         try{
-            //try loadFile returns a String (fileAccceptedText) when the file is accepted, with the number of rejected lines
+            //try loadFile returns a String when the file is accepted, with the number of rejected lines, this string
+            //pops up in the ConfirmALert message
             String resultString = loader.loadFile(stringFile, fileType);
-            fileAcceptedText.setText(resultString);
-            fileAcceptedText.setVisible(true);
-            fileView.getItems().add(selectedFile.getName());
-            nextButton.setVisible(true); //'Next' button pops up if a valid file has been selected
+            Alert ConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            ConfirmAlert.setContentText(resultString);
+            ConfirmAlert.setHeaderText("Confirm file upload");
+            ButtonType yesButton = new ButtonType("Yes");
+            ButtonType cancelButton = new ButtonType ("Cancel");
+            ConfirmAlert.getButtonTypes().setAll(yesButton, cancelButton);
+
+            Optional<ButtonType> result = ConfirmAlert.showAndWait();
+            if(result.get() == yesButton)
+            {
+                fileView.getItems().add(selectedFile.getName());
+                ConfirmAlert.close();
+            }
+            else if (result.get() == cancelButton)
+            {
+                ConfirmAlert.close();
+            }
+
+        }
+        //catches errors in uploading file and alerts user by displaying the error message in an error box
+        catch (Exception e){
+            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+            ErrorAlert.setContentText(e.getMessage());
+            ErrorAlert.show();
+        }
 
         for (DataType line: storage.getRoutes()){
             Route test = (Route) line;
             System.out.println(test.getAirlineID());
-            }
-        }
-        //catches errors in uploading file and alerts user by displaying the error message in an error box
-        catch (Exception e){
-            a.setAlertType(Alert.AlertType.ERROR);
-            a.setContentText(e.getMessage());
-            a.show();
         }
 //
     }
