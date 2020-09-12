@@ -9,7 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * TODO: write method comment
+ * The Controller class which contains the controls for the Welcome page, the first page shown to users.
+ * @author Grace Hanlon, Hayley Krippner
+ * @version 1.0
+ * @since 2020-08-26
  */
 public class WelcomeController {
 

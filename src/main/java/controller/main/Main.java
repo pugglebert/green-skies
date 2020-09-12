@@ -1,5 +1,6 @@
 package controller.main;
 
+import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
 
@@ -23,6 +24,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Route route1 = new Route("a", 123, "abc", 123, "abc", 123, "ABC", 123, null);
+       route1.setDistance(1234);
+       route1.setEmissions(1235);
+        storage.history.add(route1);
 
         GreenSkiesApplication.main(args);
     }
