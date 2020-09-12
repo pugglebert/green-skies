@@ -77,12 +77,9 @@
          </font></Label>
       <Button fx:id="filterOptionsButton" layoutX="841.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="20.0" prefWidth="150.0" text="Filter Options" />
       <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
-      <Label fx:id="filterErrorText" layoutX="199.0" layoutY="147.0" prefHeight="20.0" prefWidth="554.0" text="Filter error text" textFill="RED" visible="false">         <font>
-
-<!--         <Button fx:id="RankButton" layoutX="890.0" layoutY="116.0" mnemonicParsing="false" onAction="#Rank" prefHeight="26.0" prefWidth="97.0" text="Rank" />-->
-<!--         <ChoiceBox fx:id="RankSelection" layoutX="29.0" layoutY="116.0" prefHeight="26.0" prefWidth="132.0" />-->
-            <Font size="14.0" />
-         </font>
+      <Label fx:id="filterErrorText" layoutX="199.0" layoutY="147.0" prefHeight="20.0" prefWidth="554.0" text="Filter error text" textFill="RED" visible="false">
+      <Button fx:id="RankButton" layoutX="890.0" layoutY="116.0" mnemonicParsing="false" onAction="#Rank" prefHeight="26.0" prefWidth="97.0" text="Rank" />
+      <ChoiceBox fx:id="RankSelection" layoutX="29.0" layoutY="116.0" prefHeight="26.0" prefWidth="132.0" /><Font size="14.0" />
       </Label>
       <Button fx:id="clearSearchButton" layoutX="774.0" layoutY="185.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear" />
    </children>

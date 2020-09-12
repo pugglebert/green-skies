@@ -4,6 +4,7 @@ import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -135,4 +136,26 @@ public class FlightHistoryController extends DataViewController {
   public void filterOptions() throws IOException {
   }
 
+  @FXML
+  public void Rank() {
+    if(RankSelection.getSelectionModel().getSelectedItem() == "Distance") {
+      System.out.println(1);
+      Collections.sort(storage.getHistory(), new Comparator<Route>() {
+        @Override
+        public int compare(Route route1, Route route2) {
+          return Double.compare(route1.getDistance(), route2.getDistance());
+        }
+      });
+      for (Route i: storage.getHistory()){
+        System.out.println(i);
+      }
+    } else {
+      Collections.sort(storage.getHistory(), new Comparator<Route>() {
+        @Override
+        public int compare(Route route1, Route route2) {
+          return Double.compare(route1.getEmissions(), route2.getEmissions());
+        }
+      });
+    }
+  }
 }
