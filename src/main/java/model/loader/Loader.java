@@ -189,4 +189,31 @@ public class Loader {
         return parser.getErrorMessage();
 
     }
+
+    /**
+     * method to load a single data entry
+     * @param entryString
+     * @param dataType
+     * @return errorMessageString
+     */
+    public String loadLine(String entryString, String dataType) {
+
+        ArrayList<String> line = new ArrayList<String>();
+        line.add(entryString);
+
+        Parser parser;
+
+        try {
+            parser = constructParser(dataType, line);
+        } catch (RuntimeException e) {
+            throw e;
+        }
+
+        List<DataType> data = parser.getData();
+        storage.setData(data, dataType);
+
+        return parser.getErrorMessage();
+
+    }
+
 }
