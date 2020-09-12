@@ -42,6 +42,7 @@ public class UploadController extends SideNavBarController {
     @FXML
     private Button backButton;
 
+
     /**
      * This method adds the data types from dataTypeList to the dataTypeSelect list.
      */
@@ -55,48 +56,74 @@ public class UploadController extends SideNavBarController {
      */
     public void browseFiles() {
 
-        FileChooser fileChooser = new FileChooser(); //opens a file local file browser
-        File selectedFile = fileChooser.showOpenDialog(null);
+        if((dataTypeSelect.getValue()) == null){
+            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+            ErrorAlert.setContentText("You must select the type of data that you are going to add");
+            ErrorAlert.show();
 
-        String fileType = dataTypeSelect.getValue().toString();
-        String stringFile = selectedFile.toString();
+        } else {
 
-        try{
-            //try loadFile returns a String when the file is accepted, with the number of rejected lines, this string
-            //pops up in the ConfirmALert message
-            String resultString = loader.loadFile(stringFile, fileType);
+          FileChooser fileChooser = new FileChooser(); // opens a file local file browser
+          File selectedFile = fileChooser.showOpenDialog(null);
+
+          String fileType = dataTypeSelect.getValue().toString();
+          String stringFile = selectedFile.toString();
+
+          try {
+            // loadFile returns a String when the file is accepted, with the number of reject lines, this string
+            // pops up in the ConfirmALert message
+
+            String resultString = loader.checkFile(stringFile, fileType);
             Alert ConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
             ConfirmAlert.setContentText(resultString);
             ConfirmAlert.setHeaderText("Confirm file upload");
             ButtonType yesButton = new ButtonType("Yes");
-            ButtonType cancelButton = new ButtonType ("Cancel");
+            ButtonType cancelButton = new ButtonType("Cancel");
             ConfirmAlert.getButtonTypes().setAll(yesButton, cancelButton);
 
             Optional<ButtonType> result = ConfirmAlert.showAndWait();
-            if(result.get() == yesButton)
-            {
+            if (result.get() == yesButton) {
+                loader.loadFile(stringFile, fileType);
                 fileView.getItems().add(selectedFile.getName());
                 ConfirmAlert.close();
-            }
-            else if (result.get() == cancelButton)
-            {
+
+            //if user wishes to cancel the file chosne to upload they push cancel and no data is uploaded
+            } else if (result.get() == cancelButton) {
                 ConfirmAlert.close();
             }
-
-        }
-        //catches errors in uploading file and alerts user by displaying the error message in an error box
-        catch (Exception e){
+          }
+          // catches errors in uploading file and alerts user by displaying the error message in an
+          // error box
+          catch (Exception e) {
             Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
             ErrorAlert.setAlertType(Alert.AlertType.ERROR);
             ErrorAlert.setContentText(e.getMessage());
             ErrorAlert.show();
-        }
+          }
 
-        for (DataType line: storage.getRoutes()){
+          for (DataType line : storage.getRoutes()) {
             Route test = (Route) line;
             System.out.println(test.getAirlineID());
-        }
+          }
+            }
 //
+    }
+
+    public void addSingle() {
+
+        if((dataTypeSelect.getValue()) == null){
+            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+            ErrorAlert.setContentText("You must select the type of data that you are going to add");
+            ErrorAlert.show();
+
+        } else {
+
+
+
+        }
+
     }
 
     /**

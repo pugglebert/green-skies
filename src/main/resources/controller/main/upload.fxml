@@ -74,5 +74,6 @@
       <Button fx:id="browseButton1" alignment="CENTER_RIGHT" layoutX="708.0" layoutY="317.0" mnemonicParsing="false" onAction="#browseFiles" prefHeight="42.0" prefWidth="120.0" text="Browse files " textAlignment="CENTER" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text fx:id="fileAcceptedText" layoutX="385.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="434.0" />
+      <Button fx:id="addSingle" layoutX="708.0" layoutY="400.0" mnemonicParsing="false" onAction="#addSingle" prefHeight="42.0" prefWidth="120.0" text="Add single entry" />
     </children>
 </AnchorPane>

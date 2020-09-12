@@ -1,6 +1,5 @@
 package model.loader;
 
-import javafx.collections.ObservableList;
 import model.data.DataType;
 import model.data.Storage;
 
@@ -10,7 +9,6 @@ import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import static com.google.common.io.Files.getFileExtension;
 
@@ -121,6 +119,40 @@ public class Loader {
      * @param dataType The type of data in the file (one of airport, airline, flight or route).
      * @return Error information string.
      */
+
+    //checks if the file is erronous, does not upload any data as loadFile does
+    public String checkFile(String fileName, String dataType) throws FileSystemException, FileNotFoundException
+    {
+        if (fileName.isEmpty()) {
+            throw new RuntimeException("Filename cannot be empty.");
+        } else if (dataType.isEmpty()) {
+            throw new RuntimeException("Datatype cannot be empty.");
+        }
+
+        try {
+            checkFileType(fileName);
+        } catch (FileSystemException | IllegalArgumentException e) {
+            throw e;
+        }
+
+        ArrayList<String> lines;
+
+        try {
+            lines = openFile(fileName);
+        } catch (FileNotFoundException e) {
+            throw e;
+        }
+
+        Parser parser;
+
+        try {
+            parser = constructParser(dataType, lines);
+        } catch (RuntimeException e) {
+            throw e;
+        }
+        return parser.getErrorMessage();
+    }
+
     public String loadFile(String fileName, String dataType) throws FileSystemException, FileNotFoundException {
 
         if (fileName.isEmpty()) {
