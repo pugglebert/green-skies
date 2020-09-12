@@ -1,0 +1,25 @@
+
+u
+java:S2737—"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8éÀÔøÀ.
+t
+java:S2737d"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
+t
+java:S2737]"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8ĞœÔøÀ.
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ˆÑ¢æ8‘¨ÀÆÁ.
+L
+java:S1128"*Remove this unused import 'java.util.Set'.(ö²„¤şÿÿÿÿ8ıåŠ˜Ã.
+M
+java:S39723"7Move this "if" to a new line or add the missing "else".(ÉŒÎ¾
+ƒ
+java:S1130/"mRemove the declaration of thrown exception 'java.lang.IllegalArgumentException' which is a runtime exception.(»•„Â
+`
+java:S1128">Remove this unused import 'javafx.collections.ObservableList'.(ÄÜ€éüÿÿÿÿ8ıåŠ˜Ã.
+Š
+java:S1130T"mRemove the declaration of thrown exception 'java.lang.IllegalArgumentException' which is a runtime exception.(ûĞä¼8ĞœÔøÀ.
+t
+java:S2737k"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(éø¥O8ıåŠ˜Ã.
+u
+java:S2737"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
+u
+java:S2737‡"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8éÀÔøÀ.

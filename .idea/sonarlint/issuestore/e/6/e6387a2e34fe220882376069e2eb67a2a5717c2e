@@ -1,0 +1,5 @@
+
+P
+java:S1128"5Remove this unused import 'javafx.event.ActionEvent'.(î•¯¼ýÿÿÿÿ
+o	java:S116"URename this field "BackButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ì¤ŠÌþÿÿÿÿ
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÑÜ¹ýÿÿÿÿ

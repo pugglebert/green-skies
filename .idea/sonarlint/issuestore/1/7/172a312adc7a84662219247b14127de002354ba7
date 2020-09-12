@@ -1,0 +1,12 @@
+
+p	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÑÄ€üÿÿÿÿ8ûâÚÃ.
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÄ¤›ùÿÿÿÿ8ûâÚÃ.
+O
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8ûâÚÃ.
+k	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¦á8ûâÚÃ.
+c	java:S107"BConstructor has 12 parameters, which is greater than 7 authorized.(ÂÄ¤›ùÿÿÿÿ8ûâÚÃ.
+s
+java:S1206"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ8ûâÚÃ.
+o	java:S116"NRename this field "DST" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€çÅşÿÿÿÿ8ûâÚÃ.
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÄ¤›ùÿÿÿÿ8ûâÚÃ.
+r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆè²™ÿÿÿÿÿ8ûâÚÃ.
