@@ -39,9 +39,8 @@ public class AirlineDataViewController extends DataViewController {
 
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-  private ObservableList<String> countries;
   private final ObservableList<String> activeStatuses =
-      FXCollections.observableArrayList("Any", "True", "False");
+      FXCollections.observableArrayList("True", "False");
 
   /**
    * Initializes the controller class.
@@ -67,15 +66,8 @@ public class AirlineDataViewController extends DataViewController {
 
     // Setup choice boxes
     searchTypeSelection.setItems(searchTypes);
-    List<String> tempCountries = storage.getAirlineCounties();
-    tempCountries.add("Any");
-    countries = FXCollections.observableArrayList(tempCountries);
-    countrySelection.setItems(countries);
     activeSelection.setItems(activeStatuses);
 
-    // Add filter selection boxes to HashMap with filter type as key
-    filterSelectionBoxes.put("Country", countrySelection);
-    filterSelectionBoxes.put("Active status", activeSelection);
   }
 
   /**
@@ -86,27 +78,6 @@ public class AirlineDataViewController extends DataViewController {
     ArrayList<Airline> results =
         Searcher.searchAirlines(searchTerm, searchType, storage.getAirlines());
     tableView.setItems(FXCollections.observableList(results));
-  }
-
-  /**
-   * Calls filterAirlines method of Filterer class and sets table to display results.
-   * @param filterTerms A hashmap where the key is the filter type and the value is the term
-   *                    the filter should match.
-   */
-  public void filterByDataType(HashMap<String, String> filterTerms) {
-    ArrayList<Airline> results = Filterer.filterAirlines(filterTerms, storage.getAirlines());
-    tableView.setItems(FXCollections.observableList(results));
-  }
-
-  /**
-   * Clear filter choices and display all airlines in table view.
-   */
-  @Override
-  public void clearFilter() {
-    for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
-      filterBox.setValue(null);
-    }
-    tableView.setItems(FXCollections.observableList(storage.getAirlines()));
   }
 
   /**
