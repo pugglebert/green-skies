@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 /**
  * The controller class which contains the controls for the upload data view.
- * @author Grace Hanlon, Hayley Krippner
+ * @author Grace Hanlon
  * @version 1.0
  * @since 2020-08-26
  */
@@ -52,17 +52,27 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * This method opens the user's file browser when the 'browse' button is clicked.
+     * This method returns a boolan value based on whether the user has selected a data type or not
      */
-    public void browseFiles() {
+    public boolean checkDataTypeSelected() {
 
         if((dataTypeSelect.getValue()) == null){
             Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
             ErrorAlert.setAlertType(Alert.AlertType.ERROR);
             ErrorAlert.setContentText("You must select the type of data that you are going to add");
             ErrorAlert.show();
-
+            return false;
         } else {
+            return true;
+        }
+    }
+
+    /**
+     * This method opens the user's file browser when the 'browse' button is clicked.
+     */
+    public void browseFiles() {
+
+        if(checkDataTypeSelected()) {
 
           FileChooser fileChooser = new FileChooser(); // opens a file local file browser
           File selectedFile = fileChooser.showOpenDialog(null);
@@ -93,8 +103,7 @@ public class UploadController extends SideNavBarController {
                 ConfirmAlert.close();
             }
           }
-          // catches errors in uploading file and alerts user by displaying the error message in an
-          // error box
+          // catches errors in uploading file and alerts user by displaying the error message in an error box
           catch (Exception e) {
             Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
             ErrorAlert.setAlertType(Alert.AlertType.ERROR);
@@ -102,26 +111,44 @@ public class UploadController extends SideNavBarController {
             ErrorAlert.show();
           }
 
+          //only load data if it is not erroneous
           for (DataType line : storage.getRoutes()) {
             Route test = (Route) line;
             System.out.println(test.getAirlineID());
           }
-            }
+        }
 //
     }
+    /**
+     * This method opens a screen for singular manual data entry when the 'Add single entry' button is clicked.
+     */
+    public void addSingle() throws IOException {
 
-    public void addSingle() {
-
-        if((dataTypeSelect.getValue()) == null){
-            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
-            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
-            ErrorAlert.setContentText("You must select the type of data that you are going to add");
-            ErrorAlert.show();
-
-        } else {
-
-
-
+        //Checks to see that the user has chosen a data type
+        if (checkDataTypeSelected()) {
+          String fileType = dataTypeSelect.getValue().toString();
+          //checks which data type was chosen by the user so the correc single data entry window is opened
+          if (fileType == "Airport") {
+              Stage newStage = new Stage();
+              Parent root = FXMLLoader.load(getClass().getResource("airportSingleEntry.fxml"));
+              Scene scene = new Scene(root);
+              newStage.setScene(scene);
+              newStage.show();
+              }
+          else if (fileType == "Airline") {
+              Stage newStage = new Stage();
+              Parent root = FXMLLoader.load(getClass().getResource("airlineSingleEntry.fxml"));
+              Scene scene = new Scene(root);
+              newStage.setScene(scene);
+              newStage.show();
+              }
+          else if (fileType == "Route") {
+              Stage newStage = new Stage();
+              Parent root = FXMLLoader.load(getClass().getResource("routeSingleEntry.fxml"));
+              Scene scene = new Scene(root);
+              newStage.setScene(scene);
+              newStage.show();
+          }
         }
 
     }
