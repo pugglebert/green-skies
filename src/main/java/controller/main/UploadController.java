@@ -51,18 +51,26 @@ public class UploadController extends SideNavBarController {
         dataTypeSelect.getItems().addAll(dataTypeList);
     }
 
-    /**
-     * This method opens the user's file browser when the 'browse' button is clicked.
-     */
-    public void browseFiles() {
+
+    public boolean checkDataTypeSelected() {
 
         if((dataTypeSelect.getValue()) == null){
             Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
             ErrorAlert.setAlertType(Alert.AlertType.ERROR);
             ErrorAlert.setContentText("You must select the type of data that you are going to add");
             ErrorAlert.show();
-
+            return false;
         } else {
+            return true;
+        }
+    }
+
+    /**
+     * This method opens the user's file browser when the 'browse' button is clicked.
+     */
+    public void browseFiles() {
+
+        if(checkDataTypeSelected()) {
 
           FileChooser fileChooser = new FileChooser(); // opens a file local file browser
           File selectedFile = fileChooser.showOpenDialog(null);
@@ -106,22 +114,35 @@ public class UploadController extends SideNavBarController {
             Route test = (Route) line;
             System.out.println(test.getAirlineID());
           }
-            }
+        }
 //
     }
 
-    public void addSingle() {
+    public void addSingle() throws IOException {
 
-        if((dataTypeSelect.getValue()) == null){
-            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
-            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
-            ErrorAlert.setContentText("You must select the type of data that you are going to add");
-            ErrorAlert.show();
-
-        } else {
-
-
-
+        if (checkDataTypeSelected()) {
+          String fileType = dataTypeSelect.getValue().toString();
+          if (fileType == "Airport") {
+              Stage newStage = new Stage();
+              Parent root = FXMLLoader.load(getClass().getResource("airportSingleEntry.fxml"));
+              Scene scene = new Scene(root);
+              newStage.setScene(scene);
+              newStage.show();
+              }
+          else if (fileType == "Airline") {
+              Stage newStage = new Stage();
+              Parent root = FXMLLoader.load(getClass().getResource("airlineSingleEntry.fxml"));
+              Scene scene = new Scene(root);
+              newStage.setScene(scene);
+              newStage.show();
+              }
+          else if (fileType == "Route") {
+              Stage newStage = new Stage();
+              Parent root = FXMLLoader.load(getClass().getResource("routeSingleEntry.fxml"));
+              Scene scene = new Scene(root);
+              newStage.setScene(scene);
+              newStage.show();
+          }
         }
 
     }
