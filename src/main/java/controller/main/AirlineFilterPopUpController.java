@@ -21,6 +21,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * A pop up window in which the user can select filters to apply to the list of Routes.
+ * @author Ella Johnson
+ * @version 1.0
+ * @since 12/09/2020
+ */
 public class AirlineFilterPopUpController implements Initializable {
 
     @FXML
@@ -36,11 +42,25 @@ public class AirlineFilterPopUpController implements Initializable {
     @FXML
     private Label errorText;
 
+    /**
+     * The filtered airlines. Initialized to the List of Airlines stored in Storage.
+     */
     private ArrayList<Airline> airlines;
-    private Storage storage = Main.getStorage();
+    private final Storage storage = Main.getStorage();
+    /**
+     * The two options for the active status of an airline.
+     */
     private final ObservableList<String> activeOptions = FXCollections.observableArrayList("True", "False");
+    /**
+     * The class from which the AirlineFilterPopUpController was instantiated.
+     */
     private AirlineDataViewController caller;
 
+    /**
+     * Initialize airlines to the List stored in Storage and set activeSelection to give the options "True" or "False".
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         airlines = (ArrayList) storage.getAirlines();
@@ -48,6 +68,11 @@ public class AirlineFilterPopUpController implements Initializable {
         activeSelection.setValue("True");
     }
 
+    /**
+     * Display the filter pop up window.
+     * @param caller The class from which this method has been called.
+     * @throws IOException
+     */
     public void display(AirlineDataViewController caller) throws IOException {
         final Stage filterPopUp = new Stage();
         this.caller = caller;
@@ -58,9 +83,13 @@ public class AirlineFilterPopUpController implements Initializable {
         filterPopUp.show();
     }
 
+    /**
+     * Get the filter type and terms that have been applied by the user and pass them into the filter method. Sets the
+     * airlines displayed in the caller's tableview to be the result of this filter.
+     */
     public void applyFilters() {
         errorText.setVisible(false);
-        HashMap<String, String> filterTerms = new HashMap();
+        HashMap<String, String> filterTerms = new HashMap<>();
         if (countryCheckBox.isSelected()) {
             filterTerms.put("Country", countryField.getText());
         }

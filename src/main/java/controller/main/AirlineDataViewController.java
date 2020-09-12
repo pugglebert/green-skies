@@ -94,11 +94,19 @@ public class AirlineDataViewController extends DataViewController {
     tableView.setItems(FXCollections.observableList(storage.getAirlines()));
   }
 
+  /**
+   * Display the filter pop up box.
+   * @throws IOException
+   */
   public void filterOptions() throws IOException {
     AirlineFilterPopUpController filterPopUp = new AirlineFilterPopUpController();
     filterPopUp.display(this);
   }
 
+  /**
+   * Display the given airlines in the table view.
+   * @param airlines an ArrayList of Airlines to be displayed.
+   */
   public void setAirlines(ArrayList<Airline> airlines) {
     ObservableList<Airline> observableAirlines = FXCollections.observableList(airlines);
     tableView.setItems(observableAirlines);
