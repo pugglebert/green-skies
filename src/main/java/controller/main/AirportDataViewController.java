@@ -103,7 +103,20 @@ public class AirportDataViewController extends DataViewController {
         tableView.setItems(FXCollections.observableList(storage.getAirports()));
     }
 
+    /**
+     * Open the filter options pop up.
+     */
     public void filterOptions() throws IOException {
+        AirportFilterPopUpController filterPopUpController = new AirportFilterPopUpController();
+        filterPopUpController.display(this);
+    }
+
+    /**
+     * Display the ArrayList of airport in the table view.
+     * @param airports an ArrayList of Airports to be displayed.
+     */
+    public void setAirports(ArrayList<Airport> airports) {
+        tableView.setItems(FXCollections.observableList(airports));
     }
 
 }

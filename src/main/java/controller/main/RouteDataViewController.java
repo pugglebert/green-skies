@@ -160,6 +160,20 @@ public class RouteDataViewController extends DataViewController {
         tableView.setItems(FXCollections.observableList(storage.getRoutes()));
     }
 
+    /**
+     * Launch the filter pop up box.
+     * @throws IOException
+     */
     public void filterOptions() throws IOException {
+        RouteFilterPopUpController filterPopUp = new RouteFilterPopUpController();
+        filterPopUp.display(this);
+    }
+
+    /**
+     * Display the given routes in the table view.
+     * @param routes an ArrayList of Routes to be displayed.
+     */
+    public void setRoutes(ArrayList<Route> routes) {
+        tableView.setItems(FXCollections.observableList(routes));
     }
 }
