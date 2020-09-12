@@ -5,9 +5,16 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.data.Airline;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,15 +40,13 @@ public class AirlineDataViewController extends DataViewController {
   @FXML private TableColumn<Airline, String> callsignColumn;
   @FXML private TableColumn<Airline, String> countryColumn;
   @FXML private TableColumn<Airline, Boolean> activeStatusColumn;
-  @FXML private ChoiceBox<String> countrySelection;
-  @FXML private ChoiceBox<String> activeSelection;
-  @FXML private Button filterButton;
+
 
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
   private final ObservableList<String> activeStatuses =
       FXCollections.observableArrayList("True", "False");
-
+  private AirlineFilterPopUpController filterPopUp;
   /**
    * Initializes the controller class.
    *
@@ -66,8 +71,8 @@ public class AirlineDataViewController extends DataViewController {
 
     // Setup choice boxes
     searchTypeSelection.setItems(searchTypes);
-    activeSelection.setItems(activeStatuses);
 
+    filterPopUpFilename = "airlineFilterPopUp.fxml";
   }
 
   /**
@@ -87,5 +92,15 @@ public class AirlineDataViewController extends DataViewController {
   public void clearSearch() {
     searchBar.setText(null);
     tableView.setItems(FXCollections.observableList(storage.getAirlines()));
+  }
+
+  public void filterOptions() throws IOException {
+    AirlineFilterPopUpController filterPopUp = new AirlineFilterPopUpController();
+    filterPopUp.display(this);
+  }
+
+  public void setAirlines(ArrayList<Airline> airlines) {
+    ObservableList<Airline> observableAirlines = FXCollections.observableList(airlines);
+    tableView.setItems(observableAirlines);
   }
 }

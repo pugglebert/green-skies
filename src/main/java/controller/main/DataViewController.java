@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.data.Storage;
 import java.io.IOException;
@@ -42,8 +43,10 @@ public abstract class DataViewController extends SideNavBarController {
     protected Label errorText;
     @FXML
     protected Button clearSearchButton;
+    @FXML
+    protected Button filterOptionsButton;
 
-
+    protected String filterPopUpFilename;
     protected ObservableList<String> searchTypes;
     protected final Storage storage = Main.getStorage();
 
@@ -53,6 +56,7 @@ public abstract class DataViewController extends SideNavBarController {
     public abstract void initialize(URL url, ResourceBundle rb);
     public abstract void searchByDataType(String searchTerm, String searchType);
     public abstract void clearSearch();
+    public abstract void filterOptions() throws IOException;
 
     /**
      * Checks users search for errors and displays an error message if any are present. If no errors
@@ -76,10 +80,6 @@ public abstract class DataViewController extends SideNavBarController {
                 errorText.setVisible(true);
             }
         }
-
-    }
-
-    public void filterOptions() {
 
     }
 

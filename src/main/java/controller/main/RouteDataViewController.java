@@ -159,4 +159,7 @@ public class RouteDataViewController extends DataViewController {
         searchBar.setText(null);
         tableView.setItems(FXCollections.observableList(storage.getRoutes()));
     }
+
+    public void filterOptions() throws IOException {
+    }
 }

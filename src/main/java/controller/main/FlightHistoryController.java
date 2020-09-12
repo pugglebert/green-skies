@@ -130,4 +130,7 @@ public class FlightHistoryController extends DataViewController {
     tableView.setItems(FXCollections.observableList(storage.getHistory()));
   }
 
+  public void filterOptions() throws IOException {
+  }
+
 }

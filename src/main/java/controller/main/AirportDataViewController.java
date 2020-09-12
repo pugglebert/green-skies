@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airline;
 import model.data.Airport;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,6 +101,9 @@ public class AirportDataViewController extends DataViewController {
     public void clearSearch() {
         searchBar.setText(null);
         tableView.setItems(FXCollections.observableList(storage.getAirports()));
+    }
+
+    public void filterOptions() throws IOException {
     }
 
 }
