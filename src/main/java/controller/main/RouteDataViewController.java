@@ -161,5 +161,11 @@ public class RouteDataViewController extends DataViewController {
     }
 
     public void filterOptions() throws IOException {
+        RouteFilterPopUpController filterPopUp = new RouteFilterPopUpController();
+        filterPopUp.display(this);
+    }
+
+    public void setRoutes(ArrayList<Route> routes) {
+        tableView.setItems(FXCollections.observableList(routes));
     }
 }

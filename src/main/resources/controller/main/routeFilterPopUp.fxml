@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteFilterPopUpController">
+    <children>
+        <CheckBox fx:id="airlineCheckBox" layoutX="40.0" layoutY="85.0" mnemonicParsing="false" text="Airline IATA/ICAO" />
+        <CheckBox fx:id="sourceCheckBox" layoutX="39.0" layoutY="124.0" mnemonicParsing="false" text="Source IATA/ICAO" />
+        <TextField fx:id="airlineField" layoutX="231.0" layoutY="81.0" prefHeight="26.0" prefWidth="136.0" />
+        <Button fx:id="filterButton" layoutX="41.0" layoutY="229.0" mnemonicParsing="false" onAction="#applyFilters" text="Appy Filters" />
+        <Label layoutX="40.0" layoutY="42.0" text="Filter routes by...">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="errorText" layoutX="39.0" layoutY="201.0" text="No matches found" textFill="RED" visible="false" />
+      <CheckBox fx:id="destinationCheckBox" layoutX="40.0" layoutY="164.0" mnemonicParsing="false" text="Destination IATA/ICAO" />
+      <TextField fx:id="sourceField" layoutX="231.0" layoutY="120.0" prefHeight="26.0" prefWidth="136.0" />
+      <TextField fx:id="destinationField" layoutX="232.0" layoutY="160.0" prefHeight="26.0" prefWidth="136.0" />
+    </children>
+</AnchorPane>

@@ -12,47 +12,48 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.data.Airline;
+import model.data.Route;
 import model.data.Storage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class AirlineFilterPopUpController implements Initializable {
+public class RouteFilterPopUpController implements Initializable {
 
     @FXML
     private Button filterButton;
     @FXML
-    private CheckBox countryCheckBox;
+    private CheckBox airlineCheckBox;
     @FXML
-    private CheckBox activeCheckBox;
+    private CheckBox sourceCheckBox;
     @FXML
-    private TextField countryField;
+    private CheckBox destinationCheckBox;
     @FXML
-    private ChoiceBox<String> activeSelection;
+    private TextField airlineField;
+    @FXML
+    private TextField sourceField;
+    @FXML
+    private TextField destinationField;
     @FXML
     private Label errorText;
 
-    private ArrayList<Airline> airlines;
-    private Storage storage = Main.getStorage();
-    private final ObservableList<String> activeOptions = FXCollections.observableArrayList("True", "False");
-    private AirlineDataViewController caller;
+    private ArrayList<Route> routes;
+    private final Storage storage = Main.getStorage();
+    private RouteDataViewController caller;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        airlines = (ArrayList) storage.getAirlines();
-        activeSelection.setItems(activeOptions);
-        activeSelection.setValue("True");
+        routes = (ArrayList<Route>) storage.getRoutes();
     }
 
-    public void display(AirlineDataViewController caller) throws IOException {
+    public void display(RouteDataViewController caller) throws IOException {
         final Stage filterPopUp = new Stage();
         this.caller = caller;
         filterPopUp.initModality(Modality.APPLICATION_MODAL);
-        Parent root = FXMLLoader.load(getClass().getResource("airlineFilterPopUp.fxml")); //open the Upload Data page
+        Parent root = FXMLLoader.load(getClass().getResource("routeFilterPopUp.fxml")); //open the Upload Data page
         Scene scene = new Scene(root);
         filterPopUp.setScene(scene);
         filterPopUp.show();
@@ -60,16 +61,19 @@ public class AirlineFilterPopUpController implements Initializable {
 
     public void applyFilters() {
         errorText.setVisible(false);
-        HashMap<String, String> filterTerms = new HashMap();
-        if (countryCheckBox.isSelected()) {
-            filterTerms.put("Country", countryField.getText());
+        HashMap<String, String> filterTerms = new HashMap<>();
+        if (airlineCheckBox.isSelected()) {
+            filterTerms.put("Airline", airlineField.getText());
         }
-        if (activeCheckBox.isSelected()) {
-            filterTerms.put("Active status", activeSelection.getValue());
+        if (sourceCheckBox.isSelected()) {
+            filterTerms.put("Source", sourceField.getText());
+        }
+        if (destinationCheckBox.isSelected()) {
+            filterTerms.put("Destination", destinationField.getText());
         }
         if (!filterTerms.isEmpty()) {
-            airlines = Filterer.filterAirlines(filterTerms, storage.getAirlines());
-            caller.setAirlines(airlines);
+            routes = Filterer.filterRoutes(filterTerms, storage.getRoutes());
+            caller.setRoutes(routes);
             /*} catch (RuntimeException e) {
                 if (e.getMessage() == null) {
                     errorText.setText("Something went wrong.");
@@ -83,6 +87,5 @@ public class AirlineFilterPopUpController implements Initializable {
             errorText.setVisible(true);
         }
     }
-
 
 }

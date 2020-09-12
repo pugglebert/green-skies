@@ -104,6 +104,12 @@ public class AirportDataViewController extends DataViewController {
     }
 
     public void filterOptions() throws IOException {
+        AirportFilterPopUpController filterPopUpController = new AirportFilterPopUpController();
+        filterPopUpController.display(this);
+    }
+
+    public void setAirports(ArrayList<Airport> airports) {
+        tableView.setItems(FXCollections.observableList(airports));
     }
 
 }
