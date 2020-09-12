@@ -14,6 +14,11 @@ import java.util.*;
  */
 public class Filterer {
 
+    private ArrayList<Airport> filteredAirports;
+    private ArrayList<Airline> filteredAirlines;
+    private ArrayList<Route> filteredRoutes;
+    private boolean filterSuccess;
+
     /**
    * Filters airport data to get the Airport records that contain the desired filter entries.
    *
@@ -22,7 +27,7 @@ public class Filterer {
    * @param airports a List of Airports to filter.
    * @return an ArrayList of the Airports that are filtered based on the filter terms.
    */
-  public static ArrayList<Airport> filterAirports(HashMap<String, String> filterTerms, List<Airport> airports) {
+  public void filterAirports(HashMap<String, String> filterTerms, List<Airport> airports) {
 
     ArrayList<ArrayList<Airport>> individualLists = new ArrayList<>();
     //Iterate through and perform a search for each term and add these lists to an overall list.
@@ -44,7 +49,7 @@ public class Filterer {
         throw new RuntimeException("No entries match your filter term(s).");
       }
 
-    return filteredAirports;
+    this.filteredAirports = filteredAirports;
 
     }
 
@@ -114,6 +119,18 @@ public class Filterer {
 
         return filteredRoutes;
 
+    }
+
+    public void setFilterSuccess(boolean bool) {
+        filterSuccess = bool;
+    }
+
+    public boolean getFilterSuccess() {
+        return filterSuccess;
+    }
+
+    public List<Airport> getFilteredAirports() {
+        return filteredAirports;
     }
 
 }
