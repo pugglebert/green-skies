@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * The controller class which contains the controls for the airline data view.
@@ -109,23 +110,6 @@ public class FlightHistoryController extends DataViewController {
 
     //Set choice box to list of potential search types
     searchTypeSelection.setItems(searchTypes);
-    RankSelection.setItems((RankTypes));
-
-    //Set up choice boxes for filter options
-    List<String> tempAirlines = storage.getRouteAirlines();
-    tempAirlines.add("Any");
-    airlineSelection.setItems(FXCollections.observableArrayList(tempAirlines));
-    List<String> tempSources = storage.getRouteSources();
-    tempSources.add("Any");
-    sourceSelection.setItems(FXCollections.observableArrayList(tempSources));
-    List<String> tempDestinations = storage.getRouteDestinations();
-    tempDestinations.add("Any");
-    destinationSelection.setItems(FXCollections.observableArrayList(tempDestinations));
-
-    //Add choice boxes to hashmap with filter type as key
-    filterSelectionBoxes.put("Airline", airlineSelection);
-    filterSelectionBoxes.put("Source", sourceSelection);
-    filterSelectionBoxes.put("Destination", destinationSelection);
   }
 
   /**
@@ -140,27 +124,6 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * Filters history to routes that match the filter types and terms and displays them in the tableview.
-   * @param filterTerms a hashmap fo terms to match and their corresponding attribute.
-   */
-  @Override
-  public void filterByDataType(HashMap<String, String> filterTerms) {
-    ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getHistory());
-    tableView.setItems(FXCollections.observableList(results));
-  }
-
-  /**
-   * Clear filter choices and display all history in table view.
-   */
-  @Override
-  public void clearFilter() {
-    for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
-      filterBox.setValue(null);
-    }
-    tableView.setItems(FXCollections.observableList(storage.getHistory()));
-  }
-
-  /**
    * Clear search bar and display all history in table view.
    */
   @Override
@@ -169,28 +132,7 @@ public class FlightHistoryController extends DataViewController {
     tableView.setItems(FXCollections.observableList(storage.getHistory()));
   }
 
-
-  @FXML
-  public void Rank() {
-      if(RankSelection.getSelectionModel().getSelectedItem() == "Distance") {
-        System.out.println(1);
-          Collections.sort(storage.getHistory(), new Comparator<Route>() {
-            @Override
-            public int compare(Route route1, Route route2) {
-              return Double.compare(route1.getDistance(), route2.getDistance());
-            }
-          });
-          for (Route i: storage.getHistory()){
-            System.out.println(i);
-          }
-      } else {
-          Collections.sort(storage.getHistory(), new Comparator<Route>() {
-            @Override
-            public int compare(Route route1, Route route2) {
-              return Double.compare(route1.getEmissions(), route2.getEmissions());
-            }
-          });
-      }
+  public void filterOptions() throws IOException {
   }
 
 }

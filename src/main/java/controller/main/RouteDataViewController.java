@@ -54,18 +54,8 @@ public class RouteDataViewController extends DataViewController {
     private TableColumn<Route, String[]> equipmentColumn;
     @FXML
     private Button btnFlightHistory;
-    @FXML
-    private ChoiceBox<String> airlineSelection;
-    @FXML
-    private ChoiceBox<String> sourceSelection;
-    @FXML
-    private ChoiceBox<String> destinationSelection;
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
-    private ObservableList<String> airlines;
-    private ObservableList<String> sources;
-    private ObservableList<String> destinations;
-
 
     public RouteDataViewController() {
     }
@@ -100,23 +90,6 @@ public class RouteDataViewController extends DataViewController {
 
         //Setup choice boxes
         searchTypeSelection.setItems(searchTypes);
-        List<String> tempAirlines = storage.getRouteAirlines();
-        tempAirlines.add("Any");
-        airlines = FXCollections.observableArrayList(tempAirlines);
-        airlineSelection.setItems(airlines);
-        List<String> tempSources = storage.getRouteSources();
-        tempSources.add("Any");
-        sources = FXCollections.observableArrayList(tempSources);
-        sourceSelection.setItems(sources);
-        List<String> tempDestinations = storage.getRouteDestinations();
-        tempDestinations.add("Any");
-        destinations = FXCollections.observableArrayList(tempDestinations);
-        destinationSelection.setItems(destinations);
-
-        //Add choice boxes to hashmap with filter type as key
-        filterSelectionBoxes.put("Airline", airlineSelection);
-        filterSelectionBoxes.put("Source", sourceSelection);
-        filterSelectionBoxes.put("Destination", destinationSelection);
     }
 
     /**
@@ -179,32 +152,14 @@ public class RouteDataViewController extends DataViewController {
     }
 
     /**
-     * Calls filterRoutes method of Filterer class and sets table to display results.
-     * @param filterTerms A hashmap where the key is the type of filter and the value is the
-     *                    term the filter should match.
-     */
-    public void filterByDataType(HashMap<String, String> filterTerms) {
-        ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getRoutes());
-        tableView.setItems(FXCollections.observableList(results));
-    }
-
-    /**
-     * Clear filter choices and display all routes in table view.
-     */
-    @Override
-    public void clearFilter() {
-        for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
-            filterBox.setValue(null);
-        }
-        tableView.setItems(FXCollections.observableList(storage.getRoutes()));
-    }
-
-    /**
      * Clear search bar and display all routes in table view.
      */
     @Override
     public void clearSearch() {
         searchBar.setText(null);
         tableView.setItems(FXCollections.observableList(storage.getRoutes()));
+    }
+
+    public void filterOptions() throws IOException {
     }
 }

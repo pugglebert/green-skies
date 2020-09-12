@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
             <columns>
@@ -75,24 +75,14 @@
            <font>
                <Font size="14.0" />
            </font></Label>
-       <Pane layoutX="163.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;">
-         <children>
-            <Label layoutX="50.0" layoutY="95.0" text="Airline" />
-            <Label layoutX="188.0" layoutY="96.0" text="Source" />
-            <Label layoutX="337.0" layoutY="99.0" text="Destination" />
-         </children></Pane>
-       <Button fx:id="filterOptionsButton" layoutX="945.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options" />
+       <Pane layoutX="163.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;" />
+       <Button fx:id="filterOptionsButton" layoutX="849.0" layoutY="186.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="27.0" prefWidth="150.0" text="Filter Options" />
        <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
-      <ChoiceBox fx:id="airlineSelection" layoutX="199.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
-      <ChoiceBox fx:id="sourceSelection" layoutX="346.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" />
-      <ChoiceBox fx:id="destinationSelection" layoutX="494.0" layoutY="120.0" prefHeight="26.0" prefWidth="132.0" />
-      <Button fx:id="filterButton" layoutX="640.0" layoutY="119.0" mnemonicParsing="false" onAction="#applyFilters" prefHeight="26.0" prefWidth="125.0" text="Apply Filters" />
       <Label fx:id="filterErrorText" layoutX="213.0" layoutY="146.0" text="Filter error message goes here" textFill="RED" visible="false">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="clearFilterButton" layoutX="780.0" layoutY="121.0" mnemonicParsing="false" onAction="#clearFilter" prefHeight="25.0" prefWidth="78.0" text="Clear Filters" />
-      <Button fx:id="clearSearchButton" layoutX="778.0" layoutY="185.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear Search" />
+      <Button fx:id="clearSearchButton" layoutX="778.0" layoutY="185.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear" />
    </children>
 </AnchorPane>

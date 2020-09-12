@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airline;
 import model.data.Airport;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,14 +52,8 @@ public class AirportDataViewController extends DataViewController {
     private TableColumn<Airport, String> DSTColumn;
     @FXML
     private TableColumn<Airport, String> dataBaseTimeZoneColumn;
-    @FXML
-    private ChoiceBox<String> countrySelection;
-    @FXML
-    private ChoiceBox<String> citySelection;
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-    private ObservableList<String> countries;
-    private ObservableList<String> cities;
 
     /**
      * Initializes the controller class.
@@ -86,18 +82,6 @@ public class AirportDataViewController extends DataViewController {
 
         //Setup choice boxes
         searchTypeSelection.setItems(searchTypes);
-        List<String> tempCountries = storage.getAirportCountries();
-        tempCountries.add("Any");
-        countries = FXCollections.observableArrayList(tempCountries);
-        countrySelection.setItems(countries);
-        List<String> tempCities = storage.getAirportCities();
-        tempCities.add("Any");
-        cities = FXCollections.observableArrayList(tempCities);
-        citySelection.setItems(cities);
-
-        //Add filter choice boxes to hashmap with filter type as key
-        filterSelectionBoxes.put("Country", countrySelection);
-        filterSelectionBoxes.put("City", citySelection);
 
     }
 
@@ -111,33 +95,15 @@ public class AirportDataViewController extends DataViewController {
     }
 
     /**
-     * Calls filterAirports method of Filterer class and sets table to display results.
-     * @param filterTerms A hashmap where the key is the filter type and the value is the term
-     *                    the filter should match.
-     */
-    public void filterByDataType(HashMap<String, String> filterTerms) {
-        ArrayList<Airport> results = Filterer.filterAirports(filterTerms, storage.getAirports());
-        tableView.setItems(FXCollections.observableList(results));
-    }
-
-    /**
-     * Clear filter choices and display all airports in table view.
-     */
-    @Override
-    public void clearFilter() {
-        for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
-            filterBox.setValue(null);
-        }
-        tableView.setItems(FXCollections.observableList(storage.getAirports()));
-    }
-
-    /**
      * Clear search bar and display all airports in table view.
      */
     @Override
     public void clearSearch() {
         searchBar.setText(null);
         tableView.setItems(FXCollections.observableList(storage.getAirports()));
+    }
+
+    public void filterOptions() throws IOException {
     }
 
 }
