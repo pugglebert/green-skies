@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 /**
  * The controller class which contains the controls for the upload data view.
- * @author Grace Hanlon, Hayley Krippner
+ * @author Grace Hanlon
  * @version 1.0
  * @since 2020-08-26
  */
@@ -51,7 +51,9 @@ public class UploadController extends SideNavBarController {
         dataTypeSelect.getItems().addAll(dataTypeList);
     }
 
-
+    /**
+     * This method returns a boolan value based on whether the user has selected a data type or not
+     */
     public boolean checkDataTypeSelected() {
 
         if((dataTypeSelect.getValue()) == null){
@@ -101,8 +103,7 @@ public class UploadController extends SideNavBarController {
                 ConfirmAlert.close();
             }
           }
-          // catches errors in uploading file and alerts user by displaying the error message in an
-          // error box
+          // catches errors in uploading file and alerts user by displaying the error message in an error box
           catch (Exception e) {
             Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
             ErrorAlert.setAlertType(Alert.AlertType.ERROR);
@@ -110,6 +111,7 @@ public class UploadController extends SideNavBarController {
             ErrorAlert.show();
           }
 
+          //only load data if it is not erroneous
           for (DataType line : storage.getRoutes()) {
             Route test = (Route) line;
             System.out.println(test.getAirlineID());
@@ -117,11 +119,15 @@ public class UploadController extends SideNavBarController {
         }
 //
     }
-
+    /**
+     * This method opens a screen for singular manual data entry when the 'Add single entry' button is clicked.
+     */
     public void addSingle() throws IOException {
 
+        //Checks to see that the user has chosen a data type
         if (checkDataTypeSelected()) {
           String fileType = dataTypeSelect.getValue().toString();
+          //checks which data type was chosen by the user so the correc single data entry window is opened
           if (fileType == "Airport") {
               Stage newStage = new Stage();
               Parent root = FXMLLoader.load(getClass().getResource("airportSingleEntry.fxml"));
