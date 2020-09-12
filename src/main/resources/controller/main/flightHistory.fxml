@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
    <children>
       <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
          <columns>
@@ -78,10 +85,9 @@
       <Button fx:id="filterOptionsButton" layoutX="841.0" layoutY="185.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="20.0" prefWidth="150.0" text="Filter Options" />
       <Text layoutX="213.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type" wrappingWidth="104.00000041723251" />
       <Label fx:id="filterErrorText" layoutX="199.0" layoutY="147.0" prefHeight="20.0" prefWidth="554.0" text="Filter error text" textFill="RED" visible="false">
-      <Button fx:id="RankButton" layoutX="890.0" layoutY="116.0" mnemonicParsing="false" onAction="#Rank" prefHeight="26.0" prefWidth="97.0" text="Rank" />
-      <ChoiceBox fx:id="RankSelection" layoutX="29.0" layoutY="116.0" prefHeight="26.0" prefWidth="132.0" /><Font size="14.0" />
       </Label>
       <Button fx:id="clearSearchButton" layoutX="774.0" layoutY="185.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear" />
-      <ButtonBar layoutX="91.0" layoutY="114.0" prefHeight="43.0" prefWidth="200.0" />
+      <Button fx:id="ranker" layoutX="346.0" layoutY="123.0" mnemonicParsing="false" onAction="#rank" prefHeight="26.0" prefWidth="123.0" text="Rank" />
+      <ChoiceBox fx:id="RankSelection" layoutX="199.0" layoutY="121.0" prefHeight="31.0" prefWidth="132.0" />
    </children>
 </AnchorPane>

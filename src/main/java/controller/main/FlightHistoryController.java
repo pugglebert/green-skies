@@ -79,6 +79,7 @@ public class FlightHistoryController extends DataViewController {
   private ChoiceBox<String> RankSelection;
 
 
+
   private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
   private final ObservableList<String> RankTypes = FXCollections.observableArrayList("Emission", "Distance");
   private Storage storage = Main.getStorage();
@@ -111,6 +112,7 @@ public class FlightHistoryController extends DataViewController {
 
     //Set choice box to list of potential search types
     searchTypeSelection.setItems(searchTypes);
+    RankSelection.setItems(RankTypes);
   }
 
   /**
@@ -137,7 +139,7 @@ public class FlightHistoryController extends DataViewController {
   }
 
   @FXML
-  public void Rank() {
+  public void rank() {
     if(RankSelection.getSelectionModel().getSelectedItem() == "Distance") {
       System.out.println(1);
       Collections.sort(storage.getHistory(), new Comparator<Route>() {
