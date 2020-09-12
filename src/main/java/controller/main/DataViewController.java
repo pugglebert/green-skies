@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.data.Storage;
 import java.io.IOException;
@@ -41,16 +42,12 @@ public abstract class DataViewController extends SideNavBarController {
     @FXML
     protected Label errorText;
     @FXML
-    protected Button filterButton;
-    @FXML
-    protected Label filterErrorText;
-    @FXML
-    protected Button clearFilterButton;
-    @FXML
     protected Button clearSearchButton;
+    @FXML
+    protected Button filterOptionsButton;
 
+    protected String filterPopUpFilename;
     protected ObservableList<String> searchTypes;
-    protected HashMap<String, ChoiceBox<String>> filterSelectionBoxes = new HashMap<>();
     protected final Storage storage = Main.getStorage();
 
     protected DataViewController() {
@@ -58,9 +55,8 @@ public abstract class DataViewController extends SideNavBarController {
 
     public abstract void initialize(URL url, ResourceBundle rb);
     public abstract void searchByDataType(String searchTerm, String searchType);
-    public abstract void filterByDataType(HashMap<String, String> filterTerms);
-    public abstract void clearFilter();
     public abstract void clearSearch();
+    public abstract void filterOptions() throws IOException;
 
     /**
      * Checks users search for errors and displays an error message if any are present. If no errors
@@ -85,37 +81,6 @@ public abstract class DataViewController extends SideNavBarController {
             }
         }
 
-    }
-
-    /**
-     * Gets filter type and term to match from choiceboxes, then calls filterByDataType if no errors occur or displays
-     * an error message if there is an error.
-     */
-    public void applyFilters() {
-        filterErrorText.setVisible(false);
-        HashMap<String, String> filterTerms = new HashMap();
-        for (String filterType : filterSelectionBoxes.keySet()) {
-            ChoiceBox<String> filterTerm = filterSelectionBoxes.get(filterType);
-            if (filterTerm.getValue() != null && !filterTerm.getValue().equals("Any")){
-                filterTerms.put(filterType, filterTerm.getValue());
-            }
-        }
-        if (filterTerms.size() > 0) {
-            try {
-                filterByDataType(filterTerms);
-            } catch (RuntimeException e) {
-                filterErrorText.setText(e.getMessage());
-                filterErrorText.setVisible(true);
-            }
-        } else {
-            filterErrorText.setText("No filter conditions selected");
-            filterErrorText.setVisible(true);
-        }
-
-    }
-
-    public void filterOptions() {
-        //@TODO
     }
 
 }

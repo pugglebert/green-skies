@@ -108,22 +108,6 @@ public class FlightHistoryController extends DataViewController {
 
     //Set choice box to list of potential search types
     searchTypeSelection.setItems(searchTypes);
-
-    //Set up choice boxes for filter options
-    List<String> tempAirlines = storage.getRouteAirlines();
-    tempAirlines.add("Any");
-    airlineSelection.setItems(FXCollections.observableArrayList(tempAirlines));
-    List<String> tempSources = storage.getRouteSources();
-    tempSources.add("Any");
-    sourceSelection.setItems(FXCollections.observableArrayList(tempSources));
-    List<String> tempDestinations = storage.getRouteDestinations();
-    tempDestinations.add("Any");
-    destinationSelection.setItems(FXCollections.observableArrayList(tempDestinations));
-
-    //Add choice boxes to hashmap with filter type as key
-    filterSelectionBoxes.put("Airline", airlineSelection);
-    filterSelectionBoxes.put("Source", sourceSelection);
-    filterSelectionBoxes.put("Destination", destinationSelection);
   }
 
   /**
@@ -138,33 +122,15 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * Filters history to routes that match the filter types and terms and displays them in the tableview.
-   * @param filterTerms a hashmap fo terms to match and their corresponding attribute.
-   */
-  @Override
-  public void filterByDataType(HashMap<String, String> filterTerms) {
-    ArrayList<Route> results = Filterer.filterRoutes(filterTerms, storage.getHistory());
-    tableView.setItems(FXCollections.observableList(results));
-  }
-
-  /**
-   * Clear filter choices and display all history in table view.
-   */
-  @Override
-  public void clearFilter() {
-    for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
-      filterBox.setValue(null);
-    }
-    tableView.setItems(FXCollections.observableList(storage.getHistory()));
-  }
-
-  /**
    * Clear search bar and display all history in table view.
    */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
     tableView.setItems(FXCollections.observableList(storage.getHistory()));
+  }
+
+  public void filterOptions() throws IOException {
   }
 
 }

@@ -15,7 +15,9 @@ public class Storage {
     private List<Airline> airlines = new ArrayList<>();
     private List<Airport> airports = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
-    private List<Route> history = new ArrayList<>();
+
+    public List<Route> history = new ArrayList<>();
+
     private TreeSet<String> airportCountries = new TreeSet<>();
     private TreeSet<String> airlineCountries = new TreeSet<>();
     private TreeSet<String> airportCities = new TreeSet<>();
