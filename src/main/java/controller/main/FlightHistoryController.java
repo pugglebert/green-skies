@@ -15,14 +15,12 @@ import model.data.Route;
 import model.data.Storage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * The controller class which contains the controls for the airline data view.
- * @author Hayley Krippner, Nathan Huynh
+ * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui
  * @version 1.0
  * @since 04/09/20
  */
@@ -75,9 +73,12 @@ public class FlightHistoryController extends DataViewController {
   private ChoiceBox<String> sourceSelection;
   @FXML
   private ChoiceBox<String> destinationSelection;
+  @FXML
+  private ChoiceBox<String> RankSelection;
 
 
   private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
+  private final ObservableList<String> RankTypes = FXCollections.observableArrayList("Emission", "Distance");
   private Storage storage = Main.getStorage();
 
   /**
@@ -108,6 +109,7 @@ public class FlightHistoryController extends DataViewController {
 
     //Set choice box to list of potential search types
     searchTypeSelection.setItems(searchTypes);
+    RankSelection.setItems((RankTypes));
 
     //Set up choice boxes for filter options
     List<String> tempAirlines = storage.getRouteAirlines();
@@ -165,6 +167,30 @@ public class FlightHistoryController extends DataViewController {
   public void clearSearch() {
     searchBar.setText(null);
     tableView.setItems(FXCollections.observableList(storage.getHistory()));
+  }
+
+
+  @FXML
+  public void Rank() {
+      if(RankSelection.getSelectionModel().getSelectedItem() == "Distance") {
+        System.out.println(1);
+          Collections.sort(storage.getHistory(), new Comparator<Route>() {
+            @Override
+            public int compare(Route route1, Route route2) {
+              return Double.compare(route1.getDistance(), route2.getDistance());
+            }
+          });
+          for (Route i: storage.getHistory()){
+            System.out.println(i);
+          }
+      } else {
+          Collections.sort(storage.getHistory(), new Comparator<Route>() {
+            @Override
+            public int compare(Route route1, Route route2) {
+              return Double.compare(route1.getEmissions(), route2.getEmissions());
+            }
+          });
+      }
   }
 
 }
