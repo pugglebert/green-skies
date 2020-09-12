@@ -10,7 +10,7 @@ public class SQLiteTest {
         // sqlite driver
         Class.forName("org.sqlite.JDBC");
         // database path, if it's new database, it will be created in the project folder
-        con = DriverManager.getConnection("jdbc:sqlite:/home/cosc/student/ezh15/Desktop/SENG202/seng202_project/src/database/app.sqlite");
+        con = DriverManager.getConnection("jdbc:sqlite::src:app.sqlite");
         initialise();
     }
 
