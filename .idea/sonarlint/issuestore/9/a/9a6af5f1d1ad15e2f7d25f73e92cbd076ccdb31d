@@ -1,4 +1,27 @@
 
-_
-java:S2387+"="searchTypes" is the name of a field in "DataViewController".(‚®õ¤üÿÿÿÿ8«ò„ˆÆ.
-q	java:S116#"URename this field "ICAOColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æÿÓ¶8ŸâÚÃ.
+•
+java:S1319n"sThe type of the "airlines" object should be an interface such as "List" rather than the implementation "ArrayList".(“Ù²¢ıÿÿÿÿ8‘¥àŠÈ.
+[
+java:S1128"9Remove this unused import 'controller.analysis.Filterer'.(ıÁùÉüÿÿÿÿ8‘¥àŠÈ.
+L
+java:S1128
+"/Remove this unused import 'javafx.scene.Scene'.(Õü²8‘¥àŠÈ.
+T
+java:S1128"2Remove this unused import 'javafx.stage.Modality'.(£†üĞüÿÿÿÿ8‘¥àŠÈ.
+P
+java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8‘¥àŠÈ.
+M
+java:S1128	"0Remove this unused import 'javafx.scene.Parent'.(²ä¡È8‘¥àŠÈ.
+Q
+java:S1128"/Remove this unused import 'javafx.stage.Stage'.(æÄ¸²úÿÿÿÿ8‘¥àŠÈ.
+U
+java:S1128"3Remove this unused import 'javafx.fxml.FXMLLoader'.(À‡ô³úÿÿÿÿ8‘¥àŠÈ.
+q	java:S116'"URename this field "ICAOColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Òƒë÷8‘¥àŠÈ.
+Y
+java:S2387-"="searchTypes" is the name of a field in "DataViewController".(…òØK8‘¥àŠÈ.
+a
+java:S1117f"?Rename "filterPopUp" which hides the field declared at line 49.(õÙÿ¥şÿÿÿÿ8‘¥àŠÈ.
+O
+java:S1068/"2Remove this unused "activeStatuses" private field.(ÏÌ±¹8‘¥àŠÈ.
+Q
+java:S10681"/Remove this unused "filterPopUp" private field.(ú¶Ëœûÿÿÿÿ8‘¥àŠÈ.

@@ -1,3 +1,34 @@
 
+w
+java:S1450"WRemove the "airlines" field and declare it as a local variable in the relevant methods.(¼û´Áúÿÿÿÿ8ü÷•şÇ.
+{
+java:S1450"[Remove the "destinations" field and declare it as a local variable in the relevant methods.(áÖ¾‡øÿÿÿÿ8ü÷•şÇ.
+v
+java:S1450"VRemove the "sources" field and declare it as a local variable in the relevant methods.(—óà×ıÿÿÿÿ8ü÷•şÇ.
+¡
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(î¾Îüÿÿÿÿ8ü÷•şÇ.
+`
+java:S23878"D"btnFlightHistory" is the name of a field in "SideNavBarController".(²î08ü÷•şÇ.
+]
+java:S2387"="searchTypes" is the name of a field in "DataViewController".(’¹¾±üÿÿÿÿ8ü÷•şÇ.
+V
+java:S1117";Rename "routes" which hides the field declared at line 146.(ù­Î­8ü÷•şÇ.
+Z
+java:S1161":Add the "@Override" annotation above this method signature(«Éøáüÿÿÿÿ8ü÷•şÇ.
 R
-java:S2209N"5Change this instance-reference to a static reference.(ù­Î­8¾áÚÃ.
+java:S1135"2Complete the task associated to this TODO comment.(î°‡ıÿÿÿÿ8ü÷•şÇ.
+R
+java:S1135"2Complete the task associated to this TODO comment.(½†„ûÿÿÿÿ8ü÷•şÇ.
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ˆ¿Ôá8ü÷•şÇ.
+R
+java:S1135"2Complete the task associated to this TODO comment.(î°‡ıÿÿÿÿ8ü÷•şÇ.
+R
+java:S1135"2Complete the task associated to this TODO comment.(Ô¶ªÍúÿÿÿÿ8ü÷•şÇ.
+E
+java:S1068"*Remove this unused "buffer" private field.(€öõè8ü÷•şÇ.
+E
+java:S1068"*Remove this unused "routes" private field.(ÑÁâ8ü÷•şÇ.
+[	java:S125"<This block of commented-out lines of code should be removed.(àíÖùÿÿÿÿ8ü÷•şÇ.
+[	java:S125"<This block of commented-out lines of code should be removed.(›¹ÛÂøÿÿÿÿ8ü÷•şÇ.
+[	java:S125"<This block of commented-out lines of code should be removed.(¤‘«•úÿÿÿÿ8ü÷•şÇ.

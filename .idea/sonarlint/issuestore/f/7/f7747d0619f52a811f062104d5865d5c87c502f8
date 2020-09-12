@@ -1,26 +1,20 @@
 
-•
-java:S1319c"sThe type of the "filterTerms" object should be an interface such as "Map" rather than the implementation "HashMap".(‡¸×·üÿÿÿÿ8ÉÌ©”Ä.
-
-java:S1319A"sThe type of the "filterTerms" object should be an interface such as "Map" rather than the implementation "HashMap".(„‰¢Õ8ÉÌ©”Ä.
-’
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(øº¼­úÿÿÿÿ8ÉÌ©”Ä.
-•
-java:S1319"sThe type of the "filterTerms" object should be an interface such as "Map" rather than the implementation "HashMap".(øº¼­úÿÿÿÿ8ÉÌ©”Ä.
-’
-java:S1319c"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(‡¸×·üÿÿÿÿ8ÉÌ©”Ä.
-
-java:S1319A"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(„‰¢Õ8ÉÌ©”Ä.
-b	java:S112T"FDefine and throw a dedicated exception instead of using a generic one.(ıù¿Ñ8ÉÌ©”Ä.
-b	java:S1122"FDefine and throw a dedicated exception instead of using a generic one.(ıù¿Ñ8ÉÌ©”Ä.
-W
-java:S2209&"5Change this instance-reference to a static reference.(–©ùÑüÿÿÿÿ8ÉÌ©”Ä.
-W
-java:S2209H"5Change this instance-reference to a static reference.(Ï»Îåıÿÿÿÿ8ÉÌ©”Ä.
-J
-java:S2440"(Remove this instantiation of "Searcher".(‘Éûÿÿÿÿ8ÉÌ©”Ä.
+b	java:S112,"FDefine and throw a dedicated exception instead of using a generic one.(ıù¿Ñ8ÉÌ©”Ä.
 ƒ
-java:S11922"fDefine a constant instead of duplicating this literal "No entries match your filter term(s)." 3 times.(ıù¿Ñ8ÉÌ©”Ä.
-b	java:S112v"FDefine and throw a dedicated exception instead of using a generic one.(ıù¿Ñ8ÉÌ©”Ä.
-W
-java:S2209j"5Change this instance-reference to a static reference.(›—ß½ÿÿÿÿÿ8ÉÌ©”Ä.
+java:S1192,"fDefine a constant instead of duplicating this literal "No entries match your filter term(s)." 3 times.(ıù¿Ñ8ÉÌ©”Ä.
+b	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(ıù¿Ñ8ÉÌ©”Ä.
+b	java:S112N"FDefine and throw a dedicated exception instead of using a generic one.(ıù¿Ñ8ÉÌ©”Ä.
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(‘Çš8ÂŒãıÇ.
+
+java:S1319"sThe type of the "filterTerms" object should be an interface such as "Map" rather than the implementation "HashMap".(‘Çš8ÂŒãıÇ.
+’
+java:S1319;"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(–Òµÿÿÿÿÿ8ÂŒãıÇ.
+•
+java:S1319;"sThe type of the "filterTerms" object should be an interface such as "Map" rather than the implementation "HashMap".(–Òµÿÿÿÿÿ8ÂŒãıÇ.
+’
+java:S1319]"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(À¸˜ÿÿÿÿÿ8ÂŒãıÇ.
+•
+java:S1319]"sThe type of the "filterTerms" object should be an interface such as "Map" rather than the implementation "HashMap".(À¸˜ÿÿÿÿÿ8ÂŒãıÇ.
+\
+java:S1118":Add a private constructor to hide the implicit public one.(â‚½ûÿÿÿÿ8ÂŒãıÇ.

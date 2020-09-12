@@ -1,7 +1,7 @@
 
-l
-java:S1206›"PThis class overrides "equals()" and should therefore also override "hashCode()".(Ý¢êÍýÿÿÿÿ
-b	java:S107"AConstructor has 9 parameters, which is greater than 7 authorized.(–°…ðüÿÿÿÿ8¯¡Ã‡Ç.
+b	java:S107"AConstructor has 9 parameters, which is greater than 7 authorized.(–°…ðüÿÿÿÿ8¯¡Ã‡Ç.
 O
-java:S1135"2Complete the task associated to this TODO comment.(ƒÅ÷û8¯¡Ã‡Ç.
-^	java:S125µ"<This block of commented-out lines of code should be removed.(»ž•ûÿÿÿÿ8ø½…Ç.
+java:S1135"2Complete the task associated to this TODO comment.(ƒÅ÷û8¯¡Ã‡Ç.
+^	java:S125Ç"<This block of commented-out lines of code should be removed.(»ž•ûÿÿÿÿ8ø½…Ç.
+l
+java:S1206­"PThis class overrides "equals()" and should therefore also override "hashCode()".(Ý¢êÍýÿÿÿÿ

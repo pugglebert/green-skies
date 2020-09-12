@@ -10,7 +10,7 @@ public class SQLiteTest {
         // sqlite driver
         Class.forName("org.sqlite.JDBC");
         // database path, if it's new database, it will be created in the project folder
-        con = DriverManager.getConnection("jdbc:sqlite::src:app.sqlite");
+        con = DriverManager.getConnection("jdbc:sqlite:app.sqlite");
         initialise();
     }
 
@@ -44,6 +44,7 @@ public class SQLiteTest {
         if(con == null) {
             // get connection
             getConnection();
+
         }
         Statement state = con.createStatement();
         ResultSet res = state.executeQuery("select fname, lname from user");
@@ -53,14 +54,16 @@ public class SQLiteTest {
     public void addUser(String firstname, String lastname) throws ClassNotFoundException, SQLException {
         if(con == null) {
             // get connection
+            System.out.println("Has connection!");
+
             getConnection();
         }
+
         PreparedStatement prep = con
                 .prepareStatement("insert into user values(?,?,?);");
         prep.setString(2, firstname);
         prep.setString(3, lastname);
         prep.execute();
     }
-
 
 }

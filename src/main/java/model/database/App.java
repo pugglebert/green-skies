@@ -11,7 +11,6 @@ public class App {
 
         try {
             rs = test.displayUsers();
-
             while (rs.next()) {
                 System.out.println(rs.getString("fname") + " " + rs.getString("lname"));
             }

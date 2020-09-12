@@ -1,6 +1,15 @@
 
-u	java:S116."TRename this field "DSTColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îÜ§Àúÿÿÿÿ8›àÚÃ.
-v	java:S116""URename this field "IATAColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨­„©ÿÿÿÿÿ8›àÚÃ.
-q	java:S116$"URename this field "ICAOColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ĞàÇ8›àÚÃ.
 _
-java:S23872"="searchTypes" is the name of a field in "DataViewController".(‚®õ¤üÿÿÿÿ8¸Ú¸…Æ.
+java:S23878"="searchTypes" is the name of a field in "DataViewController".(‚®õ¤üÿÿÿÿ8¸Ú¸…Æ.
+Q
+java:S1128
+"/Remove this unused import 'model.data.Airline'.(Ò¤‰âûÿÿÿÿ8¹„şÇ.
+q	java:S116*"URename this field "ICAOColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ĞàÇ8›àÚÃ.
+v	java:S116("URename this field "IATAColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨­„©ÿÿÿÿÿ8›àÚÃ.
+u	java:S1164"TRename this field "DSTColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îÜ§Àúÿÿÿÿ8›àÚÃ.
+
+java:S1319v"sThe type of the "airports" object should be an interface such as "List" rather than the implementation "ArrayList".(ŞªÉ²8è–àŠÈ.
+[
+java:S1128"9Remove this unused import 'controller.analysis.Filterer'.(ıÁùÉüÿÿÿÿ8è–àŠÈ.
+P
+java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8è–àŠÈ.

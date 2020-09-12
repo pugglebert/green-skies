@@ -26,23 +26,6 @@ public class Storage {
     private TreeSet<String> routeDestinations = new TreeSet<>();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * @return a list of Airline objects from the currently open file cast as Datatype objects.
      */
@@ -128,7 +111,6 @@ public class Storage {
                     airlines.add(airline);
                     airlineCountries.add(airline.getCountry());
                 }
-
             }
         } else if (type.matches("Airport")) {
             for (DataType entry : data) {

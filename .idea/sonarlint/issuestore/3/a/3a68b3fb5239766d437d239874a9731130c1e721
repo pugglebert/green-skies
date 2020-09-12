@@ -1,53 +1,53 @@
 
->
-java:S1170"!Make this final field static too.(Êªˆ­8–äÈ‡Ç.
+N
+java:S11357"2Complete the task associated to this TODO comment.(ÜË³m8ËÜÜıÇ.
 {
-java:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ùå¥–üÿÿÿÿ8–äÈ‡Ç.
-X	java:S125"<This block of commented-out lines of code should be removed.(äà¼À8–äÈ‡Ç.
+java:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ùå¥–üÿÿÿÿ8ËÜÜıÇ.
+s	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—Ô ûÿÿÿÿ8ËÜÜıÇ.
+t	java:S116 "XRename this field "CruisingSpeed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûØÈ£8ËÜÜıÇ.
+{
+java:S2293*"YReplace the type specification in this constructor call with the diamond operator ("<>").(º¸•Ëûÿÿÿÿ8ËÜÜıÇ.
+R
+java:S1128"0Remove this unused import 'model.loader.Loader'.(É ‰šüÿÿÿÿ8ËÜÜıÇ.
 t
-java:S1450"WRemove the "FuelUsed" field and declare it as a local variable in the relevant methods.(©ŸÏŒ8–äÈ‡Ç.
-s	java:S117¥"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò¥”ùÿÿÿÿ8Ñ­ö¼Ã.
-n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8Ñ­ö¼Ã.
-~
-java:S1488«"`Immediately return this expression instead of assigning it to the temporary variable "finalCo2".(ñİŒÂ8Ñ­ö¼Ã.
+java:S1450"WRemove the "FuelUsed" field and declare it as a local variable in the relevant methods.(©ŸÏŒ8ËÜÜıÇ.
+n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8ËÜÜıÇ.
 {
-java:S2293("YReplace the type specification in this constructor call with the diamond operator ("<>").(«Šµ¤øÿÿÿÿ8–äÈ‡Ç.
-s	java:S117£"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÁÕáıÿÿÿÿ8Ñ­ö¼Ã.
+java:S2293("YReplace the type specification in this constructor call with the diamond operator ("<>").(«Šµ¤øÿÿÿÿ8ËÜÜıÇ.
+L
+java:S1068""*Remove this unused "route1" private field.(‚ëÁÊüÿÿÿÿ8ËÜÜıÇ.
+s	java:S117£"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÁÕáıÿÿÿÿ8ËÜÜıÇ.
+o	java:S116"SRename this field "FuelUsed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©ŸÏŒ8ËÜÜıÇ.
 F
-java:S1068$"*Remove this unused "route2" private field.(à¥¢8–äÈ‡Ç.
+java:S1068$"*Remove this unused "route2" private field.(à¥¢8ËÜÜıÇ.
+n	java:S117…"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒÏïğ8ËÜÜıÇ.
+s	java:S117¥"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò¥”ùÿÿÿÿ8ËÜÜıÇ.
+X	java:S125"<This block of commented-out lines of code should be removed.(äà¼À8ËÜÜıÇ.
+n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8ËÜÜıÇ.
+>
+java:S1170"!Make this final field static too.(Êªˆ­8ËÜÜıÇ.
+X	java:S125"<This block of commented-out lines of code should be removed.(Êªˆ­8ËÜÜıÇ.
+~
+java:S1488«"`Immediately return this expression instead of assigning it to the temporary variable "finalCo2".(ñİŒÂ8ËÜÜıÇ.
+\
+java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8ËÜÜıÇ.
+>
+java:S1170 "!Make this final field static too.(ûØÈ£8ËÜÜıÇ.
+>
+java:S1170"!Make this final field static too.(äà¼À8ËÜÜıÇ.
 U
 java:S1135¯"2Complete the task associated to this TODO comment.(ÙİØ˜úÿÿÿÿ8ê‹¯½Ã.
-n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8Ñ­ö¼Ã.
+n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8ËÜÜıÇ.
 [
-java:S1128	">Remove this unused import 'java.nio.file.FileSystemException'.(ÚÊ¢Á8–äÈ‡Ç.
-n	java:S117§"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ÇÓ˜8Ñ­ö¼Ã.
+java:S1128	">Remove this unused import 'java.nio.file.FileSystemException'.(ÚÊ¢Á8ËÜÜıÇ.
+N
+java:S1068",Remove this unused "distance" private field.(ÅÅ³Ùşÿÿÿÿ8ËÜÜıÇ.
 C
-java:S1170"!Make this final field static too.(€ıÃØıÿÿÿÿ8–äÈ‡Ç.
+java:S1170"!Make this final field static too.(€ıÃØıÿÿÿÿ8ËÜÜıÇ.
+s	java:S117†"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë²ÑÍûÿÿÿÿ8ËÜÜıÇ.
+n	java:S117§"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ÇÓ˜8ËÜÜıÇ.
+s	java:S117‡"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥Ù›øÿÿÿÿ8ËÜÜıÇ.
 _
-java:S1117"<Rename "distance" which hides the field declared at line 24.(šúÚÈøÿÿÿÿ8Ñ­ö¼Ã.
-N
-java:S1068",Remove this unused "distance" private field.(ÅÅ³Ùşÿÿÿÿ8–äÈ‡Ç.
-g	java:S117…"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒÏïğ
-\
-java:S1128":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8–äÈ‡Ç.
-o	java:S116"SRename this field "FuelUsed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©ŸÏŒ8–äÈ‡Ç.
->
-java:S1170"!Make this final field static too.(äà¼À8–äÈ‡Ç.
-L
-java:S1068""*Remove this unused "route1" private field.(‚ëÁÊüÿÿÿÿ8–äÈ‡Ç.
-l	java:S117‡"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥Ù›øÿÿÿÿ
-l	java:S117†"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë²ÑÍûÿÿÿÿ
-l	java:S117ˆ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—Ô ûÿÿÿÿ
-n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8Ñ­ö¼Ã.
-n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8Ñ­ö¼Ã.
-t	java:S116 "XRename this field "CruisingSpeed" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûØÈ£8–äÈ‡Ç.
-N
-java:S11357"2Complete the task associated to this TODO comment.(ÜË³m8–äÈ‡Ç.
-X	java:S125"<This block of commented-out lines of code should be removed.(Êªˆ­8–äÈ‡Ç.
->
-java:S1170 "!Make this final field static too.(ûØÈ£8–äÈ‡Ç.
-|	java:S116"[Rename this field "Co2OfOneGramFuel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€ıÃØıÿÿÿÿ8–äÈ‡Ç.
-{
-java:S2293*"YReplace the type specification in this constructor call with the diamond operator ("<>").(º¸•Ëûÿÿÿÿ8–äÈ‡Ç.
-R
-java:S1128"0Remove this unused import 'model.loader.Loader'.(É ‰šüÿÿÿÿ8–äÈ‡Ç.
+java:S1117"<Rename "distance" which hides the field declared at line 24.(šúÚÈøÿÿÿÿ8ËÜÜıÇ.
+n	java:S117„"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî¿ì8ËÜÜıÇ.
+|	java:S116"[Rename this field "Co2OfOneGramFuel" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€ıÃØıÿÿÿÿ8ËÜÜıÇ.

@@ -2,7 +2,10 @@ package controller.main;
 
 import model.data.Route;
 import model.data.Storage;
+import model.database.SQLiteTest;
 import model.loader.Loader;
+
+import java.sql.ResultSet;
 
 /**
  * The controller class which contains the controls for the main.
@@ -40,6 +43,21 @@ public class Main {
 //        storage.history.add(route2);
 //        storage.history.add(route3);
 //        storage.history.add(route4);
+//        SQLiteTest test = new SQLiteTest();
+//        ResultSet rs;
+//
+//        try {
+//            rs = test.displayUsers();
+//            test.addUser("abc", "tom");
+//
+//            while (rs.next()) {
+//                System.out.println(rs.getString("fname") + " " + rs.getString("lname"));
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
 
         GreenSkiesApplication.main(args);
     }
