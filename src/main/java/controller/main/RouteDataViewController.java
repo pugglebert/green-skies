@@ -1,5 +1,6 @@
 package controller.main;
 
+import controller.analysis.ReportGenerator;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Route;
-import model.loader.FlightHistory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,22 +50,22 @@ public class RouteDataViewController extends DataViewController {
     @FXML
     private Button btnFlightHistory;
     @FXML
-    public Button AddToHistoryButton;
-
+    private Button AddToHistoryButton;
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
+    private ReportGenerator reportGenerator = new ReportGenerator();
 
+    //TODO: can this constructor be removed? 13/09/2020 HK
     public RouteDataViewController() {
     }
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class. The checkboxes are added to each record.
      * @param url The URL used.
      * @param rb The resource bundle used.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Set up the columns in the TableView.
-
         addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
         airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
         airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
@@ -82,12 +82,8 @@ public class RouteDataViewController extends DataViewController {
             route.initCheckBox();
         }
         ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
-
-
         tableView.setItems(routes);
-
-        //Setup choice boxes
-        searchTypeSelection.setItems(searchTypes);
+        searchTypeSelection.setItems(searchTypes); //Setup choice boxes
     }
 
     /**
@@ -99,17 +95,33 @@ public class RouteDataViewController extends DataViewController {
         tableView.setItems(FXCollections.observableList(results));
     }
 
-    private FlightHistory buffer;
-    private ObservableList<Route> routes;
+    //TODO: can these be removed? 13/09/2020 HK
+//    private FlightHistory buffer;
+//    private ObservableList<Route> routes;
 
-  public void addDataToHistory() { // TODO: attempting to fix add to history.
-    List<Route> temp = new ArrayList<Route>();
-    for (Route route : Main.getStorage().getRoutes()) {
-      if (route.getSelect().isSelected()) {
-        temp.add(route);
-      }
-    }
-    Main.getStorage().getHistory().addAll(temp);
+    /**
+     * This method adds the selected routes to the flight history. The total distance, total emissions, least distance,
+     * most distance , least emissions , most emissions , least travelled  and most travelled route are updated.
+     */
+    public void addDataToHistory() {
+        List<Route> temp = new ArrayList<Route>();
+        for (Route route : Main.getStorage().getRoutes()) {
+          if (route.getSelect().isSelected()) {
+            temp.add(route);
+            reportGenerator.updateTotalDistance(route);
+            reportGenerator.updateTotalEmissions(route);
+            reportGenerator.updateLeastDistanceRoute(route);
+            reportGenerator.updateMostDistanceRoute(route);
+            reportGenerator.updateMostEmissionsRoute(route);
+            reportGenerator.updateLeastEmissionsRoute(route);
+          }
+        }
+
+        Main.getStorage().getHistory().addAll(temp);
+        reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
+        reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
+        //reportGenerator.updateMostVisitedSrcAirports(); //TODO: uncommment once implemented HashMap
+        //reportGenerator.updateMostVisitedSrcAirports(); //TODO: uncommment once implemented HashMap
   }
 
     /**
