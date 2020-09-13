@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class for which contains the methods for calcuting and updating the analysis data for the user's carbon emissions report.
+ * Class for which contains the methods for calcuting and updating the analysis data for the user's carbon emissions
+ * report.
  * @author Hayley Krippner
  * @since 13/09/20
  * @version 1.0
@@ -52,10 +53,9 @@ public class ReportGenerator {
     /**
      * This method updates the total distance travelled via flight travel.
      * @param currentRouteRecord, the current route record that is being added to user's flight history.
-     * @param timesRouteTaken, the times the route has been taken.
      */
-    public void updateTotalDistance(Route currentRouteRecord, int timesRouteTaken) {
-        totalDistanceTravelled += (currentRouteRecord.getDistance() * timesRouteTaken);
+    public void updateTotalDistance(Route currentRouteRecord) {
+        totalDistanceTravelled += (currentRouteRecord.getDistance());
     }
 
     //TODO: write this method.
@@ -315,8 +315,20 @@ public class ReportGenerator {
         return counter;
     }
 
+    /**
+     * This method sets the total carbon emissions to the provided totalCarbonEmissions double.
+     * @param totalCarbonEmissions , the total distance travelled by flight travel.
+     */
     public void setTotalCarbonEmissions(double totalCarbonEmissions) {
         this.totalCarbonEmissions = totalCarbonEmissions;
+    }
+
+    /**
+     * This method sets the total carbon emissions to the provided totalDistanceTravelled double.
+     * @param totalDistanceTravelled , the total distance travelled by flight travel.
+     */
+    public void setTotalDistanceTravelled(double totalDistanceTravelled) {
+        this.totalDistanceTravelled = totalDistanceTravelled;
     }
 
 }

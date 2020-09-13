@@ -34,14 +34,14 @@ public class ReportGeneratorTest {
     }
   }
 
-  //----------------------- Testing for Generating the Results for the Flight History Report ---------------------------
+  //------------------------------------------- Testing for updateTotalEmissions ---------------------------------------
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a large amount of carbon emissions that the total
-   * emissions is update accordingly.The carbon emissions are starting at 0.0 g.
+   * emissions is updated accordingly.The carbon emissions are starting at 0.0 g.
    */
   @Test
-  public void updateTotalEmissionsLargeEmissionsInitallyZeroTest() {
+  public void updateTotalEmissionsLargeEmissionsInitiallyZeroTest() {
     reportGenerator.setTotalCarbonEmissions(0.0);
     Route testRoute = new Route("2W",410,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" "));
@@ -53,10 +53,10 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a small amount of carbon emissions that the total
-   * emissions is update accordingly.The carbon emissions are starting at 0.0 g.
+   * emissions is updated accordingly.The carbon emissions are starting at 0.0 g.
    */
   @Test
-  public void updateTotalEmissionsSmallEmissionsInitallyZeroTest() {
+  public void updateTotalEmissionsSmallEmissionsInitiallyZeroTest() {
     reportGenerator.setTotalCarbonEmissions(0.0);
     Route testRoute = new Route("2W",410,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" "));
@@ -68,10 +68,10 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a zero carbon emissions that the total
-   * emissions is update accordingly.The carbon emissions are starting at large amount.
+   * emissions is updated accordingly.The carbon emissions are starting at large amount.
    */
   @Test
-  public void updateTotalEmissionsZeroEmissionsInitallyZeroTest() {
+  public void updateTotalEmissionsZeroEmissionsInitiallyZeroTest() {
     reportGenerator.setTotalCarbonEmissions(0.0);
     Route testRoute = new Route("2W",410,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" "));
@@ -83,10 +83,10 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a large amount of carbon emissions that the total
-   * emissions is update accordingly.The carbon emissions are starting at large amount.
+   * emissions is updated accordingly.The carbon emissions are starting at large amount.
    */
   @Test
-  public void updateTotalEmissionsLargeEmissionsInitallyLargeTest() {
+  public void updateTotalEmissionsLargeEmissionsInitiallyLargeTest() {
     reportGenerator.setTotalCarbonEmissions(80000000000.10);
     Route testRoute = new Route("2W",410,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" "));
@@ -98,10 +98,10 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a small amount of carbon emissions that the total
-   * emissions is update accordingly.The carbon emissions are starting at large amount.
+   * emissions is updated accordingly.The carbon emissions are starting at large amount.
    */
   @Test
-  public void updateTotalEmissionsSmallEmissionsInitallyLargeTest() {
+  public void updateTotalEmissionsSmallEmissionsInitiallyLargeTest() {
     reportGenerator.setTotalCarbonEmissions(90000000000.10);
     Route testRoute = new Route("2W",410,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" "));
@@ -113,10 +113,10 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a zero carbon emissions that the total
-   * emissions is update accordingly.The carbon emissions are starting at large amount.
+   * emissions is updated accordingly.The carbon emissions are starting at large amount.
    */
   @Test
-  public void updateTotalEmissionsZeroEmissionsInitallyLargeTest() {
+  public void updateTotalEmissionsZeroEmissionsInitiallyLargeTest() {
     reportGenerator.setTotalCarbonEmissions(345231863432.98);
     Route testRoute = new Route("2W",410,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" "));
@@ -128,7 +128,7 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a large amount of carbon emissions, which has been
-   * taken multipe times, that the total emissions is update accordingly.The carbon emissions are starting at 0.0 g.
+   * taken multipe times, that the total emissions is updated accordingly.The carbon emissions are starting at 0.0 g.
    */
   @Test
   public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
@@ -154,6 +154,92 @@ public class ReportGeneratorTest {
     testRoute.setTimesTaken(1000);
     reportGenerator.updateTotalEmissions(testRoute);
     assertEquals(8760000.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
+  }
+
+  //------------------------------------------- Testing for updateTotalDistance ---------------------------------------
+
+  /**
+   * Verify that when updateTotalDistance is called with a route that is of large distance that the total
+   * distance is updated accordingly.The total distance is started as 0.0 km.
+   */
+  @Test
+  public void updateTotalDistanceLargeDistanceInitiallyZeroTest() {
+    reportGenerator.setTotalDistanceTravelled(0.0);
+    Route testRoute = new Route("7K",392,"PKL",3920,"MDC",
+            2523,"",2,"PDS".split(" "));
+    testRoute.setDistance(4157987.41);
+    reportGenerator.updateTotalDistance(testRoute);
+    assertEquals(4157987.41, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalDistance is called with a route that is of small distance that the
+   * total * distance is updated accordingly.The total distance is started as 0.0 km.
+   */
+  @Test
+  public void updateTotalDistanceSmallDistanceInitiallyZeroTest() {
+    reportGenerator.setTotalDistanceTravelled(0.0);
+    Route testRoute = new Route("7K",392,"PKL",3920,"MDC",
+            2523,"",2,"PDS".split(" "));
+    testRoute.setDistance(3902.79);
+    reportGenerator.updateTotalDistance(testRoute);
+    assertEquals(3902.79, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalDistance is called with a route with zero distance that the total
+   * emissions is updated accordingly. The total distance is started as 0.0km.
+   */
+  @Test
+  public void updateTotalDistanceZeroDistanceInitiallyZeroTest() {
+    reportGenerator.setTotalCarbonEmissions(0.0);
+    Route testRoute = new Route("7K",392,"PKL",3920,"MDC",
+            2523,"",2,"PDS".split(" "));
+    testRoute.setDistance(0.0);
+    reportGenerator.updateTotalDistance(testRoute);
+    assertEquals(0.0, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalDistance is called with a route that is of large
+   * distance that the total distance is updated accordingly. The total distance is started at a large distance in km.
+   */
+  @Test
+  public void updateTotalDistanceLargeDistanceInitiallyLargeTest() {
+    reportGenerator.setTotalDistanceTravelled(58900000000000.02);
+    Route testRoute = new Route("7K",392,"PKL",3920,"MDC",
+            2523,"",2,"PDS".split(" "));
+    testRoute.setDistance(46372.91);
+    reportGenerator.updateTotalDistance(testRoute);
+    assertEquals(58900000046372.93, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalDistance is called with a route that is of small
+   * distance that the total distance is updated accordingly. The total distance is started at a large distance in km.
+   */
+  @Test
+  public void updateTotalDistanceSmallDistanceInitiallyLargeTest() {
+    reportGenerator.setTotalDistanceTravelled(67554440900000.07);
+    Route testRoute = new Route("7K",392,"PKL",3920,"MDC",
+            2523,"",2,"PDS".split(" "));
+    testRoute.setDistance(4157.41);
+    reportGenerator.updateTotalDistance(testRoute);
+    assertEquals(67554440904157.48, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalDistance is called with a route that is of zero
+   * distance that the total distance is updated accordingly. The total distance is started at a large distance in km.
+   */
+  @Test
+  public void updateTotalDistanceZeroDistanceInitiallyLargeTest() {
+    reportGenerator.setTotalDistanceTravelled(345231863432.98);
+    Route testRoute = new Route("7K",392,"PKL",3920,"MDC",
+            2523,"",2,"PDS".split(" "));
+    testRoute.setDistance(0.0);
+    reportGenerator.updateTotalDistance(testRoute);
+    assertEquals(345231863432.98, reportGenerator.getTotalDistanceTravelled(), 0.0001);
   }
 
 }
