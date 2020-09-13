@@ -1,20 +1,15 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.data.Airline;
 import model.data.Airport;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
