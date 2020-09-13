@@ -3,6 +3,7 @@ package controller.analysis;
 import model.data.Route;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,7 +64,7 @@ public class ReportGenerator {
      * This method updates the current most travelled flight route.
      * @param routeHistoryEntries, the current route record that is being added to user's flight history.
      */
-    public void updateMostTravelledRoute(ArrayList<Route> routeHistoryEntries) {
+    public void updateMostTravelledRoute(List<Route> routeHistoryEntries) {
         int currMaxRouteUsed = 0;
         for (Route route : routeHistoryEntries) {
             if (route.getTimesTake() > currMaxRouteUsed) {
@@ -80,7 +81,7 @@ public class ReportGenerator {
      * This method updates the current least travelled flight route, provided the route is already in the flight history.
      * @param routeHistoryEntries, the current route record that is being added to user's flight history.
      */
-    public void updateLeastTravelledRoute(ArrayList<Route> routeHistoryEntries) {
+    public void updateLeastTravelledRoute(List<Route> routeHistoryEntries) {
         int currMaxRouteUsed = 0;
         for (Route route : routeHistoryEntries) {
             if (route.getTimesTake() > currMaxRouteUsed) {
