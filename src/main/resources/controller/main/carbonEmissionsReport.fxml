@@ -144,8 +144,8 @@
       <TextField editable="false" layoutX="591.0" layoutY="491.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
       <TextField editable="false" layoutX="591.0" layoutY="528.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
       <TextField editable="false" layoutX="591.0" layoutY="567.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
-      <TextField editable="false" layoutX="591.0" layoutY="659.0" mouseTransparent="true" />
-      <TextField editable="false" layoutX="973.0" layoutY="659.0" mouseTransparent="true" />
+      <TextField fx:id="displayCarbonEmissionGoalField" editable="false" layoutX="591.0" layoutY="659.0" mouseTransparent="true" />
+      <TextField fx:id="displaycarbonEmissionGoalDurationField" editable="false" layoutX="973.0" layoutY="659.0" mouseTransparent="true" />
       <Text fontSmoothingType="LCD" layoutX="1167.0" layoutY="681.0" strokeType="OUTSIDE" strokeWidth="0.0" text="year(s)" textAlignment="RIGHT" wrappingWidth="69.6708984375">
          <font>
             <Font name="Verdana" size="18.0" />

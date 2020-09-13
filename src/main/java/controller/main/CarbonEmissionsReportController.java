@@ -49,10 +49,10 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     private TextField displayLeastVisitedDestinationAirport;
 
     @FXML
-    private TextField displayCarbonEmissionsGoal;
+    private TextField displayCarbonEmissionGoalField;
 
     @FXML
-    private TextField displayGoalDuration;
+    private TextField displaycarbonEmissionGoalDurationField;
 
     @FXML
     private TextField displayTreeOffset;
@@ -80,9 +80,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     @FXML
     private void generateReportData(ActionEvent event) throws IOException {
         String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
-        displayCarbonEmissionsGoal.setText(carbonEmissionGoalValue);
+        displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
         String carbonEmissionGoalDurationValue = carbonEmissionGoalDurationField.getText();
-        carbonEmissionGoalDurationField.setText(carbonEmissionGoalDurationValue);
+        displaycarbonEmissionGoalDurationField.setText(carbonEmissionGoalDurationValue);
 //
 //        displayTotalEmissions.setText("");
 //        displayTotalDistanceTravelled.setText("");
@@ -101,10 +101,10 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 
     @FXML
     private void clearReportData(ActionEvent event) throws IOException {
-//        displayCarbonEmissionsGoal.setText("");
-//        carbonEmissionGoalField.setText("");
-//        displayGoalDuration.setText("");
-//        carbonEmissionGoalDurationField.setText("");
+        displayCarbonEmissionGoalField.setText("");
+        carbonEmissionGoalField.setText("");
+        displaycarbonEmissionGoalDurationField.setText("");
+        carbonEmissionGoalDurationField.setText("");
 //        displayTotalEmissions.setText("");
 //        displayTotalDistanceTravelled.setText("");
 //        displayMostEmissionsRoute.setText("");
@@ -119,25 +119,5 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 //        displayLeastVisitedDestinationAirport.setText("");
 //        displayTreeOffset.setText("");
     }
-//
-//    public void generateReportData(javafx.event.ActionEvent actionEvent) throws IOException{
-//        String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
-//        displayCarbonEmissionsGoal.setText(carbonEmissionGoalValue);
-//        String carbonEmissionGoalDurationValue = carbonEmissionGoalDurationField.getText();
-//        carbonEmissionGoalDurationField.setText(carbonEmissionGoalDurationValue);
-//
-//        displayTotalEmissions.setText("");
-//        displayTotalDistanceTravelled.setText("");
-//        displayMostEmissionsRoute.setText("");
-//        displayMostEmissionsRoute.setText("");
-//        displayLeastEmissionsRoute.setText("");
-//        displayMostDistanceRoute.setText("");
-//        displayLeastEmissionsRoute.setText("");
-//        displayLeastDistanceRoute.setText("");
-//        displayMostVisitedSourceAirport.setText("");
-//        displayLeastVisitedSourceAirport.setText("");
-//        displayMostVisitedDestinationAirport.setText("");
-//        displayLeastVisitedDestinationAirport.setText("");
-//        displayTreeOffset.setText("");
-//    }
+
 }
