@@ -118,9 +118,10 @@ public class RouteDataViewController extends DataViewController {
         }
 
         Main.getStorage().getHistory().addAll(temp);
-        reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
-        reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
-
+        reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
+        reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
+        //reportGenerator.updateMostVisitedSrcAirports(); //TODO: uncommment once implemented HashMap
+        //reportGenerator.updateMostVisitedSrcAirports(); //TODO: uncommment once implemented HashMap
   }
 
     /**

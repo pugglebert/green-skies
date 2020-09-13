@@ -59,37 +59,52 @@ public class ReportGenerator {
         totalDistanceTravelled += (currentRouteRecord.getDistance());
     }
 
-    //TODO: write this method.
     /**
      * This method updates the current most travelled flight route.
      * @param routeHistoryEntries, the current route record that is being added to user's flight history.
      */
     public void updateMostTravelledRoute(List<Route> routeHistoryEntries) {
-        int currMaxRouteUsed = 0;
-        for (Route route : routeHistoryEntries) {
-            if (route.getTimesTake() > currMaxRouteUsed) {
-                mostTravelledRoutes.clear();
-                mostTravelledRoutes.add(route);
-            } else if (route.getTimesTake() == currMaxRouteUsed) {
-                mostTravelledRoutes.add(route);
-            }
+        //TODO: remove once the quicksort and binary sort have been thoughroughly tested.
+//        int currMaxRouteUsed = 0;
+//        for (Route route : routeHistoryEntries) {
+//            if (route.getTimesTake() > currMaxRouteUsed) {
+//                mostTravelledRoutes.clear();
+//                mostTravelledRoutes.add(route);
+//            } else if (route.getTimesTake() == currMaxRouteUsed) {
+//                mostTravelledRoutes.add(route);
+//            }
+//        }
+
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        int maxRouteCounter = routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTake();
+        int firstOccuranceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
+        for (int i = firstOccuranceIndex; i < routeHistoryEntries.size() - 1; i++) {
+            mostTravelledRoutes.add(routeHistoryEntries.get(i));
         }
     }
 
-    //TODO: write this method.
     /**
      * This method updates the current least travelled flight route, provided the route is already in the flight history.
      * @param routeHistoryEntries, the current route record that is being added to user's flight history.
      */
     public void updateLeastTravelledRoute(List<Route> routeHistoryEntries) {
-        int currMaxRouteUsed = 0;
-        for (Route route : routeHistoryEntries) {
-            if (route.getTimesTake() > currMaxRouteUsed) {
-                leastTravelledRoutes.clear();
-                leastTravelledRoutes.add(route);
-            } else if (route.getTimesTake() == currMaxRouteUsed) {
-                leastTravelledRoutes.add(route);
-            }
+        //TODO: remove once the quicksort and binary sort have been thoughroughly tested.
+
+//        int currMaxRouteUsed = 0;
+//        for (Route route : routeHistoryEntries) {
+//            if (route.getTimesTake() > currMaxRouteUsed) {
+//                leastTravelledRoutes.clear();
+//                leastTravelledRoutes.add(route);
+//            } else if (route.getTimesTake() == currMaxRouteUsed) {
+//                leastTravelledRoutes.add(route);
+//            }
+//        }
+
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        int minRouteCounter = routeHistoryEntries.get(0).getTimesTake();
+        int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
+        for (int i = 0; i < firstOccuranceIndex + 1; i++) {
+            mostTravelledRoutes.add(routeHistoryEntries.get(i));
         }
     }
 
@@ -163,7 +178,7 @@ public class ReportGenerator {
    * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the airports
    *     that were most visited, based on the user's flight history entries.
    */
-  public void MostVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
+  public void updateMostVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
         int currSrcAirportMax = 0;
         for (Map.Entry<String, Integer> entry : srcAirportCounts.entrySet()) {
             if (entry.getValue() > currSrcAirportMax) {
@@ -182,7 +197,7 @@ public class ReportGenerator {
  * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the airports
  *     that were most visited, based on the user's flight history entries.
  */
-  public void MostVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
+  public void updateMostVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
     int currDestAirportMax = 0;
     for (Map.Entry<String, Integer> entry : destAirportCounts.entrySet()) {
       if (entry.getValue() > currDestAirportMax) {
@@ -257,23 +272,25 @@ public class ReportGenerator {
         return analysisPeriod;
     }
 
+    //TODO: test the implemention the sort and search in terms of updateMostTravelledRoute and updateLeastTravelledRoute. 14/09/2020 HK
+
     /**
      * This function implements the binary search algorithm.
      * @param arraryToSearch, the array which is being searched.
      * @param searchElement, the element that is being search for.
      * @return
      */
-    public static int binarySearch(int arraryToSearch[], int searchElement) {
+    public static int binarySearch(List<Route> arraryToSearch, int searchElement) {
         int firstIndex = 0;
-        int lastIndex = arraryToSearch.length - 1;
+        int lastIndex = arraryToSearch.size() - 1;
         while(firstIndex <= lastIndex) {
             int middleIndex = (firstIndex + lastIndex) / 2;
-            if (arraryToSearch[middleIndex] == searchElement) {
+            if (arraryToSearch.get(middleIndex).getTimesTake() == searchElement) {
                 return middleIndex;
             }
-            else if (arraryToSearch[middleIndex] < searchElement)
+            else if (arraryToSearch.get(middleIndex).getTimesTake() < searchElement)
                 firstIndex = middleIndex + 1;
-            else if (arraryToSearch[middleIndex] > searchElement)
+            else if (arraryToSearch.get(middleIndex).getTimesTake() > searchElement)
                 lastIndex = middleIndex - 1;
         }
         return -1;
@@ -285,7 +302,7 @@ public class ReportGenerator {
      * @param start , the starting index of the arrayToSort.
      * @param end , the ending index of the arrayToSort.
      */
-    public static void quickSort(int[] arraytoSort, int start, int end) {
+    public static void quickSort(List<Route> arraytoSort, int start, int end) {
         if (end <= start) return;
         int pivot = quickSortPartition(arraytoSort, start, end);
         quickSort(arraytoSort, start, pivot-1);
@@ -299,20 +316,20 @@ public class ReportGenerator {
      * @param end , the ending index of the arrayToSort.
      * @return
      */
-    static int quickSortPartition(int[] arraytoSort, int start, int end) {
+    static int quickSortPartition(List<Route> arraytoSort, int start, int end) {
         int pivot = end;
         int counter = start;
         for (int i = start; i < end; i++) {
-            if (arraytoSort[i] < arraytoSort[pivot]) {
-                int temp = arraytoSort[counter];
-                arraytoSort[counter] = arraytoSort[i];
-                arraytoSort[i] = temp;
+            if (arraytoSort.get(i).getTimesTake() < arraytoSort.get(pivot).getTimesTake()) {
+                Route temp = arraytoSort.get(counter);
+                arraytoSort.set(counter, arraytoSort.get(i));
+                arraytoSort.set(i, temp);
                 counter++;
             }
         }
-        int temp = arraytoSort[pivot];
-        arraytoSort[pivot] = arraytoSort[counter];
-        arraytoSort[counter] = temp;
+        Route temp = arraytoSort.get(pivot);
+        arraytoSort.set(pivot, arraytoSort.get(counter));
+        arraytoSort.set(counter, temp);
         return counter;
     }
 
