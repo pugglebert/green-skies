@@ -23,7 +23,7 @@ public class Route implements DataType {
     private double emissions;
     private double distance;
     private int timesTaken = 0;
-    private CheckBox select; //TODO check again
+    private CheckBox select;
 
     /**
      * The Route constructor.

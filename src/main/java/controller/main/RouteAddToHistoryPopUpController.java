@@ -1,0 +1,15 @@
+package controller.main;
+
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class RouteAddToHistoryPopUpController implements Initializable {
+
+
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+}
+
+
