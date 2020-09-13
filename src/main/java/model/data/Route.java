@@ -159,9 +159,12 @@ public class Route implements DataType {
 
     /**
      * Set timesTaken to the given value.
+     *
      * @param timesTaken the value to set timesTaken to.
      */
-    public void setTimesTaken(int timesTaken) {this.timesTaken = timesTaken;}
+    public void setTimesTaken(int timesTaken) {
+        this.timesTaken = timesTaken;
+    }
 
     /**
      * Returns true if object has the same attributes as the Route from which the method is called,
