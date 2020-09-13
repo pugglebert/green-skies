@@ -1,10 +1,11 @@
 package controller.main;
 
 import controller.main.SideNavBarController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -99,7 +100,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     }
 
     @FXML
-    private void clearReportData(javafx.event.ActionEvent event) throws IOException {
+    private void clearReportData(ActionEvent event) throws IOException {
 //        displayCarbonEmissionsGoal.setText("");
 //        carbonEmissionGoalField.setText("");
 //        displayGoalDuration.setText("");
