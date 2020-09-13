@@ -1,20 +1,15 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.data.Route;
-import model.data.Storage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -38,8 +33,20 @@ public class RouteFilterPopUpController extends FilterPopUpController {
     private TextField sourceField;
     @FXML
     private TextField destinationField;
-    @FXML
-    private Label errorText;
+
+    /**
+     * Display the filter pop up window.
+     * @throws IOException if fmxl file cannot be opened.
+     */
+    @Override
+    public void display() throws IOException {
+        final Stage filterPopUp = new Stage();
+        filterPopUp.initModality(Modality.APPLICATION_MODAL);
+        Parent root = FXMLLoader.load(getClass().getResource("routeFilterPopUp.fxml"));
+        Scene scene = new Scene(root);
+        filterPopUp.setScene(scene);
+        filterPopUp.showAndWait();
+    }
 
     /**
      * Initialize the fxml filename.
@@ -48,7 +55,7 @@ public class RouteFilterPopUpController extends FilterPopUpController {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fxmlFilename = "routeFilterPopUp.fxml";
+
     }
 
     /**

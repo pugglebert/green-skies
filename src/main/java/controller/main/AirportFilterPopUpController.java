@@ -1,22 +1,16 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.data.Airport;
-import model.data.Storage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -44,7 +38,19 @@ public class AirportFilterPopUpController extends FilterPopUpController {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fxmlFilename = "airportFilterPopUp.fxml";
+    }
+
+    /**
+     * Display the filter pop up window.
+     * @throws IOException if fmxl file cannot be opened.
+     */
+    public void display() throws IOException {
+        final Stage filterPopUp = new Stage();
+        filterPopUp.initModality(Modality.APPLICATION_MODAL);
+        Parent root = FXMLLoader.load(getClass().getResource("airportFilterPopUp.fxml")); //open the Upload Data page
+        Scene scene = new Scene(root);
+        filterPopUp.setScene(scene);
+        filterPopUp.showAndWait();
     }
 
     /**
