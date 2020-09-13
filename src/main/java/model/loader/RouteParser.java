@@ -1,9 +1,8 @@
 package model.loader;
 
-import model.data.DataType;
 import model.data.Route;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Class to process route data which has been extracted from a file by Loader class.
@@ -38,6 +37,10 @@ public class RouteParser extends Parser {
             throw e;
         }
     }
+//
+//    public RouteParser(ArrayList<String> singleEntry) {
+//        super(singleEntry);
+//    }
 
     @Override
     /**
