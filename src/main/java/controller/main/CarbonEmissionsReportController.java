@@ -70,8 +70,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayCarbonEmissionsGoal.setText("");
-        carbonEmissionGoalDurationField.setText("");
+        //displayCarbonEmissionsGoal.setText("");
+        //carbonEmissionGoalDurationField.setText("");
     }
 
     //TODO: the inputs need to be validated and a text box needs to be displayed for invalid input 13/09/2020 HK.
