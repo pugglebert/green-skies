@@ -20,6 +20,7 @@ public class RouteSingleEntryController {
 
     private final Storage storage = Main.getStorage();
     private final Loader loader = Main.getLoader();
+    //private final RouteParser routeParser = new RouteParser(List<String>);
 
     @FXML
     TextField airlineNameField;
@@ -58,6 +59,8 @@ public class RouteSingleEntryController {
     public void addEntry () {
         String entryString = makeRouteString();
 
+        //System.out.println("in addEntry" + entryString);
+
         try {
             String message = loader.loadLine(entryString, "Route");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -66,7 +69,7 @@ public class RouteSingleEntryController {
             alert.setContentText(message);
             alert.showAndWait();
 
-            Stage stage = (Stage) cancelButton.getScene().getWindow();
+            Stage stage = (Stage) addEntryButton.getScene().getWindow();
             stage.close();
         }
         catch (Exception e){
@@ -86,31 +89,31 @@ public class RouteSingleEntryController {
         String routeLine = new String();
 
         String airlineName = airlineNameField.getText() + ", ";
-        routeLine.concat(airlineName);
+        routeLine += airlineName;
 
         String airlineID = airlineIDField.getText() + ", ";
-        routeLine.concat(airlineID);
+        routeLine += airlineID;
 
         String srcairport = srcairportField.getText() + ", ";
-        routeLine.concat(srcairport);
+        routeLine += srcairport;
 
         String srcairportID = srcairportIDField.getText() + ", ";
-        routeLine.concat(srcairportID);
+        routeLine += srcairportID;
 
         String destairport = destairportField.getText() + ", ";
-        routeLine.concat(destairport);
+        routeLine += destairport;
 
         String destairportID = destairportIDField.getText() + ", ";
-        routeLine.concat(destairportID);
+        routeLine += destairportID;
 
         String codeShare = codeshareField.getText() + ", ";
-        routeLine.concat(codeShare);
+        routeLine += codeShare;
 
         String numStops = numStopsField.getText() + ", ";
-        routeLine.concat(numStops);
+        routeLine += numStops;
 
         String equipment = equipmentField.getText() + ", ";
-        routeLine.concat(equipment);
+        routeLine += equipment;
 
         return routeLine;
     }
