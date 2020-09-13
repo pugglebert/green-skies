@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +30,7 @@ public class ReportGeneratorTest {
     reportGenerator = new ReportGenerator();
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/GenerateReportTest.csv", "Route");
-    } catch (FileSystemException | FileNotFoundException e) {
+    } catch (FileSystemException | FileNotFoundException | SQLException | ClassNotFoundException e) {
       e.printStackTrace();
     }
   }
