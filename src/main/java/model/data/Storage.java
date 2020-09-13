@@ -18,13 +18,6 @@ public class Storage {
 
     public List<Route> history = new ArrayList<>();
 
-    private TreeSet<String> airportCountries = new TreeSet<>();
-    private TreeSet<String> airlineCountries = new TreeSet<>();
-    private TreeSet<String> airportCities = new TreeSet<>();
-    private TreeSet<String> routeAirlines = new TreeSet<>();
-    private TreeSet<String> routeSources = new TreeSet<>();
-    private TreeSet<String> routeDestinations = new TreeSet<>();
-
     /**
      * @return a list of Airline objects from the currently open file cast as Datatype objects.
      */
@@ -44,48 +37,6 @@ public class Storage {
      * @return a list of routes in the user's history.
      */
     public List<Route> getHistory() {return history;}
-
-    /**
-     * @return a list all unique counties from the airline file.
-     */
-    public List<String> getAirlineCounties() {
-        return new ArrayList<>(airlineCountries);
-    }
-
-    /**
-     * @return a list of all unique countries from the aiport file.
-     */
-    public List<String> getAirportCountries() {
-        return new ArrayList<>(airportCountries);
-    }
-
-    /**
-     * @return a list of all unique cities from the airport file.
-     */
-    public List<String> getAirportCities() {
-        return new ArrayList<>(airportCities);
-    }
-
-    /**
-     * @return a list of all unique airline codes from the route file.
-     */
-    public List<String> getRouteAirlines() {
-        return new ArrayList<>(routeAirlines);
-    }
-
-    /**
-     * @return a list of all unique source airports from the route file.
-     */
-    public List<String> getRouteSources() {
-        return new ArrayList<>(routeSources);
-    }
-
-    /**
-     * @return a list of all unique destination airports from the route file.
-     */
-    public List<String> getRouteDestinations() {
-        return new ArrayList<>(routeDestinations);
-    }
 
     /**
      * Add an arrayList of routes to the history list.
@@ -108,7 +59,6 @@ public class Storage {
                 Airline airline = (Airline) entry;
                 if (airline != null) {
                     airlines.add(airline);
-                    airlineCountries.add(airline.getCountry());
                 }
 
             }
@@ -117,22 +67,13 @@ public class Storage {
                 Airport airport = (Airport) entry;
                 airports.add(airport);
                 if (airport != null) {
-                    airportCountries.add(airport.getCountry());
-                    airportCities.add(airport.getCity());
                 }
             }
         } else if (type.matches("Route")) {
-            System.out.println(type); // WORKS REMOVE
             for (DataType entry : data) {
                 Route route = (Route) entry;
 
-                System.out.println("TESTING"); //REMOVE
-                System.out.println(route);//REMOVE
-
                 routes.add(route);
-                routeAirlines.add(route.getAirlineName());
-                routeSources.add(route.getSourceAirport());
-                routeDestinations.add(route.getDestinationAirport());
             }
         } else {
             throw new IllegalArgumentException("Type must be airline, airport or route");

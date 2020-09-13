@@ -99,19 +99,16 @@ public class AirportDataViewController extends DataViewController {
     }
 
     /**
-     * Open the filter options pop up.
+     * Open the filter options pop up. If the user's filters are successfully applied, set the table to display
+     * the filtered data when the pop up is closed.
      */
     public void filterOptions() throws IOException {
         AirportFilterPopUpController filterPopUpController = new AirportFilterPopUpController();
-        filterPopUpController.display(this);
-    }
-
-    /**
-     * Display the ArrayList of airport in the table view.
-     * @param airports an ArrayList of Airports to be displayed.
-     */
-    public void setAirports(ArrayList<Airport> airports) {
-        tableView.setItems(FXCollections.observableList(airports));
+        filterer.setFilterSuccess(false);
+        filterPopUpController.display();
+        if (filterer.getFilterSuccess()) {
+            tableView.setItems(FXCollections.observableList(filterer.getFilteredAirports()));
+        }
     }
 
 }

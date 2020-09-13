@@ -20,7 +20,7 @@ import model.data.Airport;
 import model.data.Route;
 
 import static javafx.application.Application.launch;
-//import org.controlsfx.control.textfield.TextFields;
+import org.controlsfx.control.textfield.TextFields;
 
 public class AnalyseController extends SideNavBarController implements Initializable  {
     @FXML
@@ -33,6 +33,8 @@ public class AnalyseController extends SideNavBarController implements Initializ
 
     @FXML
     private TextField pathDestination2;
+
+
 
     private HashSet<String> airports = new HashSet<>();
 
@@ -56,10 +58,10 @@ public class AnalyseController extends SideNavBarController implements Initializ
 
         }
         System.out.println(airports);
-//        TextFields.bindAutoCompletion(pathSource1, airports);
-//        TextFields.bindAutoCompletion(pathDestination1, airports);
-//        TextFields.bindAutoCompletion(pathSource2, airports);
-//        TextFields.bindAutoCompletion(pathDestination2, airports);
+        TextFields.bindAutoCompletion(pathSource1, airports);
+        TextFields.bindAutoCompletion(pathDestination1, airports);
+        TextFields.bindAutoCompletion(pathSource2, airports);
+        TextFields.bindAutoCompletion(pathDestination2, airports);
     }
 
 

@@ -1,5 +1,6 @@
 package controller.analysis;
 
+import javafx.application.Application;
 import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
@@ -221,6 +222,9 @@ public class FlightAnalyser {
     public double getTotalDistancePath2(){
         return totalDistancePath2;
     }
+
+
+
 
 
 }
