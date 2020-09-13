@@ -1,5 +1,6 @@
 package model.database;
 
+import javafx.beans.binding.StringExpression;
 import model.data.*;
 
 import javax.xml.crypto.Data;
@@ -84,7 +85,16 @@ public class SQLiteDatabase {
         prep.setInt(7, route.getDestinationAirportID());
         prep.setString(8, route.getCodeShare());
         prep.setInt(9, route.getNumOfStops());
-//        prep.setString(10, route.getEquipment());
+
+        String[] equipments = route.getEquipment();
+        String stringEquipment = "";
+        if(equipments != null) {
+            for (String equipment : equipments) {
+                stringEquipment = stringEquipment + " " + equipment;
+            }
+        }
+
+        prep.setString(10, stringEquipment);
         prep.setDouble(11, route.getEmissions());
         prep.setDouble(12, route.getDistance());
         prep.setInt(13, route.getTimesTake());
@@ -185,21 +195,57 @@ public class SQLiteDatabase {
             ArrayList<DataType> airlines = new ArrayList<>();
             while(airlineRow.next()){
                 int airlineId = airlineRow.getInt("airline_id");
-                String name = airlineRow.getString("name");
-                String city = airlineRow.getString("city");
-                String country = airlineRow.getString("country");
+                String airlineName = airlineRow.getString("airlineName");
+                String alias = airlineRow.getString("alias");
                 String IATA = airlineRow.getString("IATA");
                 String ICAO = airlineRow.getString("ICAO");
-                double lat = airlineRow.getDouble("lat");
-                double lon = airlineRow.getDouble("lon");
-                int alt = airlineRow.getInt("alt");
-                float timezone = airlineRow.getFloat("timezone");
-                String DST = airlineRow.getString("DST");
-//                String DBTimezone = airlineRow.getString("DBTimezone");
-//                airline airline = new airline(airlineId, name, city, country, IATA, ICAO, lat, lon, alt, timezone, DST, DBTimezone);
-//                airlines.add(airline);
+                String callsign = airlineRow.getString("callsign");
+                String country = airlineRow.getString("country");
+                Boolean activeStatus = airlineRow.getBoolean("activeStatus");
+                Airline airline = new Airline(airlineId, airlineName, alias, IATA, ICAO, callsign, country, activeStatus);
+                airlines.add(airline);
             }
             storage.setData(airlines, "Airline");
+        }
+
+        state = con.createStatement();
+        ResultSet hasRouteTable = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
+
+        if(hasRouteTable.next()){
+            Statement routesTable = con.createStatement();
+            ResultSet routesRow = routesTable.executeQuery("select * from 'routes'");
+            ArrayList<DataType> routes = new ArrayList<>();
+            while(routesRow.next()){
+//                int route_id = routesRow.getInt("route_id");
+                String airlineName = routesRow.getString("airlineName");
+                int airlineID = routesRow.getInt("airlineID");
+                String sourceAirport = routesRow.getString("sourceAirport");
+                int sourceAirportID = routesRow.getInt("sourceAirportID");
+                String destinationAirport = routesRow.getString("destinationAirport");
+                int destinationAirportID = routesRow.getInt("destinationAirportID");
+                String codeShare = routesRow.getString("codeShare");
+                int numOfStops = routesRow.getInt("numOfStops");
+
+                String equipment = routesRow.getString("equipment");
+                System.out.println(equipment);
+                String[] equipmentArray;
+                if(equipment != null) {
+                    equipmentArray = equipment.split(" ");
+                } else {
+                    equipmentArray = null;
+                }
+
+                double emissions = routesRow.getDouble("emissions");
+                double distance = routesRow.getDouble("distance");
+                int timesTaken = routesRow.getInt("timesTaken");
+
+                Route route = new Route(airlineName, airlineID, sourceAirport, sourceAirportID, destinationAirport, destinationAirportID, codeShare, numOfStops, equipmentArray);
+                route.setEmissions(emissions);
+                route.setTimesTaken(timesTaken);
+                route.setDistance(distance);
+                routes.add(route);
+            }
+            storage.setData(routes, "Route");
         }
     }
 }
