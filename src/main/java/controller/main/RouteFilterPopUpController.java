@@ -1,20 +1,15 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.data.Route;
-import model.data.Storage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -24,7 +19,7 @@ import java.util.ResourceBundle;
  * @version 1.0
  * @since 12/09/2020
  */
-public class RouteFilterPopUpController implements Initializable {
+public class RouteFilterPopUpController extends FilterPopUpController {
 
     @FXML
     private CheckBox airlineCheckBox;
@@ -38,50 +33,37 @@ public class RouteFilterPopUpController implements Initializable {
     private TextField sourceField;
     @FXML
     private TextField destinationField;
-    @FXML
-    private Label errorText;
 
     /**
-     * A list of filtered routes. Initialized to the routes stored in storage.
+     * Display the filter pop up window.
+     * @throws IOException if fmxl file cannot be opened.
      */
-    private ArrayList<Route> routes;
-    private final Storage storage = Main.getStorage();
-    /**
-     * The class that instatiated the RouteFilterPopUpController.
-     */
-    private RouteDataViewController caller;
+    @Override
+    public void display() throws IOException {
+        final Stage filterPopUp = new Stage();
+        filterPopUp.initModality(Modality.APPLICATION_MODAL);
+        Parent root = FXMLLoader.load(getClass().getResource("routeFilterPopUp.fxml"));
+        Scene scene = new Scene(root);
+        filterPopUp.setScene(scene);
+        filterPopUp.showAndWait();
+    }
 
     /**
-     * Initalize the routes to the list stored in the Storage class.
-     * @param url
-     * @param resourceBundle
+     * Initialize the fxml filename.
+     * @param url Not used.
+     * @param resourceBundle Not used.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        routes = (ArrayList<Route>) storage.getRoutes();
+
     }
 
     /**
-     * Create and display a stage for the filter pop up.
-     * @param caller the class which instantiated the RouteFilterPopUpController
-     * @throws IOException
+     * Gets the filter terms the user has entered from the text fields and puts them into a HashMap with the filter type
+     * as the key and the filter term as the value.
+     * @return A HashMap with filter types as keys and filter terms as values.
      */
-    public void display(RouteDataViewController caller) throws IOException {
-        final Stage filterPopUp = new Stage();
-        this.caller = caller;
-        filterPopUp.initModality(Modality.APPLICATION_MODAL);
-        Parent root = FXMLLoader.load(getClass().getResource("routeFilterPopUp.fxml")); //open the Upload Data page
-        Scene scene = new Scene(root);
-        filterPopUp.setScene(scene);
-        filterPopUp.show();
-    }
-
-    /**
-     * Get the filter terms and types from the user and call Filterer.filterRoutes with a hashmap of these terms and types.
-     * Call setRoutes in the RouteDataViewController to display the results of filtering.
-     */
-    public void applyFilters() {
-        errorText.setVisible(false);
+    public HashMap<String, String> getFilterTerms() {
         HashMap<String, String> filterTerms = new HashMap<>();
         if (airlineCheckBox.isSelected()) {
             filterTerms.put("Airline", airlineField.getText());
@@ -92,21 +74,16 @@ public class RouteFilterPopUpController implements Initializable {
         if (destinationCheckBox.isSelected()) {
             filterTerms.put("Destination", destinationField.getText());
         }
-        if (!filterTerms.isEmpty()) {
-            routes = Filterer.filterRoutes(filterTerms, storage.getRoutes());
-            caller.setRoutes(routes);
-            /*} catch (RuntimeException e) {
-                if (e.getMessage() == null) {
-                    errorText.setText("Something went wrong.");
-                } else {
-                    errorText.setText(e.getMessage());
-                }
-                errorText.setVisible(true);
-            }*/
-        } else {
-            errorText.setText("Select at least one filter option.");
-            errorText.setVisible(true);
-        }
+        return filterTerms;
+    }
+
+    /**
+     * Call the filterRoutes method of filterer with the given HashMap of filter types and terms.
+     * @param filterTerms A HashMap with filter type as the key and filter term as the value.
+     */
+    @Override
+    public void filterByDataType(HashMap<String, String> filterTerms) {
+        filterer.filterRoutes(filterTerms, storage.getRoutes());
     }
 
 }

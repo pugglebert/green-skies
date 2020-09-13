@@ -1,22 +1,16 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.data.Airport;
-import model.data.Storage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -26,7 +20,7 @@ import java.util.ResourceBundle;
  * @version 1.0
  * @since 12/09/2020
  */
-public class AirportFilterPopUpController implements Initializable {
+public class AirportFilterPopUpController extends FilterPopUpController {
 
     @FXML
     private TextField countryField;
@@ -36,51 +30,36 @@ public class AirportFilterPopUpController implements Initializable {
     private CheckBox countryCheckBox;
     @FXML
     private CheckBox cityCheckBox;
-    @FXML
-    private Label errorText;
 
     /**
-     * The class form which the AirportFilterPopUpController was instantiated.
-     */
-    private AirportDataViewController caller;
-    /**
-     * An ArrayList of filtered Airports, initialized to the value stored in storage.
-     */
-    private ArrayList<Airport> airports;
-    private Storage storage = Main.getStorage();
-
-    /**
-     * Initialize airports to the list of Airports stored in storage.
-     * @param url
-     * @param resourceBundle
+     * Initialize the fxml filename.
+     * @param url Not used.
+     * @param resourceBundle Not used.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        airports = (ArrayList<Airport>) storage.getAirports();
     }
 
     /**
-     * Display the filter pop up window until close called.
-     * @param caller the class calling this method.
-     * @return an ArrayList of airports, which have been filtered if a filter was applied.
-     * @throws IOException
+     * Display the filter pop up window.
+     * @throws IOException if fmxl file cannot be opened.
      */
-    public void display(AirportDataViewController caller) throws IOException {
+    public void display() throws IOException {
         final Stage filterPopUp = new Stage();
-        this.caller = caller;
         filterPopUp.initModality(Modality.APPLICATION_MODAL);
         Parent root = FXMLLoader.load(getClass().getResource("airportFilterPopUp.fxml")); //open the Upload Data page
         Scene scene = new Scene(root);
         filterPopUp.setScene(scene);
-        filterPopUp.show();
+        filterPopUp.showAndWait();
     }
 
     /**
-     * Get the filter types and terms from the textfields. Call Filterer.filterAirports with the given filter types and
-     * terms in a hashmap, and assign the results of the filter to the airport attribute.
+     * Get the country and active status which the user has inputed and insert them into a hashmap with the filter
+     * type as the key.
+     * @return a hashmap with filter type as the key and filter term as the value.
      */
-    public void applyFilters() {
-        errorText.setVisible(false);
+    @Override
+    public HashMap<String, String> getFilterTerms() {
         HashMap<String, String> filterTerms = new HashMap<>();
         if (countryCheckBox.isSelected()) {
             filterTerms.put("Country", countryField.getText());
@@ -88,23 +67,15 @@ public class AirportFilterPopUpController implements Initializable {
         if (cityCheckBox.isSelected()) {
             filterTerms.put("Active status", cityField.getText());
         }
-        if (!filterTerms.isEmpty()) {
-            try {
-                airports = Filterer.filterAirports(filterTerms, storage.getAirports());
-                // System.out.println(String.format("Results length = %d", airports.size()));
-                caller.setAirports(airports);
-            //caller.setAirports(airports);
-            } catch (RuntimeException e) {
-                if (e.getMessage() == null) {
-                    errorText.setText("Something went wrong.");
-                } else {
-                    errorText.setText(e.getMessage());
-                }
-                errorText.setVisible(true);
-            }
-        } else {
-            errorText.setText("Select at least one filter option.");
-            errorText.setVisible(true);
-        }
+        return filterTerms;
     }
+
+    /**
+     * Call the filterAirports method of the Filterer class with the given hashmap of filter types and term.
+     * @param filterTerms a hashmap to pass into the filterAirports method.
+     */
+    public void filterByDataType(HashMap<String, String> filterTerms) {
+        filterer.filterAirports(filterTerms, storage.getAirports());
+    }
+
 }

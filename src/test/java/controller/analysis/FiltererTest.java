@@ -54,7 +54,8 @@ public class FiltererTest {
     expectedResults.add(new Airport(1,"Goroka","Goroka","Papua New Guinea","GKA",
             "AYGA",-6.081689,145.391881,5282,10,"U",
             "Pacific/Port_Moresby"));
-    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+    filterer.filterAirports(testFilterTerms, storage.getAirports());
+    ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -71,7 +72,8 @@ public class FiltererTest {
     expectedResults.add(new Airport(1,"Goroka","Goroka","Papua New Guinea","GKA",
             "AYGA",-6.081689,145.391881,5282,10,"U",
             "Pacific/Port_Moresby"));
-    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+    filterer.filterAirports(testFilterTerms, storage.getAirports());
+    ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -89,7 +91,8 @@ public class FiltererTest {
     expectedResults.add(new Airport(1,"Goroka","Goroka","Papua New Guinea","GKA",
             "AYGA",-6.081689,145.391881,5282,10,"U",
             "Pacific/Port_Moresby"));
-    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+    filterer.filterAirports(testFilterTerms, storage.getAirports());
+    ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -109,7 +112,8 @@ public class FiltererTest {
             "America/Godthab"));
     expectedResults.add(new Airport(8,"Nuuk","Godthaab","Greenland","GOH","BGGH",
             64.190922,-51.678064,283,-3,"E","America/Godthab"));
-    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+    filterer.filterAirports(testFilterTerms, storage.getAirports());
+    ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -135,7 +139,8 @@ public class FiltererTest {
             64.295556,-15.227222,24,0,"N","Atlantic/Reykjavik"));
     expectedResults.add(new Airport(14,"Akureyri","Husavik","Iceland","HZK","BIHU",
             65.952328,-17.425978,48,0,"N","Atlantic/Reykjavik"));
-    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+    filterer.filterAirports(testFilterTerms, storage.getAirports());
+    ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -157,7 +162,8 @@ public class FiltererTest {
     expectedResults.add(new Airport(22,"Sault Ste Marie","Winnipeg","Canada","YAM",
             "CYAV",50.056389,-97.0325,760,-6,"A",
             "America/Winnipeg"));
-    ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+    filterer.filterAirports(testFilterTerms, storage.getAirports());
+    ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -189,7 +195,8 @@ public class FiltererTest {
         HashMap<String, String> testFilterTerms = new HashMap<>();
         testFilterTerms.put("Name", "Mangaia Island Airport");
         testFilterTerms.put("Country", "Cook Islands");
-        ArrayList<Airport> results = filterer.filterAirports(testFilterTerms, storage.getAirports());
+        filterer.filterAirports(testFilterTerms, storage.getAirports());
+        ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
         expectedResults.add(new Airport(5864,"Mangaia Island Airport","Mangaia Island",
                 "Cook Islands","MGS","NCMG",-21.8956, -157.905,45,
                 -10,"U","Pacific/Rarotonga"));
@@ -209,7 +216,8 @@ public class FiltererTest {
     testFilterTerms.put("Name", "Private flight");
     expectedResults.add(new Airline(1,"Private flight","\\N","-","N/A","",
             "",true));
-    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    ArrayList<Airline> results = (ArrayList<Airline>) filterer.getFilteredAirlines();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -241,7 +249,8 @@ public class FiltererTest {
     testFilterTerms.put("Country", "South Africa");
     expectedResults.add(new Airline(3,"1Time Airline","\\N","1T","RNX","NEXTIME",
             "South Africa",true));
-    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    ArrayList<Airline> results = (ArrayList<Airline>) filterer.getFilteredAirlines();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -258,7 +267,8 @@ public class FiltererTest {
     testFilterTerms.put("IATA", "Q5");
     expectedResults.add(new Airline(10,"40-Mile Air","\\N","Q5","MLA","MILE-AIR",
             "United States",true));
-    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    ArrayList<Airline> results = (ArrayList<Airline>) filterer.getFilteredAirlines();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -280,7 +290,8 @@ public class FiltererTest {
             "CARGO UNIT","Russia",false));
     expectedResults.add(new Airline(52,"Hot Air","\\N","","TFU","","Russia",
             false));
-    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    ArrayList<Airline> results = (ArrayList<Airline>) filterer.getFilteredAirlines();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -299,7 +310,8 @@ public class FiltererTest {
             "United States",false));
     expectedResults.add(new Airline(53,"ABX Air","\\N","HB","ABX","ABEX",
             "United States",false));
-    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    ArrayList<Airline> results = (ArrayList<Airline>) filterer.getFilteredAirlines();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -322,7 +334,8 @@ public class FiltererTest {
             "Ghana",false));
     expectedResults.add(new Airline(56,"Antrak Air","\\N","05","ABV","ANTRAK",
             "Ghana",false));
-    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    ArrayList<Airline> results = (ArrayList<Airline>) filterer.getFilteredAirlines();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -370,7 +383,8 @@ public class FiltererTest {
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Name", "Aerial First");
     testFilterTerms.put("Country", "Finland");
-    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    filterer.filterAirlines(testFilterTerms, storage.getAirlines());
+    ArrayList<Airline> results = (ArrayList<Airline>) filterer.getFilteredAirlines();
     expectedResults.add(new Airline(54,"Aerial First","\\N","","ABF","SKYWINGS",
             "Finland",false));
     assertArrayEquals(expectedResults.toArray(), results.toArray());
@@ -388,7 +402,8 @@ public class FiltererTest {
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Airline", "2H");
     expectedResults.add(new Route("2H",1654,"IKT",2937,"ODO",8944,"",0,"AN4".split(" ")));
-    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -404,7 +419,8 @@ public class FiltererTest {
     testFilterTerms.put("Destination", "OVC");
     expectedResults.add(new Route("2W",410,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" ")));
-    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -422,7 +438,8 @@ public class FiltererTest {
     testFilterTerms.put("Destination", "OVB");
     expectedResults.add(new Route("2V",410,"SVY",2975,"OVB",
             4078,"",0,"CR2".split(" ")));
-    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -443,7 +460,8 @@ public class FiltererTest {
             2990,"",0,"CR2".split(" ")));
     expectedResults.add(new Route("2B",410,"ASF",2966,"KZN",
             2962,"",0,"CR2".split(" ")));
-    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -464,7 +482,8 @@ public class FiltererTest {
             6969,"",0,"CR2".split(" ")));
     expectedResults.add(new Route("2B",410,"CEK",4029,"NBC",
             6160,"",0,"CR2".split(" ")));
-    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -484,7 +503,8 @@ public class FiltererTest {
             4079,"",0,"CR2".split(" ")));
     expectedResults.add(new Route("2A",411,"SVH",2976,"OPP",
             4080,"",0,"CR2".split(" ")));
-    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -532,7 +552,8 @@ public class FiltererTest {
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Airline", "2K");
     testFilterTerms.put("Source", "HTA");
-    ArrayList<Route> results = filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    filterer.filterRoutes(testFilterTerms, storage.getRoutes());
+    ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     expectedResults.add(new Route("2K",1654,"HTA",2935,"IKT",
             2937,"",0,"AN4".split(" ")));
     assertArrayEquals(expectedResults.toArray(), results.toArray());

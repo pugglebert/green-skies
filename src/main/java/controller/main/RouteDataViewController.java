@@ -4,20 +4,16 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import model.data.Route;
 import model.loader.FlightHistory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -27,8 +23,6 @@ import java.util.ResourceBundle;
  * @since 2020-08-26
  */
 public class RouteDataViewController extends DataViewController {
-
-
 
     //Configure the TableView.
     @FXML
@@ -97,20 +91,6 @@ public class RouteDataViewController extends DataViewController {
     }
 
     /**
-     * This method closes the Upload Data page and opens the View Airline Data page.
-     * @throws IOException
-     */
-    public void toFlightHistory() throws IOException {
-        Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
-        stage.close();
-        Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("flightHistory.fxml")); //open the View Airline Data page
-        Scene scene = new Scene(root);
-        newStage.setScene(scene);
-        newStage.show();
-    }
-
-    /**
      * Calls searchRoutes method from searcher class and upldates table to display
      * results of search.
      */
@@ -122,39 +102,15 @@ public class RouteDataViewController extends DataViewController {
     private FlightHistory buffer;
     private ObservableList<Route> routes;
 
-
-    //TODO: remove this code.
-
-    /*add checkbox to mark which route user wanted to add*/
-//    public void addCheckboxAndDisplay() {
-//        buffer = new FlightHistory(this.fileDir);
-//        for (Route route : buffer.getBuffer()) {
-//            route.initCheckBox();
-//        }
-//        routes = FXCollections.observableList(buffer.getBuffer());
-//        FlightTable.setItems(routes);
-//    }
-
-    public void addDataToHistory() throws IOException { //TODO slow on entire data list (maybe add listener to checkbox)
-//        List<Route> temp = new ArrayList<Route>();
-//        for (Route route : Main.getStorage().getRoutes()){
-//            if (route.getSelect().isSelected()){
-//                temp.add(route);
-//
-//            }
-//        }
-//
-//        Main.getStorage().getHistory().addAll(temp);
-        RouteAddToHistoryPopUpController popUp = new RouteAddToHistoryPopUpController();
-        popUp.display(this);
-//TODO: remove this code.
-        //parent.updateTable();
-
-        //TODo pass data back
-//        Stage stage = (Stage) AddButton.getScene().getWindow();
-//        stage.close();
-
+  public void addDataToHistory() { // TODO: attempting to fix add to history.
+    List<Route> temp = new ArrayList<Route>();
+    for (Route route : Main.getStorage().getRoutes()) {
+      if (route.getSelect().isSelected()) {
+        temp.add(route);
+      }
     }
+    Main.getStorage().getHistory().addAll(temp);
+  }
 
     /**
      * Clear search bar and display all routes in table view.
@@ -166,19 +122,16 @@ public class RouteDataViewController extends DataViewController {
     }
 
     /**
-     * Launch the filter pop up box.
+     * Launch the filter pop up box. If filtering is successful displays filtered routes in tableview.
      * @throws IOException
      */
     public void filterOptions() throws IOException {
         RouteFilterPopUpController filterPopUp = new RouteFilterPopUpController();
-        filterPopUp.display(this);
+        filterer.setFilterSuccess(false);
+        filterPopUp.display();
+        if (filterer.getFilterSuccess()) {
+            tableView.setItems(FXCollections.observableList(filterer.getFilteredRoutes()));
+        }
     }
 
-    /**
-     * Display the given routes in the table view.
-     * @param routes an ArrayList of Routes to be displayed.
-     */
-    public void setRoutes(ArrayList<Route> routes) {
-        tableView.setItems(FXCollections.observableList(routes));
-    }
 }

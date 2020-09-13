@@ -1,5 +1,6 @@
 package controller.main;
 
+import controller.analysis.Filterer;
 import model.data.Route;
 import model.data.Storage;
 import model.loader.Loader;
@@ -17,6 +18,7 @@ public class Main {
 
     private static Storage storage = new Storage();
     private static Loader loader = new Loader(storage);
+    private static Filterer filterer = new Filterer();
 
     public static Storage getStorage() {
         return storage;
@@ -25,6 +27,9 @@ public class Main {
     public static Loader getLoader() {
         return loader;
     }
+
+    public static Filterer getFilterer() {return filterer;}
+
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        Route route1 = new Route("a", 123, "abc", 123, "abc", 123, "ABC", 0, null);

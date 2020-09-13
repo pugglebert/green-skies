@@ -49,6 +49,7 @@ public abstract class DataViewController extends SideNavBarController {
     protected String filterPopUpFilename;
     protected ObservableList<String> searchTypes;
     protected final Storage storage = Main.getStorage();
+    protected final Filterer filterer = Main.getFilterer();
 
     protected DataViewController() {
     }

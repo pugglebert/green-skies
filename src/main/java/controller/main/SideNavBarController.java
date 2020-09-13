@@ -39,7 +39,7 @@ public abstract class SideNavBarController implements Initializable {
     @FXML
     protected Button btnGraphs;
     @FXML
-    protected Button btnAnalyseflight;
+    protected Button btnAnalyseFlight;
 
     protected ObservableList<String> searchTypes;
     protected final Storage storage = Main.getStorage();
@@ -167,9 +167,9 @@ public abstract class SideNavBarController implements Initializable {
         newStage.show();
     }
 
-    @FXML
+
     public void toAnalyseFlight() throws IOException {
-        Stage stage = (Stage)btnAnalyseflight.getScene().getWindow();
+        Stage stage = (Stage)btnAnalyseFlight.getScene().getWindow();
         stage.close();
         Stage newStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
