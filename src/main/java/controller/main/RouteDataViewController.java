@@ -1,6 +1,5 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,16 +7,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.data.Route;
 import model.loader.FlightHistory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
  * @since 2020-08-26
  */
 public class RouteDataViewController extends DataViewController {
+
 
 
     //Configure the TableView.
@@ -54,6 +55,8 @@ public class RouteDataViewController extends DataViewController {
     private TableColumn<Route, String[]> equipmentColumn;
     @FXML
     private Button btnFlightHistory;
+    @FXML
+    public Button AddToHistoryButton;
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
 
@@ -68,6 +71,7 @@ public class RouteDataViewController extends DataViewController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Set up the columns in the TableView.
+
         addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
         airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
         airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
@@ -131,17 +135,18 @@ public class RouteDataViewController extends DataViewController {
 //        FlightTable.setItems(routes);
 //    }
 
-    public void addDataToHistory() { //TODO slow on entire data list (maybe add listener to checkbox)
-        List<Route> temp = new ArrayList<Route>();
-        for (Route route : Main.getStorage().getRoutes()){
-            if (route.getSelect().isSelected()){
-                temp.add(route);
-
-            }
-        }
-
-        Main.getStorage().getHistory().addAll(temp);
-
+    public void addDataToHistory() throws IOException { //TODO slow on entire data list (maybe add listener to checkbox)
+//        List<Route> temp = new ArrayList<Route>();
+//        for (Route route : Main.getStorage().getRoutes()){
+//            if (route.getSelect().isSelected()){
+//                temp.add(route);
+//
+//            }
+//        }
+//
+//        Main.getStorage().getHistory().addAll(temp);
+        RouteAddToHistoryPopUpController popUp = new RouteAddToHistoryPopUpController();
+        popUp.display(this);
 //TODO: remove this code.
         //parent.updateTable();
 

@@ -122,8 +122,13 @@ public class Storage {
                 }
             }
         } else if (type.matches("Route")) {
+            System.out.println(type); // WORKS REMOVE
             for (DataType entry : data) {
                 Route route = (Route) entry;
+
+                System.out.println("TESTING"); //REMOVE
+                System.out.println(route);//REMOVE
+
                 routes.add(route);
                 routeAirlines.add(route.getAirlineName());
                 routeSources.add(route.getSourceAirport());

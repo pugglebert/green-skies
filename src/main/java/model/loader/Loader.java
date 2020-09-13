@@ -100,6 +100,7 @@ public class Loader {
                 break;
             case "Route" :
                 try {
+                    //System.out.println("WOWOWOW");
                     parser = new RouteParser(lines);
                 } catch (RuntimeException e) {
                     throw e;
@@ -189,4 +190,37 @@ public class Loader {
         return parser.getErrorMessage();
 
     }
+
+    /**
+     * method to load a single data entry
+     * @param entryString
+     * @param dataType
+     * @return errorMessageString
+     */
+    public String loadLine(String entryString, String dataType) {
+
+        ArrayList<String> line = new ArrayList<String>();
+        line.add(entryString);
+
+        System.out.println("loadLine..." + entryString); // WORKS REMOVE
+
+        Parser parser;
+
+        try {
+            parser = constructParser(dataType, line);
+        } catch (RuntimeException e) {
+            throw e;
+        }
+
+        // TODO fix this issue and remove test comments in storage, parser, loader 13/09/20
+        List<DataType> data = parser.getData(); //ISSUE IN HERE
+
+        System.out.println("asdfas" + data); //DOESNT WORK REMOVE
+
+        storage.setData(data, dataType);
+
+        return parser.getErrorMessage();
+
+    }
+
 }

@@ -18,7 +18,7 @@ public class AirlineParser extends Parser {
       country = 6,
       activeStatus = 7;
 
-  // todo add error count
+
   public AirlineParser(List<String> dataFile) {
     super(dataFile, 12);
     dataParser();
