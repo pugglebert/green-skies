@@ -38,7 +38,7 @@ public class UploadController extends SideNavBarController {
     @FXML
     private ChoiceBox dataTypeSelect;
     @FXML
-    private ListView fileView;
+    public ListView fileView;
     @FXML
     private Button backButton;
 
@@ -97,7 +97,6 @@ public class UploadController extends SideNavBarController {
                 loader.loadFile(stringFile, fileType);
                 fileView.getItems().add(selectedFile.getName());
                 ConfirmAlert.close();
-
             //if user wishes to cancel the file chosne to upload they push cancel and no data is uploaded
             } else if (result.get() == cancelButton) {
                 ConfirmAlert.close();
@@ -120,14 +119,14 @@ public class UploadController extends SideNavBarController {
 //
     }
     /**
-     * This method opens a screen for singular manual data entry when the 'Add single entry' button is clicked.
+     * This method opens a screen for manual data entry of a single item when the 'Add single entry' button is clicked.
      */
     public void addSingle() throws IOException {
 
         //Checks to see that the user has chosen a data type
         if (checkDataTypeSelected()) {
           String fileType = dataTypeSelect.getValue().toString();
-          //checks which data type was chosen by the user so the correc single data entry window is opened
+          //checks which data type was chosen by the user so the correct single data entry window is opened
           if (fileType == "Airport") {
               Stage newStage = new Stage();
               Parent root = FXMLLoader.load(getClass().getResource("airportSingleEntry.fxml"));

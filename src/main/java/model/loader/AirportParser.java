@@ -4,9 +4,6 @@ import model.data.Airport;
 import model.data.DataType;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * The sub-class Parser for airport. AirportParser class receives a list of airport data, validates
@@ -103,9 +100,18 @@ public class AirportParser extends Parser {
          String[] line = dataLine.replaceAll("\"", "").split(",");
             if (validater(line)){
                 try{
-                    Airport airport = new Airport(Integer.parseInt(line[airportID]), line[name], line[city], line[country], line[IATA],
-                            line[ICAO], Double.parseDouble(line[latitude]), Double.parseDouble(line[longtitude]), Integer.parseInt(line[altitude]),
-                            Float.parseFloat(line[timezone]), line[DST], line[dataBaseTimeZone]);
+                    Airport airport = new Airport(Integer.parseInt(line[airportID]),
+                            line[name],
+                            line[city],
+                            line[country],
+                            line[IATA],
+                            line[ICAO],
+                            Double.parseDouble(line[latitude]),
+                            Double.parseDouble(line[longtitude]),
+                            Integer.parseInt(line[altitude]),
+                            Float.parseFloat(line[timezone]),
+                            line[DST],
+                            line[dataBaseTimeZone]);
                     parserData.add(airport);
                 } catch(Exception e) {
                     errorCounter(14);
