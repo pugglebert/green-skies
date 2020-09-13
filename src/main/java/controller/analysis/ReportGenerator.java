@@ -44,10 +44,9 @@ public class ReportGenerator {
     /**
      * This method updates the total carbon emissions from flight travel.
      * @param currentRouteRecord, the current route record that is being added to user's flight history.
-     * @param timesRouteTaken, the times the route has been taken.
      */
-    public void updateTotalEmissions(Route currentRouteRecord, int timesRouteTaken) {
-        totalCarbonEmissions += (currentRouteRecord.getEmissions() * timesRouteTaken);
+    public void updateTotalEmissions(Route currentRouteRecord) {
+        totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTake());
     }
 
     /**
@@ -314,6 +313,10 @@ public class ReportGenerator {
         arraytoSort[pivot] = arraytoSort[counter];
         arraytoSort[counter] = temp;
         return counter;
+    }
+
+    public void setTotalCarbonEmissions(double totalCarbonEmissions) {
+        this.totalCarbonEmissions = totalCarbonEmissions;
     }
 
 }
