@@ -1,20 +1,15 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.data.Airline;
 import model.data.Airport;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -104,19 +99,16 @@ public class AirportDataViewController extends DataViewController {
     }
 
     /**
-     * Open the filter options pop up.
+     * Open the filter options pop up. If the user's filters are successfully applied, set the table to display
+     * the filtered data when the pop up is closed.
      */
     public void filterOptions() throws IOException {
         AirportFilterPopUpController filterPopUpController = new AirportFilterPopUpController();
-        filterPopUpController.display(this);
-    }
-
-    /**
-     * Display the ArrayList of airport in the table view.
-     * @param airports an ArrayList of Airports to be displayed.
-     */
-    public void setAirports(ArrayList<Airport> airports) {
-        tableView.setItems(FXCollections.observableList(airports));
+        filterer.setFilterSuccess(false);
+        filterPopUpController.display();
+        if (filterer.getFilterSuccess()) {
+            tableView.setItems(FXCollections.observableList(filterer.getFilteredAirports()));
+        }
     }
 
 }
