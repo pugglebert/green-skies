@@ -50,32 +50,32 @@ public class AirlineSingleEntryController {
         String airlineString = new String();
 
         String airlineID = airlineIDField.getText();
-        airlineString.concat(airlineID);
+        airlineString += airlineID;
 
         String name = nameField.getText();
-        airlineString.concat(name);
+        airlineString += name;
 
         String alias = aliasField.getText();
-        airlineString.concat(alias);
+        airlineString += alias;
 
         String itat = itatField.getText();
-        airlineString.concat(itat);
+        airlineString += itat;
 
         String icao = icaoField.getText();
-        airlineString.concat(icao);
+        airlineString += icao;
 
         String callsign = callsignField.getText();
-        airlineString.concat(callsign);
+        airlineString += callsign;
 
         String country = countryField.getText();
-        airlineString.concat(country);
+        airlineString += country;
 
         Boolean active = false;
         if (activeCheck.isSelected()) {
             active = true;
         }
         String activity = String.valueOf(active);
-        airlineString.concat(activity);
+        airlineString += activity;
 
         return airlineString;
     }

@@ -36,6 +36,10 @@ public abstract class Parser {
         initErrorLookup();
     }
 
+//    public Parser(List<String> singleEntry) {
+//        this.dataFile =  singleEntry;
+//    }
+
     /** Initialize errorLookup with message for each error code */
     protected abstract void initErrorLookup();
 
