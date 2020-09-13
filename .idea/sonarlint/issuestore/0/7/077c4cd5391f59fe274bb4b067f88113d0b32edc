@@ -1,8 +1,15 @@
 
-`
-java:S2583G"CChange this condition so that it does not always evaluate to "true"(¾Å ‹8àÜÚÃ.
-U	java:S106N"9Replace this use of System.out or System.err by a logger.(œ¾ö…8àÜÚÃ.
+m	java:S117X"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÒÀÏ8·›Ğ­È.
+m	java:S117<"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢ó¯8·›Ğ­È.
+X
+java:S2387 ";"storage" is the name of a field in "SideNavBarController".(Ó«Ğ½8·›Ğ­È.
+W
+java:S4973"9Use the "equals" method if value comparison was intended.(³ÊÌÜ8·›Ğ­È.
+m	java:S117k"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢ó¯8·›Ğ­È.
+U	java:S106t"9Replace this use of System.out or System.err by a logger.(œ¾ö…8àÜÚÃ.
+\
+java:S4973‚"9Use the "equals" method if value comparison was intended.(µöÒÿÿÿÿÿ8·›Ğ­È.
 U
-java:S4838L"8Change "DataType" to the type handled by the Collection.(¼’Ëö8ó½ó˜Ã.
-T
-java:S1135R"2Complete the task associated to this TODO comment.(úé‰·şÿÿÿÿ8àÜÚÃ.
+java:S4838r"8Change "DataType" to the type handled by the Collection.(¼’Ëö8ó½ó˜Ã.
+W
+java:S4973‰"9Use the "equals" method if value comparison was intended.(È‘Â½8·›Ğ­È.

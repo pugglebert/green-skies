@@ -1,5 +1,8 @@
 package model.data;
 
+import model.database.SQLiteDatabase;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
@@ -25,7 +28,7 @@ public class Storage {
     private TreeSet<String> routeSources = new TreeSet<>();
     private TreeSet<String> routeDestinations = new TreeSet<>();
 
-
+    private SQLiteDatabase database = new SQLiteDatabase();
     /**
      * @return a list of Airline objects from the currently open file cast as Datatype objects.
      */
@@ -101,34 +104,46 @@ public class Storage {
      * @param data the list of data.
      * @param type type of data to be stored.
      */
-    public void setData(List<DataType> data, String type) {
+    public void setData(List<DataType> data, String type) throws SQLException, ClassNotFoundException {
 
         if (type.matches("Airline")) {
-
+            database.dropTable("airlines");
+            database.closeAutoCommite();
             for (DataType entry : data) {
                 Airline airline = (Airline) entry;
                 if (airline != null) {
                     airlines.add(airline);
                     airlineCountries.add(airline.getCountry());
+                    database.addAirlines(airline);
+
                 }
             }
+            database.startCommite();
         } else if (type.matches("Airport")) {
+            database.dropTable("airports");
+            database.closeAutoCommite();
             for (DataType entry : data) {
                 Airport airport = (Airport) entry;
                 airports.add(airport);
+                database.addAirports(airport);
                 if (airport != null) {
                     airportCountries.add(airport.getCountry());
                     airportCities.add(airport.getCity());
                 }
             }
+            database.startCommite();
         } else if (type.matches("Route")) {
+            database.dropTable("routes");
+            database.closeAutoCommite();
             for (DataType entry : data) {
                 Route route = (Route) entry;
                 routes.add(route);
+                database.addRoutes(route);
                 routeAirlines.add(route.getAirlineName());
                 routeSources.add(route.getSourceAirport());
                 routeDestinations.add(route.getDestinationAirport());
             }
+            database.startCommite();
         } else {
             throw new IllegalArgumentException("Type must be airline, airport or route");
         }

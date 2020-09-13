@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static org.junit.Assert.*;
@@ -26,7 +27,7 @@ public class FiltererTest {
   private Filterer filterer;
 
   @Before
-  public void setUp() {
+  public void setUp() throws SQLException, ClassNotFoundException {
     storage = new Storage();
     loader = new Loader(storage);
     filterer = new Filterer();

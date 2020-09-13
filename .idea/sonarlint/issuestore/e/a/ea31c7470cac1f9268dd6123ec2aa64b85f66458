@@ -1,29 +1,33 @@
 
-t
-java:S2737b"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8ĞœÔøÀ.
-b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ˆÑ¢æ8‘¨ÀÆÁ.
-u
-java:S2737"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
+w
+java:S2293É"YReplace the type specification in this constructor call with the diamond operator ("<>").(Å¬Šş8ù÷ª­È.
 ƒ
 java:S1130-"mRemove the declaration of thrown exception 'java.lang.IllegalArgumentException' which is a runtime exception.(»•„Â
+Š
+java:S1130R"mRemove the declaration of thrown exception 'java.lang.IllegalArgumentException' which is a runtime exception.(ûĞä¼8ĞœÔøÀ.
+u
+java:S2737§"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8šıç‹È.
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(éø¥O8ıåŠ˜Ã.
+t
+java:S2737b"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8ĞœÔøÀ.
+t
+java:S2737i"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
+M
+java:S39721"7Move this "if" to a new line or add the missing "else".(ÉŒÎ¾
+u
+java:S2737‡"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8éÀÔøÀ.
 t
 java:S2737["WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ˆÑ¢æ8‘¨ÀÆÁ.
+u
+java:S2737¯"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8šıç‹È.
+c	java:S112Ÿ"FDefine and throw a dedicated exception instead of using a generic one.(ˆÑ¢æ8šıç‹È.
+u
+java:S2737·"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8šıç‹È.
 u
 java:S2737—"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8éÀÔøÀ.
 u
-java:S2737‡"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8éÀÔøÀ.
-M
-java:S39721"7Move this "if" to a new line or add the missing "else".(ÉŒÎ¾
-t
-java:S2737i"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
-Š
-java:S1130R"mRemove the declaration of thrown exception 'java.lang.IllegalArgumentException' which is a runtime exception.(ûĞä¼8ĞœÔøÀ.
-b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(éø¥O8ıåŠ˜Ã.
-c	java:S112Ÿ"FDefine and throw a dedicated exception instead of using a generic one.(ˆÑ¢æ8šıç‹È.
+java:S2737"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8‘¨ÀÆÁ.
 b	java:S112¡"FDefine and throw a dedicated exception instead of using a generic one.(éø¥O8šıç‹È.
 u
-java:S2737§"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8šıç‹È.
-u
-java:S2737¯"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8šıç‹È.
-u
-java:S2737·"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8šıç‹È.
+java:S2737Ñ"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8ù÷ª­È.

@@ -109,3 +109,5 @@ f
 6src/main/java/controller/analysis/ReportGenerator.java,b/8/b810cf79b4c75e3f75bafef193af1bf1c395b3aa
 g
 7src/main/java/controller/main/SideNavBarController.java,9/a/9af74f34d4f72bd116dcc93c26e19dba8ac6bcb7
+`
+0src/main/java/model/database/SQLiteDatabase.java,d/4/d4616fb8a3ca98484ab95c67e904bfcf10cf5e8f

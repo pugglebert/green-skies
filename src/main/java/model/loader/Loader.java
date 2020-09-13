@@ -6,6 +6,7 @@ import model.data.Storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -153,7 +154,7 @@ public class Loader {
         return parser.getErrorMessage();
     }
 
-    public String loadFile(String fileName, String dataType) throws FileSystemException, FileNotFoundException {
+    public String loadFile(String fileName, String dataType) throws FileSystemException, FileNotFoundException, SQLException, ClassNotFoundException {
 
         if (fileName.isEmpty()) {
             throw new RuntimeException("Filename cannot be empty.");
@@ -196,7 +197,7 @@ public class Loader {
      * @param dataType
      * @return errorMessageString
      */
-    public String loadLine(String entryString, String dataType) {
+    public String loadLine(String entryString, String dataType) throws SQLException, ClassNotFoundException {
 
         ArrayList<String> line = new ArrayList<String>();
         line.add(entryString);

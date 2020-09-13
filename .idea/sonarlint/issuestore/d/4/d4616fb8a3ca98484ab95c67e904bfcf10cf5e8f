@@ -1,0 +1,27 @@
+
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ÈâûÝüÿÿÿÿ8üº€‰È.
+X
+java:S2696"6Make the enclosing method "static" or remove this set.(ïÈž²þÿÿÿÿ8üº€‰È.
+l
+java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¶ÁæÂ8üº€‰È.
+K
+java:S2115")Add password protection to this database.(ïÈž²þÿÿÿÿ8üº€‰È.
+X	java:S125/"<This block of commented-out lines of code should be removed.(ñÌÜÒ8ÑŽË­È.
+q
+java:S2095$"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(©í²Öüÿÿÿÿ8üº€‰È.
+d
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ä§þ¬8üº€‰È.
+]	java:S125"<This block of commented-out lines of code should be removed.(ÐÎ¦òûÿÿÿÿ8ºÈ‡®È.
+M
+java:S1068	"+Remove this unused "hasData" private field.(ãî©Öùÿÿÿÿ8²ö÷­È.
+]	java:S125?"<This block of commented-out lines of code should be removed.(…‚»øÿÿÿÿ8úÎþ­È.
+X	java:S125,"<This block of commented-out lines of code should be removed.(¼‘ï“8ÑŽË­È.
+J
+java:S11727".Remove this unused method parameter "airport".(Ê•øO8…¹ò­È.
+]	java:S1251"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8ÑŽË­È.
+T
+java:S4973"9Use the "equals" method if value comparison was intended.(ÕƒµŸ8¥ÀŒ®È.
+[
+java:S1854">Remove this useless assignment to local variable "builtTable".(Ä§þ¬8¥ÀŒ®È.
+L
+java:S1481"/Remove this unused "builtTable" local variable.(Ä§þ¬8¥ÀŒ®È.

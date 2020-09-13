@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +125,7 @@ public class FlightAnalyserTest {
     }
 
     @Before
-    public void setUp() throws FileNotFoundException, FileSystemException {
+    public void setUp() throws FileNotFoundException, FileSystemException, SQLException, ClassNotFoundException {
         storage = new Storage();
         loader = new Loader(storage);
         loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");

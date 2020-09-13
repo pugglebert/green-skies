@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,7 +43,7 @@ public class StorageTest {
      * Test that airlines is set to given values when setData is called with airlines as the datatype.
      */
     @Test
-    public void setDataAirlineUpdatedTest() {
+    public void setDataAirlineUpdatedTest() throws SQLException, ClassNotFoundException {
         List<DataType> testAirlines = createAirlineSet();
         storage.setData(testAirlines, "Airline");
         assertEquals(testAirlines, storage.getAirlines());
@@ -52,7 +53,7 @@ public class StorageTest {
      * Test that airport is not changed when setData is called with airlines as the datatype.
      */
     @Test
-    public void setDataAirportUnchangedTest() {
+    public void setDataAirportUnchangedTest() throws SQLException, ClassNotFoundException {
         List<DataType> testAirlines = createAirlineSet();
         storage.setData(testAirlines, "Airline");
         assertArrayEquals((new ArrayList<Airport>()).toArray(), storage.getAirports().toArray());
@@ -62,7 +63,7 @@ public class StorageTest {
      * Test that routes is not changed when setData is called with airlines as the datatype.
      */
     @Test
-    public void setDataRouteUnchangedTest() {
+    public void setDataRouteUnchangedTest() throws SQLException, ClassNotFoundException {
         List<DataType> testAirlines = createAirlineSet();
         storage.setData(testAirlines, "Airline");
         assertArrayEquals((new ArrayList<Route>()).toArray(), storage.getRoutes().toArray());
@@ -72,7 +73,7 @@ public class StorageTest {
      * Test that airports is set to given values when setData is called with airports as the datatype.
      */
     @Test
-    public void setDataAirportTest() {
+    public void setDataAirportTest() throws SQLException, ClassNotFoundException {
         List<DataType> testAirports = new ArrayList<>();
         testAirports.add(new Airport(11,"Akureyri Airport","Akureyri","Iceland","AEY",
                 "BIAR",65.66000366210938,-18.07270050048828,6,0,"N",
@@ -88,7 +89,7 @@ public class StorageTest {
      * Test that routes is set to given values when setData is called with routes as the datatype.
      */
     @Test
-    public void setDataRouteTest() {
+    public void setDataRouteTest() throws SQLException, ClassNotFoundException {
         List<DataType> testRoutes = new ArrayList<>();
         testRoutes.add(new Route("FM",4609,"CTU",3395,"SHA",
                 3391,"",0,"757 737 738".split(" ")));
@@ -102,7 +103,7 @@ public class StorageTest {
      * Test that an exception is raised when setData is called with an incorrect datatype.
      */
     @Test
-    public void setDataInvalidDataTypeTest() {
+    public void setDataInvalidDataTypeTest() throws SQLException, ClassNotFoundException {
         List<DataType> testData = new ArrayList<>();
         try {
             storage.setData(testData, "Potato");
