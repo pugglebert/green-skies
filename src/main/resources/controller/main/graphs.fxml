@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.GraphsController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.GraphsController">
    <children>
       <Text layoutX="262.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphs To Be Implemented Here" />
 
@@ -55,6 +55,11 @@
             <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: #00aa88;" text="Graphs" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Tahoma" size="22.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAnalyseFlight" alignment="CENTER" mnemonicParsing="false" onAction="#toAnalyseFlight" prefHeight="78.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="AnalyseFlight" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font size="22.0" />
                </font>
             </Button>
          </children>

@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Superclass for all data view pages. All such pages contain a table of data, tools for searching
  * and filtering that data, and a navigation bar which can be used to navigate to other pages.
- * @author Ella Johnson, Hayley Krippner.
+ * @author Ella Johnson, Hayley Krippner, Enyang Zhang, ZhengJingRui He.
  * @since 04/09/20
  * @version 1.0
  */
@@ -38,6 +38,8 @@ public abstract class SideNavBarController implements Initializable {
     protected Button btnMapOfAirports;
     @FXML
     protected Button btnGraphs;
+    @FXML
+    protected Button btnAnalyseflight;
 
     protected ObservableList<String> searchTypes;
     protected final Storage storage = Main.getStorage();
@@ -159,6 +161,18 @@ public abstract class SideNavBarController implements Initializable {
         stage.close();
         Stage newStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("graphs.fxml")); //open the View Airline Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        newStage.setMaximized(true);
+        newStage.show();
+    }
+
+    @FXML
+    public void toAnalyseFlight() throws IOException {
+        Stage stage = (Stage)btnAnalyseflight.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.setMaximized(true);
