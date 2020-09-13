@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class AirportParserTest {
     private AirportParser airportParser;
@@ -39,17 +39,17 @@ public class AirportParserTest {
 
     @Test
     public void isAirportIdValidDupId(){
-      assertEquals(airportParser.isIdValid("3"), true);
+      assertTrue(airportParser.isIdValid("3"));
     }
 
     @Test
     public void isAirportIdValidNotNumber() {
-        assertEquals(airportParser.isIdValid("4a"), true);
+        assertFalse(airportParser.isIdValid("4a"));
     }
 
     @Test
     public void isNameValidWithoutSpace() {
-        assertEquals(airportParser.isNameValid("ab"), true);
+        assertTrue(airportParser.isNameValid("ab"));
     }
 
     //    @Test
