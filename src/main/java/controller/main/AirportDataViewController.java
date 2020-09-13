@@ -54,7 +54,6 @@ public class AirportDataViewController extends DataViewController {
     private TableColumn<Airport, String> dataBaseTimeZoneColumn;
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-    private Filterer filterer = Main.getFilterer();
 
     /**
      * Initializes the controller class.

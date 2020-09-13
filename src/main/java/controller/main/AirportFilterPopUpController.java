@@ -38,19 +38,13 @@ public class AirportFilterPopUpController extends FilterPopUpController {
     private CheckBox cityCheckBox;
 
     /**
-     * An ArrayList of filtered Airports, initialized to the value stored in storage.
-     */
-    private ArrayList<Airport> airports;
-
-    /**
-     * Initialize airports to the list of Airports stored in storage.
-     * @param url not used.
-     * @param resourceBundle not used.
+     * Initialize the fxml filename.
+     * @param url Not used.
+     * @param resourceBundle Not used.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fmxlFilename = "airportFilterPopUp.fxml";
-        airports = (ArrayList<Airport>) storage.getAirports();
+        fxmlFilename = "airportFilterPopUp.fxml";
     }
 
     /**

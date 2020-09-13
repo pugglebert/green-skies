@@ -95,20 +95,17 @@ public class AirlineDataViewController extends DataViewController {
   }
 
   /**
-   * Display the filter pop up box.
-   * @throws IOException
+   * Display the filter pop up box. If filtering is successful displays the filtered airline data in the tableview when
+   * the pop up is closed.
+   * @throws IOException If AirlineFilterPopUpController fxml file cannot be opened.
    */
   public void filterOptions() throws IOException {
     AirlineFilterPopUpController filterPopUp = new AirlineFilterPopUpController();
-    filterPopUp.display(this);
+    filterer.setFilterSuccess(false);
+    filterPopUp.display();
+    if (filterer.getFilterSuccess()) {
+      tableView.setItems(FXCollections.observableList(filterer.getFilteredAirlines()));
+    }
   }
 
-  /**
-   * Display the given airlines in the table view.
-   * @param airlines an ArrayList of Airlines to be displayed.
-   */
-  public void setAirlines(ArrayList<Airline> airlines) {
-    ObservableList<Airline> observableAirlines = FXCollections.observableList(airlines);
-    tableView.setItems(observableAirlines);
-  }
 }

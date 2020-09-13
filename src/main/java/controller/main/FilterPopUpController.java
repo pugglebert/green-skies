@@ -27,7 +27,7 @@ public abstract class FilterPopUpController implements Initializable {
 
     protected Filterer filterer = Main.getFilterer();
     protected Storage storage = Main.getStorage();
-    protected String fmxlFilename;
+    protected String fxmlFilename;
 
     public abstract HashMap<String, String> getFilterTerms();
     public abstract void filterByDataType(HashMap<String, String> filterTerms);

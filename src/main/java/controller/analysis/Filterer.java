@@ -61,7 +61,7 @@ public class Filterer {
      * @param airlines a List of Airlines to filter.
      * @return an ArrayList of the Airlines that are filtered based on the filter terms.
      */
-    public static ArrayList<Airline> filterAirlines(HashMap<String, String> filterTerms, List<Airline> airlines) {
+    public void filterAirlines(HashMap<String, String> filterTerms, List<Airline> airlines) {
 
         ArrayList<ArrayList<Airline>> individualLists = new ArrayList<>();
         //Iterate through and perform a search for each term and add these lists to an overall list.
@@ -83,8 +83,7 @@ public class Filterer {
             throw new RuntimeException("No entries match your filter term(s).");
         }
 
-        return filteredAirlines;
-
+        this.filteredAirlines = filteredAirlines;
     }
 
     /**
@@ -95,7 +94,7 @@ public class Filterer {
      * @param routes a List of Routes to filter.
      * @return an ArrayList of the Routes that are filtered based on the filter terms.
      */
-    public static ArrayList<Route> filterRoutes(HashMap<String, String> filterTerms, List<Route> routes) {
+    public void filterRoutes(HashMap<String, String> filterTerms, List<Route> routes) {
 
         ArrayList<ArrayList<Route>> individualLists = new ArrayList<>();
         //Iterate through and perform a search for each term and add these lists to an overall list.
@@ -117,8 +116,7 @@ public class Filterer {
             throw new RuntimeException("No entries match your filter term(s).");
         }
 
-        return filteredRoutes;
-
+        this.filteredRoutes = filteredRoutes;
     }
 
     public void setFilterSuccess(boolean bool) {
@@ -132,5 +130,9 @@ public class Filterer {
     public List<Airport> getFilteredAirports() {
         return filteredAirports;
     }
+
+    public List<Airline> getFilteredAirlines() {return filteredAirlines;}
+
+    public List<Route> getFilteredRoutes() {return filteredRoutes;}
 
 }
