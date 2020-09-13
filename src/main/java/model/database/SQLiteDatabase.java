@@ -1,10 +1,10 @@
 package model.database;
 
-import model.data.Airline;
-import model.data.Airport;
-import model.data.Route;
+import model.data.*;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLiteDatabase {
     private static Connection con;
@@ -28,7 +28,7 @@ public class SQLiteDatabase {
             Statement builtTable = con.createStatement();
             builtTable.executeUpdate("create table airports(airport_id integer," + "name varchar(60)," + "city varchar(60),"
                     + "country varchar(60)," + "IATA varchar(5)," + "ICAO varchar(5),"
-                    + "Lat double(4, 6)," + "lon double(4, 6)," + "alt integer," + "timezone float," + "DST varchar(60),"
+                    + "lat double(4, 6)," + "lon double(4, 6)," + "alt integer," + "timezone float," + "DST varchar(60),"
                     + "DBTimezone varchar(60)," + "primary key (airport_id))");
 
     }
@@ -141,6 +141,65 @@ public class SQLiteDatabase {
             } else {
                 buildAirlinesTable();
             }
+        }
+    }
+
+    public void initialiseStorage(Storage storage) throws SQLException, ClassNotFoundException {
+        if(con == null) {
+            // get connections
+            getConnection();
+        }
+
+        Statement state = con.createStatement();
+        ResultSet hasAirportTable = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+
+        if(hasAirportTable.next()){
+            Statement airportsTable = con.createStatement();
+            ResultSet airportRow = airportsTable.executeQuery("select * from 'airports'");
+            ArrayList<DataType> airports = new ArrayList<>();
+            while(airportRow.next()){
+                int airportId = airportRow.getInt("airport_id");
+                String name = airportRow.getString("name");
+                String city = airportRow.getString("city");
+                String country = airportRow.getString("country");
+                String IATA = airportRow.getString("IATA");
+                String ICAO = airportRow.getString("ICAO");
+                double lat = airportRow.getDouble("lat");
+                double lon = airportRow.getDouble("lon");
+                int alt = airportRow.getInt("alt");
+                float timezone = airportRow.getFloat("timezone");
+                String DST = airportRow.getString("DST");
+                String DBTimezone = airportRow.getString("DBTimezone");
+                Airport airport = new Airport(airportId, name, city, country, IATA, ICAO, lat, lon, alt, timezone, DST, DBTimezone);
+                airports.add(airport);
+            }
+             storage.setData(airports, "Airport");
+        }
+
+        state = con.createStatement();
+        ResultSet hasAirlinesTable = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+
+        if(hasAirlinesTable.next()){
+            Statement airlinesTable = con.createStatement();
+            ResultSet airlineRow = airlinesTable.executeQuery("select * from 'airlines'");
+            ArrayList<DataType> airlines = new ArrayList<>();
+            while(airlineRow.next()){
+                int airlineId = airlineRow.getInt("airline_id");
+                String name = airlineRow.getString("name");
+                String city = airlineRow.getString("city");
+                String country = airlineRow.getString("country");
+                String IATA = airlineRow.getString("IATA");
+                String ICAO = airlineRow.getString("ICAO");
+                double lat = airlineRow.getDouble("lat");
+                double lon = airlineRow.getDouble("lon");
+                int alt = airlineRow.getInt("alt");
+                float timezone = airlineRow.getFloat("timezone");
+                String DST = airlineRow.getString("DST");
+//                String DBTimezone = airlineRow.getString("DBTimezone");
+//                airline airline = new airline(airlineId, name, city, country, IATA, ICAO, lat, lon, alt, timezone, DST, DBTimezone);
+//                airlines.add(airline);
+            }
+            storage.setData(airlines, "Airline");
         }
     }
 }

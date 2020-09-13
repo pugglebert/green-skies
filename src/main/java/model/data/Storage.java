@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.TreeSet;
 
 /**
- * Class to keep track of all the data currently open files
- * @author Ella Johnson
- * @since 17/08/2020
- * @version 1.0
+ * Class to keep track of all the data currently open files, also interact with database.
+ * @author Ella Johnson, Lambert
+ * @since 13/09/2020
+ * @version 1.3
  */
 public class Storage {
 
@@ -152,5 +152,9 @@ public class Storage {
         } else {
             throw new IllegalArgumentException("Type must be airline, airport or route");
         }
+    }
+
+    public void initialiseStorage() throws SQLException, ClassNotFoundException {
+        database.initialiseStorage(this);
     }
  }

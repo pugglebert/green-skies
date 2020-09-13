@@ -5,6 +5,7 @@ import model.data.Storage;
 import model.loader.Loader;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * The controller class which contains the controls for the main.
@@ -25,7 +26,7 @@ public class Main {
         return loader;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        Route route1 = new Route("a", 123, "abc", 123, "abc", 123, "ABC", 0, null);
 //        Route route2 = new Route("b", 124, "hkk", 144, "kkn", 654, "SSH", 0, null);
 //        Route route3 = new Route("c", 125, "czg", 187, "whi", 739, "PPO", 0, null);
@@ -57,7 +58,7 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-
+        storage.initialiseStorage();
         GreenSkiesApplication.main(args);
     }
 }
