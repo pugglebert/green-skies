@@ -79,7 +79,6 @@ public class AnalyseController extends SideNavBarController implements Initializ
         Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
 
 
-
         ArrayList<String> path1 = new ArrayList<>();
         ArrayList<String> path2 = new ArrayList<>();
         path1.add((String)pathSource1.getText());
