@@ -2,8 +2,13 @@ package controller.main;
 
 import controller.analysis.Filterer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.data.Storage;
 
 import java.io.IOException;
@@ -25,7 +30,20 @@ public abstract class FilterPopUpController implements Initializable {
 
     public abstract HashMap<String, String> getFilterTerms();
     public abstract void filterByDataType(HashMap<String, String> filterTerms);
-    public abstract void display() throws IOException;
+    public abstract String getFXMLFilename();
+
+    /**
+     * Display the filter pop up window.
+     * @throws IOException if fmxl file cannot be opened.
+     */
+    public void display() throws IOException {
+        final Stage filterPopUp = new Stage();
+        filterPopUp.initModality(Modality.APPLICATION_MODAL);
+        Parent root = FXMLLoader.load(getClass().getResource(getFXMLFilename()));
+        Scene scene = new Scene(root);
+        filterPopUp.setScene(scene);
+        filterPopUp.showAndWait();
+    }
 
     /**
      * Call getFilterTerms to get a hashmap of the filter types and terms. Call filterByDataType with the given filter

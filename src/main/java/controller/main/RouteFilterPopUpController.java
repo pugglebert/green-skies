@@ -1,14 +1,9 @@
 package controller.main;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -35,21 +30,7 @@ public class RouteFilterPopUpController extends FilterPopUpController {
     private TextField destinationField;
 
     /**
-     * Display the filter pop up window.
-     * @throws IOException if fmxl file cannot be opened.
-     */
-    @Override
-    public void display() throws IOException {
-        final Stage filterPopUp = new Stage();
-        filterPopUp.initModality(Modality.APPLICATION_MODAL);
-        Parent root = FXMLLoader.load(getClass().getResource("routeFilterPopUp.fxml"));
-        Scene scene = new Scene(root);
-        filterPopUp.setScene(scene);
-        filterPopUp.showAndWait();
-    }
-
-    /**
-     * Initialize the fxml filename.
+     * Must have implementation of this method as superclass implements the Initializable interface.
      * @param url Not used.
      * @param resourceBundle Not used.
      */
@@ -84,6 +65,14 @@ public class RouteFilterPopUpController extends FilterPopUpController {
     @Override
     public void filterByDataType(HashMap<String, String> filterTerms) {
         filterer.filterRoutes(filterTerms, storage.getRoutes());
+    }
+
+    /**
+     * @return The fxml filename for the route filter pop up controller.
+     */
+    @Override
+    public String getFXMLFilename() {
+        return "routeFilterPopUp.fxml";
     }
 
 }

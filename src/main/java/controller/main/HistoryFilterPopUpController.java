@@ -1,15 +1,9 @@
 package controller.main;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -30,21 +24,7 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
     private TextField destinationField;
 
     /**
-     * Display the filter pop up window.
-     * @throws IOException if fmxl file cannot be opened.
-     */
-    @Override
-    public void display() throws IOException {
-        final Stage filterPopUp = new Stage();
-        filterPopUp.initModality(Modality.APPLICATION_MODAL);
-        Parent root = FXMLLoader.load(getClass().getResource("historyFilterPopUp.fxml"));
-        Scene scene = new Scene(root);
-        filterPopUp.setScene(scene);
-        filterPopUp.showAndWait();
-    }
-
-    /**
-     * Initialize the fxml filename.
+     * Must have implementation of this method as superclass implements the Initializable interface.
      * @param url Not used.
      * @param resourceBundle Not used.
      */
@@ -81,5 +61,13 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
     public void filterByDataType(HashMap<String, String> filterTerms) {
         System.out.println("Filter by data type history method called.");
         filterer.filterRoutes(filterTerms, storage.getHistory());
+    }
+
+    /**
+     * @return The fxml filename for the history filter pop up.
+     */
+    @Override
+    public String getFXMLFilename() {
+        return "historyFilterPopUp.fxml";
     }
 }
