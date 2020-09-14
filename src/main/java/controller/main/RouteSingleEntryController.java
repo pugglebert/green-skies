@@ -5,7 +5,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.data.Storage;
 import model.loader.Loader;
 
 /**
@@ -18,7 +17,6 @@ import model.loader.Loader;
 
 public class RouteSingleEntryController {
 
-    private final Storage storage = Main.getStorage();
     private final Loader loader = Main.getLoader();
     //private final RouteParser routeParser = new RouteParser(List<String>);
 
@@ -54,12 +52,10 @@ public class RouteSingleEntryController {
     }
 
     /**
-     * Loads the data entered for a single route as a singular line
+     * Loads the data entered for a route as a singular line
      */
     public void addEntry () {
         String entryString = makeRouteString();
-
-        //System.out.println("in addEntry" + entryString);
 
         try {
             String message = loader.loadLine(entryString, "Route");
@@ -71,6 +67,7 @@ public class RouteSingleEntryController {
 
             Stage stage = (Stage) addEntryButton.getScene().getWindow();
             stage.close();
+
         }
         catch (Exception e){
             Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
@@ -88,31 +85,31 @@ public class RouteSingleEntryController {
     public String makeRouteString() {
         String routeLine = new String();
 
-        String airlineName = airlineNameField.getText() + ", ";
+        String airlineName = airlineNameField.getText() + ",";
         routeLine += airlineName;
 
-        String airlineID = airlineIDField.getText() + ", ";
+        String airlineID = airlineIDField.getText() + ",";
         routeLine += airlineID;
 
-        String srcairport = srcairportField.getText() + ", ";
+        String srcairport = srcairportField.getText() + ",";
         routeLine += srcairport;
 
-        String srcairportID = srcairportIDField.getText() + ", ";
+        String srcairportID = srcairportIDField.getText() + ",";
         routeLine += srcairportID;
 
-        String destairport = destairportField.getText() + ", ";
+        String destairport = destairportField.getText() + ",";
         routeLine += destairport;
 
-        String destairportID = destairportIDField.getText() + ", ";
+        String destairportID = destairportIDField.getText() + ",";
         routeLine += destairportID;
 
-        String codeShare = codeshareField.getText() + ", ";
+        String codeShare = codeshareField.getText() + ",";
         routeLine += codeShare;
 
-        String numStops = numStopsField.getText() + ", ";
+        String numStops = numStopsField.getText() + ",";
         routeLine += numStops;
 
-        String equipment = equipmentField.getText() + ", ";
+        String equipment = equipmentField.getText();
         routeLine += equipment;
 
         return routeLine;

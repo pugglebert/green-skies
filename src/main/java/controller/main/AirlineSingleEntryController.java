@@ -1,10 +1,13 @@
 package controller.main;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.data.Storage;
+import model.loader.Loader;
 
 /**
  * The controller class which contains the controls for data entry of a single Airline.
@@ -14,6 +17,9 @@ import javafx.stage.Stage;
  */
 
 public class AirlineSingleEntryController {
+
+    private final Storage storage = Main.getStorage();
+    private final Loader loader = Main.getLoader();
 
     @FXML
     TextField nameField;
@@ -33,6 +39,9 @@ public class AirlineSingleEntryController {
     CheckBox activeCheck;
     @FXML
     Button cancelButton;
+    @FXML
+    Button addButton;
+
 
     /**
      * Closes window when the 'Cancel' button is pushed
@@ -41,6 +50,35 @@ public class AirlineSingleEntryController {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Loads the data entered for an airline as a singular line
+     */
+    public void addEntry () {
+        String entryString = makeAirlineString();
+
+
+        try {
+            String message = loader.loadLine(entryString, "Airline");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Confirm data entry upload");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.close();
+
+        }
+        catch (Exception e){
+            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+            ErrorAlert.setContentText(e.getMessage());
+            ErrorAlert.show();
+        }
+
+    }
+
 
     /**
      * Compiles a string from the the entered data for an airline
@@ -70,12 +108,11 @@ public class AirlineSingleEntryController {
         String country = countryField.getText();
         airlineString += country;
 
-        Boolean active = false;
         if (activeCheck.isSelected()) {
-            active = true;
+            airlineString += "\"Y\"";
+        } else {
+            airlineString += "\"N\"";
         }
-        String activity = String.valueOf(active);
-        airlineString += activity;
 
         return airlineString;
     }

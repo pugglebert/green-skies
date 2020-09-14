@@ -101,7 +101,6 @@ public class Loader {
                 break;
             case "Route" :
                 try {
-                    //System.out.println("WOWOWOW");
                     parser = new RouteParser(lines);
                 } catch (RuntimeException e) {
                     throw e;
@@ -203,8 +202,6 @@ public class Loader {
         ArrayList<String> line = new ArrayList<String>();
         line.add(entryString);
 
-        System.out.println("loadLine..." + entryString); // WORKS REMOVE
-
         Parser parser;
 
         try {
@@ -213,13 +210,8 @@ public class Loader {
             throw e;
         }
 
-        // TODO fix this issue and remove test comments in storage, parser, loader 13/09/20
-        List<DataType> data = parser.getData(); //ISSUE IN HERE
-
-        System.out.println("asdfas" + data); //DOESNT WORK REMOVE
-
+        List<DataType> data = parser.getData();
         storage.setData(data, dataType);
-
         return parser.getErrorMessage();
 
     }

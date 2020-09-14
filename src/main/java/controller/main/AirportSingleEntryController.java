@@ -1,9 +1,11 @@
 package controller.main;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.loader.Loader;
 
 /**
  * The controller class which contains the controls for data entry of a single Airport.
@@ -14,6 +16,8 @@ import javafx.stage.Stage;
 
 
 public class AirportSingleEntryController {
+
+    private final Loader loader = Main.getLoader();
 
     @FXML
     TextField nameFld;
@@ -41,6 +45,9 @@ public class AirportSingleEntryController {
     TextField airportidFld;
     @FXML
     Button cancelButton;
+    @FXML
+    Button addButton;
+
 
     /**
      * Closes window when the 'Cancel' button is pushed
@@ -48,6 +55,33 @@ public class AirportSingleEntryController {
     public void closeWindow() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    /**
+     * Loads the data entered for an airport as a singular line
+     */
+    public void addEntry () {
+        String entryString = makeAirportString();
+
+        try {
+            String message = loader.loadLine(entryString, "Airport");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Confirm data entry upload");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.close();
+
+        }
+        catch (Exception e){
+            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+            ErrorAlert.setContentText(e.getMessage());
+            ErrorAlert.show();
+        }
+
     }
 
     /**

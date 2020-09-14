@@ -5,7 +5,6 @@ import model.database.SQLiteDatabase;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 /**
  * Class to keep track of all the data currently open files, also interact with database.
@@ -101,10 +100,8 @@ public class Storage {
         } else if (type.matches("Route")) {
             database.dropTable("routes");
             database.closeAutoCommite();
-            System.out.println(type); // WORKS REMOVE
             for (DataType entry : data) {
                 Route route = (Route) entry;
-
                 routes.add(route);
                 database.addRoutes(route);
 

@@ -77,10 +77,10 @@ public class UploadController extends SideNavBarController {
           FileChooser fileChooser = new FileChooser(); // opens a file local file browser
           File selectedFile = fileChooser.showOpenDialog(null);
 
-          String fileType = dataTypeSelect.getValue().toString();
-          String stringFile = selectedFile.toString();
-
           try {
+              String fileType = dataTypeSelect.getValue().toString();
+              String stringFile;
+              stringFile = selectedFile.toString();
             // loadFile returns a String when the file is accepted, with the number of reject lines, this string
             // pops up in the ConfirmALert message
 
@@ -92,28 +92,31 @@ public class UploadController extends SideNavBarController {
             ButtonType cancelButton = new ButtonType("Cancel");
             ConfirmAlert.getButtonTypes().setAll(yesButton, cancelButton);
 
+
             Optional<ButtonType> result = ConfirmAlert.showAndWait();
             if (result.get() == yesButton) {
                 loader.loadFile(stringFile, fileType);
                 fileView.getItems().add(selectedFile.getName());
                 ConfirmAlert.close();
+
+                //only load data if it is not erroneous
+                for (DataType line : storage.getRoutes()) {
+                    Route test = (Route) line;
+                    System.out.println(test.getAirlineID());
+                }
             //if user wishes to cancel the file chosne to upload they push cancel and no data is uploaded
             } else if (result.get() == cancelButton) {
                 ConfirmAlert.close();
             }
-          }
+            }
           // catches errors in uploading file and alerts user by displaying the error message in an error box
           catch (Exception e) {
-            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
-            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
-            ErrorAlert.setContentText(e.getMessage());
-            ErrorAlert.show();
-          }
-
-          //only load data if it is not erroneous
-          for (DataType line : storage.getRoutes()) {
-            Route test = (Route) line;
-            System.out.println(test.getAirlineID());
+            if (e.getMessage() != null) {
+              Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+              ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+              ErrorAlert.setContentText(e.getMessage());
+              ErrorAlert.show();
+            }
           }
         }
 //
