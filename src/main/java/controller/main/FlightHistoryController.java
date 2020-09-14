@@ -135,7 +135,18 @@ public class FlightHistoryController extends DataViewController {
     tableView.setItems(FXCollections.observableList(storage.getHistory()));
   }
 
+  /**
+   * Launch the filter pop up box. If filtering is successful displays filtered history in tableview.
+   * @throws IOException
+   */
   public void filterOptions() throws IOException {
+    HistoryFilterPopUpController filterPopUp = new HistoryFilterPopUpController();
+    System.out.println(filterPopUp.getClass());
+    filterer.setFilterSuccess(false);
+    filterPopUp.display();
+    if (filterer.getFilterSuccess()) {
+      tableView.setItems(FXCollections.observableList(filterer.getFilteredRoutes()));
+    }
   }
 
   @FXML
