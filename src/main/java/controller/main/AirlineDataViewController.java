@@ -57,9 +57,9 @@ public class AirlineDataViewController extends DataViewController {
   public void initialize(URL url, ResourceBundle rb) {
     // Set up the columns in the TableView.
     airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
-    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     airlineAliasColumn.setCellValueFactory(new PropertyValueFactory<>("airlineAlias"));
-    airlineIATAColumn.setCellValueFactory(new PropertyValueFactory<>("airlineIATA"));
+    airlineIATAColumn.setCellValueFactory(new PropertyValueFactory<>("IATA"));
     ICAOColumn.setCellValueFactory(new PropertyValueFactory<>("ICAO"));
     callsignColumn.setCellValueFactory(new PropertyValueFactory<>("callsign"));
     countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
