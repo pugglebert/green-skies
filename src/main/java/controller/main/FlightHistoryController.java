@@ -50,7 +50,7 @@ public class FlightHistoryController extends DataViewController {
   @FXML
   private TableColumn<Route, Integer> numOfStopsColumn;
   @FXML
-  private TableColumn<Route, String[]> equipmentColumn;
+  private TableColumn<Route, String> equipmentColumn;
   @FXML
   private Button btnUpload;
   @FXML
@@ -101,7 +101,7 @@ public class FlightHistoryController extends DataViewController {
 //    destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirportID"));
     codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
     numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
-    equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipment"));
+    equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
 
     //Load data by taking the Route ArrayList and converting it to an ObservableArrayList.
 //    System.out.println(Main.getStorage().getHistory());
