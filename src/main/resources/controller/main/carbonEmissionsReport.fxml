@@ -135,15 +135,15 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Text>
-      <TextField editable="false" layoutX="591.0" layoutY="242.0" mouseTransparent="true" />
-      <TextField editable="false" layoutX="591.0" layoutY="289.0" mouseTransparent="true" />
-      <TextField editable="false" layoutX="591.0" layoutY="334.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
-      <TextField editable="false" layoutX="591.0" layoutY="372.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
-      <TextField editable="false" layoutX="591.0" layoutY="416.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
-      <TextField editable="false" layoutX="591.0" layoutY="453.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
-      <TextField editable="false" layoutX="591.0" layoutY="491.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
-      <TextField editable="false" layoutX="591.0" layoutY="528.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
-      <TextField editable="false" layoutX="591.0" layoutY="567.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
+      <TextField fx:id="displayTotalEmissionsField" editable="false" layoutX="591.0" layoutY="242.0" mouseTransparent="true" />
+      <TextField fx:id="displayTotalDistanceTravelledField" editable="false" layoutX="591.0" layoutY="289.0" mouseTransparent="true" />
+      <TextField fx:id="displayMostEmissionsRouteField" editable="false" layoutX="591.0" layoutY="334.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
+      <TextField fx:id="displayLeastEmissionsRouteField" editable="false" layoutX="591.0" layoutY="372.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
+      <TextField fx:id="displayMostDistanceRouteField" editable="false" layoutX="591.0" layoutY="416.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
+      <TextField fx:id="displayLeastDistanceRouteField" editable="false" layoutX="591.0" layoutY="453.0" mouseTransparent="true" prefHeight="31.0" prefWidth="576.0" />
+      <TextField fx:id="displayMostVisitedSourceAirportField" editable="false" layoutX="591.0" layoutY="491.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
+      <TextField fx:id="displayLeastVisitedSourceAirportField" editable="false" layoutX="591.0" layoutY="528.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
+      <TextField fx:id="displayMostVisitedDestinationAirportField" editable="false" layoutX="591.0" layoutY="567.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
       <TextField fx:id="displayCarbonEmissionGoalField" editable="false" layoutX="591.0" layoutY="659.0" mouseTransparent="true" />
       <TextField fx:id="displaycarbonEmissionGoalDurationField" editable="false" layoutX="973.0" layoutY="659.0" mouseTransparent="true" />
       <Text fontSmoothingType="LCD" layoutX="1167.0" layoutY="681.0" strokeType="OUTSIDE" strokeWidth="0.0" text="year(s)" textAlignment="RIGHT" wrappingWidth="69.6708984375">
@@ -151,7 +151,7 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Text>
-      <TextField editable="false" layoutX="591.0" layoutY="610.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
+      <TextField fx:id="displayLeastVisitedDestinationAirportField" editable="false" layoutX="591.0" layoutY="610.0" mouseTransparent="true" prefHeight="31.0" prefWidth="284.0" />
       <Text fontSmoothingType="LCD" layoutX="283.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Least Visted Source Airport:" textAlignment="RIGHT" wrappingWidth="283.9999931305647">
          <font>
             <Font name="Verdana" size="18.0" />
@@ -174,7 +174,7 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Text>
-      <TextField editable="false" layoutX="591.0" layoutY="698.0" mouseTransparent="true" />
+      <TextField fx:id="displayTreeOffsetField" editable="false" layoutX="591.0" layoutY="698.0" mouseTransparent="true" />
       <Button fx:id="ClearReportDataButton" layoutX="1086.0" layoutY="165.0" mnemonicParsing="false" onAction="#clearReportData" prefHeight="49.0" prefWidth="100.0" style="-fx-background-color: #116754;" text="Clear" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Tahoma" size="18.0" />

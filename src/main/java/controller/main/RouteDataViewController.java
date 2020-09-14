@@ -52,9 +52,8 @@ public class RouteDataViewController extends DataViewController {
     @FXML
     private Button AddToHistoryButton;
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
-    private ReportGenerator reportGenerator = new ReportGenerator();
+    private ReportGenerator reportGenerator;
 
-    //TODO: can this constructor be removed? 13/09/2020 HK
     public RouteDataViewController() {
     }
 
@@ -65,6 +64,9 @@ public class RouteDataViewController extends DataViewController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        this.reportGenerator = Main.getReportGenerator();
+
         //Set up the columns in the TableView.
         addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
         airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
