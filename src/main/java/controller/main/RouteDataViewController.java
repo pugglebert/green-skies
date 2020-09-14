@@ -31,16 +31,16 @@ public class RouteDataViewController extends DataViewController {
     private TableColumn<Route, Boolean> addColumn;
     @FXML
     private TableColumn<Route, String> airlineNameColumn;
-    @FXML
-    private TableColumn<Route, Integer> airlineIDColumn;
+//    @FXML
+//    private TableColumn<Route, Integer> airlineIDColumn;
     @FXML
     private TableColumn<Route, String> sourceAirportColumn;
-    @FXML
-    private TableColumn<Route, Integer> sourceAirportIDColumn;
+//    @FXML
+//    private TableColumn<Route, Integer> sourceAirportIDColumn;
     @FXML
     private TableColumn<Route, String> destinationAirportColumn;
-    @FXML
-    private TableColumn<Route, Integer> destinationAirportIDColumn;
+//    @FXML
+//    private TableColumn<Route, Integer> destinationAirportIDColumn;
     @FXML
     private TableColumn<Route, String> codeShareColumn;
     @FXML
@@ -70,11 +70,11 @@ public class RouteDataViewController extends DataViewController {
         //Set up the columns in the TableView.
         addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
         airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
-        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
+//        airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
         sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
-        sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirportID"));
+//        sourceAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirportID"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
-        destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirportID"));
+//        destinationAirportIDColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirportID"));
         codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
         numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
         equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipment"));
