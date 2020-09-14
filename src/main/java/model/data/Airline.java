@@ -62,7 +62,7 @@ public class Airline implements DataType {
    *
    * @return airlineName.
    */
-  public String getairlineAlias() {
+  public String getAirlineAlias() {
     return alias;
   }
 
@@ -123,7 +123,7 @@ public class Airline implements DataType {
       Airline another = (Airline) o;
       return (this.airlineID == another.getAirlineID())
           && this.name.equals(another.getName())
-          && this.alias.equals(another.getairlineAlias())
+          && this.alias.equals(another.getAirlineAlias())
           && this.IATA.equals(another.getIATA())
           && this.ICAO.equals(another.getICAO())
           && this.callsign.equals(another.getCallsign())
@@ -135,14 +135,4 @@ public class Airline implements DataType {
     }
   }
 
-  @Override //TODO delete this
-  /*testing purpose
-   * */
-  public String toString() {
-    return "Airline{" +
-            "airlineID=" + airlineID +
-            ", name='" + name +
-            ", IATA=" + IATA +
-            ", ICAO=" + ICAO;
-  }
 }

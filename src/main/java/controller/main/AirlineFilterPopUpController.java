@@ -3,16 +3,10 @@ package controller.main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -40,27 +34,14 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
     private final ObservableList<String> activeOptions = FXCollections.observableArrayList("True", "False");
 
     /**
-     * Initialize the fxml filename and set activeSelection to give the options "True" or "False".
-     * @param url
-     * @param resourceBundle
+     * Initialize activeSelection to give the options "True" or "False".
+     * @param url Not used.
+     * @param resourceBundle Not used.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         activeSelection.setItems(activeOptions);
         activeSelection.setValue("True");
-    }
-
-    /**
-     * Display the filter pop up window.
-     * @throws IOException if fmxl file cannot be opened.
-     */
-    public void display() throws IOException {
-        final Stage filterPopUp = new Stage();
-        filterPopUp.initModality(Modality.APPLICATION_MODAL);
-        Parent root = FXMLLoader.load(getClass().getResource("airlineFilterPopUp.fxml")); //open the Upload Data page
-        Scene scene = new Scene(root);
-        filterPopUp.setScene(scene);
-        filterPopUp.showAndWait();
     }
 
     /**
@@ -87,6 +68,14 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
     @Override
     public void filterByDataType(HashMap<String, String> filterTerms) {
         filterer.filterAirlines(filterTerms, storage.getAirlines());
+    }
+
+    /**
+     * @return The name of the fxml file for the airline filter pop up.
+     */
+    @Override
+    public String getFXMLFilename() {
+        return "airlineFilterPopUp.fxml";
     }
 
 }

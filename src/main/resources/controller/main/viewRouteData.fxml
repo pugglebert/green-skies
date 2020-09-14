@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
+
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
     <children>
-        <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
+        <TableView fx:id="tableView" layoutX="198.0" layoutY="239.0" prefHeight="453.0" prefWidth="932.0">
             <columns>
-                <TableColumn fx:id="addColumn" prefWidth="50.0" text="Add"/>
-                <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name"/>
-                <TableColumn fx:id="airlineIDColumn" prefWidth="94.0" text="Airline ID"/>
-                <TableColumn fx:id="sourceAirportColumn" prefWidth="122.0" text="Source Airport"/>
-                <TableColumn fx:id="sourceAirportIDColumn" prefWidth="136.0" text="Source Airport ID"/>
-                <TableColumn fx:id="destinationAirportColumn" prefWidth="153.0" text="Destination Airport"/>
-                <TableColumn fx:id="destinationAirportIDColumn" minWidth="0.0" prefWidth="164.0"
-                             text="Destination Airport ID"/>
+                <TableColumn fx:id="addColumn" prefWidth="50.0" text="Add" />
+                <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name" />
+                <TableColumn fx:id="sourceAirportColumn" prefWidth="122.0" text="Source Airport" />
+                <TableColumn fx:id="destinationAirportColumn" prefWidth="153.0" text="Destination Airport" />
             <TableColumn fx:id="codeShareColumn" minWidth="0.0" prefWidth="116.0" text="Code Share" />
             <TableColumn fx:id="numOfStopsColumn" minWidth="0.0" prefWidth="131.0" text="Number of Stops" />
             <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="94.0" text="Equipment" />
@@ -92,7 +86,6 @@
          </font>
       </Label>
       <Button fx:id="clearSearchButton" layoutX="778.0" layoutY="185.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear" />
-        <Button fx:id="AddToHistoryButton" layoutX="1032.0" layoutY="188.0" mnemonicParsing="false"
-                onAction="#addDataToHistory" text="Add to History"/>
+        <Button fx:id="AddToHistoryButton" layoutX="1032.0" layoutY="188.0" mnemonicParsing="false" onAction="#addDataToHistory" text="Add to History" />
    </children>
 </AnchorPane>

@@ -110,7 +110,7 @@ public class SQLiteDatabase {
         PreparedStatement prep = con.prepareStatement("insert into airlines values(?,?,?,?,?,?,?,?);");
         prep.setInt(1, airline.getAirlineID());
         prep.setString(2, airline.getName());
-        prep.setString(3, airline.getairlineAlias());
+        prep.setString(3, airline.getAirlineAlias());
         prep.setString(4, airline.getIATA());
         prep.setString(5, airline.getICAO());
         prep.setString(6, airline.getCallsign());

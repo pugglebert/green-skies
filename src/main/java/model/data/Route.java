@@ -20,6 +20,7 @@ public class Route implements DataType {
     private final String codeShare;
     private final int numOfStops;
     private final String[] equipment;
+    private final String firstEquipment;
     private double emissions;
     private double distance;
     private int timesTaken = 0;
@@ -39,6 +40,12 @@ public class Route implements DataType {
         this.codeShare = codeShare;
         this.numOfStops = numOfStops;
         this.equipment = equipment;
+        if (equipment.length > 0)  {
+            firstEquipment = equipment[0];
+        } else {
+            firstEquipment = "";
+        }
+
     }
 
     public void initCheckBox() {
@@ -116,6 +123,13 @@ public class Route implements DataType {
      */
     public String[] getEquipment(){
         return equipment;
+    }
+
+    /**
+     * Getter for the first entry in the equipment array.
+     */
+    public String getFirstEquipment() {
+        return firstEquipment;
     }
 
     /**

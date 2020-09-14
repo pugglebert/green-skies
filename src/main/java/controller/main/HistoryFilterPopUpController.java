@@ -8,13 +8,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-/**
- * Pop up scene on which users can apply filters for the route table.
- * @author Ella Johnson
- * @version 1.0
- * @since 12/09/2020
- */
-public class RouteFilterPopUpController extends FilterPopUpController {
+public class HistoryFilterPopUpController extends FilterPopUpController {
 
     @FXML
     private CheckBox airlineCheckBox;
@@ -59,20 +53,21 @@ public class RouteFilterPopUpController extends FilterPopUpController {
     }
 
     /**
-     * Call the filterRoutes method of filterer with the given HashMap of filter types and terms.
+     * Call the filterRoutes method of filterer with the given HashMap of filter types and terms and the history stored
+     * in storage.
      * @param filterTerms A HashMap with filter type as the key and filter term as the value.
      */
     @Override
     public void filterByDataType(HashMap<String, String> filterTerms) {
-        filterer.filterRoutes(filterTerms, storage.getRoutes());
+        System.out.println("Filter by data type history method called.");
+        filterer.filterRoutes(filterTerms, storage.getHistory());
     }
 
     /**
-     * @return The fxml filename for the route filter pop up controller.
+     * @return The fxml filename for the history filter pop up.
      */
     @Override
     public String getFXMLFilename() {
-        return "routeFilterPopUp.fxml";
+        return "historyFilterPopUp.fxml";
     }
-
 }
