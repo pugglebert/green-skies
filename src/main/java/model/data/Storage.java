@@ -18,7 +18,8 @@ public class Storage {
     private List<Airline> airlines = new ArrayList<>();
     private List<Airport> airports = new ArrayList<>();
     private List<Route> routes = new ArrayList<>();
-
+    public List<Double> analyseDistanceResult = new ArrayList<Double>();
+    public List<Double> analyseEmissionResult = new ArrayList<Double>();
     public List<Route> history = new ArrayList<>();
 
     private SQLiteDatabase database = new SQLiteDatabase();
@@ -41,6 +42,24 @@ public class Storage {
      * @return a list of routes in the user's history.
      */
     public List<Route> getHistory() {return history;}
+
+    /**
+     * @return a list of distance has been analysed .
+     */
+    public List<Double> getAnalyseDistanceResult() {return analyseDistanceResult;}
+    /**
+     * @ADD distance has been analysed into a list .
+     */
+    public void setAnalyseDistanceResult(double distance) {analyseDistanceResult.add(distance);}
+
+    /**
+     * @return a list of emissions has been analysed .
+     */
+    public List<Double> getAnalyseEmissionResult() {return analyseEmissionResult;}
+    /**
+     * @ADD emissions has been analysed into a list .
+     */
+    public void setAnalyseEmissionResult(double emission) {analyseEmissionResult.add(emission);}
 
     /**
      * Add an arrayList of routes to the history list.

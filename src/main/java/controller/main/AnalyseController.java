@@ -23,23 +23,16 @@ import static javafx.application.Application.launch;
 import org.controlsfx.control.textfield.TextFields;
 
 public class AnalyseController extends SideNavBarController implements Initializable  {
+
     @FXML
     private TextField pathSource1;
 
     @FXML
     private TextField pathDestination1;
-
     @FXML
     private TextField pathSource2;
-
     @FXML
     private TextField pathDestination2;
-
-    public static String path1Distance;
-    public static String path2Distance;
-    public static String path1Emission;
-    public static String path2Emission;
-
 
 
     private HashSet<String> airports = new HashSet<>();
@@ -74,12 +67,6 @@ public class AnalyseController extends SideNavBarController implements Initializ
     @FXML
     private void analyse() throws IOException {
 
-
-        Stage stage1 = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
-
-
-
         ArrayList<String> path1 = new ArrayList<>();
         ArrayList<String> path2 = new ArrayList<>();
         path1.add((String)pathSource1.getText());
@@ -91,23 +78,22 @@ public class AnalyseController extends SideNavBarController implements Initializ
         Route route2 = new Route(null, 0, (String)pathSource2.getText(), 0, (String)pathDestination2.getText(), 0, null, 0, null);
         FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
 
-        path1Distance = String.valueOf(analyser.getTotalDistancePath1());
-        path2Distance = String.valueOf(analyser.getTotalDistancePath2());
-        path1Emission = String.valueOf(analyser.getPath1Emission());
-        path2Emission = String.valueOf(analyser.getPath2Emission());
-
 
         System.out.println(analyser.getTotalDistancePath1());
         System.out.println(analyser.getTotalDistancePath2());
         System.out.println(analyser.getPath1Emission());
         System.out.println(analyser.getPath2Emission());
 
-        AnalyseResultController a1 = new AnalyseResultController();
-        a1.DistanceRoute1.setText(path1Distance);
-        a1.DistanceRoute2.setText(path2Distance);
-        a1.EmissionRoute1.setText(path1Emission);
-        a1.EmissionRoute2.setText(path2Emission);
+        storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
+        storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
+        storage.setAnalyseEmissionResult(analyser.getPath1Emission());
+        storage.setAnalyseEmissionResult(analyser.getPath2Emission());
 
+
+
+
+        Stage stage1 = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
         Scene scene = new Scene(root);
         stage1.setScene(scene);
         stage1.setMaximized(true);
