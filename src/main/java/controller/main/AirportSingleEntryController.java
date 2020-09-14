@@ -92,37 +92,37 @@ public class AirportSingleEntryController {
         String airportString = new String();
 
         String airportID = airportidFld.getText();
-        airportString += airportID;
+        airportString += airportID + ",";
 
         String name = nameFld.getText();
-        airportString += name;
+        airportString += name + ",";
 
         String city = cityFld.getText();
-        airportString += city;
+        airportString += city + ",";
 
         String country = countryFld.getText();
-        airportString += country;
+        airportString += country + ",";
 
         String iata = iataFld.getText();
-        airportString += iata;
+        airportString += iata + ",";
 
         String icao = icaoFld.getText();
-        airportString += icao;
+        airportString += icao + ",";
 
         String latitude = latitudeFld.getText();
-        airportString += latitude;
+        airportString += latitude + ",";
 
         String longitude = longitudeFld.getText();
-        airportString += longitude;
+        airportString += longitude + ",";
 
         String altitude = altitudeFld.getText();
-        airportString += altitude;
+        airportString += altitude + ",";
 
         String timezone = timezoneFld.getText();
-        airportString += timezone;
+        airportString += timezone + ",";
 
         String DST = dstFld.getText();
-        airportString += DST;
+        airportString += DST + ",";
 
         String DBtimezone = dbtimezoneFld.getText();
         airportString += DBtimezone;

@@ -88,25 +88,25 @@ public class AirlineSingleEntryController {
         String airlineString = new String();
 
         String airlineID = airlineIDField.getText();
-        airlineString += airlineID;
+        airlineString += airlineID + ",";
 
         String name = nameField.getText();
-        airlineString += name;
+        airlineString += name + ",";
 
         String alias = aliasField.getText();
-        airlineString += alias;
+        airlineString += alias + ",";
 
         String itat = itatField.getText();
-        airlineString += itat;
+        airlineString += itat + ",";
 
         String icao = icaoField.getText();
-        airlineString += icao;
+        airlineString += icao + ",";
 
         String callsign = callsignField.getText();
-        airlineString += callsign;
+        airlineString += callsign + ",";
 
         String country = countryField.getText();
-        airlineString += country;
+        airlineString += country + ",";
 
         if (activeCheck.isSelected()) {
             airlineString += "\"Y\"";
