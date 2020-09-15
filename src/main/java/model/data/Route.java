@@ -213,6 +213,50 @@ public class Route implements DataType {
         this.select = select;
     }
 
+  public String toString() {
+    String routeString =
+        "Airline name: "
+            + airlineName
+            + "\n"
+            + "Airline ID: "
+            + airlineID
+            + "\n"
+            + "Source Airport: "
+            + sourceAirport
+            + "\n"
+            + "Source Airport ID: "
+            + sourceAirportID
+            + "\n"
+            + "Destination Airport: "
+            + destinationAirport
+            + "\n"
+            + "Destination Airport ID: "
+            + destinationAirportID
+            + "\n"
+            + "Code Share: "
+            + codeShare
+            + "\n"
+            + "Number of Stops: "
+            + numOfStops
+            + "\n"
+            + "Equipment: "
+            + equipment
+            + "\n"
+            + "First Equipment: "
+            + firstEquipment
+            + "\n"
+            + "Carbon Emissions: "
+            + emissions
+            + "\n"
+            + "Distance: "
+            + distance
+            + "\n"
+            + "Times Taken: "
+            + timesTaken
+            + "\n";
+    return routeString;
+}
+
 //    public static void main(String[] args){
 //        Route test = new Route("dsf", 12, "asd", 45, "asd",123,"asd",32, new String[]{"21"});
 //    }
