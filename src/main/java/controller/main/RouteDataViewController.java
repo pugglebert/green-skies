@@ -101,7 +101,7 @@ public class RouteDataViewController extends DataViewController {
         List<Route> temp = new ArrayList<>();
         for (Route route : Main.getStorage().getRoutes()) {
           if (route.getSelect().isSelected()) {
-            temp.add(route);
+            storage.addToHistory(route);
             FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
             route.setEmissions(flightAnalyser.getPath1Emission());
             route.setDistance(flightAnalyser.getTotalDistancePath1());
@@ -114,7 +114,7 @@ public class RouteDataViewController extends DataViewController {
           }
         }
 
-        Main.getStorage().getHistory().addAll(temp);
+//        Main.getStorage().getHistory().addAll(temp);
         //reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
         //reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
         //reportGenerator.updateMostVisitedSrcAirports(); //TODO: uncommment once implemented HashMap

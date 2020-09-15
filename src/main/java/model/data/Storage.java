@@ -64,9 +64,8 @@ public class Storage {
      * Add an arrayList of routes to the history list.
      * @param routes an arrayList of routes.
      */
-    public void addToHistory(ArrayList<Route> routes) {
-        history.addAll(routes);
-
+    public void addToHistory(Route routes) {
+        history.add(routes);
     }
 
     /**
