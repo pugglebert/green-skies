@@ -18,7 +18,6 @@ public class Storage {
   private List<Airline> airlines = new ArrayList<>();
   private List<Airport> airports = new ArrayList<>();
   private List<Route> routes = new ArrayList<>();
-  private List<Route> tempRoute = new ArrayList<>();
   public List<Double> analyseDistanceResult = new ArrayList<Double>();
   public List<Double> analyseEmissionResult = new ArrayList<Double>();
   public List<Route> history = new ArrayList<>();
@@ -42,9 +41,6 @@ public class Storage {
   }
 
   /** @return a list of Route object from the currently open file cast as Datatype objects. */
-  public List<Route> getTempRoutes() {
-    return tempRoute;
-  }
 
   /** @return a list of routes in the user's history. */
   public List<Route> getHistory() {

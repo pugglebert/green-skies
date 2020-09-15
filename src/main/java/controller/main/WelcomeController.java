@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -16,6 +17,9 @@ import java.io.IOException;
  * @since 2020-08-26
  */
 public class WelcomeController {
+
+    public Button continueButton;
+    public Button InfoButton;
 
     //Method to handle the event for continuing to the main screen of the application.
     public void continueToMainScreen(ActionEvent event) throws IOException {

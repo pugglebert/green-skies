@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
  * @version 1.0
  * @since 15/09/2020
  */
-public class RouteAddToHistoryPopUp implements Initializable {
+public class RouteAddToHistoryPopUpController implements Initializable {
 
 
 
@@ -59,17 +59,15 @@ public class RouteAddToHistoryPopUp implements Initializable {
     @FXML
     private AnchorPane btnChangePassenger;
 
-    private final ArrayList<Route> tempRoute = new ArrayList<Route>();
+    private ArrayList<Route> tempRoute;
     private RouteDataViewController caller;
 
     public void display() throws IOException {
-
-
+        setTable();
+        Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
         Stage addPopUp = new Stage();
         addPopUp.initModality(Modality.APPLICATION_MODAL);
-        Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
-        Scene scene = new Scene(root);
-        addPopUp.setScene(scene);
+        addPopUp.setScene(new Scene(root));
         addPopUp.show();
     }
 
@@ -83,15 +81,7 @@ public class RouteAddToHistoryPopUp implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         //Set up the columns in the TableView.
-        passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
-        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
-        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
-        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
-        codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
-        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
-        equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
-        ObservableList<Route> routes = FXCollections.observableList(Main.getStorage().getTempRoutes());
-        tableView.setItems(routes);
+
     }
 
 
@@ -102,6 +92,24 @@ public class RouteAddToHistoryPopUp implements Initializable {
 //    }
 
     public void confirm(){}
+    public void setCaller(RouteDataViewController caller){
+        this.caller = caller;
+    }
+
+    public ArrayList<Route> getTempRoute(){
+       return this.tempRoute;
+    }
+    public void setTable(){
+        passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
+        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
+        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
+        codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
+        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
+        equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
+        ObservableList<Route> routes = FXCollections.observableList(tempRoute);
+        tableView.setItems(routes);
+    }
 }
 
 
