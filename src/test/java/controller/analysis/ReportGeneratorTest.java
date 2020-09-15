@@ -246,31 +246,75 @@ public class ReportGeneratorTest {
   // --------------------------------- Testing for updateMostEmissionsRoute ---------------------------------
 
   /**
-   * Verify that when updateMostEmissionsRoute is called with a route and there are no routes in the history,
-   * then the route with the most emissions is the route that was added.
+   * Verify that when updateMostEmissionsRoute is called with a route and there are no routes in the
+   * history, then the route with the most emissions is the route that was added.
    */
   @Test
   public void updateMostEmissionsRouteFirstEntryTest() {
     ArrayList<Route> expectedResults = new ArrayList<>();
-    Route testRoute = new Route("2H",1654,"IKT",2937,"ODO",
-            8944,"",0,"AN4".split(" "));
+    Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
     expectedResults.add(testRoute);
     reportGenerator.updateMostEmissionsRoute(testRoute);
     assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
-    }
+  }
+
+//  /**
+//   * Verify that when updateMostEmissionsRoute is called with a route and is has more emissions than the current most
+//   * emissions route, then the most emissions route in the history is updated to this route.
+//   */
+//  @Test
+//  public void updateMostEmissionsRouteMoreEmissionsEntryTest() {
+//    ArrayList<Route> expectedResults = new ArrayList<>();
+//    Route testRouteLessEmissions = new Route("2H", 1654, "IKT", 2937, "KPK", 8944, "", 0, "AN4".split(" "));
+//    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
+//    Route testRouteMoreEmissions = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 4, "AN4".split(" "));
+//    expectedResults.add(testRouteMoreEmissions);
+//    reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
+//    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
+//  }
+
+  // --------------------------------- Testing for updateLeastEmissionsRoute ---------------------------------
+
+  /**
+   * Verify that when updateLeastEmissionsRoute is called with a route and there are no routes in the
+   * history, then the route with the least emissions is the route that was added.
+   */
+  @Test
+  public void updateLeastEmissionsRouteFirstEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
+    expectedResults.add(testRoute);
+    reportGenerator.updateLeastEmissionsRoute(testRoute);
+    assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
+  }
+
+  // --------------------------------- Testing for updateMostDistanceRoute ---------------------------------
+
+  /**
+   * Verify that when updateMostDistanceRoute is called with a route and there are no routes in the
+   * history, then the route of the most distance is the route that was added.
+   */
+  @Test
+  public void updateMostDistanceRouteFirstEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
+    expectedResults.add(testRoute);
+    reportGenerator.updateMostDistanceRoute(testRoute);
+    assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
+  }
+
+  // --------------------------------- Testing for updateLeastDistanceRoute ---------------------------------
+
+  /**
+   * Verify that when updateLeastDistanceRoute is called with a route and there are no routes in the
+   * history, then the route of the least distance is the route that was added.
+   */
+  @Test
+  public void updateLeastDistanceRouteFirstEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
+    expectedResults.add(testRoute);
+    reportGenerator.updateLeastDistanceRoute(testRoute);
+    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+  }
 }
-
-
-//@Test
-//public void filterAirportsTwoTermsTwoIncorrectOneRecordTest() {
-//        ArrayList<Airport> expectedResults = new ArrayList<>();
-//        HashMap<String, String> testFilterTerms = new HashMap<>();
-//        testFilterTerms.put("Name", "Mangaia Island Airport");
-//        testFilterTerms.put("Country", "Cook Islands");
-//        filterer.filterAirports(testFilterTerms, storage.getAirports());
-//        ArrayList<Airport> results = (ArrayList<Airport>) filterer.getFilteredAirports();
-//        expectedResults.add(new Airport(5864,"Mangaia Island Airport","Mangaia Island",
-//        "Cook Islands","MGS","NCMG",-21.8956, -157.905,45,
-//        -10,"U","Pacific/Rarotonga"));
-//        assertArrayEquals(expectedResults.toArray(), results.toArray());
-//        }

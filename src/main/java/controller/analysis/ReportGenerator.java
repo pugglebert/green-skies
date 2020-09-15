@@ -16,44 +16,33 @@ import java.util.Map;
  */
 public class ReportGenerator {
 
-  private double totalDistanceTravelled; // km
+  private double totalDistanceTravelled = 0.0; // km
 
-  private double totalCarbonEmissions; // grams
+  private double totalCarbonEmissions = 0.0; // grams
 
   private ArrayList<Route> mostEmissionsRoutes = new ArrayList<>();
 
-  private ArrayList<Route> leastEmissionsRoutes;
+  private ArrayList<Route> leastEmissionsRoutes = new ArrayList<>();
 
-  private ArrayList<Route> mostDistanceRoutes;
+  private ArrayList<Route> mostDistanceRoutes = new ArrayList<>();
 
-  private ArrayList<Route> leastDistanceRoutes;
+  private ArrayList<Route> leastDistanceRoutes = new ArrayList<>();
 
-  private ArrayList<String> mostVisitedSrcAirports;
+  private ArrayList<String> mostVisitedSrcAirports = new ArrayList<>();
 
-  private ArrayList<String> mostVisitedDestAirports;
+  private ArrayList<String> mostVisitedDestAirports = new ArrayList<>();
 
-  private ArrayList<Route> mostTravelledRoutes;
+  private ArrayList<Route> mostTravelledRoutes = new ArrayList<>();
 
-  private ArrayList<Route> leastTravelledRoutes;
+  private ArrayList<Route> leastTravelledRoutes = new ArrayList<>();
 
-  private double carbonEmissionGoal; // grams
+  private double carbonEmissionGoal = 0.0; // grams
 
-  private double howMuchToReduceCO2By;
+  private double howMuchToReduceCO2By = 0.0;
 
-  private double analysisPeriod;
+  private double analysisPeriod = 0.0;
 
-  private double treesToGrow;
-
-  public void ReportGenerator() {
-    // this.mostEmissionsRoutes = new ArrayList<>();
-    this.leastEmissionsRoutes = new ArrayList<>();
-    this.mostDistanceRoutes = new ArrayList<>();
-    this.leastDistanceRoutes = new ArrayList<>();
-    this.mostVisitedSrcAirports = new ArrayList<>();
-    this.mostVisitedDestAirports = new ArrayList<>();
-    this.mostTravelledRoutes = new ArrayList<>();
-    this.leastTravelledRoutes = new ArrayList<>();
-  }
+  private double treesToGrow = 0.0;
 
   /**
    * This method updates the total carbon emissions from flight travel.
@@ -137,16 +126,14 @@ public class ReportGenerator {
   public void updateMostEmissionsRoute(Route currentRouteRecord) {
     if (this.mostEmissionsRoutes.size() == 0) {
       mostEmissionsRoutes.add(currentRouteRecord);
-    } else {
-
-      if (currentRouteRecord.getEmissions() > mostEmissionsRoutes.get(0).getEmissions()) {
+    } else if (currentRouteRecord.getEmissions() > mostEmissionsRoutes.get(0).getEmissions()) {
         mostEmissionsRoutes.clear();
         mostEmissionsRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getEmissions() == mostEmissionsRoutes.get(0).getEmissions()) {
         mostEmissionsRoutes.add(currentRouteRecord);
       }
     }
-  }
+
 
   /**
    * This method updates the which route produces the least emissions. The currentRouteRecord is
@@ -158,12 +145,13 @@ public class ReportGenerator {
     if (leastEmissionsRoutes.isEmpty() == true) {
       leastEmissionsRoutes.add(currentRouteRecord);
     } else if (currentRouteRecord.getEmissions() < leastEmissionsRoutes.get(0).getEmissions()) {
-      leastEmissionsRoutes.clear();
-      leastEmissionsRoutes.add(currentRouteRecord);
-    } else if (currentRouteRecord.getEmissions() == leastEmissionsRoutes.get(0).getEmissions()) {
-      leastEmissionsRoutes.add(currentRouteRecord);
+        leastEmissionsRoutes.clear();
+        leastEmissionsRoutes.add(currentRouteRecord);
+      } else if (currentRouteRecord.getEmissions() == leastEmissionsRoutes.get(0).getEmissions()) {
+        leastEmissionsRoutes.add(currentRouteRecord);
+      }
     }
-  }
+
 
   /**
    * This method updates which route is of the greatest distance. The currentRouteRecord is checked
@@ -175,12 +163,13 @@ public class ReportGenerator {
     if (mostDistanceRoutes.isEmpty() == true) {
       mostDistanceRoutes.add(currentRouteRecord);
     } else if (currentRouteRecord.getDistance() > mostDistanceRoutes.get(0).getDistance()) {
-      mostDistanceRoutes.clear();
-      mostDistanceRoutes.add(currentRouteRecord);
-    } else if (currentRouteRecord.getDistance() == mostDistanceRoutes.get(0).getDistance()) {
-      mostDistanceRoutes.add(currentRouteRecord);
+        mostDistanceRoutes.clear();
+        mostDistanceRoutes.add(currentRouteRecord);
+      } else if (currentRouteRecord.getDistance() == mostDistanceRoutes.get(0).getDistance()) {
+        mostDistanceRoutes.add(currentRouteRecord);
+      }
     }
-  }
+
 
   /**
    * This method updates which route is of the least distance. The currentRouteRecord is checked
@@ -192,12 +181,12 @@ public class ReportGenerator {
     if (leastDistanceRoutes.isEmpty() == true) {
       leastDistanceRoutes.add(currentRouteRecord);
     } else if (currentRouteRecord.getDistance() < leastDistanceRoutes.get(0).getDistance()) {
-      leastDistanceRoutes.clear();
-      leastDistanceRoutes.add(currentRouteRecord);
-    } else if (currentRouteRecord.getDistance() == leastDistanceRoutes.get(0).getDistance()) {
-      leastDistanceRoutes.add(currentRouteRecord);
+        leastDistanceRoutes.clear();
+        leastDistanceRoutes.add(currentRouteRecord);
+      } else if (currentRouteRecord.getDistance() == leastDistanceRoutes.get(0).getDistance()) {
+        leastDistanceRoutes.add(currentRouteRecord);
+      }
     }
-  }
 
   // TODO: write a single method for MostVisitedSrcAirports and MostVisitedDestAirports
 
@@ -279,6 +268,14 @@ public class ReportGenerator {
 
   public ArrayList<Route> getLeastEmissionsRoutes() {
     return leastEmissionsRoutes;
+  }
+
+  public ArrayList<Route> getMostDistanceRoutes() {
+    return mostDistanceRoutes;
+  }
+
+  public ArrayList<Route> getLeastDistanceRoutes() {
+    return leastDistanceRoutes;
   }
 
   public ArrayList<String> getMostVisitedSrcAirports() {
