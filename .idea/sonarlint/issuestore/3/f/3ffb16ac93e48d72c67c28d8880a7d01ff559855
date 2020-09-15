@@ -1,27 +1,0 @@
-
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(ÈâûÝüÿÿÿÿ8üº€‰È.
-i
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(»­Øüúÿÿÿÿ8üº€‰È.
-i
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”Ýûÿÿÿÿ8üº€‰È.
-l
-java:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¶ÁæÂ8üº€‰È.
-x
-java:S14882"[Immediately return this expression instead of assigning it to the temporary variable "res".(Ö¹ÿ…8üº€‰È.
-K
-java:S2115")Add password protection to this database.(ïÈž²þÿÿÿÿ8üº€‰È.
-X
-java:S2696"6Make the enclosing method "static" or remove this set.(ÐÈÄáûÿÿÿÿ8üº€‰È.
-T	java:S1069"9Replace this use of System.out or System.err by a logger.(¸ú¢B8¼ã½ŠÈ.
-q
-java:S2095#"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(©í²Öüÿÿÿÿ8üº€‰È.
-l
-java:S2095>"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(„†Øå8üº€‰È.
-}
-java:S1192"`Define a constant instead of duplicating this literal "insert into user values(?,?,?);" 3 times.(¶ÁæÂ8üº€‰È.
-i
-java:S20951"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”Ýûÿÿÿÿ8üº€‰È.
-d
-java:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(·µ«Ò8üº€‰È.
-X
-java:S2696"6Make the enclosing method "static" or remove this set.(ïÈž²þÿÿÿÿ8üº€‰È.

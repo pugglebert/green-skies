@@ -1,7 +1,7 @@
 
 {
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ƒÚé£øÿÿÿÿ8‘–Ã.
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ƒÚé£øÿÿÿÿ8©€ÉÊÈ.
 
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ğøé”8ÿ‚’–Ã.
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ğøé”8©€ÉÊÈ.
 
-java:S1319"sThe type of the "pathPlan" object should be an interface such as "List" rather than the implementation "ArrayList".(©¸†Ô8Ì«–Ã.
+java:S1319"sThe type of the "pathPlan" object should be an interface such as "List" rather than the implementation "ArrayList".(©¸†Ô8©€ÉÊÈ.

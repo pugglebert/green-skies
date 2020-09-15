@@ -1,34 +1,22 @@
 
-w
-java:S1450"WRemove the "airlines" field and declare it as a local variable in the relevant methods.(¼û´Áúÿÿÿÿ8ü÷•şÇ.
-{
-java:S1450"[Remove the "destinations" field and declare it as a local variable in the relevant methods.(áÖ¾‡øÿÿÿÿ8ü÷•şÇ.
+O
+java:S1135b"2Complete the task associated to this TODO comment.(ğĞˆß8òûÈÊÈ.
+y	java:S1165"]Rename this field "AddToHistoryButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…š8òûÈÊÈ.
+_
+java:S23876"="searchTypes" is the name of a field in "DataViewController".(’¹¾±üÿÿÿÿ8òûÈÊÈ.
+T
+java:S1135{"2Complete the task associated to this TODO comment.(çªÇˆüÿÿÿÿ8òûÈÊÈ.
 v
-java:S1450"VRemove the "sources" field and declare it as a local variable in the relevant methods.(—óà×ıÿÿÿÿ8ü÷•şÇ.
-¡
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(î¾Îüÿÿÿÿ8ü÷•şÇ.
+java:S2293k"YReplace the type specification in this constructor call with the diamond operator ("<>").(ˆ¿Ôá8òûÈÊÈ.
+T
+java:S1135|"2Complete the task associated to this TODO comment.(çªÇˆüÿÿÿÿ8òûÈÊÈ.
+O
+java:S1135y"2Complete the task associated to this TODO comment.(œÉÈ8òûÈÊÈ.
+T
+java:S1135z"2Complete the task associated to this TODO comment.(†ÔÆîûÿÿÿÿ8òûÈÊÈ.
 `
-java:S23878"D"btnFlightHistory" is the name of a field in "SideNavBarController".(²î08ü÷•şÇ.
-]
-java:S2387"="searchTypes" is the name of a field in "DataViewController".(’¹¾±üÿÿÿÿ8ü÷•şÇ.
-V
-java:S1117";Rename "routes" which hides the field declared at line 146.(ù­Î­8ü÷•şÇ.
-Z
-java:S1161":Add the "@Override" annotation above this method signature(«Éøáüÿÿÿÿ8ü÷•şÇ.
-R
-java:S1135"2Complete the task associated to this TODO comment.(î°‡ıÿÿÿÿ8ü÷•şÇ.
-R
-java:S1135"2Complete the task associated to this TODO comment.(½†„ûÿÿÿÿ8ü÷•şÇ.
-t
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ˆ¿Ôá8ü÷•şÇ.
-R
-java:S1135"2Complete the task associated to this TODO comment.(î°‡ıÿÿÿÿ8ü÷•şÇ.
-R
-java:S1135"2Complete the task associated to this TODO comment.(Ô¶ªÍúÿÿÿÿ8ü÷•şÇ.
-E
-java:S1068"*Remove this unused "buffer" private field.(€öõè8ü÷•şÇ.
-E
-java:S1068"*Remove this unused "routes" private field.(ÑÁâ8ü÷•şÇ.
-[	java:S125"<This block of commented-out lines of code should be removed.(àíÖùÿÿÿÿ8ü÷•şÇ.
-[	java:S125"<This block of commented-out lines of code should be removed.(›¹ÛÂøÿÿÿÿ8ü÷•şÇ.
-[	java:S125"<This block of commented-out lines of code should be removed.(¤‘«•úÿÿÿÿ8ü÷•şÇ.
+java:S23873"D"btnFlightHistory" is the name of a field in "SideNavBarController".(²î08òûÈÊÈ.
+O
+java:S11359"2Complete the task associated to this TODO comment.(„Í¾¼8òûÈÊÈ.
+£
+java:S1186:"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(î¾Îüÿÿÿÿ8òûÈÊÈ.
