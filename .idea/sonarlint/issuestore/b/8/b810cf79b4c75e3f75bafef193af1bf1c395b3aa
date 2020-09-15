@@ -1,43 +1,43 @@
 
-–
-java:S1319È"xThe type of the "srcAirportCounts" object should be an interface such as "Map" rather than the implementation "HashMap".(¼Éî8ï¯„‰É.
+R
+java:S1135"2Complete the task associated to this TODO comment.(çëıûÿÿÿÿ8ï¯„‰É.
+b
+java:S3973"GUse indentation to denote the code conditionally executed by this "if".(ŞËÊ8ï¯„‰É.
+“
+java:S1319"xThe type of the "srcAirportCounts" object should be an interface such as "Map" rather than the implementation "HashMap".(¼Éî8ï¯„‰É.
+R
+java:S1135"2Complete the task associated to this TODO comment.(Âü ÿüÿÿÿÿ8ï¯„‰É.
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÜùÁıÿÿÿÿ8ï¯„‰É.
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ç¤Å…şÿÿÿÿ8ï¯„‰É.
+™
+java:S1319"yThe type of the "destAirportCounts" object should be an interface such as "Map" rather than the implementation "HashMap".(©€Íıÿÿÿÿ8ï¯„‰É.
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(•›È¬şÿÿÿÿ8ï¯„‰É.
+X
+java:S1068"8Remove this unused "leastTravelledRoutes" private field.(îşıúùÿÿÿÿ8ï¯„‰É.
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ßÇÿŞùÿÿÿÿ8ï¯„‰É.
+C
+java:S1125"(Remove the literal "true" boolean value.(‡Ö­“8ï¯„‰É.
+H
+java:S1125"(Remove the literal "true" boolean value.(¬”ûÿÿÿÿ8ï¯„‰É.
+‹
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¹Äï¯8ï¯„‰É.
+
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(–ÑÆ‚ÿÿÿÿÿ8ï¯„‰É.
+R
+java:S1135"2Complete the task associated to this TODO comment.(ÜŠê£ùÿÿÿÿ8ï¯„‰É.
+‹
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Œ§İÛ8ï¯„‰É.
 œ
-java:S1319İ"yThe type of the "destAirportCounts" object should be an interface such as "Map" rather than the implementation "HashMap".(©€Íıÿÿÿÿ8ï¯„‰É.
-“
-java:S1319‰"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ßÇÿŞùÿÿÿÿ8ï¯„‰É.
-“
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÜùÁıÿÿÿÿ8ï¯„‰É.
-
-java:S1319‘"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¹Äï¯8ï¯„‰É.
-“
-java:S1319•"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(–ÑÆ‚ÿÿÿÿÿ8ï¯„‰É.
-“
-java:S1319™"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ç¤Å…şÿÿÿÿ8ï¯„‰É.
-
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Œ§İÛ8ï¯„‰É.
-e
-java:S3973¾"GUse indentation to denote the code conditionally executed by this "if".(ŞËÊ8ï¯„‰É.
-`
-java:S1155">Use isEmpty() to check whether the collection is empty or not.(•›È¬şÿÿÿÿ8ï¯„‰É.
-Ÿ
-java:S1186÷"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡¹Ğõ8ï¯„‰É.
-T
-java:S1135J"2Complete the task associated to this TODO comment.(ÜŠê£ùÿÿÿÿ8ï¯„‰É.
-T
-java:S1135e"2Complete the task associated to this TODO comment.(ÜŠê£ùÿÿÿÿ8ï¯„‰É.
-K
-java:S1125‘"(Remove the literal "true" boolean value.(’’ÙŞøÿÿÿÿ8ï¯„‰É.
-F
-java:S1125£"(Remove the literal "true" boolean value.(‡Ö­“8ï¯„‰É.
-K
-java:S1125µ"(Remove the literal "true" boolean value.(¬”ûÿÿÿÿ8ï¯„‰É.
-U
-java:S1135¿"2Complete the task associated to this TODO comment.(çëıûÿÿÿÿ8ï¯„‰É.
-U
-java:S1135ö"2Complete the task associated to this TODO comment.(Âü ÿüÿÿÿÿ8ï¯„‰É.
-U
-java:S1135­"2Complete the task associated to this TODO comment.(‰åÄıÿÿÿÿ8ï¯„‰É.
-Z
-java:S1068%"8Remove this unused "leastTravelledRoutes" private field.(îşıúùÿÿÿÿ8ï¯„‰É.
-L
-java:S1068-"/Remove this unused "treesToGrow" private field.(úÄí¯8ï¯„‰É.
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¡¹Ğõ8ï¯„‰É.
+J
+java:S1068"/Remove this unused "treesToGrow" private field.(úÄí¯8ï¯„‰É.
+R
+java:S1135"2Complete the task associated to this TODO comment.(ÜŠê£ùÿÿÿÿ8ï¯„‰É.
+H
+java:S1125"(Remove the literal "true" boolean value.(’’ÙŞøÿÿÿÿ8ï¯„‰É.
+R
+java:S1135"2Complete the task associated to this TODO comment.(‰åÄıÿÿÿÿ8ï¯„‰É.

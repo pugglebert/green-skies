@@ -63,16 +63,16 @@ public class FlightAnalyserTest {
             i++;
         }
 
-        System.out.println(listOfAirportPath1);
-
-        System.out.println(listOfAirportPath2);
+//        System.out.println(listOfAirportPath1);
+//
+//        System.out.println(listOfAirportPath2);
         double path1Distance1 = calculatedistance(listOfAirportPath1.get(0).getLatitude(), listOfAirportPath1.get(0).getLongitude(), listOfAirportPath1.get(1).getLatitude(), listOfAirportPath1.get(1).getLongitude());
 
         double path2Distance1 = calculatedistance(listOfAirportPath2.get(0).getLatitude(), listOfAirportPath2.get(0).getLongitude(), listOfAirportPath2.get(1).getLatitude(), listOfAirportPath2.get(1).getLongitude());
         distance1 = path1Distance1;
         distance2 = path2Distance1;
-        System.out.println(distance1);
-        System.out.println(distance2);
+//        System.out.println(distance1);
+//        System.out.println(distance2);
 
     }
 
@@ -140,8 +140,8 @@ public class FlightAnalyserTest {
 
         path2.add(route2.getSourceAirport());
         path2.add(route2.getDestinationAirport());
-        System.out.println(path1);
-        System.out.println(path2);
+//        System.out.println(path1);
+//        System.out.println(path2);
 
         findCoordinate();
         analyser = new FlightAnalyser(route1, route2, storage);

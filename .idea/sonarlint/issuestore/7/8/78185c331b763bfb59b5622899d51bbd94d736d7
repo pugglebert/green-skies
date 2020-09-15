@@ -1,26 +1,20 @@
 
-y	java:S1160"]Rename this field "AddToHistoryButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…š8¼®„‰É.
-`
-java:S2387."D"btnFlightHistory" is the name of a field in "SideNavBarController".(²î08¼®„‰É.
-£
-java:S11864"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(î¾Îüÿÿÿÿ8¼®„‰É.
-Z
-java:S1854e"8Remove this useless assignment to local variable "temp".(°‰»şøÿÿÿÿ8Û±§‰É.
-O
-java:S1135\"2Complete the task associated to this TODO comment.(ğĞˆß8¼®„‰É.
-O
-java:S1135}"2Complete the task associated to this TODO comment.(àÇÅ’8äµ¯…É.
-_
-java:S23871"="searchTypes" is the name of a field in "DataViewController".(’¹¾±üÿÿÿÿ8¼®„‰É.
-K
-java:S1481e")Remove this unused "temp" local variable.(°‰»şøÿÿÿÿ8Û±§‰É.
-T
-java:S1135o"2Complete the task associated to this TODO comment.(¯¾©îúÿÿÿÿ8ùĞ‹É.
-T
-java:S1135p"2Complete the task associated to this TODO comment.(íÑÄûÿÿÿÿ8ùĞ‹É.
-O
-java:S1135z"2Complete the task associated to this TODO comment.(©áÉ¨8ùĞ‹É.
-O
-java:S1135{"2Complete the task associated to this TODO comment.(–‹óŸ8ùĞ‹É.
-O
-java:S1135|"2Complete the task associated to this TODO comment.(×Ã¿8ùĞ‹É.
+M
+java:S1135"2Complete the task associated to this TODO comment.(àÇÅ’8äµ¯…É.
+]
+java:S2387"="searchTypes" is the name of a field in "DataViewController".(’¹¾±üÿÿÿÿ8¼®„‰É.
+M
+java:S1135"2Complete the task associated to this TODO comment.(×Ã¿8ùĞ‹É.
+M
+java:S1135"2Complete the task associated to this TODO comment.(©áÉ¨8ùĞ‹É.
+^
+java:S2387"D"btnFlightHistory" is the name of a field in "SideNavBarController".(²î08¼®„‰É.
+M
+java:S1135"2Complete the task associated to this TODO comment.(–‹óŸ8ùĞ‹É.
+w	java:S116"]Rename this field "AddToHistoryButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…š8¼®„‰É.
+M
+java:S1135"2Complete the task associated to this TODO comment.(÷ğÙñ8ŠîÚÉ.
+R
+java:S1135"2Complete the task associated to this TODO comment.(¯¾©îúÿÿÿÿ8ŠîÚÉ.
+R
+java:S1135"2Complete the task associated to this TODO comment.(íÑÄûÿÿÿÿ8ŠîÚÉ.
