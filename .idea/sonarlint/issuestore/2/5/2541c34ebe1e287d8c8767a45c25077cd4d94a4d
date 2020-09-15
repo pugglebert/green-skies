@@ -1,70 +1,70 @@
 
 >
 java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
+m	java:S117“"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şğì)8¢ùÈÊÈ.
+P
+java:S1659-".Declare "dataBaseTimeZone" on a separate line.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+B
+java:S1659,"%Declare "country" on a separate line.(¯ò†À8¢ùÈÊÈ.
+•
+java:S13193"sThe type of the "dataFile" object should be an interface such as "List" rather than the implementation "ArrayList".(ëÈ¹ªúÿÿÿÿ8¢ùÈÊÈ.
 >
 java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
-C
-java:S1170-"!Make this final field static too.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
-t
-java:S27378"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8¢ùÈÊÈ.
-o	java:S116-"NRename this field "DST" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
-?
-java:S1659,""Declare "name" on a separate line.(¯ò†À8¢ùÈÊÈ.
->
-java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
-C
-java:S1170-"!Make this final field static too.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
 d
 java:S1126Õ"AReplace this if-then-else statement by a single return statement.(«Ç£ªıÿÿÿÿ8¢ùÈÊÈ.
 >
 java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
-E
-java:S1659,"(Declare "longtitude" on a separate line.(¯ò†À8¢ùÈÊÈ.
-m	java:S117“"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şğì)8¢ùÈÊÈ.
-n	java:S117‚"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºÿí…8¢ùÈÊÈ.
-M
-java:S1066†"/Merge this if statement with the enclosing one.(©—Ê¯8¢ùÈÊÈ.
-•
-java:S13193"sThe type of the "dataFile" object should be an interface such as "List" rather than the implementation "ArrayList".(ëÈ¹ªúÿÿÿÿ8¢ùÈÊÈ.
-b	java:S112Y"FDefine and throw a dedicated exception instead of using a generic one.(ÓÊ«¬8¢ùÈÊÈ.
+?
+java:S1659,""Declare "IATA" on a separate line.(¯ò†À8¢ùÈÊÈ.
+>
+java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
 >
 java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
 C
-java:S1170-"!Make this final field static too.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+java:S1659,"&Declare "latitude" on a separate line.(¯ò†À8¢ùÈÊÈ.
+b	java:S112Y"FDefine and throw a dedicated exception instead of using a generic one.(ÓÊ«¬8¢ùÈÊÈ.
 R
 java:S1066—"/Merge this if statement with the enclosing one.(—Û‚ÿÿÿÿÿ8¢ùÈÊÈ.
+k	java:S116,"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯ò†À8¢ùÈÊÈ.
+H
+java:S1659-"&Declare "timezone" on a separate line.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+M
+java:S1066ó"/Merge this if statement with the enclosing one.(ßëÜı8¢ùÈÊÈ.
+?
+java:S1659,""Declare "name" on a separate line.(¯ò†À8¢ùÈÊÈ.
 ?
 java:S1659,""Declare "city" on a separate line.(¯ò†À8¢ùÈÊÈ.
-P
-java:S1659-".Declare "dataBaseTimeZone" on a separate line.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+C
+java:S1170-"!Make this final field static too.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+C
+java:S1170-"!Make this final field static too.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+>
+java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
+E
+java:S1659,"(Declare "longtitude" on a separate line.(¯ò†À8¢ùÈÊÈ.
+V	java:S106õ"9Replace this use of System.out or System.err by a logger.(ğˆµ…8¢ùÈÊÈ.
+s	java:S117å"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎºŒ²ÿÿÿÿÿ8¢ùÈÊÈ.
+?
+java:S1659,""Declare "ICAO" on a separate line.(¯ò†À8¢ùÈÊÈ.
 C
 java:S1170-"!Make this final field static too.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
 s	java:S117ñ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ËÏ°•úÿÿÿÿ8¢ùÈÊÈ.
-k	java:S116,"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯ò†À8¢ùÈÊÈ.
-H
-java:S1659-"&Declare "timezone" on a separate line.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
 C
-java:S1659,"&Declare "latitude" on a separate line.(¯ò†À8¢ùÈÊÈ.
-?
-java:S1659,""Declare "IATA" on a separate line.(¯ò†À8¢ùÈÊÈ.
-?
-java:S1659,""Declare "ICAO" on a separate line.(¯ò†À8¢ùÈÊÈ.
+java:S1170-"!Make this final field static too.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
 M
-java:S1066ó"/Merge this if statement with the enclosing one.(ßëÜı8¢ùÈÊÈ.
-s	java:S117å"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎºŒ²ÿÿÿÿÿ8¢ùÈÊÈ.
-H
-java:S1659-"&Declare "altitude" on a separate line.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+java:S1066†"/Merge this if statement with the enclosing one.(©—Ê¯8¢ùÈÊÈ.
+o	java:S116-"NRename this field "DST" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+>
+java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
 C
 java:S1659-"!Declare "DST" on a separate line.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+t
+java:S27378"WAdd logic to this catch clause or eliminate it and rethrow the exception automatically.(ö™û8¢ùÈÊÈ.
 >
 java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
-B
-java:S1659,"%Declare "country" on a separate line.(¯ò†À8¢ùÈÊÈ.
-k	java:S116,"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯ò†À8¢ùÈÊÈ.
->
-java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
->
-java:S1170,"!Make this final field static too.(¯ò†À8¢ùÈÊÈ.
+n	java:S117‚"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ºÿí…8¢ùÈÊÈ.
+H
+java:S1659-"&Declare "altitude" on a separate line.(ÓØ™²üÿÿÿÿ8¢ùÈÊÈ.
+k	java:S116,"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯ò†À8¢ùÈÊÈ.
 _
 java:S1126æ"AReplace this if-then-else statement by a single return statement.(®ñÏÜ8¢ùÈÊÈ.
-V	java:S106õ"9Replace this use of System.out or System.err by a logger.(ğˆµ…8¢ùÈÊÈ.

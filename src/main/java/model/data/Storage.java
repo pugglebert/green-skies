@@ -66,6 +66,7 @@ public class Storage {
      */
     public void addToHistory(ArrayList<Route> routes) {
         history.addAll(routes);
+
     }
 
     /**
@@ -76,37 +77,37 @@ public class Storage {
     public void setData(List<DataType> data, String type) throws SQLException, ClassNotFoundException {
 
         if (type.matches("Airline")) {
-            database.dropTable("airlines");
-            database.closeAutoCommite();
+//            database.dropTable("airlines");
+//            database.closeAutoCommite();
             for (DataType entry : data) {
                 Airline airline = (Airline) entry;
                 if (airline != null) {
                     airlines.add(airline);
-                    database.addAirlines(airline);
+//                    database.addAirlines(airline);
                 }
             }
-            database.startCommite();
+//            database.startCommite();
         } else if (type.matches("Airport")) {
-            database.dropTable("airports");
-            database.closeAutoCommite();
+//            database.dropTable("airports");
+//            database.closeAutoCommite();
             for (DataType entry : data) {
                 Airport airport = (Airport) entry;
                 airports.add(airport);
-                database.addAirports(airport);
+//                database.addAirports(airport);
                 if (airport != null) {
                 }
             }
-            database.startCommite();
+//            database.startCommite();
         } else if (type.matches("Route")) {
-            database.dropTable("routes");
-            database.closeAutoCommite();
+//            database.dropTable("routes");
+//            database.closeAutoCommite();
             for (DataType entry : data) {
                 Route route = (Route) entry;
                 routes.add(route);
-                database.addRoutes(route);
+//                database.addRoutes(route);
 
             }
-            database.startCommite();
+//            database.startCommite();
         } else {
             throw new IllegalArgumentException("Type must be airline, airport or route");
         }

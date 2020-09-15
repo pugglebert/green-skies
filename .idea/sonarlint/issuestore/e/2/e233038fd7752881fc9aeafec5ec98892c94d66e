@@ -1,26 +1,26 @@
 
-`	java:S112~"FDefine and throw a dedicated exception instead of using a generic one.(Ûà‹Œÿÿÿÿÿ
-~
-java:S1157,"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(Ô×¢üıÿÿÿÿ
 †
 java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(è–Åä
 o
-java:S2293i"YReplace the type specification in this constructor call with the diamond operator ("<>").(½üÉô
-‹
-java:S1319="pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(½˜¡±ûÿÿÿÿ
-~
-java:S1157V"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(Ô×¢üıÿÿÿÿ
-~
-java:S1157y"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(Ô×¢üıÿÿÿÿ
-`	java:S112\"FDefine and throw a dedicated exception instead of using a generic one.(Ûà‹Œÿÿÿÿÿ
+java:S2293A"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÂªñÁ
+`	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(Ûà‹Œÿÿÿÿÿ
+a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ûà‹Œÿÿÿÿÿ
+`	java:S112_"FDefine and throw a dedicated exception instead of using a generic one.(Ûà‹Œÿÿÿÿÿ
 t
 java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ï•£Âüÿÿÿÿ
+~
+java:S1157Y"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(Ô×¢üıÿÿÿÿ
+‹
+java:S1319@"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(½˜¡±ûÿÿÿÿ
+~
+java:S1157/"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(Ô×¢üıÿÿÿÿ
+†
+java:S1319k"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¨¡…Ù
 o
-java:S2293>"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÂªñÁ
-`	java:S1121"FDefine and throw a dedicated exception instead of using a generic one.(Ûà‹Œÿÿÿÿÿ
+java:S2293l"YReplace the type specification in this constructor call with the diamond operator ("<>").(½üÉô
+~
+java:S11924"cDefine a constant instead of duplicating this literal "No entries match your search term." 3 times.(Ûà‹Œÿÿÿÿÿ
 P
 java:S1118":Add a private constructor to hide the implicit public one.(ëŸä¡
 ~
-java:S11921"cDefine a constant instead of duplicating this literal "No entries match your search term." 3 times.(Ûà‹Œÿÿÿÿÿ
-†
-java:S1319h"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¨¡…Ù
+java:S1157|"cReplace these toUpperCase()/toLowerCase() and equals() calls with a single equalsIgnoreCase() call.(Ô×¢üıÿÿÿÿ

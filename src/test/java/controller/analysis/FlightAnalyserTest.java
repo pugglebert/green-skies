@@ -21,8 +21,8 @@ public class FlightAnalyserTest {
     Loader loader ;
     ArrayList<String> path1;
     ArrayList<String> path2;
-    String[] rubbish1;
-    String[] rubbish2;
+    String[] rubbish1 = {"abc"};
+    String[] rubbish2 = {"abc"};
 
     Route route1 = new Route("Air Inter Gabon", 219, "AER", 2965, "KZN" , 2990, "dont know", 0,  rubbish1);
     Route route2 = new Route("Air Cess", 55, "ASF", 2966, "SVX", 2975, "dont know", 0, rubbish2);
