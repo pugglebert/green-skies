@@ -243,7 +243,8 @@ public class ReportGeneratorTest {
     assertEquals(345231863432.98, reportGenerator.getTotalDistanceTravelled(), 0.0001);
   }
 
-  // --------------------------------- Testing for updateMostEmissionsRoute ---------------------------------
+  // --------------------------------- Testing for updateMostEmissionsRoute
+  // ---------------------------------
 
   /**
    * Verify that when updateMostEmissionsRoute is called with a route and there are no routes in the
@@ -259,28 +260,93 @@ public class ReportGeneratorTest {
   }
 
   /**
-   * Verify that when updateMostEmissionsRoute is called with a route and is has more emissions than the current most
-   * emissions route, then the most emissions route in the history is updated to this route.
+   * Verify that when updateMostEmissionsRoute is called with a route and is has more emissions than
+   * the current most emissions route, then the most emissions route in the history is updated to
+   * this route.
    */
   @Test
-  public void updateMostEmissionsRouteMoreEmissionsEntryTest() throws SQLException, ClassNotFoundException {
+  public void updateMostEmissionsRouteMoreEmissionsEntryTest()
+      throws SQLException, ClassNotFoundException {
     ArrayList<Route> expectedResults = new ArrayList<>();
     List<DataType> providedAirports = new ArrayList<>();
+    providedAirports.add(
+        new Airport(
+            2937,
+            "Goroka",
+            "Goroka",
+            "Papua New Guinea",
+            "GKA",
+            "AYGA",
+            -6.081689,
+            145.391881,
+            5282,
+            10,
+            "U",
+            "Pacific/Port_Moresby"));
+    providedAirports.add(
+        new Airport(
+            8944,
+            "Narsarsuaq",
+            "Narssarssuaq",
+            "Greenland",
+            "UAK",
+            "BGBW",
+            61.160517,
+            -45.425978,
+            112,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            4253,
+            "Nuuk",
+            "Godthaab",
+            "Greenland",
+            "GOH",
+            "BGGH",
+            64.190922,
+            -51.678064,
+            283,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            6436,
+            "Akureyri",
+            "Akureyri",
+            "Iceland",
+            "AEY",
+            "BIAR",
+            65.659994,
+            -18.072703,
+            6,
+            0,
+            "N",
+            "Atlantic/Reykjavik"));
+
     storage.setData(providedAirports, "Airport");
-    Route testRouteLessEmissions = new Route("2H", 1654, "IKT", 2937, "KPK", 8944, "", 0, "AN4".split(" "));
-    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
-    Route testRouteMoreEmissions = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 4, "AN4".split(" "));
+    Route testRouteMoreEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    FlightAnalyser flightAnalyser =
+        new FlightAnalyser(testRouteLessEmissions, testRouteMoreEmissions, storage);
+    testRouteMoreEmissions.setEmissions(flightAnalyser.getPath2Emission()); // 12600 km
+    testRouteLessEmissions.setEmissions(flightAnalyser.getPath1Emission()); // 163 km
     expectedResults.add(testRouteMoreEmissions);
-    FlightAnalyser flightAnalyser = new FlightAnalyser(testRouteLessEmissions, testRouteMoreEmissions, storage);
     reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
     assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
   }
 
-  // --------------------------------- Testing for updateLeastEmissionsRoute ---------------------------------
+  // --------------------------------- Testing for updateLeastEmissionsRoute
+  // ---------------------------------
 
   /**
-   * Verify that when updateLeastEmissionsRoute is called with a route and there are no routes in the
-   * history, then the route with the least emissions is the route that was added.
+   * Verify that when updateLeastEmissionsRoute is called with a route and there are no routes in
+   * the history, then the route with the least emissions is the route that was added.
    */
   @Test
   public void updateLeastEmissionsRouteFirstEntryTest() {
@@ -291,7 +357,8 @@ public class ReportGeneratorTest {
     assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
   }
 
-  // --------------------------------- Testing for updateMostDistanceRoute ---------------------------------
+  // --------------------------------- Testing for updateMostDistanceRoute
+  // ---------------------------------
 
   /**
    * Verify that when updateMostDistanceRoute is called with a route and there are no routes in the
@@ -306,7 +373,8 @@ public class ReportGeneratorTest {
     assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
   }
 
-  // --------------------------------- Testing for updateLeastDistanceRoute ---------------------------------
+  // --------------------------------- Testing for updateLeastDistanceRoute
+  // ---------------------------------
 
   /**
    * Verify that when updateLeastDistanceRoute is called with a route and there are no routes in the

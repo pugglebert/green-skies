@@ -1,8 +1,6 @@
 package model.data;
 
-import javafx.fxml.Initializable;
 import model.database.SQLiteDatabase;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +8,8 @@ import java.util.List;
 
 /**
  * Class to keep track of all the data currently open files, also interact with database.
- * @author Ella Johnson, Lambert
- * @since 13/09/2020
+ * @author Ella Johnson, Lambert, Hayley Krippner
+ * @since 15/09/2020
  * @version 1.3
  */
 public class Storage {
@@ -123,8 +121,8 @@ public class Storage {
 
     /**
      * This method updates the count of source aiport visits in the flight history.
-     * @param airportName
-     * @param counter
+     * @param airportName , the name of the source airport of the route being added to history.
+     * @param counter , the number of times the route needs to be added to history.
      */
     public void addToHistorySrcAirports(String airportName, int counter) {
         if (historySrcAirports.containsKey(airportName)) {
@@ -134,10 +132,19 @@ public class Storage {
         }
     }
 
+    /**
+     * This method gets the historySrcAirports.
+     * @return
+     */
     public HashMap<String, Integer> getHistorySrcAirports() {
         return historySrcAirports;
     }
 
+    /**
+     * This method updates the count of destination aiport visits in the flight history.
+     * @param airportName , the name of the destination airport of the route being added to history.
+     * @param counter , the number of times the route needs to be added to history.
+     */
     public void addToHistoryDestAirports(String airportName, int counter) {
         if (historyDestAirports.containsKey(airportName)) {
             historyDestAirports.put(airportName, historyDestAirports.get(airportName) + 1);
@@ -146,6 +153,10 @@ public class Storage {
         }
     }
 
+    /**
+     * This method gets the historyDestAirports.
+     * @return
+     */
     public HashMap<String, Integer> getHistoryDestAirports() {
         return historyDestAirports;
     }
