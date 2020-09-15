@@ -1,5 +1,6 @@
 package controller.main;
 
+import controller.analysis.FlightAnalyser;
 import controller.analysis.ReportGenerator;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
  * The controller class which contains the controls for the route data view.
  * @author Hayley Krippner
  * @version 1.0
- * @since 2020-08-26
+ * @since 15/09/2020
  */
 public class RouteDataViewController extends DataViewController {
 
@@ -101,6 +102,9 @@ public class RouteDataViewController extends DataViewController {
         for (Route route : Main.getStorage().getRoutes()) {
           if (route.getSelect().isSelected()) {
             temp.add(route);
+              //FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
+            route.setEmissions(flightAnalyser.getpath1emission(route));
+            route.setDistance(flightAnalyser.gettotalemissionpath1 (route));
             reportGenerator.updateTotalDistance(route);
             reportGenerator.updateTotalEmissions(route);
             //reportGenerator.updateLeastDistanceRoute(route);

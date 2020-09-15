@@ -244,11 +244,11 @@ public class ReportGenerator {
         return totalCarbonEmissions;
     }
 
-    public ArrayList<Route> getMostEmissionsRoute() {
+    public ArrayList<Route> getMostEmissionsRoutes() {
         return mostEmissionsRoutes;
     }
 
-    public ArrayList<Route> getLeastEmissionsRoute() {
+    public ArrayList<Route> getLeastEmissionsRoutes() {
         return leastEmissionsRoutes;
     }
 
