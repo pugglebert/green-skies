@@ -1,54 +1,35 @@
 
-Y	java:S125Å"<This block of commented-out lines of code should be removed.(Ğ½áª8‘ªÀÆÁ.
-p	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
-]	java:S125R"<This block of commented-out lines of code should be removed.(òä•üÿÿÿÿ8¥å×”Ä.
-C
-java:S1170"!Make this final field static too.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
-G
-java:S1659"%Declare "country" on a separate line.(«Ğ±­ÿÿÿÿÿ8‘ªÀÆÁ.
-C
-java:S1170"!Make this final field static too.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
-^	java:S125 "<This block of commented-out lines of code should be removed.(´í®ûÿÿÿÿ8¥å×”Ä.
-Y	java:S125É"<This block of commented-out lines of code should be removed.(Î±¢³8‘ªÀÆÁ.
-?
-java:S1659""Declare "name" on a separate line.(˜ˆªÎ8‘ªÀÆÁ.
+s	java:S117Œ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡óŸúûÿÿÿÿ8‘ªÀÆÁ.
 C
 java:S1170"!Make this final field static too.(Æé¤İÿÿÿÿÿ8¥å×”Ä.
-]	java:S125
-"<This block of commented-out lines of code should be removed.(Šåùùÿÿÿÿ8¨§ÄÇÁ.
-^	java:S125´"<This block of commented-out lines of code should be removed.(¥†«ªüÿÿÿÿ8¥å×”Ä.
-]	java:S1251"<This block of commented-out lines of code should be removed.(Ğ´û«úÿÿÿÿ8¥å×”Ä.
-]	java:S125F"<This block of commented-out lines of code should be removed.(‹Ç—Ğùÿÿÿÿ8¥å×”Ä.
-^	java:S125¯"<This block of commented-out lines of code should be removed.(ÃÓÉ±üÿÿÿÿ8¥å×”Ä.
-p	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
->
-java:S1170"!Make this final field static too.(˜ˆªÎ8¥å×”Ä.
-^	java:S125Í"<This block of commented-out lines of code should be removed.(Ğµàğùÿÿÿÿ8¥å×”Ä.
-^	java:S125ª"<This block of commented-out lines of code should be removed.(¯ãÇûøÿÿÿÿ8¥å×”Ä.
-D
-java:S1659""Declare "ICAO" on a separate line.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
-s	java:S117û"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬¨ãÄşÿÿÿÿ8‘ªÀÆÁ.
-D
-java:S1659""Declare "IATA" on a separate line.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
-s	java:S117Œ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡óŸúûÿÿÿÿ8‘ªÀÆÁ.
-L
-java:S1659"*Declare "activeStatus" on a separate line.(ƒ÷éºøÿÿÿÿ8‘ªÀÆÁ.
-H
-java:S1659"&Declare "callsign" on a separate line.(èáÿÿÿÿÿ8‘ªÀÆÁ.
-Y	java:S125¥"<This block of commented-out lines of code should be removed.(ÁÌÑÇ8¥å×”Ä.
-C
-java:S1170"!Make this final field static too.(èáÿÿÿÿÿ8‘ªÀÆÁ.
-T
-java:S1135"2Complete the task associated to this TODO comment.(ë°æ»øÿÿÿÿ8¥å×”Ä.
 C
 java:S1170"!Make this final field static too.(«Ğ±­ÿÿÿÿÿ8‘ªÀÆÁ.
-]	java:S1254"<This block of commented-out lines of code should be removed.(Ğ´û«úÿÿÿÿ8¥å×”Ä.
-^	java:S125‘"<This block of commented-out lines of code should be removed.(°ÀÏ²úÿÿÿÿ8¥å×”Ä.
-Y	java:S125–"<This block of commented-out lines of code should be removed.(„¶À8¥å×”Ä.
-@
-java:S1659"#Declare "alias" on a separate line.(‚Ó•Î8‘ªÀÆÁ.
-Y	java:S125›"<This block of commented-out lines of code should be removed.(ÿ¦ó¦8¥å×”Ä.
-C
-java:S1170"!Make this final field static too.(ƒ÷éºøÿÿÿÿ8‘ªÀÆÁ.
+G
+java:S1659"%Declare "country" on a separate line.(«Ğ±­ÿÿÿÿÿ8‘ªÀÆÁ.
+p	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
 >
 java:S1170"!Make this final field static too.(‚Ó•Î8‘ªÀÆÁ.
+D
+java:S1659""Declare "IATA" on a separate line.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
+@
+java:S1659"#Declare "alias" on a separate line.(‚Ó•Î8‘ªÀÆÁ.
+D
+java:S1659""Declare "ICAO" on a separate line.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+H
+java:S1659"&Declare "callsign" on a separate line.(èáÿÿÿÿÿ8‘ªÀÆÁ.
+s	java:S117û"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬¨ãÄşÿÿÿÿ8‘ªÀÆÁ.
+L
+java:S1659"*Declare "activeStatus" on a separate line.(ƒ÷éºøÿÿÿÿ8‘ªÀÆÁ.
+?
+java:S1659""Declare "name" on a separate line.(˜ˆªÎ8‘ªÀÆÁ.
+p	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+C
+java:S1170"!Make this final field static too.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
+C
+java:S1170"!Make this final field static too.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+>
+java:S1170"!Make this final field static too.(˜ˆªÎ8¥å×”Ä.
+C
+java:S1170"!Make this final field static too.(èáÿÿÿÿÿ8‘ªÀÆÁ.
+C
+java:S1170"!Make this final field static too.(ƒ÷éºøÿÿÿÿ8‘ªÀÆÁ.

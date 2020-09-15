@@ -102,9 +102,9 @@ public class RouteDataViewController extends DataViewController {
         for (Route route : Main.getStorage().getRoutes()) {
           if (route.getSelect().isSelected()) {
             temp.add(route);
-              //FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
-            route.setEmissions(flightAnalyser.getpath1emission(route));
-            route.setDistance(flightAnalyser.gettotalemissionpath1 (route));
+            FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
+            route.setEmissions(flightAnalyser.getPath1Emission());
+            route.setDistance(flightAnalyser.getTotalDistancePath1());
             reportGenerator.updateTotalDistance(route);
             reportGenerator.updateTotalEmissions(route);
             //reportGenerator.updateLeastDistanceRoute(route);

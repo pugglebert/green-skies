@@ -12,219 +12,267 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The FlightAnalyser class which calculate two paths' carbon emission, total distance of the path, and comparison of two
- * paths' distance and emission.
- * @author HeZhengJingRui  and  Enyang Zhang
+ * The FlightAnalyser class which calculate two paths' carbon emission, total distance of the path,
+ * and comparison of two paths' distance and emission.
+ *
+ * @author HeZhengJingRui and Enyang Zhang
  * @version 1.2
  * @since 2020-08-24
  */
 public class FlightAnalyser {
 
-    private final double radius = 6371e3;   //radius of earth;
+  private final double radius = 6371e3; // radius of earth;
 
-    private double distance;   //must use in KM
+  private double distance; // must use in KM
 
-    private double FuelUsed;
+  private double FuelUsed;
 
-    private final int seatsOccupancy = 333;   //number of passengers;
+  private final int seatsOccupancy = 333; // number of passengers;
 
-    private final double Co2OfOneGramFuel = 3.15;  //in gram
+  private final double Co2OfOneGramFuel = 3.15; // in gram
 
-    private final int CruisingSpeed = 910;   //km per hour
+  private final int CruisingSpeed = 910; // km per hour
 
-    private Route route1;
+  private Route route1;
 
-    private Route route2;
+  private Route route2;
 
-    private ArrayList<String> path1 = new ArrayList<String>();
+  private ArrayList<String> path1 = new ArrayList<String>();
 
-    private ArrayList<String> path2 = new ArrayList<String>();
+  private ArrayList<String> path2 = new ArrayList<String>();
 
-    private List<Airport> airports = new ArrayList<Airport>();
+  private List<Airport> airports = new ArrayList<Airport>();
 
-    private ArrayList<ArrayList<Double>> path1Coords = new ArrayList<>();
+  private ArrayList<ArrayList<Double>> path1Coords = new ArrayList<>();
 
-    private ArrayList<ArrayList<Double>> path2Coords = new ArrayList<>();
+  private ArrayList<ArrayList<Double>> path2Coords = new ArrayList<>();
 
-    private double totalDistancePath1 = 0;
+  private double totalDistancePath1 = 0;
 
-    private double totalDistancePath2 = 0;
+  private double totalDistancePath2 = 0;
 
-    private double totalEmissionPath1 = 0;
+  private double totalEmissionPath1 = 0;
 
-    private double totalEmissionPath2 = 0;
-    // TODO: 1/09/2020 add checking route validation
-    /**
-     * Constructor of FlightAnalyser which starts processing and calculation.
-     * @param route1 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path1.
-     * @param route2 An arraylist contains IATA or ICAO code for each airport which the flight may pass for path2.
-     * @param storage Storage contains all information about airports, routes, and airlines.
-     */
-    public FlightAnalyser(Route route1, Route route2, Storage storage) {
-        this.route1 = route1;
-        this.route2 = route2;
-        this.path1.add(route1.getSourceAirport());
-        this.path1.add(route1.getDestinationAirport());
-        this.path2.add(route2.getSourceAirport());
-        this.path2.add(route2.getDestinationAirport());
+  private double totalEmissionPath2 = 0;
+  // TODO: 1/09/2020 add checking route validation
+  /**
+   * Constructor of FlightAnalyser which starts processing and calculation.
+   *
+   * @param route1 An arraylist contains IATA or ICAO code for each airport which the flight may
+   *     pass for path1.
+   * @param route2 An arraylist contains IATA or ICAO code for each airport which the flight may
+   *     pass for path2.
+   * @param storage Storage contains all information about airports, routes, and airlines.
+   */
+  public FlightAnalyser(Route route1, Route route2, Storage storage) {
+    this.route1 = route1;
+    this.route2 = route2;
+    this.path1.add(route1.getSourceAirport());
+    this.path1.add(route1.getDestinationAirport());
+    this.path2.add(route2.getSourceAirport());
+    this.path2.add(route2.getDestinationAirport());
 
-        this.airports = storage.getAirports();
-        processsPath();
-        calculateTotalDistance();
-        calculatePathsEmission();
-    }
+    this.airports = storage.getAirports();
+    processsPath();
+    calculateTotalDistance();
+    calculatePathsEmission();
+  }
 
-    /**
-     * Process two arraylist path1 and path2, loop through the airports data and put coordinates of each airport which
-     * is contained in the path into arraylist path1coords and path2coords.
-     */
-    private void processsPath(){
-        for(String airportCode: path1){
-            for(Airport airport: airports){
-                if(airport.getIATA().equals(airportCode)){
-                    ArrayList<Double> coord = new ArrayList<>();
-                    coord.add(airport.getLatitude());
-                    coord.add(airport.getLongitude());
-                    path1Coords.add(coord);
-                }
-            }
+  public FlightAnalyser(Route route1, Storage storage){
+    this.route1 = route1;
+    this.airports = storage.getAirports();
+    this.path1.add(route1.getSourceAirport());
+    this.path1.add(route1.getDestinationAirport());
+    processsPathSingle();
+    calculateTotalDistanceSingle();
+    calculatePathsEmissionSingle();
+  }
+
+  private void processsPathSingle(){
+    for (String airportCode : path1) {
+      for (Airport airport : airports) {
+        if (airport.getIATA().equals(airportCode)) {
+          ArrayList<Double> coord = new ArrayList<>();
+          coord.add(airport.getLatitude());
+          coord.add(airport.getLongitude());
+          path1Coords.add(coord);
         }
-        for(String airportCode: path2){
-            for(Airport airport: airports){
-                if(airport.getIATA().equals(airportCode)){
-                    ArrayList<Double> coord = new ArrayList<>();
-                    coord.add(airport.getLatitude());
-                    coord.add(airport.getLongitude());
-                    path2Coords.add(coord);
-                }
-            }
+      }
+    }
+  }
+
+  private void calculateTotalDistanceSingle() {
+    for (int i = 0; i < path1Coords.size() - 1; i++) {
+      double airport1lat = path1Coords.get(i).get(0); // lat
+      double airport1lon = path1Coords.get(i).get(1);
+      double airport2lat = path1Coords.get(i + 1).get(0); // lat
+      double airport2lon = path1Coords.get(i + 1).get(1);
+      totalDistancePath1 += calculateDistance(airport1lat, airport1lon, airport2lat, airport2lon);
+    }
+  }
+
+
+
+  /**
+   * Process two arraylist path1 and path2, loop through the airports data and put coordinates of
+   * each airport which is contained in the path into arraylist path1coords and path2coords.
+   */
+  private void processsPath() {
+    for (String airportCode : path1) {
+      for (Airport airport : airports) {
+        if (airport.getIATA().equals(airportCode)) {
+          ArrayList<Double> coord = new ArrayList<>();
+          coord.add(airport.getLatitude());
+          coord.add(airport.getLongitude());
+          path1Coords.add(coord);
         }
+      }
     }
-
-    /**
-     * Calculate totalDistance of path1 and path2.
-     */
-    private void calculateTotalDistance(){
-        for (int i = 0; i < path1Coords.size()-1;i++) {
-            double airport1lat = path1Coords.get(i).get(0); //lat
-            double airport1lon = path1Coords.get(i).get(1);
-            double airport2lat = path1Coords.get(i+1).get(0); //lat
-            double airport2lon = path1Coords.get(i+1).get(1);
-            totalDistancePath1 += calculatedistance(airport1lat, airport1lon, airport2lat, airport2lon);
+    for (String airportCode : path2) {
+      for (Airport airport : airports) {
+        if (airport.getIATA().equals(airportCode)) {
+          ArrayList<Double> coord = new ArrayList<>();
+          coord.add(airport.getLatitude());
+          coord.add(airport.getLongitude());
+          path2Coords.add(coord);
         }
+      }
+    }
+  }
 
-        for (int i = 0; i < path2Coords.size()-1;i++) {
-            double airport1lat = path2Coords.get(i).get(0); //lat
-            double airport1lon = path2Coords.get(i).get(1);
-            double airport2lat = path2Coords.get(i+1).get(0); //lat
-            double airport2lon = path2Coords.get(i+1).get(1);
-            totalDistancePath2 += calculatedistance(airport1lat, airport1lon, airport2lat, airport2lon);
-        }
+  private void calculatePathsEmissionSingle() {
+    this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
+  }
+
+
+  /** Calculate totalDistance of path1 and path2. */
+  private void calculateTotalDistance() {
+    for (int i = 0; i < path1Coords.size() - 1; i++) {
+      double airport1lat = path1Coords.get(i).get(0); // lat
+      double airport1lon = path1Coords.get(i).get(1);
+      double airport2lat = path1Coords.get(i + 1).get(0); // lat
+      double airport2lon = path1Coords.get(i + 1).get(1);
+      totalDistancePath1 += calculateDistance(airport1lat, airport1lon, airport2lat, airport2lon);
     }
 
-    /**
-     * Calculate distance between two airports.
-     * @param Lati1 Latitude of the airport in path1.
-     * @param Long1 longitude of the airport in path1.
-     * @param Lati2 Latitude of the airport in path1.
-     * @param Long2 longitude of the airport in path1.
-     * @return returns distance between two airports in kilometres.
-     */
-    private double calculatedistance(double Lati1, double Long1, double Lati2, double Long2) {
-        double φ1 = Lati1*Math.PI/180;
-        double φ2 = Lati2*Math.PI/180;
-        double Δφ = (Lati2-Lati1)*Math.PI/180;
-        double Δλ = (Long2-Long1)*Math.PI/180;
-
-        double a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
-
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-        double distance = radius * c;
-
-        return distance/1000;   //distance in kilometers
+    for (int i = 0; i < path2Coords.size() - 1; i++) {
+      double airport1lat = path2Coords.get(i).get(0); // lat
+      double airport1lon = path2Coords.get(i).get(1);
+      double airport2lat = path2Coords.get(i + 1).get(0); // lat
+      double airport2lon = path2Coords.get(i + 1).get(1);
+      totalDistancePath2 += calculateDistance(airport1lat, airport1lon, airport2lat, airport2lon);
     }
+  }
 
-    /**
-     * start calculate two paths' total carbon emission.
-     */
-    private void calculatePathsEmission(){
-        this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
-        this.totalEmissionPath2 = calculateCarbonEmission(totalDistancePath2);
-    }
+  /**
+   * Calculate distance between two airports.
+   *
+   * @param Lati1 Latitude of the airport in path1.
+   * @param Long1 longitude of the airport in path1.
+   * @param Lati2 Latitude of the airport in path1.
+   * @param Long2 longitude of the airport in path1.
+   * @return returns distance between two airports in kilometres.
+   */
+  public double calculateDistance(double Lati1, double Long1, double Lati2, double Long2) {
+    double φ1 = Lati1 * Math.PI / 180;
+    double φ2 = Lati2 * Math.PI / 180;
+    double Δφ = (Lati2 - Lati1) * Math.PI / 180;
+    double Δλ = (Long2 - Long1) * Math.PI / 180;
 
-    /**
-     * Calculate carbon emission between two airports.
-     * @param distance distance between two airports.
-     * @return carbon emission in kilograms.
-     */
-    private double calculateCarbonEmission(double distance) {
-        FuelUsed = distance * 12 / 1250  ;//fuel in tonns
+    double a =
+            Math.sin(Δφ / 2) * Math.sin(Δφ / 2)
+                    + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
 
-        double FuelPerPassenger = (FuelUsed / (distance*seatsOccupancy))*1000000;   //fuel use per passenger per km
+    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        double Co2PerPassengerPerKm = FuelPerPassenger*Co2OfOneGramFuel;  //co2 emissions per passenger km in gram
+    double distance = radius * c;
 
-        double Co2Hour = (Co2PerPassengerPerKm*CruisingSpeed)/1000;   //how much Co2 genate per hour in kg
+    return distance / 1000; // distance in kilometers
+  }
 
-        double flytime = distance / CruisingSpeed;  // in hour
+  /** start calculate two paths' total carbon emission. */
+  private void calculatePathsEmission() {
+    this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
+    this.totalEmissionPath2 = calculateCarbonEmission(totalDistancePath2);
+  }
 
-        double finalCo2 =  flytime*Co2Hour;
+  /**
+   * Calculate carbon emission between two airports.
+   *
+   * @param distance distance between two airports.
+   * @return carbon emission in kilograms.
+   */
+  private double calculateCarbonEmission(double distance) {
+    FuelUsed = distance * 12 / 1250; // fuel in tonns
 
-        return finalCo2;  // in kg
-    }
-    // TODO: 29/08/20 comfirm what need to do with compare distance and compare emission.
+    double FuelPerPassenger =
+            (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
 
-    /**
-     * Compare distance between two paths by getting absolute number of their difference.
-     * @return difference of two distances.
-     */
-    public double compareDistance() {
-        return Math.abs(totalDistancePath1-totalDistancePath2);
-    }
+    double Co2PerPassengerPerKm =
+            FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
 
-    /**
-     * Compare emission between two paths by getting absolute number of their difference.
-     * @return difference of two emissions.
-     */
-    public double compareEmission() {
-        return Math.abs(totalEmissionPath1-totalEmissionPath2);
-    }
+    double Co2Hour =
+            (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
 
-    /**
-     * Getter for path1 emission.
-     * @return Total emission of path1.
-     */
-    public double getPath1Emission(){
-        return totalEmissionPath1;
-    }
+    double flytime = distance / CruisingSpeed; // in hour
 
-    /**
-     * getter for path2 emissions.
-     * @return Total mission of path2.
-     */
-    public double getPath2Emission(){
-        return totalEmissionPath2;
-    }
+    double finalCo2 = flytime * Co2Hour;
 
-    /**
-     * Getter for path1 distance.
-     * @return Total distance of path1.
-     */
-    public double getTotalDistancePath1(){
-        return totalDistancePath1;
-    }
+    return finalCo2; // in kg
+  }
+  // TODO: 29/08/20 comfirm what need to do with compare distance and compare emission.
 
-    /**
-     * Getter for path2 distance.
-     * @return Total distance of path2.
-     */
-    public double getTotalDistancePath2(){
-        return totalDistancePath2;
-    }
+  /**
+   * Compare distance between two paths by getting absolute number of their difference.
+   *
+   * @return difference of two distances.
+   */
+  public double compareDistance() {
+    return Math.abs(totalDistancePath1 - totalDistancePath2);
+  }
 
+  /**
+   * Compare emission between two paths by getting absolute number of their difference.
+   *
+   * @return difference of two emissions.
+   */
+  public double compareEmission() {
+    return Math.abs(totalEmissionPath1 - totalEmissionPath2);
+  }
 
+  /**
+   * Getter for path1 emission.
+   *
+   * @return Total emission of path1.
+   */
+  public double getPath1Emission() {
+    return totalEmissionPath1;
+  }
 
+  /**
+   * getter for path2 emissions.
+   *
+   * @return Total mission of path2.
+   */
+  public double getPath2Emission() {
+    return totalEmissionPath2;
+  }
 
+  /**
+   * Getter for path1 distance.
+   *
+   * @return Total distance of path1.
+   */
+  public double getTotalDistancePath1() {
+    return totalDistancePath1;
+  }
 
+  /**
+   * Getter for path2 distance.
+   *
+   * @return Total distance of path2.
+   */
+  public double getTotalDistancePath2() {
+    return totalDistancePath2;
+  }
 }

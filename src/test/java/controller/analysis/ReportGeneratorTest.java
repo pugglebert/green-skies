@@ -254,6 +254,7 @@ public class ReportGeneratorTest {
     ArrayList<Route> expectedResults = new ArrayList<>();
     Route testRoute = new Route("2H",1654,"IKT",2937,"ODO",
             8944,"",0,"AN4".split(" "));
+    expectedResults.add(testRoute);
     reportGenerator.updateMostEmissionsRoute(testRoute);
     assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
     }
