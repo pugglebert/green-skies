@@ -88,6 +88,7 @@ public class Storage {
       throws SQLException, ClassNotFoundException {
 
     if (type.matches("Airline")) {
+      airlines = new ArrayList<Airline>();
       //            database.dropTable("airlines");
       //            database.closeAutoCommite();
       for (DataType entry : data) {
@@ -99,6 +100,7 @@ public class Storage {
       }
       //            database.startCommite();
     } else if (type.matches("Airport")) {
+      airports = new ArrayList<Airport>();
       //            database.dropTable("airports");
       //            database.closeAutoCommite();
       for (DataType entry : data) {
@@ -109,6 +111,7 @@ public class Storage {
       }
       //            database.startCommite();
     } else if (type.matches("Route")) {
+      routes = new ArrayList<Route>();
       //            database.dropTable("routes");
       //            database.closeAutoCommite();
       for (DataType entry : data) {

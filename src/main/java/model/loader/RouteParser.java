@@ -1,8 +1,10 @@
 package model.loader;
 
+import model.data.DataType;
 import model.data.Route;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to process route data which has been extracted from a file by Loader class.
@@ -29,8 +31,11 @@ public class RouteParser extends Parser {
      * Initializes error collection and calls dataParser method to begin processing data.
      * @param dataFile ArrayList of a string for each line in the file.
      */
-    public RouteParser(ArrayList<String> dataFile) {
+    public RouteParser(ArrayList<String> dataFile, List<Route> existingRoutes) {
         super(dataFile, 11);
+        for (Route route : existingRoutes) {
+            addRoute(route);
+        }
         try {
             dataParser();
         } catch (RuntimeException e) {
@@ -243,12 +248,22 @@ public class RouteParser extends Parser {
         return true;
     }
 
-//    /**
-//     * Returns the set of Route objects created from the data file
-//     * @return Hashset of Route objects
-//     */
-//    public Set<DataType> getData() {
-//        return parserData;
-//    }
+    /**
+     * Checks for duplicates in data. If there are no duplicates, addes route to data.
+     * @param route
+     */
+    private void addRoute(Route route) {
+        boolean inData = false;
+        for (DataType data : parserData) {
+            Route existingRoute = (Route) data;
+            if (existingRoute.equals(route)) {
+                inData = true;
+                break;
+            }
+        }
+        if (!inData) {
+            parserData.add(route);
+        }
+    }
 
 }

@@ -18,9 +18,11 @@ public class AirlineParser extends Parser {
       country = 6,
       activeStatus = 7;
 
-
-  public AirlineParser(List<String> dataFile) {
+  public AirlineParser(List<String> dataFile, List<Airline> existingAirlines) {
     super(dataFile, 12);
+    for (Airline airline : existingAirlines) {
+      addAirLine(airline.getAirlineID(), airline);
+    }
     dataParser();
   }
 

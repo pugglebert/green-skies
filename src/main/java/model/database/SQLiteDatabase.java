@@ -227,7 +227,7 @@ public class SQLiteDatabase {
                 int numOfStops = routesRow.getInt("numOfStops");
 
                 String equipment = routesRow.getString("equipment");
-                System.out.println(equipment);
+//                System.out.println(equipment);
                 String[] equipmentArray;
                 if(equipment != null) {
                     equipmentArray = equipment.split(" ");

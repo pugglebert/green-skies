@@ -1,12 +1,10 @@
 package model.loader;
 
+import model.data.Airline;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +25,8 @@ public class ParserTest {
         testLines.add("1729,\"Changan Airlines\",\\N,\"2Z\",\"CGN\",\"CHANGAN\",\"China\",\"N\"");
         testLines.add("1667,\"Caribintair\",\\N,\"\",\"CRT\",\"CARIBINTAIR\",\"Haiti\",\"N\"");
         testLines.add("19806,\"All Africa\",\"All Africa\",\"9A\",\"99F\",\"\",\"South Africa\",\"Y\"");
-        airlineParser = new AirlineParser(testLines);
+        List<Airline> existingLines = new ArrayList<Airline>();
+        airlineParser = new AirlineParser(testLines, existingLines);
     }
 
     /**

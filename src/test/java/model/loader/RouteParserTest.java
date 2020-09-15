@@ -16,14 +16,16 @@ public class RouteParserTest {
 
     private RouteParser routeParser;
     private ArrayList<String> lines;
+    private ArrayList<Route> existingLines;
 
     @Before
     public void setup() {
         Loader loader = new Loader(new Storage());
+        existingLines = new ArrayList<Route>();
         try {
 
             lines = loader.openFile("../seng202_project/src/test/java/TestFiles/routesTest.csv");
-            routeParser = new RouteParser(lines);
+            routeParser = new RouteParser(lines, existingLines);
         } catch (FileNotFoundException e) {
             fail();
         }
@@ -255,7 +257,7 @@ public class RouteParserTest {
     /*Verify that when parseLine is called with a valid route, that route is added to routes */
     public void parseRouteValidLineTest() {
         ArrayList<String> testLines = new ArrayList<String>();
-        RouteParser testParser = new RouteParser(testLines);
+        RouteParser testParser = new RouteParser(testLines, existingLines);
         testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
         Route expectedRoute = new Route("2B",410,"AER",2965,"KZN",
                 2990,"",0, "CR2".split(","));
@@ -268,7 +270,7 @@ public class RouteParserTest {
     /*Verify that when parseLine is called with a valid route, that error counter is not updated */
     public void parseRouteValidLineErrorTest() {
         ArrayList<String> testLines = new ArrayList<String>();
-        RouteParser testParser = new RouteParser(testLines);
+        RouteParser testParser = new RouteParser(testLines, existingLines);
         testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
         assertEquals("File uploaded with 0 invalid lines rejected\n", testParser.getErrorMessage());
     }
@@ -279,7 +281,7 @@ public class RouteParserTest {
     @Test
     public void parseRouteInvalidLineTest() {
         ArrayList<String> testLines = new ArrayList<String>();
-        RouteParser testParser = new RouteParser(testLines);
+        RouteParser testParser = new RouteParser(testLines, existingLines);
         testParser.parseLine("2B,410A,AER,2965,KZN,2990,,0,CR2");
         assertArrayEquals(new DataType[0], testParser.getData().toArray());
     }
@@ -290,7 +292,7 @@ public class RouteParserTest {
     @Test
     public void parseRouteInvalidLineErrorTest() {
         ArrayList<String> testLines = new ArrayList<String>();
-        RouteParser testParser = new RouteParser(testLines);
+        RouteParser testParser = new RouteParser(testLines, existingLines);
         testParser.parseLine("2B,410A,AER,2965,KZN,2990,,0,CR2");
         assertEquals("File uploaded with 1 invalid lines rejected\n" +
                 "Error [2] Invalid airline ID: 1 occurances\n", testParser.getErrorMessage());
