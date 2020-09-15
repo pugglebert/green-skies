@@ -98,7 +98,7 @@ public class RouteDataViewController extends DataViewController {
      * most distance , least emissions , most emissions , least travelled  and most travelled route are updated.
      */
     public void addDataToHistory() {
-        List<Route> temp = new ArrayList<Route>();
+        List<Route> temp = new ArrayList<>();
         for (Route route : Main.getStorage().getRoutes()) {
           if (route.getSelect().isSelected()) {
             temp.add(route);

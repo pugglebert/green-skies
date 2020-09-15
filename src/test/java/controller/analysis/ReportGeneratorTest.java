@@ -1,15 +1,15 @@
 package controller.analysis;
 
-import model.data.Airport;
-import model.data.Route;
-import model.data.Storage;
+import model.data.*;
 import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -258,20 +258,23 @@ public class ReportGeneratorTest {
     assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
   }
 
-//  /**
-//   * Verify that when updateMostEmissionsRoute is called with a route and is has more emissions than the current most
-//   * emissions route, then the most emissions route in the history is updated to this route.
-//   */
-//  @Test
-//  public void updateMostEmissionsRouteMoreEmissionsEntryTest() {
-//    ArrayList<Route> expectedResults = new ArrayList<>();
-//    Route testRouteLessEmissions = new Route("2H", 1654, "IKT", 2937, "KPK", 8944, "", 0, "AN4".split(" "));
-//    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
-//    Route testRouteMoreEmissions = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 4, "AN4".split(" "));
-//    expectedResults.add(testRouteMoreEmissions);
-//    reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
-//    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
-//  }
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route and is has more emissions than the current most
+   * emissions route, then the most emissions route in the history is updated to this route.
+   */
+  @Test
+  public void updateMostEmissionsRouteMoreEmissionsEntryTest() throws SQLException, ClassNotFoundException {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    List<DataType> providedAirports = new ArrayList<>();
+    storage.setData(providedAirports, "Airport");
+    Route testRouteLessEmissions = new Route("2H", 1654, "IKT", 2937, "KPK", 8944, "", 0, "AN4".split(" "));
+    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
+    Route testRouteMoreEmissions = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 4, "AN4".split(" "));
+    expectedResults.add(testRouteMoreEmissions);
+    FlightAnalyser flightAnalyser = new FlightAnalyser(testRouteLessEmissions, testRouteMoreEmissions, storage);
+    reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
+    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
+  }
 
   // --------------------------------- Testing for updateLeastEmissionsRoute ---------------------------------
 
