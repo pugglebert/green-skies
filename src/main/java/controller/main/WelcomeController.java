@@ -1,5 +1,6 @@
 package controller.main;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -39,5 +40,7 @@ public class WelcomeController {
         window.show(); // time for performing
 
     }
+
+
 
 }
