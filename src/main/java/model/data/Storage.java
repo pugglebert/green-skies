@@ -40,8 +40,6 @@ public class Storage {
     return routes;
   }
 
-  /** @return a list of Route object from the currently open file cast as Datatype objects. */
-
   /** @return a list of routes in the user's history. */
   public List<Route> getHistory() {
     return history;

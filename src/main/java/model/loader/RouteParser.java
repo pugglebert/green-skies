@@ -94,7 +94,7 @@ public class RouteParser extends Parser {
                                 line[codeshare],
                                 Integer.parseInt(line[stops]),
                                 line[equipment].split(" "));
-                parserData.add(route);
+                addRoute(route);
             } catch (Exception e) {
                 errorCounter(10);
             }
