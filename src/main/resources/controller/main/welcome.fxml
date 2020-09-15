@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="888.0" fitWidth="1478.0" layoutX="-11.0" layoutY="-53.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../images/unnamed.jpg" />
+            <Image url="@resources/images/unnamed.jpg" />
          </image>
       </ImageView>
       <Text layoutX="414.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Green Skies">

@@ -370,7 +370,6 @@ public class AirportParser extends Parser {
         if (!DBTZ.equalsIgnoreCase("\\N")) {
             if(!DBTZ.matches("[a-zA-Z-/a-zA-Z-_]+")){
                 errorCounter(13);
-                System.out.println(DBTZ);
                 return false;
             }
         }

@@ -1,16 +1,28 @@
 
-{
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÏÖµüÿÿÿÿÿ8å´¯…É.
-“
-java:S1319C"qThe type of the "routes" object should be an interface such as "List" rather than the implementation "ArrayList".(ƒÉãœşÿÿÿÿ8”‚­­È.
+Š
+java:S1319‰"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(»ƒ¤8™Ğ‹É.
+Š
+java:S1319•"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¨›ØD8™Ğ‹É.
 ƒ
-java:S1104"aMake analyseEmissionResult a static final constant or non-public and provide accessors if needed.(æÕÇÁøÿÿÿÿ8å´¯…É.
-J	java:S108`")Either remove or fill this block of code.(Ò»±œúÿÿÿÿ8©¾ÜÍÈ.
+java:S1104"aMake analyseDistanceResult a static final constant or non-public and provide accessors if needed.(ÏÖµüÿÿÿÿÿ8™Ğ‹É.
+ƒ
+java:S1104"aMake analyseEmissionResult a static final constant or non-public and provide accessors if needed.(æÕÇÁøÿÿÿÿ8™Ğ‹É.
 u
-java:S1104"SMake history a static final constant or non-public and provide accessors if needed.(¶±ÿÿÿÿÿ8­âäşÇ.
-n
-java:S3776L"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(İêİ8©¾ÜÍÈ.
-ƒ
-java:S1104"aMake analyseDistanceResult a static final constant or non-public and provide accessors if needed.(ÏÖµüÿÿÿÿÿ8å´¯…É.
+java:S1104"SMake history a static final constant or non-public and provide accessors if needed.(¶±ÿÿÿÿÿ8™Ğ‹É.
+S
+java:S1128"6Remove this unused import 'javafx.fxml.Initializable'.(™ÎùÆ8™Ğ‹É.
 {
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(æÕÇÁøÿÿÿÿ8å´¯…É.
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÏÖµüÿÿÿÿÿ8™Ğ‹É.
+{
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(æÕÇÁøÿÿÿÿ8™Ğ‹É.
+n
+java:S3776Q"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(İêİ8™Ğ‹É.
+Š
+java:S1130Q"nRemove the declaration of thrown exception 'java.sql.SQLException', as it cannot be thrown from method's body.(İêİ8™Ğ‹É.
+•
+java:S1130Q"yRemove the declaration of thrown exception 'java.lang.ClassNotFoundException', as it cannot be thrown from method's body.(İêİ8™Ğ‹É.
+J	java:S108e")Either remove or fill this block of code.(Ò»±œúÿÿÿÿ8™Ğ‹É.
+Q
+java:S1172".Remove this unused method parameter "counter".(®ŞÈûÿÿÿÿ8™Ğ‹É.
+Q
+java:S1172".Remove this unused method parameter "counter".(ê…›¤ùÿÿÿÿ8™Ğ‹É.

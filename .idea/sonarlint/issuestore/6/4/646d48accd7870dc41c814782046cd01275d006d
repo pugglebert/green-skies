@@ -1,10 +1,8 @@
 
 i	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÑÄ€üÿÿÿÿ
-d	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¦á
 ]	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(ó€¨ 8¹òøÃ.
-m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸òş²8¹òøÃ.
 l	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â•;8¹òøÃ.
+d	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¦á
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸òş²8¹òøÃ.
 r
-java:S1201r"UEither override Object.equals(Object), or rename the method to prevent any confusion.(İ„Ù½8¹òøÃ.
-T
-java:S1135}"2Complete the task associated to this TODO comment.(ªçÄÿúÿÿÿÿ8¹òøÃ.
+java:S1206y"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ8­¨ŠÉ.
