@@ -1,9 +1,11 @@
 package model.data;
 
+import javafx.fxml.Initializable;
 import model.database.SQLiteDatabase;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,6 +22,9 @@ public class Storage {
     public List<Double> analyseDistanceResult = new ArrayList<Double>();
     public List<Double> analyseEmissionResult = new ArrayList<Double>();
     public List<Route> history = new ArrayList<>();
+    private HashMap<String, Integer> historySrcAirports = new HashMap<>();
+    private HashMap<String, Integer> historyDestAirports = new HashMap<>();
+
 
     private SQLiteDatabase database = new SQLiteDatabase();
     /**
@@ -114,5 +119,34 @@ public class Storage {
 
     public void initialiseStorage() throws SQLException, ClassNotFoundException {
         database.initialiseStorage(this);
+    }
+
+    /**
+     * This method updates the count of source aiport visits in the flight history.
+     * @param airportName
+     * @param counter
+     */
+    public void addToHistorySrcAirports(String airportName, int counter) {
+        if (historySrcAirports.containsKey(airportName)) {
+            historySrcAirports.put(airportName, historySrcAirports.get(airportName) + 1);
+        } else {
+            historySrcAirports.put(airportName, 1);
+        }
+    }
+
+    public HashMap<String, Integer> getHistorySrcAirports() {
+        return historySrcAirports;
+    }
+
+    public void addToHistoryDestAirports(String airportName, int counter) {
+        if (historyDestAirports.containsKey(airportName)) {
+            historyDestAirports.put(airportName, historyDestAirports.get(airportName) + 1);
+        } else {
+            historyDestAirports.put(airportName, 1);
+        }
+    }
+
+    public HashMap<String, Integer> getHistoryDestAirports() {
+        return historyDestAirports;
     }
  }

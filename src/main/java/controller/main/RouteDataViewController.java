@@ -107,6 +107,10 @@ public class RouteDataViewController extends DataViewController {
             route.setDistance(flightAnalyser.getTotalDistancePath1());
             reportGenerator.updateTotalDistance(route);
             reportGenerator.updateTotalEmissions(route);
+
+            storage.addToHistorySrcAirports(route.getSourceAirport(), 1); //TODO:change to route.getTimesTake() once Nathan has implemented counter
+            storage.addToHistoryDestAirports(route.getDestinationAirport(), 1); //TODO:change to route.getTimesTake() once Nathan has implemented counter
+
             //reportGenerator.updateLeastDistanceRoute(route);
             //reportGenerator.updateMostDistanceRoute(route);
             //reportGenerator.updateMostEmissionsRoute(route);
@@ -117,8 +121,8 @@ public class RouteDataViewController extends DataViewController {
 //        Main.getStorage().getHistory().addAll(temp);
         //reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
         //reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
-        //reportGenerator.updateMostVisitedSrcAirports(); //TODO: uncommment once implemented HashMap
-        //reportGenerator.updateMostVisitedSrcAirports(); //TODO: uncommment once implemented HashMap
+        reportGenerator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports()); //TODO: uncommment once implemented HashMap
+        reportGenerator.updateMostVisitedSrcAirports(storage.getHistoryDestAirports()); //TODO: uncommment once implemented HashMap
   }
 
     /**
