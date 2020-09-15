@@ -14,7 +14,6 @@ import model.data.Route;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -49,7 +48,8 @@ public class RouteDataViewController extends DataViewController {
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
     private ReportGenerator reportGenerator;
 
-    private RouteAddToHistoryPopUp addPopUp = new RouteAddToHistoryPopUp();
+    private RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
+
 
 
     /**
@@ -61,7 +61,7 @@ public class RouteDataViewController extends DataViewController {
     public void initialize(URL url, ResourceBundle rb) {
 
         this.reportGenerator = Main.getReportGenerator();
-
+        addPopUp.setCaller(this);
         //Set up the columns in the TableView.
         addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
         airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
@@ -95,13 +95,11 @@ public class RouteDataViewController extends DataViewController {
      * most distance , least emissions , most emissions , least travelled  and most travelled route are updated.
      */
     public void addDataToHistory() throws IOException {
-        if (!Main.getStorage().getTempRoutes().isEmpty()){
-            Main.getStorage().getTempRoutes().clear();
-        }
+
         for (Route route : Main.getStorage().getRoutes()) {
           if (route.getSelect().isSelected()) {
-              route.setTimesTaken(0);
-              Main.getStorage().getTempRoutes().add(route);
+              System.out.println(route.getTimesTake());
+              addPopUp.getTempRoute().add(route);
             //storage.addToHistory(route);
               //todo add to history after change passenger number
             FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);

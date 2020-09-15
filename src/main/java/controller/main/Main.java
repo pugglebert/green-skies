@@ -62,7 +62,7 @@ public class Main {
 //        try {
 //            rs = test.displayUsers();
 //            test.addUser("abc", "tom");
-//
+
 //            while (rs.next()) {
 //                System.out.println(rs.getString("fname") + " " + rs.getString("lname"));
 //            }
@@ -71,7 +71,7 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        storage.initialiseStorage();
+//        storage.initialiseStorage();
         GreenSkiesApplication.main(args);
     }
 }
