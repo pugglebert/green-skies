@@ -49,8 +49,8 @@ public class RouteDataViewController extends DataViewController {
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
     private ReportGenerator reportGenerator;
 
-    public RouteDataViewController() {
-    }
+    private RouteAddToHistoryPopUp addPopUp = new RouteAddToHistoryPopUp();
+
 
     /**
      * Initializes the controller class. The checkboxes are added to each record.
@@ -89,19 +89,21 @@ public class RouteDataViewController extends DataViewController {
         tableView.setItems(FXCollections.observableList(results));
     }
 
-    //TODO: can these be removed? 13/09/2020 HK
-//    private FlightHistory buffer;
-//    private ObservableList<Route> routes;
 
     /**
      * This method adds the selected routes to the flight history. The total distance, total emissions, least distance,
      * most distance , least emissions , most emissions , least travelled  and most travelled route are updated.
      */
-    public void addDataToHistory() {
-        List<Route> temp = new ArrayList<>();
+    public void addDataToHistory() throws IOException {
+        if (!Main.getStorage().getTempRoutes().isEmpty()){
+            Main.getStorage().getTempRoutes().clear();
+        }
         for (Route route : Main.getStorage().getRoutes()) {
           if (route.getSelect().isSelected()) {
-            storage.addToHistory(route);
+              route.setTimesTaken(0);
+              Main.getStorage().getTempRoutes().add(route);
+            //storage.addToHistory(route);
+              //todo add to history after change passenger number
             FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
             route.setEmissions(flightAnalyser.getPath1Emission());
             route.setDistance(flightAnalyser.getTotalDistancePath1());
@@ -116,8 +118,9 @@ public class RouteDataViewController extends DataViewController {
             //reportGenerator.updateMostEmissionsRoute(route);
             //reportGenerator.updateLeastEmissionsRoute(route);
           }
-        }
 
+        }
+        addPopUp.display();
 //        Main.getStorage().getHistory().addAll(temp);
         //reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
         //reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
