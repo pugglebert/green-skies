@@ -19,7 +19,7 @@ public class AirlineParser extends Parser {
       activeStatus = 7;
 
   public AirlineParser(List<String> dataFile, List<Airline> existingAirlines) {
-    super(dataFile, 12);
+    super(dataFile, 11);
     for (Airline airline : existingAirlines) {
       addAirLine(airline.getAirlineID(), airline);
     }
@@ -40,7 +40,6 @@ public class AirlineParser extends Parser {
     errorLookup[8] = "Invalid country";
     errorLookup[9] = "Invalid status";
     errorLookup[10] = "Unknown error";
-    errorLookup[11] = "Failed insertion";
   }
 
   public void dataParser() {
@@ -75,8 +74,6 @@ public class AirlineParser extends Parser {
         } catch (Exception e) {
           errorCounter(10);
         }
-      } else {
-        errorCounter(11);
       }
     }
   }
