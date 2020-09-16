@@ -303,7 +303,7 @@ public class RouteParserTest {
      */
     @Test
     public void dataParseLowErrorsTest() {
-        for (int i = 0; i < 97; i++) {
+        for (int i = 0; i < 197; i++) {
             routeParser.errorCounter(0);
         }
         try {
@@ -318,7 +318,7 @@ public class RouteParserTest {
      */
     @Test
     public void dataParseHighErrorsTest() {
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < 201; i++) {
             routeParser.errorCounter(0);
         }
         try {
@@ -386,5 +386,26 @@ public class RouteParserTest {
         assertFalse(routeParser.validater(testString));
     }
 
+    /**
+     * Verify that the correct error code is produced when attempting to add a duplicate route
+     */
+    @Test
+    public void duplicateErrorMessageTest() throws FileNotFoundException {
+        Loader loader = new Loader(new Storage());
+        ArrayList<String> duplicateLines = loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateRouteTest.csv");
+        RouteParser duplicateParser = new RouteParser(duplicateLines, existingLines);
+        assertEquals("File uploaded with 1 invalid lines rejected\nError [10] Duplicate route: 1 occurances\n", duplicateParser.getErrorMessage());
+    }
+
+    /**
+     * Verify that the route is only added to the data once when attempting to add a duplicate route
+     */
+    @Test
+    public void duplicateNotAddedTest() throws FileNotFoundException {
+        Loader loader = new Loader(new Storage());
+        ArrayList<String> duplicateLines = loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateRouteTest.csv");
+        RouteParser duplicateParser = new RouteParser(duplicateLines, existingLines);
+        assertEquals(1, duplicateParser.getData().size());
+    }
 
 }
