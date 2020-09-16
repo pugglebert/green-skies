@@ -20,6 +20,7 @@ public class Storage {
   private List<Airline> airlines = new ArrayList<>();
   private List<Airport> airports = new ArrayList<>();
   private List<Route> routes = new ArrayList<>();
+  private List<Route> tempRoutes = new ArrayList<>();
   public List<Double> analyseDistanceResult = new ArrayList<Double>();
   public List<Double> analyseEmissionResult = new ArrayList<Double>();
   public List<Route> history = new ArrayList<>();
@@ -40,6 +41,11 @@ public class Storage {
   /** @return a list of Route object from the currently open file cast as Datatype objects. */
   public List<Route> getRoutes() {
     return routes;
+  }
+
+  /** @return a list of Route object from route to add to history. */
+  public List<Route> getTempRoutes() {
+    return tempRoutes;
   }
 
   /** @return a list of routes in the user's history. */
@@ -107,7 +113,6 @@ public class Storage {
       }
       //            database.startCommite();
     } else if (type.matches("Route")) {
-      routes = new ArrayList<Route>();
       //            database.dropTable("routes");
       //            database.closeAutoCommite();
       for (DataType entry : data) {

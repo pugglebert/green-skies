@@ -1,6 +1,5 @@
 package model.loader;
 
-import model.data.DataType;
 import model.data.Route;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,40 +17,56 @@ import java.util.List;
  */
 public class RouteParser extends Parser {
 
-  /** Alphabetical name to represent line index */
-  private final int airline = 0,
-      airlineID = 1,
-      sourceAirport = 2,
-      sourceAirportID = 3,
-      destinationAirport = 4,
-      destinationAirportID = 5,
-      codeshare = 6,
-      stops = 7,
-      equipment = 8;
+    /***
+     * Codes corresponding to each Route to check for duplicates. The external ArrayList indexed by airline
+     * ID and the internal ArrayList contains {sourceID, destinationID} arrays for all
+     * Routes with that airline ID.
+     */
+    private ArrayList<ArrayList<int[]>> routeCodes = new ArrayList<ArrayList<int[]>>();
 
-  /**
-   * Initializes error collection and calls dataParser method to begin processing data.
-   *
-   * @param dataFile ArrayList of a string for each line in the file.
-   */
-  public RouteParser(ArrayList<String> dataFile, List<Route> existingRoutes) {
-    super(dataFile, 12);
-    for (Route route : existingRoutes) {
-      addRoute(route);
+    /** Alphabetical name to represent line index */
+    private final int airline = 0,
+            airlineID = 1,
+            sourceAirport = 2,
+            sourceAirportID = 3,
+            destinationAirport = 4,
+            destinationAirportID = 5,
+            codeshare = 6,
+            stops = 7,
+            equipment = 8;
+
+    /**
+     * Initializes error collection and calls dataParser method to begin processing data.
+     * @param dataFile ArrayList of a string for each line in the file.
+     */
+    public RouteParser(ArrayList<String> dataFile, List<Route> existingRoutes) {
+        super(dataFile, 12);
+        for (Route route : existingRoutes) {
+            addToRouteCodes(route);
+        }
+        try {
+            dataParser();
+        } catch (RuntimeException e) {
+            throw e;
+        }
     }
-    try {
-      dataParser();
-    } catch (RuntimeException e) {
-      throw e;
+
+    /**
+     * Add an array containing the routes source and destination airport IDs to the internal
+     * ArrayList which is found at an index of the external ArrayList which corresponds to the
+     * Route's airline ID.
+     * @param route The Route from which to get the code to add to RouteCodes.
+     */
+    private void addToRouteCodes(Route route) {
+        int[] routeCode = new int[2];
+        routeCode[0] = route.getSourceAirportID();
+        routeCode[1] = route.getDestinationAirportID();
+        int index = route.getAirlineID();
+        while (routeCodes.size() < index + 1) {
+            routeCodes.add(new ArrayList<>());
+        }
+        routeCodes.get(index).add(routeCode);
     }
-  }
-
-  // TODO remove?
-
-  //
-  //    public RouteParser(ArrayList<String> singleEntry) {
-  //        super(singleEntry);
-  //    }
 
   @Override
   /** Initializes error lookup array with message for each error code. */
@@ -70,42 +85,45 @@ public class RouteParser extends Parser {
     errorLookup[11] = "Unknown error";
   }
 
-  /**
-   * Is called when RouteParser is initialized. Calls validate method to check each line. If line is
-   * valid, creates Route object with attributes from line and adds route to routes set.
-   */
-  @Override
-  protected void dataParser() {
-    for (String dataLine : dataFile) {
-      if (totalErrors > 100) {
-        throw new RuntimeException("File rejected: more than 100 lines contain errors");
-      }
-      parseLine(dataLine);
+    /**
+     * Is called when RouteParser is initialized. Calls validate method to check each line. If line is valid, creates
+     * Route object with attributes from line and adds route to routes set.
+     */
+    @Override
+    protected void dataParser() {
+        for (String dataLine : dataFile) {
+            if (totalErrors > 200) {
+                throw new RuntimeException("File rejected: more than 100 lines contain errors");
+            }
+            parseLine(dataLine);
+        }
     }
-  }
-  // TODO: write comment for this method
 
-  protected void parseLine(String dataLine) {
-    String[] line = dataLine.split(",");
-    if (validater(line)) {
-      try {
-        Route route =
-            new Route(
-                line[airline],
-                Integer.parseInt(line[airlineID]),
-                line[sourceAirport],
-                Integer.parseInt(line[sourceAirportID]),
-                line[destinationAirport],
-                Integer.parseInt(line[destinationAirportID]),
-                line[codeshare],
-                Integer.parseInt(line[stops]),
-                line[equipment].split(" "));
-        addRoute(route);
-      } catch (Exception e) {
-        errorCounter(11);
-      }
+    /**
+     * Call the validator method to check a single line and then add that line to parserData if it is valid.
+     * @param dataLine Line to be checked and added to parserData.
+     */
+    protected void parseLine(String dataLine) {
+        String[] line = dataLine.split(",");
+        if (validater(line)) {
+            try {
+                Route route =
+                        new Route(
+                                line[airline],
+                                Integer.parseInt(line[airlineID]),
+                                line[sourceAirport],
+                                Integer.parseInt(line[sourceAirportID]),
+                                line[destinationAirport],
+                                Integer.parseInt(line[destinationAirportID]),
+                                line[codeshare],
+                                Integer.parseInt(line[stops]),
+                                line[equipment].split(" "));
+                addRoute(route);
+            } catch (Exception e) {
+                errorCounter(11);
+            }
+        }
     }
-  }
 
   /**
    * Checks that line has expected number of entries and calls isValid method to check that each
@@ -170,8 +188,11 @@ public class RouteParser extends Parser {
 
     return true;
   }
-  // TODO: write comment for this method
 
+    /**
+     * Replace '\N' in string with the value 0.
+     * @param line Array to replace nulls in.
+     */
   protected void changeNulls(String[] line) {
     if (line[airlineID].equals("\\N")) {
       line[airlineID] = "0";
@@ -262,25 +283,29 @@ public class RouteParser extends Parser {
     return true;
   }
 
-  /**
-   * Checks for duplicates in data. If there are no duplicates, addes route to data.
-   *
-   * @param route
-   */
-  private void addRoute(Route route) {
-    boolean inData = false;
-    for (DataType data : parserData) {
-      Route existingRoute = (Route) data;
-      if (existingRoute.equals(route)) {
-        inData = true;
-        errorCounter(10);
-        System.out.println(
-            String.format("R1 = %s, R2 = %s", route.toString(), existingRoute.toString()));
-        break;
-      }
+    /**
+     * Checks for duplicates in data. If there are no duplicates, addes route to data.
+     * @param newRoute Route to be added.
+     */
+    private void addRoute(Route newRoute) {
+        boolean inData = false;
+        int[] newCode = new int[2];
+        newCode[0] = newRoute.getSourceAirportID();
+        newCode[1] = newRoute.getDestinationAirportID();
+        if (routeCodes.size() > newRoute.getAirlineID()) {
+            ArrayList<int[]> searchList = routeCodes.get(newRoute.getAirlineID());
+            for (int[] existingCode : searchList) {
+                if (existingCode[0] == newCode[0] && existingCode[1] == newCode[1]) {
+                    inData = true;
+                    errorCounter(10);
+                    break;
+                }
+            }
+        }
+        if (!inData) {
+            parserData.add(newRoute);
+            addToRouteCodes(newRoute);
+        }
     }
-    if (!inData) {
-      parserData.add(route);
-    }
-  }
+
 }

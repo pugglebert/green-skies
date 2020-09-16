@@ -27,7 +27,7 @@ public class Route implements DataType {
   private final String firstEquipment;
   private double emissions;
   private double distance;
-  private int timesTaken = 0;
+    private int timesTaken = 0;
   private CheckBox select;
 
   /** The Route constructor. */
@@ -186,10 +186,10 @@ public class Route implements DataType {
     this.distance = distance;
   }
 
-  /** Get the number of times that the user has recorded taking this flight. */
-  public int getTimesTake() {
-    return timesTaken;
-  }
+    /**
+     * Get the number of times that the user has recorded taking this flight.
+     */
+    public int getTimesTaken() {return timesTaken;}
 
   /**
    * Set timesTaken to the given value.
