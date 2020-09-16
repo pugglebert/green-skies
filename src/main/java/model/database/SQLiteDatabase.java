@@ -1,9 +1,7 @@
 package model.database;
 
-import javafx.beans.binding.StringExpression;
 import model.data.*;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -97,7 +95,7 @@ public class SQLiteDatabase {
         prep.setString(10, stringEquipment);
         prep.setDouble(11, route.getEmissions());
         prep.setDouble(12, route.getDistance());
-        prep.setInt(13, route.getTimesTake());
+        prep.setInt(13, route.getTimesTaken());
         prep.execute();
     }
 
