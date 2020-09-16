@@ -27,6 +27,10 @@ public class AnalyseResultController implements Initializable {
 
   @FXML public Text EmissionRoute2;
 
+  @FXML public Text DistanceDifference;
+
+  @FXML public Text EmissionDifference;
+
   /**
    * The require method for Initializable interface
    * show distance and emissions of each route
@@ -39,11 +43,15 @@ public class AnalyseResultController implements Initializable {
     String DistanceRoute1Text = String.valueOf(storage.getAnalyseDistanceResult().get(0));
     DistanceRoute1.setText(DistanceRoute1Text);
     String DistanceRoute2Text = String.valueOf(storage.getAnalyseDistanceResult().get(1));
-    DistanceRoute2.setText(DistanceRoute1Text);
+    DistanceRoute2.setText(DistanceRoute2Text);
     String EmissionRoute1Text = String.valueOf(storage.getAnalyseEmissionResult().get(0));
     EmissionRoute1.setText(EmissionRoute1Text);
     String EmissionRoute2Text = String.valueOf(storage.getAnalyseEmissionResult().get(1));
     EmissionRoute2.setText(EmissionRoute2Text);
+    String DistanceDifferenceText = String.valueOf(Math.abs(storage.getAnalyseDistanceResult().get(0) - storage.getAnalyseDistanceResult().get(1)));
+    DistanceDifference.setText(DistanceDifferenceText);
+    String EmissionDifferenceText = String.valueOf(Math.abs(storage.getAnalyseEmissionResult().get(0) - storage.getAnalyseEmissionResult().get(1)));
+    EmissionDifference.setText(EmissionDifferenceText);
   }
 
   /**

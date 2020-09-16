@@ -30,10 +30,14 @@ import org.controlsfx.control.textfield.TextFields;
 public class AnalyseController extends SideNavBarController implements Initializable {
 
   @FXML private TextField pathSource1;
-
   @FXML private TextField pathDestination1;
   @FXML private TextField pathSource2;
   @FXML private TextField pathDestination2;
+
+
+  String[] rubbish1 = {"abc"};
+  String[] rubbish2 = {"abc"};
+
 
   /** A hash set to store some airport data. */
   private HashSet<String> airports = new HashSet<>();
@@ -106,7 +110,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
             0,
             null,
             0,
-            null);
+            rubbish1);
     Route route2 =
         new Route(
             null,
@@ -117,7 +121,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
             0,
             null,
             0,
-            null);
+            rubbish2);
     FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
 
     System.out.println(analyser.getTotalDistancePath1());
