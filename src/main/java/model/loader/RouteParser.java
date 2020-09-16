@@ -260,6 +260,7 @@ public class RouteParser extends Parser {
             if (existingRoute.equals(route)) {
                 inData = true;
                 errorCounter(10);
+                System.out.println(String.format("R1 = %s, R2 = %s", route.toString(), existingRoute.toString()));
                 break;
             }
         }
