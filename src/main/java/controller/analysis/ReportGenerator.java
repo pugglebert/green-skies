@@ -86,11 +86,18 @@ public class ReportGenerator {
     //            }
     //        }
 
-    quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
-    int maxRouteCounter = routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTake();
-    int firstOccuranceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
-    for (int i = firstOccuranceIndex; i < routeHistoryEntries.size() - 1; i++) {
-      mostTravelledRoutes.add(routeHistoryEntries.get(i));
+    if (routeHistoryEntries.size() >= 1) {
+      if (routeHistoryEntries.size() == 1) {
+        mostTravelledRoutes.add(routeHistoryEntries.get(0));
+      } else {
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        int maxRouteCounter =
+            routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTake();
+        int firstOccuranceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
+        for (int i = firstOccuranceIndex; i < routeHistoryEntries.size(); i++) {
+          mostTravelledRoutes.add(routeHistoryEntries.get(i));
+        }
+      }
     }
   }
 
@@ -427,5 +434,9 @@ public class ReportGenerator {
    */
   public void setTotalDistanceTravelled(double totalDistanceTravelled) {
     this.totalDistanceTravelled = totalDistanceTravelled;
+  }
+
+  public ArrayList<Route> getMostTravelledRoute() {
+    return mostTravelledRoutes;
   }
 }

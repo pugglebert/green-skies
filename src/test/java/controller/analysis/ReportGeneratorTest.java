@@ -2,15 +2,20 @@ package controller.analysis;
 
 import model.data.*;
 import model.loader.Loader;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.*;
+
 
 import static org.junit.Assert.*;
+
 
 /**
  * Unit test for ReportGenrator class.
@@ -934,194 +939,212 @@ public class ReportGeneratorTest {
 
   // --------------------------------- Testing for updateMostTravelledMostRoute
 
-
-  /** */
+  /**
+   * Verify that when updateMostTravelledRoute is called when there is one route in the flight
+   * history, then the most travelled route is this single route.
+   */
   @Test
-  public void updateMostTravelledMostRouteOneTest() {
+  public void updateMostTravelledRouteOneTest() {
     ArrayList<Route> expectedResults = new ArrayList<>();
-    Route testRouteDistance =
-        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
-    Route testRouteDiffDistance =
-        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
-    testRouteDistance.setDistance(20000);
-    testRouteDiffDistance.setDistance(20000);
-    expectedResults.add(testRouteDistance);
-    expectedResults.add(testRouteDiffDistance);
-    reportGenerator.updateLeastDistanceRoute(testRouteDistance);
-    reportGenerator.updateLeastDistanceRoute(testRouteDiffDistance);
-    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRoute = new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    testRoute.setTimesTaken(5);
+    expectedResults.add(testRoute);
+    testRoutes.add(testRoute);
+    reportGenerator.updateMostTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getMostTravelledRoute());
   }
 
   /**
-   *
+   * Verify that when updateMostTravelledRoute is called when there are two routes in the flight
+   * history and one is more travelled than the other, then the most travelled route is the only
+   * route in the mostTravelled Route array.
    */
   @Test
   public void updateMostTravelledMostRouteTwoTest() {
-
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRouteMost = new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLess =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteLess.setTimesTaken(5);
+    testRouteMost.setTimesTaken(9);
+    expectedResults.add(testRouteMost);
+    testRoutes.add(testRouteMost);
+    testRoutes.add(testRouteLess);
+    reportGenerator.updateMostTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getMostTravelledRoute());
   }
 
   /**
-   *
+   * Verify that when updateMostTravelledRoute is called when there are multiple routes in history i.e. 10 and one of them
+   * is of the most travelled, then that route is the only route added to the most travelled routes array.
    */
   @Test
-  public void updateMostTravelledMostRouteTenTest() {
-
+  public void updateMostTravelledMostRouteTenDiffOneMostTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRouteMost = new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRoute2 = new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute3 = new Route("2C", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute4 = new Route("2D", 2777, "GBRF", 2242, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute5 = new Route("2E", 1744, "GFRG", 2727, "BIAR", 6436, "", 1, "NH7".split(" "));
+    Route testRoute6 = new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" "));
+    Route testRoute7 = new Route("2G", 2775, "SDD", 7557, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute8 = new Route("2H", 9898, "VSV", 5578, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute9 = new Route("2I", 2782, "SVDE", 5257, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMost.setTimesTaken(10);
+    testRoute2.setTimesTaken(2);
+    testRoute3.setTimesTaken(3);
+    testRoute4.setTimesTaken(4);
+    testRoute5.setTimesTaken(5);
+    testRoute6.setTimesTaken(6);
+    testRoute7.setTimesTaken(7);
+    testRoute8.setTimesTaken(8);
+    testRoute9.setTimesTaken(9);
+    expectedResults.add(testRouteMost);
+    testRoutes.add(testRoute2);
+    testRoutes.add(testRoute3);
+    testRoutes.add(testRoute4);
+    testRoutes.add(testRoute5);
+    testRoutes.add(testRoute6);
+    testRoutes.add(testRoute7);
+    testRoutes.add(testRoute8);
+    testRoutes.add(testRoute9);
+    testRoutes.add(testRouteMost);
+    reportGenerator.updateMostTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getMostTravelledRoute());
   }
 
   /**
-   *
+   * Verify that when updateMostTravelledRoute is called when there are multiple routes in history i.e. 10 and more than one of them
+   * e.g. 3 is of the most travelled, then those routes are the only routes added to the most travelled routes array.
+   */
+  @Test
+  public void updateMostTravelledMostRouteTenDiffThreeMostTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRoute1 = new Route("2A", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRoute2 = new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute3 = new Route("2C", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute4 = new Route("2D", 2777, "GBRF", 2242, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute5 = new Route("2E", 1744, "GFRG", 2727, "BIAR", 6436, "", 1, "NH7".split(" "));
+    Route testRoute6 = new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" "));
+    Route testRoute7 = new Route("2G", 2775, "SDD", 7557, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute8 = new Route("2H", 9898, "VSV", 5578, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute9 = new Route("2I", 2782, "SVDE", 5257, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRoute1.setTimesTaken(8);
+    testRoute2.setTimesTaken(2);
+    testRoute3.setTimesTaken(9);
+    testRoute4.setTimesTaken(4);
+    testRoute5.setTimesTaken(9);
+    testRoute6.setTimesTaken(6);
+    testRoute7.setTimesTaken(7);
+    testRoute8.setTimesTaken(8);
+    testRoute9.setTimesTaken(9);
+    expectedResults.add(testRoute9);
+    expectedResults.add(testRoute5);
+    expectedResults.add(testRoute3);
+    testRoutes.add(testRoute1);
+    testRoutes.add(testRoute2);
+    testRoutes.add(testRoute3);
+    testRoutes.add(testRoute4);
+    testRoutes.add(testRoute5);
+    testRoutes.add(testRoute6);
+    testRoutes.add(testRoute7);
+    testRoutes.add(testRoute8);
+    testRoutes.add(testRoute9);
+    reportGenerator.updateMostTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getMostTravelledRoute());
+  }
+
+  /**
+   * Verify that when updateMostTravelledRoute is called when there are no routes in history that there are no routes
+   * in the most travelled routes array.
    */
   @Test
   public void updateMostTravelledRouteNoRoutesTest() {
-
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    reportGenerator.updateMostTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getMostTravelledRoute());
   }
 
   // --------------------------------- Testing for updateLeastTravelledMostRoute
 
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateLeastTravelledMostRouteOneTest() {
+  public void updateLeastTravelledMostRouteOneTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateLeastTravelledMostRouteTwoTest() {
+  public void updateLeastTravelledMostRouteTwoTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateLeastTravelledMostRouteTenTest() {
+  public void updateLeastTravelledMostRouteTenTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateLeastTravelledRouteNoRoutesTest() {
-
-  }
+  public void updateLeastTravelledRouteNoRoutesTest() {}
 
   // --------------------------------- Testing for updateMostVisitedSrcAirport
 
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateMostVisitedSrcAirportOneTest() {
+  public void updateMostVisitedSrcAirportOneTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateMostVisitedSrcAirportTwoTest() {
+  public void updateMostVisitedSrcAirportTwoTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateMostVisitedSrcAirportNoRoutesTest() {
+  public void updateMostVisitedSrcAirportNoRoutesTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateMostVisitedDestAirportOneTest() {
-
-  }
+  public void updateMostVisitedDestAirportOneTest() {}
 
   // --------------------------------- Testing for updateMostVisitedDestAirport
 
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateMostVisitedDestAirportTwoTest() {
+  public void updateMostVisitedDestAirportTwoTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateMostVisitedDestAirportTenTest() {
+  public void updateMostVisitedDestAirportTenTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void updateMostVisitedDestAirportNoRoutesTest() {
-
-  }
+  public void updateMostVisitedDestAirportNoRoutesTest() {}
 
   // --------------------------------- Testing for calculateCO2ReductionNeeded
 
-  /**
-   *
-   */
+  /** */
   @Test
-  public void calculateCO2ReductionNeededSmallTest() {
+  public void calculateCO2ReductionNeededSmallTest() {}
 
-  }
-
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void calculateCO2ReductionNeededLargeTest() {
+  public void calculateCO2ReductionNeededLargeTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void calculateCO2ReductionNeededNegTest() {
-
-  }
+  public void calculateCO2ReductionNeededNegTest() {}
 
   // --------------------------------- Testing for calculateOffsetTrees
 
-  /**
-   *
-   */
+  /** */
   @Test
-  public void calculateOffsetTreesSmallTest() {
+  public void calculateOffsetTreesSmallTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void calculateOffsetTreesLargeTest() {
+  public void calculateOffsetTreesLargeTest() {}
 
-  }
-
-  /**
-   *
-   */
+  /** */
   @Test
-  public void calculateOffsetTreesNegTest() {
-
-  }
-
-
+  public void calculateOffsetTreesNegTest() {}
 }
