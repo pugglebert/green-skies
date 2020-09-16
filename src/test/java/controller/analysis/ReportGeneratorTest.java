@@ -255,15 +255,172 @@ public class ReportGeneratorTest {
     ArrayList<Route> expectedResults = new ArrayList<>();
     Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
     expectedResults.add(testRoute);
+    testRoute.setEmissions(10000);
     reportGenerator.updateMostEmissionsRoute(testRoute);
     assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
   }
 
-  //TODO: rebug this! The carbon emissions of for airline 2B are NaN
   /**
-   * Verify that when updateMostEmissionsRoute is called with a route and it has more emissions than
-   * the current most emissions route, then the most emissions route in the history is updated to
-   * this route.
+   * Verify that when updateMostEmissionsRoute is called with a route and it has more emissions,
+   * then the most emissions route in the history is set to the added route.
+   */
+  @Test
+  public void updateMostEmissionsRouteAddMoreEmissionsEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreEmissions.setEmissions(12600); // 12600 km
+    testRouteLessEmissions.setEmissions(163); // 163 km
+    expectedResults.add(testRouteMoreEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
+    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route and it has less emissions,
+   * then the most emissions route in the history is remains the same.
+   */
+  @Test
+  public void updateMostEmissionsRouteAddLessEmissionsEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreEmissions.setEmissions(12600); // 12600 km
+    testRouteLessEmissions.setEmissions(163); // 163 km
+    expectedResults.add(testRouteMoreEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
+    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route and it is already in the most
+   * emissions routes, then the most emissions route in the history is remains the same.
+   */
+  @Test
+  public void updateMostEmissionsRouteAddSameEmissionsSameRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    testRouteEmissions.setEmissions(20000); // 12600 km
+    expectedResults.add(testRouteEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteEmissions);
+    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route and it has the same most
+   * emissions but isn't in the most emissions routes array, then the route is added to the most
+   * emissions route array.
+   */
+  @Test
+  public void updateMostEmissionsRouteAddSameEmissionsDiffRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteDiffEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteEmissions.setEmissions(20000); // 12600 km
+    testRouteDiffEmissions.setEmissions(20000); // 12600 km
+    expectedResults.add(testRouteEmissions);
+    expectedResults.add(testRouteDiffEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteDiffEmissions);
+    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route and it has NaN emissions then
+   * the most emissions route in the history is not changed to this added route. This test also uses
+   * the FlightAnalyser class to check it works as expected here.
+   */
+  @Test
+  public void updateMostEmissionsRouteAddNaNEmissionsEntryUseFlighAnalyserTest()
+      throws SQLException, ClassNotFoundException {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    List<DataType> providedAirports = new ArrayList<>();
+    providedAirports.add(
+        new Airport(
+            2937,
+            "Goroka",
+            "Goroka",
+            "Papua New Guinea",
+            "GKA",
+            "AYGA",
+            -6.081689,
+            145.391881,
+            5282,
+            10,
+            "U",
+            "Pacific/Port_Moresby"));
+    providedAirports.add(
+        new Airport(
+            8944,
+            "Narsarsuaq",
+            "Narssarssuaq",
+            "Greenland",
+            "UAK",
+            "BGBW",
+            61.160517,
+            -45.425978,
+            112,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            4253,
+            "Nuuk",
+            "Godthaab",
+            "Greenland",
+            "GOH",
+            "BGGH",
+            64.190922,
+            -51.678064,
+            283,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            6436,
+            "Akureyri",
+            "Akureyri",
+            "Iceland",
+            "AEY",
+            "BIAR",
+            65.659994,
+            -18.072703,
+            6,
+            0,
+            "N",
+            "Atlantic/Reykjavik"));
+
+    storage.setData(providedAirports, "Airport");
+    Route testRouteEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteNaNEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    FlightAnalyser flightAnalyser =
+        new FlightAnalyser(testRouteNaNEmissions, testRouteEmissions, storage);
+    testRouteEmissions.setEmissions(flightAnalyser.getPath2Emission()); // 12600 km
+    testRouteNaNEmissions.setEmissions(flightAnalyser.getPath1Emission()); // NaN
+    expectedResults.add(testRouteEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteNaNEmissions);
+    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route that has NaN emissions and
+   * then with a route that has emissions that the NaN route gets ignored and the most emissions
+   * route is the second route (not NaN emissions).
    */
   @Test
   public void updateMostEmissionsRouteMoreEmissionsEntryTest()
@@ -328,99 +485,17 @@ public class ReportGeneratorTest {
             "Atlantic/Reykjavik"));
 
     storage.setData(providedAirports, "Airport");
-    Route testRouteMoreEmissions =
+    Route testRouteEmissions =
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
-    Route testRouteLessEmissions =
+    Route testRouteNaNEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
     FlightAnalyser flightAnalyser =
-        new FlightAnalyser(testRouteLessEmissions, testRouteMoreEmissions, storage);
-    testRouteMoreEmissions.setEmissions(flightAnalyser.getPath2Emission()); // 12600 km
-    testRouteLessEmissions.setEmissions(flightAnalyser.getPath1Emission()); // 163 km
-    expectedResults.add(testRouteMoreEmissions);
-    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
-    reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
-    assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
-  }
-
-  //TODO: check this! The carbon emissions of for airline 2B are NaN
-  /**
-   * Verify that when updateMostEmissionsRoute is called with a route and it has less emissions than
-   * the current most emissions route, then the most emissions route in the history is not changed to this added route.
-   */
-  @Test
-  public void updateMostEmissionsRouteLessEmissionsEntryTest()
-          throws SQLException, ClassNotFoundException {
-    ArrayList<Route> expectedResults = new ArrayList<>();
-    List<DataType> providedAirports = new ArrayList<>();
-    providedAirports.add(
-            new Airport(
-                    2937,
-                    "Goroka",
-                    "Goroka",
-                    "Papua New Guinea",
-                    "GKA",
-                    "AYGA",
-                    -6.081689,
-                    145.391881,
-                    5282,
-                    10,
-                    "U",
-                    "Pacific/Port_Moresby"));
-    providedAirports.add(
-            new Airport(
-                    8944,
-                    "Narsarsuaq",
-                    "Narssarssuaq",
-                    "Greenland",
-                    "UAK",
-                    "BGBW",
-                    61.160517,
-                    -45.425978,
-                    112,
-                    -3,
-                    "E",
-                    "America/Godthab"));
-    providedAirports.add(
-            new Airport(
-                    4253,
-                    "Nuuk",
-                    "Godthaab",
-                    "Greenland",
-                    "GOH",
-                    "BGGH",
-                    64.190922,
-                    -51.678064,
-                    283,
-                    -3,
-                    "E",
-                    "America/Godthab"));
-    providedAirports.add(
-            new Airport(
-                    6436,
-                    "Akureyri",
-                    "Akureyri",
-                    "Iceland",
-                    "AEY",
-                    "BIAR",
-                    65.659994,
-                    -18.072703,
-                    6,
-                    0,
-                    "N",
-                    "Atlantic/Reykjavik"));
-
-    storage.setData(providedAirports, "Airport");
-    Route testRouteMoreEmissions =
-            new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
-    Route testRouteLessEmissions =
-            new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
-    FlightAnalyser flightAnalyser =
-            new FlightAnalyser(testRouteLessEmissions, testRouteMoreEmissions, storage);
-    testRouteMoreEmissions.setEmissions(flightAnalyser.getPath2Emission()); // 12600 km
-    testRouteLessEmissions.setEmissions(flightAnalyser.getPath1Emission()); // 163 km
-    expectedResults.add(testRouteMoreEmissions);
-    reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
-    reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
+        new FlightAnalyser(testRouteNaNEmissions, testRouteEmissions, storage);
+    testRouteEmissions.setEmissions(flightAnalyser.getPath2Emission()); // 12600 km
+    testRouteNaNEmissions.setEmissions(flightAnalyser.getPath1Emission()); // NaN
+    expectedResults.add(testRouteEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteNaNEmissions);
+    reportGenerator.updateMostEmissionsRoute(testRouteEmissions);
     assertEquals(expectedResults, reportGenerator.getMostEmissionsRoutes());
   }
 
@@ -436,7 +511,248 @@ public class ReportGeneratorTest {
     ArrayList<Route> expectedResults = new ArrayList<>();
     Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
     expectedResults.add(testRoute);
+    testRoute.setEmissions(3425353);
     reportGenerator.updateLeastEmissionsRoute(testRoute);
+    assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateLeastEmissionsRoute is called with a route and it has more emissions,
+   * then the less emissions route in the history is not changed.
+   */
+  @Test
+  public void updateLeastEmissionsRouteAddMoreEmissionsEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreEmissions.setEmissions(12600); // 12600 km
+    testRouteLessEmissions.setEmissions(163); // 163 km
+    expectedResults.add(testRouteLessEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteLessEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteMoreEmissions);
+    assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route and it has less emissions,
+   * then the less emissions route in the history is updated to the added route.
+   */
+  @Test
+  public void updateLeastEmissionsRouteAddLessEmissionsEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreEmissions.setEmissions(12600); // 12600 km
+    testRouteLessEmissions.setEmissions(163); // 163 km
+    expectedResults.add(testRouteLessEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteMoreEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteLessEmissions);
+    assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateLeastEmissionsRoute is called with a route and it is already in the
+   * least emissions routes, then the least emissions route in the history is remains the same.
+   */
+  @Test
+  public void updateLeastEmissionsRouteAddSameEmissionsSameRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    testRouteEmissions.setEmissions(20000); // 12600 km
+    expectedResults.add(testRouteEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
+    assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateMostEmissionsRoute is called with a route and it has the same most
+   * emissions but isn't in the most emissions routes array, then the route is added to the most
+   * emissions route array.
+   */
+  @Test
+  public void updateLeastEmissionsRouteAddSameEmissionsDiffRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteDiffEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteEmissions.setEmissions(20000); // 12600 km
+    testRouteDiffEmissions.setEmissions(20000); // 12600 km
+    expectedResults.add(testRouteEmissions);
+    expectedResults.add(testRouteDiffEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteDiffEmissions);
+    assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
+  }
+
+  /**
+   * Verify that when updateLeastEmissionsRoute is called with a route and it has NaN emissions then
+   * the most emissions route in the history is not changed to this added route. This test also uses
+   * the FlightAnalyser class to check it works as expected here.
+   */
+  @Test
+  public void updateLeastEmissionsRouteAddNaNEmissionsEntryUseFlighAnalyserTest()
+      throws SQLException, ClassNotFoundException {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    List<DataType> providedAirports = new ArrayList<>();
+    providedAirports.add(
+        new Airport(
+            2937,
+            "Goroka",
+            "Goroka",
+            "Papua New Guinea",
+            "GKA",
+            "AYGA",
+            -6.081689,
+            145.391881,
+            5282,
+            10,
+            "U",
+            "Pacific/Port_Moresby"));
+    providedAirports.add(
+        new Airport(
+            8944,
+            "Narsarsuaq",
+            "Narssarssuaq",
+            "Greenland",
+            "UAK",
+            "BGBW",
+            61.160517,
+            -45.425978,
+            112,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            4253,
+            "Nuuk",
+            "Godthaab",
+            "Greenland",
+            "GOH",
+            "BGGH",
+            64.190922,
+            -51.678064,
+            283,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            6436,
+            "Akureyri",
+            "Akureyri",
+            "Iceland",
+            "AEY",
+            "BIAR",
+            65.659994,
+            -18.072703,
+            6,
+            0,
+            "N",
+            "Atlantic/Reykjavik"));
+
+    storage.setData(providedAirports, "Airport");
+    Route testRouteEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteNaNEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    FlightAnalyser flightAnalyser =
+        new FlightAnalyser(testRouteNaNEmissions, testRouteEmissions, storage);
+    testRouteEmissions.setEmissions(flightAnalyser.getPath2Emission()); // 12600 km
+    testRouteNaNEmissions.setEmissions(flightAnalyser.getPath1Emission()); // NaN
+    expectedResults.add(testRouteEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteNaNEmissions);
+    assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
+  }
+
+  // TODO: rebug this test. Actual array is empty.
+  /**
+   * Verify that when updateLeastEmissionsRoute is called with a route that has NaN emissions and
+   * then with a route that has emissions that the NaN route gets ignored and the most emissions
+   * route is the second route (not NaN emissions).
+   */
+  @Test
+  public void updateLeastEmissionsRouteMoreEmissionsUseFlighAnalyserEntryTest()
+      throws SQLException, ClassNotFoundException {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    List<DataType> providedAirports = new ArrayList<>();
+    providedAirports.add(
+        new Airport(
+            2937,
+            "Goroka",
+            "Goroka",
+            "Papua New Guinea",
+            "GKA",
+            "AYGA",
+            -6.081689,
+            145.391881,
+            5282,
+            10,
+            "U",
+            "Pacific/Port_Moresby"));
+    providedAirports.add(
+        new Airport(
+            8944,
+            "Narsarsuaq",
+            "Narssarssuaq",
+            "Greenland",
+            "UAK",
+            "BGBW",
+            61.160517,
+            -45.425978,
+            112,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            4253,
+            "Nuuk",
+            "Godthaab",
+            "Greenland",
+            "GOH",
+            "BGGH",
+            64.190922,
+            -51.678064,
+            283,
+            -3,
+            "E",
+            "America/Godthab"));
+    providedAirports.add(
+        new Airport(
+            6436,
+            "Akureyri",
+            "Akureyri",
+            "Iceland",
+            "AEY",
+            "BIAR",
+            65.659994,
+            -18.072703,
+            6,
+            0,
+            "N",
+            "Atlantic/Reykjavik"));
+
+    storage.setData(providedAirports, "Airport");
+    Route testRouteEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteNaNEmissions =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    FlightAnalyser flightAnalyser =
+        new FlightAnalyser(testRouteNaNEmissions, testRouteEmissions, storage);
+    testRouteEmissions.setEmissions(flightAnalyser.getPath2Emission()); // 12600 km
+    testRouteNaNEmissions.setEmissions(flightAnalyser.getPath1Emission()); // NaN
+    expectedResults.add(testRouteEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteNaNEmissions);
+    reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
     assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
   }
 
@@ -452,6 +768,7 @@ public class ReportGeneratorTest {
     ArrayList<Route> expectedResults = new ArrayList<>();
     Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
     expectedResults.add(testRoute);
+    testRoute.setDistance(12333333);
     reportGenerator.updateMostDistanceRoute(testRoute);
     assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
   }
@@ -468,6 +785,7 @@ public class ReportGeneratorTest {
     ArrayList<Route> expectedResults = new ArrayList<>();
     Route testRoute = new Route("2H", 1654, "IKT", 2937, "ODO", 8944, "", 0, "AN4".split(" "));
     expectedResults.add(testRoute);
+    testRoute.setDistance(2432828);
     reportGenerator.updateLeastDistanceRoute(testRoute);
     assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
   }

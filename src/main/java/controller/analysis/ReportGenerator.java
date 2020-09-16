@@ -124,16 +124,26 @@ public class ReportGenerator {
    * @param currentRouteRecord
    */
   public void updateMostEmissionsRoute(Route currentRouteRecord) {
-    if (this.mostEmissionsRoutes.size() == 0) {
-      mostEmissionsRoutes.add(currentRouteRecord);
-    } else if (currentRouteRecord.getEmissions() > mostEmissionsRoutes.get(0).getEmissions()) {
+    if (currentRouteRecord.getEmissions() > 0.0) {
+      if (this.mostEmissionsRoutes.size() == 0) {
+        mostEmissionsRoutes.add(currentRouteRecord);
+      } else if (currentRouteRecord.getEmissions() > mostEmissionsRoutes.get(0).getEmissions()) {
         mostEmissionsRoutes.clear();
         mostEmissionsRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getEmissions() == mostEmissionsRoutes.get(0).getEmissions()) {
-        mostEmissionsRoutes.add(currentRouteRecord);
+        Boolean found = false;
+        for (Route route : mostEmissionsRoutes) {
+          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          mostEmissionsRoutes.add(currentRouteRecord);
+        }
       }
     }
-
+  }
 
   /**
    * This method updates the which route produces the least emissions. The currentRouteRecord is
@@ -142,16 +152,26 @@ public class ReportGenerator {
    * @param currentRouteRecord
    */
   public void updateLeastEmissionsRoute(Route currentRouteRecord) {
-    if (leastEmissionsRoutes.isEmpty() == true) {
-      leastEmissionsRoutes.add(currentRouteRecord);
-    } else if (currentRouteRecord.getEmissions() < leastEmissionsRoutes.get(0).getEmissions()) {
+    if (currentRouteRecord.getEmissions() > 0.0) {
+      if (leastEmissionsRoutes.size() == 0) {
+        leastEmissionsRoutes.add(currentRouteRecord);
+      } else if (currentRouteRecord.getEmissions() < leastEmissionsRoutes.get(0).getEmissions()) {
         leastEmissionsRoutes.clear();
         leastEmissionsRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getEmissions() == leastEmissionsRoutes.get(0).getEmissions()) {
-        leastEmissionsRoutes.add(currentRouteRecord);
+        Boolean found = false;
+        for (Route route : leastEmissionsRoutes) {
+          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          leastEmissionsRoutes.add(currentRouteRecord);
+        }
       }
     }
-
+  }
 
   /**
    * This method updates which route is of the greatest distance. The currentRouteRecord is checked
@@ -160,16 +180,18 @@ public class ReportGenerator {
    * @param currentRouteRecord
    */
   public void updateMostDistanceRoute(Route currentRouteRecord) {
-    if (mostDistanceRoutes.isEmpty() == true) {
-      mostDistanceRoutes.add(currentRouteRecord);
-    } else if (currentRouteRecord.getDistance() > mostDistanceRoutes.get(0).getDistance()) {
+    if (currentRouteRecord.getDistance() > 0.0) {
+
+      if (mostDistanceRoutes.isEmpty() == true) {
+        mostDistanceRoutes.add(currentRouteRecord);
+      } else if (currentRouteRecord.getDistance() > mostDistanceRoutes.get(0).getDistance()) {
         mostDistanceRoutes.clear();
         mostDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() == mostDistanceRoutes.get(0).getDistance()) {
         mostDistanceRoutes.add(currentRouteRecord);
       }
     }
-
+  }
 
   /**
    * This method updates which route is of the least distance. The currentRouteRecord is checked
@@ -178,15 +200,18 @@ public class ReportGenerator {
    * @param currentRouteRecord
    */
   public void updateLeastDistanceRoute(Route currentRouteRecord) {
-    if (leastDistanceRoutes.isEmpty() == true) {
-      leastDistanceRoutes.add(currentRouteRecord);
-    } else if (currentRouteRecord.getDistance() < leastDistanceRoutes.get(0).getDistance()) {
+    if (currentRouteRecord.getDistance() > 0.0) {
+
+      if (leastDistanceRoutes.isEmpty() == true) {
+        leastDistanceRoutes.add(currentRouteRecord);
+      } else if (currentRouteRecord.getDistance() < leastDistanceRoutes.get(0).getDistance()) {
         leastDistanceRoutes.clear();
         leastDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() == leastDistanceRoutes.get(0).getDistance()) {
         leastDistanceRoutes.add(currentRouteRecord);
       }
     }
+  }
 
   // TODO: write a single method for MostVisitedSrcAirports and MostVisitedDestAirports
 
