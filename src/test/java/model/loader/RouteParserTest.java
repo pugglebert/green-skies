@@ -303,7 +303,7 @@ public class RouteParserTest {
      */
     @Test
     public void dataParseLowErrorsTest() {
-        for (int i = 0; i < 97; i++) {
+        for (int i = 0; i < 197; i++) {
             routeParser.errorCounter(0);
         }
         try {
@@ -318,7 +318,7 @@ public class RouteParserTest {
      */
     @Test
     public void dataParseHighErrorsTest() {
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < 201; i++) {
             routeParser.errorCounter(0);
         }
         try {

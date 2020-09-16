@@ -401,7 +401,7 @@ public class FiltererTest {
     ArrayList<Route> expectedResults = new ArrayList<>();
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Airline", "2H");
-    expectedResults.add(new Route("2H",1654,"IKT",2937,"ODO",8944,"",0,"AN4".split(" ")));
+    expectedResults.add(new Route("2H",1652,"IKT",2937,"ODO",8944,"",0,"AN4".split(" ")));
     filterer.filterRoutes(testFilterTerms, storage.getRoutes());
     ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
     assertArrayEquals(expectedResults.toArray(), results.toArray());
@@ -417,7 +417,7 @@ public class FiltererTest {
     HashMap<String, String> testFilterTerms = new HashMap<>();
     testFilterTerms.put("Source", "SVX");
     testFilterTerms.put("Destination", "OVC");
-    expectedResults.add(new Route("2W",410,"SVX",2975,"OVC",
+    expectedResults.add(new Route("2W",411,"SVX",2975,"OVC",
             4078,"",0,"CR2".split(" ")));
     filterer.filterRoutes(testFilterTerms, storage.getRoutes());
     ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
@@ -436,7 +436,7 @@ public class FiltererTest {
     testFilterTerms.put("Airline", "2V");
     testFilterTerms.put("Source", "SVY");
     testFilterTerms.put("Destination", "OVB");
-    expectedResults.add(new Route("2V",410,"SVY",2975,"OVB",
+    expectedResults.add(new Route("2V",412,"SVY",2975,"OVB",
             4078,"",0,"CR2".split(" ")));
     filterer.filterRoutes(testFilterTerms, storage.getRoutes());
     ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
@@ -499,9 +499,9 @@ public class FiltererTest {
     testFilterTerms.put("Airline", "2A");
     testFilterTerms.put("Source", "SVH");
     testFilterTerms.put("Destination", "OPP");
-    expectedResults.add(new Route("2A",411,"SVH",2976,"OPP",
+    expectedResults.add(new Route("2A",413,"SVH",2976,"OPP",
             4079,"",0,"CR2".split(" ")));
-    expectedResults.add(new Route("2A",411,"SVH",2976,"OPP",
+    expectedResults.add(new Route("2A",413,"SVH",2976,"OPP",
             4080,"",0,"CR2".split(" ")));
     filterer.filterRoutes(testFilterTerms, storage.getRoutes());
     ArrayList<Route> results = (ArrayList<Route>) filterer.getFilteredRoutes();
