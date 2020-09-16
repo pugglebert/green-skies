@@ -1,7 +1,6 @@
 package model.loader;
 
-import model.data.DataType;
-import model.data.Storage;
+import model.data.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,21 +86,24 @@ public class Loader {
         switch (dataType) {
             case "Airport" :
                 try {
-                    parser = new AirportParser(lines);
+                    List<Airport> existingAirports = storage.getAirports();
+                    parser = new AirportParser(lines, existingAirports);
                 } catch (RuntimeException e) {
                     throw e;
                 }
                 break;
             case "Airline" :
                 try {
-                    parser = new AirlineParser(lines);
+                    List<Airline> exisitingAirlines = storage.getAirlines();
+                    parser = new AirlineParser(lines, exisitingAirlines);
                 } catch (RuntimeException e) {
                     throw e;
                 }
                 break;
             case "Route" :
                 try {
-                    parser = new RouteParser(lines);
+                    List<Route> existingRoutes = storage.getRoutes();
+                    parser = new RouteParser(lines, existingRoutes);
                 } catch (RuntimeException e) {
                     throw e;
                 }

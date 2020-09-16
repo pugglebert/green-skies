@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.HelpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.HelpController">
    <children>
       <Text layoutX="588.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To users">
          <font>
@@ -35,4 +35,4 @@
          </font>
       </Text>
    </children>
-</fx:root>
+</AnchorPane>

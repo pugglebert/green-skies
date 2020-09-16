@@ -1,11 +1,13 @@
 package model.loader;
 
+import model.data.Airport;
 import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,9 +21,10 @@ public class AirportParserTest {
     @Before
     public void setUp() {
         Loader loader = new Loader(new Storage());
+        List<Airport> existingLines = new ArrayList<Airport>();
         try{
             lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
-            airportParser = new AirportParser(lines);
+            airportParser = new AirportParser(lines, existingLines);
         } catch (FileNotFoundException e) {
             System.out.println("file loader unable to load files");
         }

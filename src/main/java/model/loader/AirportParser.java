@@ -4,6 +4,7 @@ import model.data.Airport;
 import model.data.DataType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The sub-class Parser for airport. AirportParser class receives a list of airport data, validates
@@ -48,8 +49,11 @@ public class AirportParser extends Parser {
      * Constructor of AirportParser, it will start dataParse method as well.
      * @param dataFile is the list contains one line of datafile per element.
      */
-    public AirportParser(ArrayList<String> dataFile) {
+    public AirportParser(ArrayList<String> dataFile, List<Airport> existingAirports) {
         super(dataFile, 16);
+        for (Airport airport : existingAirports) {
+            parserData.add(airport);
+        }
         try {
             dataParser();
         } catch(RuntimeException e){

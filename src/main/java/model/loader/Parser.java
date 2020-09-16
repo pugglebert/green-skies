@@ -21,7 +21,7 @@ public abstract class Parser {
   protected int totalErrors = 0;
 
   /** The set contains airport, Airline, route for each sub-parser.*/
-  protected final List<DataType> parserData = new ArrayList<>();
+  protected List<DataType> parserData = new ArrayList<>();
 
 
     /**
