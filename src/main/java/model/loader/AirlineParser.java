@@ -2,13 +2,18 @@ package model.loader;
 
 import model.data.Airline;
 import model.data.DataType;
-
 import java.util.List;
+// TODO: check all method comments start with "This method ..."
+
+// TODO: write comment for this class
 
 public class AirlineParser extends Parser {
   // Processed airlines data
   //  private final Set<DataType> airlines = new HashSet<>();
   // Alphabetical name to represent line index
+
+  // TODO: write comments for these attributes
+
   private final int airlineID = 0,
       name = 1,
       alias = 2,
@@ -25,6 +30,7 @@ public class AirlineParser extends Parser {
     }
     dataParser();
   }
+  // TODO: write comment for this method
 
   @Override
   /** Initializes error lookup array with message for each error code. */
@@ -41,13 +47,14 @@ public class AirlineParser extends Parser {
     errorLookup[9] = "Invalid status";
     errorLookup[10] = "Unknown error";
   }
+  // TODO: write comment for this method
 
   public void dataParser() {
 
     for (String dataLine : dataFile) {
       dataLine = dataLine.replaceAll("[\"]", ""); // remove double quote
       String[] line = dataLine.split(",");
-//      System.out.println(Arrays.toString(line));
+      //      System.out.println(Arrays.toString(line));
 
       if (validater(line)) {
         // System.out.println(Arrays.toString(line));
@@ -58,15 +65,15 @@ public class AirlineParser extends Parser {
             active = true;
           }
           Airline airline =
-                  new Airline(
-                          Integer.parseInt(line[airlineID]),
-                          line[name],
-                          line[alias],
-                          line[IATA],
-                          line[ICAO],
-                          line[callsign],
-                          line[country],
-                          active);
+              new Airline(
+                  Integer.parseInt(line[airlineID]),
+                  line[name],
+                  line[alias],
+                  line[IATA],
+                  line[ICAO],
+                  line[callsign],
+                  line[country],
+                  active);
 
           // parserData.add(airline);
           addAirLine(airline.getAirlineID(), airline);
@@ -78,6 +85,7 @@ public class AirlineParser extends Parser {
     }
   }
 
+  // TODO: remove?
   /*private void addAirLine(List parserData, int airlineID, Airline airline) {
     int attemp = 3; // maximum attemp
     while (attemp > 0) {
@@ -103,15 +111,14 @@ public class AirlineParser extends Parser {
   }*/
 
   /**
-   * add airline to index matches with airLineID.
-   * First check if there are any airline currently sit at index. If it is null then replace with airline param.
-   * If parserset size is too small then init it with null value.
-   * If there is an airline at index then check if the airline is the same with the one we want to add.
-   * If it is the same then treat as duplicate (do nothing)
-   * If is is not then add to error
+   * add airline to index matches with airLineID. First check if there are any airline currently sit
+   * at index. If it is null then replace with airline param. If parserset size is too small then
+   * init it with null value. If there is an airline at index then check if the airline is the same
+   * with the one we want to add. If it is the same then treat as duplicate (do nothing) If is is
+   * not then add to error
    *
-   * @param airlineID  airline ID we want to add
-   * @param airline    Airline Object we wanted to add
+   * @param airlineID airline ID we want to add
+   * @param airline Airline Object we wanted to add
    */
   private void addAirLine(int airlineID, Airline airline) {
     if (airlineID >= parserData.size()) {
@@ -128,10 +135,9 @@ public class AirlineParser extends Parser {
     } else {
       errorCounter(11); // Airline exist with same ID
     }
-
   }
 
-
+  // TODO: write comment for this method
 
   protected boolean validater(String[] line) {
 
@@ -321,18 +327,21 @@ public class AirlineParser extends Parser {
     return true;
   }
 
-//  public static void main(String[] args) throws Exception {
-//    ArrayList<String> testLines;
-//    testLines = new ArrayList<String>();
-//
-//    BufferedReader br = new BufferedReader(new FileReader("src/test/java/TestFiles/airlines.csv"));
-//    int count = 0;
-//    String line = "";
-//    br.readLine(); // header
-//    while ((line = br.readLine()) != null && count < 2) {
-//      testLines.add(line);
-//      count++;
-//    }
-//    AirlineParser parser = new AirlineParser(testLines);
-//  }
+  // TODO remove?
+
+  //  public static void main(String[] args) throws Exception {
+  //    ArrayList<String> testLines;
+  //    testLines = new ArrayList<String>();
+  //
+  //    BufferedReader br = new BufferedReader(new
+  // FileReader("src/test/java/TestFiles/airlines.csv"));
+  //    int count = 0;
+  //    String line = "";
+  //    br.readLine(); // header
+  //    while ((line = br.readLine()) != null && count < 2) {
+  //      testLines.add(line);
+  //      count++;
+  //    }
+  //    AirlineParser parser = new AirlineParser(testLines);
+  //  }
 }

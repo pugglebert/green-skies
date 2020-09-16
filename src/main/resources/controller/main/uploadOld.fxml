@@ -14,87 +14,114 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1494.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+          prefWidth="1494.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.3785400390625" minWidth="10.0" prefWidth="248.39752197265625" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.3785400390625" minWidth="10.0" prefWidth="248.39752197265625" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="575.6024780273438" minWidth="10.0" prefWidth="292.6058349609375" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.409912109375" minWidth="10.0" prefWidth="195.9066162109375" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="379.19842529296875" minWidth="10.0" prefWidth="288.5933837890625" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.3785400390625" minWidth="10.0"
+                           prefWidth="248.39752197265625"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="718.3785400390625" minWidth="10.0"
+                           prefWidth="248.39752197265625"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="575.6024780273438" minWidth="10.0"
+                           prefWidth="292.6058349609375"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="391.409912109375" minWidth="10.0" prefWidth="195.9066162109375"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="379.19842529296875" minWidth="10.0"
+                           prefWidth="288.5933837890625"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" />
-        <RowConstraints />
-        <RowConstraints />
-        <RowConstraints maxHeight="600.3831787109375" minHeight="10.0" prefHeight="587.6493110656738" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints maxHeight="600.3831787109375" minHeight="10.0" prefHeight="587.6493110656738"
+                        vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-        <Text boundsType="VISUAL" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Data Type" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+        <Text boundsType="VISUAL" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Data Type"
+              textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+              GridPane.rowIndex="3" GridPane.valignment="CENTER">
             <font>
-                <Font size="20.0" />
+                <Font size="20.0"/>
             </font>
             <cursor>
-                <Cursor fx:constant="NONE" />
+                <Cursor fx:constant="NONE"/>
             </cursor>
             <GridPane.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
             </GridPane.margin>
         </Text>
-        <Button fx:id="browseButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#browseFiles" prefHeight="42.0" prefWidth="120.0" text="Browse " GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <ChoiceBox fx:id="dataTypeSelect" prefHeight="42.0" prefWidth="252.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Next" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+        <Button fx:id="browseButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#browseFiles"
+                prefHeight="42.0" prefWidth="120.0" text="Browse " GridPane.columnIndex="3" GridPane.halignment="CENTER"
+                GridPane.rowIndex="3"/>
+        <ChoiceBox fx:id="dataTypeSelect" prefHeight="42.0" prefWidth="252.0" GridPane.columnIndex="2"
+                   GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
+        <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" text="Next"
+                visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
             <GridPane.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
             </GridPane.margin>
         </Button>
-        <ListView fx:id="fileView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-        <Text fx:id="fileAcceptedText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="238.138671875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+        <ListView fx:id="fileView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+        <Text fx:id="fileAcceptedText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" visible="false"
+              wrappingWidth="238.138671875" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3"
+              GridPane.valignment="TOP">
             <GridPane.margin>
-                <Insets bottom="100.0" left="50.0" right="50.0" top="50.0" />
+                <Insets bottom="100.0" left="50.0" right="50.0" top="50.0"/>
             </GridPane.margin>
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
         </Text>
-        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToWelcome" prefHeight="42.0" prefWidth="120.0" text="Back" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+        <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToWelcome" prefHeight="42.0" prefWidth="120.0"
+                text="Back" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3"
+                GridPane.valignment="BOTTOM">
             <GridPane.margin>
-                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0"/>
             </GridPane.margin>
         </Button>
         <VBox prefHeight="644.0" prefWidth="249.0" style="-fx-background-color: #007f5f;" GridPane.rowIndex="3">
             <children>
-                <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="Upload Data" textFill="WHITE">
+                <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData"
+                        onMouseClicked="#toUploadData" prefHeight="72.0" prefWidth="220.0"
+                        style="-fx-background-color: transparent;" text="Upload Data" textFill="WHITE">
                     <font>
-                        <Font name="Arial" size="18.0" />
+                        <Font name="Arial" size="18.0"/>
                     </font>
                     <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="20.0"/>
                     </VBox.margin>
                 </Button>
-                <Button fx:id="btnRouteDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toRouteDataView" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="View Routes" textFill="WHITE">
+                <Button fx:id="btnRouteDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toRouteDataView"
+                        prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;"
+                        text="View Routes" textFill="WHITE">
                     <font>
-                        <Font name="Arial" size="18.0" />
+                        <Font name="Arial" size="18.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnAirportDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirportDataView" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="View Airports" textFill="WHITE">
+                <Button fx:id="btnAirportDataView" alignment="CENTER" mnemonicParsing="false"
+                        onAction="#toAirportDataView" prefHeight="72.0" prefWidth="220.0"
+                        style="-fx-background-color: transparent;" text="View Airports" textFill="WHITE">
                     <font>
-                        <Font name="Arial" size="18.0" />
+                        <Font name="Arial" size="18.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnAirlineDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirlineDataView" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: transparent;" text="View Airlines" textFill="WHITE">
+                <Button fx:id="btnAirlineDataView" alignment="CENTER" mnemonicParsing="false"
+                        onAction="#toAirlineDataView" prefHeight="72.0" prefWidth="220.0"
+                        style="-fx-background-color: transparent;" text="View Airlines" textFill="WHITE">
                     <font>
-                        <Font name="Arial" size="18.0" />
+                        <Font name="Arial" size="18.0"/>
                     </font>
                 </Button>
             </children>
         </VBox>
-      <DialogPane fx:id="errorBox" headerText="Error message " prefHeight="239.0" prefWidth="334.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-         <buttonTypes>
-            <ButtonType fx:constant="OK" />
-         </buttonTypes>
-         <GridPane.margin>
-            <Insets left="20.0" right="20.0" top="100.0" />
-         </GridPane.margin>
-      </DialogPane>
+        <DialogPane fx:id="errorBox" headerText="Error message " prefHeight="239.0" prefWidth="334.0" visible="false"
+                    GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3"
+                    GridPane.valignment="CENTER">
+            <buttonTypes>
+                <ButtonType fx:constant="OK"/>
+            </buttonTypes>
+            <GridPane.margin>
+                <Insets left="20.0" right="20.0" top="100.0"/>
+            </GridPane.margin>
+        </DialogPane>
     </children>
 </GridPane>

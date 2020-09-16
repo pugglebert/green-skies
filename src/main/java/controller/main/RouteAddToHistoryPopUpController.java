@@ -1,8 +1,5 @@
 package controller.main;
 
-import controller.analysis.FlightAnalyser;
-import controller.analysis.ReportGenerator;
-import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,100 +15,86 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.data.Route;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+// TODO: check all method comments start with "This method ..."
 
 /**
  * The controller class which contains the controls for the route data view.
+ *
  * @author Hayley Krippner
  * @version 1.0
  * @since 15/09/2020
  */
 public class RouteAddToHistoryPopUpController implements Initializable {
 
+  @FXML private TableView<Route> tableView;
+  @FXML private TableColumn<Route, Integer> passengerNumber;
+  @FXML private TableColumn<Route, String> airlineNameColumn;
+  @FXML private TableColumn<Route, String> sourceAirportColumn;
+  @FXML private TableColumn<Route, String> destinationAirportColumn;
+  @FXML private TableColumn<Route, String> codeShareColumn;
+  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML private Button confirmBtn;
+  @FXML private Button cancelBtn;
+  @FXML private AnchorPane btnChangePassenger;
+  // TODO: write comments for these attributes
 
+  private ArrayList<Route> tempRoute;
+  private RouteDataViewController caller;
+  // TODO: write comment for this method
 
-    //Configure the TableView.
-    @FXML
-    private TableView<Route> tableView;
-    @FXML
-    private TableColumn<Route, Integer> passengerNumber;
-    @FXML
-    private TableColumn<Route, String> airlineNameColumn;
-    @FXML
-    private TableColumn<Route, String> sourceAirportColumn;
-    @FXML
-    private TableColumn<Route, String> destinationAirportColumn;
-    @FXML
-    private TableColumn<Route, String> codeShareColumn;
-    @FXML
-    private TableColumn<Route, Integer> numOfStopsColumn;
-    @FXML
-    private TableColumn<Route, String> equipmentColumn;
-    @FXML
-    private Button confirmBtn;
-    @FXML
-    private Button cancelBtn;
-    @FXML
-    private AnchorPane btnChangePassenger;
+  public void display() throws IOException {
+    setTable();
+    Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
+    Stage addPopUp = new Stage();
+    addPopUp.initModality(Modality.APPLICATION_MODAL);
+    addPopUp.setScene(new Scene(root));
+    addPopUp.show();
+  }
 
-    private ArrayList<Route> tempRoute;
-    private RouteDataViewController caller;
+  /**
+   * Initializes the controller class. The checkboxes are added to each record.
+   *
+   * @param url The URL used.
+   * @param rb The resource bundle used.
+   */
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
 
-    public void display() throws IOException {
-        setTable();
-        Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
-        Stage addPopUp = new Stage();
-        addPopUp.initModality(Modality.APPLICATION_MODAL);
-        addPopUp.setScene(new Scene(root));
-        addPopUp.show();
-    }
+    // Set up the columns in the TableView.
 
-    /**
-     * Initializes the controller class. The checkboxes are added to each record.
-     *
-     * @param url The URL used.
-     * @param rb  The resource bundle used.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+  }
 
-        //Set up the columns in the TableView.
+  //    protected void setTableView() {
+  //        ObservableList<Route> routes = FXCollections.observableList(tempRoute);
+  //        tableView.setItems(routes);
+  //    }
 
-    }
+  public void confirm() {} // TODO: write comment for this method
 
+  public void setCaller(RouteDataViewController caller) {
+    this.caller = caller;
+  }
+  // TODO: write comment for this method
 
+  public ArrayList<Route> getTempRoute() {
+    return this.tempRoute;
+  }
+  // TODO: write comment for this method
 
-//    protected void setTableView() {
-//        ObservableList<Route> routes = FXCollections.observableList(tempRoute);
-//        tableView.setItems(routes);
-//    }
-
-    public void confirm(){}
-    public void setCaller(RouteDataViewController caller){
-        this.caller = caller;
-    }
-
-    public ArrayList<Route> getTempRoute(){
-       return this.tempRoute;
-    }
-    public void setTable(){
-        passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
-        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
-        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
-        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
-        codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
-        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
-        equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
-        ObservableList<Route> routes = FXCollections.observableList(tempRoute);
-        tableView.setItems(routes);
-    }
+  public void setTable() {
+    passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
+    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+    sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
+    destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
+    codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
+    numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
+    equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
+    ObservableList<Route> routes = FXCollections.observableList(tempRoute);
+    tableView.setItems(routes);
+  }
 }
-
-
-
-

@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ import static org.junit.Assert.*;
  * Unit test for ReportGenrator class.
  *
  * @author Hayley Krippner
- * @since 15/09/2020
+ * @since 16/09/2020
  * @version 1.0
  */
 public class ReportGeneratorTest {
@@ -41,8 +40,7 @@ public class ReportGeneratorTest {
     }
   }
 
-  // ------------------------------------------- Testing for updateTotalEmissions
-  // ---------------------------------------
+  // --------------------------------------- Testing for updateTotalEmissions
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
@@ -162,8 +160,7 @@ public class ReportGeneratorTest {
     assertEquals(8760000.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
   }
 
-  // ------------------------------------------- Testing for updateTotalDistance
-  // ---------------------------------------
+  // ------------------------------------- Testing for updateTotalDistance
 
   /**
    * Verify that when updateTotalDistance is called with a route that is of large distance that the
@@ -244,7 +241,6 @@ public class ReportGeneratorTest {
   }
 
   // --------------------------------- Testing for updateMostEmissionsRoute
-  // ---------------------------------
 
   /**
    * Verify that when updateMostEmissionsRoute is called with a route and there are no routes in the
@@ -271,8 +267,8 @@ public class ReportGeneratorTest {
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteLessEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
-    testRouteMoreEmissions.setEmissions(12600); // 12600 km
-    testRouteLessEmissions.setEmissions(163); // 163 km
+    testRouteMoreEmissions.setEmissions(12600);
+    testRouteLessEmissions.setEmissions(163);
     expectedResults.add(testRouteMoreEmissions);
     reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
     reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
@@ -290,8 +286,8 @@ public class ReportGeneratorTest {
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteLessEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
-    testRouteMoreEmissions.setEmissions(12600); // 12600 km
-    testRouteLessEmissions.setEmissions(163); // 163 km
+    testRouteMoreEmissions.setEmissions(12600);
+    testRouteLessEmissions.setEmissions(163);
     expectedResults.add(testRouteMoreEmissions);
     reportGenerator.updateMostEmissionsRoute(testRouteMoreEmissions);
     reportGenerator.updateMostEmissionsRoute(testRouteLessEmissions);
@@ -300,14 +296,14 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateMostEmissionsRoute is called with a route and it is already in the most
-   * emissions routes, then the most emissions route in the history is remains the same.
+   * emissions routes, then the most emissions route in the history remains the same.
    */
   @Test
   public void updateMostEmissionsRouteAddSameEmissionsSameRouteEntryTest() {
     ArrayList<Route> expectedResults = new ArrayList<>();
     Route testRouteEmissions =
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
-    testRouteEmissions.setEmissions(20000); // 12600 km
+    testRouteEmissions.setEmissions(20000);
     expectedResults.add(testRouteEmissions);
     reportGenerator.updateMostEmissionsRoute(testRouteEmissions);
     reportGenerator.updateMostEmissionsRoute(testRouteEmissions);
@@ -500,7 +496,6 @@ public class ReportGeneratorTest {
   }
 
   // --------------------------------- Testing for updateLeastEmissionsRoute
-  // ---------------------------------
 
   /**
    * Verify that when updateLeastEmissionsRoute is called with a route and there are no routes in
@@ -527,8 +522,8 @@ public class ReportGeneratorTest {
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteLessEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
-    testRouteMoreEmissions.setEmissions(12600); // 12600 km
-    testRouteLessEmissions.setEmissions(163); // 163 km
+    testRouteMoreEmissions.setEmissions(12600);
+    testRouteLessEmissions.setEmissions(163);
     expectedResults.add(testRouteLessEmissions);
     reportGenerator.updateLeastEmissionsRoute(testRouteLessEmissions);
     reportGenerator.updateLeastEmissionsRoute(testRouteMoreEmissions);
@@ -536,7 +531,7 @@ public class ReportGeneratorTest {
   }
 
   /**
-   * Verify that when updateMostEmissionsRoute is called with a route and it has less emissions,
+   * Verify that when updateLeastEmissionsRoute is called with a route and it has less emissions,
    * then the less emissions route in the history is updated to the added route.
    */
   @Test
@@ -546,8 +541,8 @@ public class ReportGeneratorTest {
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteLessEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
-    testRouteMoreEmissions.setEmissions(12600); // 12600 km
-    testRouteLessEmissions.setEmissions(163); // 163 km
+    testRouteMoreEmissions.setEmissions(12600);
+    testRouteLessEmissions.setEmissions(163);
     expectedResults.add(testRouteLessEmissions);
     reportGenerator.updateLeastEmissionsRoute(testRouteMoreEmissions);
     reportGenerator.updateLeastEmissionsRoute(testRouteLessEmissions);
@@ -556,14 +551,14 @@ public class ReportGeneratorTest {
 
   /**
    * Verify that when updateLeastEmissionsRoute is called with a route and it is already in the
-   * least emissions routes, then the least emissions route in the history is remains the same.
+   * least emissions routes, then the least emissions route in the history remains the same.
    */
   @Test
   public void updateLeastEmissionsRouteAddSameEmissionsSameRouteEntryTest() {
     ArrayList<Route> expectedResults = new ArrayList<>();
     Route testRouteEmissions =
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
-    testRouteEmissions.setEmissions(20000); // 12600 km
+    testRouteEmissions.setEmissions(20000);
     expectedResults.add(testRouteEmissions);
     reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
     reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
@@ -571,7 +566,7 @@ public class ReportGeneratorTest {
   }
 
   /**
-   * Verify that when updateMostEmissionsRoute is called with a route and it has the same most
+   * Verify that when updateLeastEmissionsRoute is called with a route and it has the same most
    * emissions but isn't in the most emissions routes array, then the route is added to the most
    * emissions route array.
    */
@@ -582,8 +577,8 @@ public class ReportGeneratorTest {
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteDiffEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
-    testRouteEmissions.setEmissions(20000); // 12600 km
-    testRouteDiffEmissions.setEmissions(20000); // 12600 km
+    testRouteEmissions.setEmissions(20000);
+    testRouteDiffEmissions.setEmissions(20000);
     expectedResults.add(testRouteEmissions);
     expectedResults.add(testRouteDiffEmissions);
     reportGenerator.updateLeastEmissionsRoute(testRouteEmissions);
@@ -673,7 +668,6 @@ public class ReportGeneratorTest {
     assertEquals(expectedResults, reportGenerator.getLeastEmissionsRoutes());
   }
 
-  // TODO: rebug this test. Actual array is empty.
   /**
    * Verify that when updateLeastEmissionsRoute is called with a route that has NaN emissions and
    * then with a route that has emissions that the NaN route gets ignored and the most emissions
@@ -757,7 +751,6 @@ public class ReportGeneratorTest {
   }
 
   // --------------------------------- Testing for updateMostDistanceRoute
-  // ---------------------------------
 
   /**
    * Verify that when updateMostDistanceRoute is called with a route and there are no routes in the
@@ -773,8 +766,82 @@ public class ReportGeneratorTest {
     assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
   }
 
+  /**
+   * Verify that when updateMostDistanceRoute is called with a route and it is of more distance,
+   * then the more emissions route in the history is changed to this route.
+   */
+  @Test
+  public void updateMostDistanceRouteAddMoreDistanceEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreDistance.setDistance(29394389);
+    testRouteLessDistance.setDistance(309328);
+    expectedResults.add(testRouteMoreDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteLessDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteMoreDistance);
+    assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
+  }
+
+  /**
+   * Verify that when updateMostDistanceRoute is called with a route and it is of less distance,
+   * then the most distance route is not changed.
+   */
+  @Test
+  public void updateMostDistanceRouteAddLessDistanceEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreDistance.setDistance(43243224);
+    testRouteLessDistance.setDistance(3232223);
+    expectedResults.add(testRouteMoreDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteMoreDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteLessDistance);
+    assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
+  }
+
+  /**
+   * Verify that when updateMostDistanceRoute is called with a route and it is already in the most
+   * distance routes, then the most distance routes in the history remains the same.
+   */
+  @Test
+  public void updateMostDistanceRouteAddSameDistanceSameRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    testRouteDistance.setDistance(700080);
+    expectedResults.add(testRouteDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteDistance);
+    assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
+  }
+
+  /**
+   * Verify that when updateMostDistanceRoute is called with a route and it has the same most
+   * distance but isn't in the most distance routes array, then the route is added to the most
+   * distance route array.
+   */
+  @Test
+  public void updateMostDistanceRouteAddSameEmissionsDiffRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteDiffDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteDistance.setDistance(20000);
+    testRouteDiffDistance.setDistance(20000);
+    expectedResults.add(testRouteDistance);
+    expectedResults.add(testRouteDiffDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteDistance);
+    reportGenerator.updateMostDistanceRoute(testRouteDiffDistance);
+    assertEquals(expectedResults, reportGenerator.getMostDistanceRoutes());
+  }
+
   // --------------------------------- Testing for updateLeastDistanceRoute
-  // ---------------------------------
 
   /**
    * Verify that when updateLeastDistanceRoute is called with a route and there are no routes in the
@@ -789,4 +856,272 @@ public class ReportGeneratorTest {
     reportGenerator.updateLeastDistanceRoute(testRoute);
     assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
   }
+
+  /**
+   * Verify that when updateLeastDistanceRoute is called with a route and it is of less distance,
+   * then the less emissions route in the history is changed to this route.
+   */
+  @Test
+  public void updateLeastDistanceRouteAddLessDistanceEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreDistance.setDistance(29394389);
+    testRouteLessDistance.setDistance(309328);
+    expectedResults.add(testRouteLessDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteMoreDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteLessDistance);
+    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+  }
+
+  /**
+   * Verify that when updateLeastDistanceRoute is called with a route and it is of more distance,
+   * then the most less route is not changed.
+   */
+  @Test
+  public void updateLessDistanceRouteAddMoreDistanceEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteMoreDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLessDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteMoreDistance.setDistance(43243224);
+    testRouteLessDistance.setDistance(3232223);
+    expectedResults.add(testRouteLessDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteLessDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteMoreDistance);
+    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+  }
+
+  /**
+   * Verify that when updateLeastDistanceRoute is called with a route and it is already in the least
+   * distance routes, then the least distance routes in the history remains the same.
+   */
+  @Test
+  public void updateLeastDistanceRouteAddSameDistanceSameRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    testRouteDistance.setDistance(34727229);
+    expectedResults.add(testRouteDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDistance);
+    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+  }
+
+  /**
+   * Verify that when updateLeastDistanceRoute is called with a route and it has the same most
+   * distance but isn't in the most distance routes array, then the route is added to the most
+   * distance route array.
+   */
+  @Test
+  public void updateLeastDistanceRouteAddSameDistanceDiffRouteEntryTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteDiffDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteDistance.setDistance(20000);
+    testRouteDiffDistance.setDistance(20000);
+    expectedResults.add(testRouteDistance);
+    expectedResults.add(testRouteDiffDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDiffDistance);
+    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+  }
+
+  // --------------------------------- Testing for updateMostTravelledMostRoute
+
+
+  /** */
+  @Test
+  public void updateMostTravelledMostRouteOneTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteDiffDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteDistance.setDistance(20000);
+    testRouteDiffDistance.setDistance(20000);
+    expectedResults.add(testRouteDistance);
+    expectedResults.add(testRouteDiffDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDiffDistance);
+    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostTravelledMostRouteTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostTravelledMostRouteTenTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostTravelledRouteNoRoutesTest() {
+
+  }
+
+  // --------------------------------- Testing for updateLeastTravelledMostRoute
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledMostRouteOneTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledMostRouteTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledMostRouteTenTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledRouteNoRoutesTest() {
+
+  }
+
+  // --------------------------------- Testing for updateMostVisitedSrcAirport
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedSrcAirportOneTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedSrcAirportTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedSrcAirportNoRoutesTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportOneTest() {
+
+  }
+
+  // --------------------------------- Testing for updateMostVisitedDestAirport
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportTenTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportNoRoutesTest() {
+
+  }
+
+  // --------------------------------- Testing for calculateCO2ReductionNeeded
+
+  /**
+   *
+   */
+  @Test
+  public void calculateCO2ReductionNeededSmallTest() {
+
+  }
+
+
+  /**
+   *
+   */
+  @Test
+  public void calculateCO2ReductionNeededLargeTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void calculateCO2ReductionNeededNegTest() {
+
+  }
+
+  // --------------------------------- Testing for calculateOffsetTrees
+
+  /**
+   *
+   */
+  @Test
+  public void calculateOffsetTreesSmallTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void calculateOffsetTreesLargeTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void calculateOffsetTreesNegTest() {
+
+  }
+
+
 }
