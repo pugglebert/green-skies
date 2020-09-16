@@ -181,14 +181,22 @@ public class ReportGenerator {
    */
   public void updateMostDistanceRoute(Route currentRouteRecord) {
     if (currentRouteRecord.getDistance() > 0.0) {
-
       if (mostDistanceRoutes.isEmpty() == true) {
         mostDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() > mostDistanceRoutes.get(0).getDistance()) {
         mostDistanceRoutes.clear();
         mostDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() == mostDistanceRoutes.get(0).getDistance()) {
-        mostDistanceRoutes.add(currentRouteRecord);
+        Boolean found = false;
+        for (Route route : mostDistanceRoutes) {
+          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          mostDistanceRoutes.add(currentRouteRecord);
+        }
       }
     }
   }
@@ -208,7 +216,16 @@ public class ReportGenerator {
         leastDistanceRoutes.clear();
         leastDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() == leastDistanceRoutes.get(0).getDistance()) {
-        leastDistanceRoutes.add(currentRouteRecord);
+        Boolean found = false;
+        for (Route route : leastDistanceRoutes) {
+          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          leastDistanceRoutes.add(currentRouteRecord);
+        }
       }
     }
   }
