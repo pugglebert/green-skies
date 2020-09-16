@@ -13,9 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.*;
 
-
 import static org.junit.Assert.*;
-
 
 /**
  * Unit test for ReportGenrator class.
@@ -977,8 +975,9 @@ public class ReportGeneratorTest {
   }
 
   /**
-   * Verify that when updateMostTravelledRoute is called when there are multiple routes in history i.e. 10 and one of them
-   * is of the most travelled, then that route is the only route added to the most travelled routes array.
+   * Verify that when updateMostTravelledRoute is called when there are multiple routes in history
+   * i.e. 10 and one of them is of the most travelled, then that route is the only route added to
+   * the most travelled routes array.
    */
   @Test
   public void updateMostTravelledMostRouteTenDiffOneMostTest() {
@@ -1017,8 +1016,9 @@ public class ReportGeneratorTest {
   }
 
   /**
-   * Verify that when updateMostTravelledRoute is called when there are multiple routes in history i.e. 10 and more than one of them
-   * e.g. 3 is of the most travelled, then those routes are the only routes added to the most travelled routes array.
+   * Verify that when updateMostTravelledRoute is called when there are multiple routes in history
+   * i.e. 10 and more than one of them e.g. 3 is of the most travelled, then those routes are the
+   * only routes added to the most travelled routes array.
    */
   @Test
   public void updateMostTravelledMostRouteTenDiffThreeMostTest() {
@@ -1059,8 +1059,8 @@ public class ReportGeneratorTest {
   }
 
   /**
-   * Verify that when updateMostTravelledRoute is called when there are no routes in history that there are no routes
-   * in the most travelled routes array.
+   * Verify that when updateMostTravelledRoute is called when there are no routes in history that
+   * there are no routes in the most travelled routes array.
    */
   @Test
   public void updateMostTravelledRouteNoRoutesTest() {
@@ -1072,59 +1072,337 @@ public class ReportGeneratorTest {
 
   // --------------------------------- Testing for updateLeastTravelledMostRoute
 
-  /** */
+  /**
+   * Verify that when updateMostTravelledRoute is called when there is one route in the flight
+   * history, then the least travelled route is this single route.
+   */
   @Test
-  public void updateLeastTravelledMostRouteOneTest() {}
+  public void updateLeastTravelledMostRouteOneTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRoute = new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    testRoute.setTimesTaken(5);
+    expectedResults.add(testRoute);
+    testRoutes.add(testRoute);
+    reportGenerator.updateLeastTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getLeastTravelledRoute());
+  }
 
-  /** */
+  /**
+   * Verify that when updateLeastTravelledRoute is called when there are two routes in the flight
+   * history and one is less travelled than the other, then the least travelled route is the only
+   * route in the least travelled routes array.
+   */
   @Test
-  public void updateLeastTravelledMostRouteTwoTest() {}
+  public void updateLeastTravelledMostRouteTwoTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRouteMost = new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteLess =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteLess.setTimesTaken(86);
+    testRouteMost.setTimesTaken(233);
+    expectedResults.add(testRouteLess);
+    testRoutes.add(testRouteMost);
+    testRoutes.add(testRouteLess);
+    reportGenerator.updateLeastTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getLeastTravelledRoute());
+  }
 
-  /** */
+  /**
+   * Verify that when updateMostTravelledRoute is called when there are multiple routes in history
+   * i.e. 10 and one of them is of the least travelled, then that route is the only route added to
+   * the least travelled routes array.
+   */
   @Test
-  public void updateLeastTravelledMostRouteTenTest() {}
+  public void updateLeastTravelledMostRouteTenDiffOneMostTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRouteLeast = new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRoute2 = new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute3 = new Route("2C", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute4 = new Route("2D", 2777, "GBRF", 2242, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute5 = new Route("2E", 1744, "GFRG", 2727, "BIAR", 6436, "", 1, "NH7".split(" "));
+    Route testRoute6 = new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" "));
+    Route testRoute7 = new Route("2G", 2775, "SDD", 7557, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute8 = new Route("2H", 9898, "VSV", 5578, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute9 = new Route("2I", 2782, "SVDE", 5257, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteLeast.setTimesTaken(1);
+    testRoute2.setTimesTaken(2);
+    testRoute3.setTimesTaken(3);
+    testRoute4.setTimesTaken(4);
+    testRoute5.setTimesTaken(5);
+    testRoute6.setTimesTaken(6);
+    testRoute7.setTimesTaken(7);
+    testRoute8.setTimesTaken(8);
+    testRoute9.setTimesTaken(9);
+    expectedResults.add(testRouteLeast);
+    testRoutes.add(testRoute2);
+    testRoutes.add(testRoute3);
+    testRoutes.add(testRoute4);
+    testRoutes.add(testRoute5);
+    testRoutes.add(testRoute6);
+    testRoutes.add(testRoute7);
+    testRoutes.add(testRoute8);
+    testRoutes.add(testRoute9);
+    testRoutes.add(testRouteLeast);
+    reportGenerator.updateLeastTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getLeastTravelledRoute());
+  }
 
-  /** */
+  /**
+   * Verify that when updateLeastTravelledRoute is called when there are multiple routes in history
+   * i.e. 10 and more than one of them e.g. 3 is of the least travelled, then those routes are the
+   * only routes added to the least travelled routes array.
+   */
   @Test
-  public void updateLeastTravelledRouteNoRoutesTest() {}
+  public void updateLeastTravelledMostRouteTenDiffThreeMostTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    Route testRoute1 = new Route("2A", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRoute2 = new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute3 = new Route("2C", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute4 = new Route("2D", 2777, "GBRF", 2242, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute5 = new Route("2E", 1744, "GFRG", 2727, "BIAR", 6436, "", 1, "NH7".split(" "));
+    Route testRoute6 = new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" "));
+    Route testRoute7 = new Route("2G", 2775, "SDD", 7557, "BIAR", 6436, "", 3, "NH7".split(" "));
+    Route testRoute8 = new Route("2H", 9898, "VSV", 5578, "BIAR", 6436, "", 4, "NH7".split(" "));
+    Route testRoute9 = new Route("2I", 2782, "SVDE", 5257, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRoute1.setTimesTaken(8);
+    testRoute2.setTimesTaken(2);
+    testRoute3.setTimesTaken(9);
+    testRoute4.setTimesTaken(2);
+    testRoute5.setTimesTaken(9);
+    testRoute6.setTimesTaken(6);
+    testRoute7.setTimesTaken(7);
+    testRoute8.setTimesTaken(8);
+    testRoute9.setTimesTaken(9);
+    expectedResults.add(testRoute4);
+    expectedResults.add(testRoute2);
+    testRoutes.add(testRoute1);
+    testRoutes.add(testRoute2);
+    testRoutes.add(testRoute3);
+    testRoutes.add(testRoute4);
+    testRoutes.add(testRoute5);
+    testRoutes.add(testRoute6);
+    testRoutes.add(testRoute7);
+    testRoutes.add(testRoute8);
+    testRoutes.add(testRoute9);
+    reportGenerator.updateLeastTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getLeastTravelledRoute());
+  }
+
+  /**
+   * Verify that when updateLeastTravelledRoute is called when there are no routes in history that
+   * there are no routes in the least travelled routes array.
+   */
+  @Test
+  public void updateLeastTravelledRouteNoRoutesTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    ArrayList<Route> testRoutes = new ArrayList<>();
+    reportGenerator.updateLeastTravelledRoute(testRoutes);
+    assertEquals(expectedResults, reportGenerator.getLeastTravelledRoute());
+  }
 
   // --------------------------------- Testing for updateMostVisitedSrcAirport
 
-  /** */
+  /**
+   * Verify that when updateMostVisitedSrcAiport is called when there is one source aiport entry,
+   * then the most visit source airport is this entry
+   */
   @Test
-  public void updateMostVisitedSrcAirportOneTest() {}
+  public void updateMostVisitedSrcAirportOneTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    String testString = "Wellington Aiport";
+    expectedResults.add(testString);
+    HashMap<String, Integer> testSrcAirports = new HashMap<>();
+    testSrcAirports.put("Wellington Aiport", 100);
+    reportGenerator.updateMostVisitedSrcAirports(testSrcAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedSrcAirports());
+  }
 
-  /** */
+  /**
+   * Verify that when updateMostVisitedSrcAiport is called when there are two source aiport entries,
+   * where one is most visited than the other, then the most visit source airport is the one that is
+   * most visted out of the two entries.
+   */
   @Test
-  public void updateMostVisitedSrcAirportTwoTest() {}
+  public void updateMostVisitedSrcAirportTwoTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    expectedResults.add("Wellington Aiport");
+    HashMap<String, Integer> testSrcAirports = new HashMap<>();
+    testSrcAirports.put("Wellington Aiport", 100);
+    testSrcAirports.put("Auckland Aiport", 84);
+    reportGenerator.updateMostVisitedSrcAirports(testSrcAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedSrcAirports());
+  }
 
-  /** */
+  /**
+   * Verify that when updateMostVisitedSrcAiport is called when there are multiple source airports
+   * in history i.e. 9 and one of them is of the most visited source airports, then this airport is
+   * the only airport added to the most visited source airports array.
+   */
   @Test
-  public void updateMostVisitedSrcAirportNoRoutesTest() {}
+  public void updateMostVisitedSrcAirportTenDiffOneMostTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    expectedResults.add("Christchurch Aiport");
+    HashMap<String, Integer> testSrcAirports = new HashMap<>();
+    testSrcAirports.put("Wellington Aiport", 100);
+    testSrcAirports.put("Auckland Aiport", 84);
+    testSrcAirports.put("Christchurch Aiport", 147);
+    testSrcAirports.put("Queenstown Aiport", 44);
+    testSrcAirports.put("Nelson Aiport", 44);
+    testSrcAirports.put("Hamilton Aiport", 14);
+    testSrcAirports.put("Rotorua Aiport", 57);
+    testSrcAirports.put("Hawke's Bay Aiport", 45);
+    testSrcAirports.put("Palmerston North Aiport", 4);
+    reportGenerator.updateMostVisitedSrcAirports(testSrcAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedSrcAirports());
+  }
 
-  /** */
+  /**
+   * Verify that when updateMostVisitedSrcAiport is called when there are multiple source airports
+   * in history i.e. 9 and more than one of them e.g. 3 are of the most visited source airports,
+   * then those airports are the only airports added to the most visited source airports array.
+   */
   @Test
-  public void updateMostVisitedDestAirportOneTest() {}
+  public void updateMostVisitedSrcAirportTenDiffThreeMostTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    expectedResults.add("Wellington Aiport");
+    expectedResults.add("Hamilton Aiport");
+    expectedResults.add("Auckland Aiport");
+    HashMap<String, Integer> testSrcAirports = new HashMap<>();
+    testSrcAirports.put("Wellington Aiport", 251);
+    testSrcAirports.put("Auckland Aiport", 251);
+    testSrcAirports.put("Christchurch Aiport", 147);
+    testSrcAirports.put("Queenstown Aiport", 44);
+    testSrcAirports.put("Nelson Aiport", 44);
+    testSrcAirports.put("Hamilton Aiport", 251);
+    testSrcAirports.put("Rotorua Aiport", 57);
+    testSrcAirports.put("Hawke's Bay Aiport", 45);
+    testSrcAirports.put("Palmerston North Aiport", 4);
+    reportGenerator.updateMostVisitedSrcAirports(testSrcAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedSrcAirports());
+  }
+
+  /**
+   * Verify that when updateMostVisitedSrcAiport is called when there are no source aiport entries,
+   * then the most visited source airport array should be empty.
+   */
+  @Test
+  public void updateMostVisitedSrcAirportNoRoutesTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    HashMap<String, Integer> testSrcAirports = new HashMap<>();
+    reportGenerator.updateMostVisitedSrcAirports(testSrcAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedSrcAirports());
+  }
 
   // --------------------------------- Testing for updateMostVisitedDestAirport
 
-  /** */
+  /**
+   * Verify that when updateMostVisitedDestAiport is called when there is one destionation aiport
+   * entry, then the most visit destination airport is this entry.
+   */
   @Test
-  public void updateMostVisitedDestAirportTwoTest() {}
+  public void updateMostVisitedDestAirportOneTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    String testString = "Wellington Aiport";
+    expectedResults.add(testString);
+    HashMap<String, Integer> testDestAirports = new HashMap<>();
+    testDestAirports.put("Wellington Aiport", 100);
+    reportGenerator.updateMostVisitedDestAirports(testDestAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedDestAirports());
+  }
 
-  /** */
+  /**
+   * Verify that when updateMostVisitedDestAiport is called when there are two destination aiport
+   * entries, where one is most visited than the other, then the most visit destination airport is
+   * the one that is most visted out of the two entries.
+   */
   @Test
-  public void updateMostVisitedDestAirportTenTest() {}
+  public void updateMostVisitedDestAirportTwoTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    expectedResults.add("Wellington Aiport");
+    HashMap<String, Integer> testDestAirports = new HashMap<>();
+    testDestAirports.put("Wellington Aiport", 100);
+    testDestAirports.put("Auckland Aiport", 84);
+    reportGenerator.updateMostVisitedDestAirports(testDestAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedDestAirports());
+  }
 
-  /** */
+  /**
+   * Verify that when updateMostVisitedDestAiport is called when there are multiple destination
+   * airports in history i.e. 9 and one of them is of the most visited destination airports, then
+   * this airport is the only airport added to the most visited destination airports array.
+   */
   @Test
-  public void updateMostVisitedDestAirportNoRoutesTest() {}
+  public void updateMostVisitedDestAirportTenTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    expectedResults.add("Christchurch Aiport");
+    HashMap<String, Integer> testDestAirports = new HashMap<>();
+    testDestAirports.put("Wellington Aiport", 100);
+    testDestAirports.put("Auckland Aiport", 84);
+    testDestAirports.put("Christchurch Aiport", 147);
+    testDestAirports.put("Queenstown Aiport", 44);
+    testDestAirports.put("Nelson Aiport", 44);
+    testDestAirports.put("Hamilton Aiport", 14);
+    testDestAirports.put("Rotorua Aiport", 57);
+    testDestAirports.put("Hawke's Bay Aiport", 45);
+    testDestAirports.put("Palmerston North Aiport", 4);
+    reportGenerator.updateMostVisitedDestAirports(testDestAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedDestAirports());
+  }
+
+  /**
+   * Verify that when updateMostVisitedDestAiport is called when there are multiple destination
+   * airports in history i.e. 9 and more than one of them e.g. 3 are of the most visited destination
+   * airports, then those airports are the only airports added to the most visited destination
+   * airports array.
+   */
+  @Test
+  public void updateMostVisitedDestAirportTenDiffThreeMostTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    expectedResults.add("Wellington Aiport");
+    expectedResults.add("Hamilton Aiport");
+    expectedResults.add("Auckland Aiport");
+    HashMap<String, Integer> testSrcAirports = new HashMap<>();
+    testSrcAirports.put("Wellington Aiport", 251);
+    testSrcAirports.put("Auckland Aiport", 251);
+    testSrcAirports.put("Christchurch Aiport", 147);
+    testSrcAirports.put("Queenstown Aiport", 44);
+    testSrcAirports.put("Nelson Aiport", 44);
+    testSrcAirports.put("Hamilton Aiport", 251);
+    testSrcAirports.put("Rotorua Aiport", 57);
+    testSrcAirports.put("Hawke's Bay Aiport", 45);
+    testSrcAirports.put("Palmerston North Aiport", 4);
+    reportGenerator.updateMostVisitedDestAirports(testSrcAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedDestAirports());
+  }
+
+  /**
+   * Verify that when updateMostVisitedDestAiport is called when there are no destination aiport
+   * entries, then the most visited destination airport array should be empty.
+   */
+  @Test
+  public void updateMostVisitedDestAirportNoRoutesTest() {
+    ArrayList<String> expectedResults = new ArrayList<>();
+    HashMap<String, Integer> testSrcAirports = new HashMap<>();
+    reportGenerator.updateMostVisitedDestAirports(testSrcAirports);
+    assertEquals(expectedResults, reportGenerator.getMostVisitedDestAirports());
+  }
 
   // --------------------------------- Testing for calculateCO2ReductionNeeded
 
+  // TODO: debug
   /** */
-  @Test
-  public void calculateCO2ReductionNeededSmallTest() {}
+  //  @Test
+  //  public void calculateCO2ReductionNeededSmallTest() {
+  //    reportGenerator.setCarbonEmissionsGoal(200000);
+  //    reportGenerator.setTotalCarbonEmissions(2000);
+  //    int expectedReduction = 198000;
+  //    assertEquals(expectedReduction, reportGenerator.getHowMuchToReduceCO2By(), 0.00001);
+  //
+  //  }
 
   /** */
   @Test

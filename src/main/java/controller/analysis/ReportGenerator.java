@@ -74,18 +74,6 @@ public class ReportGenerator {
    *     history.
    */
   public void updateMostTravelledRoute(List<Route> routeHistoryEntries) {
-    // TODO: remove once the quicksort and binary sort have been thoughroughly tested.
-
-    //        int currMaxRouteUsed = 0;
-    //        for (Route route : routeHistoryEntries) {
-    //            if (route.getTimesTake() > currMaxRouteUsed) {
-    //                mostTravelledRoutes.clear();
-    //                mostTravelledRoutes.add(route);
-    //            } else if (route.getTimesTake() == currMaxRouteUsed) {
-    //                mostTravelledRoutes.add(route);
-    //            }
-    //        }
-
     if (routeHistoryEntries.size() >= 1) {
       if (routeHistoryEntries.size() == 1) {
         mostTravelledRoutes.add(routeHistoryEntries.get(0));
@@ -109,23 +97,18 @@ public class ReportGenerator {
    *     history.
    */
   public void updateLeastTravelledRoute(List<Route> routeHistoryEntries) {
-    // TODO: remove once the quicksort and binary sort have been thoughroughly tested.
 
-    //        int currMaxRouteUsed = 0;
-    //        for (Route route : routeHistoryEntries) {
-    //            if (route.getTimesTake() > currMaxRouteUsed) {
-    //                leastTravelledRoutes.clear();
-    //                leastTravelledRoutes.add(route);
-    //            } else if (route.getTimesTake() == currMaxRouteUsed) {
-    //                leastTravelledRoutes.add(route);
-    //            }
-    //        }
-
-    quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
-    int minRouteCounter = routeHistoryEntries.get(0).getTimesTake();
-    int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
-    for (int i = 0; i < firstOccuranceIndex + 1; i++) {
-      mostTravelledRoutes.add(routeHistoryEntries.get(i));
+    if (routeHistoryEntries.size() >= 1) {
+      if (routeHistoryEntries.size() == 1) {
+        leastTravelledRoutes.add(routeHistoryEntries.get(0));
+      } else {
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        int minRouteCounter = routeHistoryEntries.get(0).getTimesTake();
+        int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
+        for (int i = 0; i < firstOccuranceIndex + 1; i++) {
+          leastTravelledRoutes.add(routeHistoryEntries.get(i));
+        }
+      }
     }
   }
 
@@ -301,6 +284,8 @@ public class ReportGenerator {
 
   public void calculateOffsetTrees(double totalCarbonEmissions) {}
 
+
+
   // TODO: write comment for this method
   public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
     this.carbonEmissionGoal = carbonEmissionGoal;
@@ -353,9 +338,6 @@ public class ReportGenerator {
   public double getAnalysisPeriod() {
     return analysisPeriod;
   }
-
-  // TODO: test the implemention the sort and search in terms of updateMostTravelledRoute and
-  // updateLeastTravelledRoute. 14/09/2020 HK
 
   /**
    * This function implements the binary search algorithm.
@@ -438,5 +420,9 @@ public class ReportGenerator {
 
   public ArrayList<Route> getMostTravelledRoute() {
     return mostTravelledRoutes;
+  }
+
+  public ArrayList<Route> getLeastTravelledRoute() {
+    return leastTravelledRoutes;
   }
 }
