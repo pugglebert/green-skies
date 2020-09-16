@@ -105,7 +105,6 @@ public class Storage {
       }
       //            database.startCommite();
     } else if (type.matches("Route")) {
-      routes = new ArrayList<Route>();
       //            database.dropTable("routes");
       //            database.closeAutoCommite();
       for (DataType entry : data) {
