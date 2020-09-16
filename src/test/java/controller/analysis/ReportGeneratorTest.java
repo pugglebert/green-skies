@@ -931,4 +931,197 @@ public class ReportGeneratorTest {
     reportGenerator.updateLeastDistanceRoute(testRouteDiffDistance);
     assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
   }
+
+  // --------------------------------- Testing for updateMostTravelledMostRoute
+
+
+  /** */
+  @Test
+  public void updateMostTravelledMostRouteOneTest() {
+    ArrayList<Route> expectedResults = new ArrayList<>();
+    Route testRouteDistance =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteDiffDistance =
+        new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
+    testRouteDistance.setDistance(20000);
+    testRouteDiffDistance.setDistance(20000);
+    expectedResults.add(testRouteDistance);
+    expectedResults.add(testRouteDiffDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDistance);
+    reportGenerator.updateLeastDistanceRoute(testRouteDiffDistance);
+    assertEquals(expectedResults, reportGenerator.getLeastDistanceRoutes());
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostTravelledMostRouteTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostTravelledMostRouteTenTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostTravelledRouteNoRoutesTest() {
+
+  }
+
+  // --------------------------------- Testing for updateLeastTravelledMostRoute
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledMostRouteOneTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledMostRouteTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledMostRouteTenTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateLeastTravelledRouteNoRoutesTest() {
+
+  }
+
+  // --------------------------------- Testing for updateMostVisitedSrcAirport
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedSrcAirportOneTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedSrcAirportTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedSrcAirportNoRoutesTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportOneTest() {
+
+  }
+
+  // --------------------------------- Testing for updateMostVisitedDestAirport
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportTwoTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportTenTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void updateMostVisitedDestAirportNoRoutesTest() {
+
+  }
+
+  // --------------------------------- Testing for calculateCO2ReductionNeeded
+
+  /**
+   *
+   */
+  @Test
+  public void calculateCO2ReductionNeededSmallTest() {
+
+  }
+
+
+  /**
+   *
+   */
+  @Test
+  public void calculateCO2ReductionNeededLargeTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void calculateCO2ReductionNeededNegTest() {
+
+  }
+
+  // --------------------------------- Testing for calculateOffsetTrees
+
+  /**
+   *
+   */
+  @Test
+  public void calculateOffsetTreesSmallTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void calculateOffsetTreesLargeTest() {
+
+  }
+
+  /**
+   *
+   */
+  @Test
+  public void calculateOffsetTreesNegTest() {
+
+  }
+
+
 }
