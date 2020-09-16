@@ -342,7 +342,7 @@ public class AirportParser extends Parser {
     protected boolean isTZValid(String timeZone){
         try{
 
-            if(-12 < Float.parseFloat(timeZone) && Float.parseFloat(timeZone) < 12){
+            if(-12 <= Float.parseFloat(timeZone) && Float.parseFloat(timeZone) <= 12){
                 return true;
             } else {
                 return false;

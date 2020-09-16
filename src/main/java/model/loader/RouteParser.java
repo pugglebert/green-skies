@@ -32,7 +32,7 @@ public class RouteParser extends Parser {
      * @param dataFile ArrayList of a string for each line in the file.
      */
     public RouteParser(ArrayList<String> dataFile, List<Route> existingRoutes) {
-        super(dataFile, 11);
+        super(dataFile, 12);
         for (Route route : existingRoutes) {
             addRoute(route);
         }
@@ -62,7 +62,8 @@ public class RouteParser extends Parser {
         errorLookup[7] = "Invalid value for codeshare";
         errorLookup[8] = "Invalid value for number of stops";
         errorLookup[9] = "Invalid equipment code";
-        errorLookup[10] = "Unknown error";
+        errorLookup[10] = "Duplicate route";
+        errorLookup[11] = "Unknown error";
     }
 
     /**
@@ -96,7 +97,7 @@ public class RouteParser extends Parser {
                                 line[equipment].split(" "));
                 addRoute(route);
             } catch (Exception e) {
-                errorCounter(10);
+                errorCounter(11);
             }
         }
     }
@@ -258,6 +259,8 @@ public class RouteParser extends Parser {
             Route existingRoute = (Route) data;
             if (existingRoute.equals(route)) {
                 inData = true;
+                errorCounter(10);
+                System.out.println(String.format("R1 = %s, R2 = %s", route.toString(), existingRoute.toString()));
                 break;
             }
         }
