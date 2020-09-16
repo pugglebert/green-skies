@@ -7,25 +7,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-      prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controller.main.WelcomeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.WelcomeController">
     <children>
-        <ImageView fitHeight="888.0" fitWidth="1478.0" layoutX="-11.0" layoutY="-53.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="964.0" fitWidth="1415.0" layoutX="-11.0" layoutY="-112.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@/images/unnamed.jpg"/>
+                <Image url="@../../images/air4.jpg" />
             </image>
         </ImageView>
         <Text layoutX="414.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Green Skies">
             <font>
-                <Font size="48.0"/>
+                <Font size="48.0" />
             </font>
         </Text>
-        <Button fx:id="continueButton" layoutX="126.0" layoutY="252.0" mnemonicParsing="false"
-                onAction="#continueToMainScreen" text="Continue"/>
-        <Button fx:id="InfoButton" layoutX="126.0" layoutY="303.0" mnemonicParsing="false" onAction="#toInfoScreen"
-                prefHeight="23.0" prefWidth="67.0" text="Info"/>
+        <Button fx:id="continueButton" layoutX="126.0" layoutY="252.0" mnemonicParsing="false" onAction="#continueToMainScreen" text="Continue" />
+        <Button fx:id="InfoButton" layoutX="126.0" layoutY="303.0" mnemonicParsing="false" onAction="#toInfoScreen" prefHeight="23.0" prefWidth="67.0" text="Info" />
     </children>
 </Pane>
