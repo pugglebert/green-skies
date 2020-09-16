@@ -8,10 +8,13 @@ import javafx.stage.Stage;
 import model.data.Storage;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-// TODO: check all method comments start with "This method ..."
-
-// TODO: write comment for this class
+/**
+ * The controller class which contains the controls for the analyseResult page.
+ *
+ * @author ZhengJingRui He
+ * @version 1.0
+ * @since 13/09/20
+ */
 public class AnalyseResultController implements Initializable {
 
   @FXML private Button BackButton;
@@ -23,8 +26,13 @@ public class AnalyseResultController implements Initializable {
   @FXML public Text EmissionRoute1;
 
   @FXML public Text EmissionRoute2;
-  // TODO: write comment for this method
 
+  /**
+   * The require method for Initializable interface
+   * show distance and emissions of each route
+   * @param url
+   * @param resourceBundle
+   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     Storage storage = Main.getStorage();
@@ -38,7 +46,9 @@ public class AnalyseResultController implements Initializable {
     EmissionRoute2.setText(EmissionRoute2Text);
   }
 
-  // TODO: write comment for this method
+  /**
+   * return back to the AnalysePage
+   */
   public void GoBackToAnalyse() {
     Stage stage = (Stage) BackButton.getScene().getWindow(); // get current window
     stage.close(); // close current window
