@@ -6,10 +6,15 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.data.Route;
 import java.io.IOException;
 import java.net.URL;
@@ -45,10 +50,12 @@ public class RouteDataViewController extends DataViewController {
     private Button btnFlightHistory;
     @FXML
     private Button AddToHistoryButton;
+
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
     private ReportGenerator reportGenerator;
-
     private RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
+
+
 
 
 
@@ -70,7 +77,6 @@ public class RouteDataViewController extends DataViewController {
         codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
         numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
         equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
-
         //Load data by taking the Route ArrayList and converting it to an ObservableArrayList.
         for (Route route: storage.getRoutes()){
             route.initCheckBox();
@@ -95,11 +101,14 @@ public class RouteDataViewController extends DataViewController {
      * most distance , least emissions , most emissions , least travelled  and most travelled route are updated.
      */
     public void addDataToHistory() throws IOException {
+        if (!Main.getStorage().getTempRoutes().isEmpty()){
+            Main.getStorage().getTempRoutes().clear();
+        }
 
         for (Route route : Main.getStorage().getRoutes()) {
           if (route.getSelect().isSelected()) {
-              System.out.println(route.getTimesTake());
-              addPopUp.getTempRoute().add(route);
+              Main.getStorage().getTempRoutes().add(route);
+
             //storage.addToHistory(route);
               //todo add to history after change passenger number
             FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
@@ -108,8 +117,8 @@ public class RouteDataViewController extends DataViewController {
             reportGenerator.updateTotalDistance(route);
             reportGenerator.updateTotalEmissions(route);
 
-            storage.addToHistorySrcAirports(route.getSourceAirport(), 1); //TODO:change to route.getTimesTake() once Nathan has implemented counter
-            storage.addToHistoryDestAirports(route.getDestinationAirport(), 1); //TODO:change to route.getTimesTake() once Nathan has implemented counter
+            storage.addToHistorySrcAirports(route.getSourceAirport(), 1); //TODO:change to route.getTimesTaken() once Nathan has implemented counter
+            storage.addToHistoryDestAirports(route.getDestinationAirport(), 1); //TODO:change to route.getTimesTaken() once Nathan has implemented counter
 
             //reportGenerator.updateLeastDistanceRoute(route);
             //reportGenerator.updateMostDistanceRoute(route);
@@ -119,6 +128,8 @@ public class RouteDataViewController extends DataViewController {
 
         }
         addPopUp.display();
+
+
 //        Main.getStorage().getHistory().addAll(temp);
         //reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
         //reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.

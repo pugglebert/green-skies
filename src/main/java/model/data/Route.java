@@ -23,7 +23,7 @@ public class Route implements DataType {
     private final String firstEquipment;
     private double emissions;
     private double distance;
-    private int timesTaken = 0;
+    private Integer timesTaken = 0;
     private CheckBox select;
 
     /**
@@ -169,7 +169,7 @@ public class Route implements DataType {
     /**
      * Get the number of times that the user has recorded taking this flight.
      */
-    public int getTimesTake() {return timesTaken;}
+    public int getTimesTaken() {return timesTaken;}
 
     /**
      * Set timesTaken to the given value.
