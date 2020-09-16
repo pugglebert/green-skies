@@ -7,32 +7,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteSingleEntryController">
-   <children>
-      <Text layoutX="42.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Airline Name:" />
-      <Text layoutX="237.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Airline ID:" />
-      <TextField fx:id="airlineIDField" layoutX="303.0" layoutY="105.0" prefHeight="28.0" prefWidth="74.0" />
-      <Text layoutX="53.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Source &#10;Airport:" wrappingWidth="49.39453125" />
-      <TextField fx:id="numStopsField" layoutX="479.0" layoutY="105.0" prefHeight="28.0" prefWidth="74.0" />
-      <TextField fx:id="srcairportField" layoutX="124.0" layoutY="192.0" prefHeight="28.0" prefWidth="74.0" />
-      <TextField fx:id="destairportField" layoutX="303.0" layoutY="192.0" prefHeight="28.0" prefWidth="74.0" />
-      <TextField fx:id="codeshareField" layoutX="476.0" layoutY="192.0" prefHeight="28.0" prefWidth="74.0" />
-      <Text layoutX="425.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number &#10;of Stops:&#10;" />
-      <Text layoutX="230.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination &#10;Airport:" />
-      <Label layoutX="211.0" layoutY="30.0" text="Enter Route Details" textAlignment="CENTER">
-         <font>
-            <Font name="Arial" size="22.0" />
-         </font>
-      </Label>
-      <Text layoutX="51.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Source &#10;Airport ID:&#10;" />
-      <TextField fx:id="srcairportIDField" layoutX="125.0" layoutY="268.0" prefHeight="28.0" prefWidth="74.0" />
-      <Text layoutX="402.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Share:" />
-      <Button fx:id="addEntryButton" layoutX="200.0" layoutY="338.0" mnemonicParsing="false" onAction="#addEntry" prefHeight="38.0" prefWidth="80.0" text="Add" />
-      <Button fx:id="cancelButton" layoutX="338.0" layoutY="338.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="38.0" prefWidth="80.0" text="Cancel" />
-      <TextField fx:id="airlineNameField" layoutX="127.0" layoutY="106.0" prefHeight="27.0" prefWidth="74.0" />
-      <TextField fx:id="destairportIDField" layoutX="304.0" layoutY="268.0" prefHeight="28.0" prefWidth="74.0" />
-      <Text layoutX="230.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination &#10;Aiport ID:" />
-      <Text layoutX="409.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment:" wrappingWidth="67.5517578125" />
-      <TextField fx:id="equipmentField" layoutX="477.0" layoutY="268.0" prefHeight="28.0" prefWidth="74.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.main.RouteSingleEntryController">
+    <children>
+        <Text layoutX="42.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Airline Name:"/>
+        <Text layoutX="237.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Airline ID:"/>
+        <TextField fx:id="airlineIDField" layoutX="303.0" layoutY="105.0" prefHeight="28.0" prefWidth="74.0"/>
+        <Text layoutX="53.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Source &#10;Airport:"
+              wrappingWidth="49.39453125"/>
+        <TextField fx:id="numStopsField" layoutX="479.0" layoutY="105.0" prefHeight="28.0" prefWidth="74.0"/>
+        <TextField fx:id="srcairportField" layoutX="124.0" layoutY="192.0" prefHeight="28.0" prefWidth="74.0"/>
+        <TextField fx:id="destairportField" layoutX="303.0" layoutY="192.0" prefHeight="28.0" prefWidth="74.0"/>
+        <TextField fx:id="codeshareField" layoutX="476.0" layoutY="192.0" prefHeight="28.0" prefWidth="74.0"/>
+        <Text layoutX="425.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number &#10;of Stops:&#10;"/>
+        <Text layoutX="230.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination &#10;Airport:"/>
+        <Label layoutX="211.0" layoutY="30.0" text="Enter Route Details" textAlignment="CENTER">
+            <font>
+                <Font name="Arial" size="22.0"/>
+            </font>
+        </Label>
+        <Text layoutX="51.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Source &#10;Airport ID:&#10;"/>
+        <TextField fx:id="srcairportIDField" layoutX="125.0" layoutY="268.0" prefHeight="28.0" prefWidth="74.0"/>
+        <Text layoutX="402.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Share:"/>
+        <Button fx:id="addEntryButton" layoutX="200.0" layoutY="338.0" mnemonicParsing="false" onAction="#addEntry"
+                prefHeight="38.0" prefWidth="80.0" text="Add"/>
+        <Button fx:id="cancelButton" layoutX="338.0" layoutY="338.0" mnemonicParsing="false" onAction="#closeWindow"
+                prefHeight="38.0" prefWidth="80.0" text="Cancel"/>
+        <TextField fx:id="airlineNameField" layoutX="127.0" layoutY="106.0" prefHeight="27.0" prefWidth="74.0"/>
+        <TextField fx:id="destairportIDField" layoutX="304.0" layoutY="268.0" prefHeight="28.0" prefWidth="74.0"/>
+        <Text layoutX="230.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Destination &#10;Aiport ID:"/>
+        <Text layoutX="409.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipment:"
+              wrappingWidth="67.5517578125"/>
+        <TextField fx:id="equipmentField" layoutX="477.0" layoutY="268.0" prefHeight="28.0" prefWidth="74.0"/>
+    </children>
 </AnchorPane>

@@ -6,23 +6,21 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import model.data.Route;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+// TODO: check all method comments start with "This method ..."
+
 /**
  * The controller class which contains the controls for the route data view.
+ *
  * @author Hayley Krippner
  * @version 1.0
  * @since 15/09/2020
@@ -53,6 +51,7 @@ public class RouteDataViewController extends DataViewController {
 
     private final ObservableList<String> searchTypes = FXCollections.observableArrayList("Airline", "Source", "Destination");
     private ReportGenerator reportGenerator;
+
     private RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
 
 
@@ -77,7 +76,7 @@ public class RouteDataViewController extends DataViewController {
         codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
         numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
         equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
-        //Load data by taking the Route ArrayList and converting it to an ObservableArrayList.
+
         for (Route route: storage.getRoutes()){
             route.initCheckBox();
         }
@@ -117,8 +116,12 @@ public class RouteDataViewController extends DataViewController {
             reportGenerator.updateTotalDistance(route);
             reportGenerator.updateTotalEmissions(route);
 
-            storage.addToHistorySrcAirports(route.getSourceAirport(), 1); //TODO:change to route.getTimesTaken() once Nathan has implemented counter
-            storage.addToHistoryDestAirports(route.getDestinationAirport(), 1); //TODO:change to route.getTimesTaken() once Nathan has implemented counter
+        storage.addToHistorySrcAirports(
+            route.getSourceAirport(),
+            1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
+        storage.addToHistoryDestAirports(
+            route.getDestinationAirport(),
+            1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
 
             //reportGenerator.updateLeastDistanceRoute(route);
             //reportGenerator.updateMostDistanceRoute(route);
@@ -128,8 +131,6 @@ public class RouteDataViewController extends DataViewController {
 
         }
         addPopUp.display();
-
-
 //        Main.getStorage().getHistory().addAll(temp);
         //reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.
         //reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering doing when click on history page to reduce time wasted.

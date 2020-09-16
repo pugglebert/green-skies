@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+// TODO: check all method comments start with "This method ..."
+
 /**
  * The controller class which contains the controls for the upload data view.
  * @author Grace Hanlon
@@ -102,7 +104,7 @@ public class UploadController extends SideNavBarController {
                 //only load data if it is not erroneous
                 for (DataType line : storage.getRoutes()) {
                     Route test = (Route) line;
-                    //System.out.println(test.getAirlineID());
+                    System.out.println(test.getAirlineID());
                 }
             //if user wishes to cancel the file chosne to upload they push cancel and no data is uploaded
             } else if (result.get() == cancelButton) {

@@ -92,7 +92,7 @@ public class ParserTest {
     @Test
     public void errorCounterInvalidValuesTest() {
         airlineParser.errorCounter(52);
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 11; i++) {
             assertEquals(0, (long) airlineParser.errorCollection.get(i));
         }
     }
@@ -123,7 +123,7 @@ public class ParserTest {
     @Test
     public void errorCounterValidOtherValuesTest() {
         airlineParser.errorCounter(3);
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 11; i++) {
             if (i != 3) {
                 assertEquals(0, (long) airlineParser.errorCollection.get(i));
             }

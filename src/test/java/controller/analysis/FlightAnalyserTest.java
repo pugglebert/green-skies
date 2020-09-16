@@ -21,11 +21,18 @@ public class FlightAnalyserTest {
     Loader loader ;
     ArrayList<String> path1;
     ArrayList<String> path2;
+    ArrayList<String> path3;
+    ArrayList<String> path4;
     String[] rubbish1 = {"abc"};
     String[] rubbish2 = {"abc"};
 
     Route route1 = new Route("Air Inter Gabon", 219, "AER", 2965, "KZN" , 2990, "dont know", 0,  rubbish1);
     Route route2 = new Route("Air Cess", 55, "ASF", 2966, "SVX", 2975, "dont know", 0, rubbish2);
+    Route route3 = new Route(null,296, "CEK", 2968, "DME", 4029, null,0, rubbish1);
+    Route route4 = new Route(null,297, "EGO", 2968, "UUA", 4029, null,0, rubbish2);
+
+
+
     FlightAnalyser analyser;
     List<Airport> airport;
     private final double radius = 6371e3;
@@ -35,13 +42,13 @@ public class FlightAnalyserTest {
     /**
      *
      */
-    public void findCoordinate() {
+    public void findCoordinate(ArrayList<String> firstPath, ArrayList<String> secondPath) {
 
         airport = new ArrayList<>() ;
         airport = storage.getAirports();
         ArrayList<Airport> listOfAirportPath1 = new ArrayList<Airport>();
         ArrayList<Airport> listOfAirportPath2 = new ArrayList<Airport>();
-        for(String k: path1) {
+        for(String k: firstPath) {
             for(Airport i: airport){
                 if (i.getIATA().equals(k) || i.getICAO().equals(k)) {
                     listOfAirportPath1.add(i);
@@ -49,18 +56,17 @@ public class FlightAnalyserTest {
                 }
             }
         }
-        int i = 0;
 
-        while(i < path2.size()) {
-            int j = 0;
-            while(j < airport.size()) {
-                if(path2.get(i).equals(airport.get(j).getIATA()) || path2.get(i).equals(airport.get(j).getICAO())){
-                    listOfAirportPath2.add(airport.get(j));
+
+       for(String h: secondPath) {
+            for(Airport j: airport){
+                if(j.getIATA().equals(h) || j.getICAO().equals(h)){
+                    listOfAirportPath2.add(j);
 
                 }
-                j++;
+
             }
-            i++;
+
         }
 
 //        System.out.println(listOfAirportPath1);
@@ -132,18 +138,21 @@ public class FlightAnalyserTest {
 
 
         path1 = new ArrayList<>();
-
-        path2   = new ArrayList<>();
+        path2 = new ArrayList<>();
+        path3 = new ArrayList<>();
+        path4 = new ArrayList<>();
 
         path1.add(route1.getSourceAirport());
         path1.add(route1.getDestinationAirport());
 
         path2.add(route2.getSourceAirport());
         path2.add(route2.getDestinationAirport());
+
+
 //        System.out.println(path1);
 //        System.out.println(path2);
 
-        findCoordinate();
+        findCoordinate(path1, path2);
         analyser = new FlightAnalyser(route1, route2, storage);
     }
 

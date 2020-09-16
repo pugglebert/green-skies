@@ -1,6 +1,5 @@
 package controller.main;
 
-import com.sun.javafx.scene.control.IntegerField;
 import controller.analysis.FlightAnalyser;
 import controller.analysis.ReportGenerator;
 import controller.analysis.Searcher;
@@ -15,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
@@ -23,15 +21,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import model.data.Route;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+// TODO: check all method comments start with "This method ..."
 
 /**
  * The controller class which contains the controls for the route data view.
+ *
  * @author Hayley Krippner
  * @version 1.0
  * @since 15/09/2020
@@ -63,13 +61,10 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     private Button cancelBtn;
     @FXML
     private AnchorPane btnChangePassenger;
+    // TODO: write comments for these attributes
 
     private RouteDataViewController caller;
-
-    public void setCaller(RouteDataViewController caller){
-        this.caller = caller;
-    }
-
+  // TODO: write comment for this method
 
     public void display() throws IOException{
 
@@ -120,6 +115,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
         //Set up the columns in the TableView.
 
     }
+
+
+
 
 
     public void confirm(){

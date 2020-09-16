@@ -1,15 +1,12 @@
 package controller.analysis;
 
-import javafx.application.Application;
 import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
-import model.loader.Loader;
-import java.awt.*;
-import java.io.FileNotFoundException;
-import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.List;
+
+// TODO: check all method comments start with "This method ..."
 
 /**
  * The FlightAnalyser class which calculate two paths' carbon emission, total distance of the path,
@@ -20,40 +17,25 @@ import java.util.List;
  * @since 2020-08-24
  */
 public class FlightAnalyser {
-
+  // TODO: write comments for these attributes
   private final double radius = 6371e3; // radius of earth;
-
   private double distance; // must use in KM
-
   private double FuelUsed;
-
   private final int seatsOccupancy = 333; // number of passengers;
-
   private final double Co2OfOneGramFuel = 3.15; // in gram
-
   private final int CruisingSpeed = 910; // km per hour
-
   private Route route1;
-
   private Route route2;
-
   private ArrayList<String> path1 = new ArrayList<String>();
-
   private ArrayList<String> path2 = new ArrayList<String>();
-
   private List<Airport> airports = new ArrayList<Airport>();
-
   private ArrayList<ArrayList<Double>> path1Coords = new ArrayList<>();
-
   private ArrayList<ArrayList<Double>> path2Coords = new ArrayList<>();
-
   private double totalDistancePath1 = 0;
-
   private double totalDistancePath2 = 0;
-
   private double totalEmissionPath1 = 0;
-
   private double totalEmissionPath2 = 0;
+
   // TODO: 1/09/2020 add checking route validation
   /**
    * Constructor of FlightAnalyser which starts processing and calculation.
@@ -78,7 +60,8 @@ public class FlightAnalyser {
     calculatePathsEmission();
   }
 
-  public FlightAnalyser(Route route1, Storage storage){
+  // TODO: write comment for this method
+  public FlightAnalyser(Route route1, Storage storage) {
     this.route1 = route1;
     this.airports = storage.getAirports();
     this.path1.add(route1.getSourceAirport());
@@ -88,7 +71,8 @@ public class FlightAnalyser {
     calculatePathsEmissionSingle();
   }
 
-  private void processsPathSingle(){
+  // TODO: write comment for this method
+  private void processsPathSingle() {
     for (String airportCode : path1) {
       for (Airport airport : airports) {
         if (airport.getIATA().equals(airportCode)) {
@@ -101,6 +85,7 @@ public class FlightAnalyser {
     }
   }
 
+  // TODO: write comment for this method
   private void calculateTotalDistanceSingle() {
     for (int i = 0; i < path1Coords.size() - 1; i++) {
       double airport1lat = path1Coords.get(i).get(0); // lat
@@ -110,8 +95,6 @@ public class FlightAnalyser {
       totalDistancePath1 += calculateDistance(airport1lat, airport1lon, airport2lat, airport2lon);
     }
   }
-
-
 
   /**
    * Process two arraylist path1 and path2, loop through the airports data and put coordinates of
@@ -140,10 +123,12 @@ public class FlightAnalyser {
     }
   }
 
+  // TODO: write comment for this method
   private void calculatePathsEmissionSingle() {
     this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
   }
 
+  // TODO: rewrite comment for this method
 
   /** Calculate totalDistance of path1 and path2. */
   private void calculateTotalDistance() {
@@ -180,8 +165,8 @@ public class FlightAnalyser {
     double Δλ = (Long2 - Long1) * Math.PI / 180;
 
     double a =
-            Math.sin(Δφ / 2) * Math.sin(Δφ / 2)
-                    + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        Math.sin(Δφ / 2) * Math.sin(Δφ / 2)
+            + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
 
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -190,6 +175,7 @@ public class FlightAnalyser {
     return distance / 1000; // distance in kilometers
   }
 
+  // TODO: rewrite comment for this method
   /** start calculate two paths' total carbon emission. */
   private void calculatePathsEmission() {
     this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
@@ -206,13 +192,13 @@ public class FlightAnalyser {
     FuelUsed = distance * 12 / 1250; // fuel in tonns
 
     double FuelPerPassenger =
-            (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
+        (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
 
     double Co2PerPassengerPerKm =
-            FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
+        FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
 
     double Co2Hour =
-            (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
+        (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
 
     double flytime = distance / CruisingSpeed; // in hour
 
@@ -220,6 +206,7 @@ public class FlightAnalyser {
 
     return finalCo2; // in kg
   }
+
   // TODO: 29/08/20 comfirm what need to do with compare distance and compare emission.
 
   /**

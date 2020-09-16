@@ -6,33 +6,42 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.HelpController">
-   <children>
-      <Text layoutX="588.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To users">
-         <font>
-            <Font size="49.0" />
-         </font>
-      </Text>
-      <Button fx:id="BackButton" layoutX="667.0" layoutY="623.0" mnemonicParsing="false" onAction="#BackToPreviousWindow" text="Back" />
-      <Text layoutX="268.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Application is going to provide you with a space to search  and upload flight routes  in order to keep track carbon emissions and flightdistance." wrappingWidth="876.2402191162109">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="272.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="As you use this software more deeply, you will also find you can viusalise flight routes on a map with a ranking system based on the level of CO2 emissions for each route. " wrappingWidth="845.5735778808594">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="271.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you encounter any problems in the process of using this software, please contact us by using to following emails, we will do our best to serve you." wrappingWidth="851.2187614440918">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="277.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="zhe25@uclive.ac.nz">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+            prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.main.HelpController">
+    <children>
+        <Text layoutX="588.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To users">
+            <font>
+                <Font size="49.0"/>
+            </font>
+        </Text>
+        <Button fx:id="BackButton" layoutX="667.0" layoutY="623.0" mnemonicParsing="false"
+                onAction="#BackToPreviousWindow" text="Back"/>
+        <Text layoutX="268.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="The Application is going to provide you with a space to search  and upload flight routes  in order to keep track carbon emissions and flightdistance."
+              wrappingWidth="876.2402191162109">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+        <Text layoutX="272.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="As you use this software more deeply, you will also find you can viusalise flight routes on a map with a ranking system based on the level of CO2 emissions for each route. "
+              wrappingWidth="845.5735778808594">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+        <Text layoutX="271.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="If you encounter any problems in the process of using this software, please contact us by using to following emails, we will do our best to serve you."
+              wrappingWidth="851.2187614440918">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+        <Text layoutX="277.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="zhe25@uclive.ac.nz">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Text>
+    </children>
 </AnchorPane>
