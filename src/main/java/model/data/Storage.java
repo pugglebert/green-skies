@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+// TODO: check all method comments start with "This method ..."
 
 /**
  * Class to keep track of all the data currently open files, also interact with database.
@@ -14,6 +15,7 @@ import java.util.List;
  * @version 1.3
  */
 public class Storage {
+  // TODO: write comments for these attributes
 
   private List<Airline> airlines = new ArrayList<>();
   private List<Airport> airports = new ArrayList<>();
@@ -119,6 +121,7 @@ public class Storage {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
   }
+  // TODO: write comment for this method
 
   public void initialiseStorage() throws SQLException, ClassNotFoundException {
     database.initialiseStorage(this);

@@ -2,9 +2,9 @@ package model.loader;
 
 import model.data.Airport;
 import model.data.DataType;
-
 import java.util.ArrayList;
 import java.util.List;
+//TODO: check all method comments start with "This method ..."
 
 /**
  * The sub-class Parser for airport. AirportParser class receives a list of airport data, validates
@@ -42,6 +42,9 @@ public class AirportParser extends Parser {
      * 117: invalid callsign
      * 118: invalid activestatus
      */
+
+    //TODO: write comments for these attributes
+
     private final int airportID = 0, name = 1, city = 2, country = 3, IATA = 4, ICAO = 5, latitude = 6, longtitude = 7,
             altitude = 8, timezone = 9, DST = 10, dataBaseTimeZone = 11;
 
@@ -380,6 +383,7 @@ public class AirportParser extends Parser {
         return true;
     }
 
+//TODO remove?
 
 //    /**
 //     * Getter for airports

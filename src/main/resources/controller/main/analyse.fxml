@@ -10,86 +10,113 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AnalyseController">
+<AnchorPane prefHeight="800.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AnalyseController">
 
     <children>
 
-        <TextField fx:id="pathSource1" layoutX="362.0" layoutY="252.0" prefHeight="17.0" prefWidth="135.0" />
-        <TextField fx:id="pathDestination1" layoutX="776.0" layoutY="252.0" prefHeight="20.0" prefWidth="147.0" />
-        <Button fx:id="analyseData" layoutX="565.0" layoutY="634.0" mnemonicParsing="false" onAction="#analyse" text="Analyse" />
-        <TextField fx:id="pathSource2" layoutX="366.0" layoutY="479.0" prefHeight="23.0" prefWidth="136.0" />
-        <TextField fx:id="pathDestination2" layoutX="786.0" layoutY="468.0" prefHeight="23.0" prefWidth="134.0" />
+        <TextField fx:id="pathSource1" layoutX="362.0" layoutY="252.0" prefHeight="17.0" prefWidth="135.0"/>
+        <TextField fx:id="pathDestination1" layoutX="776.0" layoutY="252.0" prefHeight="20.0" prefWidth="147.0"/>
+        <Button fx:id="analyseData" layoutX="565.0" layoutY="634.0" mnemonicParsing="false" onAction="#analyse"
+                text="Analyse"/>
+        <TextField fx:id="pathSource2" layoutX="366.0" layoutY="479.0" prefHeight="23.0" prefWidth="136.0"/>
+        <TextField fx:id="pathDestination2" layoutX="786.0" layoutY="468.0" prefHeight="23.0" prefWidth="134.0"/>
 
         <VBox prefHeight="700.0" prefWidth="162.0" style="-fx-background-color: #116754;">
             <children>
-                <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0" style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData"
+                        onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0"
+                        style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER"
+                        textFill="WHITE" wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                     <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets top="20.0"/>
                     </VBox.margin>
                 </Button>
-                <Button fx:id="btnRouteDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toRouteDataView" prefHeight="95.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Analyse Route Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnRouteDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toRouteDataView"
+                        prefHeight="95.0" prefWidth="218.0" style="-fx-background-color: transparent;"
+                        text="Analyse Route Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnAirportDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirportDataView" prefHeight="88.0" prefWidth="227.0" style="-fx-background-color: transparent;" text="Analyse Airport Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnAirportDataView" alignment="CENTER" mnemonicParsing="false"
+                        onAction="#toAirportDataView" prefHeight="88.0" prefWidth="227.0"
+                        style="-fx-background-color: transparent;" text="Analyse Airport Data" textAlignment="CENTER"
+                        textFill="WHITE" wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnAirlineDataView" alignment="CENTER" mnemonicParsing="false" onAction="#toAirlineDataView" prefHeight="88.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Analyse Airline Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnAirlineDataView" alignment="CENTER" mnemonicParsing="false"
+                        onAction="#toAirlineDataView" prefHeight="88.0" prefWidth="218.0"
+                        style="-fx-background-color: transparent;" text="Analyse Airline Data" textAlignment="CENTER"
+                        textFill="WHITE" wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnFlightHistory" alignment="CENTER" mnemonicParsing="false" onAction="#toFlightHistory" prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: #00aa88;" text="Flight History" textFill="WHITE">
+                <Button fx:id="btnFlightHistory" alignment="CENTER" mnemonicParsing="false" onAction="#toFlightHistory"
+                        prefHeight="72.0" prefWidth="220.0" style="-fx-background-color: #00aa88;" text="Flight History"
+                        textFill="WHITE">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnCarbonEmissionsReport" alignment="CENTER" mnemonicParsing="false" onAction="#toCarbonEmissionsReport" prefHeight="116.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Carbon Emissions Report" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnCarbonEmissionsReport" alignment="CENTER" mnemonicParsing="false"
+                        onAction="#toCarbonEmissionsReport" prefHeight="116.0" prefWidth="218.0"
+                        style="-fx-background-color: transparent;" text="Carbon Emissions Report" textAlignment="CENTER"
+                        textFill="WHITE" wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnMapOfAirports" alignment="CENTER" mnemonicParsing="false" onAction="#toMapOfAirports" prefHeight="78.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Map of Airports " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnMapOfAirports" alignment="CENTER" mnemonicParsing="false" onAction="#toMapOfAirports"
+                        prefHeight="78.0" prefWidth="218.0" style="-fx-background-color: transparent;"
+                        text="Map of Airports " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Graphs" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs"
+                        onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0"
+                        style="-fx-background-color: transparent;" text="Graphs" textAlignment="CENTER" textFill="WHITE"
+                        wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
-                <Button fx:id="btnAnalyseFlight" alignment="CENTER" mnemonicParsing="false" onAction="#toAnalyseFlight" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="AnalyseFlight" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnAnalyseFlight" alignment="CENTER" mnemonicParsing="false" onAction="#toAnalyseFlight"
+                        prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;"
+                        text="AnalyseFlight" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                     <font>
-                        <Font name="Tahoma" size="22.0" />
+                        <Font name="Tahoma" size="22.0"/>
                     </font>
                 </Button>
             </children>
         </VBox>
-        <Label fx:id="errorText" layoutX="238.0" layoutY="216.0" prefHeight="27.0" prefWidth="846.0" textFill="RED" visible="false">
+        <Label fx:id="errorText" layoutX="238.0" layoutY="216.0" prefHeight="27.0" prefWidth="846.0" textFill="RED"
+               visible="false">
             <font>
-                <Font size="18.0" />
-            </font></Label>
-        <Pane layoutX="162.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;" />
-      <Text layoutX="264.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SourceAirport:" />
-      <Text layoutX="631.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DestinationAirport:" />
-      <Text layoutX="263.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SourceAirport:" />
-      <Text layoutX="646.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DestinationAirport:" />
-      <Text layoutX="196.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Route1">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Text>
-      <Text layoutX="196.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Route2">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Pane layoutX="162.0" prefHeight="129.0" prefWidth="1332.0" style="-fx-background-color: cbf3f0;"/>
+        <Text layoutX="264.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SourceAirport:"/>
+        <Text layoutX="631.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DestinationAirport:"/>
+        <Text layoutX="263.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SourceAirport:"/>
+        <Text layoutX="646.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DestinationAirport:"/>
+        <Text layoutX="196.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Route1">
+            <font>
+                <Font size="19.0"/>
+            </font>
+        </Text>
+        <Text layoutX="196.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Route2">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Text>
     </children>
 </AnchorPane>
