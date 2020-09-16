@@ -36,108 +36,83 @@ import java.util.ResourceBundle;
  */
 public class RouteAddToHistoryPopUpController implements Initializable {
 
+  // Configure the TableView.
+  @FXML private TableView<Route> tableView;
+  @FXML private TableColumn<Route, Integer> passengerNumber;
+  @FXML private TableColumn<Route, String> airlineNameColumn;
+  @FXML private TableColumn<Route, String> sourceAirportColumn;
+  @FXML private TableColumn<Route, String> destinationAirportColumn;
+  @FXML private TableColumn<Route, String> codeShareColumn;
+  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML private Button confirmBtn;
+  // TODO: write comments for these attributes
 
-
-    //Configure the TableView.
-    @FXML
-    private TableView<Route> tableView;
-    @FXML
-    private TableColumn<Route, Integer> passengerNumber;
-    @FXML
-    private TableColumn<Route, String> airlineNameColumn;
-    @FXML
-    private TableColumn<Route, String> sourceAirportColumn;
-    @FXML
-    private TableColumn<Route, String> destinationAirportColumn;
-    @FXML
-    private TableColumn<Route, String> codeShareColumn;
-    @FXML
-    private TableColumn<Route, Integer> numOfStopsColumn;
-    @FXML
-    private TableColumn<Route, String> equipmentColumn;
-    @FXML
-    private Button confirmBtn;
-    @FXML
-    private Button cancelBtn;
-    @FXML
-    private AnchorPane btnChangePassenger;
-    // TODO: write comments for these attributes
-
-    private RouteDataViewController caller;
   // TODO: write comment for this method
 
-    public void display() throws IOException{
+  public void display() throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
-        Stage addPopUp = new Stage();
-        addPopUp.setTitle("Add To History ");
-        addPopUp.initModality(Modality.APPLICATION_MODAL);
-        addPopUp.setScene(new Scene(root));
-        addPopUp.show();
+    Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
+    Stage addPopUp = new Stage();
+    addPopUp.setTitle("Add To History ");
+    addPopUp.initModality(Modality.APPLICATION_MODAL);
+    addPopUp.setScene(new Scene(root));
+    addPopUp.show();
+  }
 
-    }
+  /**
+   * Initializes the controller class. The checkboxes are added to each record.
+   *
+   * @param url The URL used.
+   * @param rb The resource bundle used.
+   */
+  @Override
+  public void initialize(URL url, ResourceBundle rb) {
+    // below is initialize the cell of number of passenger, when double click the cell will be turned to textfield
+    passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
+    passengerNumber.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    passengerNumber.setOnEditCommit(
+            new EventHandler<>() {
+              @Override
+              public void handle(TableColumn.CellEditEvent<Route, Integer> routeIntegerCellEditEvent) {
+                Route routeChanged =
+                        routeIntegerCellEditEvent
+                                .getTableView()
+                                .getItems()
+                                .get(routeIntegerCellEditEvent.getTablePosition().getRow());
+                routeChanged.setTimesTaken(routeIntegerCellEditEvent.getNewValue());
+              }
+            });
+    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+    sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
+    destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
+    codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
+    numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
+    equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
 
-
-    /**
-     * Initializes the controller class. The checkboxes are added to each record.
-     *
-     * @param url The URL used.
-     * @param rb  The resource bundle used.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(""+url+ rb);
-        passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
-        passengerNumber.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        passengerNumber.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<Route, Integer>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<Route, Integer> routeIntegerCellEditEvent) {
-                        Route routeChanged = routeIntegerCellEditEvent.getTableView().getItems().get(
-                                routeIntegerCellEditEvent.getTablePosition().getRow());
-                        routeChanged.setTimesTaken(routeIntegerCellEditEvent.getNewValue());
-
-                    }
-                }
-        );
-        airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
-        sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
-        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
-        codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
-        numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
-        equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
-        ObservableList<Route> tempRoute = FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
-        tableView.setEditable(true);
-        tableView.setItems(tempRoute);
-
-
-
-        //Set up the columns in the TableView.
-
-    }
+    ObservableList<Route> tempRoute =
+        FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
+    tableView.setEditable(true);
+    tableView.setItems(tempRoute);
 
 
+  }
 
-
-
-    public void confirm(){
-        for (Route route: Main.getStorage().getTempRoutes()){
-            if (route.getTimesTaken() < 0){
-                continue;
-            } else {
-                int index = Main.getStorage().getHistory().indexOf(route);
-                if (index != -1){
-                    Main.getStorage().getHistory().get(index).setTimesTaken(route.getTimesTaken());
-                } else { Main.getStorage().getHistory().add(route); }
-            }
+  public void confirm() {
+    for (Route route : Main.getStorage().getTempRoutes()) {
+      if (route.getTimesTaken() < 0) { // Have not edit number of passenger => invalid history
+        continue; // drop
+      } else {
+        int index = Main.getStorage().getHistory().indexOf(route);
+        if (index != -1) { // Route have been added to histoy
+          Main.getStorage().getHistory().get(index).setTimesTaken(route.getTimesTaken());
+        } else { // Route have been added to history + have been set number of passenger
+          Main.getStorage().getHistory().add(route);
         }
-        System.out.println("added");
-        Stage stage = (Stage) confirmBtn.getScene().getWindow();
-        stage.close();
+      }
     }
-
+    System.out.println("added");
+    Stage stage = (Stage) confirmBtn.getScene().getWindow();
+    stage.close();
+  }
 }
-
-
-
-
