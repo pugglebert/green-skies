@@ -18,20 +18,37 @@ import model.data.Route;
 import static javafx.application.Application.launch;
 import org.controlsfx.control.textfield.TextFields;
 
-// TODO: write comment for this class
+
+
+/**
+ * The controller class which contains the controls for the analyse page.
+ *
+ * @author ZhengJingRui He and Enyang Zhang
+ * @version 1.0
+ * @since 13/09/20
+ */
 public class AnalyseController extends SideNavBarController implements Initializable {
 
   @FXML private TextField pathSource1;
-
   @FXML private TextField pathDestination1;
   @FXML private TextField pathSource2;
   @FXML private TextField pathDestination2;
 
-  // TODO: write comments for these attributes
+
+  String[] rubbish1 = {"abc"};
+  String[] rubbish2 = {"abc"};
+
+
+  /** A hash set to store some airport data. */
   private HashSet<String> airports = new HashSet<>();
 
-  // TODO: check all method comments start with "This method ..."
 
+  /**
+   * Require method for Initializable interface
+   * load the analyse.fxml and  display all the components.
+   * @param primaryStage
+   * @throws IOException
+   */
   public void start(Stage primaryStage) throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
     primaryStage.setTitle("Welcome");
@@ -39,13 +56,21 @@ public class AnalyseController extends SideNavBarController implements Initializ
     primaryStage.show();
   }
 
-  // TODO: check all method comments start with "This method ..."
 
+  /**
+   * In order to run this class indivially.
+   * @param args
+   */
   public static void main(String[] args) {
     launch(args);
   }
-  // TODO: check all method comments start with "This method ..."
 
+  /**
+   * Bind the list of airports code with textfield
+   * and show like combobox.
+   * @param url
+   * @param resourceBundle
+   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     //        System.out.println(Main.getStorage().getAirports());
@@ -59,8 +84,12 @@ public class AnalyseController extends SideNavBarController implements Initializ
     TextFields.bindAutoCompletion(pathDestination2, airports);
   }
 
-  // TODO: check all method comments start with "This method ..."
 
+
+  /**
+   * calculate distance and emissions by using two routes
+   * @throws IOException
+   */
   @FXML
   private void analyse() throws IOException {
 
@@ -81,7 +110,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
             0,
             null,
             0,
-            null);
+            rubbish1);
     Route route2 =
         new Route(
             null,
@@ -92,7 +121,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
             0,
             null,
             0,
-            null);
+            rubbish2);
     FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
 
     System.out.println(analyser.getTotalDistancePath1());

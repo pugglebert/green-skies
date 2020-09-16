@@ -14,6 +14,13 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit test for ReportGenrator class.
+ *
+ * @author ZhengJingRui He
+ * @since 16/09/2020
+ * @version 1.0
+ */
 public class FlightAnalyserTest {
 
 
@@ -38,11 +45,16 @@ public class FlightAnalyserTest {
     private final double radius = 6371e3;
     double distance1;
     double distance2;
+    double distance3;
+    double distance4;
+    double singleDistance;
 
     /**
-     *
+     * check through two list, and find out whether their airport code are equal or not
+     * find their longitude and Latitude in order to caluclate distance
+     * call calculatedistance function to find out distance between two airports for two paths.
      */
-    public void findCoordinate(ArrayList<String> firstPath, ArrayList<String> secondPath) {
+    public void findCoordinateForTwoPath(ArrayList<String> firstPath, ArrayList<String> secondPath) {
 
         airport = new ArrayList<>() ;
         airport = storage.getAirports();
@@ -72,20 +84,48 @@ public class FlightAnalyserTest {
 //        System.out.println(listOfAirportPath1);
 //
 //        System.out.println(listOfAirportPath2);
-        double path1Distance1 = calculatedistance(listOfAirportPath1.get(0).getLatitude(), listOfAirportPath1.get(0).getLongitude(), listOfAirportPath1.get(1).getLatitude(), listOfAirportPath1.get(1).getLongitude());
+        double pathDistance1 = calculatedistance(listOfAirportPath1.get(0).getLatitude(), listOfAirportPath1.get(0).getLongitude(), listOfAirportPath1.get(1).getLatitude(), listOfAirportPath1.get(1).getLongitude());
 
-        double path2Distance1 = calculatedistance(listOfAirportPath2.get(0).getLatitude(), listOfAirportPath2.get(0).getLongitude(), listOfAirportPath2.get(1).getLatitude(), listOfAirportPath2.get(1).getLongitude());
-        distance1 = path1Distance1;
-        distance2 = path2Distance1;
+        double pathDistance2 = calculatedistance(listOfAirportPath2.get(0).getLatitude(), listOfAirportPath2.get(0).getLongitude(), listOfAirportPath2.get(1).getLatitude(), listOfAirportPath2.get(1).getLongitude());
+        distance1 = pathDistance1;
+        distance2 = pathDistance2;
+        distance3 = pathDistance1;
+        distance4 = pathDistance2;
 //        System.out.println(distance1);
 //        System.out.println(distance2);
 
     }
 
     /**
-     *
-     * @param distance
-     * @return
+     * check through two list, and find out whether their airport code are equal or not
+     * find their longitude and Latitude in order to caluclate distance
+     * call calculatedistance function to find out distance between two airports for one path.
+     */
+    public void findCoordinateForOnePath(ArrayList<String> Path) {
+
+        airport = new ArrayList<>() ;
+        airport = storage.getAirports();
+        ArrayList<Airport> listOfAirportPath = new ArrayList<Airport>();
+        for(String k: Path) {
+            for(Airport i: airport){
+                if (i.getIATA().equals(k) || i.getICAO().equals(k)) {
+                    listOfAirportPath.add(i);
+
+                }
+            }
+        }
+
+        double pathDistance = calculatedistance(listOfAirportPath.get(0).getLatitude(), listOfAirportPath.get(0).getLongitude(), listOfAirportPath.get(1).getLatitude(), listOfAirportPath.get(1).getLongitude());
+
+       singleDistance = pathDistance;
+//        System.out.println(distance1);
+//        System.out.println(distance2);
+
+    }
+
+    /**
+     * Caluclate emissons by using the distance between two aitports
+     * @return Co2 emission
      */
     private double calculateCarbonEmission(double distance) {
 
@@ -115,6 +155,11 @@ public class FlightAnalyserTest {
 
         return finalCo2;  // in kg
     }
+
+    /**
+     * Caluclate distance by using the longitude and latitude of two aitports
+     * @return distance
+     */
     private double calculatedistance(double Lati1, double Long1, double Lati2, double Long2) {
         double φ1 = Lati1*Math.PI/180;
         double φ2 = Lati2*Math.PI/180;
@@ -130,6 +175,13 @@ public class FlightAnalyserTest {
         return distance/1000;   //distance in kilometers
     }
 
+    /**
+     *  Set up are the arraylist for testing
+     * @throws FileNotFoundException
+     * @throws FileSystemException
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     @Before
     public void setUp() throws FileNotFoundException, FileSystemException, SQLException, ClassNotFoundException {
         storage = new Storage();
@@ -148,35 +200,187 @@ public class FlightAnalyserTest {
         path2.add(route2.getSourceAirport());
         path2.add(route2.getDestinationAirport());
 
+        path3.add(route3.getSourceAirport());
+        path3.add(route3.getDestinationAirport());
+
+        path4.add(route4.getSourceAirport());
+        path4.add(route4.getDestinationAirport());
+
 
 //        System.out.println(path1);
 //        System.out.println(path2);
 
-        findCoordinate(path1, path2);
-        analyser = new FlightAnalyser(route1, route2, storage);
+
     }
 
+    /**
+     * check a single path distance calculate in the test class
+     * whether equal to the disatnce was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isDistanceSinglePath1Correct(){
+        findCoordinateForOnePath(path1);
+        analyser = new FlightAnalyser(route1, storage);
+        double path1Distance = analyser.getTotalDistancePath1();
+
+        assertEquals(singleDistance, path1Distance, 0.0);
+    }
+    /**
+     * check a single path emission calculate in the test class
+     * whether equal to the emission was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isEmissionSinglePath1Correct(){
+        findCoordinateForOnePath(path1);
+        analyser = new FlightAnalyser(route1, storage);
+        double path1Emission = analyser.getPath1Emission();
+
+        assertEquals(calculateCarbonEmission(singleDistance), path1Emission, 0.0);
+    }
+    /**
+     * check a single path distance calculate in the test class
+     * whether equal to the disatnce was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isDistanceSinglePath2Correct(){
+        findCoordinateForOnePath(path2);
+        analyser = new FlightAnalyser(route2, storage);
+        double path2Distance = analyser.getTotalDistancePath1();
+
+        assertEquals(singleDistance, path2Distance, 0.0);
+    }
+    /**
+     * check a single path emission calculate in the test class
+     * whether equal to the emission was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isEmissionSinglePath2Correct(){
+        findCoordinateForOnePath(path2);
+        analyser = new FlightAnalyser(route2, storage);
+        double path2Emission = analyser.getPath1Emission();
+
+        assertEquals(calculateCarbonEmission(singleDistance), path2Emission, 0.0);
+    }
+    /**
+     * check two paths distance calculate in the test class
+     * whether equal to the distance was calculated in the FlightAnalyser class
+     */
     @Test
     public void isDistancePath1Correct(){
+        findCoordinateForTwoPath(path1, path2);
+        analyser = new FlightAnalyser(route1, route2, storage);
         double path1Distance = analyser.getTotalDistancePath1();
         assertEquals(distance1, path1Distance, 0.0);
     }
-
+    /**
+     * check two paths distance calculate in the test class
+     * whether equal to the distance was calculated in the FlightAnalyser class
+     */
     @Test
     public void isDistancePath2Correct(){
+        findCoordinateForTwoPath(path1, path2);
+        analyser = new FlightAnalyser(route1, route2, storage);
         double path2Distance = analyser.getTotalDistancePath2();
 
         assertEquals(distance2, path2Distance, 0.0);
     }
+    /**
+     * check two paths distance calculate in the test class
+     * whether equal to the distance was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isDistancePath3Correct(){
+        findCoordinateForTwoPath(path3, path4);
+        analyser = new FlightAnalyser(route3, route4, storage);
+        double path3Distance = analyser.getTotalDistancePath1();
 
+        assertEquals(distance3, path3Distance, 0.0);
+    }
+    /**
+     * check two paths distance calculate in the test class
+     * whether equal to the distance was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isDistancePath4Correct(){
+        findCoordinateForTwoPath(path3, path4);
+        analyser = new FlightAnalyser(route3, route4, storage);
+        double path4Distance = analyser.getTotalDistancePath2();
+
+        assertEquals(distance4, path4Distance, 0.0);
+    }
+    /**
+     * check two paths emission calculate in the test class
+     * whether equal to the emission was calculated in the FlightAnalyser class
+     */
     @Test
     public void isEmissionPath1Correct(){
+        findCoordinateForTwoPath(path1, path2);
+        analyser = new FlightAnalyser(route1, route2, storage);
         assertEquals(calculateCarbonEmission(distance1), analyser.getPath1Emission(), 0.0);
 
     }
+    /**
+     * check two paths emission calculate in the test class
+     * whether equal to the emission was calculated in the FlightAnalyser class
+     */
     @Test
     public void isEmissionPath2Correct(){
+        findCoordinateForTwoPath(path1, path2);
+        analyser = new FlightAnalyser(route1, route2, storage);
         assertEquals(calculateCarbonEmission(distance2), analyser.getPath2Emission(), 0.0);
 
+    }
+    /**
+     * check two paths emission calculate in the test class
+     * whether equal to the emission was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isEmissionPath3Correct(){
+        findCoordinateForTwoPath(path3, path4);
+        analyser = new FlightAnalyser(route3, route4, storage);
+        assertEquals(calculateCarbonEmission(distance3), analyser.getPath1Emission(), 0.0);
+
+    }
+    /**
+     * check two paths emission calculate in the test class
+     * whether equal to the emission was calculated in the FlightAnalyser class
+     */
+    @Test
+    public void isEmissionPath4Correct(){
+        findCoordinateForTwoPath(path3, path4);
+        analyser = new FlightAnalyser(route3, route4, storage);
+        assertEquals(calculateCarbonEmission(distance4), analyser.getPath2Emission(), 0.0);
+
+    }
+
+    /**
+     * check whether the differnece of the distance between two airports is a postive number if
+     * path1 distance is smaller than path2
+     */
+    @Test
+    public void isCompareDistanceCorrect(){
+        findCoordinateForTwoPath(path1, path2);
+        analyser = new FlightAnalyser(route1, route2, storage);
+
+        if(analyser.compareDistance() > 0) {
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
+    }
+    /**
+     * check whether the differnece of the emission between two airports is a postive number if
+     * path1 emission is smaller than path2
+     */
+    @Test
+    public void isCompareEmissionCorrect(){
+        findCoordinateForTwoPath(path1, path2);
+        analyser = new FlightAnalyser(route1, route2, storage);
+
+        if(analyser.compareEmission() > 0) {
+            System.out.println(true);
+        } else {
+            System.out.println(false);
+        }
     }
 }
