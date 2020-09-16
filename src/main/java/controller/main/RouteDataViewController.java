@@ -67,7 +67,6 @@ public class RouteDataViewController extends DataViewController {
     public void initialize(URL url, ResourceBundle rb) {
 
         this.reportGenerator = Main.getReportGenerator();
-        addPopUp.setCaller(this);
         //Set up the columns in the TableView.
         addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
         airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));

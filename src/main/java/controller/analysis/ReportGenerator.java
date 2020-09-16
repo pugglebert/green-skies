@@ -54,7 +54,7 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
-    totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTake());
+    totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
   }
 
   /**
@@ -80,7 +80,7 @@ public class ReportGenerator {
       } else {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
         int maxRouteCounter =
-            routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTake();
+            routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTaken();
         int firstOccuranceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
         for (int i = firstOccuranceIndex; i < routeHistoryEntries.size(); i++) {
           mostTravelledRoutes.add(routeHistoryEntries.get(i));
@@ -97,13 +97,24 @@ public class ReportGenerator {
    *     history.
    */
   public void updateLeastTravelledRoute(List<Route> routeHistoryEntries) {
+    // TODO: remove once the quicksort and binary sort have been thoughroughly tested.
+
+    //        int currMaxRouteUsed = 0;
+    //        for (Route route : routeHistoryEntries) {
+    //            if (route.getTimesTaken() > currMaxRouteUsed) {
+    //                leastTravelledRoutes.clear();
+    //                leastTravelledRoutes.add(route);
+    //            } else if (route.getTimesTaken() == currMaxRouteUsed) {
+    //                leastTravelledRoutes.add(route);
+    //            }
+    //        }
 
     if (routeHistoryEntries.size() >= 1) {
       if (routeHistoryEntries.size() == 1) {
         leastTravelledRoutes.add(routeHistoryEntries.get(0));
       } else {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
-        int minRouteCounter = routeHistoryEntries.get(0).getTimesTake();
+    int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
         int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
         for (int i = 0; i < firstOccuranceIndex + 1; i++) {
           leastTravelledRoutes.add(routeHistoryEntries.get(i));
@@ -351,11 +362,11 @@ public class ReportGenerator {
     int lastIndex = arraryToSearch.size() - 1;
     while (firstIndex <= lastIndex) {
       int middleIndex = (firstIndex + lastIndex) / 2;
-      if (arraryToSearch.get(middleIndex).getTimesTake() == searchElement) {
+      if (arraryToSearch.get(middleIndex).getTimesTaken() == searchElement) {
         return middleIndex;
-      } else if (arraryToSearch.get(middleIndex).getTimesTake() < searchElement)
+      } else if (arraryToSearch.get(middleIndex).getTimesTaken() < searchElement)
         firstIndex = middleIndex + 1;
-      else if (arraryToSearch.get(middleIndex).getTimesTake() > searchElement)
+      else if (arraryToSearch.get(middleIndex).getTimesTaken() > searchElement)
         lastIndex = middleIndex - 1;
     }
     return -1;
@@ -387,7 +398,7 @@ public class ReportGenerator {
     int pivot = end;
     int counter = start;
     for (int i = start; i < end; i++) {
-      if (arraytoSort.get(i).getTimesTake() < arraytoSort.get(pivot).getTimesTake()) {
+      if (arraytoSort.get(i).getTimesTaken() < arraytoSort.get(pivot).getTimesTaken()) {
         Route temp = arraytoSort.get(counter);
         arraytoSort.set(counter, arraytoSort.get(i));
         arraytoSort.set(i, temp);
