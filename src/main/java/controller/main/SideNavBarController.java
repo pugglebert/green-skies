@@ -36,7 +36,6 @@ public abstract class SideNavBarController implements Initializable {
 
   // TODO: write comments for these attributes
 
-  protected ObservableList<String> searchTypes;
   protected final Storage storage = Main.getStorage();
 
   // TODO: write comment for this method
