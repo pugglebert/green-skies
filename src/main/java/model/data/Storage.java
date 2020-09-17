@@ -151,7 +151,7 @@ public class Storage {
         database.addAirports(airport);
         if (airport != null) {}
       }
-//      database.startCommite();
+      database.startCommite();
     } else if (type.matches("Route")) {
       database.initialiseTable("routes");
       database.closeAutoCommite();

@@ -17,18 +17,18 @@ public class SQLiteDatabase {
   /** database connection */
   private static Connection con;
 
-  Statement builtTable;
+  private Statement builtTable;
 
-  Statement state;
+  private Statement state;
 
-  PreparedStatement prep;
+  private PreparedStatement prep;
 
-  ResultSet res;
+  private ResultSet res;
 
   /**
    * This method create connection to local database, and will create one if there is no database.
    */
-  private void getConnection() {
+  protected void getConnection() {
     try {
       // sqlite driver
       Class.forName("org.sqlite.JDBC");
@@ -37,6 +37,13 @@ public class SQLiteDatabase {
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     }
+  }
+
+  /**
+   * This method returns connection as an object.
+   */
+  public Connection getCon(){
+    return con;
   }
 
   /**
@@ -67,7 +74,7 @@ public class SQLiteDatabase {
   }
 
   /** This method builds airports table with airport attributes as colunms in dastabase. */
-  private void buildAirportsTable() {
+  protected void buildAirportsTable() {
     if (con == null) {
       // get connection
       getConnection();
@@ -101,7 +108,7 @@ public class SQLiteDatabase {
   }
 
   /** This method builds routes table with routes attributes as colunms in dastabase. */
-  private void buildRoutesTable() {
+  protected void buildRoutesTable() {
     if (con == null) {
       // get connection
       getConnection();
@@ -136,7 +143,7 @@ public class SQLiteDatabase {
   }
 
   /** This method builds airlines table with airline attributes as colunms in dastabase. */
-  private void buildAirlinesTable() {
+  protected void buildAirlinesTable() {
     if (con == null) {
       // get connection
       getConnection();
