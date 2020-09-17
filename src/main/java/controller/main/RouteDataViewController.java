@@ -6,7 +6,6 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,14 +15,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * The controller class which contains the controls for the route data view.
  *
- * @author Hayley Krippner
+ * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 15/09/2020
+ * @since 2020-09-04
  */
 public class RouteDataViewController extends DataViewController {
 
@@ -36,14 +33,16 @@ public class RouteDataViewController extends DataViewController {
   @FXML private TableColumn<Route, String> codeShareColumn;
   @FXML private TableColumn<Route, Integer> numOfStopsColumn;
   @FXML private TableColumn<Route, String> equipmentColumn;
-  @FXML private Button btnFlightHistory;
-  @FXML private Button AddToHistoryButton;
 
+  /** The types of search which can be performed on routes. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Airline", "Source", "Destination");
+
+  /** Class to generate reports on history. */
   private ReportGenerator reportGenerator;
 
-  private RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
+  /** Pop up to launch when adding route to history. */
+  private final RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
 
   /**
    * Initializes the controller class. The checkboxes are added to each record.
@@ -73,7 +72,7 @@ public class RouteDataViewController extends DataViewController {
   }
 
   /**
-   * Calls searchRoutes method from searcher class and upldates table to display results of search.
+   * This method calls searchRoutes method from searcher class and upldates table to display results of search.
    */
   public void searchByDataType(String searchTerm, String searchType) {
     ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getRoutes());
@@ -125,7 +124,7 @@ public class RouteDataViewController extends DataViewController {
         storage.getHistoryDestAirports()); // TODO: uncommment once implemented HashMap
   }
 
-  /** Clear search bar and display all routes in table view. */
+  /** This method clears the search bar and displays all routes in table view. */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
@@ -133,9 +132,9 @@ public class RouteDataViewController extends DataViewController {
   }
 
   /**
-   * Launch the filter pop up box. If filtering is successful displays filtered routes in tableview.
+   * This method launches the filter pop up box. If filtering is successful displays filtered routes in tableview.
    *
-   * @throws IOException
+   * @throws IOException If fxml file cannot be launched.
    */
   public void filterOptions() throws IOException {
     RouteFilterPopUpController filterPopUp = new RouteFilterPopUpController();

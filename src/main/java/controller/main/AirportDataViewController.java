@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  *
  * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 04/09/20
+ * @since 2020-09-04
  */
 public class AirportDataViewController extends DataViewController {
 

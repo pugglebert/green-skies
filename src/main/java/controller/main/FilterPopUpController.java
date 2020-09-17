@@ -13,33 +13,43 @@ import model.data.Storage;
 import java.io.IOException;
 import java.util.HashMap;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * Parent class of the filter pop up window classes for each datatype.
  *
  * @author Ella Johnson
  * @version 1.0
- * @since 12/09/20202
+ * @since 2020-09-12
  */
 public abstract class FilterPopUpController implements Initializable {
 
   @FXML private Label errorText;
 
-  // TODO: write comments for these attributes
+  /** Class to call filtering methods from. */
   protected Filterer filterer = Main.getFilterer();
+
+  /** Class to get stored data from. */
   protected Storage storage = Main.getStorage();
 
-  // TODO: write comment for these methods
-
+  /**
+   * This method gets the filter terms the user has entered and their types.
+   * @return A HashMap with filter types as keys and filter terms as values.
+   */
   public abstract HashMap<String, String> getFilterTerms();
 
+  /**
+   * This method filters the data in storage by the given filter terms
+   * @param filterTerms A HashMap with filter types as keys and filter terms as values.
+   */
   public abstract void filterByDataType(HashMap<String, String> filterTerms);
 
+  /**
+   * This method returns the fxml file name which the class is the controller for.
+   * @return An fxml filename.
+   */
   public abstract String getFXMLFilename();
 
   /**
-   * Display the filter pop up window.
+   * This method displays the filter pop up window.
    *
    * @throws IOException if fmxl file cannot be opened.
    */
@@ -53,9 +63,9 @@ public abstract class FilterPopUpController implements Initializable {
   }
 
   /**
-   * Call getFilterTerms to get a hashmap of the filter types and terms. Call filterByDataType with
-   * the given filter types and terms in a hashmap, and set the filterSuccess attribute of the
-   * filterer to true. Display an error message if any step goes wrong.
+   * This method calls getFilterTerms to get a hashmap of the filter types and terms. Calls filterByDataType with
+   * the given filter types and terms in a hashmap, and sets the filterSuccess attribute of the
+   * filterer to true. Displays an error message if any step goes wrong.
    */
   public void applyFilters() {
     errorText.setVisible(false);

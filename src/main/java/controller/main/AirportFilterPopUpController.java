@@ -7,14 +7,12 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * Pop up window in which user can select filters to apply to the list of airports.
  *
  * @author Ella Johnson
  * @version 1.0
- * @since 12/09/2020
+ * @since 2020-09-12
  */
 public class AirportFilterPopUpController extends FilterPopUpController {
 
@@ -24,7 +22,7 @@ public class AirportFilterPopUpController extends FilterPopUpController {
   @FXML private CheckBox cityCheckBox;
 
   /**
-   * Must have implementation of this method as superclass implements the Initializable interface.
+   * This method is inherited from the Initializable interface.
    *
    * @param url Not used.
    * @param resourceBundle Not used.
@@ -33,10 +31,10 @@ public class AirportFilterPopUpController extends FilterPopUpController {
   public void initialize(URL url, ResourceBundle resourceBundle) {}
 
   /**
-   * Get the country and active status which the user has inputed and insert them into a hashmap
+   * This method gets the country and active status which the user has inputed and inserts them into a hashmap
    * with the filter type as the key.
    *
-   * @return a hashmap with filter type as the key and filter term as the value.
+   * @return A HashMap with filter type as the key and filter term as the value.
    */
   @Override
   public HashMap<String, String> getFilterTerms() {
@@ -51,7 +49,7 @@ public class AirportFilterPopUpController extends FilterPopUpController {
   }
 
   /**
-   * Call the filterAirports method of the Filterer class with the given hashmap of filter types and
+   * This method calls the filterAirports method of the Filterer class with the given hashmap of filter types and
    * term.
    *
    * @param filterTerms a hashmap to pass into the filterAirports method.
@@ -60,8 +58,10 @@ public class AirportFilterPopUpController extends FilterPopUpController {
     filterer.filterAirports(filterTerms, storage.getAirports());
   }
 
-  // TODO: rewrite comment for this method
-  /** @return The fxml filename for the airport filter pop up controller. */
+  /**
+   * This method returns the fxml filename for the airport filter pop up controller.
+   * @return The fxml filename
+   * */
   @Override
   public String getFXMLFilename() {
     return "airportFilterPopUp.fxml";

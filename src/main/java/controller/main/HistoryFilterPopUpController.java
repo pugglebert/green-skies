@@ -7,10 +7,13 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
-
-// TODO: write comment for this class
-
+/**
+ * Pop up screen in which uses can apply filters to the flight history.
+ *
+ * @author Ella Johnson
+ * @version 1.0
+ * @since 2020-09-14
+ */
 public class HistoryFilterPopUpController extends FilterPopUpController {
 
   @FXML private CheckBox airlineCheckBox;
@@ -21,7 +24,7 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
   @FXML private TextField destinationField;
 
   /**
-   * Must have implementation of this method as superclass implements the Initializable interface.
+   * This method is inherited from the Initializable interface.
    *
    * @param url Not used.
    * @param resourceBundle Not used.
@@ -30,7 +33,7 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
   public void initialize(URL url, ResourceBundle resourceBundle) {}
 
   /**
-   * Gets the filter terms the user has entered from the text fields and puts them into a HashMap
+   * This method gets the filter terms the user has entered from the text fields and puts them into a HashMap
    * with the filter type as the key and the filter term as the value.
    *
    * @return A HashMap with filter types as keys and filter terms as values.
@@ -50,7 +53,7 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
   }
 
   /**
-   * Call the filterRoutes method of filterer with the given HashMap of filter types and terms and
+   * This method calls the filterRoutes method of filterer with the given HashMap of filter types and terms and
    * the history stored in storage.
    *
    * @param filterTerms A HashMap with filter type as the key and filter term as the value.
@@ -60,7 +63,9 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
     filterer.filterRoutes(filterTerms, storage.getHistory());
   }
 
-  /** @return The fxml filename for the history filter pop up. */
+  /**
+   * This method returns the fxml filename for the history filter pop up.
+   * @return The fxml filename. */
   @Override
   public String getFXMLFilename() {
     return "historyFilterPopUp.fxml";

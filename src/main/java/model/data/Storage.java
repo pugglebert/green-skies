@@ -10,7 +10,7 @@ import java.util.List;
  * Class to keep track of all the data that has been uploaded to the application, also interact with database.
  *
  * @author Ella Johnson, Lambert, Hayley Krippner
- * @since 15/09/2020
+ * @since 2020-09-15
  * @version 1.3
  */
 public class Storage {

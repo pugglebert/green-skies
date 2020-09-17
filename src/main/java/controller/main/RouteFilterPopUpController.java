@@ -6,14 +6,13 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-// TODO: check all method comments start with "This method ..."
 
 /**
  * Pop up scene on which users can apply filters for the route table.
  *
  * @author Ella Johnson
  * @version 1.0
- * @since 12/09/2020
+ * @since 2020-09-12
  */
 public class RouteFilterPopUpController extends FilterPopUpController {
 
@@ -25,7 +24,7 @@ public class RouteFilterPopUpController extends FilterPopUpController {
   @FXML private TextField destinationField;
 
   /**
-   * Must have implementation of this method as superclass implements the Initializable interface.
+   * This method is inherited from the Initializable interface.
    *
    * @param url Not used.
    * @param resourceBundle Not used.
@@ -34,7 +33,7 @@ public class RouteFilterPopUpController extends FilterPopUpController {
   public void initialize(URL url, ResourceBundle resourceBundle) {}
 
   /**
-   * Gets the filter terms the user has entered from the text fields and puts them into a HashMap
+   * This method gets the filter terms the user has entered from the text fields and puts them into a HashMap
    * with the filter type as the key and the filter term as the value.
    *
    * @return A HashMap with filter types as keys and filter terms as values.
@@ -54,7 +53,7 @@ public class RouteFilterPopUpController extends FilterPopUpController {
   }
 
   /**
-   * Call the filterRoutes method of filterer with the given HashMap of filter types and terms.
+   * This method calls the filterRoutes method of filterer with the given HashMap of filter types and terms.
    *
    * @param filterTerms A HashMap with filter type as the key and filter term as the value.
    */
@@ -63,7 +62,9 @@ public class RouteFilterPopUpController extends FilterPopUpController {
     filterer.filterRoutes(filterTerms, storage.getRoutes());
   }
 
-  /** @return The fxml filename for the route filter pop up controller. */
+  /**
+   * This method returns the fxml filename for the route filter pop up controller.
+   * @return The fxml filename */
   @Override
   public String getFXMLFilename() {
     return "routeFilterPopUp.fxml";

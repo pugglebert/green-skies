@@ -18,44 +18,25 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the airline data view.
  *
- * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui
+ * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui, ELla Johnson
  * @version 1.0
- * @since 04/09/20
+ * @since 2020-09-04
  */
 public class FlightHistoryController extends DataViewController {
 
   // TODO: what is with the commented columns? HK 16/09/2020
   @FXML private TableView<Route> tableView;
-  //  @FXML
-  //  private TableColumn<Route, Boolean> addColumn;
   @FXML private TableColumn<Route, String> airlineNameColumn;
-  //  @FXML
-  //  private TableColumn<Route, Integer> airlineIDColumn;
   @FXML private TableColumn<Route, String> sourceAirportColumn;
-  //  @FXML
-  //  private TableColumn<Route, Integer> sourceAirportIDColumn;
   @FXML private TableColumn<Route, String> destinationAirportColumn;
-  //  @FXML
-  //  private TableColumn<Route, Integer> destinationAirportIDColumn;
   @FXML private TableColumn<Route, String> codeShareColumn;
   @FXML private TableColumn<Route, Integer> numOfStopsColumn;
   @FXML private TableColumn<Route, String> equipmentColumn;
-  @FXML private Button btnUpload;
-  @FXML private Button btnRouteDataView;
-  @FXML private Button btnAirportDataView;
-  @FXML private Button btnAirlineDataView;
-  @FXML private Button btnFlightHistory;
   @FXML private ChoiceBox<String> searchTypeSelection;
   @FXML private TextField searchBar;
-  @FXML private Button searchButton;
-  @FXML private Label errorText;
-  @FXML private ChoiceBox<String> airlineSelection;
-  @FXML private ChoiceBox<String> sourceSelection;
-  @FXML private ChoiceBox<String> destinationSelection;
   @FXML private ChoiceBox<String> RankSelection;
 
-  // TODO: write comments for these attributes
-
+  /** The types of search which can be performed on history. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Airline", "Source", "Destination");
   private final ObservableList<String> RankTypes =
@@ -98,7 +79,7 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * Searches history for routes which match the search type and term and displays them in the table
+   * This method earches history for routes which match the search type and term and displays them in the table
    * view.
    *
    * @param searchTerm String to match attributes to.
@@ -110,7 +91,7 @@ public class FlightHistoryController extends DataViewController {
     tableView.setItems(FXCollections.observableList(results));
   }
 
-  /** Clear search bar and display all history in table view. */
+  /** This method clears search bar and displays all history in table view. */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
@@ -118,10 +99,10 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * Launch the filter pop up box. If filtering is successful displays filtered history in
+   * This method aunches the filter pop up box. If filtering is successful displays filtered history in
    * tableview.
    *
-   * @throws IOException
+   * @throws IOException if fxml file cannot be opened.
    */
   public void filterOptions() throws IOException {
     HistoryFilterPopUpController filterPopUp = new HistoryFilterPopUpController();
@@ -131,11 +112,13 @@ public class FlightHistoryController extends DataViewController {
       tableView.setItems(FXCollections.observableList(filterer.getFilteredRoutes()));
     }
   }
-  // TODO: write comment for this method
 
+  /**
+   * This method ranks the routes by the attribute selected by the user.
+   */
   @FXML
   public void rank() {
-    if (RankSelection.getSelectionModel().getSelectedItem() == "Distance") {
+    if (RankSelection.getSelectionModel().getSelectedItem().equals("Distance")) {
       System.out.println(1);
       Collections.sort(
           storage.getHistory(),
