@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="btnChangePassenger" prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteAddToHistoryPopUpController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteAddToHistoryPopUpController">
     <children>
         <TableView fx:id="tableView" layoutX="198.0" layoutY="251.0" prefHeight="441.0" prefWidth="1262.0">
             <columns>
@@ -16,6 +16,6 @@
                 <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="94.0" text="Equipment" />
             </columns>
         </TableView>
-      <Button layoutX="606.0" layoutY="186.0" mnemonicParsing="false" text="Change Passenger Number" />
+      <Button fx:id="confirmBtn" layoutX="802.0" layoutY="186.0" mnemonicParsing="false" onAction="#confirm" text="Confirm" />
     </children>
 </AnchorPane>

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//TODO: check all method comments start with "This method ..."
+
 /**
  * Class for which contains the methods for calcuting and updating the analysis data for the user's
  * carbon emissions report.
@@ -15,6 +17,7 @@ import java.util.Map;
  * @version 1.0
  */
 public class ReportGenerator {
+  // TODO: write comments for these attributes
 
   private double totalDistanceTravelled = 0.0; // km
 
@@ -47,17 +50,17 @@ public class ReportGenerator {
   /**
    * This method updates the total carbon emissions from flight travel.
    *
-   * @param currentRouteRecord, the current route record that is being added to user's flight
+   * @param currentRouteRecord , the current route record that is being added to user's flight
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
-    totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTake());
+    totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
   }
 
   /**
    * This method updates the total distance travelled via flight travel.
    *
-   * @param currentRouteRecord, the current route record that is being added to user's flight
+   * @param currentRouteRecord , the current route record that is being added to user's flight
    *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
@@ -67,26 +70,22 @@ public class ReportGenerator {
   /**
    * This method updates the current most travelled flight route.
    *
-   * @param routeHistoryEntries, the current route record that is being added to user's flight
+   * @param routeHistoryEntries , the current route record that is being added to user's flight
    *     history.
    */
   public void updateMostTravelledRoute(List<Route> routeHistoryEntries) {
-    // TODO: remove once the quicksort and binary sort have been thoughroughly tested.
-    //        int currMaxRouteUsed = 0;
-    //        for (Route route : routeHistoryEntries) {
-    //            if (route.getTimesTake() > currMaxRouteUsed) {
-    //                mostTravelledRoutes.clear();
-    //                mostTravelledRoutes.add(route);
-    //            } else if (route.getTimesTake() == currMaxRouteUsed) {
-    //                mostTravelledRoutes.add(route);
-    //            }
-    //        }
-
-    quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
-    int maxRouteCounter = routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTake();
-    int firstOccuranceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
-    for (int i = firstOccuranceIndex; i < routeHistoryEntries.size() - 1; i++) {
-      mostTravelledRoutes.add(routeHistoryEntries.get(i));
+    if (routeHistoryEntries.size() >= 1) {
+      if (routeHistoryEntries.size() == 1) {
+        mostTravelledRoutes.add(routeHistoryEntries.get(0));
+      } else {
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        int maxRouteCounter =
+            routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTaken();
+        int firstOccuranceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
+        for (int i = firstOccuranceIndex; i < routeHistoryEntries.size(); i++) {
+          mostTravelledRoutes.add(routeHistoryEntries.get(i));
+        }
+      }
     }
   }
 
@@ -102,19 +101,25 @@ public class ReportGenerator {
 
     //        int currMaxRouteUsed = 0;
     //        for (Route route : routeHistoryEntries) {
-    //            if (route.getTimesTake() > currMaxRouteUsed) {
+    //            if (route.getTimesTaken() > currMaxRouteUsed) {
     //                leastTravelledRoutes.clear();
     //                leastTravelledRoutes.add(route);
-    //            } else if (route.getTimesTake() == currMaxRouteUsed) {
+    //            } else if (route.getTimesTaken() == currMaxRouteUsed) {
     //                leastTravelledRoutes.add(route);
     //            }
     //        }
 
-    quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
-    int minRouteCounter = routeHistoryEntries.get(0).getTimesTake();
-    int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
-    for (int i = 0; i < firstOccuranceIndex + 1; i++) {
-      mostTravelledRoutes.add(routeHistoryEntries.get(i));
+    if (routeHistoryEntries.size() >= 1) {
+      if (routeHistoryEntries.size() == 1) {
+        leastTravelledRoutes.add(routeHistoryEntries.get(0));
+      } else {
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+    int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
+        int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
+        for (int i = 0; i < firstOccuranceIndex + 1; i++) {
+          leastTravelledRoutes.add(routeHistoryEntries.get(i));
+        }
+      }
     }
   }
 
@@ -181,14 +186,22 @@ public class ReportGenerator {
    */
   public void updateMostDistanceRoute(Route currentRouteRecord) {
     if (currentRouteRecord.getDistance() > 0.0) {
-
       if (mostDistanceRoutes.isEmpty() == true) {
         mostDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() > mostDistanceRoutes.get(0).getDistance()) {
         mostDistanceRoutes.clear();
         mostDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() == mostDistanceRoutes.get(0).getDistance()) {
-        mostDistanceRoutes.add(currentRouteRecord);
+        Boolean found = false;
+        for (Route route : mostDistanceRoutes) {
+          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          mostDistanceRoutes.add(currentRouteRecord);
+        }
       }
     }
   }
@@ -208,7 +221,16 @@ public class ReportGenerator {
         leastDistanceRoutes.clear();
         leastDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() == leastDistanceRoutes.get(0).getDistance()) {
-        leastDistanceRoutes.add(currentRouteRecord);
+        Boolean found = false;
+        for (Route route : leastDistanceRoutes) {
+          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          leastDistanceRoutes.add(currentRouteRecord);
+        }
       }
     }
   }
@@ -269,62 +291,64 @@ public class ReportGenerator {
   }
 
   // TODO: write this method.
+  // TODO: write comment for this method
+
   public void calculateOffsetTrees(double totalCarbonEmissions) {}
 
+
+
+  // TODO: write comment for this method
   public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
     this.carbonEmissionGoal = carbonEmissionGoal;
   }
-
+  // TODO: write comment for this method
   public void setAnalysisPeriod(double analysisPeriod) {
     this.analysisPeriod = analysisPeriod;
   }
-
+  // TODO: write comment for this method
   public double getTotalDistanceTravelled() {
     return totalDistanceTravelled;
   }
-
+  // TODO: write comment for this method
   public double getTotalCarbonEmissions() {
     return totalCarbonEmissions;
   }
-
+  // TODO: write comment for this method
   public ArrayList<Route> getMostEmissionsRoutes() {
     return mostEmissionsRoutes;
   }
-
+  // TODO: write comment for this method
   public ArrayList<Route> getLeastEmissionsRoutes() {
     return leastEmissionsRoutes;
   }
-
+  // TODO: write comment for this method
   public ArrayList<Route> getMostDistanceRoutes() {
     return mostDistanceRoutes;
   }
-
+  // TODO: write comment for this method
   public ArrayList<Route> getLeastDistanceRoutes() {
     return leastDistanceRoutes;
   }
-
+  // TODO: write comment for this method
   public ArrayList<String> getMostVisitedSrcAirports() {
     return mostVisitedSrcAirports;
   }
-
+  // TODO: write comment for this method
   public ArrayList<String> getMostVisitedDestAirports() {
     return mostVisitedDestAirports;
   }
-
+  // TODO: write comment for this method
   public double getCarbonEmissionGoal() {
     return carbonEmissionGoal;
   }
-
+  // TODO: write comment for this method
   public double getHowMuchToReduceCO2By() {
     return howMuchToReduceCO2By;
   }
-
+  // TODO: write comment for this method
   public double getAnalysisPeriod() {
     return analysisPeriod;
   }
-
-  // TODO: test the implemention the sort and search in terms of updateMostTravelledRoute and
-  // updateLeastTravelledRoute. 14/09/2020 HK
 
   /**
    * This function implements the binary search algorithm.
@@ -338,11 +362,11 @@ public class ReportGenerator {
     int lastIndex = arraryToSearch.size() - 1;
     while (firstIndex <= lastIndex) {
       int middleIndex = (firstIndex + lastIndex) / 2;
-      if (arraryToSearch.get(middleIndex).getTimesTake() == searchElement) {
+      if (arraryToSearch.get(middleIndex).getTimesTaken() == searchElement) {
         return middleIndex;
-      } else if (arraryToSearch.get(middleIndex).getTimesTake() < searchElement)
+      } else if (arraryToSearch.get(middleIndex).getTimesTaken() < searchElement)
         firstIndex = middleIndex + 1;
-      else if (arraryToSearch.get(middleIndex).getTimesTake() > searchElement)
+      else if (arraryToSearch.get(middleIndex).getTimesTaken() > searchElement)
         lastIndex = middleIndex - 1;
     }
     return -1;
@@ -374,7 +398,7 @@ public class ReportGenerator {
     int pivot = end;
     int counter = start;
     for (int i = start; i < end; i++) {
-      if (arraytoSort.get(i).getTimesTake() < arraytoSort.get(pivot).getTimesTake()) {
+      if (arraytoSort.get(i).getTimesTaken() < arraytoSort.get(pivot).getTimesTaken()) {
         Route temp = arraytoSort.get(counter);
         arraytoSort.set(counter, arraytoSort.get(i));
         arraytoSort.set(i, temp);
@@ -403,5 +427,13 @@ public class ReportGenerator {
    */
   public void setTotalDistanceTravelled(double totalDistanceTravelled) {
     this.totalDistanceTravelled = totalDistanceTravelled;
+  }
+
+  public ArrayList<Route> getMostTravelledRoute() {
+    return mostTravelledRoutes;
+  }
+
+  public ArrayList<Route> getLeastTravelledRoute() {
+    return leastTravelledRoutes;
   }
 }

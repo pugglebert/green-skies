@@ -1,4 +1,5 @@
 package model.data;
+// TODO: check all method comments start with "This method ..."
 
 /**
  * The Airline class which contains all data for one unique airline.
@@ -8,6 +9,8 @@ package model.data;
  * @since 2020-08-11
  */
 public class Airline implements DataType {
+  // TODO: write comments for these attributes
+
   private final int airlineID;
   private final String name;
   private final String alias;
@@ -17,18 +20,16 @@ public class Airline implements DataType {
   private final String country;
   private final Boolean activeStatus;
 
-  /**
-   * The Airline constructor.
-   */
+  /** The Airline constructor. */
   public Airline(
-          int airlineID,
-          String name,
-          String alias,
-          String IATA,
-          String ICAO,
-          String callsign,
-          String country,
-          Boolean activeStatus) {
+      int airlineID,
+      String name,
+      String alias,
+      String IATA,
+      String ICAO,
+      String callsign,
+      String country,
+      Boolean activeStatus) {
     this.airlineID = airlineID;
     this.name = name;
     this.alias = alias;
@@ -112,8 +113,9 @@ public class Airline implements DataType {
   }
 
   /**
-   * Returns true if all another is instance of airline and has all the same attributes
-   * as this airline, false otherwise..
+   * Returns true if all another is instance of airline and has all the same attributes as this
+   * airline, false otherwise..
+   *
    * @param o any object to check equality against.
    * @return true if objects are equal, false otherwise.
    */
@@ -129,10 +131,8 @@ public class Airline implements DataType {
           && this.callsign.equals(another.getCallsign())
           && this.country.equals(another.getCountry())
           && this.activeStatus == another.getActiveStatus();
-    }
-    else {
+    } else {
       return false;
     }
   }
-
 }

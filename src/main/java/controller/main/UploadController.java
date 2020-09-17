@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+// TODO: check all method comments start with "This method ..."
+
 /**
  * The controller class which contains the controls for the upload data view.
  * @author Grace Hanlon
