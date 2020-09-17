@@ -6,19 +6,18 @@ import model.data.Route;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: check all method comments start with "This method ..."
 
 /**
  * Class for searching data for entry which matches specific search term.
  *
  * @author Ella Johnson, Hayley Krippner
- * @since 26/08/20
+ * @since 2020-08-26
  * @version 1.0
  */
 public class Searcher {
 
   /**
-   * Searches airport data for entries that match the given search term.
+   * This method earches airport data for entries that match the given search term.
    *
    * @param searchTerm a string entered by the user for something they want information on.
    * @param type the type of attribute the user.
@@ -61,7 +60,7 @@ public class Searcher {
   }
 
   /**
-   * Searches airline data for entries that match the given search term.
+   * This method searches airline data for entries that match the given search term.
    *
    * @param searchTerm a string entered by the user for something they want information on.
    * @param type the type of attribute the user.
@@ -106,7 +105,7 @@ public class Searcher {
   }
 
   /**
-   * Searches route data for entries that match the given search term.
+   * This method searches route data for entries that match the given search term.
    *
    * @param searchTerm a string entered by the user for something they want information on.
    * @param type the type of attribute the user. Must by one of "Airline", "Source", "Destination".
