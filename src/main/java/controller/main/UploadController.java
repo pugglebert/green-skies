@@ -45,6 +45,7 @@ public class UploadController extends SideNavBarController {
 
     /**
      * This method adds the data types from dataTypeList to the dataTypeSelect list.
+     * Must have implementation of this method as superclass implements the Initializable interface.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -121,8 +122,10 @@ public class UploadController extends SideNavBarController {
         }
 //
     }
+
     /**
      * This method opens a screen for manual data entry of a single item when the 'Add single entry' button is clicked.
+     * @throws IOException
      */
     public void addSingle() throws IOException {
 

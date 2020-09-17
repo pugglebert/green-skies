@@ -3,17 +3,19 @@ package controller.main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import controller.main.AnalyseController;
-import model.data.Airport;
 import model.data.Storage;
-import controller.analysis.FlightAnalyser;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+/**
+ * The controller class which contains the controls for the AnalyseResult screen, this screen shows the user
+ * the calcuted results for distance and emissions of two routes entered into the analyse screen
+ * @version 1.0
+ * @since 15/09/20
+ */
 
 public class AnalyseResultController implements Initializable {
 
@@ -32,6 +34,11 @@ public class AnalyseResultController implements Initializable {
     @FXML
     public Text EmissionRoute2;
 
+    /**
+     * Must have implementation of this method as superclass implements the Initializable interface.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Storage storage = Main.getStorage();
@@ -45,6 +52,7 @@ public class AnalyseResultController implements Initializable {
         EmissionRoute2.setText(EmissionRoute2Text);
 
     }
+
 
     public void GoBackToAnalyse() {
         Stage stage = (Stage) BackButton.getScene().getWindow();   //get current window

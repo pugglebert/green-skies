@@ -1,8 +1,5 @@
 package controller.main;
 
-import controller.analysis.FlightAnalyser;
-import controller.analysis.ReportGenerator;
-import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +19,6 @@ import model.data.Route;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -73,7 +69,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
 
     /**
      * Initializes the controller class. The checkboxes are added to each record.
-     *
+     * Must have implementation of this method as superclass implements the Initializable interface.
      * @param url The URL used.
      * @param rb  The resource bundle used.
      */

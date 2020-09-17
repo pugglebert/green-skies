@@ -1,7 +1,6 @@
 package controller.main;
 
 import controller.analysis.ReportGenerator;
-import controller.main.SideNavBarController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,6 +54,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     private TextField carbonEmissionGoalField;
     private ReportGenerator reportGenerator;
 
+    /**
+     * Must have implementation of this method as superclass implements the Initializable interface.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.reportGenerator = Main.getReportGenerator(); //TODO update this so that is

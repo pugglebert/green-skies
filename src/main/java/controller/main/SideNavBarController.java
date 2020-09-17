@@ -167,7 +167,10 @@ public abstract class SideNavBarController implements Initializable {
         newStage.show();
     }
 
-
+    /**
+     * Opens analyse screen
+     * @throws IOException
+     */
     public void toAnalyseFlight() throws IOException {
         Stage stage = (Stage)btnAnalyseFlight.getScene().getWindow();
         stage.close();

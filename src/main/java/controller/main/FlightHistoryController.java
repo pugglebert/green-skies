@@ -1,23 +1,19 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import model.data.Route;
 import model.data.Storage;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 /**
@@ -86,6 +82,7 @@ public class FlightHistoryController extends DataViewController {
 
   /**
    * Initializes the controller class.
+   * Must have implementation of this method as superclass implements the Initializable interface.
    * @param url The URL used.
    * @param rb The resource bundle used.
    */

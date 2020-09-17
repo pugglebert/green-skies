@@ -1,32 +1,35 @@
 package controller.main;
 
 import controller.analysis.FlightAnalyser;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.awt.*;
+import model.data.Airport;
+import model.data.Route;
+import org.controlsfx.control.textfield.TextFields;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
-import model.data.Airport;
-import model.data.Route;
 
 import static javafx.application.Application.launch;
-import org.controlsfx.control.textfield.TextFields;
 
+/**
+ * The controller class which contains the controls for the analyse screen, where two flights are entered and
+ * the details of their distances and carbon emissions are calcuated
+ * @version 1.0
+ * @since 15/09/20
+ */
 public class AnalyseController extends SideNavBarController implements Initializable  {
 
     @FXML
     private TextField pathSource1;
-
     @FXML
     private TextField pathDestination1;
     @FXML
@@ -34,9 +37,14 @@ public class AnalyseController extends SideNavBarController implements Initializ
     @FXML
     private TextField pathDestination2;
 
-
     private HashSet<String> airports = new HashSet<>();
 
+
+    /**
+     * opens Analyse screen
+     * @param primaryStage
+     * @throws IOException
+     */
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
         primaryStage.setTitle("Welcome");
@@ -45,12 +53,19 @@ public class AnalyseController extends SideNavBarController implements Initializ
     }
 
 
+
     public static void main(String[] args) {
         launch(args);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+  /**
+   * Must have implementation of this method as superclass implements the Initializable
+   * interface.
+   * @param url
+   * @param resourceBundle
+   */
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
 //        System.out.println(Main.getStorage().getAirports());
         for(Airport airport: Main.getStorage().getAirports()) {
             airports.add(airport.getIATA());
@@ -64,7 +79,11 @@ public class AnalyseController extends SideNavBarController implements Initializ
     }
 
 
-    @FXML
+    /**
+     * This method gets the route details from the text fields and calculates the total distances and emissions
+     * for each route
+     * @throws IOException
+     */
     private void analyse() throws IOException {
 
         ArrayList<String> path1 = new ArrayList<>();
@@ -88,8 +107,6 @@ public class AnalyseController extends SideNavBarController implements Initializ
         storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
         storage.setAnalyseEmissionResult(analyser.getPath1Emission());
         storage.setAnalyseEmissionResult(analyser.getPath2Emission());
-
-
 
 
         Stage stage1 = new Stage();
