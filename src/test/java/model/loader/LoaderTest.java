@@ -52,7 +52,6 @@ public class LoaderTest {
         try {
             loader.checkFileType("../seng202_project/src/test/java/TestFiles/goodFile.csv");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             fail();
         }
     }

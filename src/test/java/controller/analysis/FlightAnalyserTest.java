@@ -81,9 +81,6 @@ public class FlightAnalyserTest {
 
         }
 
-//        System.out.println(listOfAirportPath1);
-//
-//        System.out.println(listOfAirportPath2);
         double pathDistance1 = calculatedistance(listOfAirportPath1.get(0).getLatitude(), listOfAirportPath1.get(0).getLongitude(), listOfAirportPath1.get(1).getLatitude(), listOfAirportPath1.get(1).getLongitude());
 
         double pathDistance2 = calculatedistance(listOfAirportPath2.get(0).getLatitude(), listOfAirportPath2.get(0).getLongitude(), listOfAirportPath2.get(1).getLatitude(), listOfAirportPath2.get(1).getLongitude());
@@ -91,8 +88,6 @@ public class FlightAnalyserTest {
         distance2 = pathDistance2;
         distance3 = pathDistance1;
         distance4 = pathDistance2;
-//        System.out.println(distance1);
-//        System.out.println(distance2);
 
     }
 
@@ -118,8 +113,6 @@ public class FlightAnalyserTest {
         double pathDistance = calculatedistance(listOfAirportPath.get(0).getLatitude(), listOfAirportPath.get(0).getLongitude(), listOfAirportPath.get(1).getLatitude(), listOfAirportPath.get(1).getLongitude());
 
        singleDistance = pathDistance;
-//        System.out.println(distance1);
-//        System.out.println(distance2);
 
     }
 
@@ -207,8 +200,6 @@ public class FlightAnalyserTest {
         path4.add(route4.getDestinationAirport());
 
 
-//        System.out.println(path1);
-//        System.out.println(path2);
 
 
     }
@@ -363,9 +354,9 @@ public class FlightAnalyserTest {
         analyser = new FlightAnalyser(route1, route2, storage);
 
         if(analyser.compareDistance() > 0) {
-            System.out.println(true);
+//            System.out.println(true);
         } else {
-            System.out.println(false);
+//            System.out.println(false);
         }
     }
     /**
@@ -378,9 +369,9 @@ public class FlightAnalyserTest {
         analyser = new FlightAnalyser(route1, route2, storage);
 
         if(analyser.compareEmission() > 0) {
-            System.out.println(true);
+//            System.out.println(true);
         } else {
-            System.out.println(false);
+//            System.out.println(false);
         }
     }
 }

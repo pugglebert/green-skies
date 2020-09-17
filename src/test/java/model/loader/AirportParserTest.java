@@ -26,7 +26,6 @@ public class AirportParserTest {
             lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
             airportParser = new AirportParser(lines, existingLines);
         } catch (FileNotFoundException e) {
-            System.out.println("file loader unable to load files");
         }
 //        testLines = new ArrayList<String>();
 //        testLines.add("1,\"Goroka\",\"Goroka\",\"Papua New Guinea\",\"GKA\",\"AYGA\",-6.081689,145.391881,5282,10,\"U\",\"Pacific/Port_Moresby\"");

@@ -105,7 +105,6 @@ public class SearcherTest {
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/routes.csv", "Route");
     } catch (Exception e) {
-      System.out.println(e.getMessage());
       fail();
     }
     ArrayList<Route> expectedResults = new ArrayList<>();
@@ -194,9 +193,8 @@ public class SearcherTest {
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
     } catch (Exception e) {
-      System.out.println(e.getMessage());
       //TODO work out why this test is failing
-      //fail();
+      fail();
     }
     ArrayList<Airport> expectedResults = new ArrayList<>();
     expectedResults.add(new Airport(9428,"Bessemer","Bessemer","United States","EKY","KEKY",33.1876,-86.5558,700,-6,"A","America/Chicago"));
@@ -281,7 +279,6 @@ public class SearcherTest {
     try {
       String message = loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     } catch (Exception e) {
-      System.out.println(e.getMessage());
       fail();
     }
     List<Airline> airlines = storage.getAirlines();
