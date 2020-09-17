@@ -35,7 +35,6 @@ public class FlightHistory {
 
     try {
       errorMessage = loader.loadFile(fileDir, "Route");
-      System.out.println(errorMessage);
       return storage.getRoutes();
     } catch (Exception e) {
       e.printStackTrace();

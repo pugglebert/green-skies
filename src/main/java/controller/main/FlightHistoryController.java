@@ -125,7 +125,6 @@ public class FlightHistoryController extends DataViewController {
    */
   public void filterOptions() throws IOException {
     HistoryFilterPopUpController filterPopUp = new HistoryFilterPopUpController();
-    System.out.println(filterPopUp.getClass());
     filterer.setFilterSuccess(false);
     filterPopUp.display();
     if (filterer.getFilterSuccess()) {

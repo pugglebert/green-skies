@@ -75,11 +75,9 @@ public class AnalyseController extends SideNavBarController implements Initializ
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    //        System.out.println(Main.getStorage().getAirports());
     for (Airport airport : Main.getStorage().getAirports()) {
       airports.add(airport.getIATA());
     }
-    //        System.out.println(airports);
     TextFields.bindAutoCompletion(pathSource1, airports);
     TextFields.bindAutoCompletion(pathDestination1, airports);
     TextFields.bindAutoCompletion(pathSource2, airports);
@@ -126,10 +124,10 @@ public class AnalyseController extends SideNavBarController implements Initializ
             rubbish2);
     FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
 
-    System.out.println(analyser.getTotalDistancePath1());
-    System.out.println(analyser.getTotalDistancePath2());
-    System.out.println(analyser.getPath1Emission());
-    System.out.println(analyser.getPath2Emission());
+//    System.out.println(analyser.getTotalDistancePath1());
+//    System.out.println(analyser.getTotalDistancePath2());
+//    System.out.println(analyser.getPath1Emission());
+//    System.out.println(analyser.getPath2Emission());
 
     storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
     storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());

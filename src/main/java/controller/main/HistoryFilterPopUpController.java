@@ -57,7 +57,6 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
    */
   @Override
   public void filterByDataType(HashMap<String, String> filterTerms) {
-    System.out.println("Filter by data type history method called.");
     filterer.filterRoutes(filterTerms, storage.getHistory());
   }
 

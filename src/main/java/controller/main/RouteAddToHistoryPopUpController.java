@@ -111,7 +111,6 @@ public class RouteAddToHistoryPopUpController implements Initializable {
         }
       }
     }
-    System.out.println("added");
     Stage stage = (Stage) confirmBtn.getScene().getWindow();
     stage.close();
   }
