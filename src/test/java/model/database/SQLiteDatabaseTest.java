@@ -71,9 +71,12 @@ public class SQLiteDatabaseTest {
     }
 
     @Test
-    public void isAutoCommiteClosed(){
-        database.initialiseTable("airlines");
-        Route route = new Route("abc", 123, "abc", 123, "abc", )
+    public void isAutoCommiteClosed() throws SQLException {
+        database.closeAutoCommite();
+        database.initialiseTable("routes");
+        state = con.createStatement();
+        res = state.executeQuery("select * from 'routes'");
+        assertTrue(res.next());
     }
 }
 
