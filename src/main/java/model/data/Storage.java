@@ -32,10 +32,10 @@ public class Storage {
   private List<Double> analyseDistanceResult = new ArrayList<Double>();
 
   /** A list of all the values calculated for the emissions of the routes in the history. */
-  public List<Double> analyseEmissionResult = new ArrayList<Double>();
+  private List<Double> analyseEmissionResult = new ArrayList<Double>();
 
   /** A list of all the routes that have been added to the user's personal history. */
-  public List<Route> history = new ArrayList<>();
+  private List<Route> history = new ArrayList<>();
 
   /**
    * A HashMap of all the source airports the user has visited and the number of times they have
@@ -57,14 +57,29 @@ public class Storage {
     return airlines;
   }
 
+  /**This method reset airlines list. */
+  public void resetAirlinessList(){
+    airlines = new ArrayList<Airline>();
+  }
+
   /** @return a list of Airport objects from the currently open file cast as Datatype objects. */
   public List<Airport> getAirports() {
     return airports;
   }
 
+  /**This method reset airports list. */
+  public void resetAirportsList(){
+    airports = new ArrayList<Airport>();
+  }
+
   /** @return a list of Route object from the currently open file cast as Datatype objects. */
   public List<Route> getRoutes() {
     return routes;
+  }
+
+  /**This method reset routes list. */
+  public void resetRoutesList(){
+    routes = new ArrayList<Route>();
   }
 
   /** @return a list of Route object from route to add to history. */
@@ -115,7 +130,7 @@ public class Storage {
   public void setData(List<DataType> data, String type) {
 
     if (type.matches("Airline")) {
-      airlines = new ArrayList<Airline>();
+//      airlines = new ArrayList<Airline>();
       database.initialiseTable("airlines");
       database.closeAutoCommite();
       for (DataType entry : data) {
@@ -127,13 +142,13 @@ public class Storage {
       }
       database.startCommite();
     } else if (type.matches("Airport")) {
-      airports = new ArrayList<Airport>();
+//      airports = new ArrayList<Airport>();
       database.initialiseTable("airports");
       database.closeAutoCommite();
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
         airports.add(airport);
-//        database.addAirports(airport);
+        database.addAirports(airport);
         if (airport != null) {}
       }
       database.startCommite();

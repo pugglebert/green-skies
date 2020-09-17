@@ -89,6 +89,7 @@ public class RouteParser extends Parser {
     protected void dataParser() {
         for (String dataLine : dataFile) {
             if (totalErrors > 200) {
+                totalErrors = 0;
                 throw new RuntimeException("File rejected: more than 100 lines contain errors");
             }
             parseLine(dataLine);

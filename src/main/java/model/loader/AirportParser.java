@@ -165,28 +165,28 @@ public class AirportParser extends Parser {
         if(!isCityValid(line[city])){
             isValid = false;
 //            System.out.println(3);
-            System.out.println(line[city]);
+            System.out.println("city" + line[city]);
 
         }
 
         if(!isCountryValid(line[country])){
             isValid = false;
 //            System.out.println(4);
-            System.out.println(line[country]);
+            System.out.println("country" + line[country]);
 
         }
 
         if(!isIATAValid(line[IATA])){
             isValid = false;
 //            System.out.println(5);
-            System.out.println(line[IATA]);
+            System.out.println("iata" + line[IATA]);
 
         }
 
         if(!isICAOValid(line[ICAO])){
             isValid = false;
 //            System.out.println(6);
-            System.out.println(line[ICAO]);
+            System.out.println("icao" + line[ICAO]);
 
 
         }
@@ -194,42 +194,42 @@ public class AirportParser extends Parser {
         if(!isLatValid(line[latitude])){
             isValid = false;
 //            System.out.println(7);
-            System.out.println(line[latitude]);
+            System.out.println("lat" + line[latitude]);
 
         }
 
         if(!isLonValid(line[longtitude])){
             isValid = false;
 //            System.out.println(8);
-            System.out.println(line[longtitude]);
+            System.out.println("lon" + line[longtitude]);
 
         }
 
         if(!isAltValid(line[altitude])){
             isValid = false;
 //            System.out.println(9);
-            System.out.println(line[altitude]);
+            System.out.println("alt" + line[altitude]);
 
         }
 
         if(!isTZValid(line[timezone])){
             isValid = false;
 //            System.out.println(10);
-            System.out.println(line[timezone]);
+            System.out.println("time" + line[timezone]);
 
         }
 
         if(!isDSTValid(line[DST])){
             isValid = false;
 //            System.out.println(11);
-            System.out.println(line[DST]);
+            System.out.println("dst"+ line[DST]);
 
         }
 
         if(!isDBTZValid(line[dataBaseTimeZone])){
             isValid = false;
 //            System.out.println(12);
-            System.out.println(line[dataBaseTimeZone]);
+            System.out.println("dbtz" + line[dataBaseTimeZone]);
 
         }
 
@@ -385,12 +385,7 @@ public class AirportParser extends Parser {
      */
     protected boolean isTZValid(String timeZone){
         try{
-
-            if(-12 <= Float.parseFloat(timeZone) && Float.parseFloat(timeZone) <= 12){
-                return true;
-            } else {
-                return false;
-            }
+            return -11 <= Float.parseFloat(timeZone) && Float.parseFloat(timeZone) <= 14;
         } catch (Exception e){
             errorCounter(11);
             return false;
