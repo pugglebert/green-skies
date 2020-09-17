@@ -3,31 +3,55 @@ package model.data;
 import javafx.scene.control.CheckBox;
 import java.util.Arrays;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * The Route class for containing all data for one unique flight route.
  *
- * @author Hayley Krippner
+ * @author Hayley Krippner, Ella Johnson
  * @version 1.0
  * @since 2020-08-11
  */
 public class Route implements DataType {
-  // TODO: write comments for these attributes
 
+  /** The name of the airline which flies this route. */
   private final String airlineName;
+
+  /** The database ID of the airline which flies this route. */
   private final int airlineID;
+
+  /** The airport this route starts at. */
   private final String sourceAirport;
+
+  /** The database ID of the airport this route starts at. */
   private final int sourceAirportID;
+
+  /** The airport this route finishes at. */
   private final String destinationAirport;
+
+  /** The database ID of the airport this route finishes at. */
   private final int destinationAirportID;
+
+  /** "Y" if this route is a codeshare, empty string if it is not. */
   private final String codeShare;
+
+  /** The number of stops on this route. */
   private final int numOfStops;
+
+  /** The planes used on this route. */
   private final String[] equipment;
+
+  /** The first plane in the equipment array. */
   private final String firstEquipment;
+
+  /** The amount of carbon emissions produced by this route. */
   private double emissions;
+
+  /** The distance travelled via this route. */
   private double distance;
+
+  /** The number of times this route has been added to history. */
   private int timesTaken = 0;
+
+  /** A checkbox to tell whether this route has been selected. */
   private CheckBox select;
 
   /** The Route constructor. */
@@ -56,14 +80,16 @@ public class Route implements DataType {
       firstEquipment = "";
     }
   }
-  // TODO: write comment for this method
 
+  /**
+   * This method initializes the routes checkbox.
+   */
   public void initCheckBox() {
     this.select = new CheckBox();
   }
 
   /**
-   * Getter for the name of the airline of that is used during the Flight.
+   * This method returns the name of the airline of that is used during the Flight.
    *
    * @return airlineID.
    */
@@ -72,7 +98,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the ID of the airline of that is used during the Flight.
+   * This method returns the ID of the airline of that is used during the Flight.
    *
    * @return airlineID.
    */
@@ -81,7 +107,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the name of the source airport of the Flight.
+   * This method returns the name of the source airport of the Flight.
    *
    * @return sourceAirport.
    */
@@ -90,7 +116,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the ID of the source airport of the Flight.
+   * This method returns the ID of the source airport of the Flight.
    *
    * @return sourceAirportID.
    */
@@ -99,7 +125,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the name of the destination airport of the Flight.
+   * This method returns the name of the destination airport of the Flight.
    *
    * @return destinationAirport.
    */
@@ -108,7 +134,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the ID of the destination airport of the Flight.
+   * This method returns the ID of the destination airport of the Flight.
    *
    * @return destinationAirportID.
    */
@@ -117,7 +143,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the codeShare for the Flight.
+   * This method returns the codeShare for the Flight.
    *
    * @return codeShare.
    */
@@ -126,7 +152,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the number of stops the Flight has.
+   * This method returns the number of stops the Flight has.
    *
    * @return numOfStops.
    */
@@ -135,7 +161,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the equipment used during the Flight.
+   * This method returns the equipment used during the Flight.
    *
    * @return equipment.
    */
@@ -143,13 +169,15 @@ public class Route implements DataType {
     return equipment;
   }
 
-  /** Getter for the first entry in the equipment array. */
+  /** This method returns the first entry in the equipment array.
+   * @return firstEquipment.
+   */
   public String getFirstEquipment() {
     return firstEquipment;
   }
 
   /**
-   * Getter for the total carbon emissions of the route.
+   * This method returns the total carbon emissions of the route.
    *
    * @return a double for the amount of CO2 if it has been calculated, or null if it has not. yet
    *     been calculated.
@@ -159,7 +187,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Setter for the total carbon emissions of the route.
+   * This method sets the total carbon emissions of the route.
    *
    * @param emissions a double for the emissions calculated for that route.
    */
@@ -168,7 +196,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Getter for the total distance of the route.
+   * This method returns the total distance of the route.
    *
    * @return null if distance has not yet been calculated, otherwise returns a double for the
    *     distance the route covers.
@@ -178,7 +206,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Set distance to the value calculated.
+   * This method sets distance to the value calculated.
    *
    * @param distance a double for the distance calculated.
    */
@@ -186,13 +214,13 @@ public class Route implements DataType {
     this.distance = distance;
   }
 
-  /** Get the number of times that the user has recorded taking this flight. */
+  /** This method returns the number of times that the user has recorded taking this flight. */
   public int getTimesTaken() {
     return timesTaken;
   }
 
   /**
-   * Set timesTaken to the given value.
+   * This method sets timesTaken to the given value.
    *
    * @param timesTaken the value to set timesTaken to.
    */
@@ -201,7 +229,7 @@ public class Route implements DataType {
   }
 
   /**
-   * Returns true if object has the same attributes as the Route from which the method is called,
+   * This method returns true if object has the same attributes as the Route from which the method is called,
    * false otherwise.
    *
    * @param o object to be compared to the route calling the method.
@@ -225,63 +253,69 @@ public class Route implements DataType {
     }
   }
 
-  // TODO: write comment for this method
-
+  /**
+   * This method returns the routes selection checkbox.
+   *
+   * @return select.
+   */
   public CheckBox getSelect() {
     return select;
   }
-  // TODO: write comment for this method
 
+  /**
+   * This method adds a selection checkbox to the route.
+   * @param select The selection checkbox to be added.
+   */
   public void setSelect(CheckBox select) {
     this.select = select;
   }
-  // TODO: write comment for this method
 
+  /**
+   * This method returns a string representation of the route.
+   *
+   * @return A string representation of the route.
+   */
+  @Override
   public String toString() {
-    String routeString =
-        "Airline name: "
-            + airlineName
-            + "\n"
-            + "Airline ID: "
-            + airlineID
-            + "\n"
-            + "Source Airport: "
-            + sourceAirport
-            + "\n"
-            + "Source Airport ID: "
-            + sourceAirportID
-            + "\n"
-            + "Destination Airport: "
-            + destinationAirport
-            + "\n"
-            + "Destination Airport ID: "
-            + destinationAirportID
-            + "\n"
-            + "Code Share: "
-            + codeShare
-            + "\n"
-            + "Number of Stops: "
-            + numOfStops
-            + "\n"
-            + "Equipment: "
-            + equipment
-            + "\n"
-            + "First Equipment: "
-            + firstEquipment
-            + "\n"
-            + "Carbon Emissions: "
-            + emissions
-            + "\n"
-            + "Distance: "
-            + distance
-            + "\n"
-            + "Times Taken: "
-            + timesTaken
-            + "\n";
-    return routeString;
+    return "Airline name: "
+        + airlineName
+        + "\n"
+        + "Airline ID: "
+        + airlineID
+        + "\n"
+        + "Source Airport: "
+        + sourceAirport
+        + "\n"
+        + "Source Airport ID: "
+        + sourceAirportID
+        + "\n"
+        + "Destination Airport: "
+        + destinationAirport
+        + "\n"
+        + "Destination Airport ID: "
+        + destinationAirportID
+        + "\n"
+        + "Code Share: "
+        + codeShare
+        + "\n"
+        + "Number of Stops: "
+        + numOfStops
+        + "\n"
+        + "Equipment: "
+        + Arrays.toString(equipment)
+        + "\n"
+        + "First Equipment: "
+        + firstEquipment
+        + "\n"
+        + "Carbon Emissions: "
+        + emissions
+        + "\n"
+        + "Distance: "
+        + distance
+        + "\n"
+        + "Times Taken: "
+        + timesTaken
+        + "\n";
   }
 
-  //    public static void main(String[] args){
-  //        Route test = new Route("dsf", 12, "asd", 45, "asd",123,"asd",32, new String[]{"21"});
-  //    }
 }

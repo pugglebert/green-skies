@@ -4,8 +4,6 @@ import model.data.Route;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * Class to process route data which has been extracted from a file by Loader class. Each entry in
  * each line is checked for errors. If the line has no errors than a Route object is created with
@@ -13,7 +11,8 @@ import java.util.List;
  * ErrorCounter and the parser moves onto the next line without creating a route object.
  *
  * @author Ella Johnson
- * @since 11/08/22
+ * @version 1.0
+ * @since 2020-08-11
  */
 public class RouteParser extends Parser {
 
@@ -22,9 +21,9 @@ public class RouteParser extends Parser {
      * ID and the internal ArrayList contains {sourceID, destinationID} arrays for all
      * Routes with that airline ID.
      */
-    private ArrayList<ArrayList<int[]>> routeCodes = new ArrayList<ArrayList<int[]>>();
+    private final ArrayList<ArrayList<int[]>> routeCodes = new ArrayList<>();
 
-    /** Alphabetical name to represent line index */
+    /** Variable name to represent line index */
     private final int airline = 0,
             airlineID = 1,
             sourceAirport = 2,
@@ -36,7 +35,7 @@ public class RouteParser extends Parser {
             equipment = 8;
 
     /**
-     * Initializes error collection and calls dataParser method to begin processing data.
+     * This method initializes error collection and calls dataParser method to begin processing data.
      * @param dataFile ArrayList of a string for each line in the file.
      */
     public RouteParser(ArrayList<String> dataFile, List<Route> existingRoutes) {
@@ -44,17 +43,12 @@ public class RouteParser extends Parser {
         for (Route route : existingRoutes) {
             addToRouteCodes(route);
         }
-        try {
-            dataParser();
-        } catch (RuntimeException e) {
-            throw e;
-        }
+        dataParser();
     }
 
     /**
-     * Add an array containing the routes source and destination airport IDs to the internal
-     * ArrayList which is found at an index of the external ArrayList which corresponds to the
-     * Route's airline ID.
+     * This method adds a route to an array containing the routes source and destination airport IDs to the internal
+     * ArrayList which is found at an index of the external ArrayList which corresponds to the Route's airline ID.
      * @param route The Route from which to get the code to add to RouteCodes.
      */
     private void addToRouteCodes(Route route) {
@@ -68,8 +62,10 @@ public class RouteParser extends Parser {
         routeCodes.get(index).add(routeCode);
     }
 
+  /**
+   * This method initializes the error lookup array with message for each error code.
+   */
   @Override
-  /** Initializes error lookup array with message for each error code. */
   protected void initErrorLookup() {
     errorLookup[0] = "Wrong number of parameters";
     errorLookup[1] = "Invalid airline code";
@@ -86,8 +82,8 @@ public class RouteParser extends Parser {
   }
 
     /**
-     * Is called when RouteParser is initialized. Calls validate method to check each line. If line is valid, creates
-     * Route object with attributes from line and adds route to routes set.
+     * This method is called when RouteParser is initialized. Calls validate method to check each line. If line is valid,
+     * creates Route object with attributes from line and adds route to routes set.
      */
     @Override
     protected void dataParser() {
@@ -100,7 +96,7 @@ public class RouteParser extends Parser {
     }
 
     /**
-     * Call the validator method to check a single line and then add that line to parserData if it is valid.
+     * This method calls the validator method to check a single line and then add that line to parserData if it is valid.
      * @param dataLine Line to be checked and added to parserData.
      */
     protected void parseLine(String dataLine) {
@@ -126,11 +122,11 @@ public class RouteParser extends Parser {
     }
 
   /**
-   * Checks that line has expected number of entries and calls isValid method to check that each
+   * This method checks that line has expected number of entries and calls isValid method to check that each
    * token on the line matches the expected pattern.
    *
-   * @param line a string made up of comma-seperated tokens representing data about a route
-   * @return returns true if all tokens are valid, false otherwise
+   * @param line A string made up of comma-seperated tokens representing data about a route
+   * @return True if all tokens are valid, false otherwise
    */
   @Override
   public boolean validater(String[] line) {
@@ -190,7 +186,7 @@ public class RouteParser extends Parser {
   }
 
     /**
-     * Replace '\N' in string with the value 0.
+     * This method replaces '\N' in string with the value 0.
      * @param line Array to replace nulls in.
      */
   protected void changeNulls(String[] line) {
@@ -208,70 +204,70 @@ public class RouteParser extends Parser {
   }
 
   /**
-   * Verify whether string is a valid ICAO or IATA airport code
+   * This method verifies whether string is a valid ICAO or IATA airport code.
    *
-   * @param airport the string to be verified
-   * @return true if string matches ICAO or IATA format, false otherwise
+   * @param airport The string to be verified.
+   * @return True if string matches ICAO or IATA format, false otherwise.
    */
   protected boolean isAirportValid(String airport) {
     return (airport.length() == 3 || airport.length() == 4) && airport.matches("[A-Z]+");
   }
 
   /**
-   * Verify whether string is a valid openflight airport id code *
+   * This method verifies whether string is a valid openflight airport id code.
    *
-   * @param airportID the string to be verified *
-   * @return true if string matches openflights format, false otherwise
+   * @param airportID The string to be verified.
+   * @return True if string matches openflights format, false otherwise.
    */
   protected boolean isAirportIDValid(String airportID) {
     return (airportID.length() <= 5 && airportID.matches("[0-9]+"));
   }
 
   /**
-   * Verify whether string is a valid ICAO or IATA airlien code
+   * This method verifies whether string is a valid ICAO or IATA airline code.
    *
-   * @param airline the string to be verified
-   * @return true if string matches ICAO or IATA format, false otherwise
+   * @param airline The string to be verified.
+   * @return True if string matches ICAO or IATA format, false otherwise.
    */
   protected boolean isAirlineValid(String airline) {
     return (airline.length() == 2 || airline.length() == 3) && airline.matches("[0-9A-Z]+");
   }
 
   /**
-   * Verify whether string is a valid openflights airline id code
+   * This method verifies whether string is a valid openflights airline id code.
    *
-   * @param airlineID the string to be verified
-   * @return true if string matches openflights format, false otherwise
+   * @param airlineID The string to be verified.
+   * @return True if string matches openflights format, false otherwise.
    */
   protected boolean isAirlineIDValid(String airlineID) {
     return airlineID.length() <= 5 && airlineID.matches("[0-9]+");
   }
 
   /**
-   * Verify whether sting is "Y" (if route is a codeshare) or empty (if it is not)
+   * This method verifies whether string is "Y" (if route is a codeshare) or empty (if it is not).
    *
-   * @param codeshare the string to be tested
-   * @return true if string is "Y" or empty, false otherwise
+   * @param codeshare the string to be tested.
+   * @return true if string is "Y" or empty, false otherwise.
    */
   protected boolean isCodeshareValid(String codeshare) {
     return codeshare.isEmpty() || codeshare.equals("Y");
   }
 
   /**
-   * Verify whether string stops represents a number less than 10
+   * This method verifies whether string stops represents a number less than 10.
    *
-   * @param stops the string to be verified
-   * @return true if string is a number less than 10, false otherwise
+   * @param stops The string to be verified.
+   * @return True if string is a number less than 10, false otherwise.
    */
   protected boolean isStopsValid(String stops) {
     return stops.matches("[0-9]");
   }
 
   /**
-   * Verify whether equipment is a sting of whitespace separated 3 character plane codes
+   * This method verifies whether equipment is a sting of whitespace separated 3 character plane codes.
    *
-   * @param equipment the string to be tested
-   * @return returns true if string matches expected format, false otherwise
+   * @param equipment The string to be tested.
+   * @return True if string matches expected format, false otherwise.
    */
   protected boolean isEquipmentValid(String equipment) {
     String[] equipArray = equipment.split(" ");
@@ -284,7 +280,7 @@ public class RouteParser extends Parser {
   }
 
     /**
-     * Checks for duplicates in data. If there are no duplicates, addes route to data.
+     * This method checks for duplicates in data. If there are no duplicates, addes route to data.
      * @param newRoute Route to be added.
      */
     private void addRoute(Route newRoute) {
