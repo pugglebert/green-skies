@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Class to keep track of all the data that has been uploaded to the application, also interact with database.
+ * Class to keep track of all the data that has been uploaded to the application, also interact with
+ * database.
  *
  * @author Ella Johnson, Lambert, Hayley Krippner
  * @since 2020-09-15
@@ -36,12 +37,16 @@ public class Storage {
   /** A list of all the routes that have been added to the user's personal history. */
   public List<Route> history = new ArrayList<>();
 
-  /** A HashMap of all the source airports the user has visited and the number of times they
-   * have visited them. */
+  /**
+   * A HashMap of all the source airports the user has visited and the number of times they have
+   * visited them.
+   */
   private HashMap<String, Integer> historySrcAirports = new HashMap<>();
 
-  /** A HashMap of all the destination airports the user has visited and the number of times they
-   * have visited them. */
+  /**
+   * A HashMap of all the destination airports the user has visited and the number of times they
+   * have visited them.
+   */
   private HashMap<String, Integer> historyDestAirports = new HashMap<>();
 
   /** The database in which data added to the application is stored. */
@@ -107,48 +112,50 @@ public class Storage {
    * @param data The list of data.
    * @param type Type of data to be stored.
    */
-  public void setData(List<DataType> data, String type)
-      throws SQLException, ClassNotFoundException {
+  public void setData(List<DataType> data, String type) {
 
     if (type.matches("Airline")) {
       airlines = new ArrayList<Airline>();
-      //            database.dropTable("airlines");
-      //            database.closeAutoCommite();
+      database.initialiseTable("airlines");
+      database.closeAutoCommite();
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
         if (airline != null) {
           airlines.add(airline);
-          //                    database.addAirlines(airline);
+          database.addAirlines(airline);
         }
       }
-      //            database.startCommite();
+      database.startCommite();
     } else if (type.matches("Airport")) {
       airports = new ArrayList<Airport>();
-      //            database.dropTable("airports");
-      //            database.closeAutoCommite();
+      database.initialiseTable("airports");
+      database.closeAutoCommite();
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
         airports.add(airport);
-        //                database.addAirports(airport);
+//        database.addAirports(airport);
         if (airport != null) {}
       }
-      //            database.startCommite();
+      database.startCommite();
     } else if (type.matches("Route")) {
-      //            database.dropTable("routes");
-      //            database.closeAutoCommite();
+      database.initialiseTable("routes");
+      database.closeAutoCommite();
       for (DataType entry : data) {
         Route route = (Route) entry;
         routes.add(route);
-        //                database.addRoutes(route);
-
+        database.addRoutes(route);
       }
-      //            database.startCommite();
+      database.startCommite();
     } else {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
   }
-  // TODO: write comment for this method
 
+  /**
+   * This method initilises storage with data from database after user start the application
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   */
   public void initialiseStorage() throws SQLException, ClassNotFoundException {
     database.initialiseStorage(this);
   }
@@ -170,8 +177,8 @@ public class Storage {
   /**
    * This method gets the historySrcAirports.
    *
-   * @return A HashMap with the names of source airports as keys and the number of times they have been visited as the
-   * value.
+   * @return A HashMap with the names of source airports as keys and the number of times they have
+   *     been visited as the value.
    */
   public HashMap<String, Integer> getHistorySrcAirports() {
     return historySrcAirports;
@@ -194,8 +201,8 @@ public class Storage {
   /**
    * This method gets the historyDestAirports.
    *
-   * @return A HashMap of the names of destination airports as key and the number of times they have been
-   * added to history as value.
+   * @return A HashMap of the names of destination airports as key and the number of times they have
+   *     been added to history as value.
    */
   public HashMap<String, Integer> getHistoryDestAirports() {
     return historyDestAirports;

@@ -1,6 +1,4 @@
 
-b	java:S107 "AConstructor has 9 parameters, which is greater than 7 authorized.(–°…ğüÿÿÿÿ8ÁÿÈÊÈ.
 s
-java:S1206¾"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ8ÁÿÈÊÈ.
-†
-java:S1488Ú"cImmediately return this expression instead of assigning it to the temporary variable "routeString".(óØ¦ùÿÿÿÿ8ºïÚÉ.
+java:S1206ï"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ8—¨ñàÉ.
+]	java:S107:"AConstructor has 9 parameters, which is greater than 7 authorized.(¾Š‡›8—¨ñàÉ.

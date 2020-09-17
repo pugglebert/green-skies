@@ -1,35 +1,65 @@
 
-p	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
->
-java:S1170"!Make this final field static too.(˜ˆªÎ8¥å×”Ä.
-?
-java:S1659""Declare "name" on a separate line.(˜ˆªÎ8‘ªÀÆÁ.
-s	java:S117Œ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡óŸúûÿÿÿÿ8‘ªÀÆÁ.
-D
-java:S1659""Declare "IATA" on a separate line.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
 C
-java:S1170"!Make this final field static too.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
-H
-java:S1659"&Declare "callsign" on a separate line.(èáÿÿÿÿÿ8‘ªÀÆÁ.
-C
-java:S1170"!Make this final field static too.(ƒ÷éºøÿÿÿÿ8‘ªÀÆÁ.
-C
-java:S1170"!Make this final field static too.(Æé¤İÿÿÿÿÿ8¥å×”Ä.
-s	java:S117û"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬¨ãÄşÿÿÿÿ8‘ªÀÆÁ.
-C
-java:S1170"!Make this final field static too.(«Ğ±­ÿÿÿÿÿ8‘ªÀÆÁ.
-p	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
-L
-java:S1659"*Declare "activeStatus" on a separate line.(ƒ÷éºøÿÿÿÿ8‘ªÀÆÁ.
-C
-java:S1170"!Make this final field static too.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+java:S1170"!Make this final field static too.(Æé¤İÿÿÿÿÿ8‘ªÀÆÁ.
+s	java:S117€"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬¨ãÄşÿÿÿÿ8‘ªÀÆÁ.
 @
-java:S1659"#Declare "alias" on a separate line.(‚Ó•Î8‘ªÀÆÁ.
+java:S1659"#Declare "alias" on a separate line.(‚Ó•Î8‘ªÀÆÁ.
 G
-java:S1659"%Declare "country" on a separate line.(«Ğ±­ÿÿÿÿÿ8‘ªÀÆÁ.
+java:S1659"%Declare "country" on a separate line.(«Ğ±­ÿÿÿÿÿ8‘ªÀÆÁ.
+p	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
+L
+java:S1659"*Declare "activeStatus" on a separate line.(ƒ÷éºøÿÿÿÿ8‘ªÀÆÁ.
+s	java:S117‘"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡óŸúûÿÿÿÿ8‘ªÀÆÁ.
+?
+java:S1659""Declare "name" on a separate line.(˜ˆªÎ8‘ªÀÆÁ.
 >
-java:S1170"!Make this final field static too.(‚Ó•Î8‘ªÀÆÁ.
-C
-java:S1170"!Make this final field static too.(èáÿÿÿÿÿ8‘ªÀÆÁ.
+java:S1170"!Make this final field static too.(‚Ó•Î8‘ªÀÆÁ.
 D
-java:S1659""Declare "ICAO" on a separate line.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+java:S1659""Declare "ICAO" on a separate line.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+C
+java:S1170"!Make this final field static too.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
+D
+java:S1659""Declare "IATA" on a separate line.(İºƒ¥úÿÿÿÿ8‘ªÀÆÁ.
+H
+java:S1659"&Declare "callsign" on a separate line.(èáÿÿÿÿÿ8‘ªÀÆÁ.
+C
+java:S1170"!Make this final field static too.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+p	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï€‘Ûúÿÿÿÿ8‘ªÀÆÁ.
+>
+java:S1170"!Make this final field static too.(˜ˆªÎ8‘ªÀÆÁ.
+C
+java:S1170"!Make this final field static too.(èáÿÿÿÿÿ8››çâÉ.
+C
+java:S1170"!Make this final field static too.(«Ğ±­ÿÿÿÿÿ8››çâÉ.
+C
+java:S1170"!Make this final field static too.(ƒ÷éºøÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(™»Î®şÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(ß‘·—şÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8››çâÉ.
+T
+java:S1135!"2Complete the task associated to this TODO comment.(ôÒ³¶ûÿÿÿÿ8››çâÉ.
+T
+java:S11352"2Complete the task associated to this TODO comment.(ôÒ³¶ûÿÿÿÿ8››çâÉ.
+O
+java:S1135X"2Complete the task associated to this TODO comment.(ùƒº¿8››çâÉ.
+U
+java:S1135Œ"2Complete the task associated to this TODO comment.(ôÒ³¶ûÿÿÿÿ8››çâÉ.
+P
+java:S1135Ê"2Complete the task associated to this TODO comment.(´‹ñ²8››çâÉ.

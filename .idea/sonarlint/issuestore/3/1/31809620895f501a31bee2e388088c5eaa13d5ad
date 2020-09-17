@@ -1,28 +1,9 @@
 
-W
-java:S1128";Remove this unused import 'javafx.application.Application'.(í™şj8ıÈÊÈ.
-F
-java:S1905N")Remove this unnecessary cast to "String".(íÇœâ8ıÈÊÈ.
-K
-java:S1905K")Remove this unnecessary cast to "String".(«‚Ğ½ıÿÿÿÿ8ıÈÊÈ.
-F
-java:S1905N")Remove this unnecessary cast to "String".(íÇœâ8ıÈÊÈ.
-K
-java:S1905I")Remove this unnecessary cast to "String".(Î¨íüÿÿÿÿ8ıÈÊÈ.
-F
-java:S1905J")Remove this unnecessary cast to "String".(øÀØğ8ıÈÊÈ.
-F
-java:S1905M")Remove this unnecessary cast to "String".(ıˆ‚È8ıÈÊÈ.
-K
-java:S1905H")Remove this unnecessary cast to "String".(ºÑßûÿÿÿÿ8ıÈÊÈ.
-U	java:S106;"9Replace this use of System.out or System.err by a logger.(Ç§é8ıÈÊÈ.
-Z	java:S106S"9Replace this use of System.out or System.err by a logger.(‡Ó²±ùÿÿÿÿ8ıÈÊÈ.
-Z	java:S106T"9Replace this use of System.out or System.err by a logger.(˜Ÿıùÿÿÿÿ8ıÈÊÈ.
-Z	java:S106U"9Replace this use of System.out or System.err by a logger.(¨±ˆ­şÿÿÿÿ8ıÈÊÈ.
-Z	java:S1066"9Replace this use of System.out or System.err by a logger.(üøªãüÿÿÿÿ8ıÈÊÈ.
-F
-java:S1905M")Remove this unnecessary cast to "String".(ıˆ‚È8ıÈÊÈ.
-Z
+[	java:S106‘"9Replace this use of System.out or System.err by a logger.(æÄßûÿÿÿÿ8ıÈÊÈ.
+[	java:S106“"9Replace this use of System.out or System.err by a logger.(˜Ÿıùÿÿÿÿ8ıÈÊÈ.
+[	java:S106’"9Replace this use of System.out or System.err by a logger.(‡Ó²±ùÿÿÿÿ8ıÈÊÈ.
+[	java:S106”"9Replace this use of System.out or System.err by a logger.(¨±ˆ­şÿÿÿÿ8ıÈÊÈ.
+n	java:S117¢"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢ó¯8‰³ââÉ.
+Y
 java:S1128
-"8Remove this unused import 'javafx.scene.control.Button'.(Ë Í‹øÿÿÿÿ8ıÈÊÈ.
-Z	java:S106R"9Replace this use of System.out or System.err by a logger.(æÄßûÿÿÿÿ8ıÈÊÈ.
+"<Remove this unused import 'javafx.scene.control.ButtonType'.(úêÿ»8‰³ââÉ.

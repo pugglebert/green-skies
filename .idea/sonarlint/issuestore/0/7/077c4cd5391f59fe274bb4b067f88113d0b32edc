@@ -1,15 +1,15 @@
 
 m	java:S117X"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öÒÀÏ8·›Ğ­È.
 m	java:S117<"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢ó¯8·›Ğ­È.
+U
+java:S4838g"8Change "DataType" to the type handled by the Collection.(¼’Ëö8ó½ó˜Ã.
+W
+java:S4973Œ"9Use the "equals" method if value comparison was intended.(È‘Â½8·›Ğ­È.
+\
+java:S4973…"9Use the "equals" method if value comparison was intended.(µöÒÿÿÿÿÿ8·›Ğ­È.
+U	java:S106i"9Replace this use of System.out or System.err by a logger.(œ¾ö…8àÜÚÃ.
 X
 java:S2387 ";"storage" is the name of a field in "SideNavBarController".(Ó«Ğ½8·›Ğ­È.
+m	java:S117s"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢ó¯8·›Ğ­È.
 W
-java:S4973"9Use the "equals" method if value comparison was intended.(³ÊÌÜ8·›Ğ­È.
-m	java:S117k"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢ó¯8·›Ğ­È.
-U	java:S106t"9Replace this use of System.out or System.err by a logger.(œ¾ö…8àÜÚÃ.
-\
-java:S4973‚"9Use the "equals" method if value comparison was intended.(µöÒÿÿÿÿÿ8·›Ğ­È.
-U
-java:S4838r"8Change "DataType" to the type handled by the Collection.(¼’Ëö8ó½ó˜Ã.
-W
-java:S4973‰"9Use the "equals" method if value comparison was intended.(È‘Â½8·›Ğ­È.
+java:S4973“"9Use the "equals" method if value comparison was intended.(³ÊÌÜ8·›Ğ­È.
