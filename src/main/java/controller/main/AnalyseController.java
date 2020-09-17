@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.data.Airport;
@@ -97,50 +99,73 @@ public class AnalyseController extends SideNavBarController implements Initializ
 
     ArrayList<String> path1 = new ArrayList<>();
     ArrayList<String> path2 = new ArrayList<>();
-    path1.add((String) pathSource1.getText());
-    path1.add((String) pathDestination1.getText());
-    path2.add((String) pathSource2.getText());
-    path2.add((String) pathDestination2.getText());
 
-    Route route1 =
-        new Route(
-            null,
-            0,
-            (String) pathSource1.getText(),
-            0,
-            (String) pathDestination1.getText(),
-            0,
-            null,
-            0,
-            rubbish1);
-    Route route2 =
-        new Route(
-            null,
-            0,
-            (String) pathSource2.getText(),
-            0,
-            (String) pathDestination2.getText(),
-            0,
-            null,
-            0,
-            rubbish2);
-    FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
+    int check = 1;
 
-    System.out.println(analyser.getTotalDistancePath1());
-    System.out.println(analyser.getTotalDistancePath2());
-    System.out.println(analyser.getPath1Emission());
-    System.out.println(analyser.getPath2Emission());
+    for(int i = 0; i < airports.size(); i++) {
+      if (airports.contains(pathSource1.getText()) && airports.contains(pathDestination1.getText())
+              && airports.contains(pathSource2.getText()) && airports.contains(pathDestination2.getText())) {
+        check = 1;
 
-    storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
-    storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
-    storage.setAnalyseEmissionResult(analyser.getPath1Emission());
-    storage.setAnalyseEmissionResult(analyser.getPath2Emission());
+      } else {
+        check = 0;
+      }
+    }
 
-    Stage stage1 = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
-    Scene scene = new Scene(root);
-    stage1.setScene(scene);
-    stage1.setMaximized(true);
-    stage1.show();
+    if(check == 1) {
+      path1.add((String) pathSource1.getText());
+      path1.add((String) pathDestination1.getText());
+      path2.add((String) pathSource2.getText());
+      path2.add((String) pathDestination2.getText());
+
+      Route route1 =
+              new Route(
+                      null,
+                      0,
+                      (String) pathSource1.getText(),
+                      0,
+                      (String) pathDestination1.getText(),
+                      0,
+                      null,
+                      0,
+                      rubbish1);
+      Route route2 =
+              new Route(
+                      null,
+                      0,
+                      (String) pathSource2.getText(),
+                      0,
+                      (String) pathDestination2.getText(),
+                      0,
+                      null,
+                      0,
+                      rubbish2);
+      FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
+
+      System.out.println(analyser.getTotalDistancePath1());
+      System.out.println(analyser.getTotalDistancePath2());
+      System.out.println(analyser.getPath1Emission());
+      System.out.println(analyser.getPath2Emission());
+
+      storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
+      storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
+      storage.setAnalyseEmissionResult(analyser.getPath1Emission());
+      storage.setAnalyseEmissionResult(analyser.getPath2Emission());
+
+      Stage stage1 = new Stage();
+      Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
+      Scene scene = new Scene(root);
+      stage1.setScene(scene);
+      stage1.setMaximized(true);
+      stage1.show();
+    } else {
+      Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+      ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+      ErrorAlert.setContentText("Invalid airport code");
+      ErrorAlert.show();
+
+    }
+
+
   }
 }
