@@ -264,7 +264,7 @@ public class AirportParser extends Parser {
      * @return true if valid, false if invalid.
      */
     protected boolean isNameValid(String name){
-        if(!name.matches("[a-zA-Z0-9 .'()/-]+")){
+    if (!name.matches("[\\p{L}0-9 .'()/-]+")) {
             errorCounter(3);
             return false;
         }
@@ -277,7 +277,7 @@ public class AirportParser extends Parser {
      * @return true if valid, false if invalid.
      */
     protected boolean isCityValid(String city){
-        if(!city.matches("[a-zA-Z0-9 .'()/-]+")){
+    if (!city.matches("[\\p{L}0-9 .'()/-]+")) {
             errorCounter(4);
             return false;
         }
@@ -385,7 +385,7 @@ public class AirportParser extends Parser {
      */
     protected boolean isTZValid(String timeZone){
         try{
-            return -11 <= Float.parseFloat(timeZone) && Float.parseFloat(timeZone) <= 14;
+            return -12 <= Float.parseFloat(timeZone) && Float.parseFloat(timeZone) <= 14;
         } catch (Exception e){
             errorCounter(11);
             return false;

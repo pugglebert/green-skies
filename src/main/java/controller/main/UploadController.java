@@ -25,9 +25,9 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the upload data view.
  *
- * @author Grace Hanlon
- * @version 1.0
- * @since 2020-08-26
+ * @author Grace Hanlon, Lambert
+ * @version 1.1
+ * @since 2020-09-18
  */
 public class UploadController extends SideNavBarController {
 
