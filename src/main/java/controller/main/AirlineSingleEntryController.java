@@ -6,10 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.data.Storage;
 import model.loader.Loader;
 
-// TODO: check all method comments start with "This method ..."
 
 /**
  * The controller class which contains the controls for data entry of a single Airline.
@@ -19,9 +17,9 @@ import model.loader.Loader;
  * @since 12/09/20
  */
 public class AirlineSingleEntryController {
-  // TODO: write comments for these attributes
-  private final Storage storage = Main.getStorage();
-  // TODO: write comments for these attributes
+  /**
+   * Initialize a loader attribute
+   */
   private final Loader loader = Main.getLoader();
 
   @FXML TextField nameField;
@@ -35,13 +33,17 @@ public class AirlineSingleEntryController {
   @FXML Button cancelButton;
   @FXML Button addButton;
 
-  /** Closes window when the 'Cancel' button is pushed. */
+  /**
+   * This method closes window when the 'Cancel' button is pushed.
+   */
   public void closeWindow() {
     Stage stage = (Stage) cancelButton.getScene().getWindow();
     stage.close();
   }
 
-  /** Loads the data entered for an airline as a singular line. */
+  /**
+   * This method loads the data entered for an airline as a singular line.
+   */
   public void addEntry() {
     String entryString = makeAirlineString();
 
@@ -65,8 +67,7 @@ public class AirlineSingleEntryController {
   }
 
   /**
-   * Compiles a string from the the entered data for an airline.
-   *
+   * This method compiles a string from the the entered data for an airline.
    * @return airlineString.
    */
   public String makeAirlineString() {

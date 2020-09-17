@@ -31,13 +31,21 @@ public class AirlineDataViewController extends DataViewController {
   @FXML private TableColumn<Airline, String> countryColumn;
   @FXML private TableColumn<Airline, Boolean> activeStatusColumn;
 
-  // Initialize strings in the searchTypes list
+  /**
+   * Initialize strings in the searchTypes list
+   */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-  // Initialize strings in the activeStatuses list
+
+  /**
+   * Initialize strings in the activeStatuses list
+   */
   private final ObservableList<String> activeStatuses =
       FXCollections.observableArrayList("True", "False");
-  // Initializes the filterPopUp
+
+  /**
+   * Initializes the filterPopUp
+   */
   private AirlineFilterPopUpController filterPopUp;
 
   /**

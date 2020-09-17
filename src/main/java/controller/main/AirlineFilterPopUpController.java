@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
  * @since 12/09/2020
  */
 public class AirlineFilterPopUpController extends FilterPopUpController {
+
   @FXML private CheckBox countryCheckBox;
   @FXML private CheckBox activeCheckBox;
   @FXML private TextField countryField;

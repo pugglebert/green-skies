@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
 
 /**
  * The controller class which contains the controls for the airport data view.
@@ -36,13 +35,15 @@ public class AirportDataViewController extends DataViewController {
   @FXML private TableColumn<Airport, Float> timezoneColumn;
   @FXML private TableColumn<Airport, String> DSTColumn;
   @FXML private TableColumn<Airport, String> dataBaseTimeZoneColumn;
-  // TODO: write comments for these attributes
+
+  /**
+   * Initialize the list of attribute to be added tp the searchTypes list
+   */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
 
   /**
-   * Initializes the controller class.
-   *
+   * This method initializes the controller class.
    * @param url The URL used.
    * @param rb The resource bundle used.
    */
@@ -69,7 +70,7 @@ public class AirportDataViewController extends DataViewController {
   }
 
   /**
-   * Calls searchAirports method from searcher class and upldates table to display results of
+   * This method calls searchAirports method from searcher class and upldates table to display results of
    * search.
    */
   public void searchByDataType(String searchTerm, String searchType) {
@@ -78,7 +79,8 @@ public class AirportDataViewController extends DataViewController {
     tableView.setItems(FXCollections.observableList(results));
   }
 
-  /** Clear search bar and display all airports in table view. */
+  /**
+   * This method clears search bar and display all airports in table view. */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
@@ -86,7 +88,7 @@ public class AirportDataViewController extends DataViewController {
   }
 
   /**
-   * Open the filter options pop up. If the user's filters are successfully applied, set the table
+   * This method opens the filter options pop up. If the user's filters are successfully applied, set the table
    * to display the filtered data when the pop up is closed.
    */
   public void filterOptions() throws IOException {

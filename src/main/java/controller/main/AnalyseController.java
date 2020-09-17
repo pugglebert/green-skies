@@ -8,15 +8,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.data.Airport;
+import model.data.Route;
+import org.controlsfx.control.textfield.TextFields;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
-import model.data.Airport;
-import model.data.Route;
+
 import static javafx.application.Application.launch;
-import org.controlsfx.control.textfield.TextFields;
 
 
 
