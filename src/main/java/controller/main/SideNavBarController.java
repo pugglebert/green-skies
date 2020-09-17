@@ -38,6 +38,7 @@ public abstract class SideNavBarController implements Initializable {
 
   protected ObservableList<String> searchTypes;
   protected final Storage storage = Main.getStorage();
+
   // TODO: write comment for this method
 
   public abstract void initialize(URL url, ResourceBundle rb);

@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
-// TODO: check all method comments start with "This method ..."
+
 
 /**
  * The Controller class which contains the controls for the Welcome page, the first page shown to
@@ -18,13 +18,16 @@ import java.io.IOException;
  * @since 2020-08-26
  */
 public class WelcomeController {
-  // TODO: write comments for these attributes
 
+  //Initialize buttons on welcome screen
   public Button continueButton;
   public Button InfoButton;
-  // TODO: write comment for this method
 
-  // Method to handle the event for continuing to the main screen of the application.
+  /**
+   * This method handles the event for continuing to the main screen of the application.
+   * @param event
+   * @throws IOException
+   */
   public void continueToMainScreen(ActionEvent event) throws IOException {
     Stage stage = (Stage) continueButton.getScene().getWindow();
     stage.close();
@@ -36,9 +39,13 @@ public class WelcomeController {
     newStage.setMaximized(true);
     newStage.show();
   }
-  // TODO: write comment for this method
 
-  // Method to handle the event for continuing to the info screen of the application.
+
+  /**
+   * This method handles the event for continuing to the info screen of the application.
+   * @param event
+   * @throws IOException
+   */
   public void toInfoScreen(ActionEvent event) throws IOException {
     Stage stage = (Stage) continueButton.getScene().getWindow();
     stage.close();

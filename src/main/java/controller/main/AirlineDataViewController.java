@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
 /**
  * The controller class which contains the controls for the airline data view.
  *
@@ -32,18 +31,17 @@ public class AirlineDataViewController extends DataViewController {
   @FXML private TableColumn<Airline, String> countryColumn;
   @FXML private TableColumn<Airline, Boolean> activeStatusColumn;
 
-  // TODO: write comments for these attributes
+  // Initialize strings in the searchTypes list
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-  // TODO: write comments for these attributes
+  // Initialize strings in the activeStatuses list
   private final ObservableList<String> activeStatuses =
       FXCollections.observableArrayList("True", "False");
-  // TODO: write comments for these attributes
+  // Initializes the filterPopUp
   private AirlineFilterPopUpController filterPopUp;
 
   /**
-   * Initializes the controller class.
-   *
+   * This method initializes the controller class.
    * @param url The URL used.
    * @param rb The resource bundle used.
    */
@@ -67,8 +65,10 @@ public class AirlineDataViewController extends DataViewController {
   }
 
   /**
-   * Calls searchAirlines method from searcher class and upldates table to display results of
-   * search.
+   * This method calls searchAirlines method from searcher class and upldates table to display
+   * results of search.
+   * @param searchTerm
+   * @param searchType
    */
   public void searchByDataType(String searchTerm, String searchType) {
     ArrayList<Airline> results =
@@ -76,7 +76,9 @@ public class AirlineDataViewController extends DataViewController {
     tableView.setItems(FXCollections.observableList(results));
   }
 
-  /** Clear search bar and display all airlines in table view. */
+  /**
+   * This method clears search bar and display all airlines in table view.
+   */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
@@ -84,9 +86,8 @@ public class AirlineDataViewController extends DataViewController {
   }
 
   /**
-   * Display the filter pop up box. If filtering is successful displays the filtered airline data in
+   * This method displays the filter pop up box. If filtering is successful displays the filtered airline data in
    * the tableview when the pop up is closed.
-   *
    * @throws IOException If AirlineFilterPopUpController fxml file cannot be opened.
    */
   public void filterOptions() throws IOException {
