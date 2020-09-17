@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for ReportGenrator class.
@@ -352,12 +353,7 @@ public class FlightAnalyserTest {
     public void isCompareDistanceCorrect(){
         findCoordinateForTwoPath(path1, path2);
         analyser = new FlightAnalyser(route1, route2, storage);
-
-        if(analyser.compareDistance() > 0) {
-//            System.out.println(true);
-        } else {
-//            System.out.println(false);
-        }
+        assertTrue(analyser.compareDistance() > 0);
     }
     /**
      * check whether the differnece of the emission between two airports is a postive number if
@@ -367,11 +363,7 @@ public class FlightAnalyserTest {
     public void isCompareEmissionCorrect(){
         findCoordinateForTwoPath(path1, path2);
         analyser = new FlightAnalyser(route1, route2, storage);
+        assertTrue(analyser.compareEmission() > 0);
 
-        if(analyser.compareEmission() > 0) {
-//            System.out.println(true);
-        } else {
-//            System.out.println(false);
-        }
     }
 }
