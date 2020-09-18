@@ -55,16 +55,16 @@ public class AnalyseResultController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Storage storage = Main.getStorage();
         String DistanceRoute1Text = String.valueOf(storage.getAnalyseDistanceResult().get(0));
-        System.out.println(storage.getAnalyseDistanceResult().get(0));
+
         DistanceRoute1.setText(DistanceRoute1Text);
         String DistanceRoute2Text = String.valueOf(storage.getAnalyseDistanceResult().get(1));
-        System.out.println(storage.getAnalyseDistanceResult().get(1));
+
         DistanceRoute2.setText(DistanceRoute2Text);
         String EmissionRoute1Text = String.valueOf(storage.getAnalyseEmissionResult().get(0));
-        System.out.println(storage.getAnalyseEmissionResult().get(0));
+
         EmissionRoute1.setText(EmissionRoute1Text);
         String EmissionRoute2Text = String.valueOf(storage.getAnalyseEmissionResult().get(1));
-        System.out.println(storage.getAnalyseEmissionResult().get(1));
+
         EmissionRoute2.setText(EmissionRoute2Text);
         String DistanceDifferenceText = String.valueOf(Math.abs(storage.getAnalyseDistanceResult().get(0) - storage.getAnalyseDistanceResult().get(1)));
         DistanceDifference.setText(DistanceDifferenceText);
