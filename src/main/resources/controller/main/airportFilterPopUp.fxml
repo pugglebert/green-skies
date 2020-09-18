@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="250.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirportFilterPopUpController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.dataview.AirportFilterPopUpController">
     <children>
         <CheckBox fx:id="countryCheckBox" layoutX="40.0" layoutY="85.0" mnemonicParsing="false" text="Country"/>
         <CheckBox fx:id="cityCheckBox" layoutX="41.0" layoutY="129.0" mnemonicParsing="false" text="City"/>

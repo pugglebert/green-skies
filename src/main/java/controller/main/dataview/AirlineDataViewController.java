@@ -1,4 +1,4 @@
-package controller.main;
+package controller.main.dataview;
 
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
@@ -38,17 +38,6 @@ public class AirlineDataViewController extends DataViewController {
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
 
   /**
-   * Initialize strings in the activeStatuses list
-   */
-  private final ObservableList<String> activeStatuses =
-      FXCollections.observableArrayList("True", "False");
-
-  /**
-   * Initializes the filterPopUp
-   */
-  private AirlineFilterPopUpController filterPopUp;
-
-  /**
    * This method initializes the controller class.
    * @param url The URL used.
    * @param rb The resource bundle used.
@@ -69,14 +58,13 @@ public class AirlineDataViewController extends DataViewController {
 
     // Setup choice boxes
     searchTypeSelection.setItems(searchTypes);
-    filterPopUpFilename = "airlineFilterPopUp.fxml";
   }
 
   /**
    * This method calls searchAirlines method from searcher class and upldates table to display
    * results of search.
-   * @param searchTerm
-   * @param searchType
+   * @param searchTerm The term to search for matches to.
+   * @param searchType The type of attribute to check for matches.
    */
   public void searchByDataType(String searchTerm, String searchType) {
     ArrayList<Airline> results =

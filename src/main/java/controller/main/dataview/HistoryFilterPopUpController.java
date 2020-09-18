@@ -1,5 +1,6 @@
-package controller.main;
+package controller.main.dataview;
 
+import controller.main.dataview.FilterPopUpController;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -8,13 +9,13 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
- * Pop up scene on which users can apply filters for the route table.
+ * Pop up screen in which uses can apply filters to the flight history.
  *
  * @author Ella Johnson
  * @version 1.0
- * @since 2020-09-12
+ * @since 2020-09-14
  */
-public class RouteFilterPopUpController extends FilterPopUpController {
+public class HistoryFilterPopUpController extends FilterPopUpController {
 
   @FXML private CheckBox airlineCheckBox;
   @FXML private CheckBox sourceCheckBox;
@@ -53,20 +54,21 @@ public class RouteFilterPopUpController extends FilterPopUpController {
   }
 
   /**
-   * This method calls the filterRoutes method of filterer with the given HashMap of filter types and terms.
+   * This method calls the filterRoutes method of filterer with the given HashMap of filter types and terms and
+   * the history stored in storage.
    *
    * @param filterTerms A HashMap with filter type as the key and filter term as the value.
    */
   @Override
   public void filterByDataType(HashMap<String, String> filterTerms) {
-    filterer.filterRoutes(filterTerms, storage.getRoutes());
+    filterer.filterRoutes(filterTerms, storage.getHistory());
   }
 
   /**
-   * This method returns the fxml filename for the route filter pop up controller.
-   * @return The fxml filename */
+   * This method returns the fxml filename for the history filter pop up.
+   * @return The fxml filename. */
   @Override
   public String getFXMLFilename() {
-    return "routeFilterPopUp.fxml";
+    return "historyFilterPopUp.fxml";
   }
 }

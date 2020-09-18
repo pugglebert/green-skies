@@ -130,7 +130,7 @@ public class RouteParser extends Parser {
    * @return True if all tokens are valid, false otherwise
    */
   @Override
-  public boolean validater(String[] line) {
+  protected boolean validater(String[] line) {
     if (line.length != 9) {
       errorCounter(0);
       return false;

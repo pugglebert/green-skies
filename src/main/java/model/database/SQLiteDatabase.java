@@ -14,21 +14,25 @@ import java.util.ArrayList;
  * @version 1.2
  */
 public class SQLiteDatabase {
-  /** database connection */
+  /** database connection. */
   private static Connection con;
 
+  /** statement for building tables. */
   private Statement builtTable;
 
+  /** Vairable that contains statement for database. */
   private Statement state;
 
+  /** Variable that contains statement for prepare statement database. */
   private PreparedStatement prep;
 
+  /** Variable that contains result fetched form database. */
   private ResultSet res;
 
   /**
    * This method create connection to local database, and will create one if there is no database.
    */
-  protected void getConnection() {
+  protected void buildConnection() {
     try {
       // sqlite driver
       Class.forName("org.sqlite.JDBC");
@@ -39,10 +43,8 @@ public class SQLiteDatabase {
     }
   }
 
-  /**
-   * This method returns connection as an object.
-   */
-  public Connection getCon(){
+  /** This method is getter for connection returns connection as an object. */
+  public Connection getCon() {
     return con;
   }
 
@@ -64,10 +66,10 @@ public class SQLiteDatabase {
       con.commit();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
-    } finally{
-      try{
-//      con.close();
-      } catch (Exception e){
+    } finally {
+      try {
+        //      con.close();
+      } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
     }
@@ -77,7 +79,7 @@ public class SQLiteDatabase {
   protected void buildAirportsTable() {
     if (con == null) {
       // get connection
-      getConnection();
+      buildConnection();
     }
 
     try {
@@ -111,7 +113,7 @@ public class SQLiteDatabase {
   protected void buildRoutesTable() {
     if (con == null) {
       // get connection
-      getConnection();
+      buildConnection();
     }
 
     try {
@@ -146,7 +148,7 @@ public class SQLiteDatabase {
   protected void buildAirlinesTable() {
     if (con == null) {
       // get connection
-      getConnection();
+      buildConnection();
     }
 
     try {
@@ -180,7 +182,7 @@ public class SQLiteDatabase {
   public void addAirports(Airport airport) {
     if (con == null) {
       // get connection
-      getConnection();
+      buildConnection();
     }
 
     try {
@@ -217,7 +219,7 @@ public class SQLiteDatabase {
   public void addRoutes(Route route) {
     if (con == null) {
       // get connection
-      getConnection();
+      buildConnection();
     }
 
     try {
@@ -263,7 +265,7 @@ public class SQLiteDatabase {
   public void addAirlines(Airline airline) {
     if (con == null) {
       // get connections
-      getConnection();
+      buildConnection();
     }
 
     try {
@@ -297,7 +299,7 @@ public class SQLiteDatabase {
   public void initialiseTable(String tableType) {
     if (con == null) {
       // get connection
-      getConnection();
+      buildConnection();
     }
 
     if (tableType.equals("airports")) {
@@ -376,10 +378,10 @@ public class SQLiteDatabase {
    * @throws SQLException
    * @throws ClassNotFoundException
    */
-  public void initialiseStorage(Storage storage) {
+  public void initialiseStorage(Storage storage) throws SQLException {
     if (con == null) {
       // get connections
-      getConnection();
+      buildConnection();
     }
     try {
       state = con.createStatement();
@@ -422,7 +424,19 @@ public class SQLiteDatabase {
         }
         storage.setData(airports, "Airport");
       }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        res.close();
+        state.close();
+        //        con.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
 
+    try {
       state = con.createStatement();
       res =
           state.executeQuery(
@@ -448,7 +462,19 @@ public class SQLiteDatabase {
         }
         storage.setData(airlines, "Airline");
       }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        res.close();
+        state.close();
+        //        con.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
 
+    try {
       state = con.createStatement();
       res =
           state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
@@ -505,7 +531,7 @@ public class SQLiteDatabase {
       try {
         res.close();
         state.close();
-//        con.close();
+        //        con.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }

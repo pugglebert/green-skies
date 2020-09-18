@@ -1,13 +1,14 @@
-package controller.main;
+package controller.main.dataview;
 
 import controller.analysis.Searcher;
+import controller.main.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Route;
-import model.data.Storage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -41,7 +42,6 @@ public class FlightHistoryController extends DataViewController {
       FXCollections.observableArrayList("Airline", "Source", "Destination");
   private final ObservableList<String> RankTypes =
       FXCollections.observableArrayList("Emission", "Distance");
-  private Storage storage = Main.getStorage();
 
   /**
    * This method initializes the controller class.
@@ -119,7 +119,7 @@ public class FlightHistoryController extends DataViewController {
   @FXML
   public void rank() {
     if (RankSelection.getSelectionModel().getSelectedItem().equals("Distance")) {
-      System.out.println(1);
+//      System.out.println(1);
       Collections.sort(
           storage.getHistory(),
           new Comparator<Route>() {
@@ -129,7 +129,7 @@ public class FlightHistoryController extends DataViewController {
             }
           });
       for (Route i : storage.getHistory()) {
-        System.out.println(i);
+//        System.out.println(i);
       }
     } else {
       Collections.sort(

@@ -33,9 +33,6 @@ public abstract class SideNavBarController implements Initializable {
   @FXML protected Button btnGraphs;
   @FXML protected Button btnAnalyseFlight;
 
-  // TODO: write comments for these attributes
-  /** Initialize the list to contain the different search types */
-  protected ObservableList<String> searchTypes;
   /** Initalize a storage object*/
   protected final Storage storage = Main.getStorage();
 
