@@ -1,4 +1,4 @@
-package controller.main;
+package controller.main.dataview;
 
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;

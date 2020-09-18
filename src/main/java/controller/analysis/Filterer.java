@@ -126,10 +126,10 @@ public class Filterer {
    * This method allows class calling filter datatype methods to set filter success to true if there were no
    * errors or false if errors occured.
    *
-   * @param bool Value to set filter success attribute to.
+   * @param success Value to set filter success attribute to.
    */
-  public void setFilterSuccess(boolean bool) {
-    filterSuccess = bool;
+  public void setFilterSuccess(boolean success) {
+    filterSuccess = success;
   }
 
   /**

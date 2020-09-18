@@ -1,5 +1,7 @@
-package controller.main;
+package controller.main.upload;
 
+import controller.main.Main;
+import controller.main.SideNavBarController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

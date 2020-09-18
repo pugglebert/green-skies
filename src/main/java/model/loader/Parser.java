@@ -7,7 +7,9 @@ import java.util.*;
 // TODO: write comment for this class
 
 public abstract class Parser {
+
   protected final List<String> dataFile;
+
   /** Stores int key for error code and int value for error quantity. */
   protected Map<Integer, Integer> errorCollection = new HashMap<>();
 

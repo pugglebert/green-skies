@@ -141,10 +141,10 @@ public class AnalyseController extends SideNavBarController implements Initializ
                       rubbish2);
       FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
 
-      System.out.println(analyser.getTotalDistancePath1());
-      System.out.println(analyser.getTotalDistancePath2());
-      System.out.println(analyser.getPath1Emission());
-      System.out.println(analyser.getPath2Emission());
+//      System.out.println(analyser.getTotalDistancePath1());
+//      System.out.println(analyser.getTotalDistancePath2());
+//      System.out.println(analyser.getPath1Emission());
+//      System.out.println(analyser.getPath2Emission());
 
       storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
       storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
