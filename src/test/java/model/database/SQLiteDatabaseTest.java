@@ -73,10 +73,10 @@ public class SQLiteDatabaseTest {
     @Test
     public void isAutoCommiteClosed() throws SQLException {
         database.closeAutoCommite();
-        database.initialiseTable("routes");
         state = con.createStatement();
         res = state.executeQuery("select * from 'routes'");
-        assertTrue(res.next());
+        System.out.println(res.next());
+        assertFalse(res.next());
     }
 }
 

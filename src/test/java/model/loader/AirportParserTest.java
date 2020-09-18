@@ -188,7 +188,22 @@ public class AirportParserTest {
 
     @Test
     public void isTZValidWrong2(){
-        assertEquals(airportParser.isTZValid("14"), false);
+        assertFalse(airportParser.isTZValid("15"));
+    }
+
+    @Test
+    public void isTZValidWrong3(){
+        assertFalse(airportParser.isTZValid("-13"));
+    }
+
+    @Test
+    public void isTZValidWrong4(){
+        assertTrue(airportParser.isTZValid("-12"));
+    }
+
+    @Test
+    public void isTZValidWrong5(){
+        assertTrue(airportParser.isTZValid("14"));
     }
 
     @Test
