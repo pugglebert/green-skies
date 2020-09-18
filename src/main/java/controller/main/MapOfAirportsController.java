@@ -5,7 +5,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import java.net.URL;
 import java.util.ResourceBundle;
-// TODO: check all method comments start with "This method ..."
+
 
 /**
  * The controller class which contains the controls for the map of airports page.
@@ -18,8 +18,13 @@ public class MapOfAirportsController extends SideNavBarController {
 
   @FXML private WebView mapView;
   @FXML private WebEngine mapEngine;
-  // TODO: write comment for this method
 
+
+  /**
+   * This method initializes the controller class.
+   * @param url
+   * @param resourceBundle
+   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     mapEngine = mapView.getEngine();

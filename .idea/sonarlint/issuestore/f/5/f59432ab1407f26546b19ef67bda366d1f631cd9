@@ -1,30 +1,15 @@
 
-M
-java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8¤Ê¹şÇ.
-J
-java:S1128"/Remove this unused import 'javafx.stage.Stage'.(æÄ¸²úÿÿÿÿ
-[
-java:S1128"9Remove this unused import 'controller.analysis.Filterer'.(ıÁùÉüÿÿÿÿ8¤Ê¹şÇ.
+_
+java:S2387"="btnUpload" is the name of a field in "SideNavBarController".(ãèÍùÿÿÿÿ8—¥ñàÉ.
+f
+java:S2387"D"btnRouteDataView" is the name of a field in "SideNavBarController".(¢şèïùÿÿÿÿ8—¥ñàÉ.
+c
+java:S2387"F"btnAirportDataView" is the name of a field in "SideNavBarController".(¶àÈĞ8—¥ñàÉ.
+h
+java:S2387"F"btnAirlineDataView" is the name of a field in "SideNavBarController".(›Ÿøãÿÿÿÿÿ8—¥ñàÉ.
+\
+java:S2387&"?"searchTypes" is the name of a field in "SideNavBarController".(ò‹¥Ô8—¥ñàÉ.
 X
-java:S2387"="btnUpload" is the name of a field in "SideNavBarController".(ø«É¸ùÿÿÿÿ
-a
-java:S2387#"F"btnAirlineDataView" is the name of a field in "SideNavBarController".(’Ğøµûÿÿÿÿ
-F
-java:S1128"0Remove this unused import 'javafx.scene.Parent'.(²ä¡È
-U
-java:S23872"?"searchTypes" is the name of a field in "SideNavBarController".(ò‹¥Ô
-E
-java:S1128"/Remove this unused import 'javafx.scene.Scene'.(Õü²
+java:S2387)";"storage" is the name of a field in "SideNavBarController".(ïÊ÷¬8—¥ñàÉ.
 T
-java:S1128
-"2Remove this unused import 'javafx.stage.Modality'.(£†üĞüÿÿÿÿ8£üäŠÈ.
-N
-java:S1128"3Remove this unused import 'javafx.fxml.FXMLLoader'.(À‡ô³úÿÿÿÿ
-Q
-java:S23873";"storage" is the name of a field in "SideNavBarController".(ïÊ÷¬
-a
-java:S2387!"F"btnAirportDataView" is the name of a field in "SideNavBarController".(°°©ûÿÿÿÿ
-P
-java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8£üäŠÈ.
-Y
-java:S2387"D"btnRouteDataView" is the name of a field in "SideNavBarController".(œí¨S
+java:S1135 "2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8—¥ñàÉ.

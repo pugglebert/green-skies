@@ -32,7 +32,7 @@ public class AnalyseResultController implements Initializable {
   @FXML public Text EmissionDifference;
 
   /**
-   * The require method for Initializable interface
+   * This method is required for Initializable interface
    * show distance and emissions of each route
    * @param url
    * @param resourceBundle
@@ -55,7 +55,7 @@ public class AnalyseResultController implements Initializable {
   }
 
   /**
-   * return back to the AnalysePage
+   * This method is to return back to the AnalysePage
    */
   public void GoBackToAnalyse() {
     Stage stage = (Stage) BackButton.getScene().getWindow(); // get current window

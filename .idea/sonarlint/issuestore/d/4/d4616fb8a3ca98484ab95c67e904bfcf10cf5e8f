@@ -1,70 +1,67 @@
 
-e
-java:S2095•"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÚµÙ8›³ñÌÈ.
-s	java:S117°"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ÃÅşÿÿÿÿ8›³ñÌÈ.
-e
-java:S2095Ó"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÍôÜ8›³ñÌÈ.
-n	java:S117µ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œáÅğ8›³ñÌÈ.
 d
-java:S2095&"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ä§ş¬8üº€‰È.
+java:S2095_"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ä§ş¬8ç£‚ãÉ.
 j
-java:S2095Á"GUse try-with-resources or close this "Statement" in a "finally" clause.(®©åşÿÿÿÿ8›³ñÌÈ.
-j
-java:S2095“"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(å¾—ªûÿÿÿÿ8›³ñÌÈ.
-j
-java:S2095€"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8›³ñÌÈ.
-s	java:S117¶"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©¤ŸÇÿÿÿÿÿ8›³ñÌÈ.
-j
-java:S2095‰"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8›³ñÌÈ.
->
-java:S1643]"Use a StringBuilder instead.(¹¤¡ªùÿÿÿÿ8›³ñÌÈ.
-d
-java:S1128"BRemove this unused import 'javafx.beans.binding.StringExpression'.(ç–êªüÿÿÿÿ8›³ñÌÈ.
+java:S2095ã"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8ç£‚ãÉ.
 e
-java:S2095ƒ"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÚµÙ8›³ñÌÈ.
+java:S2095Ê"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÚµÙ8ç£‚ãÉ.
 j
-java:S2095Ø"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(óé¥±ûÿÿÿÿ8›³ñÌÈ.
-j
-java:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(˜¥ïıÿÿÿÿ8›³ñÌÈ.
-j
-java:S2095Š"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(±Éİ½úÿÿÿÿ8›³ñÌÈ.
-j
-java:S2095’"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8›³ñÌÈ.
+java:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Ê†œãıÿÿÿÿ8ç€ñâÉ.
 e
-java:S2095¤"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Õ™˜Ñ8›³ñÌÈ.
-e
-java:S2095Ô"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(«¹Ä÷8›³ñÌÈ.
-s	java:S117¯"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú¿îÂşÿÿÿÿ8›³ñÌÈ.
-k
-java:S2095O"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ıœÄE8›³ñÌÈ.
-d
-java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ä§ş¬8›³ñÌÈ.
-l
-java:S20959"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(õã„¢8›³ñÌÈ.
-d
-java:S2095."GUse try-with-resources or close this "Statement" in a "finally" clause.(Ä§ş¬8›³ñÌÈ.
-s	java:S117È"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş®Ôªûÿÿÿÿ8›³ñÌÈ.
-X
-java:S2696"6Make the enclosing method "static" or remove this set.(ïÈ²şÿÿÿÿ8üº€‰È.
+java:S2095È"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Îú÷ø8ç£‚ãÉ.
+j
+java:S2095©"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(óé¥±ûÿÿÿÿ8ç£‚ãÉ.
 K
-java:S2115")Add password protection to this database.(ïÈ²şÿÿÿÿ8üº€‰È.
+java:S2115")Add password protection to this database.(ïÈ²şÿÿÿÿ8ç€ñâÉ.
+e
+java:S2095è"GUse try-with-resources or close this "Statement" in a "finally" clause.(ä¨’8ç£‚ãÉ.
+d
+java:S20956"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ä§ş¬8’ÃÿâÉ.
 j
-java:S2095¨"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(„»§±ÿÿÿÿÿ8›³ñÌÈ.
-e
-java:S2095Â"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Ó½óÌ8›³ñÌÈ.
-e
-java:S2095½"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÍôÜ8›³ñÌÈ.
-e
-java:S2095¾"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(ÎÊÓ¸8›³ñÌÈ.
-j
-java:S2095×"GUse try-with-resources or close this "Statement" in a "finally" clause.(ó°ĞÏüÿÿÿÿ8›³ñÌÈ.
-j
-java:S2095£"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8›³ñÌÈ.
-e
-java:S2095Œ"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÚµÙ8›³ñÌÈ.
-n	java:S117É"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•²–Ì8›³ñÌÈ.
-[	java:S106æ"9Replace this use of System.out or System.err by a logger.(àş˜¡ÿÿÿÿÿ8›³ñÌÈ.
+java:S2095Ò"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(éù™Şşÿÿÿÿ8ç£‚ãÉ.
 q
-java:S2095n"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ŠĞÄüÿÿÿÿ8›³ñÌÈ.
+java:S2095s"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(›„¦Äşÿÿÿÿ8ç£‚ãÉ.
+?
+java:S1643˜"Use a StringBuilder instead.(¹¤¡ªùÿÿÿÿ8ç£‚ãÉ.
+m
+java:S2095Š"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Ô”®¢8ç£‚ãÉ.
+d
+java:S2095L"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ä§ş¬8ç£‚ãÉ.
+n	java:S117˜"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•²–Ì8ç£‚ãÉ.
+j
+java:S2095¨"GUse try-with-resources or close this "Statement" in a "finally" clause.(ó°ĞÏüÿÿÿÿ8ç£‚ãÉ.
+r
+java:S2095©"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(¦ŠĞÄüÿÿÿÿ8ç£‚ãÉ.
+j
+java:S2095»"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8ç£‚ãÉ.
+s	java:S117ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú¿îÂşÿÿÿÿ8ç£‚ãÉ.
 e
-java:S2095§"GUse try-with-resources or close this "Statement" in a "finally" clause.(ä¨’8›³ñÌÈ.
+java:S2095Õ"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÚµÙ8ç£‚ãÉ.
+s	java:S117—"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş®Ôªûÿÿÿÿ8ç£‚ãÉ.
+j
+java:S2095Æ"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8ç€ñâÉ.
+e
+java:S2095‹"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÍôÜ8ç£‚ãÉ.
+e
+java:S2095£"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÍôÜ8ç£‚ãÉ.
+j
+java:S2095é"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(„»§±ÿÿÿÿÿ8ç£‚ãÉ.
+X
+java:S2696"6Make the enclosing method "static" or remove this set.(ïÈ²şÿÿÿÿ8ç€ñâÉ.
+e
+java:S2095¥"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Îú÷ø8ç€ñâÉ.
+j
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(®©åşÿÿÿÿ8ç£‚ãÉ.
+s	java:S117÷"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©¤ŸÇÿÿÿÿÿ8ç£‚ãÉ.
+s	java:S117ñ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»ÃÅşÿÿÿÿ8ç£‚ãÉ.
+j
+java:S2095½"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(éù™Şşÿÿÿÿ8ç£‚ãÉ.
+j
+java:S2095Ğ"GUse try-with-resources or close this "Statement" in a "finally" clause.(¾Å”İûÿÿÿÿ8ç£‚ãÉ.
+e
+java:S2095‘"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Ó½óÌ8ç£‚ãÉ.
+n	java:S117ö"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œáÅğ8ç£‚ãÉ.
+e
+java:S2095À"GUse try-with-resources or close this "Statement" in a "finally" clause.(ÚµÙ8ç£‚ãÉ.
+j
+java:S2095å"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(í¢áßùÿÿÿÿ8ç€ñâÉ.

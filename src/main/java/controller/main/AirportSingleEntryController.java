@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.loader.Loader;
 
-// TODO: check all method comments start with "This method ..."
 
 /**
  * The controller class which contains the controls for data entry of a single Airport.
@@ -18,6 +17,9 @@ import model.loader.Loader;
  */
 public class AirportSingleEntryController {
 
+  /**
+   * Initialize a loader object
+   */
   private final Loader loader = Main.getLoader();
 
   @FXML TextField nameFld;
@@ -35,13 +37,17 @@ public class AirportSingleEntryController {
   @FXML Button cancelButton;
   @FXML Button addButton;
 
-  /** Closes window when the 'Cancel' button is pushed */
+  /**
+   * This method closes window when the 'Cancel' button is pushed.
+   */
   public void closeWindow() {
     Stage stage = (Stage) cancelButton.getScene().getWindow();
     stage.close();
   }
 
-  /** Loads the data entered for an airport as a singular line */
+  /**
+   * This method loads the data entered for an aiport as a singular line.
+   */
   public void addEntry() {
     String entryString = makeAirportString();
 
@@ -65,9 +71,8 @@ public class AirportSingleEntryController {
   }
 
   /**
-   * Compiles a string from the the entered data for an airport
-   *
-   * @return airportString
+   * This method compiles a string from the the entered data for an airport.
+   * @return airlineString.
    */
   public String makeAirportString() {
     String airportString = new String();

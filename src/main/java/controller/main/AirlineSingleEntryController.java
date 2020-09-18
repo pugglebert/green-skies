@@ -18,7 +18,7 @@ import model.loader.Loader;
  */
 public class AirlineSingleEntryController {
   /**
-   * Initialize a loader attribute
+   * Initialize a loader object
    */
   private final Loader loader = Main.getLoader();
 

@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.data.Airport;
@@ -48,7 +47,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
 
 
   /**
-   * Require method for Initializable interface
+   * This method is required for Initializable interface
    * load the analyse.fxml and  display all the components.
    * @param primaryStage
    * @throws IOException
@@ -70,7 +69,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
   }
 
   /**
-   * Bind the list of airports code with textfield
+   * This method binds the list of airports code with textfield
    * and show like combobox.
    * @param url
    * @param resourceBundle
@@ -91,7 +90,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
 
 
   /**
-   * calculate distance and emissions by using two routes
+   * This method alculates distance and emissions by using two routes
    * @throws IOException
    */
   @FXML

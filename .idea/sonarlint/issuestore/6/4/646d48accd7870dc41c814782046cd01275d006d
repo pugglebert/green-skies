@@ -1,8 +1,12 @@
 
-k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸òş²8¹òøÃ.
-g	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÑÄ€üÿÿÿÿ
-j	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â•;8¹òøÃ.
-p
-java:S1206"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ8­¨ŠÉ.
-[	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(ó€¨ 8¹òøÃ.
-b	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¦á
+p	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÑÄ€üÿÿÿÿ8Œ¦ñàÉ.
+k	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¦á8Œ¦ñàÉ.
+]	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(ó€¨ 8Œ¦ñàÉ.
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸òş²8Œ¦ñàÉ.
+l	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â•;8Œ¦ñàÉ.
+r
+java:S1206{"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ8Œ¦ñàÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8Œ¦ñàÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(™»Î®şÿÿÿÿ8Œ¦ñàÉ.

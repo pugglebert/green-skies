@@ -43,7 +43,7 @@ public class FlightHistoryController extends DataViewController {
       FXCollections.observableArrayList("Emission", "Distance");
 
   /**
-   * Initializes the controller class.
+   * This method initializes the controller class.
    *
    * @param url The URL used.
    * @param rb The resource bundle used.
@@ -98,7 +98,7 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * This method aunches the filter pop up box. If filtering is successful displays filtered history in
+   * This method launches the filter pop up box. If filtering is successful displays filtered history in
    * tableview.
    *
    * @throws IOException if fxml file cannot be opened.

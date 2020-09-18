@@ -93,6 +93,7 @@ public class AirportParser extends Parser {
     protected void dataParser() {
         for (String dataLine : dataFile) {
             if (totalErrors > 200) {
+                totalErrors = 0;
                 throw new RuntimeException("File rejected: more than 100 lines contain errors");
             }
             parseLine(dataLine);
@@ -142,54 +143,68 @@ public class AirportParser extends Parser {
         if (line.length != 12){
             errorCounter(0);
             isValid = false;
+
         }
 
         if (!isIdValid(line[airportID])){
             isValid = false;
+
         }
 
         if(!isNameValid(line[name])){
             isValid = false;
+
         }
 
         if(!isCityValid(line[city])){
             isValid = false;
+
         }
 
         if(!isCountryValid(line[country])){
             isValid = false;
+
         }
 
         if(!isIATAValid(line[IATA])){
             isValid = false;
+
         }
 
         if(!isICAOValid(line[ICAO])){
             isValid = false;
+
+
         }
 
         if(!isLatValid(line[latitude])){
             isValid = false;
+
         }
 
         if(!isLonValid(line[longtitude])){
             isValid = false;
+
         }
 
         if(!isAltValid(line[altitude])){
             isValid = false;
+
         }
 
         if(!isTZValid(line[timezone])){
             isValid = false;
+
         }
 
         if(!isDSTValid(line[DST])){
             isValid = false;
+
         }
 
         if(!isDBTZValid(line[dataBaseTimeZone])){
             isValid = false;
+
         }
 
         return isValid;
@@ -223,7 +238,7 @@ public class AirportParser extends Parser {
      * @return true if valid, false if invalid.
      */
     protected boolean isNameValid(String name){
-        if(!name.matches("[a-zA-Z0-9 .'()/-]+")){
+    if (!name.matches("[\\p{L}0-9 .'()/-]+")) {
             errorCounter(3);
             return false;
         }
@@ -236,7 +251,7 @@ public class AirportParser extends Parser {
      * @return true if valid, false if invalid.
      */
     protected boolean isCityValid(String city){
-        if(!city.matches("[a-zA-Z0-9 .'()/-]+")){
+    if (!city.matches("[\\p{L}0-9 .'()/-]+")) {
             errorCounter(4);
             return false;
         }
@@ -344,12 +359,7 @@ public class AirportParser extends Parser {
      */
     protected boolean isTZValid(String timeZone){
         try{
-
-            if(-12 <= Float.parseFloat(timeZone) && Float.parseFloat(timeZone) <= 12){
-                return true;
-            } else {
-                return false;
-            }
+            return -12 <= Float.parseFloat(timeZone) && Float.parseFloat(timeZone) <= 14;
         } catch (Exception e){
             errorCounter(11);
             return false;
