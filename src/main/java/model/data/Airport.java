@@ -1,5 +1,4 @@
 package model.data;
-// TODO: check all method comments start with "This method ..."
 
 /**
  * The Airport class which contains all data for one unique airport.
@@ -9,8 +8,8 @@ package model.data;
  * @since 2020-08-21
  */
 public class Airport implements DataType {
-  // TODO: write comments for these attributes
 
+  /**All Airport information according to datafile and official explainations. */
   private final int airportID;
   private final String name;
   private final String city;
@@ -160,8 +159,13 @@ public class Airport implements DataType {
     return dataBaseTimeZone;
   }
 
-  // TODO: write comment for this method
-
+  /**
+   * This method returns true if object has the same attributes as the airport from which the method is called,
+   * false otherwise.
+   *
+   * @param o object to be compared to the airport calling the method.
+   * @return true if the two objects attributes are the same, false if there are any differences.
+   */
   @Override
   public boolean equals(Object o) {
     if (o instanceof Airport) {
