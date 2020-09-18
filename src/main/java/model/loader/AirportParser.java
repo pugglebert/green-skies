@@ -143,93 +143,67 @@ public class AirportParser extends Parser {
         if (line.length != 12){
             errorCounter(0);
             isValid = false;
-//            System.out.println(0);
-            System.out.println("airport length invaid" + line.length);
 
         }
 
         if (!isIdValid(line[airportID])){
             isValid = false;
-//            System.out.println(1);
-            System.out.println("airport id invaid"  + line[airportID]);
 
         }
 
         if(!isNameValid(line[name])){
             isValid = false;
-//            System.out.println(2);
-            System.out.println("airport name invaid"+ line[name]);
 
         }
 
         if(!isCityValid(line[city])){
             isValid = false;
-//            System.out.println(3);
-            System.out.println("city" + line[city]);
 
         }
 
         if(!isCountryValid(line[country])){
             isValid = false;
-//            System.out.println(4);
-            System.out.println("country" + line[country]);
 
         }
 
         if(!isIATAValid(line[IATA])){
             isValid = false;
-//            System.out.println(5);
-            System.out.println("iata" + line[IATA]);
 
         }
 
         if(!isICAOValid(line[ICAO])){
             isValid = false;
-//            System.out.println(6);
-            System.out.println("icao" + line[ICAO]);
 
 
         }
 
         if(!isLatValid(line[latitude])){
             isValid = false;
-//            System.out.println(7);
-            System.out.println("lat" + line[latitude]);
 
         }
 
         if(!isLonValid(line[longtitude])){
             isValid = false;
-//            System.out.println(8);
-            System.out.println("lon" + line[longtitude]);
 
         }
 
         if(!isAltValid(line[altitude])){
             isValid = false;
-//            System.out.println(9);
-            System.out.println("alt" + line[altitude]);
 
         }
 
         if(!isTZValid(line[timezone])){
             isValid = false;
-//            System.out.println(10);
-            System.out.println("time" + line[timezone]);
 
         }
 
         if(!isDSTValid(line[DST])){
             isValid = false;
-//            System.out.println(11);
-            System.out.println("dst"+ line[DST]);
 
         }
 
         if(!isDBTZValid(line[dataBaseTimeZone])){
             isValid = false;
-//            System.out.println(12);
-            System.out.println("dbtz" + line[dataBaseTimeZone]);
 
         }
 
