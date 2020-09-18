@@ -1,6 +1,7 @@
 package model.database;
 
 import model.data.Airport;
+import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
 import model.loader.AirportParser;
@@ -18,65 +19,162 @@ import static org.junit.Assert.*;
 
 /**
  * Test cases for database.
+ *
  * @author Lambert
  * @since 18/09/2020
  * @version 1.0
  */
-
 public class SQLiteDatabaseTest {
-    private Storage storage = new Storage();
-    private Loader loader = new Loader(storage);
-    private SQLiteDatabase database = new SQLiteDatabase();
-    private Statement state;
-    private PreparedStatement prep;
-    private ResultSet res;
-    private static Connection con;
+  private Storage storage = new Storage();
+  private Loader loader = new Loader(storage);
+  private SQLiteDatabase database = new SQLiteDatabase();
+  private Statement state;
+  private PreparedStatement prep;
+  private ResultSet res;
+  private static Connection con;
 
-    @Before
-    public void setUp() throws FileSystemException, SQLException, ClassNotFoundException {
-        try{
-            loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairport.csv", "Airport");
-            loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
-            loader.loadFile("../seng202_project/src/test/java/TestFiles/singleRoute.csv", "Route");
-            con = database.getCon();
-        } catch (FileNotFoundException e) {
-        }
+  @Before
+  public void setUp() throws FileSystemException, SQLException, ClassNotFoundException {
+    try {
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairport.csv", "Airport");
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
+      loader.loadFile("../seng202_project/src/test/java/TestFiles/singleRoute.csv", "Route");
+      con = database.getCon();
+    } catch (FileNotFoundException e) {
     }
+  }
 
-    @Test
-    public void isTableAirportReseted() throws SQLException {
-        database.initialiseTable("airports");
-        state = con.createStatement();
-        res = state.executeQuery(
-                        "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+  @Test
+  public void isTableAirportReseted() throws SQLException {
+    database.initialiseTable("airports");
+    state = con.createStatement();
+    res =
+        state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+    assertTrue(res.next());
+
+    res.close();
+    state.close();
+
+  }
+
+  @Test
+  public void isTableAirlinesReseted() throws SQLException {
+    database.initialiseTable("airlines");
+    state = con.createStatement();
+    res =
+        state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+    assertTrue(res.next());
+
+    res.close();
+    state.close();
+
+  }
+
+  @Test
+  public void isTableRoutesReseted() throws SQLException {
+    database.initialiseTable("routes");
+    state = con.createStatement();
+    res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
+    assertTrue(res.next());
+
+    res.close();
+    state.close();
+
+  }
+
+  @Test
+  public void isAutoCommiteClosed() throws SQLException {
+    database.closeAutoCommite();
+    database.initialiseTable("routes");
+    state = con.createStatement();
+    res = state.executeQuery("select * from 'routes'");
+    assertFalse(res.next());
+
+    res.close();
+    state.close();
+
+  }
+
+  @Test
+  public void isAirportsTableBuilt() throws Exception {
+    database.initialiseTable("airport");
+    state = con.createStatement();
+    state.executeUpdate("drop table airports");
+    state = con.createStatement();
+    res =
+        state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+    try {
+      if (!res.next()) {
+        database.buildAirportsTable();
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+
         assertTrue(res.next());
-    }
+        res.close();
+        state.close();
 
-    @Test
-    public void isTableAirlinesReseted() throws SQLException {
-        database.initialiseTable("airlines");
-        state = con.createStatement();
-        res = state.executeQuery(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
-        assertTrue(res.next());
-    }
+      }
+    } catch (Exception e) {
+      throw new Exception("Table not drop successfully.");
+    } finally{
 
-    @Test
-    public void isTableRoutesReseted() throws SQLException {
-        database.initialiseTable("routes");
-        state = con.createStatement();
-        res = state.executeQuery(
+    }
+  }
+
+  @Test
+  public void isRoutesTableBuilt() throws Exception {
+    database.initialiseTable("routes");
+    state = con.createStatement();
+    state.executeUpdate("drop table routes");
+    state = con.createStatement();
+    res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
+    try {
+      if (!res.next()) {
+        database.buildRoutesTable();
+        res =
+            state.executeQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
+
         assertTrue(res.next());
-    }
+        res.close();
+        state.close();
+      }
+    } catch (Exception e) {
+      throw new Exception("Table not drop successfully.");
+    } finally{
 
-    @Test
-    public void isAutoCommiteClosed() throws SQLException {
-        database.closeAutoCommite();
-        database.initialiseTable("routes");
-        state = con.createStatement();
-        res = state.executeQuery("select * from 'routes'");
-        assertFalse(res.next());
     }
+  }
+
+  @Test
+  public void isAirlinesTableBuilt() throws Exception {
+    database.initialiseTable("airlines");
+    state = con.createStatement();
+    state.executeUpdate("drop table airlines");
+    state = con.createStatement();
+    res =
+        state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+    try {
+      if (!res.next()) {
+        database.buildAirlinesTable();
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+
+        assertTrue(res.next());
+        res.close();
+        state.close();
+      }
+    } catch (Exception e) {
+      throw new Exception("Table not drop successfully.");
+    } finally{
+
+    }
+  }
+
+  @Test
+  public void isAirportAdded() throws SQLException {
+
+  }
 }
-

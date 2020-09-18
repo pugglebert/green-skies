@@ -146,10 +146,10 @@ public class AirportParser extends Parser {
 
         }
 
-        if (!isIdValid(line[airportID])){
-            isValid = false;
-
-        }
+//        if (!isIdValid(line[airportID])){
+//            isValid = false;
+//
+//        }
 
         if(!isNameValid(line[name])){
             isValid = false;
