@@ -128,6 +128,7 @@ public class Storage {
    * @param type Type of data to be stored.
    */
   public void setData(List<DataType> data, String type) {
+//    long startTime =
 
     if (type.matches("Airline")) {
 //      airlines = new ArrayList<Airline>();

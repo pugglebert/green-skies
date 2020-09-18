@@ -33,6 +33,7 @@ public class SQLiteDatabase {
    * This method create connection to local database, and will create one if there is no database.
    */
   protected void buildConnection() {
+
     try {
       // sqlite driver
       Class.forName("org.sqlite.JDBC");
@@ -41,6 +42,7 @@ public class SQLiteDatabase {
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     }
+
   }
 
   /** This method is getter for connection returns connection as an object. */
