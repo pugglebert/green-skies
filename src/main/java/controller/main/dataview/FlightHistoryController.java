@@ -33,6 +33,9 @@ public class FlightHistoryController extends DataViewController {
   @FXML private TableColumn<Route, String> codeShareColumn;
   @FXML private TableColumn<Route, Integer> numOfStopsColumn;
   @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML private TableColumn<Route, Integer> timesTakenColumn;
+  @FXML private TableColumn<Route, Double> distanceColumn;
+  @FXML private TableColumn<Route, String> emissionsColumn;
   @FXML private ChoiceBox<String> searchTypeSelection;
   @FXML private TextField searchBar;
   @FXML private ChoiceBox<String> RankSelection;
@@ -64,6 +67,9 @@ public class FlightHistoryController extends DataViewController {
     codeShareColumn.setCellValueFactory(new PropertyValueFactory<>("codeShare"));
     numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
     equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
+    timesTakenColumn.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
+    distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+    emissionsColumn.setCellValueFactory(new PropertyValueFactory<>("emissions"));
 
     // TODO: what is with the commented things? HK 16/09/2020
     // Load data by taking the Route ArrayList and converting it to an ObservableArrayList.
