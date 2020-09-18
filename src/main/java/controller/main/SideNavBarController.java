@@ -12,7 +12,6 @@ import model.data.Storage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-// TODO: check all method comments start with "This method ..."
 
 /**
  * Superclass for all data view pages. All such pages contain a table of data, tools for searching
@@ -35,12 +34,16 @@ public abstract class SideNavBarController implements Initializable {
   @FXML protected Button btnAnalyseFlight;
 
   // TODO: write comments for these attributes
-
+  /** Initialize the list to contain the different search types */
   protected ObservableList<String> searchTypes;
+  /** Initalize a storage object*/
   protected final Storage storage = Main.getStorage();
 
-  // TODO: write comment for this method
-
+  /**
+   * This method is required for Initializable interface
+   * @param url
+   * @param rb
+   */
   public abstract void initialize(URL url, ResourceBundle rb);
 
   /**
@@ -186,8 +189,11 @@ public abstract class SideNavBarController implements Initializable {
     newStage.show();
   }
 
-  // TODO: write comment for this method
 
+  /**
+   * This method closes the current page and opens the Analyse Flight page
+   * @throws IOException
+   */
   public void toAnalyseFlight() throws IOException {
     Stage stage = (Stage) btnAnalyseFlight.getScene().getWindow();
     stage.close();

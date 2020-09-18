@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.loader.Loader;
-// TODO: check all method comments start with "This method ..."
 
 /**
  * The controller class which contains the controls for data entry of a single Route.
@@ -16,10 +15,12 @@ import model.loader.Loader;
  * @since 12/09/20
  */
 public class RouteSingleEntryController {
-  // TODO: write comments for these attributes
 
+  /**
+   * Initialize a loader object
+   */
   private final Loader loader = Main.getLoader();
-  // private final RouteParser routeParser = new RouteParser(List<String>);
+
 
   @FXML TextField airlineNameField;
   @FXML TextField airlineIDField;
@@ -33,13 +34,17 @@ public class RouteSingleEntryController {
   @FXML Button cancelButton;
   @FXML Button addEntryButton;
 
-  /** Closes window when the 'Cancel' button is pushed */
+  /**
+   * This method closes window when the 'Cancel' button is pushed.
+   */
   public void closeWindow() {
     Stage stage = (Stage) cancelButton.getScene().getWindow();
     stage.close();
   }
 
-  /** Loads the data entered for a route as a singular line */
+  /**
+   * This method loads the data entered for a route as a singular line.
+   */
   public void addEntry() {
     String entryString = makeRouteString();
 
@@ -63,9 +68,8 @@ public class RouteSingleEntryController {
   }
 
   /**
-   * Compiles a string from the the entered data for a route
-   *
-   * @return routeString
+   * This method compiles a string from the the entered data for a route.
+   * @return airlineString.
    */
   public String makeRouteString() {
     String routeLine = new String();
