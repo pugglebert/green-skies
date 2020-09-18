@@ -13,7 +13,7 @@ import java.io.IOException;
  * The Controller class which contains the controls for the Welcome page, the first page shown to
  * users.
  *
- * @author Grace Hanlon, Hayley Krippner
+ * @author Grace Hanlon, Hayley Krippner, ZhengJingRui He
  * @version 1.0
  * @since 2020-08-26
  */

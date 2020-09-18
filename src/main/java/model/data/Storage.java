@@ -222,4 +222,6 @@ public class Storage {
   public HashMap<String, Integer> getHistoryDestAirports() {
     return historyDestAirports;
   }
+
+
 }

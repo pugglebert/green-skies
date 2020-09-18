@@ -17,10 +17,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.application.Application.launch;
-
 
 
 /**
@@ -32,139 +32,162 @@ import static javafx.application.Application.launch;
  */
 public class AnalyseController extends SideNavBarController implements Initializable {
 
-  @FXML private TextField pathSource1;
-  @FXML private TextField pathDestination1;
-  @FXML private TextField pathSource2;
-  @FXML private TextField pathDestination2;
+    @FXML
+    public TextField pathSource1;
+    @FXML
+    public TextField pathDestination1;
+    @FXML
+    public TextField pathSource2;
+    @FXML
+    public TextField pathDestination2;
 
 
-  String[] rubbish1 = {"abc"};
-  String[] rubbish2 = {"abc"};
+    String[] rubbish1 = {"abc"};
+    String[] rubbish2 = {"abc"};
 
 
-  /** A hash set to store some airport data. */
-  private HashSet<String> airports = new HashSet<>();
+    /**
+     * A hash set to store some airport data.
+     */
+    private HashSet<String> airports = new HashSet<>();
 
 
-  /**
-   * This method is required for Initializable interface
-   * load the analyse.fxml and  display all the components.
-   * @param primaryStage
-   * @throws IOException
-   */
-  public void start(Stage primaryStage) throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
-    primaryStage.setTitle("Welcome");
-    primaryStage.setScene(new Scene(root, 1024, 640));
-    primaryStage.show();
-  }
+    /**
+     * This method is required for Initializable interface
+     * load the analyse.fxml and  display all the components.
+     *
+     * @param primaryStage
+     * @throws IOException
+     */
+    public void start(Stage primaryStage) throws IOException {
 
-
-  /**
-   * In order to run this class indivially.
-   * @param args
-   */
-  public static void main(String[] args) {
-    launch(args);
-  }
-
-  /**
-   * This method binds the list of airports code with textfield
-   * and show like combobox.
-   * @param url
-   * @param resourceBundle
-   */
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-    //        System.out.println(Main.getStorage().getAirports());
-    for (Airport airport : Main.getStorage().getAirports()) {
-      airports.add(airport.getIATA());
-    }
-    //        System.out.println(airports);
-    TextFields.bindAutoCompletion(pathSource1, airports);
-    TextFields.bindAutoCompletion(pathDestination1, airports);
-    TextFields.bindAutoCompletion(pathSource2, airports);
-    TextFields.bindAutoCompletion(pathDestination2, airports);
-  }
-
-
-
-  /**
-   * This method alculates distance and emissions by using two routes
-   * @throws IOException
-   */
-  @FXML
-  private void analyse() throws IOException {
-
-    ArrayList<String> path1 = new ArrayList<>();
-    ArrayList<String> path2 = new ArrayList<>();
-
-    int check = 1;
-
-    for(int i = 0; i < airports.size(); i++) {
-      if (airports.contains(pathSource1.getText()) && airports.contains(pathDestination1.getText())
-              && airports.contains(pathSource2.getText()) && airports.contains(pathDestination2.getText())) {
-        check = 1;
-
-      } else {
-        check = 0;
-      }
+        Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
+        primaryStage.setTitle("Welcome");
+        primaryStage.setScene(new Scene(root, 1024, 640));
+        primaryStage.show();
     }
 
-    if(check == 1) {
-      path1.add((String) pathSource1.getText());
-      path1.add((String) pathDestination1.getText());
-      path2.add((String) pathSource2.getText());
-      path2.add((String) pathDestination2.getText());
 
-      Route route1 =
-              new Route(
-                      null,
-                      0,
-                      (String) pathSource1.getText(),
-                      0,
-                      (String) pathDestination1.getText(),
-                      0,
-                      null,
-                      0,
-                      rubbish1);
-      Route route2 =
-              new Route(
-                      null,
-                      0,
-                      (String) pathSource2.getText(),
-                      0,
-                      (String) pathDestination2.getText(),
-                      0,
-                      null,
-                      0,
-                      rubbish2);
-      FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
+    /**
+     * In order to run this class indivially.
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
 
-      System.out.println(analyser.getTotalDistancePath1());
-      System.out.println(analyser.getTotalDistancePath2());
-      System.out.println(analyser.getPath1Emission());
-      System.out.println(analyser.getPath2Emission());
+        launch(args);
+    }
 
-      storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
-      storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
-      storage.setAnalyseEmissionResult(analyser.getPath1Emission());
-      storage.setAnalyseEmissionResult(analyser.getPath2Emission());
-
-      Stage stage1 = new Stage();
-      Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
-      Scene scene = new Scene(root);
-      stage1.setScene(scene);
-      stage1.setMaximized(true);
-      stage1.show();
-    } else {
-      Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
-      ErrorAlert.setAlertType(Alert.AlertType.ERROR);
-      ErrorAlert.setContentText("Invalid airport code");
-      ErrorAlert.show();
+    /**
+     * This method binds the list of airports code with textfield
+     * and show like combobox.
+     *
+     * @param url
+     * @param resourceBundle
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //        System.out.println(Main.getStorage().getAirports());
+        for (Airport airport : Main.getStorage().getAirports()) {
+            airports.add(airport.getIATA());
+        }
+        //        System.out.println(airports);
+        TextFields.bindAutoCompletion(pathSource1, airports);
+        TextFields.bindAutoCompletion(pathDestination1, airports);
+        TextFields.bindAutoCompletion(pathSource2, airports);
+        TextFields.bindAutoCompletion(pathDestination2, airports);
 
     }
 
 
-  }
+    /**
+     * This method alculates distance and emissions by using two routes
+     *
+     * @throws IOException
+     */
+    @FXML
+    private void analyse() throws IOException {
+
+        ArrayList<String> path1 = new ArrayList<>();
+        ArrayList<String> path2 = new ArrayList<>();
+
+        int check = 1;
+
+
+        for (int i = 0; i < airports.size(); i++) {
+            if (airports.contains(pathSource1.getText()) && airports.contains(pathDestination1.getText())
+                    && airports.contains(pathSource2.getText()) && airports.contains(pathDestination2.getText())) {
+                check = 1;
+
+            } else {
+                check = 0;
+            }
+        }
+
+        if (check == 1) {
+            path1.add((String) pathSource1.getText());
+            path1.add((String) pathDestination1.getText());
+            path2.add((String) pathSource2.getText());
+            path2.add((String) pathDestination2.getText());
+
+            Route route1 =
+                    new Route(
+                            null,
+                            0,
+                            (String) pathSource1.getText(),
+                            0,
+                            (String) pathDestination1.getText(),
+                            0,
+                            null,
+                            0,
+                            rubbish1);
+            Route route2 =
+                    new Route(
+                            null,
+                            0,
+                            (String) pathSource2.getText(),
+                            0,
+                            (String) pathDestination2.getText(),
+                            0,
+                            null,
+                            0,
+                            rubbish2);
+            FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
+
+            System.out.println(analyser.getTotalDistancePath1());
+            System.out.println(analyser.getTotalDistancePath2());
+            System.out.println(analyser.getPath1Emission());
+            System.out.println(analyser.getPath2Emission());
+
+            storage.getAnalyseDistanceResult().removeAll(storage.getAnalyseDistanceResult());
+            storage.getAnalyseEmissionResult().removeAll(storage.getAnalyseEmissionResult());
+            storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
+            storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
+            storage.setAnalyseEmissionResult(analyser.getPath1Emission());
+            storage.setAnalyseEmissionResult(analyser.getPath2Emission());
+
+            Stage stage1 = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
+            Scene scene = new Scene(root);
+            stage1.setScene(scene);
+            stage1.setMaximized(true);
+            stage1.show();
+        } else {
+            Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+            ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+            ErrorAlert.setContentText("Invalid airport code");
+            ErrorAlert.show();
+
+        }
+
+
+    }
+
+    @FXML
+    public void cleanText() {
+        pathSource1.clear();
+        pathSource2.clear();
+        pathDestination1.clear();
+        pathDestination2.clear();
+    }
 }
