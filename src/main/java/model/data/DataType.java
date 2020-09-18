@@ -9,4 +9,7 @@ package model.data;
  */
 public interface DataType {
 
+    @Override
+    public abstract boolean equals(Object o);
+
 }

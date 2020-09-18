@@ -41,7 +41,6 @@ public class FlightHistoryController extends DataViewController {
       FXCollections.observableArrayList("Airline", "Source", "Destination");
   private final ObservableList<String> RankTypes =
       FXCollections.observableArrayList("Emission", "Distance");
-  private Storage storage = Main.getStorage();
 
   /**
    * Initializes the controller class.
@@ -119,7 +118,7 @@ public class FlightHistoryController extends DataViewController {
   @FXML
   public void rank() {
     if (RankSelection.getSelectionModel().getSelectedItem().equals("Distance")) {
-      System.out.println(1);
+//      System.out.println(1);
       Collections.sort(
           storage.getHistory(),
           new Comparator<Route>() {
@@ -129,7 +128,7 @@ public class FlightHistoryController extends DataViewController {
             }
           });
       for (Route i : storage.getHistory()) {
-        System.out.println(i);
+//        System.out.println(i);
       }
     } else {
       Collections.sort(

@@ -29,16 +29,9 @@ public abstract class DataViewController extends SideNavBarController {
   @FXML protected Label errorText;
   @FXML protected Button clearSearchButton;
   @FXML protected Button filterOptionsButton;
-  // TODO: write comments for these attributes
-
-  /** Name of the fxml file associated with this controller. */
-  protected String filterPopUpFilename;
 
   /** The types of searches which can be chosen from for a particular datatype. */
   protected ObservableList<String> searchTypes;
-
-  /** Class to get storage data from. */
-  protected final Storage storage = Main.getStorage();
 
   /** Class to get filtered data from. */
   protected final Filterer filterer = Main.getFilterer();
