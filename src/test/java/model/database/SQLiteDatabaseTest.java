@@ -1,10 +1,6 @@
 package model.database;
 
-import model.data.Airport;
-import model.data.DataType;
-import model.data.Route;
-import model.data.Storage;
-import model.loader.AirportParser;
+import model.data.*;
 import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,8 +8,6 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -125,6 +119,9 @@ public class SQLiteDatabaseTest {
   @Test
   public void isRoutesTableBuilt() throws Exception {
     database.initialiseTable("routes");
+    con.close();
+    database.buildConnection();
+    con = database.getCon();
     state = con.createStatement();
     state.executeUpdate("drop table routes");
     state = con.createStatement();
@@ -175,6 +172,56 @@ public class SQLiteDatabaseTest {
 
   @Test
   public void isAirportAdded() throws SQLException {
+    Airport airport =
+        new Airport(14 , "Husavik", "Husavik", "Iceland", "HZK", "BIHU", 65.952328, -17.425978, 48, 0, "N", "Atlantic/Reykjavik");
+    assertEquals(airport, storage.getAirports().get(0));
+  }
 
+  @Test
+  public void isRouteAdded() throws SQLException {
+    String[] equipment = new String[]{"CR2"};
+    Route route =
+            new Route("2B" , 410, "EGO", 6156, "KZN", 2990, "", 0, equipment);
+    assertEquals(route, storage.getRoutes().get(0));
+  }
+
+  @Test
+  public void isAirlineAdded() throws SQLException {
+    Airline airline =
+            new Airline(6, "223 Flight Unit State Airline", "\\N", "", "CHD", "CHKALOVSK-AVIA", "Russia", false);
+    assertEquals(airline, storage.getAirlines().get(0));
+  }
+
+  @Test
+  public void isStorageAirportInited() throws Exception {
+    storage.resetAirportsList();
+    if(storage.getAirports().size() == 0){
+      database.initialiseStorage(storage);
+      assertEquals(storage.getAirports().size(), 1);
+    } else {
+      throw new Exception ("Airports table not reset successfully.");
+    }
+  }
+
+  @Test
+  public void isStorageAirlineInited() throws Exception {
+    storage.resetAirlinesList();
+    if(storage.getAirlines().size() == 0){
+      database.initialiseStorage(storage);
+      assertEquals(storage.getAirlines().size(), 1);
+    } else {
+      throw new Exception ("Airline table not reset successfully.");
+    }
+  }
+
+  @Test
+  public void isStorageRouteInited() throws Exception {
+    storage.resetRoutesList();
+    if(storage.getRoutes().size() == 0){
+      database.initialiseStorage(storage);
+      assertEquals(storage.getRoutes().size(), 1);
+    } else {
+      throw new Exception ("Route table not reset successfully.");
+    }
   }
 }

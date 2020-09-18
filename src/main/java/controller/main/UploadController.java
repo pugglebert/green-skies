@@ -95,7 +95,7 @@ public class UploadController extends SideNavBarController {
           if (fileType.equals("Airport")) {
             storage.resetAirportsList();
           } else if (fileType.equals("Airline")) {
-            storage.resetAirlinessList();
+            storage.resetAirlinesList();
           } else if (fileType.equals("Route")) {
             storage.resetRoutesList();
               }
