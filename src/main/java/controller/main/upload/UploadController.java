@@ -144,19 +144,19 @@ public class UploadController extends SideNavBarController {
       // opened
       if (fileType == "Airport") {
         Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("airportSingleEntry.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../airportSingleEntry.fxml"));
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
       } else if (fileType == "Airline") {
         Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("airlineSingleEntry.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../airlineSingleEntry.fxml"));
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
       } else if (fileType == "Route") {
         Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("routeSingleEntry.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../routeSingleEntry.fxml"));
         Scene scene = new Scene(root);
         newStage.setScene(scene);
         newStage.show();
@@ -173,7 +173,7 @@ public class UploadController extends SideNavBarController {
     Stage stage = (Stage) backButton.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml")); // open the Welcome page
+    Parent root = FXMLLoader.load(getClass().getResource("../welcome.fxml")); // open the Welcome page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
     newStage.setMaximized(true);

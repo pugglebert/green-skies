@@ -74,6 +74,6 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
    */
   @Override
   public String getFXMLFilename() {
-    return "airlineFilterPopUp.fxml";
+    return "../airlineFilterPopUp.fxml";
   }
 }

@@ -12,6 +12,7 @@ import model.data.Storage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+// TODO: check all method comments start with "This method ..."
 
 /**
  * Superclass for all data view pages. All such pages contain a table of data, tools for searching
@@ -33,14 +34,13 @@ public abstract class SideNavBarController implements Initializable {
   @FXML protected Button btnGraphs;
   @FXML protected Button btnAnalyseFlight;
 
-  /** Initalize a storage object*/
+  // TODO: write comments for these attributes
+
+  protected ObservableList<String> searchTypes;
   protected final Storage storage = Main.getStorage();
 
-  /**
-   * This method is required for Initializable interface
-   * @param url
-   * @param rb
-   */
+  // TODO: write comment for this method
+
   public abstract void initialize(URL url, ResourceBundle rb);
 
   /**
@@ -52,12 +52,23 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnUpload.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(getClass().getResource("upload.fxml")); // open the Upload Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("upload.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../upload.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 
   /**
@@ -69,13 +80,23 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(
-            getClass().getResource("viewRouteData.fxml")); // open the View Route Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("viewRouteData.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../viewRouteData.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 
   /**
@@ -87,13 +108,25 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(
-            getClass().getResource("viewAirportData.fxml")); // open the View Airport Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("viewAirportData.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../viewAirportData.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
+     // open the View Airport Data page
+
   }
 
   /**
@@ -105,13 +138,23 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(
-            getClass().getResource("viewAirlineData.fxml")); // open the View Airline Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("viewAirlineData.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../viewAirlineData.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 
   /**
@@ -123,13 +166,23 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(
-            getClass().getResource("flightHistory.fxml")); // open the View Airline Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("flightHistory.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../flightHistory.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 
   /**
@@ -141,14 +194,23 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnCarbonEmissionsReport.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(
-            getClass()
-                .getResource("carbonEmissionsReport.fxml")); // open the View Airline Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("carbonEmissionsReport.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../carbonEmissionsReport.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 
   /**
@@ -160,13 +222,23 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnMapOfAirports.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(
-            getClass().getResource("mapOfAirports.fxml")); // open the View Airline Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("mapOfAirports.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../mapOfAirports.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 
   /**
@@ -178,27 +250,47 @@ public abstract class SideNavBarController implements Initializable {
     Stage stage = (Stage) btnGraphs.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root =
-        FXMLLoader.load(getClass().getResource("graphs.fxml")); // open the View Airline Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("graphs.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../graphs.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 
+  // TODO: write comment for this method
 
-  /**
-   * This method closes the current page and opens the Analyse Flight page
-   * @throws IOException
-   */
   public void toAnalyseFlight() throws IOException {
     Stage stage = (Stage) btnAnalyseFlight.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
+    try {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("analyse.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    } catch (Exception e) {
+      Parent root =
+              FXMLLoader.load(
+                      getClass().getResource("../analyse.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
+      newStage.setMaximized(true);
+      newStage.show();
+    }
   }
 }
