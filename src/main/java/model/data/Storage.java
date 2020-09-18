@@ -58,7 +58,7 @@ public class Storage {
   }
 
   /**This method reset airlines list. */
-  public void resetAirlinessList(){
+  public void resetAirlinesList(){
     airlines = new ArrayList<Airline>();
   }
 
