@@ -14,15 +14,19 @@ import java.util.ArrayList;
  * @version 1.2
  */
 public class SQLiteDatabase {
-  /** database connection */
+  /** database connection. */
   private static Connection con;
 
+  /** statement for building tables. */
   private Statement builtTable;
 
+  /** Vairable that contains statement for database. */
   private Statement state;
 
+  /** Variable that contains statement for prepare statement database. */
   private PreparedStatement prep;
 
+  /** Variable that contains result fetched form database. */
   private ResultSet res;
 
   /**
@@ -39,10 +43,8 @@ public class SQLiteDatabase {
     }
   }
 
-  /**
-   * This method is getter for connection returns connection as an object.
-   */
-  public Connection getCon(){
+  /** This method is getter for connection returns connection as an object. */
+  public Connection getCon() {
     return con;
   }
 
@@ -64,10 +66,10 @@ public class SQLiteDatabase {
       con.commit();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
-    } finally{
-      try{
-//      con.close();
-      } catch (Exception e){
+    } finally {
+      try {
+        //      con.close();
+      } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
     }
@@ -428,13 +430,13 @@ public class SQLiteDatabase {
       try {
         res.close();
         state.close();
-//        con.close();
+        //        con.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
     }
 
-    try{
+    try {
       state = con.createStatement();
       res =
           state.executeQuery(
@@ -466,13 +468,13 @@ public class SQLiteDatabase {
       try {
         res.close();
         state.close();
-//        con.close();
+        //        con.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
     }
 
-    try{
+    try {
       state = con.createStatement();
       res =
           state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
@@ -529,7 +531,7 @@ public class SQLiteDatabase {
       try {
         res.close();
         state.close();
-//        con.close();
+        //        con.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }

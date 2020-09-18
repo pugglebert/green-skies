@@ -27,6 +27,9 @@ public class SQLiteDatabaseTest {
   private ResultSet res;
   private static Connection con;
 
+  /**
+   *Setup storage and database with one row in each table and list in storage.
+   */
   @Before
   public void setUp() throws FileSystemException, SQLException, ClassNotFoundException {
     try {
@@ -38,6 +41,9 @@ public class SQLiteDatabaseTest {
     }
   }
 
+  /**
+   * Check if initialiseTable method resets airport table
+   */
   @Test
   public void isTableAirportReseted() throws SQLException {
     database.initialiseTable("airports");
@@ -51,6 +57,9 @@ public class SQLiteDatabaseTest {
 
   }
 
+  /**
+   * Check if initialiseTable method resets ainlines table.
+   */
   @Test
   public void isTableAirlinesReseted() throws SQLException {
     database.initialiseTable("airlines");
@@ -64,6 +73,9 @@ public class SQLiteDatabaseTest {
 
   }
 
+  /**
+   * Check if initialiseTable method resets routes table.
+   */
   @Test
   public void isTableRoutesReseted() throws SQLException {
     database.initialiseTable("routes");
@@ -76,6 +88,9 @@ public class SQLiteDatabaseTest {
 
   }
 
+  /**
+   * Check if Auto commite feature for database will be set off by closeAutoCommite method.
+   */
   @Test
   public void isAutoCommiteClosed() throws SQLException {
     database.closeAutoCommite();
@@ -89,6 +104,9 @@ public class SQLiteDatabaseTest {
 
   }
 
+  /**
+   * Check if buildAirportsTable will create a airports table if there is no airports table.
+   */
   @Test
   public void isAirportsTableBuilt() throws Exception {
     database.initialiseTable("airport");
@@ -116,6 +134,9 @@ public class SQLiteDatabaseTest {
     }
   }
 
+  /**
+   * Check if buildAirportsTable will create a routes table if there is no routes table.
+   */
   @Test
   public void isRoutesTableBuilt() throws Exception {
     database.initialiseTable("routes");
@@ -144,6 +165,9 @@ public class SQLiteDatabaseTest {
     }
   }
 
+  /**
+   * Check if buildAirportsTable will create a airlines table if there is no airlines table.
+   */
   @Test
   public void isAirlinesTableBuilt() throws Exception {
     database.initialiseTable("airlines");
@@ -170,6 +194,9 @@ public class SQLiteDatabaseTest {
     }
   }
 
+  /**
+   * Check if addAirport method will insert given data into databases.
+   */
   @Test
   public void isAirportAdded() throws SQLException {
     Airport airport =
@@ -177,6 +204,9 @@ public class SQLiteDatabaseTest {
     assertEquals(airport, storage.getAirports().get(0));
   }
 
+  /**
+   * Check if addRoute method will insert given data into databases.
+   */
   @Test
   public void isRouteAdded() throws SQLException {
     String[] equipment = new String[]{"CR2"};
@@ -185,6 +215,9 @@ public class SQLiteDatabaseTest {
     assertEquals(route, storage.getRoutes().get(0));
   }
 
+  /**
+   * Check if addAirline method will insert given data into databases.
+   */
   @Test
   public void isAirlineAdded() throws SQLException {
     Airline airline =
@@ -192,6 +225,9 @@ public class SQLiteDatabaseTest {
     assertEquals(airline, storage.getAirlines().get(0));
   }
 
+  /**
+   * Check if initialiseStorage method will exist airport data from database into airport data list of storage.
+   */
   @Test
   public void isStorageAirportInited() throws Exception {
     storage.resetAirportsList();
@@ -203,6 +239,9 @@ public class SQLiteDatabaseTest {
     }
   }
 
+  /**
+   * Check if initialiseStorage method will exist airline data from database into airlines data list of storage.
+   */
   @Test
   public void isStorageAirlineInited() throws Exception {
     storage.resetAirlinesList();
@@ -214,6 +253,9 @@ public class SQLiteDatabaseTest {
     }
   }
 
+  /**
+   * Check if initialiseStorage method will exist route data from database into routes data list of storage.
+   */
   @Test
   public void isStorageRouteInited() throws Exception {
     storage.resetRoutesList();
