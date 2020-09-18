@@ -82,7 +82,7 @@ public class Route implements DataType {
   }
 
   /**
-   * This method initializes the routes checkbox.
+   * This method initializes the routes checkbox to use with JavaFx.
    */
   public void initCheckBox() {
     this.select = new CheckBox();

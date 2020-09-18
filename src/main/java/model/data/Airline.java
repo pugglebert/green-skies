@@ -1,5 +1,4 @@
 package model.data;
-// TODO: check all method comments start with "This method ..."
 
 /**
  * The Airline class which contains all data for one unique airline.
@@ -9,15 +8,28 @@ package model.data;
  * @since 2020-08-11
  */
 public class Airline implements DataType {
-  // TODO: write comments for these attributes
-
+  /** The ID of an airline (unique). */
   private final int airlineID;
+
+  /** The name of the airline. */
   private final String name;
+
+  /** The alias of an airline. */
   private final String alias;
+
+  /** The IATA code of an airline. */
   private final String IATA;
+
+  /** The ICAO code of an airline. */
   private final String ICAO;
+
+  /** The callsign of an airline. */
   private final String callsign;
+
+  /** The country or territory where airport is located. */
   private final String country;
+
+  /** "Y" if the airline is or has until recently been operational, "N" if it is defunct. */
   private final Boolean activeStatus;
 
   /** The Airline constructor. */
@@ -41,7 +53,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the Airline's ID.
+   * This method returns the Airline's ID.
    *
    * @return airlineID.
    */
@@ -50,7 +62,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the name of the Airline.
+   * This method returns the name of the Airline.
    *
    * @return airlineName.
    */
@@ -59,7 +71,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the alias of the Airline.
+   * This method returns the alias of the Airline.
    *
    * @return airlineName.
    */
@@ -68,7 +80,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the IATA of the Airline.
+   * This method returns the IATA of the Airline.
    *
    * @return IATA.
    */
@@ -77,7 +89,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the ICAO of the Airline.
+   * This method returns the ICAO of the Airline.
    *
    * @return ICAO.
    */
@@ -86,7 +98,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the callsign of the Airline.
+   * This method returns the callsign of the Airline.
    *
    * @return airlineCallsign.
    */
@@ -95,7 +107,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the country of origin of the Airline.
+   * This method returns the country of origin of the Airline.
    *
    * @return country.
    */
@@ -104,7 +116,7 @@ public class Airline implements DataType {
   }
 
   /**
-   * Getter for the whether the Airline is active or not.
+   * This method returns the whether the Airline is active or not.
    *
    * @return activeStatus.
    */
