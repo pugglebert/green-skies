@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="seng202_2020_team1_phase2_project" />
+        <module name="seng202_project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="seng202_2020_team1_phase2_project" target="11" />
+      <module name="seng202_project" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

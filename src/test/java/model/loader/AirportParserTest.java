@@ -11,229 +11,210 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * This class tests airportParser.
+ */
 public class AirportParserTest {
-    private AirportParser airportParser;
+  private AirportParser airportParser;
 
-    //    private AirportParser parser;
-//    private final Method methods[] = AirportParser.class.getDeclaredMethods();
-//    private ArrayList<String> testLines;
-//
-    @Before
-    public void setUp() {
-        Loader loader = new Loader(new Storage());
-        List<Airport> existingLines = new ArrayList<Airport>();
-        try{
-            ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
-            airportParser = new AirportParser(lines, existingLines);
-        } catch (FileNotFoundException e) {
-        }
-//        testLines = new ArrayList<String>();
-//        testLines.add("1,\"Goroka\",\"Goroka\",\"Papua New Guinea\",\"GKA\",\"AYGA\",-6.081689,145.391881,5282,10,\"U\",\"Pacific/Port_Moresby\"");
-//        testLines.add("2,\"Madang\",\"Madang\",\"Papua New Guinea\",\"MAG\",\"AYMD\",-5.207083,145.7887,20,10,\"U\",\"Pacific/Port_Moresby\"");
-//        testLines.add("3,\"Mount Hagen\",\"Mount Hagen\",\"Papua New Guinea\",\"HGU\",\"AYMH\",-5.826789,144.295861,5388,10,\"U\",\"Pacific/Port_Moresby\"");
-//        parser = new AirportParser(testLines);
+  /**
+   * This method sets up evironment before each test case.
+   */
+  @Before
+  public void setUp() {
+    Loader loader = new Loader(new Storage());
+    List<Airport> existingLines = new ArrayList<Airport>();
+    try {
+      ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
+      airportParser = new AirportParser(lines, existingLines);
+    } catch (FileNotFoundException e) {
     }
+  }
 
-    @Test
-    public void isAirportIdValidNoDupId(){
-        assertEquals(airportParser.isIdValid("4"), true);
-    }
-
-    @Test
-    public void isAirportIdValidDupId(){
-      assertTrue(airportParser.isIdValid("3"));
-    }
-
-//    @Test
-//    public void isAirportIdValidNotNumber() {
-//        assertTrue(airportParser.isIdValid("4a"));
-//    }
-
-    @Test
-    public void isNameValidWithoutSpace() {
-        assertTrue(airportParser.isNameValid("ab"));
-    }
-
-    //    @Test
-//    public void isNameValidInvalidName(){
-//        assertEquals(airportParser.isNameValid("4a"), false);
-//    }
-// todo change name regex
-    @Test
-    public void isNameValidWithSpace() {
-        assertEquals(airportParser.isNameValid("a b"), true);
-    }
+  /** test if the airportId is valid with a new airport id number that is not exists in storage. */
+  @Test
+  public void isAirportIdValidNoDupId() {
+    assertTrue(airportParser.isIdValid("4"));
+  }
 
 
-    @Test
-    public void isCityValidWithoutSpace() {
-        assertEquals(airportParser.isCityValid("ab"), true);
-    }
+  @Test
+  public void isAirportIdValidDupId() {
+    assertTrue(airportParser.isIdValid("3"));
+  }
 
-//    @Test
-//    public void isCityValidInvalidName(){
-//        assertEquals(airportParser.isCityValid("4a"), false);
-//    }
-    // todo change city regex
+  @Test
+  public void isNameValidWithoutSpace() {
+    assertTrue(airportParser.isNameValid("ab"));
+  }
 
-    @Test
-    public void isCityWithSpace() {
-        assertEquals(airportParser.isCityValid("a b"), true);
-    }
+  @Test
+  public void isNameValidWithSpace() {
+    assertTrue(airportParser.isNameValid("a b"));
+  }
 
-    @Test
-    public void isCountryValidWithoutSpace() {
-        assertEquals(airportParser.isCountryValid("ab"), true);
-    }
+  @Test
+  public void isCityValidWithoutSpace() {
+    assertTrue(airportParser.isCityValid("ab"));
+  }
 
-    @Test
-    public void isCountryValidInvalidName(){
-        assertEquals(airportParser.isCountryValid("4a"), false);
-    }
+  @Test
+  public void isCityWithSpace() {
+    assertTrue(airportParser.isCityValid("a b"));
+  }
 
-    @Test
-    public void isCountryWithSpace(){
-        assertEquals(airportParser.isCountryValid("a b"), true);
-    }
+  @Test
+  public void isCountryValidWithoutSpace() {
+    assertTrue(airportParser.isCountryValid("ab"));
+  }
 
-    @Test
-    public void isIATAValidNull(){
-        assertEquals(airportParser.isIATAValid("null"), true);
-    }
+  @Test
+  public void isCountryValidInvalidName() {
+    assertFalse(airportParser.isCountryValid("4a"));
+  }
 
-    @Test
-    public void isIATAValidUnknow(){
-        assertEquals(airportParser.isIATAValid("unknow"), false);
-    }
+  @Test
+  public void isCountryWithSpace() {
+    assertTrue(airportParser.isCountryValid("a b"));
+  }
 
-    @Test
-    public void isIATAValidNotFormated(){
-        assertEquals(airportParser.isIATAValid("abcd"), false);
-    }
+  @Test
+  public void isIATAValidNull() {
+    assertTrue(airportParser.isIATAValid("null"));
+  }
 
-    @Test
-    public void isIATAValidWithSpace(){
-        assertEquals(airportParser.isIATAValid("a b"), false);
-    }
+  @Test
+  public void isIATAValidUnknow() {
+    assertFalse(airportParser.isIATAValid("unknow"));
+  }
 
-    @Test
-    public void isIATAValidValid(){
-        assertEquals(airportParser.isIATAValid("ABC"), true);
-    }
+  @Test
+  public void isIATAValidNotFormated() {
+    assertFalse(airportParser.isIATAValid("abcd"));
+  }
 
-    @Test
-    public void isICAOValidNull(){
-        assertEquals(airportParser.isICAOValid("null"), true);
-    }
+  @Test
+  public void isIATAValidWithSpace() {
+    assertFalse(airportParser.isIATAValid("a b"));
+  }
 
-    @Test
-    public void isICAOValidUnknow(){
-        assertEquals(airportParser.isICAOValid("unknow"), false);
-    }
+  @Test
+  public void isIATAValidValid() {
+    assertTrue(airportParser.isIATAValid("ABC"));
+  }
 
-    @Test
-    public void isICAOValidNotFormated(){
-        assertEquals(airportParser.isICAOValid("abc"), false);
-    }
+  @Test
+  public void isICAOValidNull() {
+    assertTrue(airportParser.isICAOValid("null"));
+  }
 
-    @Test
-    public void isICAOValidWithSpace(){
-        assertEquals(airportParser.isICAOValid("a b"), false);
-    }
+  @Test
+  public void isICAOValidUnknow() {
+    assertFalse(airportParser.isICAOValid("unknow"));
+  }
 
-    @Test
-    public void isICAOValidValid(){
-        assertEquals(airportParser.isICAOValid("ABCD"), true);
-    }
+  @Test
+  public void isICAOValidNotFormated() {
+    assertFalse(airportParser.isICAOValid("abc"));
+  }
 
-    @Test
-    public void isLatValidCorrect(){
-        assertEquals(airportParser.isLatValid("-6.081689834590001"), true);
-    }
+  @Test
+  public void isICAOValidWithSpace() {
+    assertFalse(airportParser.isICAOValid("a b"));
+  }
 
-    @Test
-    public void isLatValidWrong(){
-        assertEquals(airportParser.isLatValid("-6.081689834590001ab"), false);
-    }
+  @Test
+  public void isICAOValidValid() {
+    assertTrue(airportParser.isICAOValid("ABCD"));
+  }
 
-    @Test
-    public void isLonValidCorrect(){
-        assertEquals(airportParser.isLonValid("145.391998291"), true);
-    }
+  @Test
+  public void isLatValidCorrect() {
+    assertTrue(airportParser.isLatValid("-6.081689834590001"));
+  }
 
-    @Test
-    public void isLonValidWrong(){
-        assertEquals(airportParser.isLonValid("145.391998291ab"), false);
-    }
+  @Test
+  public void isLatValidWrong() {
+    assertFalse(airportParser.isLatValid("-6.081689834590001ab"));
+  }
 
-    @Test
-    public void isAltValidCorrect(){
-        assertEquals(airportParser.isAltValid("145"), true);
-    }
+  @Test
+  public void isLonValidCorrect() {
+    assertTrue(airportParser.isLonValid("145.391998291"));
+  }
 
-    @Test
-    public void isAltValidWrong(){
-        assertEquals(airportParser.isAltValid("145.391998291ab"), false);
-    }
+  @Test
+  public void isLonValidWrong() {
+    assertFalse(airportParser.isLonValid("145.391998291ab"));
+  }
 
-    @Test
-    public void isTZValidCorrect(){
-        assertEquals(airportParser.isTZValid("5.5"), true);
-    }
+  @Test
+  public void isAltValidCorrect() {
+    assertTrue(airportParser.isAltValid("145"));
+  }
 
-    @Test
-    public void isTZValidWrong1(){
-        assertEquals(airportParser.isTZValid("5a"), false);
-    }
+  @Test
+  public void isAltValidWrong() {
+    assertFalse(airportParser.isAltValid("145.391998291ab"));
+  }
 
-    @Test
-    public void isTZValidWrong2(){
-        assertFalse(airportParser.isTZValid("15"));
-    }
+  @Test
+  public void isTZValidCorrect() {
+    assertTrue(airportParser.isTZValid("5.5"));
+  }
 
-    @Test
-    public void isTZValidWrong3(){
-        assertFalse(airportParser.isTZValid("-13"));
-    }
+  @Test
+  public void isTZValidWrong1() {
+    assertFalse(airportParser.isTZValid("5a"));
+  }
 
-    @Test
-    public void isTZValidWrong4(){
-        assertTrue(airportParser.isTZValid("-12"));
-    }
+  @Test
+  public void isTZValidWrong2() {
+    assertFalse(airportParser.isTZValid("15"));
+  }
 
-    @Test
-    public void isTZValidWrong5(){
-        assertTrue(airportParser.isTZValid("14"));
-    }
+  @Test
+  public void isTZValidWrong3() {
+    assertFalse(airportParser.isTZValid("-13"));
+  }
 
-    @Test
-    public void isDSValidCorrect(){
-        assertEquals(airportParser.isDSTValid("E"), true);
-    }
+  @Test
+  public void isTZValidWrong4() {
+    assertTrue(airportParser.isTZValid("-12"));
+  }
 
-    @Test
-    public void isDSValidWrong1(){
-        assertEquals(airportParser.isDSTValid("14"), false);
-    }
+  @Test
+  public void isTZValidWrong5() {
+    assertTrue(airportParser.isTZValid("14"));
+  }
 
-    @Test
-    public void isDSValidWrong2(){
-        assertEquals(airportParser.isDSTValid("B"), false);
-    }
+  @Test
+  public void isDSValidCorrect() {
+    assertTrue(airportParser.isDSTValid("E"));
+  }
 
-    @Test
-    public void isDBValidCorrect(){
-    assertEquals(airportParser.isDBTZValid("a/b"), true);
-    }
+  @Test
+  public void isDSValidWrong1() {
+    assertFalse(airportParser.isDSTValid("14"));
+  }
 
-    @Test
-    public void isDBValidWrong1(){
-        assertEquals(airportParser.isDBTZValid("ab"), true);
-    }
+  @Test
+  public void isDSValidWrong2() {
+    assertFalse(airportParser.isDSTValid("B"));
+  }
 
-    @Test
-    public void isDBValidWrong2(){
-        assertEquals(airportParser.isDBTZValid("a1"), false);
-    }
+  @Test
+  public void isDBValidCorrect() {
+    assertTrue(airportParser.isDBTZValid("a/b"));
+  }
 
+  @Test
+  public void isDBValidWrong1() {
+    assertTrue(airportParser.isDBTZValid("ab"));
+  }
+
+  @Test
+  public void isDBValidWrong2() {
+    assertFalse(airportParser.isDBTZValid("a1"));
+  }
 }
