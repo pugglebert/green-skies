@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="668.0" prefWidth="1400" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
+<AnchorPane prefHeight="668.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
     <children>
         <TableView fx:id="tableView" layoutX="202.0" layoutY="186.0" prefHeight="499.0" prefWidth="1179.0">
             <columns>
@@ -40,8 +40,6 @@
         <Label fx:id="filterErrorText" layoutX="199.0" layoutY="147.0" prefHeight="20.0" prefWidth="554.0" text="Filter error text" textFill="RED" visible="false">
         </Label>
         <Button fx:id="clearSearchButton" layoutX="864.0" layoutY="130.0" mnemonicParsing="false" onAction="#clearSearch" text="Clear" />
-        <Button fx:id="ranker" layoutX="350.0" layoutY="68.0" mnemonicParsing="false" onAction="#rank" prefHeight="26.0" prefWidth="123.0" text="Rank" />
-        <ChoiceBox fx:id="RankSelection" layoutX="203.0" layoutY="66.0" prefHeight="31.0" prefWidth="132.0" />
       <VBox prefHeight="703.0" prefWidth="188.0" style="-fx-background-color: #116754;">
          <children>
             <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0" style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
@@ -94,6 +92,5 @@
             </Button>
          </children>
       </VBox>
-      <Text layoutX="230.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rank Type" wrappingWidth="104.00000041723251" />
     </children>
 </AnchorPane>
