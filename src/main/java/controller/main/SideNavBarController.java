@@ -49,7 +49,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the Upload Data page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toUploadData() throws IOException {
     Stage stage = (Stage) btnUpload.getScene().getWindow();
@@ -70,7 +70,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the View Route Data page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toRouteDataView() throws IOException {
     Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
@@ -91,7 +91,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the View Airport Data page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toAirportDataView() throws IOException {
     Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
@@ -114,7 +114,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the View Airline Data page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toAirlineDataView() throws IOException {
     Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
@@ -135,7 +135,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the Flight History page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toFlightHistory() throws IOException {
     Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
@@ -156,7 +156,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the Carbon Emissions Report page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toCarbonEmissionsReport() throws IOException {
     Stage stage = (Stage) btnCarbonEmissionsReport.getScene().getWindow();
@@ -177,7 +177,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the Map of Airports page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toMapOfAirports() throws IOException {
     Stage stage = (Stage) btnMapOfAirports.getScene().getWindow();
@@ -198,7 +198,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the Graphs page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toGraphs() throws IOException {
     Stage stage = (Stage) btnGraphs.getScene().getWindow();
@@ -219,7 +219,7 @@ public abstract class SideNavBarController implements Initializable {
   /**
    * This method closes the current page and opens the Flight Analyser page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void toAnalyseFlight() throws IOException {
     Stage stage = (Stage) btnAnalyseFlight.getScene().getWindow();

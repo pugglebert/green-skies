@@ -1,7 +1,6 @@
 package controller.main;
 
 import controller.analysis.Filterer;
-import controller.main.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,15 +10,16 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.data.Storage;
+
 import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * Parent class of the filter pop up window classes for each datatype.
+ * This is the parent class of the filter pop up window classes for each datatype.
  *
  * @author Ella Johnson
  * @version 1.0
- * @since 2020-09-12
+ * @since 12/09/2020
  */
 public abstract class FilterPopUpController implements Initializable {
 
@@ -33,18 +33,21 @@ public abstract class FilterPopUpController implements Initializable {
 
   /**
    * This method gets the filter terms the user has entered and their types.
+   *
    * @return A HashMap with filter types as keys and filter terms as values.
    */
   public abstract HashMap<String, String> getFilterTerms();
 
   /**
-   * This method filters the data in storage by the given filter terms
+   * This method filters the data in storage by the given filter terms.
+   *
    * @param filterTerms A HashMap with filter types as keys and filter terms as values.
    */
   public abstract void filterByDataType(HashMap<String, String> filterTerms);
 
   /**
    * This method returns the fxml file name which the class is the controller for.
+   *
    * @return An fxml filename.
    */
   public abstract String getFXMLFilename();
@@ -64,9 +67,9 @@ public abstract class FilterPopUpController implements Initializable {
   }
 
   /**
-   * This method calls getFilterTerms to get a hashmap of the filter types and terms. Calls filterByDataType with
-   * the given filter types and terms in a hashmap, and sets the filterSuccess attribute of the
-   * filterer to true. Displays an error message if any step goes wrong.
+   * This method calls getFilterTerms to get a hashmap of the filter types and terms. Calls
+   * filterByDataType with the given filter types and terms in a hashmap, and sets the filterSuccess
+   * attribute of the filterer to true. Displays an error message if any step goes wrong.
    */
   public void applyFilters() {
     errorText.setVisible(false);

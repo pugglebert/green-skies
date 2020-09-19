@@ -1,13 +1,10 @@
 package controller.main;
 
 import controller.analysis.ReportGenerator;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.data.Route;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -34,19 +31,28 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayCarbonEmissionGoalField;
   @FXML private TextField displaycarbonEmissionGoalDurationField;
   @FXML private TextField displayTreeOffsetField;
-  @FXML private Button generateReportDataButton;
-  @FXML private Button clearReportDataButton;
   @FXML private TextField carbonEmissionGoalDurationField;
   @FXML private TextField carbonEmissionGoalField;
+  /** This reportGenerator for the application. */
   private ReportGenerator reportGenerator;
+  /** A string of the most emission routes. */
   private String MostEmissionsRouteString;
+  /** A string of the least emission routes. */
   private String LeastEmissionsRouteString;
+  /** A string of the most distance routes. */
   private String MostDistanceRouteString;
+  /** A string of the least distance routes. */
   private String LeastDistanceRouteString;
+  /** A string of the most visited source airports. */
   private String MostVisitedSourceAirport;
+  /** A string of the least visited source airports. */
   private String LeastVisitedSourceAirport;
+  /** A string of the most visited destination airports. */
   private String MostVisitedDestAirport;
+  /** A string of the least visited destination airports. */
   private String LeastVisitedDestAirport;
+
+  public CarbonEmissionsReportController() {}
 
   /**
    * This method is the initializer for this class.
@@ -62,12 +68,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   /**
    * This method displays the carbon emissions report information based on the inputted goal,
    * duration and current flight history records.
-   *
-   * @param event The event to handle.
-   * @throws IOException
    */
   @FXML
-  private void generateReportData(ActionEvent event) throws IOException {
+  private void generateReportData() {
     setUpData();
 
     String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
@@ -75,7 +78,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     String carbonEmissionGoalDurationValue = carbonEmissionGoalDurationField.getText();
     displaycarbonEmissionGoalDurationField.setText(carbonEmissionGoalDurationValue);
     displayTotalEmissionsField.setText(Double.toString(reportGenerator.getTotalCarbonEmissions()));
-    displayTotalDistanceTravelledField.setText(Double.toString(reportGenerator.getTotalDistanceTravelled()));
+    displayTotalDistanceTravelledField.setText(
+        Double.toString(reportGenerator.getTotalDistanceTravelled()));
     displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
     displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
     displayMostDistanceRouteField.setText(MostDistanceRouteString);
@@ -87,17 +91,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayTreeOffsetField.setText("To be implemented!");
 
     reportGenerator.resetReportGenerator();
-
   }
 
-  /**
-   * This method clears all fields in the report generator page to be empty.
-   *
-   * @param event The event to handle.
-   * @throws IOException
-   */
+  /** This method clears all fields in the report generator page to be empty. */
   @FXML
-  private void clearReportData(ActionEvent event) throws IOException {
+  private void clearReportData() {
     displayCarbonEmissionGoalField.setText("");
     carbonEmissionGoalField.setText("");
     displaycarbonEmissionGoalDurationField.setText("");
@@ -121,55 +119,71 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 
   public void setUpData() {
 
-    this.MostEmissionsRouteString = RoutesArrayToString(MostEmissionsRouteString, reportGenerator.getMostEmissionsRoutes());
-    this.LeastEmissionsRouteString = RoutesArrayToString(LeastEmissionsRouteString, reportGenerator.getLeastEmissionsRoutes());
-    this.MostDistanceRouteString = RoutesArrayToString(MostDistanceRouteString, reportGenerator.getMostDistanceRoutes());
-    this.LeastDistanceRouteString = RoutesArrayToString(LeastDistanceRouteString, reportGenerator.getLeastDistanceRoutes());
-    this.MostVisitedSourceAirport = CombineAirportsToOneString(MostVisitedSourceAirport, reportGenerator.getMostVisitedSrcAirports());
-    this.LeastVisitedSourceAirport = CombineAirportsToOneString(LeastVisitedSourceAirport, reportGenerator.getLeastVisitedSrcAirports());
-    this.MostVisitedDestAirport = CombineAirportsToOneString(MostVisitedDestAirport, reportGenerator.getMostVisitedDestAirports());
-    this.LeastVisitedDestAirport = CombineAirportsToOneString(LeastVisitedDestAirport, reportGenerator.getLeastVisitedDestAirports());
-
+    this.MostEmissionsRouteString =
+        RoutesArrayToString(MostEmissionsRouteString, reportGenerator.getMostEmissionsRoutes());
+    this.LeastEmissionsRouteString =
+        RoutesArrayToString(LeastEmissionsRouteString, reportGenerator.getLeastEmissionsRoutes());
+    this.MostDistanceRouteString =
+        RoutesArrayToString(MostDistanceRouteString, reportGenerator.getMostDistanceRoutes());
+    this.LeastDistanceRouteString =
+        RoutesArrayToString(LeastDistanceRouteString, reportGenerator.getLeastDistanceRoutes());
+    this.MostVisitedSourceAirport =
+        CombineAirportsToOneString(
+            MostVisitedSourceAirport, reportGenerator.getMostVisitedSrcAirports());
+    this.LeastVisitedSourceAirport =
+        CombineAirportsToOneString(
+            LeastVisitedSourceAirport, reportGenerator.getLeastVisitedSrcAirports());
+    this.MostVisitedDestAirport =
+        CombineAirportsToOneString(
+            MostVisitedDestAirport, reportGenerator.getMostVisitedDestAirports());
+    this.LeastVisitedDestAirport =
+        CombineAirportsToOneString(
+            LeastVisitedDestAirport, reportGenerator.getLeastVisitedDestAirports());
   }
 
   /**
-   * This methods takes an arrary containing either routes with most or least emissions or most or least distance and
-   * produces a string of its routes' AirlineIDs.
-   * @param resultString Where the content in the provided array with be added to.
-   * @param arrayToConvert Either the most or least emissions or most or least distance array that needs to be
-   *                                converted to a String.
-   * @return resultString The string of the array's routes' AirlineIDs.
-   */
-  public String RoutesArrayToString(String resultString, ArrayList<Route> arrayToConvert) {
-    for (int i = 0; i < arrayToConvert.size(); i++) {
-      if (arrayToConvert.get(i).getAirlineID() >= 0)
-        if (i == arrayToConvert.size() - 1) {
-          resultString += arrayToConvert.get(i).getAirlineID();
-        } else {
-          resultString += arrayToConvert.get(i).getAirlineID() + " , ";
-        }
-    }
-  return resultString;
-  }
-
-  // TODO fix comments
-  /**
-   * This methods takes an array containing either routes with most or least emissions or most or
+   * This methods takes an arrary containing either routes with most or least emissions or most or
    * least distance and produces a string of its routes' AirlineIDs.
    *
    * @param resultString Where the content in the provided array with be added to.
-   * @param airportArrayToConvert Either the most or least emissions or most or least distance
-   *     array that needs to be converted to a String.
+   * @param arrayToConvert Either the most or least emissions or most or least distance array that
+   *     needs to be converted to a String.
    * @return resultString The string of the array's routes' AirlineIDs.
    */
-  public String CombineAirportsToOneString(String resultString, ArrayList<String> airportArrayToConvert) {
+  public String RoutesArrayToString(String resultString, ArrayList<Route> arrayToConvert) {
+    StringBuilder resultStringBuilder = new StringBuilder(resultString);
+    for (int i = 0; i < arrayToConvert.size(); i++) {
+      if (arrayToConvert.get(i).getAirlineID() >= 0)
+        if (i == arrayToConvert.size() - 1) {
+          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID());
+        } else {
+          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID()).append(" , ");
+        }
+    }
+    resultString = resultStringBuilder.toString();
+    return resultString;
+  }
+
+  /**
+   * This methods takes an array containing either source or destination airports that are most or
+   * least visited and produces a string of its routes' AirlineIDs.
+   *
+   * @param resultString Where the content in the provided array with be added to.
+   * @param airportArrayToConvert Either the most or least visited source or destination airports
+   *     array that needs to be converted to a String.
+   * @return resultString The string of the array's airport names.
+   */
+  public String CombineAirportsToOneString(
+      String resultString, ArrayList<String> airportArrayToConvert) {
+    StringBuilder resultStringBuilder = new StringBuilder(resultString);
     for (int i = 0; i < airportArrayToConvert.size(); i++) {
       if (i == airportArrayToConvert.size() - 1) {
-        resultString += airportArrayToConvert.get(i);
+        resultStringBuilder.append(airportArrayToConvert.get(i));
       } else {
-        resultString += airportArrayToConvert.get(i) + " , ";
+        resultStringBuilder.append(airportArrayToConvert.get(i)).append(" , ");
       }
     }
+    resultString = resultStringBuilder.toString();
     return resultString;
-    }
+  }
 }

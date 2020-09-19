@@ -6,7 +6,6 @@ import javafx.scene.web.WebView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 /**
  * The controller class which contains the controls for the map of airports page.
  *
@@ -21,6 +20,7 @@ public class MapOfRoutesController extends SideNavBarController {
 
   /**
    * This method initializes the controller class.
+   *
    * @param url The provided url.
    * @param resourceBundle The proided resource bundle.
    */

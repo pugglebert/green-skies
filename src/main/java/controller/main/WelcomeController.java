@@ -1,6 +1,5 @@
 package controller.main;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,10 +24,9 @@ public class WelcomeController {
   /**
    * This method handles the event for continuing to the main screen of the application.
    *
-   * @param event The event to handle.
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
-  public void continueToMainScreen(ActionEvent event) throws IOException {
+  public void continueToMainScreen() throws IOException {
     Stage stage = (Stage) continueButton.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
@@ -43,10 +41,9 @@ public class WelcomeController {
   /**
    * This method handles the event for continuing to the info screen of the application.
    *
-   * @param event The event to handle.
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
-  public void toInfoScreen(ActionEvent event) throws IOException {
+  public void toInfoScreen() throws IOException {
     Stage stage = (Stage) continueButton.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();

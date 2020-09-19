@@ -24,7 +24,6 @@ import java.util.ResourceBundle;
  */
 public class RouteDataViewController extends DataViewController {
 
-  // Configure the TableView.
   @FXML private TableView<Route> tableView;
   @FXML private TableColumn<Route, Boolean> addColumn;
   @FXML private TableColumn<Route, String> airlineNameColumn;
@@ -54,7 +53,6 @@ public class RouteDataViewController extends DataViewController {
   public void initialize(URL url, ResourceBundle rb) {
 
     this.reportGenerator = Main.getReportGenerator();
-    // Set up the columns in the TableView.
     addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
     airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
     sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
@@ -72,7 +70,8 @@ public class RouteDataViewController extends DataViewController {
   }
 
   /**
-   * This method calls searchRoutes method from searcher class and upldates table to display results of search.
+   * This method calls searchRoutes method from searcher class and upldates table to display results
+   * of search.
    */
   public void searchByDataType(String searchTerm, String searchType) {
     ArrayList<Route> results = Searcher.searchRoutes(searchTerm, searchType, storage.getRoutes());
@@ -92,18 +91,14 @@ public class RouteDataViewController extends DataViewController {
     for (Route route : Main.getStorage().getRoutes()) {
       if (route.getSelect().isSelected()) {
         Main.getStorage().getTempRoutes().add(route);
-
         FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
         route.setEmissions(flightAnalyser.getPath1Emission());
         route.setDistance(flightAnalyser.getTotalDistancePath1());
         reportGenerator.updateTotalDistance(route);
         reportGenerator.updateTotalEmissions(route);
-
-        route.setTimesTaken(1); //TODO change one Nathan's code works
-
-        storage.addToHistorySrcAirports(route.getSourceAirport(), 1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
-        storage.addToHistoryDestAirports(route.getDestinationAirport(),1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
-
+        route.setTimesTaken(1);
+        storage.addToHistorySrcAirports(route.getSourceAirport(), 1);
+        storage.addToHistoryDestAirports(route.getDestinationAirport(), 1);
         reportGenerator.updateLeastDistanceRoute(route);
         reportGenerator.updateMostDistanceRoute(route);
         reportGenerator.updateMostEmissionsRoute(route);
@@ -112,7 +107,6 @@ public class RouteDataViewController extends DataViewController {
     }
 
     addPopUp.display();
-    //        Main.getStorage().getHistory().addAll(temp);
     reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
     reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
     reportGenerator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
@@ -127,7 +121,8 @@ public class RouteDataViewController extends DataViewController {
   }
 
   /**
-   * This method launches the filter pop up box. If filtering is successful displays filtered routes in tableview.
+   * This method launches the filter pop up box. If filtering is successful displays filtered routes
+   * in tableview.
    *
    * @throws IOException If fxml file cannot be launched.
    */

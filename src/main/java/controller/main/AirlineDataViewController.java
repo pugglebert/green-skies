@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
  *
  * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 2020-09-04
+ * @since 04/09/2020
  */
 public class AirlineDataViewController extends DataViewController {
 
@@ -31,14 +31,13 @@ public class AirlineDataViewController extends DataViewController {
   @FXML private TableColumn<Airline, String> countryColumn;
   @FXML private TableColumn<Airline, Boolean> activeStatusColumn;
 
-  /**
-   * Initialize strings in the searchTypes list
-   */
+  /** Initialize the strings in the searchTypes list. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
 
   /**
    * This method initializes the controller class.
+   *
    * @param url The URL used.
    * @param rb The resource bundle used.
    */
@@ -55,14 +54,13 @@ public class AirlineDataViewController extends DataViewController {
 
     ObservableList<Airline> airlines = FXCollections.observableList(storage.getAirlines());
     tableView.setItems(airlines);
-
-    // Setup choice boxes
-    searchTypeSelection.setItems(searchTypes);
+    searchTypeSelection.setItems(searchTypes); // Setup choice boxes
   }
 
   /**
    * This method calls searchAirlines method from searcher class and upldates table to display
    * results of search.
+   *
    * @param searchTerm The term to search for matches to.
    * @param searchType The type of attribute to check for matches.
    */
@@ -72,9 +70,7 @@ public class AirlineDataViewController extends DataViewController {
     tableView.setItems(FXCollections.observableList(results));
   }
 
-  /**
-   * This method clears search bar and display all airlines in table view.
-   */
+  /** This method clears search bar and display all airlines in table view. */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
@@ -82,8 +78,9 @@ public class AirlineDataViewController extends DataViewController {
   }
 
   /**
-   * This method displays the filter pop up box. If filtering is successful displays the filtered airline data in
-   * the tableview when the pop up is closed.
+   * This method displays the filter pop up box. If filtering is successful displays the filtered
+   * airline data in the tableview when the pop up is closed.
+   *
    * @throws IOException If AirlineFilterPopUpController fxml file cannot be opened.
    */
   public void filterOptions() throws IOException {

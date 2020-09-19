@@ -1,12 +1,12 @@
 package controller.main;
 
 import controller.analysis.Filterer;
-import controller.main.Main;
-import controller.main.SideNavBarController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import model.data.Storage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
  * and filtering that data, and a navigation bar which can be used to navigate to other pages.
  *
  * @author Ella Johnson, Hayley Krippner.
- * @since 2020-09-04
+ * @since 04/09/2020
  * @version 1.0
  */
 public abstract class DataViewController extends SideNavBarController {
@@ -40,6 +40,7 @@ public abstract class DataViewController extends SideNavBarController {
 
   /**
    * This method is inherited from Initializable interface.
+   *
    * @param url Not used.
    * @param rb Not used.
    */
@@ -47,25 +48,25 @@ public abstract class DataViewController extends SideNavBarController {
 
   /**
    * This method searches for datatypes matching the search term and type.
+   *
    * @param searchTerm The term to search for e.g. "Christchurch"
    * @param searchType The type of search e.g. "Country"
    */
   public abstract void searchByDataType(String searchTerm, String searchType);
 
-  /**
-   * This method resets the table view and clears the search bar.
-   */
+  /** This method resets the table view and clears the search bar. */
   public abstract void clearSearch();
 
   /**
    * This method opens the filter pop up.
+   *
    * @throws IOException If loading of fxml file fails.
    */
   public abstract void filterOptions() throws IOException;
 
   /**
-   * This method checks user's search for errors and displays an error message if any are present. If no errors
-   * are present, calls searchByDataType method in subclass.
+   * This method checks user's search for errors and displays an error message if any are present.
+   * If no errors are present, calls searchByDataType method in subclass.
    */
   public void search() {
     String searchType = searchTypeSelection.getValue();

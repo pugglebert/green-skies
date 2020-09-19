@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
- * Pop up window in which user can select filters to apply to the list of airports.
+ * The controlleer for the pop up window in which user can select filters to apply to the list of
+ * airports.
  *
  * @author Ella Johnson
  * @version 1.0
@@ -31,8 +32,8 @@ public class AirportFilterPopUpController extends FilterPopUpController {
   public void initialize(URL url, ResourceBundle resourceBundle) {}
 
   /**
-   * This method gets the country and active status which the user has inputed and inserts them into a hashmap
-   * with the filter type as the key.
+   * This method gets the country and active status which the user has inputed and inserts them into
+   * a hashmap with the filter type as the key.
    *
    * @return A HashMap with filter type as the key and filter term as the value.
    */
@@ -49,8 +50,8 @@ public class AirportFilterPopUpController extends FilterPopUpController {
   }
 
   /**
-   * This method calls the filterAirports method of the Filterer class with the given hashmap of filter types and
-   * term.
+   * This method calls the filterAirports method of the Filterer class with the given hashmap of
+   * filter types and term.
    *
    * @param filterTerms a hashmap to pass into the filterAirports method.
    */
@@ -60,8 +61,9 @@ public class AirportFilterPopUpController extends FilterPopUpController {
 
   /**
    * This method returns the fxml filename for the airport filter pop up controller.
+   *
    * @return The fxml filename
-   * */
+   */
   @Override
   public String getFXMLFilename() {
     return "airportFilterPopUp.fxml";

@@ -65,7 +65,7 @@ public class AnalyseResultController implements Initializable {
   /**
    * This method is to return back to the AnalysePage.
    *
-   * @throws IOException
+   * @throws IOException This throws and IOException.
    */
   public void GoBackToAnalyse() throws IOException {
 

@@ -23,7 +23,7 @@ public class HelpController {
   /**
    * This method is used to return to the welcome page via the back button on the upload page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void BackToPreviousWindow() throws IOException {
     Stage stage = (Stage) BackButton.getScene().getWindow(); // get current window

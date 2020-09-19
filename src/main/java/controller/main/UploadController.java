@@ -1,7 +1,5 @@
 package controller.main;
 
-import controller.main.Main;
-import controller.main.SideNavBarController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,7 +31,6 @@ import java.util.ResourceBundle;
  */
 public class UploadController extends SideNavBarController {
 
-  // Initialize storage space for selected file.
   private final Storage storage = Main.getStorage();
   private final Loader loader = Main.getLoader();
   @FXML public ListView fileView;
@@ -83,7 +80,6 @@ public class UploadController extends SideNavBarController {
         // loadFile returns a String when the file is accepted, with the number of reject lines,
         // this string
         // pops up in the ConfirmALert message
-        // TODO: 18/09/2020 Some parser checks duplication of ID, if the old data not reset before checkfile will cause lots of valid dasta become invalid data.
         String resultString = loader.checkFile(stringFile, fileType);
         Alert ConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         ConfirmAlert.setContentText(resultString);
@@ -94,13 +90,17 @@ public class UploadController extends SideNavBarController {
 
         Optional<ButtonType> result = ConfirmAlert.showAndWait();
         if (result.get() == yesButton) {
-          if (fileType.equals("Airport")) {
-            storage.resetAirportsList();
-          } else if (fileType.equals("Airline")) {
-            storage.resetAirlinesList();
-          } else if (fileType.equals("Route")) {
-            storage.resetRoutesList();
-              }
+          switch (fileType) {
+            case "Airport":
+              storage.resetAirportsList();
+              break;
+            case "Airline":
+              storage.resetAirlinesList();
+              break;
+            case "Route":
+              storage.resetRoutesList();
+              break;
+          }
           loader.loadFile(stringFile, fileType);
           fileView.getItems().add(selectedFile.getName());
           ConfirmAlert.close();
@@ -133,7 +133,7 @@ public class UploadController extends SideNavBarController {
    * This method opens a screen for manual data entry of a single item when the 'Add single entry'
    * button is clicked.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void addSingle() throws IOException {
 
@@ -142,24 +142,34 @@ public class UploadController extends SideNavBarController {
       String fileType = dataTypeSelect.getValue().toString();
       // checks which data type was chosen by the user so the correct single data entry window is
       // opened
-      if (fileType == "Airport") {
-        Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../airportSingleEntry.fxml"));
-        Scene scene = new Scene(root);
-        newStage.setScene(scene);
-        newStage.show();
-      } else if (fileType == "Airline") {
-        Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../airlineSingleEntry.fxml"));
-        Scene scene = new Scene(root);
-        newStage.setScene(scene);
-        newStage.show();
-      } else if (fileType == "Route") {
-        Stage newStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../routeSingleEntry.fxml"));
-        Scene scene = new Scene(root);
-        newStage.setScene(scene);
-        newStage.show();
+      switch (fileType) {
+        case "Airport":
+          {
+            Stage newStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../airportSingleEntry.fxml"));
+            Scene scene = new Scene(root);
+            newStage.setScene(scene);
+            newStage.show();
+            break;
+          }
+        case "Airline":
+          {
+            Stage newStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../airlineSingleEntry.fxml"));
+            Scene scene = new Scene(root);
+            newStage.setScene(scene);
+            newStage.show();
+            break;
+          }
+        case "Route":
+          {
+            Stage newStage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("../routeSingleEntry.fxml"));
+            Scene scene = new Scene(root);
+            newStage.setScene(scene);
+            newStage.show();
+            break;
+          }
       }
     }
   }
@@ -167,13 +177,14 @@ public class UploadController extends SideNavBarController {
   /**
    * This method closes the Upload Data page and opens the Welcome page.
    *
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   public void backToWelcome() throws IOException {
     Stage stage = (Stage) backButton.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("../welcome.fxml")); // open the Welcome page
+    Parent root =
+        FXMLLoader.load(getClass().getResource("../welcome.fxml")); // open the Welcome page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
     newStage.setMaximized(true);

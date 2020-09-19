@@ -1,6 +1,5 @@
 package controller.main;
 
-import controller.main.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -17,11 +16,8 @@ import model.loader.Loader;
  */
 public class RouteSingleEntryController {
 
-  /**
-   * Initialize a loader object
-   */
+  /** Initialize a loader object */
   private final Loader loader = Main.getLoader();
-
 
   @FXML TextField airlineNameField;
   @FXML TextField airlineIDField;
@@ -35,17 +31,13 @@ public class RouteSingleEntryController {
   @FXML Button cancelButton;
   @FXML Button addEntryButton;
 
-  /**
-   * This method closes window when the 'Cancel' button is pushed.
-   */
+  /** This method closes window when the 'Cancel' button is pushed. */
   public void closeWindow() {
     Stage stage = (Stage) cancelButton.getScene().getWindow();
     stage.close();
   }
 
-  /**
-   * This method loads the data entered for a route as a singular line.
-   */
+  /** This method loads the data entered for a route as a singular line. */
   public void addEntry() {
     String entryString = makeRouteString();
 
@@ -70,10 +62,11 @@ public class RouteSingleEntryController {
 
   /**
    * This method compiles a string from the the entered data for a route.
+   *
    * @return airlineString.
    */
   public String makeRouteString() {
-    String routeLine = new String();
+    String routeLine = "";
 
     String airlineName = airlineNameField.getText() + ",";
     routeLine += airlineName;

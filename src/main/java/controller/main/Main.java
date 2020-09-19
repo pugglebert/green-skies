@@ -14,21 +14,13 @@ import java.sql.SQLException;
  * @since 04/09/20
  */
 public class Main {
-  /**
-   * The storage for the application.
-   */
+  /** The storage for the application. */
   private static Storage storage = new Storage();
-  /**
-   * The data loader for the the application.
-   */
+  /** The data loader for the the application. */
   private static Loader loader = new Loader(storage);
-  /**
-   * The filter for the application.
-   */
+  /** The filter for the application. */
   private static Filterer filterer = new Filterer();
-  /**
-   * The report generator for the application.
-   */
+  /** The report generator for the application. */
   private static ReportGenerator reportGenerator = new ReportGenerator();
 
   public static Storage getStorage() {
@@ -49,9 +41,10 @@ public class Main {
 
   /**
    * This method is the main which initilizes the storage and starts the application.
+   *
    * @param args The arguments passed in.
-   * @throws SQLException
-   * @throws ClassNotFoundException
+   * @throws SQLException This throws an SQLException.
+   * @throws ClassNotFoundException This throws a ClassNotFoundException.
    */
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
 

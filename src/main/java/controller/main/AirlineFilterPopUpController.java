@@ -30,6 +30,7 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
 
   /**
    * This method initializes activeSelection to give the options "True" or "False".
+   *
    * @param url Not used.
    * @param resourceBundle Not used.
    */
@@ -40,8 +41,8 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
   }
 
   /**
-   * This method gets the filter terms the user has entered in each textfield or choicebox and put them into a
-   * hashmap with the type of filter as the key.
+   * This method gets the filter terms the user has entered in each textfield or choicebox and put
+   * them into a hashmap with the type of filter as the key.
    *
    * @return A hashmap with filter types as keys and filter terms as values.
    */
@@ -58,7 +59,8 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
   }
 
   /**
-   * This method calls the filterAirlines method of filterer with the given hashmap of filter types and terms.
+   * This method calls the filterAirlines method of filterer with the given hashmap of filter types
+   * and terms.
    *
    * @param filterTerms A hasmap with filter types as keys and filter terms as values.
    */
@@ -69,6 +71,7 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
 
   /**
    * This method returns for the airline filter pop up.
+   *
    * @return The name of the fxml file
    */
   @Override

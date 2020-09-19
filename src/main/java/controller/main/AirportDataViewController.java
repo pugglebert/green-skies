@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 /**
  * The controller class which contains the controls for the airport data view.
  *
@@ -36,14 +35,13 @@ public class AirportDataViewController extends DataViewController {
   @FXML private TableColumn<Airport, String> DSTColumn;
   @FXML private TableColumn<Airport, String> dataBaseTimeZoneColumn;
 
-  /**
-   * Initialize the list of attribute to be added tp the searchTypes list
-   */
+  /** Initialize the list of attribute to be added tp the searchTypes list */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
 
   /**
    * This method initializes the controller class.
+   *
    * @param url The URL used.
    * @param rb The resource bundle used.
    */
@@ -64,14 +62,12 @@ public class AirportDataViewController extends DataViewController {
 
     ObservableList<Airport> airports = FXCollections.observableList(storage.getAirports());
     tableView.setItems(airports);
-
-    // Setup choice boxes
     searchTypeSelection.setItems(searchTypes);
   }
 
   /**
-   * This method calls searchAirports method from searcher class and upldates table to display results of
-   * search.
+   * This method calls searchAirports method from searcher class and upldates table to display
+   * results of search.
    */
   public void searchByDataType(String searchTerm, String searchType) {
     ArrayList<Airport> results =
@@ -79,8 +75,7 @@ public class AirportDataViewController extends DataViewController {
     tableView.setItems(FXCollections.observableList(results));
   }
 
-  /**
-   * This method clears search bar and display all airports in table view. */
+  /** This method clears search bar and display all airports in table view. */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
@@ -88,8 +83,8 @@ public class AirportDataViewController extends DataViewController {
   }
 
   /**
-   * This method opens the filter options pop up. If the user's filters are successfully applied, set the table
-   * to display the filtered data when the pop up is closed.
+   * This method opens the filter options pop up. If the user's filters are successfully applied,
+   * set the table to display the filtered data when the pop up is closed.
    */
   public void filterOptions() throws IOException {
     AirportFilterPopUpController filterPopUpController = new AirportFilterPopUpController();
