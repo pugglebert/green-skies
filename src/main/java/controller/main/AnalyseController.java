@@ -73,7 +73,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
   }
 
   /**
-   * This method alculates distance and emissions by using two routes.
+   * This method calculates distance and emissions by using two routes.
    *
    * @throws IOException
    */
@@ -94,7 +94,6 @@ public class AnalyseController extends SideNavBarController implements Initializ
           && airports.contains(pathSource2.getText())
           && airports.contains(pathDestination2.getText())) {
         check = 1;
-
       } else {
         check = 0;
       }
