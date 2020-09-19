@@ -85,6 +85,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayMostVisitedDestinationAirportField.setText("");
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("To be implemented!");
+
+    reportGenerator.resetReportGenerator();
+
   }
 
   /**
@@ -112,6 +115,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayMostVisitedDestinationAirportField.setText("");
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
+
+    reportGenerator.resetReportGenerator();
   }
 
   public void setUpData() {
@@ -139,6 +144,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     }
   return resultString;
   }
+
+
+
 
 //  /**
 //   * This methods takes an array containing either routes with most or least emissions or most or least distance and

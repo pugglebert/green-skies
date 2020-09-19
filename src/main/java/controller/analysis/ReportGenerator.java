@@ -423,4 +423,16 @@ public class ReportGenerator {
   }
 
   // TODO: add in the missing gets and sets needed to rewrite the missing code from 17/09/2020 HK
+
+  public void resetReportGenerator() {
+    mostTravelledRoutes.clear();
+    leastTravelledRoutes.clear();
+    mostEmissionsRoutes.clear();
+    leastEmissionsRoutes.clear();
+    mostDistanceRoutes.clear();
+    leastEmissionsRoutes.clear();
+    mostVisitedDestAirports.clear();
+    mostVisitedSrcAirports.clear();
+    //TODO add in least visited.
+  }
 }
