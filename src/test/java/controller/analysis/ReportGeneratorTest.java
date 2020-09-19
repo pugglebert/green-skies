@@ -651,9 +651,9 @@ public class ReportGeneratorTest {
             "Atlantic/Reykjavik"));
 
     storage.setData(providedAirports, "Airport");
-    Route testRouteEmissions =
-        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteNaNEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
     FlightAnalyser flightAnalyser =
         new FlightAnalyser(testRouteNaNEmissions, testRouteEmissions, storage);
@@ -733,9 +733,9 @@ public class ReportGeneratorTest {
             "Atlantic/Reykjavik"));
 
     storage.setData(providedAirports, "Airport");
-    Route testRouteEmissions =
-        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteNaNEmissions =
+        new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
+    Route testRouteEmissions =
         new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" "));
     FlightAnalyser flightAnalyser =
         new FlightAnalyser(testRouteNaNEmissions, testRouteEmissions, storage);
