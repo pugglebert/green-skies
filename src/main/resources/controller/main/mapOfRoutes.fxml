@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.MapOfAirportsController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.MapOfRoutesController">
     <children>
         <Text layoutX="277.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Map Of Airports To Be Implemented Here]" />
         <WebView fx:id="mapView" layoutX="277.0" layoutY="235.0" prefHeight="367.0" prefWidth="535.0" />

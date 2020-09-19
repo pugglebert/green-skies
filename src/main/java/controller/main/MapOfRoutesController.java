@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  * @version 1.2
  * @since 14/09/20
  */
-public class MapOfAirportsController extends SideNavBarController {
+public class MapOfRoutesController extends SideNavBarController {
 
   @FXML private WebView mapView;
   @FXML private WebEngine mapEngine;
@@ -29,7 +29,7 @@ public class MapOfAirportsController extends SideNavBarController {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     mapEngine = mapView.getEngine();
     mapEngine.load(
-        MapOfAirportsController.class
+        MapOfRoutesController.class
             .getResource("/controller/main/googleMap.html")
             .toExternalForm());
   }

@@ -196,11 +196,11 @@ public abstract class SideNavBarController implements Initializable {
     try {
       root =
               FXMLLoader.load(
-                      getClass().getResource("mapOfAirports.fxml"));
+                      getClass().getResource("mapOfRoutes.fxml"));
     } catch (NullPointerException e) {
       root =
               FXMLLoader.load(
-                      getClass().getResource("../mapOfAirports.fxml"));
+                      getClass().getResource("../mapOfRoutes.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
