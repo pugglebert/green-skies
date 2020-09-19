@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.data.Storage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,222 +19,235 @@ import java.util.ResourceBundle;
  * and filtering that data, and a navigation bar which can be used to navigate to other pages.
  *
  * @author Ella Johnson, Hayley Krippner, Enyang Zhang, ZhengJingRui He.
- * @since 04/09/20
  * @version 1.0
+ * @since 04/09/20
  */
 public abstract class SideNavBarController implements Initializable {
 
-  @FXML protected Button btnUpload;
-  @FXML protected Button btnRouteDataView;
-  @FXML protected Button btnAirportDataView;
-  @FXML protected Button btnAirlineDataView;
-  @FXML protected Button btnFlightHistory;
-  @FXML protected Button btnCarbonEmissionsReport;
-  @FXML protected Button btnMapOfAirports;
-  @FXML protected Button btnGraphs;
-  @FXML protected Button btnAnalyseFlight;
+    @FXML
+    protected Button btnUpload;
+    @FXML
+    protected Button btnRouteDataView;
+    @FXML
+    protected Button btnAirportDataView;
+    @FXML
+    protected Button btnAirlineDataView;
+    @FXML
+    protected Button btnFlightHistory;
+    @FXML
+    protected Button btnCarbonEmissionsReport;
+    @FXML
+    protected Button btnMapOfAirports;
+    @FXML
+    protected Button btnGraphs;
+    @FXML
+    protected Button btnAnalyseFlight;
 
-  /** The search types. */
-  protected ObservableList<String> searchTypes;
-  /** The storage for the application. */
-  protected final Storage storage = Main.getStorage();
+    /**
+     * The search types.
+     */
+    protected ObservableList<String> searchTypes;
+    /**
+     * The storage for the application.
+     */
+    protected final Storage storage = Main.getStorage();
 
-  /**
-   * This method initializes the class.
-   *
-   * @param url The provided url.
-   * @param rb The provided resource bundle.
-   */
-  public abstract void initialize(URL url, ResourceBundle rb);
+    /**
+     * This method initializes the class.
+     *
+     * @param url The provided url.
+     * @param rb  The provided resource bundle.
+     */
+    public abstract void initialize(URL url, ResourceBundle rb);
 
-  /**
-   * This method closes the current page and opens the Upload Data page.
-   *
-   * @throws IOException
-   */
-  public void toUploadData() throws IOException {
-    Stage stage = (Stage) btnUpload.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("upload.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../upload.fxml"));
+    /**
+     * This method closes the current page and opens the Upload Data page.
+     *
+     * @throws IOException
+     */
+    public void toUploadData() throws IOException {
+        Stage stage = (Stage) btnUpload.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("upload.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../upload.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+
+        newStage.show();
     }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
 
-  /**
-   * This method closes the current page and opens the View Route Data page.
-   *
-   * @throws IOException
-   */
-  public void toRouteDataView() throws IOException {
-    Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../viewRouteData.fxml"));
+    /**
+     * This method closes the current page and opens the View Route Data page.
+     *
+     * @throws IOException
+     */
+    public void toRouteDataView() throws IOException {
+        Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../viewRouteData.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+
+        newStage.show();
     }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
 
-  /**
-   * This method closes the current page and opens the View Airport Data page.
-   *
-   * @throws IOException
-   */
-  public void toAirportDataView() throws IOException {
-    Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml"));
+    /**
+     * This method closes the current page and opens the View Airport Data page.
+     *
+     * @throws IOException
+     */
+    public void toAirportDataView() throws IOException {
+        Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml"));
 
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../viewAirportData.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../viewAirportData.fxml"));
+        }
+        // open the View Airport Data page
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+
+        newStage.show();
     }
-    // open the View Airport Data page
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
 
-  /**
-   * This method closes the current page and opens the View Airline Data page.
-   *
-   * @throws IOException
-   */
-  public void toAirlineDataView() throws IOException {
-    Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../viewAirlineData.fxml"));
-    }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
+    /**
+     * This method closes the current page and opens the View Airline Data page.
+     *
+     * @throws IOException
+     */
+    public void toAirlineDataView() throws IOException {
+        Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../viewAirlineData.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
 
-  /**
-   * This method closes the current page and opens the Flight History page.
-   *
-   * @throws IOException
-   */
-  public void toFlightHistory() throws IOException {
-    Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("flightHistory.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../flightHistory.fxml"));
+        newStage.show();
     }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
 
-  /**
-   * This method closes the current page and opens the Carbon Emissions Report page.
-   *
-   * @throws IOException
-   */
-  public void toCarbonEmissionsReport() throws IOException {
-    Stage stage = (Stage) btnCarbonEmissionsReport.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("carbonEmissionsReport.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../carbonEmissionsReport.fxml"));
-    }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
+    /**
+     * This method closes the current page and opens the Flight History page.
+     *
+     * @throws IOException
+     */
+    public void toFlightHistory() throws IOException {
+        Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("flightHistory.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../flightHistory.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
 
-  /**
-   * This method closes the current page and opens the Map of Airports page.
-   *
-   * @throws IOException
-   */
-  public void toMapOfAirports() throws IOException {
-    Stage stage = (Stage) btnMapOfAirports.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("mapOfRoutes.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../mapOfRoutes.fxml"));
+        newStage.show();
     }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
 
-  /**
-   * This method closes the current page and opens the Graphs page.
-   *
-   * @throws IOException
-   */
-  public void toGraphs() throws IOException {
-    Stage stage = (Stage) btnGraphs.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("graphs.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../graphs.fxml"));
-    }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
+    /**
+     * This method closes the current page and opens the Carbon Emissions Report page.
+     *
+     * @throws IOException
+     */
+    public void toCarbonEmissionsReport() throws IOException {
+        Stage stage = (Stage) btnCarbonEmissionsReport.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("carbonEmissionsReport.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../carbonEmissionsReport.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
 
-  /**
-   * This method closes the current page and opens the Flight Analyser page.
-   *
-   * @throws IOException
-   */
-  public void toAnalyseFlight() throws IOException {
-    Stage stage = (Stage) btnAnalyseFlight.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root;
-    try {
-      root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
-    } catch (NullPointerException e) {
-      root = FXMLLoader.load(getClass().getResource("../analyse.fxml"));
+        newStage.show();
     }
-    Scene scene = new Scene(root);
-    newStage.setScene(scene);
-    newStage.setMaximized(true);
-    newStage.show();
-  }
+
+    /**
+     * This method closes the current page and opens the Map of Airports page.
+     *
+     * @throws IOException
+     */
+    public void toMapOfAirports() throws IOException {
+        Stage stage = (Stage) btnMapOfAirports.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("mapOfRoutes.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../mapOfRoutes.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+
+        newStage.show();
+    }
+
+    /**
+     * This method closes the current page and opens the Graphs page.
+     *
+     * @throws IOException
+     */
+    public void toGraphs() throws IOException {
+        Stage stage = (Stage) btnGraphs.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("graphs.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../graphs.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+
+        newStage.show();
+    }
+
+    /**
+     * This method closes the current page and opens the Flight Analyser page.
+     *
+     * @throws IOException
+     */
+    public void toAnalyseFlight() throws IOException {
+        Stage stage = (Stage) btnAnalyseFlight.getScene().getWindow();
+        stage.close();
+        Stage newStage = new Stage();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
+        } catch (NullPointerException e) {
+            root = FXMLLoader.load(getClass().getResource("../analyse.fxml"));
+        }
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+
+        newStage.show();
+    }
 }

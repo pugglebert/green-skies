@@ -149,7 +149,6 @@ public class AnalyseController extends SideNavBarController implements Initializ
             Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
             Scene scene = new Scene(root);
             stage1.setScene(scene);
-            stage1.setMaximized(true);
             stage1.show();
         } else {
             Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
