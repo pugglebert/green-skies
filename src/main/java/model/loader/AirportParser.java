@@ -23,8 +23,8 @@ public class AirportParser extends Parser {
    * timezone 114: invalid unknown error 115: number of failed insertions 116: invalid alias 117:
    * invalid callsign 118: invalid activestatus
    */
-
   private final int name = 1;
+
   private final int city = 2;
   private final int country = 3;
   private final int IATA = 4;
@@ -47,9 +47,7 @@ public class AirportParser extends Parser {
     dataParser();
   }
 
-  /**
-   * This method initializes the error messages for each error code
-   */
+  /** This method initializes the error messages for each error code */
   @Override
   protected void initErrorLookup() {
     errorLookup[0] = "Not enough parameters";
@@ -71,8 +69,9 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * This method is called when airportParser is initialized. Calls validate method to check each line. If line
-   * is valid, creates airport object with attributes from line and adds route to routes set.
+   * This method is called when airportParser is initialized. Calls validate method to check each
+   * line. If line is valid, creates airport object with attributes from line and adds route to
+   * routes set.
    */
   @Override
   protected void dataParser() {
@@ -86,8 +85,8 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * This method is a data parser to convert airport data from list into airport objects and add to HashSet. It will
-   * also call validater to verify each airport data.
+   * This method is a data parser to convert airport data from list into airport objects and add to
+   * HashSet. It will also call validater to verify each airport data.
    */
   protected void parseLine(String dataLine) {
     String[] line = dataLine.replaceAll("\"", "").split(",");
@@ -372,5 +371,4 @@ public class AirportParser extends Parser {
     }
     return true;
   }
-
 }

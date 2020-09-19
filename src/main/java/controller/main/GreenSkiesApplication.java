@@ -20,7 +20,7 @@ public class GreenSkiesApplication extends Application {
    * This method starts the application's GUI
    *
    * @param primaryStage The primary stage used.
-   * @throws IOException
+   * @throws IOException This throws an IOException.
    */
   @Override
   public void start(Stage primaryStage) throws IOException {

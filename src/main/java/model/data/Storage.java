@@ -57,8 +57,8 @@ public class Storage {
     return airlines;
   }
 
-  /**This method reset airlines list. */
-  public void resetAirlinesList(){
+  /** This method reset airlines list. */
+  public void resetAirlinesList() {
     airlines = new ArrayList<>();
   }
 
@@ -67,8 +67,8 @@ public class Storage {
     return airports;
   }
 
-  /**This method reset airports list. */
-  public void resetAirportsList(){
+  /** This method reset airports list. */
+  public void resetAirportsList() {
     airports = new ArrayList<>();
   }
 
@@ -77,8 +77,8 @@ public class Storage {
     return routes;
   }
 
-  /**This method reset routes list. */
-  public void resetRoutesList(){
+  /** This method reset routes list. */
+  public void resetRoutesList() {
     routes = new ArrayList<>();
   }
 
@@ -128,10 +128,10 @@ public class Storage {
    * @param type Type of data to be stored.
    */
   public void setData(List<DataType> data, String type) {
-//    long startTime =
+    //    long startTime =
 
     if (type.matches("Airline")) {
-//      airlines = new ArrayList<Airline>();
+      //      airlines = new ArrayList<Airline>();
       database.initialiseTable("airlines");
       database.closeAutoCommite();
       for (DataType entry : data) {
@@ -143,7 +143,7 @@ public class Storage {
       }
       database.startCommite();
     } else if (type.matches("Airport")) {
-//      airports = new ArrayList<Airport>();
+      //      airports = new ArrayList<Airport>();
       database.initialiseTable("airports");
       database.closeAutoCommite();
       for (DataType entry : data) {
@@ -168,6 +168,7 @@ public class Storage {
 
   /**
    * This method initilises storage with data from database after user start the application
+   *
    * @throws SQLException This throws an SQLException.
    */
   public void initialiseStorage() throws SQLException {
@@ -219,6 +220,4 @@ public class Storage {
   public HashMap<String, Integer> getHistoryDestAirports() {
     return historyDestAirports;
   }
-
-
 }

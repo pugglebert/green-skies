@@ -81,9 +81,7 @@ public class Route implements DataType {
     }
   }
 
-  /**
-   * This method initializes the routes checkbox to use with JavaFx.
-   */
+  /** This method initializes the routes checkbox to use with JavaFx. */
   public void initCheckBox() {
     this.select = new CheckBox();
   }
@@ -169,7 +167,9 @@ public class Route implements DataType {
     return equipment;
   }
 
-  /** This method returns the first entry in the equipment array.
+  /**
+   * This method returns the first entry in the equipment array.
+   *
    * @return firstEquipment.
    */
   public String getFirstEquipment() {
@@ -229,8 +229,8 @@ public class Route implements DataType {
   }
 
   /**
-   * This method returns true if object has the same attributes as the Route from which the method is called,
-   * false otherwise.
+   * This method returns true if object has the same attributes as the Route from which the method
+   * is called, false otherwise.
    *
    * @param o object to be compared to the route calling the method.
    * @return true if the two objects attributes are the same, false if there are any differences.
@@ -264,6 +264,7 @@ public class Route implements DataType {
 
   /**
    * This method adds a selection checkbox to the route.
+   *
    * @param select The selection checkbox to be added.
    */
   public void setSelect(CheckBox select) {
@@ -317,5 +318,4 @@ public class Route implements DataType {
         + timesTaken
         + "\n";
   }
-
 }

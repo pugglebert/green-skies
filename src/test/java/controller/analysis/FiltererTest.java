@@ -28,7 +28,7 @@ public class FiltererTest {
   private Filterer filterer;
 
   @Before
-  public void setUp() throws SQLException, ClassNotFoundException {
+  public void setUp() throws SQLException {
     storage = new Storage();
     loader = new Loader(storage);
     filterer = new Filterer();
@@ -44,7 +44,6 @@ public class FiltererTest {
   }
 
   // ----------------------------------------- Testing for filtering Airports
-  // -------------------------------------------
 
   /**
    * Verify that when filterAirports is called with a filter term that matches one entry in the
@@ -343,7 +342,6 @@ public class FiltererTest {
   }
 
   // ----------------------------------------- Testing for filtering Airlines
-  // -------------------------------------------
 
   /**
    * Verify that when filterAirlines is called with a filter term that matches one entry in the
@@ -360,7 +358,6 @@ public class FiltererTest {
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
-  // @TODO: complete this test once the active status option has been added into the Searcher class.
   //  /**
   //   * Verify that when filterAirlines is called with a filter term that matches one entry in the
   // file, an ArrayList
@@ -539,7 +536,6 @@ public class FiltererTest {
   }
 
   // ----------------------------------------- Testing for filtering Routes
-  // -------------------------------------------
 
   /**
    * Verify that when filterRoutes is called with a filter term that matches one entry in the file,

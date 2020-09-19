@@ -1,7 +1,3 @@
 package view;
 
-import static org.junit.Assert.*;
-
-public class MainWindowTest {
-
-}
+public class MainWindowTest {}

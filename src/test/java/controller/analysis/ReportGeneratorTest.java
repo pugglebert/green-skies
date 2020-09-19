@@ -2,14 +2,12 @@ package controller.analysis;
 
 import model.data.*;
 import model.loader.Loader;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.*;
 
@@ -35,10 +33,7 @@ public class ReportGeneratorTest {
     reportGenerator = new ReportGenerator();
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/GenerateReportTest.csv", "Route");
-    } catch (FileSystemException
-        | FileNotFoundException
-        | SQLException
-        | ClassNotFoundException e) {
+    } catch (FileSystemException | FileNotFoundException | SQLException e) {
       e.printStackTrace();
     }
   }
@@ -133,35 +128,36 @@ public class ReportGeneratorTest {
     assertEquals(345231863432.98, reportGenerator.getTotalCarbonEmissions(), 0.0001);
   }
 
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
-//   * emissions, which has been taken multipe times, that the total emissions is updated
-//   * accordingly.The carbon emissions are starting at 0.0 g.
-//   */
-//  @Test
-//  public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
-//    reportGenerator.setTotalCarbonEmissions(0.0);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(20000000.50);
-//    testRoute.setTimesTaken(0);
-//    reportGenerator.updateTotalEmissions(testRoute);
-//    assertEquals(0.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
-//  }
+  //  /**
+  //   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
+  //   * emissions, which has been taken multipe times, that the total emissions is updated
+  //   * accordingly.The carbon emissions are starting at 0.0 g.
+  //   */
+  //  @Test
+  //  public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
+  //    reportGenerator.setTotalCarbonEmissions(0.0);
+  //    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+  //    testRoute.setEmissions(20000000.50);
+  //    testRoute.setTimesTaken(0);
+  //    reportGenerator.updateTotalEmissions(testRoute);
+  //    assertEquals(0.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
+  //  }
 
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
-//   * emissions, which has been taken zero times, that the total emissions is not updated. The carbon
-//   * emissions are starting at 0.0 g.
-//   */
-//  @Test
-//  public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
-//    reportGenerator.setTotalCarbonEmissions(0.0);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(8760.0);
-//    testRoute.setTimesTaken(1000);
-//    reportGenerator.updateTotalEmissions(testRoute);
-//    assertEquals(8760000.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
-//  }
+  //  /**
+  //   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
+  //   * emissions, which has been taken zero times, that the total emissions is not updated. The
+  // carbon
+  //   * emissions are starting at 0.0 g.
+  //   */
+  //  @Test
+  //  public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
+  //    reportGenerator.setTotalCarbonEmissions(0.0);
+  //    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+  //    testRoute.setEmissions(8760.0);
+  //    testRoute.setTimesTaken(1000);
+  //    reportGenerator.updateTotalEmissions(testRoute);
+  //    assertEquals(8760000.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
+  //  }
 
   // ------------------------------------- Testing for updateTotalDistance
 
@@ -340,8 +336,7 @@ public class ReportGeneratorTest {
    * the FlightAnalyser class to check it works as expected here.
    */
   @Test
-  public void updateMostEmissionsRouteAddNaNEmissionsEntryUseFlighAnalyserTest()
-      throws SQLException, ClassNotFoundException {
+  public void updateMostEmissionsRouteAddNaNEmissionsEntryUseFlighAnalyserTest() {
     ArrayList<Route> expectedResults = new ArrayList<>();
     List<DataType> providedAirports = new ArrayList<>();
     providedAirports.add(
@@ -422,8 +417,7 @@ public class ReportGeneratorTest {
    * route is the second route (not NaN emissions).
    */
   @Test
-  public void updateMostEmissionsRouteMoreEmissionsEntryTest()
-      throws SQLException, ClassNotFoundException {
+  public void updateMostEmissionsRouteMoreEmissionsEntryTest() throws SQLException {
     ArrayList<Route> expectedResults = new ArrayList<>();
     List<DataType> providedAirports = new ArrayList<>();
     providedAirports.add(
@@ -596,7 +590,7 @@ public class ReportGeneratorTest {
    */
   @Test
   public void updateLeastEmissionsRouteAddNaNEmissionsEntryUseFlighAnalyserTest()
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     ArrayList<Route> expectedResults = new ArrayList<>();
     List<DataType> providedAirports = new ArrayList<>();
     providedAirports.add(
@@ -678,7 +672,7 @@ public class ReportGeneratorTest {
    */
   @Test
   public void updateLeastEmissionsRouteMoreEmissionsUseFlighAnalyserEntryTest()
-      throws SQLException, ClassNotFoundException {
+      throws SQLException {
     ArrayList<Route> expectedResults = new ArrayList<>();
     List<DataType> providedAirports = new ArrayList<>();
     providedAirports.add(
@@ -1393,8 +1387,6 @@ public class ReportGeneratorTest {
 
   // --------------------------------- Testing for calculateCO2ReductionNeeded
 
-  // TODO: debug
-  /** */
   //  @Test
   //  public void calculateCO2ReductionNeededSmallTest() {
   //    reportGenerator.setCarbonEmissionsGoal(200000);

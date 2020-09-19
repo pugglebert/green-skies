@@ -1,22 +1,22 @@
-//package cucumber;
+// package cucumber;
 //
-//import io.cucumber.java.Before;
-//import io.cucumber.java.en.Given;
-//import io.cucumber.java.en.Then;
-//import io.cucumber.java.en.When;
-//import model.data.Airline;
-//import model.data.Airport;
-//import model.data.Route;
-//import model.data.Storage;
-//import model.database.SQLiteDatabase;
-//import model.loader.Loader;
-//import org.junit.Assert;
+// import io.cucumber.java.Before;
+// import io.cucumber.java.en.Given;
+// import io.cucumber.java.en.Then;
+// import io.cucumber.java.en.When;
+// import model.data.Airline;
+// import model.data.Airport;
+// import model.data.Route;
+// import model.data.Storage;
+// import model.database.SQLiteDatabase;
+// import model.loader.Loader;
+// import org.junit.Assert;
 //
-//import java.io.FileNotFoundException;
-//import java.nio.file.FileSystemException;
-//import java.sql.SQLException;
+// import java.io.FileNotFoundException;
+// import java.nio.file.FileSystemException;
+// import java.sql.SQLException;
 //
-//public class UploadStepDefinition {
+// public class UploadStepDefinition {
 //    private String fileType;
 //    private String filePath;
 //    private Storage storage = new Storage();
@@ -41,12 +41,14 @@
 //
 //    @When("upload the file via upload page")
 //    public void uploadTheFile()
-//            throws ClassNotFoundException, FileNotFoundException, SQLException, FileSystemException {
+//            throws ClassNotFoundException, FileNotFoundException, SQLException,
+// FileSystemException {
 //        loader.loadFile(this.filePath, this.fileType);
 //    }
 //
 //    @Then(
-//            "the data uploaded should contains following information of the airport {int},{string},{string},{string},{string},{string},{double},{double},{int},{float},{string},{string}")
+//            "the data uploaded should contains following information of the airport
+// {int},{string},{string},{string},{string},{string},{double},{double},{int},{float},{string},{string}")
 //    public void theAirportDataInStorageIs(
 //            int airportID,
 //            String name,
@@ -78,7 +80,8 @@
 //    }
 //
 //    @Then(
-//            "the data uploaded should contains following information of the route {string},{int},{string},{int},{string},{int},{string},{int},{string}")
+//            "the data uploaded should contains following information of the route
+// {string},{int},{string},{int},{string},{int},{string},{int},{string}")
 //    public void theRouteDataInStorageIs(
 //            String airlineName,
 //            int airlineID,
@@ -104,7 +107,8 @@
 //    }
 //
 //    @Then(
-//            "the data uploaded should contains following information of the airline {int},{string},{string},{string},{string},{string},{string},{string}")
+//            "the data uploaded should contains following information of the airline
+// {int},{string},{string},{string},{string},{string},{string},{string}")
 //    public void theRouteDataInStorageIs(
 //            int airlineID,
 //            String name,
@@ -116,7 +120,8 @@
 //            String activeStatus) {
 //        boolean actStat;
 //        actStat = activeStatus.equals("Y");
-//        Airline airline = new Airline(airlineID, name, alias, IATA, ICAO, callsign, country, actStat);
+//        Airline airline = new Airline(airlineID, name, alias, IATA, ICAO, callsign, country,
+// actStat);
 //        Assert.assertEquals(airline, storage.getAirlines().get(0));
 //    }
-//}
+// }

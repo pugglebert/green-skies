@@ -42,7 +42,6 @@ public class SQLiteDatabase {
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     }
-
   }
 
   /** This method is getter for connection returns connection as an object. */
@@ -308,8 +307,8 @@ public class SQLiteDatabase {
         try {
           state = con.createStatement();
           res =
-                  state.executeQuery(
-                          "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+              state.executeQuery(
+                  "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
           if (res.next()) {
             state = con.createStatement();
             state.executeUpdate("Delete from 'airports'");
@@ -331,8 +330,8 @@ public class SQLiteDatabase {
         try {
           state = con.createStatement();
           res =
-                  state.executeQuery(
-                          "SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
+              state.executeQuery(
+                  "SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
           if (res.next()) {
             state = con.createStatement();
             state.executeUpdate("Delete from 'routes'");
@@ -354,8 +353,8 @@ public class SQLiteDatabase {
         try {
           state = con.createStatement();
           res =
-                  state.executeQuery(
-                          "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+              state.executeQuery(
+                  "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
           if (res.next()) {
             state = con.createStatement();
             state.executeUpdate("Delete from 'airlines'");

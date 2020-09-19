@@ -28,7 +28,7 @@ public class AirlineParserTest {
       testLines.add(line);
       count++;
     }
-    List<Airline> existingLines = new ArrayList<Airline>();
+    List<Airline> existingLines = new ArrayList<>();
     parser = new AirlineParser(testLines, existingLines);
 
     /*testLines = new ArrayList<String>();
@@ -235,6 +235,5 @@ public class AirlineParserTest {
   public void validater() {
     String[] invalidValider = {"-1", "Unknown", "\\N", "-", "N/A", "\\N", "\\N", "Y"};
     Assert.assertFalse(parser.validater(invalidValider));
-
   }
 }

@@ -11,21 +11,18 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * This class tests airportParser.
- */
+/** This class tests airportParser. */
 public class AirportParserTest {
   private AirportParser airportParser;
 
-  /**
-   * This method sets up evironment before each test case.
-   */
+  /** This method sets up evironment before each test case. */
   @Before
   public void setUp() {
     Loader loader = new Loader(new Storage());
     List<Airport> existingLines = new ArrayList<Airport>();
     try {
-      ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
+      ArrayList<String> lines =
+          loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
       airportParser = new AirportParser(lines, existingLines);
     } catch (FileNotFoundException e) {
     }
@@ -36,7 +33,6 @@ public class AirportParserTest {
   public void isAirportIdValidNoDupId() {
     assertTrue(airportParser.isIdValid("4"));
   }
-
 
   @Test
   public void isAirportIdValidDupId() {

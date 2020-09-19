@@ -29,6 +29,7 @@ public class AirlineParser extends Parser {
 
   /**
    * This method initializes error collection and calls dataParser method to begin processing data.
+   *
    * @param dataFile ArrayList of a string for each line in the file.
    */
   public AirlineParser(List<String> dataFile, List<Airline> existingAirlines) {
@@ -39,9 +40,7 @@ public class AirlineParser extends Parser {
     dataParser();
   }
 
-  /**
-   * This method initializes error lookup array with message for each error code.
-   */
+  /** This method initializes error lookup array with message for each error code. */
   @Override
   protected void initErrorLookup() {
     errorLookup[0] = "Not enough parameters";
@@ -58,8 +57,8 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method iterate throught each line of input file, strip line in to data segment. Then call validator method to
-   * check a singke line then add that line to parserData if it is valid.
+   * This method iterate throught each line of input file, strip line in to data segment. Then call
+   * validator method to check a singke line then add that line to parserData if it is valid.
    */
   @Override
   public void dataParser() {
@@ -93,11 +92,11 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method add airline to index matches with airLineID. First check if there are any airline currently sit
-   * at index. If it is null then replace with airline param. If parserset size is too small then
-   * init it with null value. If there is an airline at index then check if the airline is the same
-   * with the one we want to add. If it is the same then treat as duplicate (do nothing) If is is
-   * not then add to error.
+   * This method add airline to index matches with airLineID. First check if there are any airline
+   * currently sit at index. If it is null then replace with airline param. If parserset size is too
+   * small then init it with null value. If there is an airline at index then check if the airline
+   * is the same with the one we want to add. If it is the same then treat as duplicate (do nothing)
+   * If is is not then add to error.
    *
    * @param airlineID airline ID we want to add
    * @param airline Airline Object we wanted to add
@@ -120,8 +119,8 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method checks that line has expected number of entries and calls isValid method to check that each
-   * token on the line matches the expected pattern.
+   * This method checks that line has expected number of entries and calls isValid method to check
+   * that each token on the line matches the expected pattern.
    *
    * @param line A string made up of comma-seperated tokens representing data about a route
    * @return True if all tokens are valid, false otherwise
@@ -244,7 +243,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method checks if the  ICAO is valid.
+   * This method checks if the ICAO is valid.
    *
    * @param ICAO airline ICAO as a string.
    * @return true if valid, false if invalid.
@@ -303,5 +302,4 @@ public class AirlineParser extends Parser {
     }
     return true;
   }
-
 }
