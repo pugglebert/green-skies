@@ -7,6 +7,7 @@ import model.data.Route;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -36,7 +37,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   /** This reportGenerator for the application. */
   private ReportGenerator reportGenerator;
   /** A string of the most emission routes. */
-  private String MostEmissionsRouteString;
+  private String MostEmissionsRouteString = "";
   /** A string of the least emission routes. */
   private String LeastEmissionsRouteString;
   /** A string of the most distance routes. */
@@ -118,27 +119,27 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   }
 
   public void setUpData() {
-
+    System.out.println(MostEmissionsRouteString);
     this.MostEmissionsRouteString =
-        RoutesArrayToString(MostEmissionsRouteString, reportGenerator.getMostEmissionsRoutes());
+        RoutesArrayToString(reportGenerator.getMostEmissionsRoutes());
     this.LeastEmissionsRouteString =
-        RoutesArrayToString(LeastEmissionsRouteString, reportGenerator.getLeastEmissionsRoutes());
+        RoutesArrayToString(reportGenerator.getLeastEmissionsRoutes());
     this.MostDistanceRouteString =
-        RoutesArrayToString(MostDistanceRouteString, reportGenerator.getMostDistanceRoutes());
+        RoutesArrayToString(reportGenerator.getMostDistanceRoutes());
     this.LeastDistanceRouteString =
-        RoutesArrayToString(LeastDistanceRouteString, reportGenerator.getLeastDistanceRoutes());
+        RoutesArrayToString(reportGenerator.getLeastDistanceRoutes());
     this.MostVisitedSourceAirport =
         CombineAirportsToOneString(
-            MostVisitedSourceAirport, reportGenerator.getMostVisitedSrcAirports());
+            reportGenerator.getMostVisitedSrcAirports());
     this.LeastVisitedSourceAirport =
         CombineAirportsToOneString(
-            LeastVisitedSourceAirport, reportGenerator.getLeastVisitedSrcAirports());
+            reportGenerator.getLeastVisitedSrcAirports());
     this.MostVisitedDestAirport =
         CombineAirportsToOneString(
-            MostVisitedDestAirport, reportGenerator.getMostVisitedDestAirports());
+            reportGenerator.getMostVisitedDestAirports());
     this.LeastVisitedDestAirport =
         CombineAirportsToOneString(
-            LeastVisitedDestAirport, reportGenerator.getLeastVisitedDestAirports());
+            reportGenerator.getLeastVisitedDestAirports());
   }
 
   /**
@@ -150,7 +151,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    *     needs to be converted to a String.
    * @return resultString The string of the array's routes' AirlineIDs.
    */
-  public String RoutesArrayToString(String resultString, ArrayList<Route> arrayToConvert) {
+  public String RoutesArrayToString(ArrayList<Route> arrayToConvert) {
+    String resultString = "";
     StringBuilder resultStringBuilder = new StringBuilder(resultString);
     for (int i = 0; i < arrayToConvert.size(); i++) {
       if (arrayToConvert.get(i).getAirlineID() >= 0)
@@ -174,7 +176,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    * @return resultString The string of the array's airport names.
    */
   public String CombineAirportsToOneString(
-      String resultString, ArrayList<String> airportArrayToConvert) {
+      ArrayList<String> airportArrayToConvert) {
+    String resultString = "";
     StringBuilder resultStringBuilder = new StringBuilder(resultString);
     for (int i = 0; i < airportArrayToConvert.size(); i++) {
       if (i == airportArrayToConvert.size() - 1) {

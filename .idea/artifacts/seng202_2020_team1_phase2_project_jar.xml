@@ -2,7 +2,7 @@
   <artifact type="jar" name="seng202_2020_team1_phase2_project:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/seng202_2020_team1_phase2_project_jar</output-path>
     <root id="archive" name="seng202_2020_team1_phase2_project_jar.jar">
-      <element id="module-output" name="seng202_2020_team1_phase2_project" />
+      <element id="module-output" name="seng202_project" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/14/javafx-graphics-14-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-media/11.0.2/javafx-media-11.0.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-web/11.0.2/javafx-web-11.0.2.jar" path-in-jar="/" />
