@@ -29,6 +29,8 @@ public class Airline implements DataType {
   /** The country or territory where airport is located. */
   private final String country;
 
+
+  
   /** "Y" if the airline is or has until recently been operational, "N" if it is defunct. */
   private final Boolean activeStatus;
 
