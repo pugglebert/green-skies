@@ -39,9 +39,6 @@ public class FlightHistoryController extends DataViewController {
   /** The types of search which can be performed on history. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Airline", "Source", "Destination");
-  /** The types of ranking which can be performed on history. */
-  private final ObservableList<String> RankTypes =
-      FXCollections.observableArrayList("Emission", "Distance");
 
   /**
    * This method initializes the controller class.
@@ -65,7 +62,6 @@ public class FlightHistoryController extends DataViewController {
     ObservableList<Route> routes = FXCollections.observableList(Main.getStorage().getHistory());
     tableView.setItems(routes);
     searchTypeSelection.setItems(searchTypes);
-    RankSelection.setItems(RankTypes);
   }
 
   /**
