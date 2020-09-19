@@ -32,6 +32,10 @@ public class ReportGenerator {
   /** * The destination airports which were the most visited. */
   private ArrayList<String> mostVisitedDestAirports = new ArrayList<>();
   /** * The routes which were most travelled. */
+  private ArrayList<String> leastVisitedSrcAirports = new ArrayList<>();
+  /** * The destination airports which were the most visited. */
+  private ArrayList<String> leastVisitedDestAirports = new ArrayList<>();
+  /** * The routes which were most travelled. */
   private ArrayList<Route> mostTravelledRoutes = new ArrayList<>();
   /** The routes which were the least travelled. */
   private ArrayList<Route> leastTravelledRoutes = new ArrayList<>();
@@ -229,10 +233,10 @@ public class ReportGenerator {
   }
 
   /**
-   * Calculates the airport(s) that was the most visited, based on the user's flight history
+   * Calculates the source airport(s) that was the most visited, based on the user's flight history
    * entries.
    *
-   * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the airports
+   * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the source airports
    *     that were most visited, based on the user's flight history entries.
    */
   public void updateMostVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
@@ -250,13 +254,55 @@ public class ReportGenerator {
   }
 
   /**
-   * Calculates the airport(s) that was the least visited, based on the user's flight history
+   * Calculates the destionation airport(s) that was the most visited, based on the user's flight history
    * entries.
    *
-   * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the airports
+   * @return mostVisitedDestAirports, an ArrayList containing the String of the name of the destination airports
    *     that were most visited, based on the user's flight history entries.
    */
   public void updateMostVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
+    int currDestAirportMax = 0;
+    for (Map.Entry<String, Integer> entry : destAirportCounts.entrySet()) {
+      if (entry.getValue() > currDestAirportMax) {
+        currDestAirportMax = entry.getValue();
+        mostVisitedDestAirports.clear();
+        mostVisitedDestAirports.add(entry.getKey());
+      } else if (entry.getValue() == currDestAirportMax) {
+        currDestAirportMax = entry.getValue();
+        mostVisitedDestAirports.add(entry.getKey());
+      }
+    }
+  }
+
+  /**
+   * Calculates the source airport(s) that was the least visited, based on the user's flight history
+   * entries.
+   *
+   * @return leastVisitedSrcAirports, an ArrayList containing the String of the name of the source airports
+   *     that were most visited, based on the user's flight history entries.
+   */
+  public void updateLeastVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
+    int currSrcAirportMax = 0;
+    for (Map.Entry<String, Integer> entry : srcAirportCounts.entrySet()) {
+      if (entry.getValue() > currSrcAirportMax) {
+        currSrcAirportMax = entry.getValue();
+        leastVisitedSrcAirports.clear();
+        leastVisitedSrcAirports.add(entry.getKey());
+      } else if (entry.getValue() == currSrcAirportMax) {
+        currSrcAirportMax = entry.getValue();
+        leastVisitedSrcAirports.add(entry.getKey());
+      }
+    }
+  }
+
+  /**
+   * Calculates the destination airport(s) that was the least visited, based on the user's flight history
+   * entries.
+   *
+   * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the destination airports
+   *     that were most visited, based on the user's flight history entries.
+   */
+  public void updateLeastVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
     int currDestAirportMax = 0;
     for (Map.Entry<String, Integer> entry : destAirportCounts.entrySet()) {
       if (entry.getValue() > currDestAirportMax) {
@@ -330,11 +376,11 @@ public class ReportGenerator {
   }
 
   public ArrayList<String> getLeastVisitedSrcAirports() {
-    return mostVisitedSrcAirports;
+    return leastVisitedSrcAirports;
   }
 
   public ArrayList<String> getLeastVisitedDestAirports() {
-    return mostVisitedDestAirports;
+    return leastVisitedDestAirports;
   }
 
   public double getCarbonEmissionGoal() {
