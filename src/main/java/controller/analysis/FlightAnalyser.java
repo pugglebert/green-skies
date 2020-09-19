@@ -86,7 +86,7 @@ public class FlightAnalyser {
   private void processsPathSingle() {
     for (String airportCode : path1) {
       for (Airport airport : airports) {
-        if (airport.getIATA().equals(airportCode)) {
+        if (airport.getIATA().equals(airportCode) || airport.getICAO().equals(airportCode)) {
           ArrayList<Double> coord = new ArrayList<>();
           coord.add(airport.getLatitude());
           coord.add(airport.getLongitude());
@@ -115,7 +115,7 @@ public class FlightAnalyser {
   private void processsPath() {
     for (String airportCode : path1) {
       for (Airport airport : airports) {
-        if (airport.getIATA().equals(airportCode)) {
+        if (airport.getIATA().equals(airportCode) || airport.getICAO().equals(airportCode)) {
           ArrayList<Double> coord = new ArrayList<>();
           coord.add(airport.getLatitude());
           coord.add(airport.getLongitude());
@@ -125,7 +125,7 @@ public class FlightAnalyser {
     }
     for (String airportCode : path2) {
       for (Airport airport : airports) {
-        if (airport.getIATA().equals(airportCode)) {
+        if (airport.getIATA().equals(airportCode) || airport.getICAO().equals(airportCode)) {
           ArrayList<Double> coord = new ArrayList<>();
           coord.add(airport.getLatitude());
           coord.add(airport.getLongitude());

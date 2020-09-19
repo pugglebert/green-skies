@@ -63,9 +63,12 @@ public class AnalyseController extends SideNavBarController implements Initializ
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
     for (Airport airport : Main.getStorage().getAirports()) {
-      airports.add(airport.getIATA());
+      if (!airport.getIATA().equals("")) {
+        airports.add(airport.getIATA());
+      } else if(!airport.getICAO().equals("")){
+        airports.add(airport.getICAO());
+      }
     }
-
     TextFields.bindAutoCompletion(pathSource1, airports);
     TextFields.bindAutoCompletion(pathDestination1, airports);
     TextFields.bindAutoCompletion(pathSource2, airports);
@@ -83,11 +86,12 @@ public class AnalyseController extends SideNavBarController implements Initializ
     ArrayList<String> path1 = new ArrayList<>();
     ArrayList<String> path2 = new ArrayList<>();
 
+    storage.getAnalyseDistanceResult().clear();
+    storage.getAnalyseEmissionResult().clear();
+
     String[] equipment1 = {"abc"};
     String[] equipment2 = {"abc"};
-
     int check = 1;
-
     for (int i = 0; i < airports.size(); i++) {
       if (airports.contains(pathSource1.getText())
           && airports.contains(pathDestination1.getText())
@@ -129,8 +133,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
               equipment2);
       FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
 
-      storage.getAnalyseDistanceResult().removeAll(storage.getAnalyseDistanceResult());
-      storage.getAnalyseEmissionResult().removeAll(storage.getAnalyseEmissionResult());
+
       storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
       storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
       storage.setAnalyseEmissionResult(analyser.getPath1Emission());

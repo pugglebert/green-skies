@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.data.Storage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,13 +20,13 @@ import java.util.ResourceBundle;
  */
 public class AnalyseResultController implements Initializable {
 
-  @FXML private Button BackButton;
   @FXML public Text DistanceRoute1;
   @FXML public Text DistanceRoute2;
   @FXML public Text EmissionRoute1;
   @FXML public Text EmissionRoute2;
   @FXML public Text DistanceDifference;
   @FXML public Text EmissionDifference;
+  @FXML private Button BackButton;
 
   /**
    * This method is required for Initializable interface show distance and emissions of each route
@@ -36,18 +37,27 @@ public class AnalyseResultController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     Storage storage = Main.getStorage();
-    String DistanceRoute1Text = String.valueOf(storage.getAnalyseDistanceResult().get(0));
+    if (storage.getAnalyseDistanceResult().size() == 0
+        || storage.getAnalyseEmissionResult().size() == 0) {
 
-    DistanceRoute1.setText(DistanceRoute1Text);
-    String DistanceRoute2Text = String.valueOf(storage.getAnalyseDistanceResult().get(1));
+      DistanceRoute1.setText("NaN");
+      DistanceRoute2.setText("NaN");
+      EmissionRoute1.setText("NaN");
+      EmissionRoute2.setText("NaN");
+    } else {
+      String DistanceRoute1Text = String.valueOf(storage.getAnalyseDistanceResult().get(0));
+      DistanceRoute1.setText(DistanceRoute1Text);
 
-    DistanceRoute2.setText(DistanceRoute2Text);
-    String EmissionRoute1Text = String.valueOf(storage.getAnalyseEmissionResult().get(0));
+      String DistanceRoute2Text = String.valueOf(storage.getAnalyseDistanceResult().get(1));
+      DistanceRoute2.setText(DistanceRoute2Text);
 
-    EmissionRoute1.setText(EmissionRoute1Text);
-    String EmissionRoute2Text = String.valueOf(storage.getAnalyseEmissionResult().get(1));
+      String EmissionRoute1Text = String.valueOf(storage.getAnalyseEmissionResult().get(0));
+      EmissionRoute1.setText(EmissionRoute1Text);
 
-    EmissionRoute2.setText(EmissionRoute2Text);
+      String EmissionRoute2Text = String.valueOf(storage.getAnalyseEmissionResult().get(1));
+      EmissionRoute2.setText(EmissionRoute2Text);
+    }
+
     String DistanceDifferenceText =
         String.valueOf(
             Math.abs(
