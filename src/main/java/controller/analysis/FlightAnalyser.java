@@ -3,7 +3,6 @@ package controller.analysis;
 import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +13,13 @@ import java.util.List;
  *
  * @author HeZhengJingRui and Enyang Zhang
  * @version 1.2
- * @since 2020-08-24
+ * @since 24/08/2020
  */
 public class FlightAnalyser {
     /**
      * radius of the earth
      */
-    private final double radius = 6371e3; // radius of earth;
+    private final double radius = 6371e3;
 
     /**
      * the amount of fuel have been used
@@ -29,27 +28,27 @@ public class FlightAnalyser {
     /**
      * the number of seats have been occupancy
      */
-    private final int seatsOccupancy = 333; // number of passengers;
+    private final int seatsOccupancy = 333;
     /**
-     * the amount of Co2 produce by one gram of fuel
+     * the amount of Co2 produce by one gram of fuel in grams
      */
-    private final double Co2OfOneGramFuel = 3.15; // in gram
+    private final double Co2OfOneGramFuel = 3.15;
     /**
-     * cruisingspeed of the aircraft
+     * cruisingspeed of the aircraft in km per hour
      */
-    private final int CruisingSpeed = 910; // km per hour
+    private final int CruisingSpeed = 910;
     /**
      * arraylist path1 to store two airport code
      */
-    private ArrayList<String> path1 = new ArrayList<String>();
+    private ArrayList<String> path1 = new ArrayList<>();
     /**
      * arraylist path2 to store two airport code
      */
-    private ArrayList<String> path2 = new ArrayList<String>();
+    private ArrayList<String> path2 = new ArrayList<>();
     /**
      * arraylist to store all airport code which are available
      */
-    private List<Airport> airports = new ArrayList<Airport>();
+    private List<Airport> airports = new ArrayList<>();
     /**
      * arraylist to store airport code
      */
@@ -77,7 +76,7 @@ public class FlightAnalyser {
 
 
     /**
-     * Constructor of FlightAnalyser which starts processing and calculation.
+     * The constructor of FlightAnalyser which starts processing and calculation.
      *
      * @param route1  An arraylist contains IATA or ICAO code for each airport which the flight may
      *                pass for path1.
@@ -98,10 +97,10 @@ public class FlightAnalyser {
     }
 
     /**
-     * Constructor of FlightAnalyser which starts processing and calculation.
+     *The constructor of FlightAnalyser which starts processing and calculation.
      *
      * @param route1  An arraylist contains IATA or ICAO code for each airport which the flight may
-     *                *     pass for a path.
+     *                pass for a path.
      * @param storage Storage contains all information about airports, routes, and airlines.
      */
     public FlightAnalyser(Route route1, Storage storage) {
@@ -114,7 +113,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Get the longitude and the latitude from each airport and put them into a list.
+     * This method gets the longitude and the latitude from each airport and put them into a list.
      */
     private void processsPathSingle() {
         for (String airportCode : path1) {
@@ -130,7 +129,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Get the coordinate and then calculate the single airline distance.
+     * This method gets the coordinate and then calculate the single airline distance.
      */
     private void calculateTotalDistanceSingle() {
         for (int i = 0; i < path1Coords.size() - 1; i++) {
@@ -143,7 +142,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Process two arraylist path1 and path2, loop through the airports data and put coordinates of
+     * This method processes two arraylist path1 and path2, loop through the airports data and put coordinates of
      * each airport which is contained in the path into arraylist path1coords and path2coords.
      */
     private void processsPath() {
@@ -170,7 +169,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * calculate the single path emission by using the distance has been calculated
+     * This method calculates the single path emission by using the distance has been calculated
      */
     private void calculatePathsEmissionSingle() {
         this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
@@ -178,7 +177,7 @@ public class FlightAnalyser {
 
 
     /**
-     * Calculate totalDistance of path1 and path2.
+     * This method calculates totalDistance of path1 and path2.
      */
     private void calculateTotalDistance() {
         for (int i = 0; i < path1Coords.size() - 1; i++) {
@@ -199,7 +198,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Calculate distance between two airports.
+     * This method calculates distance between two airports.
      *
      * @param Lati1 Latitude of the airport in path1.
      * @param Long1 longitude of the airport in path1.
@@ -226,7 +225,7 @@ public class FlightAnalyser {
 
 
     /**
-     * start calculate two paths' total carbon emission.
+     * This method starts the calculation of two paths' total carbon emission.
      */
     private void calculatePathsEmission() {
         this.totalEmissionPath1 = calculateCarbonEmission(totalDistancePath1);
@@ -234,7 +233,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Calculate carbon emission between two airports.
+     * This method calculates the carbon emission between two airports.
      *
      * @param distance distance between two airports.
      * @return carbon emission in kilograms.
@@ -260,7 +259,7 @@ public class FlightAnalyser {
 
 
     /**
-     * Compare distance between two paths by getting absolute number of their difference.
+     * This method compares the distance between two paths by getting absolute number of their difference.
      *
      * @return difference of two distances.
      */
@@ -269,7 +268,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Compare emission between two paths by getting absolute number of their difference.
+     * This method compares the emissions between two paths by getting absolute number of their difference.
      *
      * @return difference of two emissions.
      */
@@ -278,7 +277,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Getter for path1 emission.
+     * The getter for path1 emission.
      *
      * @return Total emission of path1.
      */
@@ -287,7 +286,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * getter for path2 emissions.
+     * The getter for path2 emissions.
      *
      * @return Total mission of path2.
      */
@@ -296,7 +295,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Getter for path1 distance.
+     * The getter for path1 distance.
      *
      * @return Total distance of path1.
      */
@@ -305,7 +304,7 @@ public class FlightAnalyser {
     }
 
     /**
-     * Getter for path2 distance.
+     * The getter for path2 distance.
      *
      * @return Total distance of path2.
      */

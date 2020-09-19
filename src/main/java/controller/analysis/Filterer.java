@@ -10,7 +10,7 @@ import java.util.*;
  * Class for filtering data based on one or more filter options.
  *
  * @author Hayley Krippner, Ella Johnson
- * @since 2020-08-30
+ * @since 30/08/2020
  * @version 1.0
  */
 public class Filterer {
