@@ -58,8 +58,7 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
-    totalCarbonEmissions +=
-        (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+    totalCarbonEmissions += (currentRouteRecord.getEmissions() * 1);
   }
 
   // TODO: change to remove getTimesTaken for the time being (HK)
@@ -70,7 +69,7 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
-    totalDistanceTravelled += (currentRouteRecord.getDistance());
+    totalDistanceTravelled += (currentRouteRecord.getDistance() * 1);
   }
 
   /**
@@ -282,9 +281,6 @@ public class ReportGenerator {
     }
   }
 
-  // TODO: write this method.
-  // TODO: write comment for this method
-
   /**
    * This method calculates how many trees need to be planted to counter the carbon emissions
    * produced.
@@ -330,6 +326,14 @@ public class ReportGenerator {
   }
 
   public ArrayList<String> getMostVisitedDestAirports() {
+    return mostVisitedDestAirports;
+  }
+
+  public ArrayList<String> getLeastVisitedSrcAirports() {
+    return mostVisitedSrcAirports;
+  }
+
+  public ArrayList<String> getLeastVisitedDestAirports() {
     return mostVisitedDestAirports;
   }
 
@@ -430,7 +434,7 @@ public class ReportGenerator {
     mostEmissionsRoutes.clear();
     leastEmissionsRoutes.clear();
     mostDistanceRoutes.clear();
-    leastEmissionsRoutes.clear();
+    leastDistanceRoutes.clear();
     mostVisitedDestAirports.clear();
     mostVisitedSrcAirports.clear();
     //TODO add in least visited.
