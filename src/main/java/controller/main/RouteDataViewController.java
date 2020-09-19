@@ -1,9 +1,8 @@
-package controller.main.dataview;
+package controller.main;
 
 import controller.analysis.FlightAnalyser;
 import controller.analysis.ReportGenerator;
 import controller.analysis.Searcher;
-import controller.main.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

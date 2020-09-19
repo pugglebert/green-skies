@@ -1,4 +1,4 @@
-package controller.main.dataview;
+package controller.main;
 
 import controller.analysis.FlightAnalyser;
 import controller.analysis.ReportGenerator;

@@ -13,8 +13,8 @@ import static org.junit.Assert.*;
 
 public class AirportParserTest {
     private AirportParser airportParser;
-    private ArrayList lines;
-//    private AirportParser parser;
+
+    //    private AirportParser parser;
 //    private final Method methods[] = AirportParser.class.getDeclaredMethods();
 //    private ArrayList<String> testLines;
 //
@@ -23,7 +23,7 @@ public class AirportParserTest {
         Loader loader = new Loader(new Storage());
         List<Airport> existingLines = new ArrayList<Airport>();
         try{
-            lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
+            ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airportsTest.csv");
             airportParser = new AirportParser(lines, existingLines);
         } catch (FileNotFoundException e) {
         }
