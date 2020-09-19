@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
             prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.main.upload.AirlineSingleEntryController">
+            fx:controller="controller.main.AirlineSingleEntryController">
     <children>
         <Text layoutX="53.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:"/>
         <Text layoutX="223.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Airline ID:"/>

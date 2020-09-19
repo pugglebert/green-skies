@@ -1,4 +1,4 @@
-package controller.main.upload;
+package controller.main;
 
 import controller.main.Main;
 import controller.main.SideNavBarController;
