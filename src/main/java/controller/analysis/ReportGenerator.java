@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//TODO: check all method comments start with "This method ..."
-
 /**
  * Class for which contains the methods for calcuting and updating the analysis data for the user's
  * carbon emissions report.
@@ -17,51 +15,80 @@ import java.util.Map;
  * @version 1.0
  */
 public class ReportGenerator {
-  // TODO: write comments for these attributes
-
-  private double totalDistanceTravelled = 0.0; // km
-
-  private double totalCarbonEmissions = 0.0; // grams
-
+  /**
+   * This total distance the user has travelled via flying in km.
+   */
+  private double totalDistanceTravelled = 0.0;
+  /**
+   * The total carbon emissions produced in g from the user's flight travel.
+   */
+  private double totalCarbonEmissions = 0.0;
+  /***
+   * The routes which produce the most emissions.
+   */
   private ArrayList<Route> mostEmissionsRoutes = new ArrayList<>();
-
+  /***
+   * The routes which produce the least emissions.
+   */
   private ArrayList<Route> leastEmissionsRoutes = new ArrayList<>();
-
+  /***
+   * The routes which are of the most distance.
+   */
   private ArrayList<Route> mostDistanceRoutes = new ArrayList<>();
-
+  /***
+   * The routes which are of the least distance.
+   */
   private ArrayList<Route> leastDistanceRoutes = new ArrayList<>();
-
+  /***
+   * The source airports which were the most visited.
+   */
   private ArrayList<String> mostVisitedSrcAirports = new ArrayList<>();
-
+  /***
+   * The destination airports which were the most visited.
+   */
   private ArrayList<String> mostVisitedDestAirports = new ArrayList<>();
-
+  /***
+   * The routes which were most travelled.
+   */
   private ArrayList<Route> mostTravelledRoutes = new ArrayList<>();
-
+  /**
+   * The routes which were the least travelled.
+   */
   private ArrayList<Route> leastTravelledRoutes = new ArrayList<>();
-
-  private double carbonEmissionGoal = 0.0; // grams
-
+  /**
+   * The user's carbon emission goal which is the amount of carbon emissions they want to remain below within the current year, in grams.
+   */
+  private double carbonEmissionGoal = 0.0;
+  /**
+   * The amount the user needs to reduce their carbon emission production by via flight travel to ensure their goal is met.
+   */
   private double howMuchToReduceCO2By = 0.0;
-
+  /**
+   * The analysis period for their current carbon emissions goal.
+   */
   private double analysisPeriod = 0.0;
-
+  /**
+   * The number of trees the user would need to plant to counter their current carbon emissions.
+   */
   private double treesToGrow = 0.0;
 
+  //TODO: change to remove getTimesTaken for the time being (HK)
   /**
    * This method updates the total carbon emissions from flight travel.
    *
    * @param currentRouteRecord , the current route record that is being added to user's flight
-   *     history.
+   *                             history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
     totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
   }
 
+  //TODO: change to remove getTimesTaken for the time being (HK)
   /**
    * This method updates the total distance travelled via flight travel.
    *
    * @param currentRouteRecord , the current route record that is being added to user's flight
-   *     history.
+   *                             history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
     totalDistanceTravelled += (currentRouteRecord.getDistance());
@@ -71,7 +98,7 @@ public class ReportGenerator {
    * This method updates the current most travelled flight route.
    *
    * @param routeHistoryEntries , the current route record that is being added to user's flight
-   *     history.
+   *                              history.
    */
   public void updateMostTravelledRoute(List<Route> routeHistoryEntries) {
     if (routeHistoryEntries.size() >= 1) {
@@ -94,21 +121,9 @@ public class ReportGenerator {
    * the flight history.
    *
    * @param routeHistoryEntries, the current route record that is being added to user's flight
-   *     history.
+   *                             history.
    */
   public void updateLeastTravelledRoute(List<Route> routeHistoryEntries) {
-    // TODO: remove once the quicksort and binary sort have been thoughroughly tested.
-
-    //        int currMaxRouteUsed = 0;
-    //        for (Route route : routeHistoryEntries) {
-    //            if (route.getTimesTaken() > currMaxRouteUsed) {
-    //                leastTravelledRoutes.clear();
-    //                leastTravelledRoutes.add(route);
-    //            } else if (route.getTimesTaken() == currMaxRouteUsed) {
-    //                leastTravelledRoutes.add(route);
-    //            }
-    //        }
-
     if (routeHistoryEntries.size() >= 1) {
       if (routeHistoryEntries.size() == 1) {
         leastTravelledRoutes.add(routeHistoryEntries.get(0));
@@ -235,8 +250,6 @@ public class ReportGenerator {
     }
   }
 
-  // TODO: write a single method for MostVisitedSrcAirports and MostVisitedDestAirports
-
   /**
    * Calculates the airport(s) that was the most visited, based on the user's flight history
    * entries.
@@ -293,59 +306,62 @@ public class ReportGenerator {
   // TODO: write this method.
   // TODO: write comment for this method
 
-  public void calculateOffsetTrees(double totalCarbonEmissions) {}
+  /**
+   * This method calculates how many trees need to be planted to counter the carbon emissions produced.
+   * @param totalCarbonEmissions , the total carbon emissions which have currently been produced.
+   */
+  public void calculateOffsetTrees(double totalCarbonEmissions) {
 
+  }
 
-
-  // TODO: write comment for this method
   public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
     this.carbonEmissionGoal = carbonEmissionGoal;
   }
-  // TODO: write comment for this method
+
   public void setAnalysisPeriod(double analysisPeriod) {
     this.analysisPeriod = analysisPeriod;
   }
-  // TODO: write comment for this method
+
   public double getTotalDistanceTravelled() {
     return totalDistanceTravelled;
   }
-  // TODO: write comment for this method
+
   public double getTotalCarbonEmissions() {
     return totalCarbonEmissions;
   }
-  // TODO: write comment for this method
+
   public ArrayList<Route> getMostEmissionsRoutes() {
     return mostEmissionsRoutes;
   }
-  // TODO: write comment for this method
+
   public ArrayList<Route> getLeastEmissionsRoutes() {
     return leastEmissionsRoutes;
   }
-  // TODO: write comment for this method
+
   public ArrayList<Route> getMostDistanceRoutes() {
     return mostDistanceRoutes;
   }
-  // TODO: write comment for this method
+
   public ArrayList<Route> getLeastDistanceRoutes() {
     return leastDistanceRoutes;
   }
-  // TODO: write comment for this method
+
   public ArrayList<String> getMostVisitedSrcAirports() {
     return mostVisitedSrcAirports;
   }
-  // TODO: write comment for this method
+
   public ArrayList<String> getMostVisitedDestAirports() {
     return mostVisitedDestAirports;
   }
-  // TODO: write comment for this method
+
   public double getCarbonEmissionGoal() {
     return carbonEmissionGoal;
   }
-  // TODO: write comment for this method
+
   public double getHowMuchToReduceCO2By() {
     return howMuchToReduceCO2By;
   }
-  // TODO: write comment for this method
+
   public double getAnalysisPeriod() {
     return analysisPeriod;
   }
@@ -411,20 +427,10 @@ public class ReportGenerator {
     return counter;
   }
 
-  /**
-   * This method sets the total carbon emissions to the provided totalCarbonEmissions double.
-   *
-   * @param totalCarbonEmissions , the total distance travelled by flight travel.
-   */
   public void setTotalCarbonEmissions(double totalCarbonEmissions) {
     this.totalCarbonEmissions = totalCarbonEmissions;
   }
 
-  /**
-   * This method sets the total carbon emissions to the provided totalDistanceTravelled double.
-   *
-   * @param totalDistanceTravelled , the total distance travelled by flight travel.
-   */
   public void setTotalDistanceTravelled(double totalDistanceTravelled) {
     this.totalDistanceTravelled = totalDistanceTravelled;
   }
@@ -436,4 +442,6 @@ public class ReportGenerator {
   public ArrayList<Route> getLeastTravelledRoute() {
     return leastTravelledRoutes;
   }
+
+  //TODO: add in the missing gets and sets needed to rewrite the missing code from 17/09/2020 HK
 }
