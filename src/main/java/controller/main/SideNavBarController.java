@@ -12,7 +12,6 @@ import model.data.Storage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-// TODO: check all method comments start with "This method ..."
 
 /**
  * Superclass for all data view pages. All such pages contain a table of data, tools for searching
@@ -34,13 +33,17 @@ public abstract class SideNavBarController implements Initializable {
   @FXML protected Button btnGraphs;
   @FXML protected Button btnAnalyseFlight;
 
-  // TODO: write comments for these attributes
-
+  /** The search types. */
   protected ObservableList<String> searchTypes;
+  /** The storage for the application. */
   protected final Storage storage = Main.getStorage();
 
-  // TODO: write comment for this method
-
+  /**
+   * This method initializes the class.
+   *
+   * @param url The provided url.
+   * @param rb The provided resource bundle.
+   */
   public abstract void initialize(URL url, ResourceBundle rb);
 
   /**
@@ -54,11 +57,9 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("upload.fxml"));
+      root = FXMLLoader.load(getClass().getResource("upload.fxml"));
     } catch (NullPointerException e) {
-      root = FXMLLoader.load(
-                      getClass().getResource("../upload.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../upload.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
@@ -77,11 +78,9 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("viewRouteData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
     } catch (NullPointerException e) {
-      root = FXMLLoader.load(
-                      getClass().getResource("../viewRouteData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../viewRouteData.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
@@ -100,14 +99,12 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("viewAirportData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml"));
 
     } catch (NullPointerException e) {
-      root = FXMLLoader.load(
-                      getClass().getResource("../viewAirportData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../viewAirportData.fxml"));
     }
-     // open the View Airport Data page
+    // open the View Airport Data page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
     newStage.setMaximized(true);
@@ -125,11 +122,9 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("viewAirlineData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml"));
     } catch (NullPointerException e) {
-      root = FXMLLoader.load(
-                      getClass().getResource("../viewAirlineData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../viewAirlineData.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
@@ -148,11 +143,9 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("flightHistory.fxml"));
+      root = FXMLLoader.load(getClass().getResource("flightHistory.fxml"));
     } catch (NullPointerException e) {
-      root = FXMLLoader.load(
-                      getClass().getResource("../flightHistory.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../flightHistory.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
@@ -171,11 +164,9 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("carbonEmissionsReport.fxml"));
+      root = FXMLLoader.load(getClass().getResource("carbonEmissionsReport.fxml"));
     } catch (NullPointerException e) {
-      root = FXMLLoader.load(
-                      getClass().getResource("../carbonEmissionsReport.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../carbonEmissionsReport.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
@@ -194,13 +185,9 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root =
-              FXMLLoader.load(
-                      getClass().getResource("mapOfRoutes.fxml"));
+      root = FXMLLoader.load(getClass().getResource("mapOfRoutes.fxml"));
     } catch (NullPointerException e) {
-      root =
-              FXMLLoader.load(
-                      getClass().getResource("../mapOfRoutes.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../mapOfRoutes.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
@@ -219,12 +206,9 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("graphs.fxml"));
+      root = FXMLLoader.load(getClass().getResource("graphs.fxml"));
     } catch (NullPointerException e) {
-      root =
-              FXMLLoader.load(
-                      getClass().getResource("../graphs.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../graphs.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
@@ -232,19 +216,20 @@ public abstract class SideNavBarController implements Initializable {
     newStage.show();
   }
 
-  // TODO: write comment for this method
-
+  /**
+   * This method closes the current page and opens the Flight Analyser page.
+   *
+   * @throws IOException
+   */
   public void toAnalyseFlight() throws IOException {
     Stage stage = (Stage) btnAnalyseFlight.getScene().getWindow();
     stage.close();
     Stage newStage = new Stage();
     Parent root;
     try {
-      root = FXMLLoader.load(
-                      getClass().getResource("analyse.fxml"));
+      root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
     } catch (NullPointerException e) {
-      root = FXMLLoader.load(
-                      getClass().getResource("../analyse.fxml"));
+      root = FXMLLoader.load(getClass().getResource("../analyse.fxml"));
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);

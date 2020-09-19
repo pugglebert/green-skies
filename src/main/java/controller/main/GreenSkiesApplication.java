@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * The controller class which contains the controls for starting the application.
  *
@@ -17,9 +15,13 @@ import java.io.IOException;
  * @since 04/09/20
  */
 public class GreenSkiesApplication extends Application {
-  // TODO: write comment for this method
 
-  /** @param primaryStage, the primary stage used. */
+  /**
+   * This method starts the application's GUI
+   *
+   * @param primaryStage The primary stage used.
+   * @throws IOException
+   */
   @Override
   public void start(Stage primaryStage) throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
@@ -28,8 +30,12 @@ public class GreenSkiesApplication extends Application {
     primaryStage.setMaximized(true);
     primaryStage.show();
   }
-  // TODO: write comment for this method
 
+  /**
+   * This method is where the application is called from.
+   *
+   * @param args The passed in arguements.
+   */
   public static void main(String[] args) {
     launch(args);
   }

@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  *
  * @author Hayley Krippner
  * @version 1.0
- * @since 14/09/20
+ * @since 19/09/20
  */
 public class CarbonEmissionsReportController extends SideNavBarController {
 
@@ -37,19 +37,22 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField carbonEmissionGoalField;
   private ReportGenerator reportGenerator;
 
+  /**
+   * This method is the initializer for this class.
+   *
+   * @param url The provided url.
+   * @param resourceBundle The provided resource bundle.
+   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    this.reportGenerator = Main.getReportGenerator(); // TODO update this so that is
+    this.reportGenerator = Main.getReportGenerator();
   }
-
-  // TODO: the inputs need to be validated and a text box needs to be displayed for invalid input
-  // 13/09/2020 HK.
 
   /**
    * This method displays the carbon emissions report information based on the inputted goal,
    * duration and current flight history records.
    *
-   * @param event
+   * @param event The event to handle.
    * @throws IOException
    */
   @FXML
@@ -83,7 +86,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   /**
    * This method clears all fields in the report generator page to be empty.
    *
-   * @param event
+   * @param event The event to handle.
    * @throws IOException
    */
   @FXML

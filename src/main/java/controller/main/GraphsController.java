@@ -3,8 +3,6 @@ package controller.main;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * The controller class which contains the controls for the graphs page.
  *
@@ -14,7 +12,12 @@ import java.util.ResourceBundle;
  */
 public class GraphsController extends SideNavBarController {
 
-  // TODO: write comments for these attributes
+  /**
+   * This method is the initializer for this class.
+   *
+   * @param url The provided resoure bundle.
+   * @param resourceBundle The resoure bundle.
+   */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {}
 }

@@ -6,12 +6,11 @@ import model.data.Route;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Class for searching data for entry which matches specific search term.
  *
  * @author Ella Johnson, Hayley Krippner
- * @since 2020-08-26
+ * @since 26/08/2020
  * @version 1.0
  */
 public class Searcher {
@@ -19,10 +18,10 @@ public class Searcher {
   /**
    * This method earches airport data for entries that match the given search term.
    *
-   * @param searchTerm a string entered by the user for something they want information on.
-   * @param type the type of attribute the user.
-   * @param airports a list of airports to be searched through.
-   * @return an arrayList of the airports that match the search term.
+   * @param searchTerm A string entered by the user for something they want information on.
+   * @param type The type of attribute the user.
+   * @param airports A list of airports to be searched through.
+   * @return An arrayList of the airports that match the search term.
    */
   public static ArrayList<Airport> searchAirports(
       String searchTerm, String type, List<Airport> airports) {
@@ -62,10 +61,10 @@ public class Searcher {
   /**
    * This method searches airline data for entries that match the given search term.
    *
-   * @param searchTerm a string entered by the user for something they want information on.
-   * @param type the type of attribute the user.
-   * @param airlines a list of airlines to be searched through.
-   * @return an arrayList of the airlines that match the search term.
+   * @param searchTerm A string entered by the user for something they want information on.
+   * @param type The type of attribute the user.
+   * @param airlines A list of airlines to be searched through.
+   * @return An arrayList of the airlines that match the search term.
    */
   public static ArrayList<Airline> searchAirlines(
       String searchTerm, String type, List<Airline> airlines) {
@@ -107,10 +106,10 @@ public class Searcher {
   /**
    * This method searches route data for entries that match the given search term.
    *
-   * @param searchTerm a string entered by the user for something they want information on.
-   * @param type the type of attribute the user. Must by one of "Airline", "Source", "Destination".
-   * @param routes a list of routes to be searched through.
-   * @return an arrayList of the routes that match the search term.
+   * @param searchTerm A string entered by the user for something they want information on.
+   * @param type The type of attribute the user. Must by one of "Airline", "Source", "Destination".
+   * @param routes A list of routes to be searched through.
+   * @return An arrayList of the routes that match the search term.
    */
   public static ArrayList<Route> searchRoutes(String searchTerm, String type, List<Route> routes) {
     ArrayList<Route> matches = new ArrayList<Route>();

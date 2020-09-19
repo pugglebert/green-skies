@@ -19,11 +19,10 @@ public class MapOfRoutesController extends SideNavBarController {
   @FXML private WebView mapView;
   @FXML private WebEngine mapEngine;
 
-
   /**
    * This method initializes the controller class.
-   * @param url
-   * @param resourceBundle
+   * @param url The provided url.
+   * @param resourceBundle The proided resource bundle.
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {

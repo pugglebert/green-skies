@@ -5,7 +5,6 @@ import model.data.Airport;
 import model.data.Route;
 import java.util.*;
 
-
 /**
  * Class for filtering data based on one or more filter options.
  *
@@ -25,11 +24,12 @@ public class Filterer {
   private boolean filterSuccess;
 
   /**
-   * This method filters airport data to get the Airport records that contain the desired filter entries.
+   * This method filters airport data to get the Airport records that contain the desired filter
+   * entries.
    *
-   * @param filterTerms an HashMap of Strings of filter terms selected by the user for Airport
+   * @param filterTerms A HashMap of Strings of filter terms selected by the user for Airport
    *     records they want information on and their associated attribute type as a String.
-   * @param airports a List of Airports to filter.
+   * @param airports A List of Airports to filter.
    */
   public void filterAirports(HashMap<String, String> filterTerms, List<Airport> airports) {
 
@@ -58,11 +58,12 @@ public class Filterer {
   }
 
   /**
-   * This method filters airline data to get the airport records that contain the desired filter entries.
+   * This method filters airline data to get the airport records that contain the desired filter
+   * entries.
    *
-   * @param filterTerms an HashMap of Strings of filter terms selected by the user for airline
+   * @param filterTerms A HashMap of Strings of filter terms selected by the user for airline
    *     records they want information on and their associated attribute type as a String.
-   * @param airlines a List of Airlines to filter.
+   * @param airlines A List of Airlines to filter.
    */
   public void filterAirlines(HashMap<String, String> filterTerms, List<Airline> airlines) {
 
@@ -91,11 +92,12 @@ public class Filterer {
   }
 
   /**
-   * This method filters airport data to get the airport records that contain the desired filter entries.
+   * This method filters airport data to get the airport records that contain the desired filter
+   * entries.
    *
-   * @param filterTerms an HashMap of Strings of filter terms selected by the user for airport
+   * @param filterTerms A HashMap of Strings of filter terms selected by the user for airport
    *     records they want information on and their associated attribute type as a String.
-   * @param routes a List of Routes to filter.
+   * @param routes A List of Routes to filter.
    */
   public void filterRoutes(HashMap<String, String> filterTerms, List<Route> routes) {
 
@@ -123,48 +125,27 @@ public class Filterer {
   }
 
   /**
-   * This method allows class calling filter datatype methods to set filter success to true if there were no
-   * errors or false if errors occured.
+   * This method allows class calling filter datatype methods to set filter success to true if there
+   * were no errors or false if errors occured.
    *
-   * @param success Value to set filter success attribute to.
+   * @param success The value to set filter success attribute to.
    */
   public void setFilterSuccess(boolean success) {
     filterSuccess = success;
   }
 
-  /**
-   * This method returns the filterSuccess attribute, which should be set to true if filtering was executed with
-   *  no errors and false otherwise.
-   *
-   * @return filterSuccess.
-   */
   public boolean getFilterSuccess() {
     return filterSuccess;
   }
 
-  /**
-   * This method returns a list of airports after latest filterAirports call has been carried out.
-   *
-   * @return filteredAirports.
-   */
   public List<Airport> getFilteredAirports() {
     return filteredAirports;
   }
 
-  /**
-   * This method returns a list of airlines after latest filterAirlines call has been carried out.
-   *
-   * @return filteredAirlines.
-   */
   public List<Airline> getFilteredAirlines() {
     return filteredAirlines;
   }
 
-  /**
-   * This method returns a list of routes after latest filterRoutes call has been carried out.
-   *
-   * @return filteredRoutes.
-   */
   public List<Route> getFilteredRoutes() {
     return filteredRoutes;
   }

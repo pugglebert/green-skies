@@ -6,8 +6,6 @@ import model.data.Storage;
 import model.loader.Loader;
 import java.sql.SQLException;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * The controller class which contains the controls for the main.
  *
@@ -16,35 +14,45 @@ import java.sql.SQLException;
  * @since 04/09/20
  */
 public class Main {
-  // TODO: write comments for these attributes
-
+  /**
+   * The storage for the application.
+   */
   private static Storage storage = new Storage();
+  /**
+   * The data loader for the the application.
+   */
   private static Loader loader = new Loader(storage);
+  /**
+   * The filter for the application.
+   */
   private static Filterer filterer = new Filterer();
+  /**
+   * The report generator for the application.
+   */
   private static ReportGenerator reportGenerator = new ReportGenerator();
-  // TODO: write comment for this method
 
   public static Storage getStorage() {
     return storage;
   }
-  // TODO: write comment for this method
 
   public static Loader getLoader() {
     return loader;
   }
-  // TODO: write comment for this method
 
   public static Filterer getFilterer() {
     return filterer;
   }
-  // TODO: write comment for this method
 
   public static ReportGenerator getReportGenerator() {
     return reportGenerator;
   }
 
-  // TODO: write comment for this method
-  // TODO can the comment things be removed? HK 16/09/2020
+  /**
+   * This method is the main which initilizes the storage and starts the application.
+   * @param args The arguments passed in.
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   */
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
     storage.initialiseStorage();

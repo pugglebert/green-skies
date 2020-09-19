@@ -15,80 +15,59 @@ import java.util.Map;
  * @version 1.0
  */
 public class ReportGenerator {
-  /**
-   * This total distance the user has travelled via flying in km.
-   */
+  /** This total distance the user has travelled via flying in km. */
   private double totalDistanceTravelled = 0.0;
-  /**
-   * The total carbon emissions produced in g from the user's flight travel.
-   */
+  /** The total carbon emissions produced in g from the user's flight travel. */
   private double totalCarbonEmissions = 0.0;
-  /***
-   * The routes which produce the most emissions.
-   */
+  /** * The routes which produce the most emissions. */
   private ArrayList<Route> mostEmissionsRoutes = new ArrayList<>();
-  /***
-   * The routes which produce the least emissions.
-   */
+  /** * The routes which produce the least emissions. */
   private ArrayList<Route> leastEmissionsRoutes = new ArrayList<>();
-  /***
-   * The routes which are of the most distance.
-   */
+  /** * The routes which are of the most distance. */
   private ArrayList<Route> mostDistanceRoutes = new ArrayList<>();
-  /***
-   * The routes which are of the least distance.
-   */
+  /** * The routes which are of the least distance. */
   private ArrayList<Route> leastDistanceRoutes = new ArrayList<>();
-  /***
-   * The source airports which were the most visited.
-   */
+  /** * The source airports which were the most visited. */
   private ArrayList<String> mostVisitedSrcAirports = new ArrayList<>();
-  /***
-   * The destination airports which were the most visited.
-   */
+  /** * The destination airports which were the most visited. */
   private ArrayList<String> mostVisitedDestAirports = new ArrayList<>();
-  /***
-   * The routes which were most travelled.
-   */
+  /** * The routes which were most travelled. */
   private ArrayList<Route> mostTravelledRoutes = new ArrayList<>();
-  /**
-   * The routes which were the least travelled.
-   */
+  /** The routes which were the least travelled. */
   private ArrayList<Route> leastTravelledRoutes = new ArrayList<>();
   /**
-   * The user's carbon emission goal which is the amount of carbon emissions they want to remain below within the current year, in grams.
+   * The user's carbon emission goal which is the amount of carbon emissions they want to remain
+   * below within the current year, in grams.
    */
   private double carbonEmissionGoal = 0.0;
   /**
-   * The amount the user needs to reduce their carbon emission production by via flight travel to ensure their goal is met.
+   * The amount the user needs to reduce their carbon emission production by via flight travel to
+   * ensure their goal is met.
    */
   private double howMuchToReduceCO2By = 0.0;
-  /**
-   * The analysis period for their current carbon emissions goal.
-   */
+  /** The analysis period for their current carbon emissions goal. */
   private double analysisPeriod = 0.0;
-  /**
-   * The number of trees the user would need to plant to counter their current carbon emissions.
-   */
+  /** The number of trees the user would need to plant to counter their current carbon emissions. */
   private double treesToGrow = 0.0;
 
-  //TODO: change to remove getTimesTaken for the time being (HK)
+  // TODO: change to remove getTimesTaken for the time being (HK)
   /**
    * This method updates the total carbon emissions from flight travel.
    *
    * @param currentRouteRecord , the current route record that is being added to user's flight
-   *                             history.
+   *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
-    totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+    totalCarbonEmissions +=
+        (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
   }
 
-  //TODO: change to remove getTimesTaken for the time being (HK)
+  // TODO: change to remove getTimesTaken for the time being (HK)
   /**
    * This method updates the total distance travelled via flight travel.
    *
    * @param currentRouteRecord , the current route record that is being added to user's flight
-   *                             history.
+   *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
     totalDistanceTravelled += (currentRouteRecord.getDistance());
@@ -98,7 +77,7 @@ public class ReportGenerator {
    * This method updates the current most travelled flight route.
    *
    * @param routeHistoryEntries , the current route record that is being added to user's flight
-   *                              history.
+   *     history.
    */
   public void updateMostTravelledRoute(List<Route> routeHistoryEntries) {
     if (routeHistoryEntries.size() >= 1) {
@@ -121,7 +100,7 @@ public class ReportGenerator {
    * the flight history.
    *
    * @param routeHistoryEntries, the current route record that is being added to user's flight
-   *                             history.
+   *     history.
    */
   public void updateLeastTravelledRoute(List<Route> routeHistoryEntries) {
     if (routeHistoryEntries.size() >= 1) {
@@ -129,7 +108,7 @@ public class ReportGenerator {
         leastTravelledRoutes.add(routeHistoryEntries.get(0));
       } else {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
-    int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
+        int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
         int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
         for (int i = 0; i < firstOccuranceIndex + 1; i++) {
           leastTravelledRoutes.add(routeHistoryEntries.get(i));
@@ -307,12 +286,12 @@ public class ReportGenerator {
   // TODO: write comment for this method
 
   /**
-   * This method calculates how many trees need to be planted to counter the carbon emissions produced.
+   * This method calculates how many trees need to be planted to counter the carbon emissions
+   * produced.
+   *
    * @param totalCarbonEmissions , the total carbon emissions which have currently been produced.
    */
-  public void calculateOffsetTrees(double totalCarbonEmissions) {
-
-  }
+  public void calculateOffsetTrees(double totalCarbonEmissions) {}
 
   public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
     this.carbonEmissionGoal = carbonEmissionGoal;
@@ -369,8 +348,8 @@ public class ReportGenerator {
   /**
    * This function implements the binary search algorithm.
    *
-   * @param arraryToSearch, the array which is being searched.
-   * @param searchElement, the element that is being search for.
+   * @param arraryToSearch The array which is being searched.
+   * @param searchElement The element that is being search for.
    * @return
    */
   public static int binarySearch(List<Route> arraryToSearch, int searchElement) {
@@ -391,9 +370,9 @@ public class ReportGenerator {
   /**
    * This method sets up the quick sort algorithm.
    *
-   * @param arraytoSort , the array which needs to be sorted.
-   * @param start , the starting index of the arrayToSort.
-   * @param end , the ending index of the arrayToSort.
+   * @param arraytoSort The array which needs to be sorted.
+   * @param start The starting index of the arrayToSort.
+   * @param end The ending index of the arrayToSort.
    */
   public static void quickSort(List<Route> arraytoSort, int start, int end) {
     if (end <= start) return;
@@ -405,9 +384,9 @@ public class ReportGenerator {
   /**
    * This function implements the main logic of the quick sort algoirthm.
    *
-   * @param arraytoSort , the array which needs to be sorted.
-   * @param start , the starting index of the arrayToSort.
-   * @param end , the ending index of the arrayToSort.
+   * @param arraytoSort The array which needs to be sorted.
+   * @param start The starting index of the arrayToSort.
+   * @param end The ending index of the arrayToSort.
    * @return
    */
   static int quickSortPartition(List<Route> arraytoSort, int start, int end) {
@@ -443,5 +422,5 @@ public class ReportGenerator {
     return leastTravelledRoutes;
   }
 
-  //TODO: add in the missing gets and sets needed to rewrite the missing code from 17/09/2020 HK
+  // TODO: add in the missing gets and sets needed to rewrite the missing code from 17/09/2020 HK
 }
