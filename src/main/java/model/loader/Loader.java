@@ -17,16 +17,20 @@ import static com.google.common.io.Files.getFileExtension;
  *
  * @author Ella Johnson
  * @version 1.0
- * @since 2020-08-09
+ * @since 09/08/2020
  */
 public class Loader {
 
     /** Expected file extension */
     private final ArrayList<String> supportedExtensions;
-
+    /**
+     * The storage used in the application.
+     */
     private final Storage storage;
 
-    /** This constructor adds extensions for supported fileTypes to supportedExtensions. */
+    /**
+     * This constructor adds extensions for supported fileTypes to supportedExtensions.
+     */
     public Loader(Storage storage) {
         this.storage = storage;
         supportedExtensions = new ArrayList<>();
@@ -151,7 +155,7 @@ public class Loader {
      * @return Error information string.
      */
     public String loadFile(String fileName, String dataType)
-        throws FileSystemException, FileNotFoundException, SQLException, ClassNotFoundException {
+        throws FileSystemException, FileNotFoundException, SQLException {
 
         if (fileName.isEmpty()) {
             throw new RuntimeException("Filename cannot be empty.");
@@ -179,7 +183,7 @@ public class Loader {
      * @return errorMessageString
      */
     public String loadLine(String entryString, String dataType)
-        throws SQLException, ClassNotFoundException {
+        throws SQLException {
 
         ArrayList<String> line = new ArrayList<>();
         line.add(entryString);

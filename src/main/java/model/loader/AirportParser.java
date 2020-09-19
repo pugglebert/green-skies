@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Enyang Zhang(Lambert)
  * @version 2.4
- * @since 2020-09-18
+ * @since 18/09/2020
  */
 public class AirportParser extends Parser {
   /**
@@ -24,39 +24,33 @@ public class AirportParser extends Parser {
    * invalid callsign 118: invalid activestatus
    */
 
-/** All attributes for data of airport*/
-  private final int airportID = 0,
-      name = 1,
-      city = 2,
-      country = 3,
-      IATA = 4,
-      ICAO = 5,
-      latitude = 6,
-      longtitude = 7,
-      altitude = 8,
-      timezone = 9,
-      DST = 10,
-      dataBaseTimeZone = 11;
+  private final int name = 1;
+  private final int city = 2;
+  private final int country = 3;
+  private final int IATA = 4;
+  private final int ICAO = 5;
+  private final int latitude = 6;
+  private final int longtitude = 7;
+  private final int altitude = 8;
+  private final int timezone = 9;
+  private final int DST = 10;
+  private final int dataBaseTimeZone = 11;
 
   /**
-   * Constructor of AirportParser, it will start dataParse method as well.
+   * The constructor of AirportParser, it will start dataParse method as well.
    *
-   * @param dataFile is the list contains one line of datafile per element.
+   * @param dataFile The list contains one line of datafile per element.
    */
   public AirportParser(ArrayList<String> dataFile, List<Airport> existingAirports) {
     super(dataFile, 16);
-    for (Airport airport : existingAirports) {
-      parserData.add(airport);
-    }
-    try {
-      dataParser();
-    } catch (RuntimeException e) {
-      throw e;
-    }
+    parserData.addAll(existingAirports);
+    dataParser();
   }
 
+  /**
+   * This method initializes the error messages for each error code
+   */
   @Override
-  /** Initialize the error messages for each error code */
   protected void initErrorLookup() {
     errorLookup[0] = "Not enough parameters";
     errorLookup[1] = "Duplicate airport ID";
@@ -77,7 +71,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Is called when airportParser is initialized. Calls validate method to check each line. If line
+   * This method is called when airportParser is initialized. Calls validate method to check each line. If line
    * is valid, creates airport object with attributes from line and adds route to routes set.
    */
   @Override
@@ -92,13 +86,14 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Data parser to convert airport data from list into airport objects and add to HashSet. will
+   * This method is a data parser to convert airport data from list into airport objects and add to HashSet. It will
    * also call validater to verify each airport data.
    */
   protected void parseLine(String dataLine) {
     String[] line = dataLine.replaceAll("\"", "").split(",");
     if (validater(line)) {
       try {
+        int airportID = 0;
         Airport airport =
             new Airport(
                 Integer.parseInt(line[airportID]),
@@ -123,7 +118,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Validates the data in one line is valid or not.
+   * This method Validates the data in one line is valid or not.
    *
    * @param line String list contains 11 data for airport attributes.
    * @return true if the data line is valid, false if the data line is not expected.
@@ -135,11 +130,6 @@ public class AirportParser extends Parser {
       errorCounter(0);
       isValid = false;
     }
-
-    //        if (!isIdValid(line[airportID])){
-    //            isValid = false;
-    //
-    //        }
 
     if (!isNameValid(line[name])) {
       isValid = false;
@@ -189,7 +179,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if id is valid.
+   * This method checks if the id is valid.
    *
    * @param id airport id as a string.
    * @return true if valid, false if invalid.
@@ -212,7 +202,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if name is valid.
+   * This method checks if the name is valid.
    *
    * @param name airport name as a string.
    * @return true if valid, false if invalid.
@@ -226,7 +216,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if city is valid.
+   * This method checks if the city is valid.
    *
    * @param city airport city as a string.
    * @return true if valid, false if invalid.
@@ -240,7 +230,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if country is valid.
+   * This method checks if the country is valid.
    *
    * @param country airport country as a string.
    * @return true if valid, false if invalid.
@@ -255,7 +245,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if IATA is valid.
+   * This method checks if the IATA is valid.
    *
    * @param IATA airport IATA as a string.
    * @return true if valid, false if invalid.
@@ -274,7 +264,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if ICAO is valid.
+   * This method checks if the ICAO is valid.
    *
    * @param ICAO airport ICAO as a string.
    * @return true if valid, false if invalid.
@@ -294,7 +284,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if latitude is valid.
+   * This method checks if the latitude is valid.
    *
    * @param lat airport latitude as a string.
    * @return true if valid, false if invalid.
@@ -311,7 +301,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if longitude is valid.
+   * This method checks if the longitude is valid.
    *
    * @param lon airport longitude as a string.
    * @return true if valid, false if invalid.
@@ -327,7 +317,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if altitude is valid.
+   * This method checks if the altitude is valid.
    *
    * @param alt airport altitude as a string.
    * @return true if valid, false if invalid.
@@ -343,7 +333,7 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if timeZone is valid.
+   * This method checks if the timeZone is valid.
    *
    * @param timeZone airport timeZone as a string.
    * @return true if valid, false if invalid.
@@ -358,20 +348,17 @@ public class AirportParser extends Parser {
   }
 
   /**
-   * Check if DST is valid.
+   * This method checks if the DST is valid.
    *
    * @param DST airport DST as a string.
    * @return true if valid, false if invalid.
    */
   protected boolean isDSTValid(String DST) {
-    if (!DST.matches("[EASOZNU]+") || DST.length() != 1) {
-      return false;
-    }
-    return true;
+    return DST.matches("[EASOZNU]+") && DST.length() == 1;
   }
 
   /**
-   * Check if DBTZ is valid.
+   * This method checks if the DBTZ is valid.
    *
    * @param DBTZ airport DBTZ as a string.
    * @return true if valid, false if invalid.

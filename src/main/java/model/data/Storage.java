@@ -29,10 +29,10 @@ public class Storage {
   private List<Route> tempRoutes = new ArrayList<>();
 
   /** A list of all the values calculated for the distances of the routes in the history. */
-  private List<Double> analyseDistanceResult = new ArrayList<Double>();
+  private List<Double> analyseDistanceResult = new ArrayList<>();
 
   /** A list of all the values calculated for the emissions of the routes in the history. */
-  private List<Double> analyseEmissionResult = new ArrayList<Double>();
+  private List<Double> analyseEmissionResult = new ArrayList<>();
 
   /** A list of all the routes that have been added to the user's personal history. */
   private List<Route> history = new ArrayList<>();
@@ -59,7 +59,7 @@ public class Storage {
 
   /**This method reset airlines list. */
   public void resetAirlinesList(){
-    airlines = new ArrayList<Airline>();
+    airlines = new ArrayList<>();
   }
 
   /** @return a list of Airport objects from the currently open file cast as Datatype objects. */
@@ -69,7 +69,7 @@ public class Storage {
 
   /**This method reset airports list. */
   public void resetAirportsList(){
-    airports = new ArrayList<Airport>();
+    airports = new ArrayList<>();
   }
 
   /** @return a list of Route object from the currently open file cast as Datatype objects. */
@@ -79,7 +79,7 @@ public class Storage {
 
   /**This method reset routes list. */
   public void resetRoutesList(){
-    routes = new ArrayList<Route>();
+    routes = new ArrayList<>();
   }
 
   /** @return a list of Route object from route to add to history. */
@@ -150,7 +150,6 @@ public class Storage {
         Airport airport = (Airport) entry;
         airports.add(airport);
         database.addAirports(airport);
-        if (airport != null) {}
       }
       database.startCommite();
     } else if (type.matches("Route")) {
@@ -169,20 +168,18 @@ public class Storage {
 
   /**
    * This method initilises storage with data from database after user start the application
-   * @throws SQLException
-   * @throws ClassNotFoundException
+   * @throws SQLException This throws an SQLException.
    */
-  public void initialiseStorage() throws SQLException, ClassNotFoundException {
+  public void initialiseStorage() throws SQLException {
     database.initialiseStorage(this);
   }
 
   /**
    * This method updates the count of source aiport visits in the flight history.
    *
-   * @param airportName , the name of the source airport of the route being added to history.
-   * @param counter , the number of times the route needs to be added to history.
+   * @param airportName The name of the source airport of the route being added to history.
    */
-  public void addToHistorySrcAirports(String airportName, int counter) {
+  public void addToHistorySrcAirports(String airportName) {
     if (historySrcAirports.containsKey(airportName)) {
       historySrcAirports.put(airportName, historySrcAirports.get(airportName) + 1);
     } else {
@@ -203,10 +200,9 @@ public class Storage {
   /**
    * This method updates the count of destination aiport visits in the flight history.
    *
-   * @param airportName , the name of the destination airport of the route being added to history.
-   * @param counter , the number of times the route needs to be added to history.
+   * @param airportName The name of the destination airport of the route being added to history.
    */
-  public void addToHistoryDestAirports(String airportName, int counter) {
+  public void addToHistoryDestAirports(String airportName) {
     if (historyDestAirports.containsKey(airportName)) {
       historyDestAirports.put(airportName, historyDestAirports.get(airportName) + 1);
     } else {

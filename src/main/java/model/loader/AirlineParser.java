@@ -3,11 +3,8 @@ package model.loader;
 import model.data.Airline;
 import model.data.DataType;
 
-import java.util.HashMap;
 import java.util.List;
-// TODO: check all method comments start with "This method ..."
 
-// TODO: write comment for this class
 /**
  * Class to process airline data which has been extracted from a file by Loader class. Each entry in
  * each line is checked for errors. If the line has no errors than a Airline object is created with
@@ -16,7 +13,7 @@ import java.util.List;
  *
  * @author Nathan Huynh
  * @version 1.0
- * @since 2020-08-11
+ * @since 11/08/2020
  */
 public class AirlineParser extends Parser {
 
@@ -42,7 +39,9 @@ public class AirlineParser extends Parser {
     dataParser();
   }
 
-  /** Initializes error lookup array with message for each error code. */
+  /**
+   * This method initializes error lookup array with message for each error code.
+   */
   @Override
   protected void initErrorLookup() {
     errorLookup[0] = "Not enough parameters";
@@ -58,8 +57,10 @@ public class AirlineParser extends Parser {
     errorLookup[10] = "Unknown error";
   }
 
-  /** This method iterate throught each line of input file, strip line in to data segment. Then call validator method to
-   * check a singke line then add that line to parserData if it is valid*/
+  /**
+   * This method iterate throught each line of input file, strip line in to data segment. Then call validator method to
+   * check a singke line then add that line to parserData if it is valid.
+   */
   @Override
   public void dataParser() {
 
@@ -92,11 +93,11 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * add airline to index matches with airLineID. First check if there are any airline currently sit
+   * This method add airline to index matches with airLineID. First check if there are any airline currently sit
    * at index. If it is null then replace with airline param. If parserset size is too small then
    * init it with null value. If there is an airline at index then check if the airline is the same
    * with the one we want to add. If it is the same then treat as duplicate (do nothing) If is is
-   * not then add to error
+   * not then add to error.
    *
    * @param airlineID airline ID we want to add
    * @param airline Airline Object we wanted to add
@@ -167,7 +168,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if id is valid.
+   * This method check if id is valid.
    *
    * @param airlineID airline id as a string.
    * @return true if valid, false if invalid.
@@ -198,7 +199,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if name is valid.
+   * This method checks if the name is valid.
    *
    * @param name airline name as a string.
    * @return true if valid, false if invalid.
@@ -212,7 +213,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if city is valid.
+   * This method checks if the city is valid.
    *
    * @param alias airline city as a string.
    * @return true if valid, false if invalid.
@@ -226,7 +227,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if IATA is valid.
+   * This method checks if the IATA is valid.
    *
    * @param IATA airline IATA as a string.
    * @return true if valid, false if invalid.
@@ -243,14 +244,12 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if ICAO is valid.
+   * This method checks if the  ICAO is valid.
    *
    * @param ICAO airline ICAO as a string.
    * @return true if valid, false if invalid.
    */
   private boolean isICAOValid(String ICAO) {
-
-    // airline ICAO check
 
     if (!ICAO.matches("(\\\\N)|(N/A)|([A-Z0-9]{3})|(^$)")) {
       errorCounter(6);
@@ -261,7 +260,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if callsign is valid.
+   * This method checks if the callsign is valid.
    *
    * @param callsign airline latitude as a string.
    * @return true if valid, false if invalid.
@@ -276,7 +275,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if country is valid.
+   * This method checks if the country is valid.
    *
    * @param country airline country as a string.
    * @return true if valid, false if invalid.
@@ -291,7 +290,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if activeStatus is valid.
+   * This method checks if the activeStatus is valid.
    *
    * @param activeStatus as a string.
    * @return true if valid, false if invalid.
@@ -305,21 +304,4 @@ public class AirlineParser extends Parser {
     return true;
   }
 
-  // TODO remove?
-
-  //  public static void main(String[] args) throws Exception {
-  //    ArrayList<String> testLines;
-  //    testLines = new ArrayList<String>();
-  //
-  //    BufferedReader br = new BufferedReader(new
-  // FileReader("src/test/java/TestFiles/airlines.csv"));
-  //    int count = 0;
-  //    String line = "";
-  //    br.readLine(); // header
-  //    while ((line = br.readLine()) != null && count < 2) {
-  //      testLines.add(line);
-  //      count++;
-  //    }
-  //    AirlineParser parser = new AirlineParser(testLines);
-  //  }
 }

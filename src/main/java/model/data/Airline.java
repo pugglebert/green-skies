@@ -5,7 +5,7 @@ package model.data;
  *
  * @author Nathan
  * @version 1.3
- * @since 2020-08-11
+ * @since 11/08/2020
  */
 public class Airline implements DataType {
   /** The ID of an airline (unique). */
@@ -29,8 +29,6 @@ public class Airline implements DataType {
   /** The country or territory where airport is located. */
   private final String country;
 
-
-  
   /** "Y" if the airline is or has until recently been operational, "N" if it is defunct. */
   private final Boolean activeStatus;
 

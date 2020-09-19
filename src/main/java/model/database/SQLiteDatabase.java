@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Class to store presistent data in database.
  *
  * @author Lambert
- * @since 2020-09-18
+ * @since 18/09/2020
  * @version 1.2
  */
 public class SQLiteDatabase {
@@ -70,7 +70,6 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {
-        //      con.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
@@ -236,14 +235,14 @@ public class SQLiteDatabase {
       prep.setInt(9, route.getNumOfStops());
 
       String[] equipments = route.getEquipment();
-      String stringEquipment = "";
+      StringBuilder stringEquipment = new StringBuilder();
       if (equipments != null) {
         for (String equipment : equipments) {
-          stringEquipment = stringEquipment + " " + equipment;
+          stringEquipment.append(" ").append(equipment);
         }
       }
 
-      prep.setString(10, stringEquipment);
+      prep.setString(10, stringEquipment.toString());
       prep.setDouble(11, route.getEmissions());
       prep.setDouble(12, route.getDistance());
       prep.setInt(13, route.getTimesTaken());
@@ -304,83 +303,86 @@ public class SQLiteDatabase {
       buildConnection();
     }
 
-    if (tableType.equals("airports")) {
-      try {
-        state = con.createStatement();
-        res =
-            state.executeQuery(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
-        if (res.next()) {
-          state = con.createStatement();
-          state.executeUpdate("Delete from 'airports'");
-        } else {
-          buildAirportsTable();
-        }
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      } finally {
+    switch (tableType) {
+      case "airports":
         try {
-          res.close();
-          state.close();
+          state = con.createStatement();
+          res =
+                  state.executeQuery(
+                          "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+          if (res.next()) {
+            state = con.createStatement();
+            state.executeUpdate("Delete from 'airports'");
+          } else {
+            buildAirportsTable();
+          }
         } catch (Exception e) {
           JOptionPane.showMessageDialog(null, e);
+        } finally {
+          try {
+            res.close();
+            state.close();
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+          }
         }
-      }
-    } else if (tableType.equals("routes")) {
-      try {
-        state = con.createStatement();
-        res =
-            state.executeQuery(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
-        if (res.next()) {
-          state = con.createStatement();
-          state.executeUpdate("Delete from 'routes'");
-        } else {
-          buildRoutesTable();
-        }
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      } finally {
+        break;
+      case "routes":
         try {
-          res.close();
-          state.close();
+          state = con.createStatement();
+          res =
+                  state.executeQuery(
+                          "SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
+          if (res.next()) {
+            state = con.createStatement();
+            state.executeUpdate("Delete from 'routes'");
+          } else {
+            buildRoutesTable();
+          }
         } catch (Exception e) {
           JOptionPane.showMessageDialog(null, e);
+        } finally {
+          try {
+            res.close();
+            state.close();
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+          }
         }
-      }
-    } else if (tableType.equals("airlines")) {
-      try {
-        state = con.createStatement();
-        res =
-            state.executeQuery(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
-        if (res.next()) {
-          state = con.createStatement();
-          state.executeUpdate("Delete from 'airlines'");
-        } else {
-          buildAirlinesTable();
-        }
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      } finally {
+        break;
+      case "airlines":
         try {
-          res.close();
-          state.close();
+          state = con.createStatement();
+          res =
+                  state.executeQuery(
+                          "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+          if (res.next()) {
+            state = con.createStatement();
+            state.executeUpdate("Delete from 'airlines'");
+          } else {
+            buildAirlinesTable();
+          }
         } catch (Exception e) {
           JOptionPane.showMessageDialog(null, e);
+        } finally {
+          try {
+            res.close();
+            state.close();
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+          }
         }
-      }
+        break;
     }
   }
 
   /**
    * This method initialise storage with data from database.
    *
-   * @param storage
-   * @throws SQLException
-   * @throws ClassNotFoundException
+   * @param storage The storage used.
+   * @throws ClassNotFoundException This throws a ClassNotFoundException.
    */
-  public void initialiseStorage(Storage storage) throws SQLException {
+  public void initialiseStorage(Storage storage) {
     if (con == null) {
       // get connections
       buildConnection();
@@ -509,6 +511,7 @@ public class SQLiteDatabase {
           double distance = res.getDouble("distance");
           int timesTaken = res.getInt("timesTaken");
 
+          assert equipmentArray != null;
           Route route =
               new Route(
                   airlineName,

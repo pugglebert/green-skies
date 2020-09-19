@@ -53,7 +53,7 @@ public abstract class Parser {
   /** Getter returning processed data result for all sub-parsers. */
   public List<DataType> getData() {
     return parserData;
-  };
+  }
 
   /**
    * Getter for error collection.
@@ -84,7 +84,7 @@ public abstract class Parser {
     try {
       errorCollection.put(key, errorCollection.get(key) + 1);
       totalErrors++;
-    } catch (NullPointerException e) {
+    } catch (NullPointerException ignored) {
     }
   }
 
@@ -94,14 +94,14 @@ public abstract class Parser {
    * @return String with information about error types in fiile
    */
   public String getErrorMessage() {
-    String errorMessage =
-        String.format("File uploaded with %d invalid lines rejected\n", totalErrors);
+    StringBuilder errorMessage =
+            new StringBuilder(String.format("File uploaded with %d invalid lines rejected\n", totalErrors));
     String template = "Error [%d] %s: %d occurances\n";
     for (int i = 0; i < numCodes; i++) {
       if (errorCollection.get(i) > 0) {
-        errorMessage += String.format(template, i, errorLookup[i], errorCollection.get(i));
+        errorMessage.append(String.format(template, i, errorLookup[i], errorCollection.get(i)));
       }
     }
-    return errorMessage;
+    return errorMessage.toString();
   }
 }

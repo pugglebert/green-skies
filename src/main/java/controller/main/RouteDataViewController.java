@@ -97,8 +97,8 @@ public class RouteDataViewController extends DataViewController {
         reportGenerator.updateTotalDistance(route);
         reportGenerator.updateTotalEmissions(route);
         route.setTimesTaken(1);
-        storage.addToHistorySrcAirports(route.getSourceAirport(), 1);
-        storage.addToHistoryDestAirports(route.getDestinationAirport(), 1);
+        storage.addToHistorySrcAirports(route.getSourceAirport());
+        storage.addToHistoryDestAirports(route.getDestinationAirport());
         reportGenerator.updateLeastDistanceRoute(route);
         reportGenerator.updateMostDistanceRoute(route);
         reportGenerator.updateMostEmissionsRoute(route);

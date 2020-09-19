@@ -5,7 +5,7 @@ package model.data;
  *
  * @author Enyang Zhang, Nathan Huynh
  * @version 1.3
- * @since 2020-08-21
+ * @since 21/08/2020
  */
 public class Airport implements DataType {
 
