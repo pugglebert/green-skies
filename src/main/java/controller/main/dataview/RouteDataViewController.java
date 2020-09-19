@@ -100,29 +100,24 @@ public class RouteDataViewController extends DataViewController {
         reportGenerator.updateTotalDistance(route);
         reportGenerator.updateTotalEmissions(route);
 
-        storage.addToHistorySrcAirports(
-            route.getSourceAirport(),
-            1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
-        storage.addToHistoryDestAirports(
-            route.getDestinationAirport(),
-            1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
+        route.setTimesTaken(1); //TODO change one Nathan's code works
 
-        // reportGenerator.updateLeastDistanceRoute(route);
-        // reportGenerator.updateMostDistanceRoute(route);
-        // reportGenerator.updateMostEmissionsRoute(route);
-        // reportGenerator.updateLeastEmissionsRoute(route);
+        storage.addToHistorySrcAirports(route.getSourceAirport(), 1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
+        storage.addToHistoryDestAirports(route.getDestinationAirport(),1); // TODO:change to route.getTimesTaken() once Nathan has implemented counter
+
+        reportGenerator.updateLeastDistanceRoute(route);
+        reportGenerator.updateMostDistanceRoute(route);
+        reportGenerator.updateMostEmissionsRoute(route);
+        reportGenerator.updateLeastEmissionsRoute(route);
       }
     }
+
     addPopUp.display();
     //        Main.getStorage().getHistory().addAll(temp);
-    // reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory()); //TODO:
-    // considering doing when click on history page to reduce time wasted.
-    // reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory()); //TODO: considering
-    // doing when click on history page to reduce time wasted.
-    reportGenerator.updateMostVisitedSrcAirports(
-        storage.getHistorySrcAirports()); // TODO: uncommment once implemented HashMap
-    reportGenerator.updateMostVisitedSrcAirports(
-        storage.getHistoryDestAirports()); // TODO: uncommment once implemented HashMap
+    reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
+    reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
+    reportGenerator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
+    reportGenerator.updateMostVisitedSrcAirports(storage.getHistoryDestAirports());
   }
 
   /** This method clears the search bar and displays all routes in table view. */

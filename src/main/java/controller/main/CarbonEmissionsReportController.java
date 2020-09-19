@@ -124,6 +124,10 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     this.LeastEmissionsRouteString = RoutesArrayToString(LeastEmissionsRouteString, reportGenerator.getLeastEmissionsRoutes());
     this.MostDistanceRouteString = RoutesArrayToString(MostDistanceRouteString, reportGenerator.getMostDistanceRoutes());
     this.LeastDistanceRouteString = RoutesArrayToString(LeastDistanceRouteString, reportGenerator.getLeastDistanceRoutes());
+    this.MostVisitedSourceAirport = CombineAirportsToOneString(MostVisitedSourceAirport, reportGenerator.getMostVisitedSrcAirports());
+    //this.LeastVisitedSourceAirport = CombineAirportsToOneString(LeastVisitedSourceAirport, reportGenerator.getLeastVisitedSrcAirports());
+    this.MostVisitedDestAirport = CombineAirportsToOneString(MostVisitedDestAirport, reportGenerator.getMostVisitedDestAirports());
+    //this.LeastVisitedDestAirport = CombineAirportsToOneString(LeastVisitedDestAirport, reportGenerator.getLeastVisitedDestAirports());
   }
 
   /**
@@ -136,54 +140,35 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    */
   public String RoutesArrayToString(String resultString, ArrayList<Route> arrayToConvert) {
     for (int i = 0; i < arrayToConvert.size(); i++) {
-      if (i == arrayToConvert.size() - 1) {
-        resultString += arrayToConvert.get(i).getAirlineID();
-      } else {
-        resultString += arrayToConvert.get(i).getAirlineID() + " , ";
-      }
+      if (arrayToConvert.get(i).getAirlineID() >= 0)
+        if (i == arrayToConvert.size() - 1) {
+          resultString += arrayToConvert.get(i).getAirlineID();
+        } else {
+          resultString += arrayToConvert.get(i).getAirlineID() + " , ";
+        }
     }
   return resultString;
   }
 
-
-
-
-//  /**
-//   * This methods takes an array containing either routes with most or least emissions or most or least distance and
-//   * produces a string of its routes' AirlineIDs.
-//   * @param resultString Where the content in the provided array with be added to.
-//   * @param emissionsArrayToConvert Either the most or least emissions or most or least distance array that needs to be
-//   *                                converted to a String.
-//   * @return resultString The string of the array's routes' AirlineIDs.
-//   */
-//  public String CombineAirportsToOneString(String resultString, ArrayList<Route> emissionsArrayToConvert) {
-//    for (int i = 0; i < emissionsArrayToConvert.size(); i++) {
-//      if (i == emissionsArrayToConvert.size() - 1) {
-//        resultString += emissionsArrayToConvert.get(i).getAirlineID();
-//      } else {
-//        resultString += emissionsArrayToConvert.get(i).getAirlineID() + " , ";
-//      }
-//    }
-//    return resultString;
-
-
-
-
-//  /**
-//   * This methods takes an arrary containing either routes of most or least distance and produces a string of its
-//   * routes' AirlineIDs.
-//   * @param resultString Where the content in the provided array with be added to.
-//   * @param distanceArrayToConvert Either the most or least distance arrary that needs to be converted to a String.
-//   * @return resultString The string of the array's routes' AirlineIDs.
-//   */
-//  public String DistanceRouteToString(String resultString, ArrayList<Route> distanceArrayToConvert) {
-//    for (int i = 0; i < distanceArrayToConvert.size(); i++) {
-//      if (i == distanceArrayToConvert.size() - 1) {
-//        resultString += distanceArrayToConvert.get(i).getAirlineID();
-//      } else {
-//        resultString += distanceArrayToConvert.get(i).getAirlineID() + " , ";
-//      }
-//    }
-//    return resultString;
-//  }
+  // TODO fix comments
+  /**
+   * This methods takes an array containing either routes with most or least emissions or most or
+   * least distance and produces a string of its routes' AirlineIDs.
+   *
+   * @param resultString Where the content in the provided array with be added to.
+   * @param airportArrayToConvert Either the most or least emissions or most or least distance
+   *     array that needs to be converted to a String.
+   * @return resultString The string of the array's routes' AirlineIDs.
+   */
+  public String CombineAirportsToOneString(
+      String resultString, ArrayList<String> airportArrayToConvert) {
+    for (int i = 0; i < airportArrayToConvert.size(); i++) {
+      if (i == airportArrayToConvert.size() - 1) {
+        resultString += airportArrayToConvert.get(i);
+      } else {
+        resultString += airportArrayToConvert.get(i) + " , ";
+      }
+    }
+    return resultString;
+    }
 }
