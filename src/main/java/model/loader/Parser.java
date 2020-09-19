@@ -7,6 +7,7 @@ import java.util.*;
 
 /**
  *  the super class of whole sub_parser classes
+ * @author Ella Lambert Tom
  */
 public abstract class Parser {
 

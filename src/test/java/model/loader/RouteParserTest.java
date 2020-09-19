@@ -12,6 +12,10 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test cases for routePaser.
+ * @author Ella
+ */
 public class RouteParserTest {
 
   private RouteParser routeParser;
