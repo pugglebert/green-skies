@@ -70,6 +70,6 @@ public class RouteFilterPopUpController extends FilterPopUpController {
    */
   @Override
   public String getFXMLFilename() {
-    return "../routeFilterPopUp.fxml";
+    return "routeFilterPopUp.fxml";
   }
 }

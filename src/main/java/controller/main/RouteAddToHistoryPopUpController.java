@@ -47,7 +47,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
    */
   public void display() throws IOException {
 
-    Parent root = FXMLLoader.load(getClass().getResource("../routeAddToHistoryPopUp.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
     Stage addPopUp = new Stage();
     addPopUp.setTitle("Add To History ");
     addPopUp.initModality(Modality.APPLICATION_MODAL);

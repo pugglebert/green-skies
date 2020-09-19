@@ -70,6 +70,6 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
    */
   @Override
   public String getFXMLFilename() {
-    return "../historyFilterPopUp.fxml";
+    return "historyFilterPopUp.fxml";
   }
 }
