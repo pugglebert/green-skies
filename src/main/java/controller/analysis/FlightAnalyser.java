@@ -236,18 +236,31 @@ public class FlightAnalyser {
     return Math.abs(totalEmissionPath1 - totalEmissionPath2);
   }
 
+  /**
+   * Get path1 emission
+   * @return emission
+   */
   public double getPath1Emission() {
     return totalEmissionPath1;
   }
-
+  /**
+   * Get path2 emission
+   * @return emission
+   */
   public double getPath2Emission() {
     return totalEmissionPath2;
   }
-
+  /**
+   * Get path1 distance
+   * @return distance
+   */
   public double getTotalDistancePath1() {
     return totalDistancePath1;
   }
-
+  /**
+   * Get path2 distance
+   * @return distance
+   */
   public double getTotalDistancePath2() {
     return totalDistancePath2;
   }

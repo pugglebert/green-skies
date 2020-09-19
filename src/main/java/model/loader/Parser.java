@@ -3,9 +3,11 @@ package model.loader;
 import model.data.DataType;
 import java.util.*;
 
-// TODO: check all method comments start with "This method ..."
-// TODO: write comment for this class
 
+
+/**
+ *  the super class of whole sub_parser classes
+ */
 public abstract class Parser {
 
   protected final List<String> dataFile;
