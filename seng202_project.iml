@@ -43,19 +43,19 @@
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:11.0.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-java:6.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-core:6.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-gherkin:6.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-gherkin-messages:6.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:messages:13.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:tag-expressions:3.0.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-expressions:10.3.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:datatable:3.4.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-plugin:6.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:docstring:6.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:html-formatter:9.0.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:create-meta:2.0.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:cucumber-java:6.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:cucumber-core:6.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:cucumber-gherkin:6.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:cucumber-gherkin-messages:6.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:messages:13.0.1" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:tag-expressions:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:cucumber-expressions:10.3.0" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:datatable:3.4.0" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:cucumber-plugin:6.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:docstring:6.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:html-formatter:9.0.0" level="project" />
+    <orderEntry type="library" name="Maven: io.cucumber:create-meta:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.cucumber:cucumber-junit:6.6.1" level="project" />
   </component>
 </module>

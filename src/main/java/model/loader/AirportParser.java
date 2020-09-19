@@ -24,7 +24,6 @@ public class AirportParser extends Parser {
    * invalid callsign 118: invalid activestatus
    */
   private final int name = 1;
-
   private final int city = 2;
   private final int country = 3;
   private final int IATA = 4;
