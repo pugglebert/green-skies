@@ -12,7 +12,7 @@
                 <Font size="49.0" />
             </font>
         </Text>
-        <Button fx:id="BackButton" layoutX="661.0" layoutY="414.0" mnemonicParsing="false" onAction="#BackToPreviousWindow" text="Back" />
+        <Button fx:id="BackButton" layoutX="661.0" layoutY="495.0" mnemonicParsing="false" onAction="#BackToPreviousWindow" text="Back" />
         <Text layoutX="262.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Skies provides you with a space to search  and upload flight data in order to track your carbon emissions produced from flight travel." wrappingWidth="876.2402191162109">
             <font>
                 <Font size="20.0" />
@@ -23,5 +23,10 @@
                 <Font size="20.0" />
             </font>
         </Text>
+      <Text layoutX="262.0" layoutY="635.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Royalty-free image taken from Pixaby " wrappingWidth="845.5735778808594">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

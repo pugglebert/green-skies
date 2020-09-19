@@ -133,35 +133,35 @@ public class ReportGeneratorTest {
     assertEquals(345231863432.98, reportGenerator.getTotalCarbonEmissions(), 0.0001);
   }
 
-  /**
-   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
-   * emissions, which has been taken multipe times, that the total emissions is updated
-   * accordingly.The carbon emissions are starting at 0.0 g.
-   */
-  @Test
-  public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
-    reportGenerator.setTotalCarbonEmissions(0.0);
-    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-    testRoute.setEmissions(20000000.50);
-    testRoute.setTimesTaken(0);
-    reportGenerator.updateTotalEmissions(testRoute);
-    assertEquals(0.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
-  }
+//  /**
+//   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
+//   * emissions, which has been taken multipe times, that the total emissions is updated
+//   * accordingly.The carbon emissions are starting at 0.0 g.
+//   */
+//  @Test
+//  public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
+//    reportGenerator.setTotalCarbonEmissions(0.0);
+//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+//    testRoute.setEmissions(20000000.50);
+//    testRoute.setTimesTaken(0);
+//    reportGenerator.updateTotalEmissions(testRoute);
+//    assertEquals(0.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
+//  }
 
-  /**
-   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
-   * emissions, which has been taken zero times, that the total emissions is not updated. The carbon
-   * emissions are starting at 0.0 g.
-   */
-  @Test
-  public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
-    reportGenerator.setTotalCarbonEmissions(0.0);
-    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-    testRoute.setEmissions(8760.0);
-    testRoute.setTimesTaken(1000);
-    reportGenerator.updateTotalEmissions(testRoute);
-    assertEquals(8760000.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
-  }
+//  /**
+//   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
+//   * emissions, which has been taken zero times, that the total emissions is not updated. The carbon
+//   * emissions are starting at 0.0 g.
+//   */
+//  @Test
+//  public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
+//    reportGenerator.setTotalCarbonEmissions(0.0);
+//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+//    testRoute.setEmissions(8760.0);
+//    testRoute.setTimesTaken(1000);
+//    reportGenerator.updateTotalEmissions(testRoute);
+//    assertEquals(8760000.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
+//  }
 
   // ------------------------------------- Testing for updateTotalDistance
 
