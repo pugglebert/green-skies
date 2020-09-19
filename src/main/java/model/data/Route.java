@@ -86,144 +86,66 @@ public class Route implements DataType {
     this.select = new CheckBox();
   }
 
-  /**
-   * This method returns the name of the airline of that is used during the Flight.
-   *
-   * @return airlineID.
-   */
   public String getAirlineName() {
     return airlineName;
   }
 
-  /**
-   * This method returns the ID of the airline of that is used during the Flight.
-   *
-   * @return airlineID.
-   */
   public int getAirlineID() {
     return airlineID;
   }
 
-  /**
-   * This method returns the name of the source airport of the Flight.
-   *
-   * @return sourceAirport.
-   */
   public String getSourceAirport() {
     return sourceAirport;
   }
 
-  /**
-   * This method returns the ID of the source airport of the Flight.
-   *
-   * @return sourceAirportID.
-   */
   public int getSourceAirportID() {
     return sourceAirportID;
   }
 
-  /**
-   * This method returns the name of the destination airport of the Flight.
-   *
-   * @return destinationAirport.
-   */
   public String getDestinationAirport() {
     return destinationAirport;
   }
 
-  /**
-   * This method returns the ID of the destination airport of the Flight.
-   *
-   * @return destinationAirportID.
-   */
   public int getDestinationAirportID() {
     return destinationAirportID;
   }
 
-  /**
-   * This method returns the codeShare for the Flight.
-   *
-   * @return codeShare.
-   */
   public String getCodeShare() {
     return codeShare;
   }
 
-  /**
-   * This method returns the number of stops the Flight has.
-   *
-   * @return numOfStops.
-   */
   public int getNumOfStops() {
     return numOfStops;
   }
 
-  /**
-   * This method returns the equipment used during the Flight.
-   *
-   * @return equipment.
-   */
   public String[] getEquipment() {
     return equipment;
   }
 
-  /**
-   * This method returns the first entry in the equipment array.
-   *
-   * @return firstEquipment.
-   */
   public String getFirstEquipment() {
     return firstEquipment;
   }
 
-  /**
-   * This method returns the total carbon emissions of the route.
-   *
-   * @return a double for the amount of CO2 if it has been calculated, or null if it has not. yet
-   *     been calculated.
-   */
   public double getEmissions() {
     return emissions;
   }
 
-  /**
-   * This method sets the total carbon emissions of the route.
-   *
-   * @param emissions a double for the emissions calculated for that route.
-   */
   public void setEmissions(double emissions) {
     this.emissions = emissions;
   }
 
-  /**
-   * This method returns the total distance of the route.
-   *
-   * @return null if distance has not yet been calculated, otherwise returns a double for the
-   *     distance the route covers.
-   */
   public double getDistance() {
     return distance;
   }
 
-  /**
-   * This method sets distance to the value calculated.
-   *
-   * @param distance a double for the distance calculated.
-   */
   public void setDistance(double distance) {
     this.distance = distance;
   }
 
-  /** This method returns the number of times that the user has recorded taking this flight. */
   public int getTimesTaken() {
     return timesTaken;
   }
 
-  /**
-   * This method sets timesTaken to the given value.
-   *
-   * @param timesTaken the value to set timesTaken to.
-   */
   public void setTimesTaken(int timesTaken) {
     this.timesTaken = timesTaken;
   }

@@ -52,74 +52,34 @@ public class Airline implements DataType {
     this.activeStatus = activeStatus;
   }
 
-  /**
-   * This method returns the Airline's ID.
-   *
-   * @return airlineID.
-   */
   public int getAirlineID() {
     return airlineID;
   }
 
-  /**
-   * This method returns the name of the Airline.
-   *
-   * @return airlineName.
-   */
   public String getName() {
     return name;
   }
 
-  /**
-   * This method returns the alias of the Airline.
-   *
-   * @return airlineName.
-   */
   public String getAirlineAlias() {
     return alias;
   }
 
-  /**
-   * This method returns the IATA of the Airline.
-   *
-   * @return IATA.
-   */
   public String getIATA() {
     return IATA;
   }
 
-  /**
-   * This method returns the ICAO of the Airline.
-   *
-   * @return ICAO.
-   */
   public String getICAO() {
     return ICAO;
   }
 
-  /**
-   * This method returns the callsign of the Airline.
-   *
-   * @return airlineCallsign.
-   */
   public String getCallsign() {
     return callsign;
   }
 
-  /**
-   * This method returns the country of origin of the Airline.
-   *
-   * @return country.
-   */
   public String getCountry() {
     return country;
   }
 
-  /**
-   * This method returns the whether the Airline is active or not.
-   *
-   * @return activeStatus.
-   */
   public boolean getActiveStatus() {
     return activeStatus;
   }

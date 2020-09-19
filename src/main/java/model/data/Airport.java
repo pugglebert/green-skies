@@ -76,110 +76,50 @@ public class Airport implements DataType {
     this.dataBaseTimeZone = dataBaseTimeZone;
   }
 
-  /**
-   * This method returns the Airport's ID.
-   *
-   * @return airportID.
-   */
   public int getAirportID() {
     return airportID;
   }
 
-  /**
-   * This method returns the name of the Airport.
-   *
-   * @return name.
-   */
   public String getName() {
     return name;
   }
 
-  /**
-   * This method returns the city the Airport is in.
-   *
-   * @return city.
-   */
   public String getCity() {
     return city;
   }
 
-  /**
-   * This method returns the country the Airport is in.
-   *
-   * @return country.
-   */
   public String getCountry() {
     return country;
   }
 
-  /**
-   * This method returns the IATA of the Airport.
-   *
-   * @return IATA.
-   */
   public String getIATA() {
     return IATA;
   }
 
-  /**
-   * This method returns the ICAO of the Airport.
-   *
-   * @return ICAO.
-   */
   public String getICAO() {
     return ICAO;
   }
 
-  /**
-   * This method returns latitude of the Airport.
-   *
-   * @return latitude.
-   */
   public double getLatitude() {
     return latitude;
   }
 
-  /**
-   * This method returns the longitude of the airport.
-   *
-   * @return longitude.
-   */
   public double getLongitude() {
     return longitude;
   }
 
-  /**
-   * This method returns the altitude of the airport.
-   *
-   * @return altitude.
-   */
   public int getAltitude() {
     return altitude;
   }
 
-  /**
-   * This method returns the timezone of the Airport.
-   *
-   * @return timezone.
-   */
   public float getTimezone() {
     return timezone;
   }
 
-  /**
-   * This method returns the DST of the airport.
-   *
-   * @return DST.
-   */
   public String getDST() {
     return DST;
   }
 
-  /**
-   * This method returns the dataBaseTimeZone of the Airport.
-   *
-   * @return dataBaseTimeZone.
-   */
   public String getDataBaseTimeZone() {
     return dataBaseTimeZone;
   }
