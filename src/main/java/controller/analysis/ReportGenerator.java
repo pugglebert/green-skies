@@ -235,9 +235,8 @@ public class ReportGenerator {
   /**
    * Calculates the source airport(s) that was the most visited, based on the user's flight history
    * entries.
-   *
-   * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the source
-   *     airports that were most visited, based on the user's flight history entries.
+   * @param srcAirportCounts A count of the number of times each source airport has been visited with the
+   *                         name of the aiport as the key.
    */
   public void updateMostVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
     int currSrcAirportMax = 0;
@@ -257,8 +256,8 @@ public class ReportGenerator {
    * Calculates the destionation airport(s) that was the most visited, based on the user's flight
    * history entries.
    *
-   * @return mostVisitedDestAirports, an ArrayList containing the String of the name of the
-   *     destination airports that were most visited, based on the user's flight history entries.
+   * @param destAirportCounts A count of how many times each destination airport has been visited
+   *                          with the names as the key.
    */
   public void updateMostVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
     int currDestAirportMax = 0;
@@ -278,8 +277,8 @@ public class ReportGenerator {
    * Calculates the source airport(s) that was the least visited, based on the user's flight history
    * entries.
    *
-   * @return leastVisitedSrcAirports, an ArrayList containing the String of the name of the source
-   *     airports that were most visited, based on the user's flight history entries.
+   * @param srcAirportCounts A count of how many times each airport has been visited with the name of the
+   *                         airport as the key.
    */
   public void updateLeastVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
     int currSrcAirportMax = 0;
@@ -299,8 +298,8 @@ public class ReportGenerator {
    * Calculates the destination airport(s) that was the least visited, based on the user's flight
    * history entries.
    *
-   * @return mostVisitedSrcAirports, an ArrayList containing the String of the name of the
-   *     destination airports that were most visited, based on the user's flight history entries.
+   * @param destAirportCounts A count of how many times each destination airport has been visited with the
+   *                          name of the airport as the key.
    */
   public void updateLeastVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
     int currDestAirportMax = 0;

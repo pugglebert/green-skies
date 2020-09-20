@@ -146,7 +146,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    * This methods takes an arrary containing either routes with most or least emissions or most or
    * least distance and produces a string of its routes' AirlineIDs.
    *
-   * @param resultString Where the content in the provided array with be added to.
    * @param arrayToConvert Either the most or least emissions or most or least distance array that
    *     needs to be converted to a String.
    * @return resultString The string of the array's routes' AirlineIDs.
@@ -170,7 +169,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    * This methods takes an array containing either source or destination airports that are most or
    * least visited and produces a string of its routes' AirlineIDs.
    *
-   * @param resultString Where the content in the provided array with be added to.
    * @param airportArrayToConvert Either the most or least visited source or destination airports
    *     array that needs to be converted to a String.
    * @return resultString The string of the array's airport names.
