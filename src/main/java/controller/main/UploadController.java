@@ -92,13 +92,13 @@ public class UploadController extends SideNavBarController {
         if (result.get() == yesButton) {
           switch (fileType) {
             case "Airport":
-              storage.resetAirportsList();
+//              storage.resetAirportsList();
               break;
             case "Airline":
-              storage.resetAirlinesList();
+//              storage.resetAirlinesList();
               break;
             case "Route":
-              storage.resetRoutesList();
+//              storage.resetRoutesList();
               break;
           }
           loader.loadFile(stringFile, fileType);

@@ -396,7 +396,7 @@ public class ReportGeneratorTest {
             "N",
             "Atlantic/Reykjavik"));
 
-    storage.setData(providedAirports, "Airport");
+    storage.setData(providedAirports, "Airport", "airporttest.csv");
     Route testRouteEmissions =
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteNaNEmissions =
@@ -477,7 +477,7 @@ public class ReportGeneratorTest {
             "N",
             "Atlantic/Reykjavik"));
 
-    storage.setData(providedAirports, "Airport");
+    storage.setData(providedAirports, "Airport", "airporttest.csv");
     Route testRouteEmissions =
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteNaNEmissions =
@@ -650,7 +650,7 @@ public class ReportGeneratorTest {
             "N",
             "Atlantic/Reykjavik"));
 
-    storage.setData(providedAirports, "Airport");
+    storage.setData(providedAirports, "Airport", "airporttest.csv");
     Route testRouteNaNEmissions =
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteEmissions =
@@ -732,7 +732,7 @@ public class ReportGeneratorTest {
             "N",
             "Atlantic/Reykjavik"));
 
-    storage.setData(providedAirports, "Airport");
+    storage.setData(providedAirports, "Airport", "airporttest.csv");
     Route testRouteNaNEmissions =
         new Route("2H", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" "));
     Route testRouteEmissions =

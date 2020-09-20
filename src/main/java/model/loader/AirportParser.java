@@ -43,7 +43,7 @@ public class AirportParser extends Parser {
    */
   public AirportParser(ArrayList<String> dataFile, List<Airport> existingAirports) {
     super(dataFile, 16);
-    parserData.addAll(existingAirports);
+//    parserData.addAll(existingAirports);
     dataParser();
   }
 

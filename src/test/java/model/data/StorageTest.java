@@ -40,7 +40,8 @@ public class StorageTest {
   @Test
   public void setDataAirlineUpdatedTest() {
     List<DataType> testAirlines = createAirlineSet();
-    storage.setData(testAirlines, "Airline");
+    storage.setData(testAirlines, "Airline", "airlinetest.csv");
+    System.out.println(storage.getCurrentAirlineFile());
     assertEquals(testAirlines, storage.getAirlines());
   }
 
@@ -48,7 +49,7 @@ public class StorageTest {
   @Test
   public void setDataAirportUnchangedTest() {
     List<DataType> testAirlines = createAirlineSet();
-    storage.setData(testAirlines, "Airline");
+    storage.setData(testAirlines, "Airline", "airporttest.csv");
     assertArrayEquals((new ArrayList<Airport>()).toArray(), storage.getAirports().toArray());
   }
 
@@ -56,7 +57,7 @@ public class StorageTest {
   @Test
   public void setDataRouteUnchangedTest() {
     List<DataType> testAirlines = createAirlineSet();
-    storage.setData(testAirlines, "Airline");
+    storage.setData(testAirlines, "Airline", "routetest.csv");
     assertArrayEquals((new ArrayList<Route>()).toArray(), storage.getRoutes().toArray());
   }
 
@@ -94,7 +95,8 @@ public class StorageTest {
             -7,
             "A",
             "America/Edmonton"));
-    storage.setData(testAirports, "Airport");
+    storage.setData(testAirports, "Airport", "airporttest.csv");
+    System.out.println(storage.getCurrentAirportFile());
     assertEquals(testAirports, storage.getAirports());
   }
 
@@ -105,7 +107,7 @@ public class StorageTest {
     testRoutes.add(
         new Route("FM", 4609, "CTU", 3395, "SHA", 3391, "", 0, "757 737 738".split(" ")));
     testRoutes.add(new Route("MH", 3378, "MYY", 3266, "BTU", 3262, "Y", 0, "AT7".split(" ")));
-    storage.setData(testRoutes, "Route");
+    storage.setData(testRoutes, "Route", "routetest.csv");
     assertEquals(testRoutes, storage.getRoutes());
   }
 
@@ -114,7 +116,7 @@ public class StorageTest {
   public void setDataInvalidDataTypeTest() {
     List<DataType> testData = new ArrayList<>();
     try {
-      storage.setData(testData, "Potato");
+      storage.setData(testData, "Potato", "potatotest.csv");
       fail();
     } catch (IllegalArgumentException ignored) {
 

@@ -71,6 +71,9 @@ public class Storage {
   public String getCurrentAirlineFile() {return currentAirlineFile;}
 
   public List<Airline> getAirlines() {
+    if (currentAirlineFile == null) {
+      return new ArrayList<>();
+    }
     return airlineFiles.get(currentAirlineFile);
   }
 
@@ -90,6 +93,9 @@ public class Storage {
   }
 
   public List<Airport> getAirports() {
+    if (currentAirportFile == null) {
+      return new ArrayList<>();
+    }
     return airportFiles.get(currentAirportFile);
   }
 //  /** This method reset airports list. */
@@ -108,6 +114,9 @@ public class Storage {
   }
 
   public List<Route> getRoutes() {
+    if (currentRouteFile == null) {
+      return new ArrayList<>();
+    }
     return routeFiles.get(currentRouteFile);
   }
 
