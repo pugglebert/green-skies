@@ -266,7 +266,7 @@ public class AirlineParser extends Parser {
    */
   private boolean isCallsignValid(String callsign) {
     // airline callsign check
-    if (!callsign.matches("(\\\\N)|([A-Za-z -]+)|(^$)")) {
+    if (!callsign.matches("([A-Za-z -]+)|(^$)")) {
       errorCounter(7);
       return false;
     }

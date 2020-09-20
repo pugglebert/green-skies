@@ -11,12 +11,18 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test cases for routePaser.
+ * @author Nathan
+ */
 public class AirlineParserTest {
+  //todo change to using loader
   private AirlineParser parser;
   private final Method[] methods = AirlineParserTest.class.getDeclaredMethods();
 
   @Before
   public void setUp() throws Exception {
+
     ArrayList<String> testLines = new ArrayList<>();
 
     BufferedReader br = new BufferedReader(new FileReader("src/test/java/TestFiles/airlines.csv"));
@@ -31,15 +37,8 @@ public class AirlineParserTest {
     List<Airline> existingLines = new ArrayList<>();
     parser = new AirlineParser(testLines, existingLines);
 
-    /*testLines = new ArrayList<String>();
-    testLines.add("1,\"Private flight\",\\N,\"-\",\"N/A\",\"\",\"\",\"Y\"");
-    //System.out.println(testLines.get(0));
-    testLines.add("2,\"135 Airways\",\\N,\"\",\"GNL\",\"GENERAL\",\"United States\",\"N\"");
-    testLines.add("3,\"1Time Airline\",\\N,\"1T\",\"RNX\",\"NEXTIME\",\"South Africa\",\"Y\"");
-    parser = new AirlineParser(testLines);*/
-
   }
-
+  /** Verify that isIDValid returns true for ID that is not contain any alphabetic character and not already in the database. */
   @Test
   public void testIsIdValid() throws Exception {
     for (Method method : methods) {
@@ -60,6 +59,7 @@ public class AirlineParserTest {
     }
   }
 
+  /** Verify that isNameValid returns true for name that not started with numerals.  */
   @Test
   public void testIsNameValid() throws Exception {
     for (Method method : methods) {
@@ -80,6 +80,7 @@ public class AirlineParserTest {
     }
   }
 
+  /** Verify that isAliasValid return true only alphabetic character and null value "\N". */
   @Test
   public void testIsAliasValid() throws Exception {
     for (Method method : methods) {
@@ -103,6 +104,7 @@ public class AirlineParserTest {
     }
   }
 
+  /** Verify that isIATAValid return only when IATA is 2 characters. */
   @Test
   public void testIsIATAValid() throws Exception {
     for (Method method : methods) {
@@ -112,23 +114,24 @@ public class AirlineParserTest {
         Object IATAUnknow = "unknown";
         Object IATANotFormated = "abcd";
         Object IATAWithSpace = "a b";
-        Object IATAValid = "ABC";
+        Object IATAInValid = "ABC";
 
         Boolean IATANullTest = (Boolean) method.invoke(parser, IATANull);
         Boolean IATAUnknowTest = (Boolean) method.invoke(parser, IATAUnknow);
         Boolean IATANotFormatedTest = (Boolean) method.invoke(parser, IATANotFormated);
         Boolean IATAWithSpaceTest = (Boolean) method.invoke(parser, IATAWithSpace);
-        Boolean IATAValidTest = (Boolean) method.invoke(parser, IATAValid);
+        Boolean IATAInValidTest = (Boolean) method.invoke(parser, IATAInValid);
 
         Assert.assertEquals(true, IATANullTest);
         Assert.assertEquals(true, IATAUnknowTest);
         Assert.assertEquals(false, IATANotFormatedTest);
         Assert.assertEquals(false, IATAWithSpaceTest);
-        Assert.assertEquals(true, IATAValidTest);
+        Assert.assertEquals(true, IATAInValidTest);
       }
     }
   }
 
+  /** Verify that isICAOValid return true only when ICAO is 3 characters. */
   @Test
   public void testIsICAOValid() throws Exception {
     for (Method method : methods) {
@@ -155,6 +158,7 @@ public class AirlineParserTest {
     }
   }
 
+  /** Verify that isCallsignValid return true only when callsign is a string not starting with numerals . */
   @Test
   public void testIsCallsignValid() throws Exception {
     for (Method method : methods) {
@@ -178,6 +182,7 @@ public class AirlineParserTest {
     }
   }
 
+  /** Verify that isCountryValid return true only when country is a string not started with numerals . */
   @Test
   public void testIsCountryValid() throws Exception {
     for (Method method : methods) {
@@ -198,6 +203,7 @@ public class AirlineParserTest {
     }
   }
 
+  /** Verify that isActiveStatusValid return true only when activeStatus is "Y" or "N"*/
   @Test
   public void testIsActiveStatusValid() throws Exception {
     for (Method method : methods) {
@@ -215,12 +221,13 @@ public class AirlineParserTest {
 
         Assert.assertEquals(true, validActiveStatus1Test);
         Assert.assertEquals(true, validActiveStatus2Test);
-        Assert.assertEquals(true, invalidCallsign1Test);
+        Assert.assertEquals(false, invalidCallsign1Test);
         Assert.assertEquals(false, invalidCallsign2Test);
       }
     }
   }
 
+  /** The data parser should add null to the index that not been accumulate by an Airline yet */
   @Test
   public void dataParser() {
     Airline temp0 = (Airline) parser.parserData.get(0);
