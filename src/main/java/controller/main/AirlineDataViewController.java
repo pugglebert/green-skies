@@ -1,6 +1,5 @@
 package controller.main;
 
-import controller.analysis.Filterer;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,10 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airline;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -19,11 +17,10 @@ import java.util.ResourceBundle;
  *
  * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 04/09/20
+ * @since 04/09/2020
  */
 public class AirlineDataViewController extends DataViewController {
 
-  // Configure the TableView.
   @FXML private TableView<Airline> tableView;
   @FXML private TableColumn<Airline, Integer> airlineIDColumn;
   @FXML private TableColumn<Airline, String> airlineNameColumn;
@@ -33,54 +30,39 @@ public class AirlineDataViewController extends DataViewController {
   @FXML private TableColumn<Airline, String> callsignColumn;
   @FXML private TableColumn<Airline, String> countryColumn;
   @FXML private TableColumn<Airline, Boolean> activeStatusColumn;
-  @FXML private ChoiceBox<String> countrySelection;
-  @FXML private ChoiceBox<String> activeSelection;
-  @FXML private Button filterButton;
 
+  /** Initialize the strings in the searchTypes list. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
-  private ObservableList<String> countries;
-  private final ObservableList<String> activeStatuses =
-      FXCollections.observableArrayList("Any", "True", "False");
 
   /**
-   * Initializes the controller class.
+   * This method initializes the controller class.
    *
    * @param url The URL used.
    * @param rb The resource bundle used.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    // Set up the columns in the TableView.
     airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
-    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
+    airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     airlineAliasColumn.setCellValueFactory(new PropertyValueFactory<>("airlineAlias"));
-    airlineIATAColumn.setCellValueFactory(new PropertyValueFactory<>("airlineIATA"));
+    airlineIATAColumn.setCellValueFactory(new PropertyValueFactory<>("IATA"));
     ICAOColumn.setCellValueFactory(new PropertyValueFactory<>("ICAO"));
     callsignColumn.setCellValueFactory(new PropertyValueFactory<>("callsign"));
     countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
     activeStatusColumn.setCellValueFactory(new PropertyValueFactory<>("activeStatus"));
 
-    // Load data by taking the Airline ArrayList and converting it to an ObservableArrayList.
     ObservableList<Airline> airlines = FXCollections.observableList(storage.getAirlines());
     tableView.setItems(airlines);
-
-    // Setup choice boxes
-    searchTypeSelection.setItems(searchTypes);
-    List<String> tempCountries = storage.getAirlineCounties();
-    tempCountries.add("Any");
-    countries = FXCollections.observableArrayList(tempCountries);
-    countrySelection.setItems(countries);
-    activeSelection.setItems(activeStatuses);
-
-    // Add filter selection boxes to HashMap with filter type as key
-    filterSelectionBoxes.put("Country", countrySelection);
-    filterSelectionBoxes.put("Active status", activeSelection);
+    searchTypeSelection.setItems(searchTypes); // Setup choice boxes
   }
 
   /**
-   * Calls searchAirlines method from searcher class and upldates table to display results of
-   * search.
+   * This method calls searchAirlines method from searcher class and upldates table to display
+   * results of search.
+   *
+   * @param searchTerm The term to search for matches to.
+   * @param searchType The type of attribute to check for matches.
    */
   public void searchByDataType(String searchTerm, String searchType) {
     ArrayList<Airline> results =
@@ -88,33 +70,25 @@ public class AirlineDataViewController extends DataViewController {
     tableView.setItems(FXCollections.observableList(results));
   }
 
-  /**
-   * Calls filterAirlines method of Filterer class and sets table to display results.
-   * @param filterTerms A hashmap where the key is the filter type and the value is the term
-   *                    the filter should match.
-   */
-  public void filterByDataType(HashMap<String, String> filterTerms) {
-    ArrayList<Airline> results = Filterer.filterAirlines(filterTerms, storage.getAirlines());
-    tableView.setItems(FXCollections.observableList(results));
-  }
-
-  /**
-   * Clear filter choices and display all airlines in table view.
-   */
-  @Override
-  public void clearFilter() {
-    for (ChoiceBox<String> filterBox : filterSelectionBoxes.values()) {
-      filterBox.setValue(null);
-    }
-    tableView.setItems(FXCollections.observableList(storage.getAirlines()));
-  }
-
-  /**
-   * Clear search bar and display all airlines in table view.
-   */
+  /** This method clears search bar and display all airlines in table view. */
   @Override
   public void clearSearch() {
     searchBar.setText(null);
     tableView.setItems(FXCollections.observableList(storage.getAirlines()));
+  }
+
+  /**
+   * This method displays the filter pop up box. If filtering is successful displays the filtered
+   * airline data in the tableview when the pop up is closed.
+   *
+   * @throws IOException If AirlineFilterPopUpController fxml file cannot be opened.
+   */
+  public void filterOptions() throws IOException {
+    AirlineFilterPopUpController filterPopUp = new AirlineFilterPopUpController();
+    filterer.setFilterSuccess(false);
+    filterPopUp.display();
+    if (filterer.getFilterSuccess()) {
+      tableView.setItems(FXCollections.observableList(filterer.getFilteredAirlines()));
+    }
   }
 }

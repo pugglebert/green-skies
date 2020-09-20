@@ -8,4 +8,6 @@
 /dataSources/
 /dataSources.local.xml
 target/
+app.sqlite
+
 

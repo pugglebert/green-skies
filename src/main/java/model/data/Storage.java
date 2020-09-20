@@ -1,134 +1,222 @@
 package model.data;
 
+import model.database.SQLiteDatabase;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
 
 /**
- * Class to keep track of all the data currently open files
- * @author Ella Johnson
- * @since 17/08/2020
- * @version 1.0
+ * Class to keep track of all the data that has been uploaded to the application, also interact with
+ * database.
+ *
+ * @author Ella Johnson, Lambert, Hayley Krippner
+ * @since 2020-09-15
+ * @version 1.3
  */
 public class Storage {
 
-    private List<Airline> airlines = new ArrayList<>();
-    private List<Airport> airports = new ArrayList<>();
-    private List<Route> routes = new ArrayList<>();
-    private List<Route> history = new ArrayList<>();
-    private TreeSet<String> airportCountries = new TreeSet<>();
-    private TreeSet<String> airlineCountries = new TreeSet<>();
-    private TreeSet<String> airportCities = new TreeSet<>();
-    private TreeSet<String> routeAirlines = new TreeSet<>();
-    private TreeSet<String> routeSources = new TreeSet<>();
-    private TreeSet<String> routeDestinations = new TreeSet<>();
+  /** A list of all the airlines that have been uploaded to the application. */
+  private List<Airline> airlines = new ArrayList<>();
 
-    /**
-     * @return a list of Airline objects from the currently open file cast as Datatype objects.
-     */
-    public List<Airline> getAirlines() {return airlines;}
+  /** A list of all the airports that have been uploaded to the application. */
+  private List<Airport> airports = new ArrayList<>();
 
-    /**
-     * @return a list of Airport objects from the currently open file cast as Datatype objects.
-     */
-    public List<Airport> getAirports() {return airports;}
+  /** A list of all the routes that have been uploaded to the application. */
+  private List<Route> routes = new ArrayList<>();
 
-    /**
-     * @return a list of Route object from the currently open file cast as Datatype objects.
-     */
-    public List<Route> getRoutes() {return routes;}
+  /** Temporary list of routes used when adding routes to history. */
+  private List<Route> tempRoutes = new ArrayList<>();
 
-    /**
-     * @return a list of routes in the user's history.
-     */
-    public List<Route> getHistory() {return history;}
+  /** A list of all the values calculated for the distances of the routes in the history. */
+  private List<Double> analyseDistanceResult = new ArrayList<>();
 
-    /**
-     * @return a list all unique counties from the airline file.
-     */
-    public List<String> getAirlineCounties() {
-        return new ArrayList<>(airlineCountries);
-    }
+  /** A list of all the values calculated for the emissions of the routes in the history. */
+  private List<Double> analyseEmissionResult = new ArrayList<>();
 
-    /**
-     * @return a list of all unique countries from the aiport file.
-     */
-    public List<String> getAirportCountries() {
-        return new ArrayList<>(airportCountries);
-    }
+  /** A list of all the routes that have been added to the user's personal history. */
+  private List<Route> history = new ArrayList<>();
 
-    /**
-     * @return a list of all unique cities from the airport file.
-     */
-    public List<String> getAirportCities() {
-        return new ArrayList<>(airportCities);
-    }
+  /**
+   * A HashMap of all the source airports the user has visited and the number of times they have
+   * visited them.
+   */
+  private HashMap<String, Integer> historySrcAirports = new HashMap<>();
 
-    /**
-     * @return a list of all unique airline codes from the route file.
-     */
-    public List<String> getRouteAirlines() {
-        return new ArrayList<>(routeAirlines);
-    }
+  /**
+   * A HashMap of all the destination airports the user has visited and the number of times they
+   * have visited them.
+   */
+  private HashMap<String, Integer> historyDestAirports = new HashMap<>();
 
-    /**
-     * @return a list of all unique source airports from the route file.
-     */
-    public List<String> getRouteSources() {
-        return new ArrayList<>(routeSources);
-    }
+  /** The database in which data added to the application is stored. */
+  private SQLiteDatabase database = new SQLiteDatabase();
 
-    /**
-     * @return a list of all unique destination airports from the route file.
-     */
-    public List<String> getRouteDestinations() {
-        return new ArrayList<>(routeDestinations);
-    }
+  /** @return a list of Airline objects from the currently open file cast as Datatype objects. */
+  public List<Airline> getAirlines() {
+    return airlines;
+  }
 
-    /**
-     * Add an arrayList of routes to the history list.
-     * @param routes an arrayList of routes.
-     */
-    public void addToHistory(ArrayList<Route> routes) {
-        history.addAll(routes);
-    }
+  /** This method reset airlines list. */
+  public void resetAirlinesList() {
+    airlines = new ArrayList<>();
+  }
 
-    /**
-     * Add a list of data from a file to storage.
-     * @param data the list of data.
-     * @param type type of data to be stored.
-     */
-    public void setData(List<DataType> data, String type) {
+  /** @return a list of Airport objects from the currently open file cast as Datatype objects. */
+  public List<Airport> getAirports() {
+    return airports;
+  }
 
-        if (type.matches("Airline")) {
+  /** This method reset airports list. */
+  public void resetAirportsList() {
+    airports = new ArrayList<>();
+  }
 
-            for (DataType entry : data) {
-                Airline airline = (Airline) entry;
-                if (airline != null) {
-                    airlines.add(airline);
-                    airlineCountries.add(airline.getCountry());
-                }
+  /** @return a list of Route object from the currently open file cast as Datatype objects. */
+  public List<Route> getRoutes() {
+    return routes;
+  }
 
-            }
-        } else if (type.matches("Airport")) {
-            for (DataType entry : data) {
-                Airport airport = (Airport) entry;
-                airports.add(airport);
-                if (airport != null) {
-                    airportCountries.add(airport.getCountry());
-                    airportCities.add(airport.getCity());
-                }
-            }
-        } else if (type.matches("Route")) {
-            for (DataType entry : data) {
-                Route route = (Route) entry;
-                routes.add(route);
-                routeAirlines.add(route.getAirlineName());
-                routeSources.add(route.getSourceAirport());
-                routeDestinations.add(route.getDestinationAirport());
-            }
-        } else {
-            throw new IllegalArgumentException("Type must be airline, airport or route");
+  /** This method reset routes list. */
+  public void resetRoutesList() {
+    routes = new ArrayList<>();
+  }
+
+  /** @return a list of Route object from route to add to history. */
+  public List<Route> getTempRoutes() {
+    return tempRoutes;
+  }
+
+  /** @return a list of routes in the user's history. */
+  public List<Route> getHistory() {
+    return history;
+  }
+
+  /** @return a list of distance has been analysed . */
+  public List<Double> getAnalyseDistanceResult() {
+    return analyseDistanceResult;
+  }
+
+  /** @ADD distance has been analysed into a list . */
+  public void setAnalyseDistanceResult(double distance) {
+    analyseDistanceResult.add(distance);
+  }
+
+  /** @return a list of emissions has been analysed . */
+  public List<Double> getAnalyseEmissionResult() {
+    return analyseEmissionResult;
+  }
+
+  /** @ADD emissions has been analysed into a list . */
+  public void setAnalyseEmissionResult(double emission) {
+    analyseEmissionResult.add(emission);
+  }
+
+  /**
+   * This method adds an arrayList of routes to the history list.
+   *
+   * @param routes An arrayList of routes.
+   */
+  public void addToHistory(Route routes) {
+    history.add(routes);
+  }
+
+  /**
+   * This method adds a list of data from a file to storage.
+   *
+   * @param data The list of data.
+   * @param type Type of data to be stored.
+   */
+  public void setData(List<DataType> data, String type) {
+
+    if (type.matches("Airline")) {
+      //      airlines = new ArrayList<Airline>();
+      database.initialiseTable("airlines");
+      database.closeAutoCommite();
+      for (DataType entry : data) {
+        Airline airline = (Airline) entry;
+        if (airline != null) {
+          airlines.add(airline);
+          database.addAirlines(airline);
         }
+      }
+      database.startCommite();
+    } else if (type.matches("Airport")) {
+      //      airports = new ArrayList<Airport>();
+      database.initialiseTable("airports");
+      database.closeAutoCommite();
+      for (DataType entry : data) {
+        Airport airport = (Airport) entry;
+        airports.add(airport);
+        database.addAirports(airport);
+      }
+      database.startCommite();
+    } else if (type.matches("Route")) {
+      database.initialiseTable("routes");
+      database.closeAutoCommite();
+      for (DataType entry : data) {
+        Route route = (Route) entry;
+        routes.add(route);
+        database.addRoutes(route);
+      }
+      database.startCommite();
+    } else {
+      throw new IllegalArgumentException("Type must be airline, airport or route");
     }
- }
+  }
+
+  /**
+   * This method initilises storage with data from database after user start the application
+   *
+   * @throws SQLException This throws an SQLException.
+   */
+  public void initialiseStorage() throws SQLException {
+    database.initialiseStorage(this);
+  }
+
+  /**
+   * This method updates the count of source aiport visits in the flight history.
+   *
+   * @param airportName The name of the source airport of the route being added to history.
+   */
+  public void addToHistorySrcAirports(String airportName) {
+    if (historySrcAirports.containsKey(airportName)) {
+      historySrcAirports.put(airportName, historySrcAirports.get(airportName) + 1);
+    } else {
+      historySrcAirports.put(airportName, 1);
+    }
+  }
+
+  /**
+   * This method gets the historySrcAirports.
+   *
+   * @return A HashMap with the names of source airports as keys and the number of times they have
+   *     been visited as the value.
+   */
+  public HashMap<String, Integer> getHistorySrcAirports() {
+    return historySrcAirports;
+  }
+
+  /**
+   * This method updates the count of destination aiport visits in the flight history.
+   *
+   * @param airportName The name of the destination airport of the route being added to history.
+   */
+  public void addToHistoryDestAirports(String airportName) {
+    if (historyDestAirports.containsKey(airportName)) {
+      historyDestAirports.put(airportName, historyDestAirports.get(airportName) + 1);
+    } else {
+      historyDestAirports.put(airportName, 1);
+    }
+  }
+
+  /**
+   * This method gets the historyDestAirports.
+   *
+   * @return A HashMap of the names of destination airports as key and the number of times they have
+   *     been added to history as value.
+   */
+  public HashMap<String, Integer> getHistoryDestAirports() {
+    return historyDestAirports;
+  }
+}

@@ -1,0 +1,10 @@
+
+w
+java:S1104"ZMake continueButton a static final constant or non-public and provide accessors if needed.(µàÅ™8¹ª‰£É.
+q	java:S116"URename this field "InfoButton" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸·¹Ì8¹ª‰£É.
+s
+java:S1104"VMake InfoButton a static final constant or non-public and provide accessors if needed.(¸·¹Ì8¹ª‰£É.
+N
+java:S1172",Remove this unused method parameter "event".(²óÍøøÿÿÿÿ8ü–òàÉ.
+I
+java:S11721",Remove this unused method parameter "event".(Ç¦ÙÚ8ü–òàÉ.

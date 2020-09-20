@@ -5,10 +5,19 @@ import model.data.DataType;
 
 import java.util.List;
 
+/**
+ * Class to process airline data which has been extracted from a file by Loader class. Each entry in
+ * each line is checked for errors. If the line has no errors than a Airline object is created with
+ * attributes determined by the data in the line. If the line contains an error this is added to the
+ * ErrorCounter and the parser moves onto the next line without creating a route object.
+ *
+ * @author Nathan Huynh
+ * @version 1.0
+ * @since 11/08/2020
+ */
 public class AirlineParser extends Parser {
-  // Processed airlines data
-  //  private final Set<DataType> airlines = new HashSet<>();
-  // Alphabetical name to represent line index
+
+  /** Variable name to represent line index */
   private final int airlineID = 0,
       name = 1,
       alias = 2,
@@ -18,14 +27,21 @@ public class AirlineParser extends Parser {
       country = 6,
       activeStatus = 7;
 
-  // todo add error count
-  public AirlineParser(List<String> dataFile) {
-    super(dataFile, 12);
+  /**
+   * This method initializes error collection and calls dataParser method to begin processing data.
+   *
+   * @param dataFile ArrayList of a string for each line in the file.
+   */
+  public AirlineParser(List<String> dataFile, List<Airline> existingAirlines) {
+    super(dataFile, 11);
+    for (Airline airline : existingAirlines) {
+      addAirLine(airline.getAirlineID(), airline);
+    }
     dataParser();
   }
 
+  /** This method initializes error lookup array with message for each error code. */
   @Override
-  /** Initializes error lookup array with message for each error code. */
   protected void initErrorLookup() {
     errorLookup[0] = "Not enough parameters";
     errorLookup[1] = "Duplicate airline";
@@ -38,81 +54,52 @@ public class AirlineParser extends Parser {
     errorLookup[8] = "Invalid country";
     errorLookup[9] = "Invalid status";
     errorLookup[10] = "Unknown error";
-    errorLookup[11] = "Failed insertion";
   }
 
+  /**
+   * This method iterate throught each line of input file, strip line in to data segment. Then call
+   * validator method to check a singke line then add that line to parserData if it is valid.
+   */
+  @Override
   public void dataParser() {
 
     for (String dataLine : dataFile) {
-      dataLine = dataLine.replaceAll("[\"]", ""); // remove double quote
+      dataLine = dataLine.replaceAll("[\"]", "");
       String[] line = dataLine.split(",");
-//      System.out.println(Arrays.toString(line));
 
       if (validater(line)) {
-        // System.out.println(Arrays.toString(line));
-
         try {
           boolean active = false;
           if (line[activeStatus].matches("Y")) {
             active = true;
           }
           Airline airline =
-                  new Airline(
-                          Integer.parseInt(line[airlineID]),
-                          line[name],
-                          line[alias],
-                          line[IATA],
-                          line[ICAO],
-                          line[callsign],
-                          line[country],
-                          active);
-
-          // parserData.add(airline);
+              new Airline(
+                  Integer.parseInt(line[airlineID]),
+                  line[name],
+                  line[alias],
+                  line[IATA],
+                  line[ICAO],
+                  line[callsign],
+                  line[country],
+                  active);
           addAirLine(airline.getAirlineID(), airline);
-
         } catch (Exception e) {
           errorCounter(10);
         }
-      } else {
-        errorCounter(11);
       }
     }
   }
 
-  /*private void addAirLine(List parserData, int airlineID, Airline airline) {
-    int attemp = 3; // maximum attemp
-    while (attemp > 0) {
-      attemp--;
-      try {
-        Airline arrayItem = (Airline) parserData.get(airlineID);
-        if (arrayItem == null) {
-          parserData.set(airlineID, airline);
-        } else if (arrayItem.equals(airline)) {
-          errorCounter(1); // Have the same airline
-          System.out.println("ID " + airlineID);
-        } else {
-          errorCounter(11); // Airline exist with same ID
-        }
-
-      } catch (
-              IndexOutOfBoundsException e) { // size is smaller than ID then init array with null value
-        for (int i = 0; i < airlineID - parserData.size() + 1; i++) {
-          parserData.add(null);
-        }
-      }
-    }
-  }*/
-
   /**
-   * add airline to index matches with airLineID.
-   * First check if there are any airline currently sit at index. If it is null then replace with airline param.
-   * If parserset size is too small then init it with null value.
-   * If there is an airline at index then check if the airline is the same with the one we want to add.
-   * If it is the same then treat as duplicate (do nothing)
-   * If is is not then add to error
+   * This method add airline to index matches with airLineID. First check if there are any airline
+   * currently sit at index. If it is null then replace with airline param. If parserset size is too
+   * small then init it with null value. If there is an airline at index then check if the airline
+   * is the same with the one we want to add. If it is the same then treat as duplicate (do nothing)
+   * If is is not then add to error.
    *
-   * @param airlineID  airline ID we want to add
-   * @param airline    Airline Object we wanted to add
+   * @param airlineID airline ID we want to add
+   * @param airline Airline Object we wanted to add
    */
   private void addAirLine(int airlineID, Airline airline) {
     if (airlineID >= parserData.size()) {
@@ -129,11 +116,15 @@ public class AirlineParser extends Parser {
     } else {
       errorCounter(11); // Airline exist with same ID
     }
-
   }
 
-
-
+  /**
+   * This method checks that line has expected number of entries and calls isValid method to check
+   * that each token on the line matches the expected pattern.
+   *
+   * @param line A string made up of comma-seperated tokens representing data about a route
+   * @return True if all tokens are valid, false otherwise
+   */
   protected boolean validater(String[] line) {
 
     boolean isValid = true;
@@ -142,48 +133,41 @@ public class AirlineParser extends Parser {
     }
 
     if (!isIdValid(line[airlineID])) {
-      //      System.out.println("ID " + line[airlineID]);
       isValid = false;
     }
 
     if (!isNameValid(line[name])) {
-      //      System.out.println("name " + line[name]);
       isValid = false;
     }
 
     if (!isAliasValid(line[alias])) {
-      //      System.out.println("alias " + line[alias]);
       isValid = false;
     }
 
     if (!isIATAValid(line[IATA])) {
-      //      System.out.println("IATA " + line[IATA]);
       isValid = false;
     }
 
     if (!isICAOValid(line[ICAO])) {
-      //      System.out.println("ICAO " + line[ICAO]);
       isValid = false;
     }
 
     if (!isCallsignValid(line[callsign])) {
-      //      System.out.println("callsign " + line[callsign]);
       isValid = false;
     }
 
     if (!isCountryValid(line[country])) {
-      //      System.out.println("country " + line[country]);
       isValid = false;
     }
 
     if (!isActiveStatusValid(line[activeStatus])) {
-      //      System.out.println("activeStatus " + line[activeStatus]);
       isValid = false;
     }
     return isValid;
   }
+
   /**
-   * Check if id is valid.
+   * This method check if id is valid.
    *
    * @param airlineID airline id as a string.
    * @return true if valid, false if invalid.
@@ -210,12 +194,11 @@ public class AirlineParser extends Parser {
       errorCounter(2);
       return false;
     }
-
     return true;
   }
 
   /**
-   * Check if name is valid.
+   * This method checks if the name is valid.
    *
    * @param name airline name as a string.
    * @return true if valid, false if invalid.
@@ -229,7 +212,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if city is valid.
+   * This method checks if the city is valid.
    *
    * @param alias airline city as a string.
    * @return true if valid, false if invalid.
@@ -243,7 +226,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if IATA is valid.
+   * This method checks if the IATA is valid.
    *
    * @param IATA airline IATA as a string.
    * @return true if valid, false if invalid.
@@ -260,14 +243,12 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if ICAO is valid.
+   * This method checks if the ICAO is valid.
    *
    * @param ICAO airline ICAO as a string.
    * @return true if valid, false if invalid.
    */
   private boolean isICAOValid(String ICAO) {
-
-    // airline ICAO check
 
     if (!ICAO.matches("(\\\\N)|(N/A)|([A-Z0-9]{3})|(^$)")) {
       errorCounter(6);
@@ -278,7 +259,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if callsign is valid.
+   * This method checks if the callsign is valid.
    *
    * @param callsign airline latitude as a string.
    * @return true if valid, false if invalid.
@@ -293,7 +274,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if country is valid.
+   * This method checks if the country is valid.
    *
    * @param country airline country as a string.
    * @return true if valid, false if invalid.
@@ -308,7 +289,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * Check if activeStatus is valid.
+   * This method checks if the activeStatus is valid.
    *
    * @param activeStatus as a string.
    * @return true if valid, false if invalid.
@@ -321,19 +302,4 @@ public class AirlineParser extends Parser {
     }
     return true;
   }
-
-//  public static void main(String[] args) throws Exception {
-//    ArrayList<String> testLines;
-//    testLines = new ArrayList<String>();
-//
-//    BufferedReader br = new BufferedReader(new FileReader("src/test/java/TestFiles/airlines.csv"));
-//    int count = 0;
-//    String line = "";
-//    br.readLine(); // header
-//    while ((line = br.readLine()) != null && count < 2) {
-//      testLines.add(line);
-//      count++;
-//    }
-//    AirlineParser parser = new AirlineParser(testLines);
-//  }
 }

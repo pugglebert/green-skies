@@ -1,0 +1,21 @@
+
+Z
+java:S1128"?Remove this unused import 'controller.analysis.FlightAnalyser'.(á…öÂúÿÿÿÿ
+O
+java:S1128"9Remove this unused import 'controller.analysis.Searcher'.(¸àÇ¹
+[
+java:S1128"@Remove this unused import 'controller.analysis.ReportGenerator'.(š¼¶±ıÿÿÿÿ
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8Ÿ ñàÉ.
+X
+java:S1128";Remove this unused import 'javafx.scene.layout.AnchorPane'.(Ø µ8Ÿ ñàÉ.
+T
+java:S1135"2Complete the task associated to this TODO comment.(™»Î®şÿÿÿÿ8Ÿ ñàÉ.
+T
+java:S11351"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8Ÿ ñàÉ.
+T
+java:S11353"2Complete the task associated to this TODO comment.(ôÒ³¶ûÿÿÿÿ8Ÿ ñàÉ.
+_
+java:S1854N"=Remove this useless assignment to local variable "!unknown!".(˜Ùğåşÿÿÿÿ8Ÿ ñàÉ.
+=
+java:S3626h"Remove this redundant jump.(üËÏŸúÿÿÿÿ8Ÿ ñàÉ.

@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AirlineParserTest {
   private AirlineParser parser;
@@ -27,7 +28,8 @@ public class AirlineParserTest {
       testLines.add(line);
       count++;
     }
-    parser = new AirlineParser(testLines);
+    List<Airline> existingLines = new ArrayList<>();
+    parser = new AirlineParser(testLines, existingLines);
 
     /*testLines = new ArrayList<String>();
     testLines.add("1,\"Private flight\",\\N,\"-\",\"N/A\",\"\",\"\",\"Y\"");
@@ -233,6 +235,5 @@ public class AirlineParserTest {
   public void validater() {
     String[] invalidValider = {"-1", "Unknown", "\\N", "-", "N/A", "\\N", "\\N", "Y"};
     Assert.assertFalse(parser.validater(invalidValider));
-
   }
 }

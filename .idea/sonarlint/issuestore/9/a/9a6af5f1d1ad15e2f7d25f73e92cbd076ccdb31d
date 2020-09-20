@@ -1,0 +1,10 @@
+
+Q
+java:S10681"/Remove this unused "filterPopUp" private field.(ú¶Ëœûÿÿÿÿ8‘¥àŠÈ.
+Y
+java:S2387%"="searchTypes" is the name of a field in "DataViewController".(…òØK8‘¥àŠÈ.
+q	java:S116"URename this field "ICAOColumn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Òƒë÷8‘¥àŠÈ.
+O
+java:S1068+"2Remove this unused "activeStatuses" private field.(ÏÌ±¹8‘¥àŠÈ.
+a
+java:S1117f"?Rename "filterPopUp" which hides the field declared at line 49.(õÙÿ¥şÿÿÿÿ8‘¥àŠÈ.
