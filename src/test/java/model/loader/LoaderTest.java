@@ -16,16 +16,18 @@ import static org.junit.Assert.*;
 
 /**
  * Unit tests for the Loader class
- *
  * @author Ella Johnson
+ * @since 2020-09-08
  */
 public class LoaderTest {
 
   private Loader loader;
   private Storage storage;
   private ArrayList<String> testLines;
-  private HashSet<Airport> testAirports;
 
+  /**
+   * Set up before each test case.
+   */
   @Before
   public void setUp() {
     storage = new Storage();
