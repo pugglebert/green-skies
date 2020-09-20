@@ -6,8 +6,9 @@ import java.util.*;
 
 
 /**
- *  the super class of whole sub_parser classes
+ * The super class of whole sub_parser classes
  * @author Ella Lambert Tom
+ * @since 2020-08-09
  */
 public abstract class Parser {
 

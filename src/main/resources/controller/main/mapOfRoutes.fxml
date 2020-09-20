@@ -12,7 +12,7 @@
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.MapOfRoutesController">
     <children>
         <Text layoutX="277.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="[Map Of Airports To Be Implemented Here]"/>
+              text="[Map Of Routes To Be Implemented Here]"/>
         <WebView fx:id="mapView" layoutX="277.0" layoutY="235.0" prefHeight="367.0" prefWidth="535.0"/>
         <VBox prefHeight="703.0" prefWidth="188.0" style="-fx-background-color: #116754;">
             <children>

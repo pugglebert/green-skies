@@ -97,6 +97,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
           && airports.contains(pathDestination1.getText())
           && airports.contains(pathSource2.getText())
           && airports.contains(pathDestination2.getText())) {
+
         check = 1;
       } else {
         check = 0;
