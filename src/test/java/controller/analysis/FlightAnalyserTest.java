@@ -158,14 +158,14 @@ public class FlightAnalyserTest {
    * @return distance
    */
   private double calculatedistance(double Lati1, double Long1, double Lati2, double Long2) {
-    double φ1 = Lati1 * Math.PI / 180;
-    double φ2 = Lati2 * Math.PI / 180;
-    double Δφ = (Lati2 - Lati1) * Math.PI / 180;
-    double Δλ = (Long2 - Long1) * Math.PI / 180;
+    double need1 = Lati1 * Math.PI / 180;
+    double need2 = Lati2 * Math.PI / 180;
+    double need3 = (Lati2 - Lati1) * Math.PI / 180;
+    double need4 = (Long2 - Long1) * Math.PI / 180;
 
     double a =
-        Math.sin(Δφ / 2) * Math.sin(Δφ / 2)
-            + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+            Math.sin(need3 / 2) * Math.sin(need3 / 2)
+                    + Math.cos(need1) * Math.cos(need2) * Math.sin(need4 / 2) * Math.sin(need4 / 2);
 
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
