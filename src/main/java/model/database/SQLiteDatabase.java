@@ -425,7 +425,7 @@ public class SQLiteDatabase {
                   DBTimezone);
           airports.add(airport);
         }
-        storage.setData(airports, "Airport");
+        storage.setData(airports, "Airport", null);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
@@ -463,7 +463,7 @@ public class SQLiteDatabase {
                   airlineId, airlineName, alias, IATA, ICAO, callsign, country, activeStatus);
           airlines.add(airline);
         }
-        storage.setData(airlines, "Airline");
+        storage.setData(airlines, "Airline", null);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
@@ -527,7 +527,7 @@ public class SQLiteDatabase {
           route.setDistance(distance);
           routes.add(route);
         }
-        storage.setData(routes, "Route");
+        storage.setData(routes, "Route", null);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);

@@ -169,6 +169,8 @@ public class Storage {
       List<Airline> airlines = new ArrayList<>();
       if (filename == null) {
         filename = currentAirlineFile;
+      } else {
+        currentAirlineFile = filename;
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
@@ -183,6 +185,8 @@ public class Storage {
       List<Airport> airports = new ArrayList<>();
       if (filename == null) {
         filename = currentAirportFile;
+      } else {
+        currentAirportFile = filename;
       }
 //      database.initialiseTable("airports");
 //      database.closeAutoCommite();
@@ -197,6 +201,8 @@ public class Storage {
       List<Route> routes = new ArrayList<>();
       if (filename == null) {
         filename = currentRouteFile;
+      } else {
+        currentRouteFile = filename;
       }
 //      database.initialiseTable("routes");
 //      database.closeAutoCommite();
