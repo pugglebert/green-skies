@@ -23,6 +23,7 @@ public class AirportParser extends Parser {
    * timezone 114: invalid unknown error 115: number of failed insertions 116: invalid alias 117:
    * invalid callsign 118: invalid activestatus
    */
+  private final int airportID = 0;
   private final int name = 1;
   private final int city = 2;
   private final int country = 3;
@@ -91,7 +92,6 @@ public class AirportParser extends Parser {
     String[] line = dataLine.replaceAll("\"", "").split(",");
     if (validater(line)) {
       try {
-        int airportID = 0;
         Airport airport =
             new Airport(
                 Integer.parseInt(line[airportID]),
@@ -128,7 +128,9 @@ public class AirportParser extends Parser {
       errorCounter(0);
       isValid = false;
     }
-
+    if(!isIdValid(line[airportID])){
+      isValid = false;
+    }
     if (!isNameValid(line[name])) {
       isValid = false;
     }
