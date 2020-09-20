@@ -55,6 +55,26 @@ public class Loader {
   }
 
   /**
+   * This method checks if file is already uploaded to the system.
+   *
+   * @param fileName Name of file to be checked.
+   * @throws RuntimeException If filename is already in the system.
+   */
+  protected void checkDuplicateFileName(String fileName) {
+    boolean duplicate = false;
+    if (storage.getAirportFiles().containsKey(fileName)) {
+      duplicate = true;
+    } else if (storage.getAirlineFiles().containsKey(fileName)) {
+      duplicate = true;
+    } else if (storage.getRouteFiles().containsKey(fileName)) {
+      duplicate = true;
+    }
+    if (duplicate) {
+      throw new RuntimeException(String.format("There is already a file with the name %s in the system", fileName));
+    }
+  }
+
+  /**
    * This method opens file, reads each line and appends it to an ArrayList.
    *
    * @param fileName Name of file to read from.
@@ -159,12 +179,13 @@ public class Loader {
     }
 
     checkFileType(fileName);
+    checkDuplicateFileName(fileName);
     ArrayList<String> lines;
     lines = openFile(fileName);
 
     Parser parser = constructParser(dataType, lines);
     List<DataType> data = parser.getData();
-    storage.setData(data, dataType);
+    storage.setData(data, dataType, fileName);
 
     return parser.getErrorMessage();
   }
@@ -187,7 +208,7 @@ public class Loader {
     parser = constructParser(dataType, line);
 
     List<DataType> data = parser.getData();
-    storage.setData(data, dataType);
+    storage.setData(data, dataType, null);
     return parser.getErrorMessage();
   }
 }

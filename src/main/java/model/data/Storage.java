@@ -1,5 +1,6 @@
 package model.data;
 
+import io.cucumber.java.hu.Ha;
 import model.database.SQLiteDatabase;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,13 +18,22 @@ import java.util.List;
 public class Storage {
 
   /** A list of all the airlines that have been uploaded to the application. */
-  private List<Airline> airlines = new ArrayList<>();
+  private HashMap<String, List<Airline>> airlineFiles = new HashMap<>();
+
+  /** The name of the airline files which is currently in use. */
+  private String currentAirlineFile;
 
   /** A list of all the airports that have been uploaded to the application. */
-  private List<Airport> airports = new ArrayList<>();
+  private HashMap<String, List<Airport>> airportFiles = new HashMap<>();
+
+  /** The name of the airport file which is2 currently in use. */
+  private String currentAirportFile;
 
   /** A list of all the routes that have been uploaded to the application. */
-  private List<Route> routes = new ArrayList<>();
+  private HashMap<String, List<Route>> routeFiles = new HashMap<>();
+
+  /** The name of the route file which is currently in use. */
+  private String currentRouteFile;
 
   /** Temporary list of routes used when adding routes to history. */
   private List<Route> tempRoutes = new ArrayList<>();
@@ -52,35 +62,59 @@ public class Storage {
   /** The database in which data added to the application is stored. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
-  /** @return a list of Airline objects from the currently open file cast as Datatype objects. */
+  /** @return a HashMap with filename as key and List of Airline datatypes as values. */
+  public HashMap<String, List<Airline>> getAirlineFiles() {
+    return airlineFiles;
+  }
+
+  /** @return the name of the currently open Airline file. */
+  public String getCurrentAirlineFile() {return currentAirlineFile;}
+
   public List<Airline> getAirlines() {
-    return airlines;
+    return airlineFiles.get(currentAirlineFile);
   }
 
-  /** This method reset airlines list. */
-  public void resetAirlinesList() {
-    airlines = new ArrayList<>();
+//  /** This method reset airlines list. */
+//  public void resetAirlinesList() {
+//    airlines = new ArrayList<>();
+//  }
+
+  /** @return a HashMap with filename as key and List of Airport datatypes as values. */
+  public HashMap<String, List<Airport>> getAirportFiles() {
+    return airportFiles;
   }
 
-  /** @return a list of Airport objects from the currently open file cast as Datatype objects. */
+  /** @return the name of the currently open Airport file. */
+  public String getCurrentAirportFile() {
+    return currentAirportFile;
+  }
+
   public List<Airport> getAirports() {
-    return airports;
+    return airportFiles.get(currentAirportFile);
+  }
+//  /** This method reset airports list. */
+//  public void resetAirportsList() {
+//    airports = new ArrayList<>();
+//  }
+
+  /** @return a HashMap with filename as key and List of Route datatypes as values. */
+  public HashMap<String, List<Route>> getRouteFiles() {
+    return routeFiles;
   }
 
-  /** This method reset airports list. */
-  public void resetAirportsList() {
-    airports = new ArrayList<>();
+  /** @return the name of the currently open Route file. */
+  public String getCurrentRouteFile() {
+    return currentRouteFile;
   }
 
-  /** @return a list of Route object from the currently open file cast as Datatype objects. */
   public List<Route> getRoutes() {
-    return routes;
+    return routeFiles.get(currentRouteFile);
   }
 
-  /** This method reset routes list. */
-  public void resetRoutesList() {
-    routes = new ArrayList<>();
-  }
+//  /** This method reset routes list. */
+//  public void resetRoutesList() {
+//    routes = new ArrayList<>();
+//  }
 
   /** @return a list of Route object from route to add to history. */
   public List<Route> getTempRoutes() {
@@ -127,39 +161,52 @@ public class Storage {
    * @param data The list of data.
    * @param type Type of data to be stored.
    */
-  public void setData(List<DataType> data, String type) {
+  public void setData(List<DataType> data, String type, String filename) {
 
     if (type.matches("Airline")) {
-      //      airlines = new ArrayList<Airline>();
-      database.initialiseTable("airlines");
-      database.closeAutoCommite();
+//      database.initialiseTable("airlines");
+//      database.closeAutoCommite();
+      List<Airline> airlines = new ArrayList<>();
+      if (filename == null) {
+        filename = currentAirlineFile;
+      }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
         if (airline != null) {
           airlines.add(airline);
-          database.addAirlines(airline);
+//          database.addAirlines(airline);
         }
       }
-      database.startCommite();
+      airlineFiles.put(filename, airlines);
+//      database.startCommite();
     } else if (type.matches("Airport")) {
-      //      airports = new ArrayList<Airport>();
-      database.initialiseTable("airports");
-      database.closeAutoCommite();
+      List<Airport> airports = new ArrayList<>();
+      if (filename == null) {
+        filename = currentAirportFile;
+      }
+//      database.initialiseTable("airports");
+//      database.closeAutoCommite();
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
         airports.add(airport);
-        database.addAirports(airport);
+//        database.addAirports(airport);
       }
-      database.startCommite();
+//      database.startCommite();
+      airportFiles.put(filename, airports);
     } else if (type.matches("Route")) {
-      database.initialiseTable("routes");
-      database.closeAutoCommite();
+      List<Route> routes = new ArrayList<>();
+      if (filename == null) {
+        filename = currentRouteFile;
+      }
+//      database.initialiseTable("routes");
+//      database.closeAutoCommite();
       for (DataType entry : data) {
         Route route = (Route) entry;
         routes.add(route);
-        database.addRoutes(route);
+//        database.addRoutes(route);
       }
-      database.startCommite();
+      routeFiles.put(filename, routes);
+//      database.startCommite();
     } else {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
