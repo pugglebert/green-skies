@@ -128,7 +128,7 @@ public class Storage {
    * @param type Type of data to be stored.
    */
   public void setData(List<DataType> data, String type) {
-
+    long startTime = System.currentTimeMillis();
     if (type.matches("Airline")) {
       //      airlines = new ArrayList<Airline>();
       database.initialiseTable("airlines");
@@ -163,6 +163,8 @@ public class Storage {
     } else {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
+    long EndTime = System.currentTimeMillis();
+    System.out.println("Uploading time: " + (EndTime - startTime) + "ms");
   }
 
   /**
