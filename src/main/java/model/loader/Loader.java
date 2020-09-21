@@ -105,22 +105,31 @@ public class Loader {
    * @throws IllegalArgumentException Thrown if datatype is not one of airline, airport, flight or
    *     route.
    */
-  protected Parser constructParser(String dataType, ArrayList<String> lines)
+  protected Parser constructParser(String dataType, ArrayList<String> lines, boolean appendToExisting)
       throws IllegalArgumentException {
 
     Parser parser;
 
     switch (dataType) {
       case "Airport":
-        List<Airport> existingAirports = storage.getAirports();
+        List<Airport> existingAirports = new ArrayList<>();
+        if (appendToExisting) {
+          existingAirports = storage.getAirports();
+        }
         parser = new AirportParser(lines, existingAirports);
         break;
       case "Airline":
-        List<Airline> exisitingAirlines = storage.getAirlines();
-        parser = new AirlineParser(lines, exisitingAirlines);
+        List<Airline> existingAirlines = new ArrayList<>();
+        if (appendToExisting) {
+          existingAirlines = storage.getAirlines();
+        }
+        parser = new AirlineParser(lines, existingAirlines);
         break;
       case "Route":
-        List<Route> existingRoutes = storage.getRoutes();
+        List<Route> existingRoutes = new ArrayList<>();
+        if (appendToExisting) {
+          existingRoutes = storage.getRoutes();
+        }
         parser = new RouteParser(lines, existingRoutes);
         break;
       default:
@@ -151,10 +160,11 @@ public class Loader {
     }
 
     checkFileType(fileName);
+    checkDuplicateFileName(fileName);
     ArrayList<String> lines;
     lines = openFile(fileName);
 
-    Parser parser = constructParser(dataType, lines);
+    Parser parser = constructParser(dataType, lines, false);
 
     return parser.getErrorMessage();
   }
@@ -183,7 +193,7 @@ public class Loader {
     ArrayList<String> lines;
     lines = openFile(fileName);
 
-    Parser parser = constructParser(dataType, lines);
+    Parser parser = constructParser(dataType, lines, false);
     List<DataType> data = parser.getData();
     storage.setData(data, dataType, fileName);
 
@@ -203,9 +213,7 @@ public class Loader {
     ArrayList<String> line = new ArrayList<>();
     line.add(entryString);
 
-    Parser parser;
-
-    parser = constructParser(dataType, line);
+    Parser parser = constructParser(dataType, line, true);
 
     List<DataType> data = parser.getData();
     storage.setData(data, dataType, null);

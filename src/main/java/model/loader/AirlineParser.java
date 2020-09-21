@@ -34,9 +34,9 @@ public class AirlineParser extends Parser {
    */
   public AirlineParser(List<String> dataFile, List<Airline> existingAirlines) {
     super(dataFile, 11);
-//    for (Airline airline : existingAirlines) {
-//      addAirLine(airline.getAirlineID(), airline);
-//    }
+    for (Airline airline : existingAirlines) {
+      addAirLine(airline.getAirlineID(), airline);
+    }
     dataParser();
   }
 

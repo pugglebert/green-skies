@@ -109,7 +109,7 @@ public class LoaderTest {
    * valid datatype
    */
   public void testConstructParserValid() {
-    Parser testParser = loader.constructParser("Airport", testLines);
+    Parser testParser = loader.constructParser("Airport", testLines, false);
     assertTrue(testParser instanceof AirportParser);
   }
 
@@ -117,7 +117,7 @@ public class LoaderTest {
   /** Test that constructParser throws an exception when called with an invalid datatype */
   public void testConstructParserInvalid() {
     try {
-      loader.constructParser("plane", testLines);
+      loader.constructParser("plane", testLines, false);
       fail();
     } catch (IllegalArgumentException e) {
     }
