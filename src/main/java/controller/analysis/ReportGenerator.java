@@ -54,7 +54,7 @@ public class ReportGenerator {
   /** The number of trees the user would need to plant to counter their current carbon emissions. */
   private double treesToGrow = 0.0;
 
-  // TODO: change to remove getTimesTaken for the time being (HK)
+  // TODO: change 1 to being getTimesTaken once working (HK)
   /**
    * This method updates the total carbon emissions from flight travel.
    *
@@ -65,7 +65,7 @@ public class ReportGenerator {
     totalCarbonEmissions += (currentRouteRecord.getEmissions() * 1);
   }
 
-  // TODO: change to remove getTimesTaken for the time being (HK)
+  // TODO: change 1 to being getTimesTaken once working (HK)
   /**
    * This method updates the total distance travelled via flight travel.
    *

@@ -85,7 +85,7 @@ public class RouteDataViewController extends DataViewController {
    */
   public void addDataToHistory() throws IOException {
     if (!Main.getStorage().getTempRoutes().isEmpty()) {
-      Main.getStorage().getTempRoutes().clear();
+      Main.getStorage().getTempRoutes().clear(); //TODO: ask Nathan if this should be here. Does it need to be cleared every time a new route is added? HK, 23/09/2020
     }
 
     for (Route route : Main.getStorage().getRoutes()) {
@@ -107,10 +107,15 @@ public class RouteDataViewController extends DataViewController {
     }
 
     addPopUp.display();
-    reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
-    reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
+//    reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
+//    reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
+    reportGenerator.updateLeastTravelledRoute(storage.getHistory());
+    reportGenerator.updateMostTravelledRoute(storage.getHistory());
     reportGenerator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
-    reportGenerator.updateMostVisitedSrcAirports(storage.getHistoryDestAirports());
+    reportGenerator.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
+    reportGenerator.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
+    reportGenerator.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
+
   }
 
   /** This method clears the search bar and displays all routes in table view. */

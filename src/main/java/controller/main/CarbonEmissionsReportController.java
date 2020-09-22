@@ -86,12 +86,12 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayMostDistanceRouteField.setText(MostDistanceRouteString);
     displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
     displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirport);
-    displayLeastVisitedSourceAirportField.setText("To be implemented!");
-    displayMostVisitedDestinationAirportField.setText("To be implemented!");
-    displayLeastVisitedDestinationAirportField.setText("To be implemented!");
+    displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirport);
+    displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirport);
+    displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirport);
     displayTreeOffsetField.setText("To be implemented!");
 
-    reportGenerator.resetReportGenerator();
+    //reportGenerator.resetReportGenerator();
   }
 
   /** This method clears all fields in the report generator page to be empty. */
@@ -115,7 +115,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
 
-    reportGenerator.resetReportGenerator();
+    //reportGenerator.resetReportGenerator();
   }
 
   public void setUpData() {
@@ -146,7 +146,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    * This methods takes an arrary containing either routes with most or least emissions or most or
    * least distance and produces a string of its routes' AirlineIDs.
    *
-   * @param resultString Where the content in the provided array with be added to.
    * @param arrayToConvert Either the most or least emissions or most or least distance array that
    *     needs to be converted to a String.
    * @return resultString The string of the array's routes' AirlineIDs.
@@ -170,7 +169,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    * This methods takes an array containing either source or destination airports that are most or
    * least visited and produces a string of its routes' AirlineIDs.
    *
-   * @param resultString Where the content in the provided array with be added to.
    * @param airportArrayToConvert Either the most or least visited source or destination airports
    *     array that needs to be converted to a String.
    * @return resultString The string of the array's airport names.
