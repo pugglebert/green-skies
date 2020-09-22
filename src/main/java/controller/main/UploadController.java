@@ -33,10 +33,13 @@ public class UploadController extends SideNavBarController {
 
   private final Storage storage = Main.getStorage();
   private final Loader loader = Main.getLoader();
-  @FXML public ListView fileView;
   // Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
   ObservableList<String> dataTypeList =
       FXCollections.observableArrayList("Airport", "Route", "Airline");
+
+  @FXML public ListView<String> airlineFileList;
+  @FXML private ListView<String> airportFileList;
+  @FXML private ListView<String> routeFileList;
   @FXML private ChoiceBox dataTypeSelect;
   @FXML private Button backButton;
 
@@ -47,6 +50,14 @@ public class UploadController extends SideNavBarController {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     dataTypeSelect.getItems().addAll(dataTypeList);
+
+    airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
+    airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
+    routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
+
+    airlineFileList.getSelectionModel().select(storage.getCurrentAirlineFile());
+    airportFileList.getSelectionModel().select(storage.getCurrentAirportFile());
+    routeFileList.getSelectionModel().select(storage.getCurrentRouteFile());
   }
 
   /**
@@ -90,19 +101,24 @@ public class UploadController extends SideNavBarController {
 
         Optional<ButtonType> result = ConfirmAlert.showAndWait();
         if (result.get() == yesButton) {
+          loader.loadFile(stringFile, fileType);
           switch (fileType) {
             case "Airport":
+              airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
+              airportFileList.getSelectionModel().select(storage.getCurrentAirportFile());
 //              storage.resetAirportsList();
               break;
             case "Airline":
+              airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
+              airlineFileList.getSelectionModel().select(storage.getCurrentAirlineFile());
 //              storage.resetAirlinesList();
               break;
             case "Route":
+              routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
+              routeFileList.getSelectionModel().select(storage.getCurrentRouteFile());
 //              storage.resetRoutesList();
               break;
           }
-          loader.loadFile(stringFile, fileType);
-          fileView.getItems().add(selectedFile.getName());
           ConfirmAlert.close();
 
           // only load data if it is not erroneous
@@ -190,4 +206,11 @@ public class UploadController extends SideNavBarController {
     newStage.setMaximized(true);
     newStage.show();
   }
+
+  public void changeAirlineFile() {
+    System.out.println("Change airline file.");
+    String currentAirlineFile = airlineFileList.getSelectionModel().getSelectedItem();
+    storage.setCurrentAirlineFile(currentAirlineFile);
+  }
+
 }

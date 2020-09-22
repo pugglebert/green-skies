@@ -55,6 +55,21 @@ public class Loader {
   }
 
   /**
+   * This method gets the name of the file from its full path.
+   * @param filePath full path of the file on the computer.
+   * @return the last part of the file path (after the last slash).
+   */
+  protected String getFileName(String filePath) {
+    String fileName;
+    if (filePath.contains("/")) {
+      fileName = filePath.substring(filePath.lastIndexOf("/")+1);
+    } else {
+      fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
+    }
+    return fileName;
+  }
+
+  /**
    * This method checks if file is already uploaded to the system.
    *
    * @param fileName Name of file to be checked.
@@ -62,11 +77,11 @@ public class Loader {
    */
   protected void checkDuplicateFileName(String fileName) {
     boolean duplicate = false;
-    if (storage.getAirportFiles().containsKey(fileName)) {
+    if (storage.getAirportFileNames().contains(fileName)) {
       duplicate = true;
-    } else if (storage.getAirlineFiles().containsKey(fileName)) {
+    } else if (storage.getAirlineFileNames().contains(fileName)) {
       duplicate = true;
-    } else if (storage.getRouteFiles().containsKey(fileName)) {
+    } else if (storage.getRouteFileNames().contains(fileName)) {
       duplicate = true;
     }
     if (duplicate) {
@@ -175,23 +190,25 @@ public class Loader {
    * the file, returns a message about the error. Otherwise, returns message abount number of
    * rejected lines from file.
    *
-   * @param fileName Name of the file to be opened.
+   * @param filePath Path of the file to be opened.
    * @param dataType The type of data in the file (one of airport, airline, or route).
    * @return Error information string.
    */
-  public String loadFile(String fileName, String dataType)
+  public String loadFile(String filePath, String dataType)
       throws FileSystemException, FileNotFoundException, SQLException {
 
-    if (fileName.isEmpty()) {
+    if (filePath.isEmpty()) {
       throw new RuntimeException("Filename cannot be empty.");
     } else if (dataType.isEmpty()) {
       throw new RuntimeException("Datatype cannot be empty.");
     }
 
-    checkFileType(fileName);
+    checkFileType(filePath);
+
+    String fileName = getFileName(filePath);
     checkDuplicateFileName(fileName);
     ArrayList<String> lines;
-    lines = openFile(fileName);
+    lines = openFile(filePath);
 
     Parser parser = constructParser(dataType, lines, false);
     List<DataType> data = parser.getData();

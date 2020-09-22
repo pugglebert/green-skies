@@ -62,14 +62,34 @@ public class Storage {
   /** The database in which data added to the application is stored. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
-  /** @return a HashMap with filename as key and List of Airline datatypes as values. */
-  public HashMap<String, List<Airline>> getAirlineFiles() {
-    return airlineFiles;
+  /**
+   * @return a List of the names of files in AirlineFiles.
+   */
+  public List<String> getAirlineFileNames() {
+    List<String> airlineFileNames = new ArrayList<>();
+    for (String filename : airlineFiles.keySet()) {
+      airlineFileNames.add(filename);
+    }
+    return airlineFileNames;
   }
 
-  /** @return the name of the currently open Airline file. */
+  /**
+   * @return the name of the currently open Airline file.
+   */
   public String getCurrentAirlineFile() {return currentAirlineFile;}
 
+  /**
+   * @param newCurrentFile the name of an airline file to change currentAirlineFile to.
+   */
+  public void setCurrentAirlineFile(String newCurrentFile) {
+    if (airlineFiles.containsKey(newCurrentFile)) {
+      currentAirlineFile = newCurrentFile;
+    } else {
+      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
+    }
+  }
+
+  /** @return a list of Airlines in the current file. */
   public List<Airline> getAirlines() {
     if (currentAirlineFile == null) {
       return new ArrayList<>();
@@ -82,9 +102,13 @@ public class Storage {
 //    airlines = new ArrayList<>();
 //  }
 
-  /** @return a HashMap with filename as key and List of Airport datatypes as values. */
-  public HashMap<String, List<Airport>> getAirportFiles() {
-    return airportFiles;
+  /** @return a List of the names of files in AirportFiles. */
+  public List<String> getAirportFileNames() {
+    List<String> airportFileNames = new ArrayList<>();
+    for (String filename : airportFiles.keySet()) {
+      airportFileNames.add(filename);
+    }
+    return airportFileNames;
   }
 
   /** @return the name of the currently open Airport file. */
@@ -92,6 +116,19 @@ public class Storage {
     return currentAirportFile;
   }
 
+  /**
+   * @param newCurrentFile the name of an airport file to change currentAirportFile to.
+   */
+  public void setCurrentAirportFile(String newCurrentFile) {
+    if (airportFiles.containsKey(newCurrentFile)) {
+      currentAirportFile = newCurrentFile;
+    } else {
+      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
+    }
+  }
+
+
+  /** @return a List of all the Airports from the current file. */
   public List<Airport> getAirports() {
     if (currentAirportFile == null) {
       return new ArrayList<>();
@@ -103,9 +140,13 @@ public class Storage {
 //    airports = new ArrayList<>();
 //  }
 
-  /** @return a HashMap with filename as key and List of Route datatypes as values. */
-  public HashMap<String, List<Route>> getRouteFiles() {
-    return routeFiles;
+  /** @return a List of the names of files in RouteFiles. */
+  public List<String> getRouteFileNames() {
+    List<String> airportFileNames = new ArrayList<>();
+    for (String filename : airportFiles.keySet()) {
+      airportFileNames.add(filename);
+    }
+    return airportFileNames;
   }
 
   /** @return the name of the currently open Route file. */
@@ -113,6 +154,18 @@ public class Storage {
     return currentRouteFile;
   }
 
+  /**
+   * @param newCurrentFile the name of a route file to change currentRouteFile to.
+   */
+  public void setCurrentRouteFile(String newCurrentFile) {
+    if (routeFiles.containsKey(newCurrentFile)) {
+      currentRouteFile = newCurrentFile;
+    } else {
+      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
+    }
+  }
+
+  /** @return a List of Routes in the current file. */
   public List<Route> getRoutes() {
     if (currentRouteFile == null) {
       return new ArrayList<>();
