@@ -307,11 +307,11 @@ public class ReportGenerator {
     for (Map.Entry<String, Integer> entry : destAirportCounts.entrySet()) {
       if (entry.getValue() > currDestAirportMax) {
         currDestAirportMax = entry.getValue();
-        mostVisitedDestAirports.clear();
-        mostVisitedDestAirports.add(entry.getKey());
+        leastVisitedDestAirports.clear();
+        leastVisitedDestAirports.add(entry.getKey());
       } else if (entry.getValue() == currDestAirportMax) {
         currDestAirportMax = entry.getValue();
-        mostVisitedDestAirports.add(entry.getKey());
+        leastVisitedDestAirports.add(entry.getKey());
       }
     }
   }
