@@ -208,9 +208,19 @@ public class UploadController extends SideNavBarController {
   }
 
   public void changeAirlineFile() {
-    System.out.println("Change airline file.");
     String currentAirlineFile = airlineFileList.getSelectionModel().getSelectedItem();
     storage.setCurrentAirlineFile(currentAirlineFile);
   }
+
+  public void changeAirportFile() {
+    String currentAirportFile = airportFileList.getSelectionModel().getSelectedItem();
+    storage.setCurrentAirportFile(currentAirportFile);
+  }
+
+  public void changeRouteFile() {
+    String currentRouteFile = routeFileList.getSelectionModel().getSelectedItem();
+    storage.setCurrentRouteFile(currentRouteFile);
+  }
+
 
 }
