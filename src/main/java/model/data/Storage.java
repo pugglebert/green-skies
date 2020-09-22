@@ -142,11 +142,11 @@ public class Storage {
 
   /** @return a List of the names of files in RouteFiles. */
   public List<String> getRouteFileNames() {
-    List<String> airportFileNames = new ArrayList<>();
-    for (String filename : airportFiles.keySet()) {
-      airportFileNames.add(filename);
+    List<String> routeFileNames = new ArrayList<>();
+    for (String filename : routeFiles.keySet()) {
+      routeFileNames.add(filename);
     }
-    return airportFileNames;
+    return routeFileNames;
   }
 
   /** @return the name of the currently open Route file. */
