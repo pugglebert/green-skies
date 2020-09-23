@@ -6,13 +6,14 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Route;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -24,25 +25,44 @@ import java.util.ResourceBundle;
  */
 public class RouteDataViewController extends DataViewController {
 
-  @FXML private TableView<Route> tableView;
-  @FXML private TableColumn<Route, Boolean> addColumn;
-  @FXML private TableColumn<Route, String> airlineNameColumn;
-  @FXML private TableColumn<Route, String> sourceAirportColumn;
-  @FXML private TableColumn<Route, String> destinationAirportColumn;
-  @FXML private TableColumn<Route, String> codeShareColumn;
-  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
-  @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML
+  private TableView<Route> tableView;
+  @FXML
+  private TableColumn<Route, Boolean> addColumn;
+  @FXML
+  private TableColumn<Route, String> airlineNameColumn;
+  @FXML
+  private TableColumn<Route, String> sourceAirportColumn;
+  @FXML
+  private TableColumn<Route, String> destinationAirportColumn;
+  @FXML
+  private TableColumn<Route, String> codeShareColumn;
+  @FXML
+  private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML
+  private TableColumn<Route, String> equipmentColumn;
+  @FXML
+  private Button AddToHistoryButton;
+  @FXML
+  private Button btnRemove;
 
-  /** The types of search which can be performed on routes. */
+  /**
+   * The types of search which can be performed on routes.
+   */
   private final ObservableList<String> searchTypes =
-      FXCollections.observableArrayList("Airline", "Source", "Destination");
+          FXCollections.observableArrayList("Airline", "Source", "Destination");
 
-  /** Class to generate reports on history. */
+  /**
+   * Class to generate reports on history.
+   */
   private ReportGenerator reportGenerator;
 
-  /** Pop up to launch when adding route to history. */
+  /**
+   * Pop up to launch when adding route to history.
+   */
   private final RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
 
+  private ObservableList<Route> routes;
   /**
    * Initializes the controller class. The checkboxes are added to each record.
    *
@@ -64,7 +84,7 @@ public class RouteDataViewController extends DataViewController {
     for (Route route : storage.getRoutes()) {
       route.initCheckBox();
     }
-    ObservableList<Route> routes = FXCollections.observableList(storage.getRoutes());
+    routes = FXCollections.observableList(storage.getRoutes());
     tableView.setItems(routes);
     searchTypeSelection.setItems(searchTypes); // Setup choice boxes
   }
@@ -121,4 +141,18 @@ public class RouteDataViewController extends DataViewController {
       tableView.setItems(FXCollections.observableList(filterer.getFilteredRoutes()));
     }
   }
-}
+
+  public void removeSelected() {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirm remove");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure?");
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      routes.removeIf(route -> route.getSelect().isSelected());
+
+      }
+    }
+
+  }
+
