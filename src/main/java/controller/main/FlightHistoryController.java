@@ -51,8 +51,6 @@ public class FlightHistoryController extends DataViewController {
   @FXML
   private TableColumn<Route, String> emissionsColumn;
   @FXML
-  private Button removeBtn;
-  @FXML
   private ChoiceBox<String> searchTypeSelection;
   @FXML
   private TextField searchBar;
@@ -157,6 +155,18 @@ public class FlightHistoryController extends DataViewController {
     Optional<ButtonType> result = RouteDataViewController.showDeleteAlert();
     if (result.isPresent() && result.get() == ButtonType.OK) {
       routes.removeIf(route -> route.getSelect().isSelected());
+    }
+  }
+
+  public void selectAll() {
+    for (Route route : Main.getStorage().getHistory()) {
+      route.getSelect().setSelected(true);
+    }
+  }
+
+  public void deselectAll() {
+    for (Route route : Main.getStorage().getHistory()) {
+      route.getSelect().setSelected(false);
     }
   }
 }

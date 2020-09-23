@@ -120,5 +120,9 @@
         </VBox>
         <Button fx:id="removeBtn" layoutX="1255.0" layoutY="98.0" mnemonicParsing="false" onAction="#removeSelected"
                 prefWidth="30.0" text="X"/>
+        <Button fx:id="selectAllBtn" layoutX="238.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectAll"
+                prefWidth="78.0" text="Select All"/>
+        <Button fx:id="deselectAllBtn" layoutX="334.0" layoutY="626.0" mnemonicParsing="false" onAction="#deselectAll"
+                text="Deselect All"/>
     </children>
 </AnchorPane>

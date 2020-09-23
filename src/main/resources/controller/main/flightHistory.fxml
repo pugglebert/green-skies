@@ -10,7 +10,7 @@
     <children>
         <TableView fx:id="tableView" layoutX="202.0" layoutY="186.0" prefHeight="499.0" prefWidth="1179.0">
             <columns>
-                <TableColumn fx:id="addColumn" prefWidth="50.0" text="Add"/>
+                <TableColumn fx:id="addColumn" prefWidth="50.0" text="Select"/>
                 <TableColumn fx:id="airlineNameColumn" prefWidth="117.0" text="Airline Name"/>
                 <TableColumn fx:id="sourceAirportColumn" prefWidth="122.0" text="Source Airport"/>
                 <TableColumn fx:id="destinationAirportColumn" prefWidth="153.0" text="Destination Airport"/>
@@ -22,24 +22,24 @@
                 <TableColumn fx:id="emissionsColumn" prefWidth="155.0" text="Emissions (kg)"/>
             </columns>
         </TableView>
-        <Button fx:id="searchButton" layoutX="792.0" layoutY="130.0" mnemonicParsing="false" onAction="#search"
+        <Button fx:id="searchButton" layoutX="792.0" layoutY="116.0" mnemonicParsing="false" onAction="#search"
                 text="Search"/>
-        <TextField fx:id="searchBar" layoutX="350.0" layoutY="130.0" prefHeight="31.0" prefWidth="430.0"/>
-        <ChoiceBox fx:id="searchTypeSelection" layoutX="203.0" layoutY="130.0" prefHeight="31.0" prefWidth="132.0"/>
+        <TextField fx:id="searchBar" layoutX="350.0" layoutY="116.0" prefHeight="31.0" prefWidth="430.0"/>
+        <ChoiceBox fx:id="searchTypeSelection" layoutX="203.0" layoutY="116.0" prefHeight="31.0" prefWidth="132.0"/>
         <Label fx:id="errorText" layoutX="238.0" layoutY="216.0" prefHeight="27.0" prefWidth="846.0" textFill="RED"
                visible="false">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Button fx:id="filterOptionsButton" layoutX="931.0" layoutY="130.0" mnemonicParsing="false"
+        <Button fx:id="filterOptionsButton" layoutX="931.0" layoutY="116.0" mnemonicParsing="false"
                 onAction="#filterOptions" prefHeight="20.0" prefWidth="150.0" text="Filter Options"/>
-        <Text layoutX="230.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type"
+        <Text layoutX="230.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type"
               wrappingWidth="104.00000041723251"/>
         <Label fx:id="filterErrorText" layoutX="199.0" layoutY="147.0" prefHeight="20.0" prefWidth="554.0"
                text="Filter error text" textFill="RED" visible="false">
         </Label>
-        <Button fx:id="clearSearchButton" layoutX="864.0" layoutY="130.0" mnemonicParsing="false"
+        <Button fx:id="clearSearchButton" layoutX="864.0" layoutY="116.0" mnemonicParsing="false"
                 onAction="#clearSearch" text="Clear"/>
         <VBox prefHeight="703.0" prefWidth="188.0" style="-fx-background-color: #116754;">
             <children>
@@ -116,7 +116,9 @@
                 </Button>
             </children>
         </VBox>
-        <Button fx:id="removeBtn" layoutX="1103.0" layoutY="130.0" mnemonicParsing="false" onAction="#removeSelected"
-                text="X"/>
+        <Button layoutX="1103.0" layoutY="116.0" mnemonicParsing="false" onAction="#removeSelected" text="X"/>
+        <Button layoutX="203.0" layoutY="155.0" mnemonicParsing="false" onAction="#selectAll" prefWidth="78.0"
+                text="Select all"/>
+        <Button layoutX="296.0" layoutY="155.0" mnemonicParsing="false" onAction="#deselectAll" text="Deselect all"/>
     </children>
 </AnchorPane>

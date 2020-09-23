@@ -4,6 +4,7 @@ import controller.analysis.FlightAnalyser;
 import controller.analysis.ReportGenerator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,7 +35,9 @@ import java.util.ResourceBundle;
 public class RouteAddToHistoryPopUpController implements Initializable {
 
 
-  @FXML private TableView<Route> tableView;
+  public Button setAllPassengerBtn;
+  @FXML
+  private TableView<Route> tableView;
   @FXML
   private TableColumn<Route, Integer> passengerNumber;
   @FXML
@@ -61,6 +64,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
 
   private final Storage storage = Main.getStorage();
 
+  private ObservableList<Route> tempRoute;
   /**
    * This method displays the content for the history.
    *
@@ -104,8 +108,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
     equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
 
-    ObservableList<Route> tempRoute =
-        FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
+    tempRoute = FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
     tableView.setEditable(true);
     tableView.setItems(tempRoute);
   }
@@ -156,5 +159,12 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     }
     Stage stage = (Stage) cancelBtn.getScene().getWindow();
     stage.close();
+  }
+
+  public void setAllPassengerTo1(ActionEvent event) {
+    for (Route route : Main.getStorage().getTempRoutes()) {
+      route.setTimesTaken(1);
+    }
+    tableView.refresh();
   }
 }

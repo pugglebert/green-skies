@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
  */
 public class RouteDataViewController extends DataViewController {
 
+
   @FXML
   private TableView<Route> tableView;
   @FXML
@@ -40,6 +41,10 @@ public class RouteDataViewController extends DataViewController {
   private TableColumn<Route, Integer> numOfStopsColumn;
   @FXML
   private TableColumn<Route, String> equipmentColumn;
+  @FXML
+  private Button selectAllBtn;
+  @FXML
+  private Button deselectAllBtn;
   @FXML
   private Button AddToHistoryButton;
   @FXML
@@ -89,7 +94,7 @@ public class RouteDataViewController extends DataViewController {
     searchTypeSelection.setItems(searchTypes); // Setup choice boxes
   }
 
-  //todo write comment
+  // todo write comment
   public static Optional<ButtonType> showDeleteAlert() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Confirm Remove");
@@ -124,9 +129,6 @@ public class RouteDataViewController extends DataViewController {
     }
 
     addPopUp.display();
-
-
-
   }
 
   /** This method clears the search bar and displays all routes in table view. */
@@ -155,8 +157,18 @@ public class RouteDataViewController extends DataViewController {
     Optional<ButtonType> result = showDeleteAlert();
     if (result.isPresent() && result.get() == ButtonType.OK) {
       routes.removeIf(route -> route.getSelect().isSelected());
-      }
     }
-
   }
 
+  public void selectAll() {
+    for (Route route : Main.getStorage().getRoutes()) {
+      route.getSelect().setSelected(true);
+    }
+  }
+
+  public void deselectAll() {
+    for (Route route : Main.getStorage().getRoutes()) {
+      route.getSelect().setSelected(false);
+    }
+  }
+}
