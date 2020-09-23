@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -61,8 +64,18 @@
                 </Button>
             </children>
         </VBox>
-      <Button fx:id="barChart" layoutX="1143.0" layoutY="179.0" mnemonicParsing="false" onAction="#toBarChart" text="Bar Chart" />
-      <Button fx:id="pieChart" layoutX="1144.0" layoutY="288.0" mnemonicParsing="false" onAction="#toPieChart" text="Pie Chart" />
-      <Pane fx:id="barChart" layoutX="563.0" layoutY="101.0" prefHeight="375.0" prefWidth="404.0" />
+      <Button fx:id="barChart" layoutX="1286.0" layoutY="176.0" mnemonicParsing="false" onAction="#toBarChart" text="Bar Chart" />
+      <Pane fx:id="barChart" layoutX="563.0" layoutY="101.0" prefHeight="375.0" prefWidth="404.0">
+         <children>
+            <BarChart fx:id="barChart" layoutX="-270.0" layoutY="-23.0" prefHeight="570.0" prefWidth="958.0" title="CO2 Emissions per Route ">
+              <xAxis>
+                <CategoryAxis label="Route" side="BOTTOM" fx:id="xAxis" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxis" label="Carbon Emissions" side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>

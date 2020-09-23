@@ -151,12 +151,29 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
+  public void makeBarChart() {
+
+    if (!Main.getStorage().getTempRoutes().isEmpty()) {
+      Main.getStorage().getTempRoutes().clear();
+    }
+
+    for (Route route : Main.getStorage().getRoutes()) {
+      if (route.getSelect().isSelected()) {
+        Main.getStorage().getTempRoutes().add(route);
+      }
+    }
+
+
+
+  }
+
   public void removeSelected() {
     Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight history");
     if (result.isPresent() && result.get() == ButtonType.OK) {
       routes.removeIf(route -> route.getSelect().isSelected());
     }
   }
+
 
   public void selectAll() {
     for (Route route : Main.getStorage().getHistory()) {
