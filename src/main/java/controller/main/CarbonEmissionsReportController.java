@@ -72,15 +72,15 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    */
   @FXML
   private void generateReportData() {
+    reportGenerator.updateTravelledAndVisited();
     setUpData();
 
     String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
     displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
     String carbonEmissionGoalDurationValue = carbonEmissionGoalDurationField.getText();
     displaycarbonEmissionGoalDurationField.setText(carbonEmissionGoalDurationValue);
-    displayTotalEmissionsField.setText(Double.toString(reportGenerator.getTotalCarbonEmissions()));
-    displayTotalDistanceTravelledField.setText(
-        Double.toString(reportGenerator.getTotalDistanceTravelled()));
+    displayTotalEmissionsField.setText(String.format("%.2f",reportGenerator.getTotalCarbonEmissions()));
+    displayTotalDistanceTravelledField.setText(String.format("%.2f",reportGenerator.getTotalDistanceTravelled()));
     displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
     displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
     displayMostDistanceRouteField.setText(MostDistanceRouteString);

@@ -1,6 +1,9 @@
 package controller.analysis;
 
+import controller.main.Main;
 import model.data.Route;
+import model.data.Storage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -488,5 +491,19 @@ public class ReportGenerator {
     leastVisitedSrcAirports.clear();
     leastVisitedDestAirports.clear();
     // TODO add in least visited.
+  }
+
+  //TODO: write comment
+  /**
+   *
+   */
+  public void updateTravelledAndVisited() {
+    Storage storage = Main.getStorage();
+    this.updateLeastTravelledRoute(storage.getHistory());
+    this.updateMostTravelledRoute(storage.getHistory());
+    this.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
+    this.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
+    this.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
+    this.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
   }
 }

@@ -98,7 +98,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   /** This method is to confirm the selected Routes. */
   public void confirm() {
     for (Route route : Main.getStorage().getTempRoutes()) {
-      if (route.getTimesTaken() < 0) { // Have not edit number of passenger => invalid history
+      if (route.getTimesTaken() <= 0) { // Have not edit number of passenger => invalid history
         continue; // drop
       } else {
         int index = Main.getStorage().getHistory().indexOf(route);
@@ -120,6 +120,8 @@ public class RouteAddToHistoryPopUpController implements Initializable {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
     route.setEmissions(flightAnalyser.getPath1Emission());
+    //TODO: remove later!
+    System.out.println("Update report stats: " + route.getEmissions());
     route.setDistance(flightAnalyser.getTotalDistancePath1());
     reportGenerator.updateTotalDistance(route);
     reportGenerator.updateTotalEmissions(route);
@@ -130,14 +132,6 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     reportGenerator.updateMostEmissionsRoute(route);
     reportGenerator.updateLeastEmissionsRoute(route);
 
-//    reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
-//    reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
-    reportGenerator.updateLeastTravelledRoute(storage.getHistory());
-    reportGenerator.updateMostTravelledRoute(storage.getHistory());
-    reportGenerator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
-    reportGenerator.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
-    reportGenerator.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
-    reportGenerator.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
 
   }
 }
