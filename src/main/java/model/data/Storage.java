@@ -127,7 +127,6 @@ public class Storage {
     }
   }
 
-
   /** @return a List of all the Airports from the current file. */
   public List<Airport> getAirports() {
     if (currentAirportFile == null) {
