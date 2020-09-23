@@ -1,8 +1,10 @@
 package controller.main;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +20,9 @@ import java.util.ResourceBundle;
  */
 public class GraphsController extends SideNavBarController {
 
+  @FXML
+  Pane barChart;
+
   /**
    * This method is the initializer for this class.
    *
@@ -27,6 +32,9 @@ public class GraphsController extends SideNavBarController {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {}
 
+
+
+  @FXML
   public void toBarChart() throws IOException {
     Stage newStage = new Stage();
     Parent root = FXMLLoader.load(getClass().getResource("barChart.fxml"));
@@ -34,5 +42,7 @@ public class GraphsController extends SideNavBarController {
     newStage.setScene(scene);
     newStage.show();
   }
+
+
 
 }
