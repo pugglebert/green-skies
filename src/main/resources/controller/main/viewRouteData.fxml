@@ -19,7 +19,7 @@
                 <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="210.0" text="Equipment"/>
             </columns>
         </TableView>
-        <Button fx:id="searchButton" layoutX="843.0" layoutY="98.0" mnemonicParsing="false" onAction="#search"
+        <Button fx:id="searchButton" layoutX="833.0" layoutY="98.0" mnemonicParsing="false" onAction="#search"
                 prefHeight="31.0" prefWidth="85.0" text="Search"/>
         <TextField fx:id="searchBar" layoutX="380.0" layoutY="98.0" prefHeight="31.0" prefWidth="445.0"/>
         <ChoiceBox fx:id="searchTypeSelection" layoutX="241.0" layoutY="98.0" prefHeight="31.0" prefWidth="132.0"/>
@@ -29,8 +29,8 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Button fx:id="filterOptionsButton" layoutX="990.0" layoutY="97.0" mnemonicParsing="false"
-                onAction="#filterOptions" prefHeight="27.0" prefWidth="150.0" text="Filter Options"/>
+        <Button fx:id="filterOptionsButton" layoutX="980.0" layoutY="98.0" mnemonicParsing="false"
+                onAction="#filterOptions" prefHeight="31.0" prefWidth="150.0" text="Filter Options"/>
         <Text layoutX="248.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search Type"
               wrappingWidth="104.00000041723251"/>
         <Label fx:id="filterErrorText" layoutX="213.0" layoutY="146.0" text="Filter error message goes here"
@@ -39,10 +39,10 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Button fx:id="clearSearchButton" layoutX="935.0" layoutY="98.0" mnemonicParsing="false" onAction="#clearSearch"
+        <Button fx:id="clearSearchButton" layoutX="928.0" layoutY="98.0" mnemonicParsing="false" onAction="#clearSearch"
                 prefHeight="31.0" text="Clear"/>
-        <Button fx:id="AddToHistoryButton" layoutX="1155.0" layoutY="98.0" mnemonicParsing="false"
-                onAction="#addDataToHistory" text="Add to History"/>
+        <Button fx:id="AddToHistoryButton" layoutX="1140.0" layoutY="98.0" mnemonicParsing="false"
+                onAction="#addDataToHistory" prefHeight="31.0" text="Add to History"/>
         <VBox prefHeight="700.0" prefWidth="188.0" style="-fx-background-color: #116754;">
             <children>
                 <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData"
@@ -118,11 +118,11 @@
                 </Button>
             </children>
         </VBox>
-        <Button fx:id="removeBtn" layoutX="1255.0" layoutY="98.0" mnemonicParsing="false" onAction="#removeSelected"
-                prefWidth="30.0" text="X"/>
+        <Button fx:id="removeBtn" layoutX="1248.0" layoutY="98.0" mnemonicParsing="false" onAction="#removeSelected"
+                prefHeight="31.0" text="Remove"/>
         <Button fx:id="selectAllBtn" layoutX="238.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectAll"
-                prefWidth="78.0" text="Select All"/>
+                prefHeight="31.0" prefWidth="78.0" text="Select All"/>
         <Button fx:id="deselectAllBtn" layoutX="334.0" layoutY="626.0" mnemonicParsing="false" onAction="#deselectAll"
-                text="Deselect All"/>
+                prefHeight="31.0" text="Deselect All"/>
     </children>
 </AnchorPane>
