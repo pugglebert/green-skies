@@ -111,30 +111,12 @@ public class RouteDataViewController extends DataViewController {
     for (Route route : Main.getStorage().getRoutes()) {
       if (route.getSelect().isSelected()) {
         Main.getStorage().getTempRoutes().add(route);
-        FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
-        route.setEmissions(flightAnalyser.getPath1Emission());
-        route.setDistance(flightAnalyser.getTotalDistancePath1());
-        reportGenerator.updateTotalDistance(route);
-        reportGenerator.updateTotalEmissions(route);
-        route.setTimesTaken(1);
-        storage.addToHistorySrcAirports(route.getSourceAirport());
-        storage.addToHistoryDestAirports(route.getDestinationAirport());
-        reportGenerator.updateLeastDistanceRoute(route);
-        reportGenerator.updateMostDistanceRoute(route);
-        reportGenerator.updateMostEmissionsRoute(route);
-        reportGenerator.updateLeastEmissionsRoute(route);
       }
     }
 
     addPopUp.display();
-//    reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
-//    reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
-    reportGenerator.updateLeastTravelledRoute(storage.getHistory());
-    reportGenerator.updateMostTravelledRoute(storage.getHistory());
-    reportGenerator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
-    reportGenerator.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
-    reportGenerator.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
-    reportGenerator.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
+
+
 
   }
 
