@@ -35,4 +35,8 @@ public class GraphsController extends SideNavBarController {
     newStage.show();
   }
 
+  public void toPieChart() {
+
+  }
+
 }
