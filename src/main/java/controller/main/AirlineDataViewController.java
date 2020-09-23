@@ -4,12 +4,17 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airline;
+import model.data.Route;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -21,8 +26,13 @@ import java.util.ResourceBundle;
  */
 public class AirlineDataViewController extends DataViewController {
 
-  @FXML private TableView<Airline> tableView;
-  @FXML private TableColumn<Airline, Integer> airlineIDColumn;
+
+  @FXML
+  private TableView<Airline> tableView;
+  @FXML
+  private TableColumn<Route, Boolean> addColumn;
+  @FXML
+  private TableColumn<Airline, Integer> airlineIDColumn;
   @FXML private TableColumn<Airline, String> airlineNameColumn;
   @FXML private TableColumn<Airline, String> airlineAliasColumn;
   @FXML private TableColumn<Airline, String> airlineIATAColumn;
@@ -35,6 +45,7 @@ public class AirlineDataViewController extends DataViewController {
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
 
+  ObservableList<Airline> airlines;
   /**
    * This method initializes the controller class.
    *
@@ -43,6 +54,7 @@ public class AirlineDataViewController extends DataViewController {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
     airlineIDColumn.setCellValueFactory(new PropertyValueFactory<>("airlineID"));
     airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     airlineAliasColumn.setCellValueFactory(new PropertyValueFactory<>("airlineAlias"));
@@ -52,7 +64,10 @@ public class AirlineDataViewController extends DataViewController {
     countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
     activeStatusColumn.setCellValueFactory(new PropertyValueFactory<>("activeStatus"));
 
-    ObservableList<Airline> airlines = FXCollections.observableList(storage.getAirlines());
+    for (Airline airline : storage.getAirlines()) {
+      airline.initCheckBox();
+    }
+    airlines = FXCollections.observableList(storage.getAirlines());
     tableView.setItems(airlines);
     searchTypeSelection.setItems(searchTypes); // Setup choice boxes
   }
@@ -89,6 +104,13 @@ public class AirlineDataViewController extends DataViewController {
     filterPopUp.display();
     if (filterer.getFilterSuccess()) {
       tableView.setItems(FXCollections.observableList(filterer.getFilteredAirlines()));
+    }
+  }
+
+  public void removeSelected() {
+    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("Airline");
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      airlines.removeIf(airline -> airline.getSelect().isSelected());
     }
   }
 }

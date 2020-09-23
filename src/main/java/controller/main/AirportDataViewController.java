@@ -4,12 +4,16 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airport;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -21,8 +25,13 @@ import java.util.ResourceBundle;
  */
 public class AirportDataViewController extends DataViewController {
 
-  @FXML private TableView<Airport> tableView;
-  @FXML private TableColumn<Airport, Integer> airportIDColumn;
+
+  @FXML
+  private TableView<Airport> tableView;
+  @FXML
+  private TableColumn<Airport, Boolean> addColumn;
+  @FXML
+  private TableColumn<Airport, Integer> airportIDColumn;
   @FXML private TableColumn<Airport, String> nameColumn;
   @FXML private TableColumn<Airport, String> cityColumn;
   @FXML private TableColumn<Airport, String> countryColumn;
@@ -39,6 +48,7 @@ public class AirportDataViewController extends DataViewController {
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
 
+  ObservableList<Airport> airports;
   /**
    * This method initializes the controller class.
    *
@@ -47,6 +57,7 @@ public class AirportDataViewController extends DataViewController {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
     airportIDColumn.setCellValueFactory(new PropertyValueFactory<>("airportID"));
     nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
     cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
@@ -60,7 +71,10 @@ public class AirportDataViewController extends DataViewController {
     DSTColumn.setCellValueFactory(new PropertyValueFactory<>("DST"));
     dataBaseTimeZoneColumn.setCellValueFactory(new PropertyValueFactory<>("dataBaseTimeZone"));
 
-    ObservableList<Airport> airports = FXCollections.observableList(storage.getAirports());
+    for (Airport airport : storage.getAirports()) {
+      airport.initCheckBox();
+    }
+    airports = FXCollections.observableList(storage.getAirports());
     tableView.setItems(airports);
     searchTypeSelection.setItems(searchTypes);
   }
@@ -92,6 +106,13 @@ public class AirportDataViewController extends DataViewController {
     filterPopUpController.display();
     if (filterer.getFilterSuccess()) {
       tableView.setItems(FXCollections.observableList(filterer.getFilteredAirports()));
+    }
+  }
+
+  public void removeSelected() {
+    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("Airline");
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      airports.removeIf(airport -> airport.getSelect().isSelected());
     }
   }
 }

@@ -5,9 +5,11 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.StageStyle;
 import model.data.Route;
 
 import java.io.IOException;
@@ -76,7 +78,6 @@ public class RouteDataViewController extends DataViewController {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-
     this.reportGenerator = Main.getReportGenerator();
     addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
     airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
@@ -95,15 +96,6 @@ public class RouteDataViewController extends DataViewController {
     searchTypeSelection.setItems(searchTypes); // Setup choice boxes
   }
 
-  // todo write comment
-  public static Optional<ButtonType> showDeleteAlert() {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Confirm Remove");
-    alert.setHeaderText("Are you sure you want to delete selected flight? It can not be undone.");
-    //alert.setContentText(null);
-    alert.initStyle(StageStyle.UTILITY);
-    return alert.showAndWait();
-  }
 
   /**
    * This method calls searchRoutes method from searcher class and upldates table to display results
@@ -156,7 +148,7 @@ public class RouteDataViewController extends DataViewController {
   }
 
   public void removeSelected() {
-    Optional<ButtonType> result = showDeleteAlert();
+    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("route");
     if (result.isPresent() && result.get() == ButtonType.OK) {
       routes.removeIf(route -> route.getSelect().isSelected());
     }
