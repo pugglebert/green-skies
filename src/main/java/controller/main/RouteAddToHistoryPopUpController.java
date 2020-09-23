@@ -33,18 +33,33 @@ import java.util.ResourceBundle;
  */
 public class RouteAddToHistoryPopUpController implements Initializable {
 
-  @FXML private TableView<Route> tableView;
-  @FXML private TableColumn<Route, Integer> passengerNumber;
-  @FXML private TableColumn<Route, String> airlineNameColumn;
-  @FXML private TableColumn<Route, String> sourceAirportColumn;
-  @FXML private TableColumn<Route, String> destinationAirportColumn;
-  @FXML private TableColumn<Route, String> codeShareColumn;
-  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
-  @FXML private TableColumn<Route, String> equipmentColumn;
-  @FXML private Button confirmBtn;
 
-  private ReportGenerator reportGenerator = Main.getReportGenerator();
-  private Storage storage = Main.getStorage();
+  @FXML private TableView<Route> tableView;
+  @FXML
+  private TableColumn<Route, Integer> passengerNumber;
+  @FXML
+  private TableColumn<Route, String> airlineNameColumn;
+  @FXML
+  private TableColumn<Route, String> sourceAirportColumn;
+  @FXML
+  private TableColumn<Route, String> destinationAirportColumn;
+  @FXML
+  private TableColumn<Route, String> codeShareColumn;
+  @FXML
+  private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML
+  private TableColumn<Route, String> equipmentColumn;
+  @FXML
+  private Button confirmBtn;
+  @FXML
+  private Button cancelBtn;
+
+  /**
+   * Class to generate reports on history.
+   */
+  private final ReportGenerator reportGenerator = Main.getReportGenerator();
+
+  private final Storage storage = Main.getStorage();
 
   /**
    * This method displays the content for the history.
@@ -98,30 +113,32 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   /** This method is to confirm the selected Routes. */
   public void confirm() {
     for (Route route : Main.getStorage().getTempRoutes()) {
-      if (route.getTimesTaken() <= 0) { // Have not edit number of passenger => invalid history
+      if (route.getTimesTaken() <= 0) {
+        // Have not edit number of passenger => invalid history
         continue; // drop
+
       } else {
         int index = Main.getStorage().getHistory().indexOf(route);
-        if (index != -1) { // Route have been added to histoy
+        if (index != -1) {
+          // Route have been added to histoy
           Main.getStorage().getHistory().get(index).setTimesTaken(route.getTimesTaken());
-          updateReportStats(route);
-        } else { // Route have been added to history + have been set number of passenger
+
+        } else {
+          // Route have been added to history + have been set number of passenger
           Main.getStorage().getHistory().add(route);
-          updateReportStats(route);
         }
+        route.getSelect().setSelected(false);
+        updateReportStats(route);
       }
     }
-    Stage stage = (Stage) confirmBtn.getScene().getWindow();
+    Stage stage = (Stage) cancelBtn.getScene().getWindow();
     stage.close();
   }
-
 
   public void updateReportStats(Route route) {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
     route.setEmissions(flightAnalyser.getPath1Emission());
-    //TODO: remove later!
-    System.out.println("Update report stats: " + route.getEmissions());
     route.setDistance(flightAnalyser.getTotalDistancePath1());
     reportGenerator.updateTotalDistance(route);
     reportGenerator.updateTotalEmissions(route);
@@ -131,7 +148,13 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     reportGenerator.updateMostDistanceRoute(route);
     reportGenerator.updateMostEmissionsRoute(route);
     reportGenerator.updateLeastEmissionsRoute(route);
+  }
 
-
+  public void cancel() {
+    for (Route route : Main.getStorage().getTempRoutes()) {
+      route.setTimesTaken(0);
+    }
+    Stage stage = (Stage) cancelBtn.getScene().getWindow();
+    stage.close();
   }
 }

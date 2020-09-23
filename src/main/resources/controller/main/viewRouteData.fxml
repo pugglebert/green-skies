@@ -118,7 +118,7 @@
                 </Button>
             </children>
         </VBox>
-        <Button fx:id="btnRemove" layoutX="1255.0" layoutY="98.0" mnemonicParsing="false" onAction="#removeSelected"
+        <Button fx:id="removeBtn" layoutX="1255.0" layoutY="98.0" mnemonicParsing="false" onAction="#removeSelected"
                 prefWidth="30.0" text="X"/>
     </children>
 </AnchorPane>

@@ -1,6 +1,5 @@
 package controller.main;
 
-import controller.analysis.FlightAnalyser;
 import controller.analysis.ReportGenerator;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
@@ -44,7 +43,7 @@ public class RouteDataViewController extends DataViewController {
   @FXML
   private Button AddToHistoryButton;
   @FXML
-  private Button btnRemove;
+  private Button removeBtn;
 
   /**
    * The types of search which can be performed on routes.
@@ -86,7 +85,17 @@ public class RouteDataViewController extends DataViewController {
     }
     routes = FXCollections.observableList(storage.getRoutes());
     tableView.setItems(routes);
+    tableView.setEditable(true);
     searchTypeSelection.setItems(searchTypes); // Setup choice boxes
+  }
+
+  //todo write comment
+  public static Optional<ButtonType> showDeleteAlert() {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirm Remove");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure you want to delete selected flight? It can not be undone.");
+    return alert.showAndWait();
   }
 
   /**
@@ -105,7 +114,7 @@ public class RouteDataViewController extends DataViewController {
    */
   public void addDataToHistory() throws IOException {
     if (!Main.getStorage().getTempRoutes().isEmpty()) {
-      Main.getStorage().getTempRoutes().clear(); //TODO: ask Nathan if this should be here. Does it need to be cleared every time a new route is added? HK, 23/09/2020
+      Main.getStorage().getTempRoutes().clear();
     }
 
     for (Route route : Main.getStorage().getRoutes()) {
@@ -143,14 +152,9 @@ public class RouteDataViewController extends DataViewController {
   }
 
   public void removeSelected() {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Confirm remove");
-    alert.setHeaderText(null);
-    alert.setContentText("Are you sure?");
-    Optional<ButtonType> result = alert.showAndWait();
+    Optional<ButtonType> result = showDeleteAlert();
     if (result.isPresent() && result.get() == ButtonType.OK) {
       routes.removeIf(route -> route.getSelect().isSelected());
-
       }
     }
 

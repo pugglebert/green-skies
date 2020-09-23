@@ -4,10 +4,7 @@ import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
@@ -17,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -28,33 +26,57 @@ import java.util.ResourceBundle;
  */
 public class FlightHistoryController extends DataViewController {
 
-  @FXML private TableView<Route> tableView;
-  @FXML private TableColumn<Route, String> airlineNameColumn;
-  @FXML private TableColumn<Route, String> sourceAirportColumn;
-  @FXML private TableColumn<Route, String> destinationAirportColumn;
-  @FXML private TableColumn<Route, String> codeShareColumn;
-  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
-  @FXML private TableColumn<Route, String> equipmentColumn;
-  @FXML private TableColumn<Route, Integer> timesTakenColumn;
-  @FXML private TableColumn<Route, Double> distanceColumn;
-  @FXML private TableColumn<Route, String> emissionsColumn;
-  @FXML private ChoiceBox<String> searchTypeSelection;
-  @FXML private TextField searchBar;
-  @FXML private ChoiceBox<String> RankSelection;
 
-  /** The types of search which can be performed on history. */
+  ;
+  @FXML
+  private TableView<Route> tableView;
+  @FXML
+  private TableColumn<Route, Boolean> addColumn;
+  @FXML
+  private TableColumn<Route, String> airlineNameColumn;
+  @FXML
+  private TableColumn<Route, String> sourceAirportColumn;
+  @FXML
+  private TableColumn<Route, String> destinationAirportColumn;
+  @FXML
+  private TableColumn<Route, String> codeShareColumn;
+  @FXML
+  private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML
+  private TableColumn<Route, String> equipmentColumn;
+  @FXML
+  private TableColumn<Route, Integer> timesTakenColumn;
+  @FXML
+  private TableColumn<Route, Double> distanceColumn;
+  @FXML
+  private TableColumn<Route, String> emissionsColumn;
+  @FXML
+  private Button removeBtn;
+  @FXML
+  private ChoiceBox<String> searchTypeSelection;
+  @FXML
+  private TextField searchBar;
+  @FXML
+  private ChoiceBox<String> RankSelection;
+
+  /**
+   * The types of search which can be performed on history.
+   */
   private final ObservableList<String> searchTypes =
-      FXCollections.observableArrayList("Airline", "Source", "Destination");
+          FXCollections.observableArrayList("Airline", "Source", "Destination");
+
+  ObservableList<Route> routes;
 
   /**
    * This method initializes the controller class.
    *
    * @param url The URL used.
-   * @param rb The resource bundle used.
+   * @param rb  The resource bundle used.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 
+    addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
     airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
     sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));
     destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<>("destinationAirport"));
@@ -77,7 +99,7 @@ public class FlightHistoryController extends DataViewController {
     distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
     emissionsColumn.setCellValueFactory(new PropertyValueFactory<>("emissions"));
 
-    ObservableList<Route> routes = FXCollections.observableList(Main.getStorage().getHistory());
+    routes = FXCollections.observableList(Main.getStorage().getHistory());
     tableView.setItems(routes);
     tableView.setEditable(true);
 
@@ -119,13 +141,22 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
-  /** This method ranks the routes by the attribute selected by the user. */
+  /**
+   * This method ranks the routes by the attribute selected by the user.
+   */
   @FXML
   public void rank() {
     if (RankSelection.getSelectionModel().getSelectedItem().equals("Distance")) {
       storage.getHistory().sort(Comparator.comparingDouble(Route::getDistance));
     } else {
       storage.getHistory().sort(Comparator.comparingDouble(Route::getEmissions));
+    }
+  }
+
+  public void removeSelected() {
+    Optional<ButtonType> result = RouteDataViewController.showDeleteAlert();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      routes.removeIf(route -> route.getSelect().isSelected());
     }
   }
 }
