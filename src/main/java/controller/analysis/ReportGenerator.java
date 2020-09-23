@@ -62,7 +62,6 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
-    //totalCarbonEmissions += (currentRouteRecord.getEmissions() * 1);
     totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
 
   }
@@ -75,7 +74,6 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
-//    totalDistanceTravelled += (currentRouteRecord.getDistance() * 1); //TODO only works for one route, not more
     totalDistanceTravelled += (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
 
   }

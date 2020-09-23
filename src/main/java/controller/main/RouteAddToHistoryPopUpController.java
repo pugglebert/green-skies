@@ -1,5 +1,7 @@
 package controller.main;
 
+import controller.analysis.FlightAnalyser;
+import controller.analysis.ReportGenerator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import model.data.Route;
+import model.data.Storage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +42,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   @FXML private TableColumn<Route, Integer> numOfStopsColumn;
   @FXML private TableColumn<Route, String> equipmentColumn;
   @FXML private Button confirmBtn;
+
+  private ReportGenerator reportGenerator = Main.getReportGenerator();
+  private Storage storage = Main.getStorage();
 
   /**
    * This method displays the content for the history.
@@ -98,12 +104,40 @@ public class RouteAddToHistoryPopUpController implements Initializable {
         int index = Main.getStorage().getHistory().indexOf(route);
         if (index != -1) { // Route have been added to histoy
           Main.getStorage().getHistory().get(index).setTimesTaken(route.getTimesTaken());
+          updateReportStats(route);
         } else { // Route have been added to history + have been set number of passenger
           Main.getStorage().getHistory().add(route);
+          updateReportStats(route);
         }
       }
     }
     Stage stage = (Stage) confirmBtn.getScene().getWindow();
     stage.close();
+  }
+
+
+  public void updateReportStats(Route route) {
+
+    FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
+    route.setEmissions(flightAnalyser.getPath1Emission());
+    route.setDistance(flightAnalyser.getTotalDistancePath1());
+    reportGenerator.updateTotalDistance(route);
+    reportGenerator.updateTotalEmissions(route);
+    storage.addToHistorySrcAirports(route.getSourceAirport());
+    storage.addToHistoryDestAirports(route.getDestinationAirport());
+    reportGenerator.updateLeastDistanceRoute(route);
+    reportGenerator.updateMostDistanceRoute(route);
+    reportGenerator.updateMostEmissionsRoute(route);
+    reportGenerator.updateLeastEmissionsRoute(route);
+
+//    reportGenerator.updateLeastTravelledRoute(Main.getStorage().getHistory());
+//    reportGenerator.updateMostTravelledRoute(Main.getStorage().getHistory());
+    reportGenerator.updateLeastTravelledRoute(storage.getHistory());
+    reportGenerator.updateMostTravelledRoute(storage.getHistory());
+    reportGenerator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
+    reportGenerator.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
+    reportGenerator.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
+    reportGenerator.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
+
   }
 }
