@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.StageStyle;
 import model.data.Route;
 
 import java.io.IOException;
@@ -98,8 +99,9 @@ public class RouteDataViewController extends DataViewController {
   public static Optional<ButtonType> showDeleteAlert() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Confirm Remove");
-    alert.setHeaderText(null);
-    alert.setContentText("Are you sure you want to delete selected flight? It can not be undone.");
+    alert.setHeaderText("Are you sure you want to delete selected flight? It can not be undone.");
+    //alert.setContentText(null);
+    alert.initStyle(StageStyle.UTILITY);
     return alert.showAndWait();
   }
 
