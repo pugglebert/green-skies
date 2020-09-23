@@ -158,7 +158,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         if (i == arrayToConvert.size() - 1) {
           resultStringBuilder.append(arrayToConvert.get(i).getAirlineID());
         } else {
-          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID()).append(" , ");
+          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID()).append(", ");
         }
     }
     resultString = resultStringBuilder.toString();
@@ -181,7 +181,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       if (i == airportArrayToConvert.size() - 1) {
         resultStringBuilder.append(airportArrayToConvert.get(i));
       } else {
-        resultStringBuilder.append(airportArrayToConvert.get(i)).append(" , ");
+        resultStringBuilder.append(airportArrayToConvert.get(i)).append(", ");
       }
     }
     resultString = resultStringBuilder.toString();

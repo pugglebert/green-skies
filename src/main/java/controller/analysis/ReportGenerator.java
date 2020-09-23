@@ -62,7 +62,9 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
-    totalCarbonEmissions += (currentRouteRecord.getEmissions() * 1);
+    //totalCarbonEmissions += (currentRouteRecord.getEmissions() * 1);
+    totalCarbonEmissions += (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+
   }
 
   // TODO: change 1 to being getTimesTaken once working (HK)
@@ -73,7 +75,9 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
-    totalDistanceTravelled += (currentRouteRecord.getDistance() * 1);
+//    totalDistanceTravelled += (currentRouteRecord.getDistance() * 1); //TODO only works for one route, not more
+    totalDistanceTravelled += (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+
   }
 
   /**
@@ -282,9 +286,9 @@ public class ReportGenerator {
    *     airports that were most visited, based on the user's flight history entries.
    */
   public void updateLeastVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
-    int currSrcAirportMax = 0;
+    int currSrcAirportMax = 1;
     for (Map.Entry<String, Integer> entry : srcAirportCounts.entrySet()) {
-      if (entry.getValue() > currSrcAirportMax) {
+      if (entry.getValue() < currSrcAirportMax) {
         currSrcAirportMax = entry.getValue();
         leastVisitedSrcAirports.clear();
         leastVisitedSrcAirports.add(entry.getKey());
@@ -303,9 +307,9 @@ public class ReportGenerator {
    *     destination airports that were most visited, based on the user's flight history entries.
    */
   public void updateLeastVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
-    int currDestAirportMax = 0;
+    int currDestAirportMax = 1;
     for (Map.Entry<String, Integer> entry : destAirportCounts.entrySet()) {
-      if (entry.getValue() > currDestAirportMax) {
+      if (entry.getValue() < currDestAirportMax) {
         currDestAirportMax = entry.getValue();
         leastVisitedDestAirports.clear();
         leastVisitedDestAirports.add(entry.getKey());
@@ -483,6 +487,8 @@ public class ReportGenerator {
     leastDistanceRoutes.clear();
     mostVisitedDestAirports.clear();
     mostVisitedSrcAirports.clear();
+    leastVisitedSrcAirports.clear();
+    leastVisitedDestAirports.clear();
     // TODO add in least visited.
   }
 }
