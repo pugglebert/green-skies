@@ -1,7 +1,7 @@
 package controller.main;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -11,53 +11,33 @@ import javafx.scene.layout.BorderPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BarChartController extends SideNavBarController {
+public class BarChartController implements Initializable {
 
-    /**
-     * This method is the initializer for this class.
-     *
-     * @param url The provided resoure bundle.
-     * @param resourceBundle The resoure bundle.
-     */
+    @FXML
+    BorderPane borderPane;
+    @FXML
+    NumberAxis yAxis;
+    @FXML
+    CategoryAxis xAxis;
+    @FXML
+    BarChart<String, Number> barChart;
+
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resources) {
+        //xAxis.setLabel("Route");
+        //yAxis.setLabel("Carbon Emissions");
 
-    @FXML
-    private BorderPane borderPane;
+        XYChart.Series<String, Number> data = new XYChart.Series();
 
-
-    @FXML
-    private void handleClose(ActionEvent e) {
-
-    }
-
-    @FXML
-    private void ShowBarChart(ActionEvent e) {
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Route");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Carbon Emissions");
-
-        BarChart barChart = new BarChart(xAxis, yAxis);
-
-        XYChart.Series data = new XYChart.Series();
-        data.setName("Products sold");
-
-        //provide data
+        //provide data EXAMPLES
         data.getData().add(new XYChart.Data("Route A", 100));
         data.getData().add(new XYChart.Data("Route b", 111));
         data.getData().add(new XYChart.Data("Route c", 50));
 
         barChart.getData().add(data);
-
-        //add barChart to borderPane
-        borderPane.setCenter(barChart);
     }
 
 
-    @FXML
-    private void handleUpdateData(ActionEvent e) {
-    }
 
 }
