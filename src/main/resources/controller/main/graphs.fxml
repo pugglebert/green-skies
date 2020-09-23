@@ -64,8 +64,7 @@
                 </Button>
             </children>
         </VBox>
-      <Button fx:id="barChart" layoutX="1286.0" layoutY="176.0" mnemonicParsing="false" onAction="#toBarChart" text="Bar Chart" />
-      <Pane fx:id="barChart" layoutX="563.0" layoutY="101.0" prefHeight="375.0" prefWidth="404.0">
+      <Pane layoutX="563.0" layoutY="101.0" prefHeight="375.0" prefWidth="404.0">
          <children>
             <BarChart fx:id="barChart" layoutX="-270.0" layoutY="-23.0" prefHeight="570.0" prefWidth="958.0" title="CO2 Emissions per Route ">
               <xAxis>
