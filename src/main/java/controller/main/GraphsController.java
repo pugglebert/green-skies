@@ -1,12 +1,15 @@
 package controller.main;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import model.data.Route;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -26,6 +29,8 @@ public class GraphsController extends SideNavBarController {
   @FXML
   BarChart<String, Number> barChart;
 
+  List<Route> routes;
+
   /**
    * This method is the initializer for this class.
    *
@@ -34,23 +39,21 @@ public class GraphsController extends SideNavBarController {
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+
     XYChart.Series<String, Number> data = new XYChart.Series();
 
-    //provide data EXAMPLES
-    data.getData().add(new XYChart.Data("Route A", 100));
-    data.getData().add(new XYChart.Data("Route b", 111));
-    data.getData().add(new XYChart.Data("Route c", 50));
+    routes = storage.getHistory();
+
+    for (Route route: routes) {
+      String dest = route.getDestinationAirport();
+      String src = route.getSourceAirport();
+      String axisString = String.format("%s - %s", src, dest);
+      double emissions = route.getEmissions();
+      data.getData().add(new XYChart.Data(axisString, emissions));
+    }
 
     barChart.getData().add(data);
   }
-
-//  public void toBarChart() throws IOException {
-//    Stage newStage = new Stage();
-//    Parent root = FXMLLoader.load(getClass().getResource("barChart.fxml"));
-//    Scene scene = new Scene(root);
-//    newStage.setScene(scene);
-//    newStage.show();
-//  }
 
 
 }
