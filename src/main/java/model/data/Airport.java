@@ -1,5 +1,7 @@
 package model.data;
 
+import javafx.scene.control.CheckBox;
+
 /**
  * The Airport class which contains all data for one unique airport.
  *
@@ -45,23 +47,32 @@ public class Airport implements DataType {
    */
   private final String DST;
 
-  /** Timezone in "tz" (Olson) format, eg. "America/Los_Angeles". */
+  /**
+   * Timezone in "tz" (Olson) format, eg. "America/Los_Angeles".
+   */
   private final String dataBaseTimeZone;
 
-  /** The Airport constructor. */
+  /**
+   * A checkbox to tell whether this route has been selected.
+   */
+  private CheckBox select;
+
+  /**
+   * The Airport constructor.
+   */
   public Airport(
-      int airportID,
-      String name,
-      String city,
-      String country,
-      String IATA,
-      String ICAO,
-      double latitude,
-      double longitude,
-      int altitude,
-      float timezone,
-      String DST,
-      String dataBaseTimeZone) {
+          int airportID,
+          String name,
+          String city,
+          String country,
+          String IATA,
+          String ICAO,
+          double latitude,
+          double longitude,
+          int altitude,
+          float timezone,
+          String DST,
+          String dataBaseTimeZone) {
     this.airportID = airportID;
     this.name = name;
     this.city = city;
@@ -74,6 +85,13 @@ public class Airport implements DataType {
     this.timezone = timezone;
     this.DST = DST;
     this.dataBaseTimeZone = dataBaseTimeZone;
+  }
+
+  /**
+   * This method initializes the routes checkbox to use with JavaFx.
+   */
+  public void initCheckBox() {
+    this.select = new CheckBox();
   }
 
   public int getAirportID() {
@@ -122,6 +140,24 @@ public class Airport implements DataType {
 
   public String getDataBaseTimeZone() {
     return dataBaseTimeZone;
+  }
+
+  /**
+   * This method returns the routes selection checkbox.
+   *
+   * @return select.
+   */
+  public CheckBox getSelect() {
+    return select;
+  }
+
+  /**
+   * This method adds a selection checkbox to the route.
+   *
+   * @param select The selection checkbox to be added.
+   */
+  public void setSelect(CheckBox select) {
+    this.select = select;
   }
 
   /**

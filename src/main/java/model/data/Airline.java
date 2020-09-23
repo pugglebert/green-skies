@@ -1,5 +1,7 @@
 package model.data;
 
+import javafx.scene.control.CheckBox;
+
 /**
  * The Airline class which contains all data for one unique airline.
  *
@@ -8,7 +10,9 @@ package model.data;
  * @since 11/08/2020
  */
 public class Airline implements DataType {
-  /** The ID of an airline (unique). */
+  /**
+   * The ID of an airline (unique).
+   */
   private final int airlineID;
 
   /** The name of the airline. */
@@ -23,25 +27,38 @@ public class Airline implements DataType {
   /** The ICAO code of an airline. */
   private final String ICAO;
 
-  /** The callsign of an airline. */
+  /**
+   * The callsign of an airline.
+   */
   private final String callsign;
 
-  /** The country or territory where airport is located. */
+  /**
+   * The country or territory where airport is located.
+   */
   private final String country;
 
-  /** "Y" if the airline is or has until recently been operational, "N" if it is defunct. */
+  /**
+   * "Y" if the airline is or has until recently been operational, "N" if it is defunct.
+   */
   private final Boolean activeStatus;
 
-  /** The Airline constructor. */
+  /**
+   * A checkbox to tell whether this airline has been selected.
+   */
+  private CheckBox select;
+
+  /**
+   * The Airline constructor.
+   */
   public Airline(
-      int airlineID,
-      String name,
-      String alias,
-      String IATA,
-      String ICAO,
-      String callsign,
-      String country,
-      Boolean activeStatus) {
+          int airlineID,
+          String name,
+          String alias,
+          String IATA,
+          String ICAO,
+          String callsign,
+          String country,
+          Boolean activeStatus) {
     this.airlineID = airlineID;
     this.name = name;
     this.alias = alias;
@@ -50,6 +67,13 @@ public class Airline implements DataType {
     this.callsign = callsign;
     this.country = country;
     this.activeStatus = activeStatus;
+  }
+
+  /**
+   * This method initializes the routes checkbox to use with JavaFx.
+   */
+  public void initCheckBox() {
+    this.select = new CheckBox();
   }
 
   public int getAirlineID() {
@@ -82,6 +106,24 @@ public class Airline implements DataType {
 
   public boolean getActiveStatus() {
     return activeStatus;
+  }
+
+  /**
+   * This method returns the airline selection checkbox.
+   *
+   * @return select.
+   */
+  public CheckBox getSelect() {
+    return select;
+  }
+
+  /**
+   * This method adds a selection checkbox to the airline.
+   *
+   * @param select The selection checkbox to be added.
+   */
+  public void setSelect(CheckBox select) {
+    this.select = select;
   }
 
   /**
