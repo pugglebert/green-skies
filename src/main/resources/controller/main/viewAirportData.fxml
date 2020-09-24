@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="703.0" prefWidth="1422.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirportDataViewController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirportDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="244.0" layoutY="184.0" prefHeight="441.0" prefWidth="1142.0">
             <columns>

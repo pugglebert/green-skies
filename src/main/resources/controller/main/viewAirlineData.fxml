@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="689.0" prefWidth="1494.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirlineDataViewController">
+<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirlineDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="265.0" layoutY="162.0" prefHeight="441.0" prefWidth="1176.0">
             <columns>

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
     <children>
         <DialogPane fx:id="errorBox" headerText="Error message " prefHeight="239.0" prefWidth="334.0" visible="false">
             <buttonTypes>

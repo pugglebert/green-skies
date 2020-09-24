@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1494.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.CarbonEmissionsReportController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.CarbonEmissionsReportController">
     <children>
         <Text fontSmoothingType="LCD" layoutX="402.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Emissions:" textAlignment="RIGHT" wrappingWidth="150.6708984375">
             <font>
@@ -229,7 +229,7 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Text>
-      <TextArea layoutX="591.0" layoutY="628.0" mouseTransparent="true" prefHeight="61.0" prefWidth="828.0" promptText="                                                                                                                                                                                   Generate report to diplay data">
+      <TextArea layoutX="591.0" layoutY="628.0" mouseTransparent="true" prefHeight="61.0" prefWidth="777.0" promptText="                                                                                                                                                                                   Generate report to diplay data">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
