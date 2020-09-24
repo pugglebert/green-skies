@@ -186,8 +186,9 @@ public class Loader {
 
   /**
    * This method checks if filename and datatype fields are empty. If they aren't, processes file by
-   * calling checkFileType, openFile and constructParser. If an error occurs while trying to open
-   * the file, returns a message about the error. Otherwise, returns message abount number of
+   * calling checkFileType, getFileName, checkDuplicateFileName, openFile and constructParser. Then
+   * adds the resulting data to that stored in the storage class. If an error occurs while trying to
+   * open the file, returns a message about the error. Otherwise, returns message abount number of
    * rejected lines from file.
    *
    * @param filePath Path of the file to be opened.

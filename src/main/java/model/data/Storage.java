@@ -63,6 +63,8 @@ public class Storage {
   private SQLiteDatabase database = new SQLiteDatabase();
 
   /**
+   * This method returns a List of all the names of the stored airline files, or an empty List if no Airline files
+   * have been stored.
    * @return a List of the names of files in AirlineFiles.
    */
   public List<String> getAirlineFileNames() {
@@ -74,22 +76,29 @@ public class Storage {
   }
 
   /**
+   * This method returns the name of the Airline file which is currently open, or null if none is open.
    * @return the name of the currently open Airline file.
    */
   public String getCurrentAirlineFile() {return currentAirlineFile;}
 
   /**
+   * This method changes the name of the current file to the given name if the name matches one of the stored files
+   * and throws an IllegalArgumentException if the name does not match one of the stored files.
    * @param newCurrentFile the name of an airline file to change currentAirlineFile to.
    */
   public void setCurrentAirlineFile(String newCurrentFile) {
-    if (airlineFiles.containsKey(newCurrentFile)) {
+    if (airlineFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirlineFile = newCurrentFile;
     } else {
       throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
   }
 
-  /** @return a list of Airlines in the current file. */
+  /**
+   * This method returns an empty List if there is not current file, or all the Airlines in the current file
+   * if there is a current file.
+   * @return a list of Airlines in the current file.
+   */
   public List<Airline> getAirlines() {
     if (currentAirlineFile == null) {
       return new ArrayList<>();
@@ -102,7 +111,11 @@ public class Storage {
 //    airlines = new ArrayList<>();
 //  }
 
-  /** @return a List of the names of files in AirportFiles. */
+  /**
+   * This method returns a List of all the names of the stored airport files, or an empty List if no Airport files
+   * have been stored.
+   * @return a List of the names of files in AirportFiles.
+   */
   public List<String> getAirportFileNames() {
     List<String> airportFileNames = new ArrayList<>();
     for (String filename : airportFiles.keySet()) {
@@ -111,23 +124,32 @@ public class Storage {
     return airportFileNames;
   }
 
-  /** @return the name of the currently open Airport file. */
+  /**
+   * This method returns the name of the Airport file which is currently open, or null if none is open.
+   * @return the name of the currently open Airport file.
+   */
   public String getCurrentAirportFile() {
     return currentAirportFile;
   }
 
   /**
+   * This method changes the name of the current file to the given name if the name matches one of the stored files
+   * and throws an IllegalArgumentException if the name does not match one of the stored files.
    * @param newCurrentFile the name of an airport file to change currentAirportFile to.
    */
   public void setCurrentAirportFile(String newCurrentFile) {
-    if (airportFiles.containsKey(newCurrentFile)) {
+    if (airportFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirportFile = newCurrentFile;
     } else {
       throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
   }
 
-  /** @return a List of all the Airports from the current file. */
+  /**
+   * This method returns an empty List if there is not current file, or all the Airports in the current file
+   * if there is a current file.
+   * @return a list of Airports in the current file.
+   */
   public List<Airport> getAirports() {
     if (currentAirportFile == null) {
       return new ArrayList<>();
@@ -139,7 +161,11 @@ public class Storage {
 //    airports = new ArrayList<>();
 //  }
 
-  /** @return a List of the names of files in RouteFiles. */
+  /**
+   * This method returns a List of all the names of the stored Route files, or an empty List if no Route files
+   * have been stored.
+   * @return a List of the names of files in RouteFiles.
+   */
   public List<String> getRouteFileNames() {
     List<String> routeFileNames = new ArrayList<>();
     for (String filename : routeFiles.keySet()) {
@@ -148,23 +174,32 @@ public class Storage {
     return routeFileNames;
   }
 
-  /** @return the name of the currently open Route file. */
+  /**
+   * This method returns the name of the Route file which is currently open, or null if none is open.
+   * @return the name of the currently open Route file.
+   */
   public String getCurrentRouteFile() {
     return currentRouteFile;
   }
 
   /**
-   * @param newCurrentFile the name of a route file to change currentRouteFile to.
+   * This method changes the name of the current file to the given name if the name matches one of the stored files
+   * and throws an IllegalArgumentException if the name does not match one of the stored files.
+   * @param newCurrentFile the name of an airline file to change currentRouteFile to.
    */
   public void setCurrentRouteFile(String newCurrentFile) {
-    if (routeFiles.containsKey(newCurrentFile)) {
+    if (routeFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentRouteFile = newCurrentFile;
     } else {
       throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
   }
 
-  /** @return a List of Routes in the current file. */
+  /**
+   * This method returns an empty List if there is not current file, or all the Routes in the current file
+   * if there is a current file.
+   * @return a list of Routes in the current file.
+   */
   public List<Route> getRoutes() {
     if (currentRouteFile == null) {
       return new ArrayList<>();

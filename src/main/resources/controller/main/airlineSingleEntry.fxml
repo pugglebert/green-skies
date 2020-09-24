@@ -8,34 +8,80 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.main.AirlineSingleEntryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="901.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirlineSingleEntryController">
     <children>
-        <Text layoutX="53.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:"/>
-        <Text layoutX="223.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Airline ID:"/>
-        <TextField fx:id="airlineIDField" layoutX="293.0" layoutY="117.0" prefHeight="28.0" prefWidth="74.0"/>
-        <Text layoutX="408.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alias:"
-              wrappingWidth="49.39453125"/>
-        <TextField fx:id="aliasField" layoutX="469.0" layoutY="117.0" prefHeight="28.0" prefWidth="74.0"/>
-        <TextField fx:id="itatField" layoutX="117.0" layoutY="203.0" prefHeight="28.0" prefWidth="74.0"/>
-        <TextField fx:id="icaoField" layoutX="296.0" layoutY="203.0" prefHeight="28.0" prefWidth="74.0"/>
-        <TextField fx:id="callsignField" layoutX="469.0" layoutY="203.0" prefHeight="28.0" prefWidth="74.0"/>
-        <Text layoutX="57.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ITAT:"/>
-        <Text layoutX="233.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ICAO:"/>
-        <Label layoutX="201.0" layoutY="37.0" text="Enter Airline Details" textAlignment="CENTER">
-            <font>
-                <Font name="Arial" size="22.0"/>
-            </font>
-        </Label>
-        <Text layoutX="48.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country:"/>
-        <TextField fx:id="countryField" layoutX="117.0" layoutY="286.0" prefHeight="28.0" prefWidth="74.0"/>
-        <Text layoutX="410.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Callsign:"/>
-        <Button fx:id="addButton" layoutX="209.0" layoutY="347.0" mnemonicParsing="false" onAction="#addEntry"
-                prefHeight="38.0" prefWidth="80.0" text="Add"/>
-        <Button fx:id="cancelButton" layoutX="330.0" layoutY="347.0" mnemonicParsing="false" onAction="#closeWindow"
-                prefHeight="38.0" prefWidth="80.0" text="Cancel"/>
-        <CheckBox fx:id="activeCheck" layoutX="293.0" layoutY="291.0" mnemonicParsing="false" text="Active "/>
-        <TextField fx:id="nameField" layoutX="117.0" layoutY="118.0" prefHeight="27.0" prefWidth="74.0"/>
+        <Text layoutX="48.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text layoutX="319.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Airline ID:">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <TextField fx:id="airlineIDField" layoutX="420.0" layoutY="112.0" prefHeight="40.0" prefWidth="180.0" promptText="Enter airline's ID">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font></TextField>
+        <Text layoutX="644.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alias:" wrappingWidth="49.39453125">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <TextField fx:id="aliasField" layoutX="702.0" layoutY="114.0" prefHeight="40.0" prefWidth="180.0" promptText="Enter airline's alias">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font></TextField>
+        <TextField fx:id="itatField" layoutX="119.0" layoutY="184.0" prefHeight="40.0" prefWidth="180.0" promptText="Enter airline's ITAT ">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font></TextField>
+        <TextField fx:id="icaoField" layoutX="420.0" layoutY="185.0" prefHeight="40.0" prefWidth="180.0" promptText="Enter airline's ICAO">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font></TextField>
+        <TextField fx:id="callsignField" layoutX="702.0" layoutY="187.0" prefHeight="40.0" prefWidth="180.0" promptText="Enter airline's callsign">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font></TextField>
+        <Text layoutX="53.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ITAT:">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text layoutX="350.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ICAO:">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text layoutX="26.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Country:">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <TextField fx:id="countryField" layoutX="119.0" layoutY="244.0" prefHeight="40.0" prefWidth="180.0" promptText="Enter airline's country">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font></TextField>
+        <Text layoutX="616.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Callsign:">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Button fx:id="addButton" layoutX="341.0" layoutY="327.0" mnemonicParsing="false" onAction="#addEntry" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #116754;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Button>
+        <Button fx:id="cancelButton" layoutX="490.0" layoutY="327.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #116754;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Button>
+        <CheckBox fx:id="activeCheck" layoutX="422.0" layoutY="255.0" mnemonicParsing="false" text="Active ">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></CheckBox>
+        <TextField fx:id="nameField" layoutX="119.0" layoutY="114.0" prefHeight="40.0" prefWidth="180.0" promptText="Enter airline's name">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font></TextField>
+      <Label layoutX="339.0" layoutY="45.0" text="Enter Airline Details">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
