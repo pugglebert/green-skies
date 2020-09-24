@@ -45,28 +45,28 @@ public class AnalyseResultController implements Initializable {
       EmissionRoute1.setText("NaN");
       EmissionRoute2.setText("NaN");
     } else {
-      String DistanceRoute1Text = String.valueOf(storage.getAnalyseDistanceResult().get(0));
+      String DistanceRoute1Text = String.format("%.2f", storage.getAnalyseDistanceResult().get(0));
       DistanceRoute1.setText(DistanceRoute1Text);
 
-      String DistanceRoute2Text = String.valueOf(storage.getAnalyseDistanceResult().get(1));
+      String DistanceRoute2Text = String.format("%.2f", storage.getAnalyseDistanceResult().get(1));
       DistanceRoute2.setText(DistanceRoute2Text);
 
-      String EmissionRoute1Text = String.valueOf(storage.getAnalyseEmissionResult().get(0));
+      String EmissionRoute1Text = String.format("%.2f", storage.getAnalyseEmissionResult().get(0));
       EmissionRoute1.setText(EmissionRoute1Text);
 
-      String EmissionRoute2Text = String.valueOf(storage.getAnalyseEmissionResult().get(1));
+      String EmissionRoute2Text = String.format("%.2f", storage.getAnalyseEmissionResult().get(1));
       EmissionRoute2.setText(EmissionRoute2Text);
     }
 
     String DistanceDifferenceText =
-        String.valueOf(
-            Math.abs(
+            String.format("%.2f",
+                    Math.abs(
                 storage.getAnalyseDistanceResult().get(0)
                     - storage.getAnalyseDistanceResult().get(1)));
     DistanceDifference.setText(DistanceDifferenceText);
     String EmissionDifferenceText =
-        String.valueOf(
-            Math.abs(
+            String.format("%.2f",
+                    Math.abs(
                 storage.getAnalyseEmissionResult().get(0)
                     - storage.getAnalyseEmissionResult().get(1)));
     EmissionDifference.setText(EmissionDifferenceText);

@@ -52,7 +52,7 @@ public class AirlineParserTest {
         Boolean validIdTest = (Boolean) method.invoke(parser, validID);
         Boolean intvalidIdTest = (Boolean) method.invoke(parser, invalidID);
 
-        Assert.assertEquals(false, dupIDTest);
+        Assert.assertEquals(true, dupIDTest);
         Assert.assertEquals(true, validIdTest);
         Assert.assertEquals(false, intvalidIdTest);
       }
