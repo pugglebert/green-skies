@@ -57,36 +57,48 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method iterate throught each line of input file, strip line in to data segment. Then call
-   * validator method to check a singke line then add that line to parserData if it is valid.
+   * This method iterate throught each line of input file and calls parseData if there are less than 200 erors
+   * in the file. If there are more than 200 errors raises exception.
    */
   @Override
   public void dataParser() {
-
     for (String dataLine : dataFile) {
-      dataLine = dataLine.replaceAll("[\"]", "");
-      String[] line = dataLine.split(",");
+      if (totalErrors > 200) {
+        totalErrors = 0;
+        throw new RuntimeException("File rejected: more than 200 lines contain errors");
+      }
+      parseLine(dataLine);
+    }
+  }
 
-      if (validater(line)) {
-        try {
-          boolean active = false;
-          if (line[activeStatus].matches("Y")) {
-            active = true;
-          }
-          Airline airline =
-              new Airline(
-                  Integer.parseInt(line[airlineID]),
-                  line[name],
-                  line[alias],
-                  line[IATA],
-                  line[ICAO],
-                  line[callsign],
-                  line[country],
-                  active);
-          addAirLine(airline.getAirlineID(), airline);
-        } catch (Exception e) {
-          errorCounter(10);
+  /**
+   * This method splits the line into data segments, calls the validator method to check each segment,
+   * and then adds that line to paserData if it is valid.
+   * @param dataLine line from file to split into segments.
+   */
+  protected void parseLine(String dataLine) {
+    dataLine = dataLine.replaceAll("[\"]", "");
+    String[] line = dataLine.split(",");
+
+    if (validater(line)) {
+      try {
+        boolean active = false;
+        if (line[activeStatus].matches("Y")) {
+          active = true;
         }
+        Airline airline =
+            new Airline(
+                Integer.parseInt(line[airlineID]),
+                line[name],
+                line[alias],
+                line[IATA],
+                line[ICAO],
+                line[callsign],
+                line[country],
+                active);
+        addAirLine(airline.getAirlineID(), airline);
+      } catch (Exception e) {
+        errorCounter(10);
       }
     }
   }
