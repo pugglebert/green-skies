@@ -23,19 +23,19 @@
          <font>
             <Font name="Arial" size="24.0" />
          </font></Button>
-        <Text fx:id="DistanceRoute1" layoutX="394.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+        <Text fx:id="DistanceRoute1" layoutX="400.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Text>
-        <Text fx:id="DistanceRoute2" layoutX="394.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+        <Text fx:id="DistanceRoute2" layoutX="400.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Text>
-        <Text fx:id="EmissionRoute1" layoutX="394.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+        <Text fx:id="EmissionRoute1" layoutX="400.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Text>
-        <Text fx:id="EmissionRoute2" layoutX="394.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+        <Text fx:id="EmissionRoute2" layoutX="400.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Text>
@@ -47,11 +47,11 @@
          <font>
             <Font name="Arial" size="20.0" />
          </font></Text>
-        <Text fx:id="DistanceDifference" layoutX="390.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+        <Text fx:id="DistanceDifference" layoutX="400.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Text>
-        <Text fx:id="EmissionDifference" layoutX="390.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+        <Text fx:id="EmissionDifference" layoutX="400.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Text>
