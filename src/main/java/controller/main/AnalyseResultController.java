@@ -59,14 +59,16 @@ public class AnalyseResultController implements Initializable {
     }
 
     String DistanceDifferenceText =
-            String.format("%.2f",
-                    Math.abs(
+        String.format(
+            "%.2f",
+            Math.abs(
                 storage.getAnalyseDistanceResult().get(0)
                     - storage.getAnalyseDistanceResult().get(1)));
     DistanceDifference.setText(DistanceDifferenceText);
     String EmissionDifferenceText =
-            String.format("%.2f",
-                    Math.abs(
+        String.format(
+            "%.2f",
+            Math.abs(
                 storage.getAnalyseEmissionResult().get(0)
                     - storage.getAnalyseEmissionResult().get(1)));
     EmissionDifference.setText(EmissionDifferenceText);
