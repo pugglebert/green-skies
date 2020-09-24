@@ -31,7 +31,7 @@ public class GreenSkiesApplication extends Application {
   public void start(Stage primaryStage) throws IOException {
     this.primaryStage = primaryStage;
     Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
-    primaryStage.setTitle("Welcome");
+    primaryStage.setTitle("Green Skies");
     primaryStage.setScene(new Scene(root));
     primaryStage.show();
   }
