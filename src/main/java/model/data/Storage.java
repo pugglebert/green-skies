@@ -87,7 +87,7 @@ public class Storage {
    * @param newCurrentFile the name of an airline file to change currentAirlineFile to.
    */
   public void setCurrentAirlineFile(String newCurrentFile) {
-    if (airlineFiles.containsKey(newCurrentFile)) {
+    if (airlineFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirlineFile = newCurrentFile;
     } else {
       throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
@@ -138,7 +138,7 @@ public class Storage {
    * @param newCurrentFile the name of an airport file to change currentAirportFile to.
    */
   public void setCurrentAirportFile(String newCurrentFile) {
-    if (airportFiles.containsKey(newCurrentFile)) {
+    if (airportFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirportFile = newCurrentFile;
     } else {
       throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
@@ -188,7 +188,7 @@ public class Storage {
    * @param newCurrentFile the name of an airline file to change currentRouteFile to.
    */
   public void setCurrentRouteFile(String newCurrentFile) {
-    if (routeFiles.containsKey(newCurrentFile)) {
+    if (routeFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentRouteFile = newCurrentFile;
     } else {
       throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
