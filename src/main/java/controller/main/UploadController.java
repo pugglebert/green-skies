@@ -196,14 +196,11 @@ public class UploadController extends SideNavBarController {
    * @throws IOException This throws an IOException.
    */
   public void backToWelcome() throws IOException {
-    Stage stage = (Stage) backButton.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root =
         FXMLLoader.load(getClass().getResource("welcome.fxml")); // open the Welcome page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-    newStage.show();
   }
 
   public void changeAirlineFile() {

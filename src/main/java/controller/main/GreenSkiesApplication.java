@@ -17,6 +17,11 @@ import java.io.IOException;
 public class GreenSkiesApplication extends Application {
 
   /**
+   * The main window for the application
+   */
+  private static Stage primaryStage;
+
+  /**
    * This method starts the application's GUI
    *
    * @param primaryStage The primary stage used.
@@ -24,10 +29,19 @@ public class GreenSkiesApplication extends Application {
    */
   @Override
   public void start(Stage primaryStage) throws IOException {
+    this.primaryStage = primaryStage;
     Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
     primaryStage.setTitle("Welcome");
     primaryStage.setScene(new Scene(root));
     primaryStage.show();
+  }
+
+  /**
+   * The method returns the primary stage of the application.
+   * @return the stage for the application's main window.
+   */
+  public static Stage getPrimaryStage() {
+    return primaryStage;
   }
 
   /**

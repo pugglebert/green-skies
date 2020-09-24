@@ -53,9 +53,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toUploadData() throws IOException {
-    Stage stage = (Stage) btnUpload.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("upload.fxml"));
@@ -64,8 +62,6 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -74,9 +70,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toRouteDataView() throws IOException {
-    Stage stage = (Stage) btnRouteDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
@@ -85,8 +79,6 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -95,9 +87,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toAirportDataView() throws IOException {
-    Stage stage = (Stage) btnAirportDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml"));
@@ -108,8 +98,6 @@ public abstract class SideNavBarController implements Initializable {
     // open the View Airport Data page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -118,9 +106,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toAirlineDataView() throws IOException {
-    Stage stage = (Stage) btnAirlineDataView.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml"));
@@ -129,8 +115,6 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -139,9 +123,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toFlightHistory() throws IOException {
-    Stage stage = (Stage) btnFlightHistory.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("flightHistory.fxml"));
@@ -150,8 +132,6 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -160,9 +140,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toCarbonEmissionsReport() throws IOException {
-    Stage stage = (Stage) btnCarbonEmissionsReport.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("carbonEmissionsReport.fxml"));
@@ -171,8 +149,6 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -181,9 +157,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toMapOfAirports() throws IOException {
-    Stage stage = (Stage) btnMapOfAirports.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("mapOfRoutes.fxml"));
@@ -192,8 +166,6 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -202,9 +174,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toGraphs() throws IOException {
-    Stage stage = (Stage) btnGraphs.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("graphs.fxml"));
@@ -213,8 +183,6 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -223,9 +191,7 @@ public abstract class SideNavBarController implements Initializable {
    * @throws IOException
    */
   public void toAnalyseFlight() throws IOException {
-    Stage stage = (Stage) btnAnalyseFlight.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
       root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
@@ -234,7 +200,5 @@ public abstract class SideNavBarController implements Initializable {
     }
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 }
