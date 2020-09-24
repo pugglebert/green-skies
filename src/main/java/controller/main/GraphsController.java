@@ -1,6 +1,5 @@
 package controller.main;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -15,7 +14,7 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the graphs page.
  *
- * @author Hayley Krippner
+ * @author Grace Hanlon
  * @version 1.0
  * @since 04/09/20
  */
