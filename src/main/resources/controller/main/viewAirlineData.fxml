@@ -35,7 +35,7 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
-        <ChoiceBox fx:id="searchTypeSelection" layoutX="270.0" layoutY="51.0" prefHeight="40.0" prefWidth="188.0" style="-fx-background-color: #116754;">
+        <ChoiceBox fx:id="searchTypeSelection" layoutX="270.0" layoutY="51.0" prefHeight="40.0" prefWidth="188.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;">
          <cursor>
             <Cursor fx:constant="NONE" />
          </cursor></ChoiceBox>

@@ -12,7 +12,7 @@
                 <ButtonType fx:constant="OK" />
             </buttonTypes>
         </DialogPane>
-        <ChoiceBox fx:id="dataTypeSelect" layoutX="291.0" layoutY="192.0" prefHeight="42.0" prefWidth="328.0" style="-fx-background-color: #116754;" />
+        <ChoiceBox fx:id="dataTypeSelect" layoutX="291.0" layoutY="192.0" prefHeight="42.0" prefWidth="328.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;"/>
         <Button fx:id="backButton" layoutX="292.0" layoutY="631.0" mnemonicParsing="false" onAction="#backToWelcome" prefHeight="43.0" prefWidth="198.0" style="-fx-background-color: #116754;" text="Back to Home" textFill="WHITE">
          <font>
             <Font name="Arial" size="24.0" />

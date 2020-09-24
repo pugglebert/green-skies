@@ -32,7 +32,7 @@
          <font>
             <Font size="16.0" />
          </font></TextField>
-        <ChoiceBox fx:id="searchTypeSelection" layoutX="241.0" layoutY="50.0" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #116754;" />
+        <ChoiceBox fx:id="searchTypeSelection" layoutX="241.0" layoutY="50.0" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;" />
         <Label fx:id="errorText" layoutX="444.0" layoutY="110.0" prefHeight="27.0" prefWidth="345.0" text="Search error mesage goes here" textFill="RED" visible="false">
             <font>
                 <Font name="Arial" size="20.0" />

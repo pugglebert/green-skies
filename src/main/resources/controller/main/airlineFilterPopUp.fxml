@@ -14,7 +14,7 @@
          <font>
             <Font name="Arial" size="20.0" />
          </font></CheckBox>
-        <ChoiceBox fx:id="activeSelection" layoutX="186.0" layoutY="139.0" prefHeight="37.0" prefWidth="187.0" style="-fx-background-color: #116754;" />
+        <ChoiceBox fx:id="activeSelection" layoutX="186.0" layoutY="139.0" prefHeight="37.0" prefWidth="187.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;" />
         <CheckBox fx:id="activeCheckBox" layoutX="59.0" layoutY="144.0" mnemonicParsing="false" text="Active">
          <font>
             <Font name="Arial" size="20.0" />
