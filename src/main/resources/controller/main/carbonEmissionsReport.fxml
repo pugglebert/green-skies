@@ -171,7 +171,7 @@
                 <Font name="Arial" size="20.0" />
             </font>
         </Button>
-        <VBox prefHeight="703.0" prefWidth="188.0" style="-fx-background-color: #116754;">
+        <VBox prefHeight="703.0" prefWidth="214.0" style="-fx-background-color: #116754;">
             <children>
                 <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0" style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                     <font>
@@ -216,7 +216,7 @@
                         <Font name="Arial" size="24.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnAnalyseFlight" alignment="CENTER" mnemonicParsing="false" onAction="#toAnalyseFlight" prefHeight="80.0" prefWidth="197.0" style="-fx-background-color: transparent;" text="Analyse Flight" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button fx:id="btnAnalyseFlight" alignment="CENTER" mnemonicParsing="false" onAction="#toAnalyseFlight" prefHeight="74.0" prefWidth="216.0" style="-fx-background-color: transparent;" text="Analyse Flight" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                     <font>
                         <Font name="Arial" size="24.0" />
                     </font>
