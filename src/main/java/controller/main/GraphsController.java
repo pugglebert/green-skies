@@ -8,8 +8,7 @@ import javafx.scene.chart.XYChart;
 import model.data.Route;
 
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * The controller class which contains the controls for the graphs page.
@@ -43,16 +42,29 @@ public class GraphsController extends SideNavBarController {
 
     routes = storage.getHistory();
 
-    for (Route route: routes) {
-      String dest = route.getDestinationAirport();
-      String src = route.getSourceAirport();
-      String axisString = String.format("%s - %s", src, dest);
-      double emissions = route.getEmissions();
-      data.getData().add(new XYChart.Data(axisString, emissions));
-    }
+//    if (routes.size() <= 10) {
+//      for (Route route : routes) {
+//        String dest = route.getDestinationAirport();
+//        String src = route.getSourceAirport();
+//        String axisString = String.format("%s - %s", src, dest);
+//        double emissions = route.getEmissions();
+//        data.getData().add(new XYChart.Data(axisString, emissions));
+//      }
+//    } else {
+      List<Route> sortedByEmissions = new ArrayList<Route>(routes);
+      Collections.sort(sortedByEmissions, new Comparator<Route>() {
+        @Override
+        public int compare(Route o1, Route o2) {
+          return Double.valueOf(o1.getEmissions()).compareTo(o2.getEmissions());
+        }
+      });
+      System.out.println(sortedByEmissions);
+    //}
 
-    barChart.getData().add(data);
+    //barChart.getData().add(data);
   }
+
+
 
 
 }
