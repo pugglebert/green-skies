@@ -111,9 +111,9 @@ public class AirlineParser extends Parser {
    * If is is not then add to error.
    *
    * @param airlineID airline ID we want to add
-   * @param airline Airline Object we wanted to add
+   * @param airline   Airline Object we wanted to add
    */
-  private void addAirLine(int airlineID, Airline airline) {
+  protected void addAirLine(int airlineID, Airline airline) {
     if (airlineID >= parserData.size()) {
       int i = parserData.size();
       while (i < airlineID + 2) {
@@ -184,7 +184,7 @@ public class AirlineParser extends Parser {
    * @param airlineID airline id as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isIdValid(String airlineID) {
+  protected boolean isIdValid(String airlineID) {
 
     // airline ID Duplication and Negative check
     try {
@@ -215,7 +215,7 @@ public class AirlineParser extends Parser {
    * @param name airline name as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isNameValid(String name) {
+  protected boolean isNameValid(String name) {
     if (!name.matches("[a-zA-Z0-9 -.]+")) {
       errorCounter(3);
       return false;
@@ -229,7 +229,7 @@ public class AirlineParser extends Parser {
    * @param alias airline city as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isAliasValid(String alias) {
+  protected boolean isAliasValid(String alias) {
     if (!alias.matches("(\\\\N)|([\\w ]+)|(^$)")) {
       errorCounter(4);
       return false;
@@ -243,7 +243,7 @@ public class AirlineParser extends Parser {
    * @param IATA airline IATA as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isIATAValid(String IATA) {
+  protected boolean isIATAValid(String IATA) {
 
     // airline IATA check
     if (!IATA.matches("-|([A-Z0-9]{2})|(^$)")) {
@@ -260,7 +260,7 @@ public class AirlineParser extends Parser {
    * @param ICAO airline ICAO as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isICAOValid(String ICAO) {
+  protected boolean isICAOValid(String ICAO) {
 
     if (!ICAO.matches("(\\\\N)|(N/A)|([A-Z0-9]{3})|(^$)")) {
       errorCounter(6);
@@ -276,7 +276,7 @@ public class AirlineParser extends Parser {
    * @param callsign airline latitude as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isCallsignValid(String callsign) {
+  protected boolean isCallsignValid(String callsign) {
     // airline callsign check
     if (!callsign.matches("([A-Za-z -]+)|(^$)")) {
       errorCounter(7);
@@ -291,7 +291,7 @@ public class AirlineParser extends Parser {
    * @param country airline country as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isCountryValid(String country) {
+  protected boolean isCountryValid(String country) {
     // ISO 3166-1 codes not implemented
     if (!country.matches("(\\\\N)|([a-zA-Z ]+)|(^$)")) {
       errorCounter(8);
@@ -306,7 +306,7 @@ public class AirlineParser extends Parser {
    * @param activeStatus as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isActiveStatusValid(String activeStatus) {
+  protected boolean isActiveStatusValid(String activeStatus) {
 
     if (!activeStatus.matches("[YN]")) {
       errorCounter(9);
