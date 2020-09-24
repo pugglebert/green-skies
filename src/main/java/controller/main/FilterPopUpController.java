@@ -78,6 +78,8 @@ public abstract class FilterPopUpController implements Initializable {
       try {
         filterByDataType(filterTerms);
         filterer.setFilterSuccess(true);
+        Stage stage = (Stage) errorText.getScene().getWindow();
+        stage.close();
       } catch (RuntimeException e) {
         if (e.getMessage() == null) {
           errorText.setText("Something went wrong.");
