@@ -2,39 +2,98 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="473.0" maxWidth="807.0" minHeight="400" minWidth="600" prefHeight="473.0" prefWidth="807.0"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.main.AnalyseResultController">
+<AnchorPane maxHeight="481.0" maxWidth="807.0" minHeight="400" minWidth="600" prefHeight="481.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AnalyseResultController">
     <children>
-        <Text layoutX="88.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance Of Route1 :"/>
-        <Text layoutX="88.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance Of Route2 :"/>
-        <Text layoutX="87.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emission Of Route1 :"/>
-        <Text layoutX="87.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emission Of Route2 :"/>
-        <Button fx:id="BackButton" layoutX="288.0" layoutY="409.0" mnemonicParsing="false" onAction="#GoBackToAnalyse"
-                text="Back"/>
-        <Text fx:id="DistanceRoute1" layoutX="365.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              wrappingWidth="158.7294921875"/>
-        <Text fx:id="DistanceRoute2" layoutX="365.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              wrappingWidth="158.7294921875"/>
-        <Text fx:id="EmissionRoute1" layoutX="365.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              wrappingWidth="158.7294921875"/>
-        <Text fx:id="EmissionRoute2" layoutX="365.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              wrappingWidth="158.7294921875"/>
-        <Text layoutX="697.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KM"/>
-        <Text layoutX="697.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KM"/>
-        <Text layoutX="698.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KG"/>
-        <Text layoutX="698.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KG"/>
-        <Text layoutX="87.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="Distance difference between Route1 and Route2"/>
-        <Text fx:id="DistanceDifference" layoutX="444.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              wrappingWidth="158.7294921875"/>
-        <Text layoutX="88.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="Emission difference between Route1 and Route2"/>
-        <Text fx:id="EmissionDifference" layoutX="444.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              wrappingWidth="158.7294921875"/>
-        <Text layoutX="696.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KM"/>
-        <Text layoutX="698.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KG"/>
+        <Text layoutX="182.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance of Route 1 :">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text layoutX="182.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance of Route 2 :">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text layoutX="180.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emission of Route 1 :">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Button fx:id="BackButton" layoutX="361.0" layoutY="422.0" mnemonicParsing="false" onAction="#GoBackToAnalyse" style="-fx-background-color: #116754;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font></Button>
+        <Text fx:id="DistanceRoute1" layoutX="394.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text fx:id="DistanceRoute2" layoutX="394.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text fx:id="EmissionRoute1" layoutX="394.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text fx:id="EmissionRoute2" layoutX="394.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text layoutX="587.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="km">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text layoutX="80.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance difference between Route 1 and Route 2 :" textAlignment="RIGHT" wrappingWidth="288.509765625">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text fx:id="DistanceDifference" layoutX="390.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+        <Text fx:id="EmissionDifference" layoutX="390.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.7294921875">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font></Text>
+      <Text layoutX="588.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="km">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="180.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emission of Route 2 :">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="589.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kg">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="590.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kg">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="78.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emissions difference between Route 1 and Route 2 :" textAlignment="RIGHT" wrappingWidth="288.509765625">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="588.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="km">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="590.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kg">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="271.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analysis Results">
+         <font>
+            <Font name="Arial" size="36.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>
