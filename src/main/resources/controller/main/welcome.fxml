@@ -7,25 +7,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-            prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.main.WelcomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.WelcomeController">
     <children>
-        <ImageView fitHeight="943.0" fitWidth="1415.0" layoutX="-8.0" layoutY="-231.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="943.0" fitWidth="1415.0" layoutX="-8.0" layoutY="-241.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../images/air5.jpg"/>
+                <Image url="@../../images/plane3.jpg" />
             </image>
         </ImageView>
-        <Text layoutX="540.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Green Skies">
+        <Text fill="WHITE" layoutX="452.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GREEN SKIES" wrappingWidth="499.8984375">
             <font>
-                <Font size="28.0"/>
+                <Font name="Tahoma" size="80.0" />
             </font>
         </Text>
-        <Button fx:id="continueButton" layoutX="139.0" layoutY="227.0" mnemonicParsing="false"
-                onAction="#continueToMainScreen" text="Continue"/>
-        <Button fx:id="InfoButton" layoutX="139.0" layoutY="299.0" mnemonicParsing="false" onAction="#toInfoScreen"
-                prefHeight="23.0" prefWidth="68.0" text="Info"/>
+        <Button fx:id="continueButton" layoutX="619.0" layoutY="560.0" mnemonicParsing="false" onAction="#continueToMainScreen" style="-fx-background-color: WHITE;" text="Continue">
+         <font>
+            <Font name="Arial" size="26.0" />
+         </font></Button>
+        <Button fx:id="InfoButton" layoutX="619.0" layoutY="485.0" mnemonicParsing="false" onAction="#toInfoScreen" prefHeight="49.0" prefWidth="141.0" style="-fx-background-color: WHITE;" text="Info">
+         <font>
+            <Font name="Arial" size="26.0" />
+         </font></Button>
     </children>
 </AnchorPane>
