@@ -142,40 +142,49 @@ public class AirlineParser extends Parser {
     boolean isValid = true;
     if (line.length != 8) {
       errorCounter(0);
+      return false;
     }
 
-    if (!isIdValid(line[airlineID])) {
-      isValid = false;
+    if (!Validator.isAirlineIDValid(line[airlineID])) {
+      errorCounter(2);
+      return false;
     }
 
-    if (!isNameValid(line[name])) {
-      isValid = false;
+    if (!Validator.isAirlineNameValid(line[name])) {
+      errorCounter(3);
+      return false;
     }
 
-    if (!isAliasValid(line[alias])) {
-      isValid = false;
+    if (!Validator.isAliasValid(line[alias])) {
+      errorCounter(4);
+      return false;
     }
 
-    if (!isIATAValid(line[IATA])) {
-      isValid = false;
+    if (!Validator.isAirlineIATAValid(line[IATA])) {
+      errorCounter(5);
+      return false;
     }
 
-    if (!isICAOValid(line[ICAO])) {
-      isValid = false;
+    if (!Validator.isAirlineICAOValid(line[ICAO])) {
+      errorCounter(6);
+      return false;
     }
 
-    if (!isCallsignValid(line[callsign])) {
-      isValid = false;
+    if (!Validator.isCallsignValid(line[callsign])) {
+      errorCounter(7);
+      return false;
     }
 
-    if (!isCountryValid(line[country])) {
-      isValid = false;
+    if (!Validator.isCountryValid(line[country])) {
+      errorCounter(8);
+      return false;
     }
 
-    if (!isActiveStatusValid(line[activeStatus])) {
-      isValid = false;
+    if (!Validator.isActiveStatusValid(line[activeStatus])) {
+      errorCounter(9);
+      return false;
     }
-    return isValid;
+    return true;
   }
 
   /**
