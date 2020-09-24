@@ -142,47 +142,47 @@ public class RouteParser extends Parser {
 
     changeNulls(line);
 
-    if (!Validator.isAirlineValid(line[airline])) {
+    if (!isAirlineValid(line[airline])) {
       errorCounter(1);
       return false;
     }
 
-    if (!Validator.isAirlineIDValid(line[airlineID])) {
+    if (!isAirlineIDValid(line[airlineID])) {
       errorCounter(2);
       return false;
     }
 
-    if (!Validator.isAirportValid(line[sourceAirport])) {
+    if (!isAirportValid(line[sourceAirport])) {
       errorCounter(3);
       return false;
     }
 
-    if (!Validator.isAirportIDValid(line[sourceAirportID])) {
+    if (!isAirportIDValid(line[sourceAirportID])) {
       errorCounter(4);
       return false;
     }
 
-    if (!Validator.isAirportValid(line[destinationAirport])) {
+    if (!isAirportValid(line[destinationAirport])) {
       errorCounter(5);
       return false;
     }
 
-    if (!Validator.isAirportIDValid(line[destinationAirportID])) {
+    if (!isAirportIDValid(line[destinationAirportID])) {
       errorCounter(6);
       return false;
     }
 
-    if (!Validator.isCodeshareValid(line[codeshare])) {
+    if (!isCodeshareValid(line[codeshare])) {
       errorCounter(7);
       return false;
     }
 
-    if (!Validator.isStopsValid(line[stops])) {
+    if (!isStopsValid(line[stops])) {
       errorCounter(8);
       return false;
     }
 
-    if (!Validator.isEquipmentValid(line[equipment])) {
+    if (!isEquipmentValid(line[equipment])) {
       errorCounter(9);
       return false;
     }
@@ -207,6 +207,83 @@ public class RouteParser extends Parser {
     if (line[destinationAirportID].equals("\\N")) {
       line[destinationAirportID] = "0";
     }
+  }
+
+  /**
+   * This method verifies whether string is a valid ICAO or IATA airport code.
+   *
+   * @param airport The string to be verified.
+   * @return True if string matches ICAO or IATA format, false otherwise.
+   */
+  protected boolean isAirportValid(String airport) {
+    return (airport.length() == 3 || airport.length() == 4) && airport.matches("[A-Z]+");
+  }
+
+  /**
+   * This method verifies whether string is a valid openflight airport id code.
+   *
+   * @param airportID The string to be verified.
+   * @return True if string matches openflights format, false otherwise.
+   */
+  protected boolean isAirportIDValid(String airportID) {
+    return (airportID.length() <= 5 && airportID.matches("[0-9]+"));
+  }
+
+  /**
+   * This method verifies whether string is a valid ICAO or IATA airline code.
+   *
+   * @param airline The string to be verified.
+   * @return True if string matches ICAO or IATA format, false otherwise.
+   */
+  protected boolean isAirlineValid(String airline) {
+    return (airline.length() == 2 || airline.length() == 3) && airline.matches("[0-9A-Z]+");
+  }
+
+  /**
+   * This method verifies whether string is a valid openflights airline id code.
+   *
+   * @param airlineID The string to be verified.
+   * @return True if string matches openflights format, false otherwise.
+   */
+  protected boolean isAirlineIDValid(String airlineID) {
+    return airlineID.length() <= 5 && airlineID.matches("[0-9]+");
+  }
+
+  /**
+   * This method verifies whether string is "Y" (if route is a codeshare) or empty (if it is not).
+   *
+   * @param codeshare the string to be tested.
+   * @return true if string is "Y" or empty, false otherwise.
+   */
+  protected boolean isCodeshareValid(String codeshare) {
+    return codeshare.isEmpty() || codeshare.equals("Y");
+  }
+
+  /**
+   * This method verifies whether string stops represents a number less than 10.
+   *
+   * @param stops The string to be verified.
+   * @return True if string is a number less than 10, false otherwise.
+   */
+  protected boolean isStopsValid(String stops) {
+    return stops.matches("[0-9]");
+  }
+
+  /**
+   * This method verifies whether equipment is a sting of whitespace separated 3 character plane
+   * codes.
+   *
+   * @param equipment The string to be tested.
+   * @return True if string matches expected format, false otherwise.
+   */
+  protected boolean isEquipmentValid(String equipment) {
+    String[] equipArray = equipment.split(" ");
+    for (String plane : equipArray) {
+      if (!(plane.length() == 3 && plane.matches("[0-9A-Z]+"))) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
