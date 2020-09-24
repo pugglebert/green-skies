@@ -44,7 +44,7 @@
                 <Font name="Arial" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="filterOptionsButton" layoutX="1104.0" layoutY="68.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #116754;" text="Filter Options" textFill="WHITE">
+        <Button fx:id="filterOptionsButton" layoutX="1104.0" layoutY="68.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="40.0" prefWidth="279.0" style="-fx-background-color: #116754;" text="Filter Options" textFill="WHITE">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>
@@ -57,7 +57,7 @@
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>
-        <Button layoutX="1104.0" layoutY="122.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #116754;" text="Remove Airport Record" textFill="WHITE">
+        <Button layoutX="1104.0" layoutY="122.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="279.0" style="-fx-background-color: #116754;" text="Remove Airport Record(s)" textFill="WHITE">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>

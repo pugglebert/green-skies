@@ -38,7 +38,7 @@
                 <Font name="Arial" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="filterOptionsButton" layoutX="1182.0" layoutY="52.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #116754;" text="Filter Options" textFill="WHITE">
+        <Button fx:id="filterOptionsButton" layoutX="926.0" layoutY="98.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Filter Options" textFill="WHITE">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>
@@ -51,11 +51,11 @@
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>
-        <Button fx:id="AddToHistoryButton" layoutX="926.0" layoutY="98.0" mnemonicParsing="false" onAction="#addDataToHistory" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #116754;" text="Add to History" textFill="WHITE">
+        <Button fx:id="AddToHistoryButton" layoutX="1198.0" layoutY="50.0" mnemonicParsing="false" onAction="#addDataToHistory" prefHeight="88.0" prefWidth="175.0" style="-fx-background-color: #116754;" text="Add Record(s) to History" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>
-        <Button fx:id="removeBtn" layoutX="926.0" layoutY="50.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #116754;" text="Remove Route Record" textFill="WHITE">
+        <Button fx:id="removeBtn" layoutX="926.0" layoutY="50.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Remove Route Record(s)" textFill="WHITE">
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>
