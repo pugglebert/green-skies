@@ -35,13 +35,16 @@ public class GraphsController extends SideNavBarController {
 
   /**
    * This method is the initializer for this class.
+   * Displays graph of routes from history
    *
    * @param url The provided resoure bundle.
    * @param resourceBundle The resoure bundle.
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    /**
+     * Initialise the series to which route details will be added and then added from here to the graph
+     */
     XYChart.Series<String, Number> data = new XYChart.Series();
 
     routes = storage.getHistory();
@@ -71,7 +74,9 @@ public class GraphsController extends SideNavBarController {
         int i = 0;
         int limit = 10;
         while(i<limit) {
-          if (sortedByEmissions.get(i).getEmissions() != NaN) { //issue, graph wont display if there is NaN for emissions value
+
+          //@TODO issue, graph wont display if there is NaN for any emissions value in the top 10
+          if (sortedByEmissions.get(i).getEmissions() != NaN) {
             String dest = sortedByEmissions.get(i).getDestinationAirport();
             String src = sortedByEmissions.get(i).getSourceAirport();
             String axisString = String.format("%s - %s", src, dest);
