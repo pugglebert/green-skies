@@ -45,13 +45,18 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   /** A string of the least distance routes. */
   private String LeastDistanceRouteString;
   /** A string of the most visited source airports. */
-  private String MostVisitedSourceAirport;
+  private String MostVisitedSourceAirportString;
   /** A string of the least visited source airports. */
-  private String LeastVisitedSourceAirport;
+  private String LeastVisitedSourceAirportString;
   /** A string of the most visited destination airports. */
-  private String MostVisitedDestAirport;
+  private String MostVisitedDestAirportString;
   /** A string of the least visited destination airports. */
-  private String LeastVisitedDestAirport;
+  private String LeastVisitedDestAirportString;
+  /**
+   * A string of the number of trees required to offset the provided amount of carbon emissions.
+   */
+  private String numOfTreesString;
+
 
   public CarbonEmissionsReportController() {}
 
@@ -85,11 +90,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
     displayMostDistanceRouteField.setText(MostDistanceRouteString);
     displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
-    displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirport);
-    displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirport);
-    displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirport);
-    displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirport);
-    displayTreeOffsetField.setText("To be implemented!");
+    displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
+    displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
+    displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
+    displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
+    displayTreeOffsetField.setText(numOfTreesString);
 
     //reportGenerator.resetReportGenerator();
   }
@@ -128,18 +133,19 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         RoutesArrayToString(reportGenerator.getMostDistanceRoutes());
     this.LeastDistanceRouteString =
         RoutesArrayToString(reportGenerator.getLeastDistanceRoutes());
-    this.MostVisitedSourceAirport =
+    this.MostVisitedSourceAirportString =
         CombineAirportsToOneString(
             reportGenerator.getMostVisitedSrcAirports());
-    this.LeastVisitedSourceAirport =
+    this.LeastVisitedSourceAirportString =
         CombineAirportsToOneString(
             reportGenerator.getLeastVisitedSrcAirports());
-    this.MostVisitedDestAirport =
+    this.MostVisitedDestAirportString =
         CombineAirportsToOneString(
             reportGenerator.getMostVisitedDestAirports());
-    this.LeastVisitedDestAirport =
+    this.LeastVisitedDestAirportString =
         CombineAirportsToOneString(
             reportGenerator.getLeastVisitedDestAirports());
+    numOfTreesToString(reportGenerator.calculateOffsetTrees(reportGenerator.getTotalCarbonEmissions()));
   }
 
   /**
@@ -186,5 +192,13 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     }
     resultString = resultStringBuilder.toString();
     return resultString;
+  }
+
+  /**
+   * This method converts the number of trees to offset emissions to a string that has been ceiled.
+   * @param trees The number of trees to offset as a double.
+   */
+  public void numOfTreesToString(Double trees) {
+    this.numOfTreesString = String.format("%.0f", Math.ceil(trees));
   }
 }

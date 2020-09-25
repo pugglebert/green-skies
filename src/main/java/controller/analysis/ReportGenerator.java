@@ -333,11 +333,22 @@ public class ReportGenerator {
 
   /**
    * This method calculates how many trees need to be planted to counter the carbon emissions
-   * produced.
+   * produced. It assumes that the trees planted have an approximate age of standing of at least 20 years and
+   * and that the age of stand when measured is also at least 20 years. Note that trees do not sequester much carbon in
+   * the first few years after planting so the minimum standing age must be no less than 20.
    *
-   * @param totalCarbonEmissions , the total carbon emissions which have currently been produced.
+   * @param totalCarbonEmissions The total carbon emissions which have currently been produced in kilograms.
+   * @return numOfTrees The number of trees required to offset the provided about of carbon emissions.
    */
-  public void calculateOffsetTrees(double totalCarbonEmissions) {}
+  public double calculateOffsetTrees(double totalCarbonEmissions) {
+
+    //convert carbon emissions from grams to tonnes
+    double CO2Tonnes = totalCarbonEmissions / 1000;
+
+    //determine number of trees to offset emissions
+    double numOfTrees = (CO2Tonnes / 144.64) * 2500;
+    return numOfTrees;
+  }
 
   public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
     this.carbonEmissionGoal = carbonEmissionGoal;
@@ -476,7 +487,7 @@ public class ReportGenerator {
     return leastTravelledRoutes;
   }
 
-  // TODO: add in the missing gets and sets needed to rewrite the missing code from 17/09/2020 HK
+  // TODO: possibly remove HK 25/09/2020
 
   public void resetReportGenerator() {
     mostTravelledRoutes.clear();
@@ -489,12 +500,10 @@ public class ReportGenerator {
     mostVisitedSrcAirports.clear();
     leastVisitedSrcAirports.clear();
     leastVisitedDestAirports.clear();
-    // TODO add in least visited.
   }
 
-  //TODO: write comment
   /**
-   *
+   * This methods updates all the most and least travelled route(s) arrays and visited airport(s) arrays at once.
    */
   public void updateTravelledAndVisited() {
     Storage storage = Main.getStorage();
