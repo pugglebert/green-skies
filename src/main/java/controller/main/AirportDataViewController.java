@@ -32,28 +32,42 @@ public class AirportDataViewController extends DataViewController {
   private TableColumn<Airport, Boolean> addColumn;
   @FXML
   private TableColumn<Airport, Integer> airportIDColumn;
-  @FXML private TableColumn<Airport, String> nameColumn;
-  @FXML private TableColumn<Airport, String> cityColumn;
-  @FXML private TableColumn<Airport, String> countryColumn;
-  @FXML private TableColumn<Airport, String> IATAColumn;
-  @FXML private TableColumn<Airport, String> ICAOColumn;
-  @FXML private TableColumn<Airport, Double> latitudeColumn;
-  @FXML private TableColumn<Airport, Double> longitudeColumn;
-  @FXML private TableColumn<Airport, Integer> altitudeColumn;
-  @FXML private TableColumn<Airport, Float> timezoneColumn;
-  @FXML private TableColumn<Airport, String> DSTColumn;
-  @FXML private TableColumn<Airport, String> dataBaseTimeZoneColumn;
+  @FXML
+  private TableColumn<Airport, String> nameColumn;
+  @FXML
+  private TableColumn<Airport, String> cityColumn;
+  @FXML
+  private TableColumn<Airport, String> countryColumn;
+  @FXML
+  private TableColumn<Airport, String> IATAColumn;
+  @FXML
+  private TableColumn<Airport, String> ICAOColumn;
+  @FXML
+  private TableColumn<Airport, Double> latitudeColumn;
+  @FXML
+  private TableColumn<Airport, Double> longitudeColumn;
+  @FXML
+  private TableColumn<Airport, Integer> altitudeColumn;
+  @FXML
+  private TableColumn<Airport, Float> timezoneColumn;
+  @FXML
+  private TableColumn<Airport, String> DSTColumn;
+  @FXML
+  private TableColumn<Airport, String> dataBaseTimeZoneColumn;
 
-  /** Initialize the list of attribute to be added tp the searchTypes list */
+  /**
+   * Initialize the list of attribute to be added tp the searchTypes list
+   */
   private final ObservableList<String> searchTypes =
-      FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
+          FXCollections.observableArrayList("Name", "Country", "IATA", "ICAO");
 
   ObservableList<Airport> airports;
+
   /**
    * This method initializes the controller class.
    *
    * @param url The URL used.
-   * @param rb The resource bundle used.
+   * @param rb  The resource bundle used.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -70,15 +84,16 @@ public class AirportDataViewController extends DataViewController {
     timezoneColumn.setCellValueFactory(new PropertyValueFactory<>("timezone"));
     DSTColumn.setCellValueFactory(new PropertyValueFactory<>("DST"));
     dataBaseTimeZoneColumn.setCellValueFactory(new PropertyValueFactory<>("dataBaseTimeZone"));
-
-    for (Airport airport : storage.getAirports()) {
-      airport.initCheckBox();
-    }
+    if (storage.getAirports() != null){
+      for (Airport airport : storage.getAirports()) {
+        airport.initCheckBox();
+      }
     airports = FXCollections.observableList(storage.getAirports());
     tableView.setItems(airports);
     searchTypeSelection.setItems(searchTypes);
   }
 
+}
   /**
    * This method calls searchAirports method from searcher class and upldates table to display
    * results of search.

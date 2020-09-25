@@ -1,17 +1,17 @@
 package model.loader;
 
 import model.data.Airline;
-import model.data.Airport;
 import model.data.Storage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test cases for routePaser.
@@ -30,7 +30,11 @@ public class AirlineParserTest {
     try {
       ArrayList<String> lines =
               loader.openFile("../seng202_project/src/test/java/TestFiles/airlinesTest.csv");
+      ArrayList<String> lines_200_Error =
+              loader.openFile("../seng202_project/src/test/java/TestFiles/airports.csv");
+
       airlineParser = new AirlineParser(lines, existingLines);
+
     } catch (FileNotFoundException ignored) {
     }
   }
@@ -47,7 +51,7 @@ public class AirlineParserTest {
 
   @Test
   public void isAirlineIdInvalid() {
-    assertFalse(airlineParser.isIdValid("3a"));
+    assertFalse(airlineParser.isIdValid("One"));
   }
 
   @Test
@@ -212,9 +216,11 @@ public class AirlineParserTest {
 
   @Test
   public void validater() {
-    String[] invalidValider = {"-1", "Unknown", "\\N", "-", "N/A", "\\N", "\\N", "Y"};
+    String[] invalidValider = {"-1", "N@me", "@LI@S", "NotIATA", "NotICAO", "1Callsign", "1Country"};
     Assert.assertFalse(airlineParser.validater(invalidValider));
   }
+
+
 //  /** The data parser should add null to the index that not been accumulate by an Airline yet */
 //  @Test
 //  public void dataParser() {

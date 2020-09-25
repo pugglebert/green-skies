@@ -139,44 +139,48 @@ public class AirlineParser extends Parser {
    */
   @Override
   protected boolean validater(String[] line) {
+    try {
+      boolean isValid = true;
+      if (line.length != 8) {
+        errorCounter(0);
+      }
 
-    boolean isValid = true;
-    if (line.length != 8) {
-      errorCounter(0);
-    }
+      if (!isIdValid(line[airlineID])) {
+        isValid = false;
+        ;
+      }
 
-    if (!isIdValid(line[airlineID])) {
-      isValid = false;
-    }
+      if (!isNameValid(line[name])) {
+        isValid = false;
+      }
 
-    if (!isNameValid(line[name])) {
-      isValid = false;
-    }
+      if (!isAliasValid(line[alias])) {
+        isValid = false;
+      }
 
-    if (!isAliasValid(line[alias])) {
-      isValid = false;
-    }
+      if (!isIATAValid(line[IATA])) {
+        isValid = false;
+      }
 
-    if (!isIATAValid(line[IATA])) {
-      isValid = false;
-    }
+      if (!isICAOValid(line[ICAO])) {
+        isValid = false;
+      }
 
-    if (!isICAOValid(line[ICAO])) {
-      isValid = false;
-    }
+      if (!isCallsignValid(line[callsign])) {
+        isValid = false;
+      }
 
-    if (!isCallsignValid(line[callsign])) {
-      isValid = false;
-    }
+      if (!isCountryValid(line[country])) {
+        isValid = false;
+      }
 
-    if (!isCountryValid(line[country])) {
-      isValid = false;
+      if (!isActiveStatusValid(line[activeStatus])) {
+        isValid = false;
+      }
+      return isValid;
+    } catch (Exception e) {
+      return false;
     }
-
-    if (!isActiveStatusValid(line[activeStatus])) {
-      isValid = false;
-    }
-    return isValid;
   }
 
   /**

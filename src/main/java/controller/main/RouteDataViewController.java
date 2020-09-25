@@ -87,6 +87,7 @@ public class RouteDataViewController extends DataViewController {
     numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
     equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
 
+    if (storage.getRoutes() != null){
     for (Route route : storage.getRoutes()) {
       route.initCheckBox();
     }
@@ -94,7 +95,7 @@ public class RouteDataViewController extends DataViewController {
     tableView.setItems(routes);
     tableView.setEditable(true);
     searchTypeSelection.setItems(searchTypes); // Setup choice boxes
-  }
+  }}
 
 
   /**
