@@ -7,7 +7,6 @@ import model.data.Route;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -32,8 +31,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayCarbonEmissionGoalField;
   @FXML private TextField displaycarbonEmissionGoalDurationField;
   @FXML private TextField displayTreeOffsetField;
-  @FXML private TextField carbonEmissionGoalDurationField;
   @FXML private TextField carbonEmissionGoalField;
+  @FXML private TextField displayStatusCommentField;
+
   /** This reportGenerator for the application. */
   private ReportGenerator reportGenerator;
   /** A string of the most emission routes. */
@@ -82,8 +82,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 
     String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
     displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
-    String carbonEmissionGoalDurationValue = carbonEmissionGoalDurationField.getText();
-    displaycarbonEmissionGoalDurationField.setText(carbonEmissionGoalDurationValue);
+    //TODO: fix this line below! It's creating issues and crashing the app.
+    reportGenerator.setCarbonEmissionsGoal(Double.parseDouble(carbonEmissionGoalValue)); //TODO write test for handling different errors
+
     displayTotalEmissionsField.setText(String.format("%.2f",reportGenerator.getTotalCarbonEmissions()));
     displayTotalDistanceTravelledField.setText(String.format("%.2f",reportGenerator.getTotalDistanceTravelled()));
     displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
@@ -94,9 +95,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
     displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
     displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
-    displayTreeOffsetField.setText(numOfTreesString);
 
-    //reportGenerator.resetReportGenerator();
+    displayTreeOffsetField.setText(numOfTreesString);
+    displayStatusCommentField.setText(reportGenerator.getCarbonEmissionsComment());
+
+    reportGenerator.resetReportGenerator();
   }
 
   /** This method clears all fields in the report generator page to be empty. */
@@ -105,7 +108,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayCarbonEmissionGoalField.setText("");
     carbonEmissionGoalField.setText("");
     displaycarbonEmissionGoalDurationField.setText("");
-    carbonEmissionGoalDurationField.setText("");
     displayTotalEmissionsField.setText("");
     displayTotalDistanceTravelledField.setText("");
     displayMostEmissionsRouteField.setText("");
@@ -120,10 +122,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
 
-    //reportGenerator.resetReportGenerator();
+    reportGenerator.resetReportGenerator();
   }
 
   public void setUpData() {
+    reportGenerator.calculateOffsetTrees();
     System.out.println(MostEmissionsRouteString);
     this.MostEmissionsRouteString =
         RoutesArrayToString(reportGenerator.getMostEmissionsRoutes());
@@ -145,7 +148,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     this.LeastVisitedDestAirportString =
         CombineAirportsToOneString(
             reportGenerator.getLeastVisitedDestAirports());
-    numOfTreesToString(reportGenerator.calculateOffsetTrees(reportGenerator.getTotalCarbonEmissions()));
+    numOfTreesToString(reportGenerator.getTreesToGrow());
   }
 
   /**
