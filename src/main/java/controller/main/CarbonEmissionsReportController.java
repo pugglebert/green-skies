@@ -194,6 +194,10 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     return resultString;
   }
 
+  /**
+   * This method converts the number of trees to offset emissions to a string that has been ceiled.
+   * @param trees The number of trees to offset as a double.
+   */
   public void numOfTreesToString(Double trees) {
     this.numOfTreesString = String.format("%.0f", Math.ceil(trees));
   }
