@@ -10,8 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Test cases for routePaser.
@@ -21,12 +20,12 @@ import static org.junit.Assert.assertTrue;
 public class AirlineParserTest {
   // todo change to using loader
   private AirlineParser airlineParser;
-
+  Loader loader = new Loader(new Storage());
+  List<Airline> existingLines = new ArrayList<>();
   @Before
   public void setUp() {
 
-    Loader loader = new Loader(new Storage());
-    List<Airline> existingLines = new ArrayList<>();
+
     try {
       ArrayList<String> lines =
               loader.openFile("../seng202_project/src/test/java/TestFiles/airlinesTest.csv");
@@ -40,40 +39,70 @@ public class AirlineParserTest {
   }
 
   @Test
+  public void isAddAirlineValidDupAirlineID() {
+    airlineParser.addAirLine(3, new Airline(3, "Airline Name", "Airline Alias", "IA", "ICA", "Airline Callsign", "Airline Country", true));
+  }
+
+
+
+
+  /**
+   * Test if method accept new airport id number that is not exist in the storage
+   */
+  @Test
   public void isAirlineIdValidNoDupId() {
     assertTrue(airlineParser.isIdValid("4"));
   }
-
+  /**
+   * Test if method reject duplicate airlineID.
+   */
   @Test
   public void isAirlineIdValidDupId() {
     assertFalse(airlineParser.isIdValid("3"));
   }
 
+  /**
+   * Test if method reject airportID that is not numerals
+   */
   @Test
   public void isAirlineIdInvalid() {
     assertFalse(airlineParser.isIdValid("One"));
   }
 
+  /**
+   * Test if method accept valid airline name without space.
+   */
   @Test
   public void isNameValidWithoutSpace() {
     assertTrue(airlineParser.isNameValid("ab"));
   }
 
+  /**
+   * Test if method accept valid airline name with space.
+   */
   @Test
   public void isNameValidWithSpace() {
     assertTrue(airlineParser.isNameValid("a b"));
   }
-
+  /**
+   * Test if method accept valid airline name started with numerals.
+   */
   @Test
   public void isNameValidStartedWithNumerals() {
     assertTrue(airlineParser.isNameValid("4b"));
   }
 
+  /**
+   * Test if method accept valid alias name.
+   */
   @Test
   public void isAliasValidWithoutSpace() {
-    assertTrue(airlineParser.isAliasValid("ab"));
+    assertTrue(airlineParser.isAliasValid("abcdefghi"));
   }
 
+  /**
+   * Test if method reject invalid alias that have special character.
+   */
   @Test
   public void isAliasInvalid() {
     assertFalse(airlineParser.isAliasValid("a%b"));
@@ -197,7 +226,7 @@ public class AirlineParserTest {
   }
 
   /**
-   * T.
+   * Test if method accept airline with activeStatus field "Y" or "N"
    */
   @Test
   public void isActivaStatusValid() {
@@ -206,7 +235,7 @@ public class AirlineParserTest {
   }
 
   /**
-   * T.
+   * Test if method reject airline with activeStatus field not "Y" and "N"
    */
   @Test
   public void isActivaStatusInvalid() {
@@ -214,12 +243,26 @@ public class AirlineParserTest {
     assertFalse(airlineParser.isActiveStatusValid("No"));
   }
 
+
   @Test
-  public void validater() {
-    String[] invalidValider = {"-1", "N@me", "@LI@S", "NotIATA", "NotICAO", "1Callsign", "1Country"};
-    Assert.assertFalse(airlineParser.validater(invalidValider));
+  public void isValidaterValidAllInvalid() {
+    Airline testAirline = new Airline(-1, "N@me", "@LI@S", "NotIATA", "NotICAO", "1Callsign", "1Country", true);
+    airlineParser.addAirLine(-1, testAirline);
+//    assertNotSame();
   }
 
+  @Test
+  public void isvalidaterValidNotEnoughPara() {
+    String[] invalidValider = {"-1", "N@me", "@LI@S", "NotIATA", "NotICAO", "1Callsign", "1Country"};
+  }
+
+
+  @Test
+  public void isAddAirlineValidDupID () {
+    Airline testAirline = new Airline(3, "N@me", "@LI@S", "NotIATA", "NotICAO", "1Callsign", "1Country", true);
+    airlineParser.addAirLine(3, testAirline);
+    assertNotSame(testAirline, airlineParser.parserData.get(3));
+  }
 
 //  /** The data parser should add null to the index that not been accumulate by an Airline yet */
 //  @Test
