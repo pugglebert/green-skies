@@ -5,31 +5,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.UploadController">
     <children>
         <DialogPane fx:id="errorBox" headerText="Error message " prefHeight="239.0" prefWidth="334.0" visible="false">
             <buttonTypes>
                 <ButtonType fx:constant="OK" />
             </buttonTypes>
         </DialogPane>
-        <ChoiceBox fx:id="dataTypeSelect" layoutX="291.0" layoutY="192.0" prefHeight="42.0" prefWidth="328.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;"/>
+        <ChoiceBox fx:id="dataTypeSelect" layoutX="291.0" layoutY="192.0" prefHeight="42.0" prefWidth="328.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;" />
         <Button fx:id="backButton" layoutX="292.0" layoutY="631.0" mnemonicParsing="false" onAction="#backToWelcome" prefHeight="43.0" prefWidth="198.0" style="-fx-background-color: #116754;" text="Back to Home" textFill="WHITE">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="20.0" />
          </font></Button>
         <Button fx:id="browseButton1" alignment="CENTER_RIGHT" layoutX="648.0" layoutY="191.0" mnemonicParsing="false" onAction="#browseFiles" prefHeight="42.0" prefWidth="217.0" style="-fx-background-color: #116754;" text="Browse Files   " textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="20.0" />
          </font></Button>
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
         <Text fx:id="fileAcceptedText" layoutX="385.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="434.0" />
         <Button fx:id="btnAddSingle" layoutX="648.0" layoutY="261.0" mnemonicParsing="false" onAction="#addSingle" prefHeight="42.0" prefWidth="217.0" style="-fx-background-color: #116754;" text="Add Single Entry" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="20.0" />
          </font></Button>
       <Label layoutX="1049.0" layoutY="29.0" text="Uploaded Airline Files">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="20.0" />
          </font>
       </Label>
       <ListView fx:id="airlineFileList" layoutX="929.0" layoutY="65.0" onMouseClicked="#changeAirlineFile" prefHeight="169.0" prefWidth="434.0" />
@@ -37,17 +37,17 @@
       <ListView fx:id="routeFileList" layoutX="929.0" layoutY="491.0" onMouseClicked="#changeRouteFile" prefHeight="169.0" prefWidth="434.0" />
       <Label layoutX="1047.0" layoutY="250.0" text="Uploaded Airport Files">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="20.0" />
          </font>
       </Label>
       <Label layoutX="1050.0" layoutY="457.0" text="Uploaded Route Files">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="20.0" />
          </font>
       </Label>
       <Label layoutX="307.0" layoutY="154.0" text="Select Data Type to Upload">
          <font>
-            <Font name="Arial" size="24.0" />
+            <Font size="20.0" />
          </font>
       </Label>
       <VBox prefHeight="703.0" prefWidth="214.0" style="-fx-background-color: #116754;">
