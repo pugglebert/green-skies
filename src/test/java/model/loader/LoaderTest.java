@@ -7,6 +7,9 @@ import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+import java.nio.file.FileSystemException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -78,8 +81,78 @@ public class LoaderTest {
     }
   }
 
+  /**
+   * Test that getFileName returns the correct filename for a file path containing forward slashes.
+   */
   @Test
-  /* Test that openFile instantiates the Parser class with an ArrayList of Lines matching the contents of the file */
+  public void testGetFileNameForwardSlash() {
+    String filename = loader.getFileName("C:/Users/ellaj/Documents/GreenSkies/seng202_project/src/test/java/TestFiles/airlines.csv");
+    assertEquals("airlines.csv", filename);
+  }
+
+  /**
+   * Test that getFileName returns the correct filename for a filepath contiaining back slashes.
+   */
+  @Test
+  public void testGetFileNameBackSlash() {
+    String filename = loader.getFileName("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv");
+    assertEquals("airlines.csv", filename);
+  }
+
+  /**
+   * Test that getFileName returns the correct filename for a file path containing no slashes.
+   */
+  @Test
+  public void testGetFileNameNoSlash() {
+    String filename = loader.getFileName("airlines.csv");
+    assertEquals("airlines.csv", filename);
+  }
+
+  /**
+   * Test that checkDuplicateFileName raises an error when another file with the same name has been uploaded.
+   */
+  @Test
+  public void testCheckDuplicateFileNameDuplicateUploaded() throws FileNotFoundException, FileSystemException, SQLException {
+    loader.loadFile("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv", "Airline");
+    try {
+      loader.checkDuplicateFileName("airlines.csv");
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Test that checkDuplicateFileName does not raise an exception when another file with the same name has not been uploaded.
+   */
+  @Test
+  public void testCheckDuplicatFileNameDuplicateNotUploaded() throws FileNotFoundException, FileSystemException, SQLException {
+    loader.loadFile("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv", "Airline");
+    try {
+      loader.checkDuplicateFileName("airports.csv");
+      assertTrue(true);
+    } catch (RuntimeException e) {
+      fail();
+    }
+  }
+
+  /**
+   * Test that checkDuplicateFileName does not raise an exception when another file with the same name has been uploaded and then deleted.
+   */
+  @Test
+  public void testCheckDuplicateFileNameDuplicateDeleted() throws FileNotFoundException, FileSystemException, SQLException {
+    loader.loadFile("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv", "Airline");
+    storage.getAirlineFileList().remove("airlines.csv");
+    try {
+      loader.checkDuplicateFileName("airlines.csv");
+      assertTrue(true);
+    } catch (RuntimeException e) {
+      fail();
+    }
+  }
+
+  @Test
+  /** Test that openFile instantiates the Parser class with an ArrayList of Lines matching the contents of the file */
   public void testOpenFileValidFile() {
     ArrayList<String> actualLines = new ArrayList<String>();
 
