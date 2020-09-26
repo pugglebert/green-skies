@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
+<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.FlightHistoryController">
     <children>
         <TableView fx:id="tableView" layoutX="248.0" layoutY="186.0" prefHeight="432.0" prefWidth="1133.0">
             <columns>
@@ -30,17 +30,15 @@
             <Font name="Arial" size="16.0" />
          </font></TextField>
         <ChoiceBox fx:id="searchTypeSelection" layoutX="248.0" layoutY="67.0" prefHeight="40.0" prefWidth="188.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;" />
-        <Label fx:id="errorText" layoutX="396.0" layoutY="154.0" prefHeight="27.0" prefWidth="846.0" text="Search error message goes here" textFill="RED" visible="false">
+        <Label fx:id="errorText" layoutX="446.0" layoutY="121.0" prefHeight="30.0" prefWidth="511.0" text="Search error message goes here" textFill="RED" visible="false">
             <font>
-                <Font size="14.0" />
+                <Font size="20.0" />
             </font>
         </Label>
         <Button fx:id="filterOptionsButton" layoutX="1071.0" layoutY="69.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="40.0" prefWidth="310.0" style="-fx-background-color: #116754;" text="Filter Options" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Button>
-        <Label fx:id="filterErrorText" layoutX="199.0" layoutY="147.0" prefHeight="20.0" prefWidth="554.0" text="Filter error text" textFill="RED" visible="false">
-        </Label>
         <Button fx:id="clearSearchButton" layoutX="965.0" layoutY="116.0" mnemonicParsing="false" onAction="#clearSearch" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #116754;" text="Clear" textFill="WHITE">
          <font>
             <Font size="18.0" />
