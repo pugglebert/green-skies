@@ -230,6 +230,131 @@ public class AirportStatsCalculatorTest {
     //TODO write tests for these methods and rerun coverage once completed! HK 26/09/2020
     //--------------------------------- resetAirportArrays() tests
 
+    /**
+     * Verify that when resetRoutesArrays is called when there are no values in the arrays,
+     * then they remain empty.
+     */
+    @Test
+    public void resetAirportsArraysEmptyTest() {
+        ArrayList<Route> expectedMostVisitedDestAirports = new ArrayList<>();
+        ArrayList<Route> expectedMostVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedDestAirports = new ArrayList<>();
+
+        airportStatsCalculator.resetAirportArrays();
+
+        assertEquals(expectedMostVisitedDestAirports, airportStatsCalculator.getMostVisitedDestAirports());
+        assertEquals(expectedMostVisitedSrcAirports, airportStatsCalculator.getMostVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedSrcAirports, airportStatsCalculator.getLeastVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedDestAirports, airportStatsCalculator.getLeastVisitedDestAirports());
+
+    }
+
+    /**
+     * Verify that when resetRoutesArrays is called when there is a single value in each array,
+     * that the arrays become empty.
+     */
+    @Test
+    public void resetAirportsArraysOneValueTest() {
+        ArrayList<String> testMostVisitedDestAirports = new ArrayList<>();
+        ArrayList<String> testMostVisitedSrcAirports = new ArrayList<>();
+        ArrayList<String> testLeastVisitedSrcAirports = new ArrayList<>();
+        ArrayList<String> testLeastVisitedDestAirports = new ArrayList<>();
+
+        testMostVisitedDestAirports.add("GKA");
+        testMostVisitedSrcAirports.add("BGG");
+        testLeastVisitedSrcAirports.add("BHL");
+        testLeastVisitedDestAirports.add("GBR");
+
+        ArrayList<Route> expectedMostVisitedDestAirports = new ArrayList<>();
+        ArrayList<Route> expectedMostVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedDestAirports = new ArrayList<>();
+
+        airportStatsCalculator.resetAirportArrays();
+
+        assertEquals(expectedMostVisitedDestAirports, airportStatsCalculator.getMostVisitedDestAirports());
+        assertEquals(expectedMostVisitedSrcAirports, airportStatsCalculator.getMostVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedSrcAirports, airportStatsCalculator.getLeastVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedDestAirports, airportStatsCalculator.getLeastVisitedDestAirports());
+
+    }
+
+    /**
+     * Verify that when resetRoutesArrays is called when there is are multiple values in each array,
+     * that the arrays become empty.
+     */
+    @Test
+    public void resetAirportsArraysMultiValuesTest() {
+        ArrayList<String> testMostVisitedDestAirports = new ArrayList<>();
+        ArrayList<String> testMostVisitedSrcAirports = new ArrayList<>();
+        ArrayList<String> testLeastVisitedSrcAirports = new ArrayList<>();
+        ArrayList<String> testLeastVisitedDestAirports = new ArrayList<>();
+
+        testMostVisitedDestAirports.add("GKA");
+        testMostVisitedSrcAirports.add("BGG");
+        testLeastVisitedSrcAirports.add("BHL");
+        testLeastVisitedDestAirports.add("GBR");
+        testMostVisitedDestAirports.add("AUR");
+        testMostVisitedSrcAirports.add("HEP");
+        testLeastVisitedSrcAirports.add("MAA");
+        testLeastVisitedDestAirports.add("ETY");
+        testMostVisitedDestAirports.add("UED");
+        testMostVisitedSrcAirports.add("DEA");
+        testLeastVisitedSrcAirports.add("PVE");
+        testLeastVisitedDestAirports.add("LAC");
+
+        ArrayList<Route> expectedMostVisitedDestAirports = new ArrayList<>();
+        ArrayList<Route> expectedMostVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedDestAirports = new ArrayList<>();
+
+        airportStatsCalculator.resetAirportArrays();
+
+        assertEquals(expectedMostVisitedDestAirports, airportStatsCalculator.getMostVisitedDestAirports());
+        assertEquals(expectedMostVisitedSrcAirports, airportStatsCalculator.getMostVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedSrcAirports, airportStatsCalculator.getLeastVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedDestAirports, airportStatsCalculator.getLeastVisitedDestAirports());
+
+    }
+
+    /**
+     * Verify that when resetRoutesArrays is called when there is a mixture of values in each array,
+     * that the arrays become empty.
+     */
+    @Test
+    public void resetAirportsArraysVaryingNumOfValuesTest() {
+        ArrayList<String> testMostVisitedDestAirports = new ArrayList<>();
+        ArrayList<String> testMostVisitedSrcAirports = new ArrayList<>();
+        ArrayList<String> testLeastVisitedSrcAirports = new ArrayList<>();
+        ArrayList<String> testLeastVisitedDestAirports = new ArrayList<>();
+
+        testMostVisitedDestAirports.add("GKA");
+        testLeastVisitedSrcAirports.add("BHL");
+        testLeastVisitedDestAirports.add("GBR");
+        testMostVisitedDestAirports.add("AUR");
+        testMostVisitedSrcAirports.add("HEP");
+        testLeastVisitedSrcAirports.add("MAA");
+        testMostVisitedDestAirports.add("UED");
+        testMostVisitedSrcAirports.add("DEA");
+        testLeastVisitedSrcAirports.add("PVE");
+        testLeastVisitedDestAirports.add("LAC");
+
+        ArrayList<Route> expectedMostVisitedDestAirports = new ArrayList<>();
+        ArrayList<Route> expectedMostVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedSrcAirports = new ArrayList<>();
+        ArrayList<Route> expectedLeastVisitedDestAirports = new ArrayList<>();
+
+        airportStatsCalculator.resetAirportArrays();
+
+        assertEquals(expectedMostVisitedDestAirports, airportStatsCalculator.getMostVisitedDestAirports());
+        assertEquals(expectedMostVisitedSrcAirports, airportStatsCalculator.getMostVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedSrcAirports, airportStatsCalculator.getLeastVisitedSrcAirports());
+        assertEquals(expectedLeastVisitedDestAirports, airportStatsCalculator.getLeastVisitedDestAirports());
+
+    }
+
+    //TODO write these tests! 26/09/2020 HK
     //------------------------------------ updateLeastVisitedDestAirports(HashMap<String, Integer> destAirportCounts) tests
 
     //------------------------------------ updateLeastVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) tests
