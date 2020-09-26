@@ -1,7 +1,8 @@
 package controller.main;
 
 import controller.analysis.FlightAnalyser;
-import controller.analysis.ReportGenerator;
+import controller.analysis.GeneralStatsCalculator;
+import controller.analysis.RouteStatsCalculator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -58,13 +59,26 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   private Button cancelBtn;
 
   /**
-   * Class to generate reports on history.
+   * The GeneralStatsCalculator to generate reports about flight history.
    */
-  private final ReportGenerator reportGenerator = Main.getReportGenerator();
+  private final GeneralStatsCalculator generalStatsCalculator = Main.getGeneralStatsCalculator();
+  /**
+   * The RouteStatsCalculator to generate route stats for the reports about flight history.
+   */
+  private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
+  //TODO: Nathan please write. HK 26/09/2020
+  /**
+   *
+   */
   private final Storage storage = Main.getStorage();
 
+  //TODO: Nathan please write. HK 26/09/2020
+  /**
+   *
+   */
   private ObservableList<Route> tempRoute;
+
   /**
    * This method displays the content for the history.
    *
@@ -143,14 +157,14 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
     route.setEmissions(flightAnalyser.getPath1Emission());
     route.setDistance(flightAnalyser.getTotalDistancePath1());
-    reportGenerator.updateTotalDistance(route);
-    reportGenerator.updateTotalEmissions(route);
+    generalStatsCalculator.updateTotalDistance(route);
+    generalStatsCalculator.updateTotalEmissions(route);
     storage.addToHistorySrcAirports(route.getSourceAirport());
     storage.addToHistoryDestAirports(route.getDestinationAirport());
-    reportGenerator.updateLeastDistanceRoute(route);
-    reportGenerator.updateMostDistanceRoute(route);
-    reportGenerator.updateMostEmissionsRoute(route);
-    reportGenerator.updateLeastEmissionsRoute(route);
+    routeStatsCalculator.updateLeastDistanceRoute(route);
+    routeStatsCalculator.updateMostDistanceRoute(route);
+    routeStatsCalculator.updateMostEmissionsRoute(route);
+    routeStatsCalculator.updateLeastEmissionsRoute(route);
   }
 
   public void cancel() {
