@@ -113,7 +113,7 @@ public class LoaderTest {
    */
   @Test
   public void testCheckDuplicateFileNameDuplicateUploaded() throws FileNotFoundException, FileSystemException, SQLException {
-    loader.loadFile("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv", "Airline");
+    loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     try {
       loader.checkDuplicateFileName("airlines.csv");
       fail();
@@ -127,7 +127,7 @@ public class LoaderTest {
    */
   @Test
   public void testCheckDuplicatFileNameDuplicateNotUploaded() throws FileNotFoundException, FileSystemException, SQLException {
-    loader.loadFile("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv", "Airline");
+    loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     try {
       loader.checkDuplicateFileName("airports.csv");
       assertTrue(true);
@@ -141,7 +141,7 @@ public class LoaderTest {
    */
   @Test
   public void testCheckDuplicateFileNameDuplicateDeleted() throws FileNotFoundException, FileSystemException, SQLException {
-    loader.loadFile("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv", "Airline");
+    loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     storage.getAirlineFileList().remove("airlines.csv");
     try {
       loader.checkDuplicateFileName("airlines.csv");
