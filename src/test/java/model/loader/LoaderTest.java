@@ -226,7 +226,7 @@ public class LoaderTest {
 
   @Test
   /**
-   * Test that a expected data is stored in Storage when loadFile is called with valid input for
+   * Test that expected data is stored in Storage when loadFile is called with valid input for
    * filename and datatype
    */
   public void testLoadFileValid() {
@@ -242,5 +242,23 @@ public class LoaderTest {
     }
 
     assertArrayEquals(testRoutes.toArray(), storage.getRoutes().toArray());
+  }
+
+  @Test
+  /**
+   * Test that getLineFileName returns default name when current file is null.
+   */
+  public void testGetLineFileNameDefault() {
+    String fileName = loader.getLineFileName("Route");
+    assertEquals("singleEntryRoutes.csv", fileName);
+  }
+
+  @Test
+  /**
+   * Test that getLineFileName returns the current filename when current filename is not null.
+   */
+  public void testGetLineFileNameCurrent() {
+    storage.setData(new ArrayList<>(), "Route", "testRoutes.csv");
+    assertEquals("testRoutes.csv", loader.getLineFileName("Route"));
   }
 }

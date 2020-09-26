@@ -89,8 +89,6 @@ public class Storage {
   public void setCurrentAirlineFile(String newCurrentFile) {
     if (airlineFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirlineFile = newCurrentFile;
-//    } else {
-//      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
   }
 
@@ -141,9 +139,6 @@ public class Storage {
     if (airportFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirportFile = newCurrentFile;
     }
-//    else {
-//      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
-//    }
   }
 
   /**
@@ -191,8 +186,6 @@ public class Storage {
   public void setCurrentRouteFile(String newCurrentFile) {
     if (routeFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentRouteFile = newCurrentFile;
-//    } else {
-//      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
   }
 
