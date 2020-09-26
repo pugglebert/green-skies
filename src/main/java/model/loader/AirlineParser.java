@@ -69,6 +69,9 @@ public class AirlineParser extends Parser {
       }
       parseLine(dataLine);
     }
+    if (!getValidFile()) {
+      throw new RuntimeException("File rejected: All lines contain errors.");
+    }
   }
 
   /**

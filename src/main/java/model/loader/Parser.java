@@ -109,4 +109,12 @@ public abstract class Parser {
     }
     return errorMessage.toString();
   }
+
+  /**
+   * Checks if the number of errors in the file is less than the size of the file.
+   * @return true if there are less errors than lines in the file, false otherwise.
+   */
+  public boolean getValidFile() {
+    return (totalErrors < dataFile.size());
+  }
 }

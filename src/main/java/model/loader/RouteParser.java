@@ -45,6 +45,9 @@ public class RouteParser extends Parser {
       addToRouteCodes(route);
     }
     dataParser();
+    if (!getValidFile()) {
+      throw new RuntimeException("File rejected: All lines contain errors.");
+    }
   }
 
   /**
