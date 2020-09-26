@@ -186,18 +186,14 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentAirlineFile throws an IllegalArgumentException when called with a filename that
-   * has not been stored.
+   * Test that setCurrentAirlineFile does not change the value of currentAirlineFile if it is called with a name
+   * that is not stored in airlineFiles.
    */
   @Test
   public void setCurrentAirlienFileNameNotStoredTest() {
     storage.setData(createAirlineList(), "Airline", "a.csv");
-    try {
-      storage.setCurrentAirlineFile("airlinetest.csv");
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertTrue(true);
-    }
+    storage.setCurrentAirlineFile("airlinetest.csv");
+    assertEquals("a.csv", storage.getCurrentAirlineFile());
   }
 
   /**
@@ -269,18 +265,14 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentAirportFile throws an IllegalArgumentException when called with a filename that
+   * Test that setCurrentAirportFile does not change the current airport file when called with a filename that
    * has not been stored.
    */
   @Test
   public void setCurrentAirportFileNameNotStoredTest() {
     storage.setData(createAirportList(), "Airport", "a.csv");
-    try {
-      storage.setCurrentAirportFile("airporttest.csv");
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertTrue(true);
-    }
+    storage.setCurrentAirportFile("airporttest.csv");
+    assertEquals("a.csv", storage.getCurrentAirportFile());
   }
 
   /**
@@ -352,18 +344,14 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentRouteFile throws an IllegalArgumentException when called with a filename that
+   * Test that setCurrentRouteFile doesn't change the current route file when called with a filename that
    * has not been stored.
    */
   @Test
   public void setCurrentRouteFileNameNotStoredTest() {
     storage.setData(createRouteList(), "Route", "a.csv");
-    try {
-      storage.setCurrentAirlineFile("routetest.csv");
-      fail();
-    } catch (IllegalArgumentException e) {
-      assertTrue(true);
-    }
+    storage.setCurrentAirlineFile("routetest.csv");
+    assertEquals("a.csv", storage.getCurrentRouteFile());
   }
 
   /**
