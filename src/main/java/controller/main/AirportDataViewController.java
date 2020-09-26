@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airport;
+import model.data.Route;
 
 import java.io.IOException;
 import java.net.URL;
@@ -107,6 +108,7 @@ public class AirportDataViewController extends DataViewController {
   /** This method clears search bar and display all airports in table view. */
   @Override
   public void clearSearch() {
+    errorText.setVisible(false);
     searchBar.setText(null);
     tableView.setItems(FXCollections.observableList(storage.getAirports()));
   }
@@ -116,6 +118,7 @@ public class AirportDataViewController extends DataViewController {
    * set the table to display the filtered data when the pop up is closed.
    */
   public void filterOptions() throws IOException {
+    errorText.setVisible(false);
     AirportFilterPopUpController filterPopUpController = new AirportFilterPopUpController();
     filterer.setFilterSuccess(false);
     filterPopUpController.display();
@@ -125,9 +128,30 @@ public class AirportDataViewController extends DataViewController {
   }
 
   public void removeSelected() {
-    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("Airline");
-    if (result.isPresent() && result.get() == ButtonType.OK) {
-      airports.removeIf(airport -> airport.getSelect().isSelected());
+    errorText.setVisible(false);
+    if (getAnySelected()) {
+      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airport(s)");
+      if (result.isPresent() && result.get() == ButtonType.OK) {
+        airports.removeIf(airport -> airport.getSelect().isSelected());
+      }
+    } else {
+      errorText.setText("No airports selected.");
+      errorText.setVisible(true);
     }
+  }
+
+  /**
+   * Check if at least one entry has been selected.
+   * @return true if any have been selected or false otherwise.
+   */
+  public boolean getAnySelected() {
+    boolean selected = false;
+    for (Airport airport : airports) {
+      if (airport.getSelect().isSelected()) {
+        selected = true;
+        break;
+      }
+    }
+    return selected;
   }
 }

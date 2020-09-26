@@ -89,6 +89,7 @@ public class AirlineDataViewController extends DataViewController {
   /** This method clears search bar and display all airlines in table view. */
   @Override
   public void clearSearch() {
+    errorText.setVisible(false);
     searchBar.setText(null);
     tableView.setItems(FXCollections.observableList(storage.getAirlines()));
   }
@@ -100,6 +101,7 @@ public class AirlineDataViewController extends DataViewController {
    * @throws IOException If AirlineFilterPopUpController fxml file cannot be opened.
    */
   public void filterOptions() throws IOException {
+    errorText.setVisible(false);
     AirlineFilterPopUpController filterPopUp = new AirlineFilterPopUpController();
     filterer.setFilterSuccess(false);
     filterPopUp.display();
@@ -109,9 +111,30 @@ public class AirlineDataViewController extends DataViewController {
   }
 
   public void removeSelected() {
-    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("Airline");
-    if (result.isPresent() && result.get() == ButtonType.OK) {
-      airlines.removeIf(airline -> airline.getSelect().isSelected());
+    errorText.setVisible(false);
+    if (getAnySelected()) {
+      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airline(s)");
+      if (result.isPresent() && result.get() == ButtonType.OK) {
+        airlines.removeIf(airline -> airline.getSelect().isSelected());
+      }
+    } else {
+      errorText.setText("No airlines selected");
+      errorText.setVisible(true);
     }
+  }
+
+  /**
+   * Check if at least one entry has been selected.
+   * @return true if any have been selected or false otherwise.
+   */
+  public boolean getAnySelected() {
+    boolean selected = false;
+    for (Airline airline : airlines) {
+      if (airline.getSelect().isSelected()) {
+        selected = true;
+        break;
+      }
+    }
+    return selected;
   }
 }

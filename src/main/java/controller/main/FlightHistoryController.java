@@ -120,6 +120,7 @@ public class FlightHistoryController extends DataViewController {
   /** This method clears search bar and displays all history in table view. */
   @Override
   public void clearSearch() {
+    errorText.setVisible(false);
     searchBar.setText(null);
     tableView.setItems(FXCollections.observableList(storage.getHistory()));
   }
@@ -131,6 +132,7 @@ public class FlightHistoryController extends DataViewController {
    * @throws IOException if fxml file cannot be opened.
    */
   public void filterOptions() throws IOException {
+    errorText.setVisible(false);
     HistoryFilterPopUpController filterPopUp = new HistoryFilterPopUpController();
     filterer.setFilterSuccess(false);
     filterPopUp.display();
@@ -168,9 +170,15 @@ public class FlightHistoryController extends DataViewController {
   }
 
   public void removeSelected() {
-    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight history");
-    if (result.isPresent() && result.get() == ButtonType.OK) {
-      routes.removeIf(route -> route.getSelect().isSelected());
+    errorText.setVisible(false);
+    if (getAnySelected()) {
+      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight history");
+      if (result.isPresent() && result.get() == ButtonType.OK) {
+        routes.removeIf(route -> route.getSelect().isSelected());
+      }
+    } else {
+      errorText.setText("No routes selected.");
+      errorText.setVisible(true);
     }
   }
 
@@ -185,5 +193,20 @@ public class FlightHistoryController extends DataViewController {
     for (Route route : Main.getStorage().getHistory()) {
       route.getSelect().setSelected(false);
     }
+  }
+
+  /**
+   * Check if at least one entry has been selected.
+   * @return true if any have been selected or false otherwise.
+   */
+  public boolean getAnySelected() {
+    boolean selected = false;
+    for (Route route : routes) {
+      if (route.getSelect().isSelected()) {
+        selected = true;
+        break;
+      }
+    }
+    return selected;
   }
 }
