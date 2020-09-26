@@ -140,44 +140,43 @@ public class AirlineParser extends Parser {
    */
   @Override
   protected boolean validater(String[] line) {
-    boolean isValid = true;
     if (line.length != 8) {
       errorCounter(0);
+      return false;
     }
 
     if (!isIdValid(line[airlineID])) {
-      isValid = false;
-      ;
+      return false;
     }
 
     if (!isNameValid(line[name])) {
-      isValid = false;
+      return false;
     }
 
     if (!isAliasValid(line[alias])) {
-      isValid = false;
+      return false;
     }
 
     if (!isIATAValid(line[IATA])) {
-      isValid = false;
+      return false;
     }
 
     if (!isICAOValid(line[ICAO])) {
-      isValid = false;
+      return false;
     }
 
     if (!isCallsignValid(line[callsign])) {
-      isValid = false;
+      return false;
     }
 
     if (!isCountryValid(line[country])) {
-      isValid = false;
+      return false;
     }
 
     if (!isActiveStatusValid(line[activeStatus])) {
-      isValid = false;
+      return false;
     }
-    return isValid;
+    return true;
   }
 
   /**
