@@ -83,6 +83,7 @@ public class AirportParser extends Parser {
       parseLine(dataLine);
     }
     if (!getValidFile()) {
+      System.out.println(getErrorMessage());
       throw new RuntimeException("File rejected: All lines contain errors.");
     }
   }

@@ -294,11 +294,14 @@ public class RouteParserTest {
   @Test
   public void parseRouteValidLineTest() {
     ArrayList<String> testLines = new ArrayList<>();
+    testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
-    Route expectedRoute = new Route("2B", 410, "AER", 2965, "KZN", 2990, "", 0, "CR2".split(","));
-    Route[] expectedArray = new Route[1];
-    expectedArray[0] = expectedRoute;
+    Route existingRoute = new Route("2B",410,"KZN",2990,"DME",4029,"",0,"CR2".split(" "));
+    Route addedRoute = new Route("2B", 410, "AER", 2965, "KZN", 2990, "", 0, "CR2".split(","));
+    Route[] expectedArray = new Route[2];
+    expectedArray[0] = existingRoute;
+    expectedArray[1] = addedRoute;
     assertArrayEquals(expectedArray, testParser.getData().toArray());
   }
 
@@ -306,6 +309,7 @@ public class RouteParserTest {
   @Test
   public void parseRouteValidLineErrorTest() {
     ArrayList<String> testLines = new ArrayList<>();
+    testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
     assertEquals("File uploaded with 0 invalid lines rejected\n", testParser.getErrorMessage());
@@ -315,15 +319,19 @@ public class RouteParserTest {
   @Test
   public void parseRouteInvalidLineTest() {
     ArrayList<String> testLines = new ArrayList<>();
+    testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410A,AER,2965,KZN,2990,,0,CR2");
-    assertArrayEquals(new DataType[0], testParser.getData().toArray());
+    ArrayList<Route> expected = new ArrayList<>();
+    expected.add(new Route("2B",410,"KZN",2990,"DME",4029,"",0,"CR2".split(" ")));
+    assertArrayEquals(expected.toArray(), testParser.getData().toArray());
   }
 
   /** Test that error counter is updated when invalid line is parser. */
   @Test
   public void parseRouteInvalidLineErrorTest() {
     ArrayList<String> testLines = new ArrayList<>();
+    testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410A,AER,2965,KZN,2990,,0,CR2");
     assertEquals(
