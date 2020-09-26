@@ -178,7 +178,8 @@ public class UploadController extends SideNavBarController {
                     Parent root = FXMLLoader.load(getClass().getResource("airportSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
-                    newStage.show();
+                    newStage.showAndWait();
+                    airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
                     break;
                 }
                 case "Airline": {
@@ -186,7 +187,8 @@ public class UploadController extends SideNavBarController {
                     Parent root = FXMLLoader.load(getClass().getResource("airlineSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
-                    newStage.show();
+                    newStage.showAndWait();
+                    airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
                     break;
                 }
                 case "Route": {
@@ -194,7 +196,8 @@ public class UploadController extends SideNavBarController {
                     Parent root = FXMLLoader.load(getClass().getResource("routeSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
-                    newStage.show();
+                    newStage.showAndWait();
+                    routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
                     break;
                 }
             }

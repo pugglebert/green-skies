@@ -219,6 +219,41 @@ public class Loader {
   }
 
   /**
+   * Returns the current filename for that datatype, or if current filename is null returns the name of the single
+   * entry file.
+   * @return The filename to use when adding the file to storage.
+   */
+  public String getLineFileName(String dataType) {
+    String fileName;
+    switch (dataType) {
+      case "Airline":
+        if (storage.getCurrentAirlineFile() == null) {
+          fileName = "singleEntryAirlines.csv";
+        } else {
+          fileName = storage.getCurrentAirlineFile();
+        }
+        break;
+      case "Airport":
+        if (storage.getCurrentAirportFile() == null) {
+          fileName = "singleEntryAirports.csv";
+        } else {
+          fileName = storage.getCurrentAirportFile();
+        }
+        break;
+      case "Route":
+        if (storage.getCurrentRouteFile() == null) {
+          fileName = "singleEntryRoutes.csv";
+        } else {
+          fileName = storage.getCurrentRouteFile();
+        }
+        break;
+      default:
+        throw new IllegalArgumentException("Datatype must be one of: Airline, Airport, Route");
+    }
+    return fileName;
+  }
+
+  /**
    * This method parses a single line and returns a message about whether any errors occured when
    * processing that line.
    *
@@ -228,13 +263,16 @@ public class Loader {
    */
   public String loadLine(String entryString, String dataType) throws SQLException {
 
+    String fileName = getLineFileName(dataType);
+
+    checkDuplicateFileName(fileName);
     ArrayList<String> line = new ArrayList<>();
     line.add(entryString);
 
     Parser parser = constructParser(dataType, line, true);
 
     List<DataType> data = parser.getData();
-    storage.setData(data, dataType, null);
+    storage.setData(data, dataType, fileName);
     return parser.getErrorMessage();
   }
 }

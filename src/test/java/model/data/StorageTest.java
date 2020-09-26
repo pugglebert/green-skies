@@ -385,4 +385,14 @@ public class StorageTest {
     assertArrayEquals(createRouteList().toArray(), storage.getRoutes().toArray());
   }
 
+  /**
+   * Test that setData changes currentFilename to the given filename when the given filename is not null.
+   */
+  @Test
+  public void setDataFileNameChangeTest() {
+    storage.setData(createAirportList(), "Airport", "airportstest.csv");
+    storage.setData(createAirportList(), "Airport", "airportstest2.csv");
+    assertEquals("airportstest2.csv", storage.getCurrentAirportFile());
+  }
+
 }
