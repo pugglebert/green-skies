@@ -46,7 +46,7 @@ public class AirlineParser extends Parser {
     errorLookup[0] = "Not enough parameters";
     errorLookup[1] = "Duplicate airline";
     errorLookup[2] = "Invalid airline ID";
-    errorLookup[3] = "Invalid airport name";
+    errorLookup[3] = "Invalid airline name";
     errorLookup[4] = "Invalid ailias";
     errorLookup[5] = "Invalid IATA code";
     errorLookup[6] = "Invalid ICAO code";
@@ -57,8 +57,8 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method iterate throught each line of input file and calls parseData if there are less than 200 erors
-   * in the file. If there are more than 200 errors raises exception.
+   * This method iterate throught each line of input file and calls parseData if there are less than
+   * 200 erors in the file. If there are more than 200 errors raises exception.
    */
   @Override
   public void dataParser() {
@@ -72,8 +72,9 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method splits the line into data segments, calls the validator method to check each segment,
-   * and then adds that line to paserData if it is valid.
+   * This method splits the line into data segments, calls the validator method to check each
+   * segment, and then adds that line to paserData if it is valid.
+   *
    * @param dataLine line from file to split into segments.
    */
   protected void parseLine(String dataLine) {
@@ -111,7 +112,7 @@ public class AirlineParser extends Parser {
    * If is is not then add to error.
    *
    * @param airlineID airline ID we want to add
-   * @param airline   Airline Object we wanted to add
+   * @param airline Airline Object we wanted to add
    */
   protected void addAirLine(int airlineID, Airline airline) {
     if (airlineID >= parserData.size()) {
@@ -139,7 +140,6 @@ public class AirlineParser extends Parser {
    */
   @Override
   protected boolean validater(String[] line) {
-
     boolean isValid = true;
     if (line.length != 8) {
       errorCounter(0);
@@ -147,6 +147,7 @@ public class AirlineParser extends Parser {
 
     if (!isIdValid(line[airlineID])) {
       isValid = false;
+      ;
     }
 
     if (!isNameValid(line[name])) {

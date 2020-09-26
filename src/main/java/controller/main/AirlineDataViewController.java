@@ -64,14 +64,15 @@ public class AirlineDataViewController extends DataViewController {
     countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
     activeStatusColumn.setCellValueFactory(new PropertyValueFactory<>("activeStatus"));
 
-    for (Airline airline : storage.getAirlines()) {
-      airline.initCheckBox();
+    if (storage.getAirlines() != null) {
+      for (Airline airline : storage.getAirlines()) {
+        airline.initCheckBox();
+      }
+      airlines = FXCollections.observableList(storage.getAirlines());
+      tableView.setItems(airlines);
+      searchTypeSelection.setItems(searchTypes); // Setup choice boxes
     }
-    airlines = FXCollections.observableList(storage.getAirlines());
-    tableView.setItems(airlines);
-    searchTypeSelection.setItems(searchTypes); // Setup choice boxes
   }
-
   /**
    * This method calls searchAirlines method from searcher class and upldates table to display
    * results of search.

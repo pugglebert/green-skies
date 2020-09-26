@@ -3,18 +3,15 @@ package controller.analysis;
 import controller.main.Main;
 import model.data.Route;
 import model.data.Storage;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Class for which contains the methods for calcuting and updating the analysis data for the user's
  * carbon emissions report.
  *
  * @author Hayley Krippner
- * @since 13/09/20
+ * @since 25/09/20
  * @version 1.0
  */
 public class ReportGenerator {
@@ -56,8 +53,27 @@ public class ReportGenerator {
   private double analysisPeriod = 0.0;
   /** The number of trees the user would need to plant to counter their current carbon emissions. */
   private double treesToGrow = 0.0;
+  /**
+   * The rate of emissions produced so far in the current year.
+   */
+  private double emissionsPerDayBaseOnCurrDate;
+  /**
+   * The rate of emissions produced at the year in total if the user continues at their current rate.
+   */
+  private double emissionsPerYear;
+  /**
+   * The amount of carbon emissions the user can produce whilst still achieving their carbon emissions goal.
+   */
+  private double remainingCO2InYear;
+  /**
+   *
+   */
+  public double reductionPercentage;
+  /**
+   * This method creates the comment of the user's carbon emission status in terms of their goal.
+   */
+  public String carbonEmissionsComment;
 
-  // TODO: change 1 to being getTimesTaken once working (HK)
   /**
    * This method updates the total carbon emissions from flight travel.
    *
@@ -69,7 +85,6 @@ public class ReportGenerator {
 
   }
 
-  // TODO: change 1 to being getTimesTaken once working (HK)
   /**
    * This method updates the total distance travelled via flight travel.
    *
@@ -77,6 +92,8 @@ public class ReportGenerator {
    *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
+    //TODO remove later!
+    System.out.println(currentRouteRecord.getTimesTaken());
     totalDistanceTravelled += (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
 
   }
@@ -321,10 +338,58 @@ public class ReportGenerator {
   }
 
   /**
+   * This method determines the amount of emissions per year based on the current rate of carbon
+   * emissions produced at the current time of the year.
+   */
+  public void calculateEmissionsPerYear() {
+    Date currDayinCurrYear = new Date();
+    SimpleDateFormat dateForm = new SimpleDateFormat("D");
+    String dayAsString = dateForm.format(currDayinCurrYear);
+    Integer dayAsInt = Integer.valueOf(dayAsString);
+    this.remainingCO2InYear = 365 - dayAsInt;
+    this.emissionsPerDayBaseOnCurrDate = getTotalCarbonEmissions()/dayAsInt;
+    this.emissionsPerYear = emissionsPerDayBaseOnCurrDate * 365;
+  }
+
+  //TODO implement this!
+  /**
+   * This method calculates the carbon emissions production reduction percentage required to meet the user's goal
+   * by the end of the year.
+   */
+  public void calculateReductionPercentage() {
+
+  }
+
+  /**
+   * This method creates the comment of the user's carbon emission status in terms of their goal.
+   */
+  public void createCarbonEmissionsComment() {
+    calculateRemainingCO2InYear();
+    this.carbonEmissionsComment = "Currently, in " + getCurrentYear() + ", you are producing " + getEmissionsPerDayBaseOnCurrDate() + " kg of carbon emissions per day." +
+            "If you continue at this rate, you will produce " + getEmissionsPerYear() + "by the end of this year. This means you can only produce " +
+            getRemainingCO2InYear() + " this year. To do so, you will need to reduce your flight travel by " + getReductionPercentage() + ".";
+  //TODO remove later!
+    System.out.println(this.carbonEmissionsComment);
+
+  }
+
+  /**
+   * This method gets the current year.
+   * @return The current year as an integer.
+   */
+  public int getCurrentYear() {
+    Date currDayinCurrYear = new Date();
+    SimpleDateFormat dateForm = new SimpleDateFormat("Y");
+    String yearAsString = dateForm.format(currDayinCurrYear);
+    Integer yearAsInt = Integer.valueOf(yearAsString);
+    return yearAsInt;
+  }
+
+  /**
    * This method calcuates the amount of CO2 that the user can produce whilst meeting their maximum
    * yearly CO2 production goal.
    */
-  public void calculateCO2ReductionNeeded() {
+  public void calculateRemainingCO2InYear() {
     this.howMuchToReduceCO2By = this.carbonEmissionGoal - this.totalCarbonEmissions;
     if (howMuchToReduceCO2By < 0) {
       throw new IllegalArgumentException();
@@ -333,70 +398,26 @@ public class ReportGenerator {
 
   /**
    * This method calculates how many trees need to be planted to counter the carbon emissions
-   * produced.
-   *
-   * @param totalCarbonEmissions , the total carbon emissions which have currently been produced.
+   * produced. It assumes that the trees planted have an approximate age of standing of at least 20 years and
+   * and that the age of stand when measured is also at least 20 years. Note that trees do not sequester much carbon in
+   * the first few years after planting so the minimum standing age must be no less than 20.
    */
-  public void calculateOffsetTrees(double totalCarbonEmissions) {}
-
-  public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
-    this.carbonEmissionGoal = carbonEmissionGoal;
+  public void calculateOffsetTrees() {
+    double CO2Tonnes = this.totalCarbonEmissions / 1000; //convert carbon emissions from grams to tonnes
+    this.treesToGrow = (CO2Tonnes / 144.64) * 2500; //determine number of trees to offset emissions
   }
 
-  public void setAnalysisPeriod(double analysisPeriod) {
-    this.analysisPeriod = analysisPeriod;
-  }
-
-  public double getTotalDistanceTravelled() {
-    return totalDistanceTravelled;
-  }
-
-  public double getTotalCarbonEmissions() {
-    return totalCarbonEmissions;
-  }
-
-  public ArrayList<Route> getMostEmissionsRoutes() {
-    return mostEmissionsRoutes;
-  }
-
-  public ArrayList<Route> getLeastEmissionsRoutes() {
-    return leastEmissionsRoutes;
-  }
-
-  public ArrayList<Route> getMostDistanceRoutes() {
-    return mostDistanceRoutes;
-  }
-
-  public ArrayList<Route> getLeastDistanceRoutes() {
-    return leastDistanceRoutes;
-  }
-
-  public ArrayList<String> getMostVisitedSrcAirports() {
-    return mostVisitedSrcAirports;
-  }
-
-  public ArrayList<String> getMostVisitedDestAirports() {
-    return mostVisitedDestAirports;
-  }
-
-  public ArrayList<String> getLeastVisitedSrcAirports() {
-    return leastVisitedSrcAirports;
-  }
-
-  public ArrayList<String> getLeastVisitedDestAirports() {
-    return leastVisitedDestAirports;
-  }
-
-  public double getCarbonEmissionGoal() {
-    return carbonEmissionGoal;
-  }
-
-  public double getHowMuchToReduceCO2By() {
-    return howMuchToReduceCO2By;
-  }
-
-  public double getAnalysisPeriod() {
-    return analysisPeriod;
+  /**
+   * This methods updates all the most and least travelled route(s) arrays and visited airport(s) arrays at once.
+   */
+  public void updateTravelledAndVisited() {
+    Storage storage = Main.getStorage();
+    this.updateLeastTravelledRoute(storage.getHistory());
+    this.updateMostTravelledRoute(storage.getHistory());
+    this.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
+    this.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
+    this.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
+    this.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
   }
 
   /**
@@ -460,6 +481,101 @@ public class ReportGenerator {
     return counter;
   }
 
+  // TODO: possibly remove HK 25/09/2020
+
+  public void resetReportGenerator() {
+    mostTravelledRoutes.clear();
+    leastTravelledRoutes.clear();
+    mostEmissionsRoutes.clear();
+    leastEmissionsRoutes.clear();
+    mostDistanceRoutes.clear();
+    leastDistanceRoutes.clear();
+    mostVisitedDestAirports.clear();
+    mostVisitedSrcAirports.clear();
+    leastVisitedSrcAirports.clear();
+    leastVisitedDestAirports.clear();
+  }
+
+  public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
+    this.carbonEmissionGoal = carbonEmissionGoal;
+  }
+
+  public void setAnalysisPeriod(double analysisPeriod) {
+    this.analysisPeriod = analysisPeriod;
+  }
+
+  public double getTotalDistanceTravelled() {
+    return totalDistanceTravelled;
+  }
+
+  public double getTotalCarbonEmissions() {
+    return totalCarbonEmissions;
+  }
+
+  public ArrayList<Route> getMostEmissionsRoutes() {
+    return mostEmissionsRoutes;
+  }
+
+  public ArrayList<Route> getLeastEmissionsRoutes() {
+    return leastEmissionsRoutes;
+  }
+
+  public ArrayList<Route> getMostDistanceRoutes() {
+    return mostDistanceRoutes;
+  }
+
+  public ArrayList<Route> getLeastDistanceRoutes() {
+    return leastDistanceRoutes;
+  }
+
+  public ArrayList<String> getMostVisitedSrcAirports() {
+    return mostVisitedSrcAirports;
+  }
+
+  public ArrayList<String> getMostVisitedDestAirports() {
+    return mostVisitedDestAirports;
+  }
+
+  public ArrayList<String> getLeastVisitedSrcAirports() {
+    return leastVisitedSrcAirports;
+  }
+
+  public ArrayList<String> getLeastVisitedDestAirports() {
+    return leastVisitedDestAirports;
+  }
+
+  public double getCarbonEmissionGoal() {
+    return carbonEmissionGoal;
+  }
+
+  public double getHowMuchToReduceCO2By() {
+    return howMuchToReduceCO2By;
+  }
+
+  public double getAnalysisPeriod() {
+    return analysisPeriod;
+  }
+
+  public double getTreesToGrow() {
+    return this.treesToGrow;
+  }
+
+  public double getEmissionsPerDayBaseOnCurrDate() {
+    return this.emissionsPerDayBaseOnCurrDate;
+  }
+
+  public double getEmissionsPerYear() {
+    return this.emissionsPerYear;
+  }
+
+  public double getRemainingCO2InYear() {
+    return this.remainingCO2InYear;
+  }
+
+  public double getReductionPercentage() {
+    return this.reductionPercentage;
+  }
+
   public void setTotalCarbonEmissions(double totalCarbonEmissions) {
     this.totalCarbonEmissions = totalCarbonEmissions;
   }
@@ -476,33 +592,8 @@ public class ReportGenerator {
     return leastTravelledRoutes;
   }
 
-  // TODO: add in the missing gets and sets needed to rewrite the missing code from 17/09/2020 HK
-
-  public void resetReportGenerator() {
-    mostTravelledRoutes.clear();
-    leastTravelledRoutes.clear();
-    mostEmissionsRoutes.clear();
-    leastEmissionsRoutes.clear();
-    mostDistanceRoutes.clear();
-    leastDistanceRoutes.clear();
-    mostVisitedDestAirports.clear();
-    mostVisitedSrcAirports.clear();
-    leastVisitedSrcAirports.clear();
-    leastVisitedDestAirports.clear();
-    // TODO add in least visited.
+  public String getCarbonEmissionsComment() {
+    return carbonEmissionsComment;
   }
 
-  //TODO: write comment
-  /**
-   *
-   */
-  public void updateTravelledAndVisited() {
-    Storage storage = Main.getStorage();
-    this.updateLeastTravelledRoute(storage.getHistory());
-    this.updateMostTravelledRoute(storage.getHistory());
-    this.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
-    this.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
-    this.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
-    this.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
-  }
 }

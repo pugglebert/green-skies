@@ -89,8 +89,8 @@ public class Storage {
   public void setCurrentAirlineFile(String newCurrentFile) {
     if (airlineFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirlineFile = newCurrentFile;
-    } else {
-      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
+//    } else {
+//      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
   }
 
@@ -140,9 +140,10 @@ public class Storage {
   public void setCurrentAirportFile(String newCurrentFile) {
     if (airportFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentAirportFile = newCurrentFile;
-    } else {
-      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
+//    else {
+//      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
+//    }
   }
 
   /**
@@ -190,8 +191,8 @@ public class Storage {
   public void setCurrentRouteFile(String newCurrentFile) {
     if (routeFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
       currentRouteFile = newCurrentFile;
-    } else {
-      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
+//    } else {
+//      throw new IllegalArgumentException("Current file can only be set to a file that is stored in the application.");
     }
   }
 
@@ -367,5 +368,18 @@ public class Storage {
    */
   public HashMap<String, Integer> getHistoryDestAirports() {
     return historyDestAirports;
+  }
+
+
+  public HashMap<String, List<Airline>> getAirlineFileList() {
+    return airlineFiles;
+  }
+
+  public HashMap<String, List<Airport>> getAirportFileList() {
+    return airportFiles;
+  }
+
+  public HashMap<String, List<Route>> getRouteFileList() {
+    return routeFiles;
   }
 }
