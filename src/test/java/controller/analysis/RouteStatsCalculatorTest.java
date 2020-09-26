@@ -998,6 +998,152 @@ public class RouteStatsCalculatorTest {
     }
 
     //TODO write tests and rerun coverage
-    //--------------------------------- resetRoutesArrays() tests
+    //--------------------------------- Testing for resetRoutesArrays()
+
+    /**
+     * Verify that when resetRoutesArrays is called when there are no values in the arrays,
+     * then they remain empty.
+     */
+    @Test
+    public void resetRoutesArraysEmptyTest() {
+        ArrayList<Route> expectedLeastTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostDistanceRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastDistanceRoutes = new ArrayList<>();
+
+        routeStatsCalculator.resetRoutesArrays();
+
+        assertEquals(expectedLeastTravelledRoutes, routeStatsCalculator.getLeastTravelledRoutes());
+        assertEquals(expectedMostTravelledRoutes, routeStatsCalculator.getMostTravelledRoutes());
+        assertEquals(expectedMostEmissionsRoutes, routeStatsCalculator.getMostEmissionsRoutes());
+        assertEquals(expectedLeastEmissionsRoutes, routeStatsCalculator.getLeastEmissionsRoutes());
+        assertEquals(expectedMostDistanceRoutes, routeStatsCalculator.getMostDistanceRoutes());
+        assertEquals(expectedLeastDistanceRoutes, routeStatsCalculator.getLeastDistanceRoutes());
+
+    }
+
+    /**
+     * Verify that when resetRoutesArrays is called when there is a single value in each array,
+     * that the arrays become empty.
+     */
+    @Test
+    public void resetRoutesArraysOneValueTest() {
+        ArrayList<Route> testLeastTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> testMostTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> testMostEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> testLeastEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> testMostDistanceRoutes = new ArrayList<>();
+        ArrayList<Route> testLeastDistanceRoutes = new ArrayList<>();
+
+        testLeastTravelledRoutes.add(new Route("2A", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" ")));
+        testMostTravelledRoutes.add(new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testMostEmissionsRoutes.add(new Route("2C", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testLeastEmissionsRoutes.add(new Route("2D", 2777, "GBRF", 2242, "BIAR", 6436, "", 3, "NH7".split(" ")));
+        testMostDistanceRoutes.add(new Route("2E", 1744, "GFRG", 2727, "BIAR", 6436, "", 1, "NH7".split(" ")));
+        testLeastDistanceRoutes.add(new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" ")));
+
+        ArrayList<Route> expectedLeastTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostDistanceRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastDistanceRoutes = new ArrayList<>();
+
+        routeStatsCalculator.resetRoutesArrays();
+
+        assertEquals(expectedLeastTravelledRoutes, routeStatsCalculator.getLeastTravelledRoutes());
+        assertEquals(expectedMostTravelledRoutes, routeStatsCalculator.getMostTravelledRoutes());
+        assertEquals(expectedMostEmissionsRoutes, routeStatsCalculator.getMostEmissionsRoutes());
+        assertEquals(expectedLeastEmissionsRoutes, routeStatsCalculator.getLeastEmissionsRoutes());
+        assertEquals(expectedMostDistanceRoutes, routeStatsCalculator.getMostDistanceRoutes());
+        assertEquals(expectedLeastDistanceRoutes, routeStatsCalculator.getLeastDistanceRoutes());
+
+    }
+
+    /**
+     * Verify that when resetRoutesArrays is called when there is are multiple values in each array,
+     * that the arrays become empty.
+     */
+    @Test
+    public void resetRoutesArraysMultiValuesTest() {
+        ArrayList<Route> testLeastTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> testMostTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> testMostEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> testLeastEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> testMostDistanceRoutes = new ArrayList<>();
+        ArrayList<Route> testLeastDistanceRoutes = new ArrayList<>();
+
+        testLeastTravelledRoutes.add(new Route("2A", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" ")));
+        testMostTravelledRoutes.add(new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testMostEmissionsRoutes.add(new Route("2C", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testLeastEmissionsRoutes.add(new Route("2D", 2777, "GBRF", 2242, "BIAR", 6436, "", 3, "NH7".split(" ")));
+        testMostDistanceRoutes.add(new Route("2E", 1744, "GFRG", 2727, "BIAR", 6436, "", 1, "NH7".split(" ")));
+        testLeastDistanceRoutes.add(new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" ")));
+        testLeastTravelledRoutes.add(new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" ")));
+        testMostTravelledRoutes.add(new Route("2G", 2775, "SDD", 7557, "BIAR", 6436, "", 3, "NH7".split(" ")));
+        testMostEmissionsRoutes.add(new Route("2H", 9898, "VSV", 5578, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testLeastEmissionsRoutes.add(new Route("2I", 2782, "SVDE", 5257, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testMostDistanceRoutes.add(new Route("2A", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" ")));
+        testLeastDistanceRoutes.add(new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" ")));
+
+        ArrayList<Route> expectedLeastTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostDistanceRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastDistanceRoutes = new ArrayList<>();
+
+        routeStatsCalculator.resetRoutesArrays();
+
+        assertEquals(expectedLeastTravelledRoutes, routeStatsCalculator.getLeastTravelledRoutes());
+        assertEquals(expectedMostTravelledRoutes, routeStatsCalculator.getMostTravelledRoutes());
+        assertEquals(expectedMostEmissionsRoutes, routeStatsCalculator.getMostEmissionsRoutes());
+        assertEquals(expectedLeastEmissionsRoutes, routeStatsCalculator.getLeastEmissionsRoutes());
+        assertEquals(expectedMostDistanceRoutes, routeStatsCalculator.getMostDistanceRoutes());
+        assertEquals(expectedLeastDistanceRoutes, routeStatsCalculator.getLeastDistanceRoutes());
+
+    }
+
+    /**
+     * Verify that when resetRoutesArrays is called when there is a mixture of values in each array,
+     * that the arrays become empty.
+     */
+    @Test
+    public void resetRoutesArraysVaryingNumOfValuesTest() {
+        ArrayList<Route> testLeastTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> testMostTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> testMostEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> testLeastEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> testMostDistanceRoutes = new ArrayList<>();
+        ArrayList<Route> testLeastDistanceRoutes = new ArrayList<>();
+
+        testLeastTravelledRoutes.add(new Route("2A", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" ")));
+        testMostEmissionsRoutes.add(new Route("2C", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testLeastEmissionsRoutes.add(new Route("2D", 2777, "GBRF", 2242, "BIAR", 6436, "", 3, "NH7".split(" ")));
+        testMostDistanceRoutes.add(new Route("2E", 1744, "GFRG", 2727, "BIAR", 6436, "", 1, "NH7".split(" ")));
+        testLeastDistanceRoutes.add(new Route("2F", 2424, "SWVR", 5858, "BIAR", 6436, "", 0, "NH7".split(" ")));
+        testMostEmissionsRoutes.add(new Route("2H", 9898, "VSV", 5578, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testLeastEmissionsRoutes.add(new Route("2I", 2782, "SVDE", 5257, "BIAR", 6436, "", 4, "NH7".split(" ")));
+        testMostDistanceRoutes.add(new Route("2A", 1654, "GKA", 2937, "UAK", 8944, "", 0, "AN4".split(" ")));
+        testLeastDistanceRoutes.add(new Route("2B", 5336, "BGGH", 4253, "BIAR", 6436, "", 4, "NH7".split(" ")));
+
+        ArrayList<Route> expectedLeastTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostTravelledRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastEmissionsRoutes = new ArrayList<>();
+        ArrayList<Route> expectedMostDistanceRoutes = new ArrayList<>();
+        ArrayList<Route> expectedLeastDistanceRoutes = new ArrayList<>();
+
+        routeStatsCalculator.resetRoutesArrays();
+
+        assertEquals(expectedLeastTravelledRoutes, routeStatsCalculator.getLeastTravelledRoutes());
+        assertEquals(expectedMostTravelledRoutes, routeStatsCalculator.getMostTravelledRoutes());
+        assertEquals(expectedMostEmissionsRoutes, routeStatsCalculator.getMostEmissionsRoutes());
+        assertEquals(expectedLeastEmissionsRoutes, routeStatsCalculator.getLeastEmissionsRoutes());
+        assertEquals(expectedMostDistanceRoutes, routeStatsCalculator.getMostDistanceRoutes());
+        assertEquals(expectedLeastDistanceRoutes, routeStatsCalculator.getLeastDistanceRoutes());
+    }
 
 }

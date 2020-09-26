@@ -125,36 +125,36 @@ public class GeneralStatsCalculatorTest {
     assertEquals(345231863432.98, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
   }
 
-  //  /**
-  //   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
-  //   * emissions, which has been taken multipe times, that the total emissions is updated
-  //   * accordingly.The carbon emissions are starting at 0.0 g.
-  //   */
-  //  @Test
-  //  public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
-  //    reportGenerator.setTotalCarbonEmissions(0.0);
-  //    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-  //    testRoute.setEmissions(20000000.50);
-  //    testRoute.setTimesTaken(0);
-  //    reportGenerator.updateTotalEmissions(testRoute);
-  //    assertEquals(0.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
-  //  }
+    /**
+     * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
+     * emissions, which has been taken multipe times, that the total emissions is updated
+     * accordingly.The carbon emissions are starting at 0.0 g.
+     */
+    @Test
+    public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
+      generalStatsCalculator.setTotalCarbonEmissions(0.0);
+      Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+      testRoute.setEmissions(20000000.50);
+      testRoute.setTimesTaken(0);
+      generalStatsCalculator.updateTotalEmissions(testRoute);
+      assertEquals(0.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+    }
 
-  //  /**
-  //   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
-  //   * emissions, which has been taken zero times, that the total emissions is not updated. The
-  // carbon
-  //   * emissions are starting at 0.0 g.
-  //   */
-  //  @Test
-  //  public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
-  //    reportGenerator.setTotalCarbonEmissions(0.0);
-  //    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-  //    testRoute.setEmissions(8760.0);
-  //    testRoute.setTimesTaken(1000);
-  //    reportGenerator.updateTotalEmissions(testRoute);
-  //    assertEquals(8760000.0, reportGenerator.getTotalCarbonEmissions(), 0.0001);
-  //  }
+    /**
+     * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
+     * emissions, which has been taken zero times, that the total emissions is not updated. The
+   carbon
+     * emissions are starting at 0.0 g.
+     */
+    @Test
+    public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
+      generalStatsCalculator.setTotalCarbonEmissions(0.0);
+      Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+      testRoute.setEmissions(8760.0);
+      testRoute.setTimesTaken(1000);
+      generalStatsCalculator.updateTotalEmissions(testRoute);
+      assertEquals(8760000.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+    }
 
   // ------------------------------------- Testing for updateTotalDistance
 
@@ -240,28 +240,15 @@ public class GeneralStatsCalculatorTest {
     assertEquals(345231863432.98, generalStatsCalculator.getTotalDistanceTravelled(), 0.0001);
   }
 
+  //TODO write tests for these and rerun coverage
 
+  // --------------------------------- calculateEmissionsPerYear() tests
 
+  // --------------------------------- calculateReductionPercentage() tests
 
+  // --------------------------------- getCurrentYear() tests
 
-  // --------------------------------- Testing for calculateCO2ReductionNeeded
-
-  //  @Test
-  //  public void calculateCO2ReductionNeededSmallTest() {
-  //    reportGenerator.setCarbonEmissionsGoal(200000);
-  //    reportGenerator.setTotalCarbonEmissions(2000);
-  //    int expectedReduction = 198000;
-  //    assertEquals(expectedReduction, reportGenerator.getHowMuchToReduceCO2By(), 0.00001);
-  //
-  //  }
-
-  /** */
-  @Test
-  public void calculateCO2ReductionNeededLargeTest() {}
-
-  /** */
-  @Test
-  public void calculateCO2ReductionNeededNegTest() {}
+  // --------------------------------- calculateRemainingCO2InYear() tests
 
   // --------------------------------- Testing for calculateOffsetTrees
 
@@ -276,4 +263,12 @@ public class GeneralStatsCalculatorTest {
   /** */
   @Test
   public void calculateOffsetTreesNegTest() {}
+
+  // --------------------------------- createCarbonEmissionsComment()
+
+
+
+  // --------------------------------- Testing for calculateCO2ReductionNeeded
+
+
 }
