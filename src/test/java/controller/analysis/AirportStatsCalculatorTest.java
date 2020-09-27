@@ -457,7 +457,7 @@ public class AirportStatsCalculatorTest {
     assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedSrcAirports());
   }
 
-    // ------------------------------------ Testing for updateLeastVisitedDestAirports()
+    // ----------------------------------- Testing for updateLeastVisitedDestAirports()
 
     /**
      * Verify that when updateLeastVisitedDestAiport is called when there is one destination aiport entry,
