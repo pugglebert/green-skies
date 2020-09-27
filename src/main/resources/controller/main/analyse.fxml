@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AnalyseController">
+<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AnalyseController">
 
     <children>
 
@@ -17,7 +17,7 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
-        <Button fx:id="analyseData" layoutX="749.0" layoutY="451.0" mnemonicParsing="false" onAction="#analyse" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #116754;" text="Analyse Routes" textFill="WHITE">
+        <Button fx:id="analyseData" layoutX="729.0" layoutY="449.0" mnemonicParsing="false" onAction="#analyseButton" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #116754;" text="Analyse Routes" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -29,11 +29,6 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
-        <Label fx:id="errorText" layoutX="238.0" layoutY="216.0" prefHeight="27.0" prefWidth="846.0" textFill="RED" visible="false">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
         <Text layoutX="412.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Source Airport:">
          <font>
             <Font size="20.0" />
@@ -47,7 +42,7 @@
                 <Font name="Arial" size="48.0" />
             </font>
         </Text>
-        <Button fx:id="cleanTextButton" layoutX="749.0" layoutY="519.0" mnemonicParsing="false" onAction="#cleanText" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #116754;" text="Clear" textFill="WHITE">
+        <Button fx:id="cleanTextButton" layoutX="729.0" layoutY="517.0" mnemonicParsing="false" onAction="#cleanText" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #116754;" text="Clear" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
@@ -118,5 +113,10 @@
             <Font size="20.0" />
          </font>
       </Text>
+      <Label fx:id="errorText" layoutX="643.0" layoutY="404.0" prefHeight="27.0" prefWidth="402.0" text="Please enter information into all fields to proceed" textAlignment="CENTER" textFill="RED" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

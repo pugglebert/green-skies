@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.data.Airport;
@@ -34,6 +35,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
   @FXML public TextField pathDestination1;
   @FXML public TextField pathSource2;
   @FXML public TextField pathDestination2;
+  @FXML private Label errorText;
 
   /** A hash set to store some airport data. */
   private HashSet<String> airports = new HashSet<>();
@@ -76,6 +78,28 @@ public class AnalyseController extends SideNavBarController implements Initializ
   }
 
   /**
+   * This method checks if all data has been entered correctly. If it has, it calls the analyse method to analyse
+   * the routes and display the results.
+   * @throws IOException
+   */
+  public void analyseButton() throws IOException {
+    errorText.setVisible(false);
+    if (pathSource1.getText().isEmpty()
+            || pathSource2.getText().isEmpty()
+            || pathDestination1.getText().isEmpty()
+            || pathDestination2.getText().isEmpty()) {
+      errorText.setText("Please enter information into all fields to proceed.");
+      errorText.setVisible(true);
+    } else if (pathSource1.getText().equals(pathDestination1.getText())
+            || pathSource2.getText().equals(pathDestination2.getText())) {
+      errorText.setText("Source cannot be the same as destination.");
+      errorText.setVisible(true);
+    } else {
+      analyse();
+    }
+  }
+
+  /**
    * This method calculates distance and emissions by using two routes.
    *
    * @throws IOException
@@ -91,17 +115,13 @@ public class AnalyseController extends SideNavBarController implements Initializ
 
     String[] equipment1 = {"abc"};
     String[] equipment2 = {"abc"};
-    int check = 1;
-    for (int i = 0; i < airports.size(); i++) {
-      if (airports.contains(pathSource1.getText())
-          && airports.contains(pathDestination1.getText())
-          && airports.contains(pathSource2.getText())
-          && airports.contains(pathDestination2.getText())) {
+    int check = 0;
+    if (airports.contains(pathSource1.getText())
+            && airports.contains(pathDestination1.getText())
+            && airports.contains(pathSource2.getText())
+            && airports.contains(pathDestination2.getText())) {
 
-        check = 1;
-      } else {
-        check = 0;
-      }
+      check = 1;
     }
 
     if (check == 1) {
@@ -146,10 +166,8 @@ public class AnalyseController extends SideNavBarController implements Initializ
       stage1.setScene(scene);
       stage1.show();
     } else {
-      Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
-      ErrorAlert.setAlertType(Alert.AlertType.ERROR);
-      ErrorAlert.setContentText("Invalid airport code");
-      ErrorAlert.show();
+      errorText.setText("Invalid airport code.");
+      errorText.setVisible(true);
     }
   }
 
@@ -160,5 +178,6 @@ public class AnalyseController extends SideNavBarController implements Initializ
     pathSource2.clear();
     pathDestination1.clear();
     pathDestination2.clear();
+    errorText.setVisible(false);
   }
 }
