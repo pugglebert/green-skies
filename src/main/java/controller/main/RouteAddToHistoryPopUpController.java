@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the route data view.
  *
- * @author Hayley Krippner
+ * @author Nathan Huynh
  * @version 1.0
  * @since 15/09/2020
  */
@@ -64,7 +64,6 @@ public class RouteAddToHistoryPopUpController implements Initializable {
 
   private final Storage storage = Main.getStorage();
 
-  private ObservableList<Route> tempRoute;
   /**
    * This method displays the content for the history.
    *
@@ -108,7 +107,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
     equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
 
-    tempRoute = FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
+    ObservableList<Route> tempRoute = FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
     tableView.setEditable(true);
     tableView.setItems(tempRoute);
   }
@@ -116,11 +115,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   /** This method is to confirm the selected Routes. */
   public void confirm() {
     for (Route route : Main.getStorage().getTempRoutes()) {
-      if (route.getTimesTaken() <= 0) {
-        // Have not edit number of passenger => invalid history
-        continue; // drop
-
-      } else {
+      // Have not edit number of passenger => invalid history
+      if (route.getTimesTaken() <= 0) continue; // drop
+      else {
         int index = Main.getStorage().getHistory().indexOf(route);
         if (index != -1) {
           // Route have been added to histoy
@@ -157,6 +154,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(0);
     }
+    Main.getStorage().getTempRoutes().clear();
     Stage stage = (Stage) cancelBtn.getScene().getWindow();
     stage.close();
   }
