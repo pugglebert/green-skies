@@ -172,7 +172,7 @@ public class FlightHistoryController extends DataViewController {
   public void removeSelected() {
     errorText.setVisible(false);
     if (getAnySelected()) {
-      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight history");
+      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         routes.removeIf(route -> route.getSelect().isSelected());
       }

@@ -43,15 +43,15 @@
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <Button fx:id="removeBtn" layoutX="1100.0" layoutY="50.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Remove Airport Record(s)" textFill="WHITE">
+        <Button fx:id="removeBtn" layoutX="1100.0" layoutY="50.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Remove Flight Record(s)" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <Button fx:id="selectAllBtn" layoutX="238.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="37.0" prefWidth="188.0" style="-fx-background-color: #116754;" text="Select All Routes" textFill="WHITE">
+        <Button fx:id="selectAllBtn" layoutX="238.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="37.0" prefWidth="188.0" style="-fx-background-color: #116754;" text="Select All Flights" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <Button fx:id="deselectAllBtn" layoutX="448.0" layoutY="626.0" mnemonicParsing="false" onAction="#deselectAll" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #116754;" text="Deselect All Routes" textFill="WHITE">
+        <Button fx:id="deselectAllBtn" layoutX="448.0" layoutY="626.0" mnemonicParsing="false" onAction="#deselectAll" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #116754;" text="Deselect All Flights" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font></Button>
