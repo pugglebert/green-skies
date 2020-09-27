@@ -22,7 +22,7 @@ public class AirlineSingleEntryController {
   @FXML TextField nameField;
   @FXML TextField airlineIDField;
   @FXML TextField aliasField;
-  @FXML TextField itatField;
+  @FXML TextField iataField;
   @FXML TextField icaoField;
   @FXML TextField callsignField;
   @FXML TextField countryField;
@@ -76,7 +76,7 @@ public class AirlineSingleEntryController {
     String alias = aliasField.getText();
     airlineString += alias + ",";
 
-    String itat = itatField.getText();
+    String itat = iataField.getText();
     airlineString += itat + ",";
 
     String icao = icaoField.getText();

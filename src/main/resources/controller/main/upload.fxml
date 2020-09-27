@@ -111,7 +111,7 @@
       </VBox>
       <Button fx:id="deleteBtn" layoutX="650.0" layoutY="330.0" mnemonicParsing="false" onAction="#deleteFile" style="-fx-background-color: #116754;" text="Delete" textFill="#f8f4f4">
          <font>
-            <Font name="Arial" size="23.0" />
+            <Font name="Arial" size="20.0" />
          </font>
       </Button>
     </children>
