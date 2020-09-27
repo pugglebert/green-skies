@@ -348,11 +348,62 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerYear(), 0.000000000000001);
   }
 
+  //TODO write tests
+
   // --------------------------------- calculateReductionPercentage() tests
 
   // --------------------------------- getCurrentYear() tests
 
+  /**
+   * Verify that when getCurrentYear is called, then the correct year as in integer
+   * is given.
+   */
+  @Test
+  public void getCurrentYearTest() {
+    int expectedValue = 2020;
+    assertEquals(expectedValue, generalStatsCalculator.getCurrentYear());
+  }
+
   // --------------------------------- calculateRemainingCO2InYear() tests
+
+  /**
+   * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is greater than
+   * totalCarbonEmissionsthen, then the correct value is returned and is positive.
+   */
+  @Test
+  public void calculateRemainingCO2InYearPositiveTest() {
+    generalStatsCalculator.setCarbonEmissionsGoal(200000.0);
+    generalStatsCalculator.setTotalCarbonEmissions(100000.0);
+    double expectedValue = 100000.0;
+    generalStatsCalculator.calculateRemainingCO2InYear();
+    assertEquals(expectedValue, generalStatsCalculator.getRemainingCO2InYear(), 0.001);
+  }
+
+  /**
+   * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is smaller than
+   * totalCarbonEmissionsthen, then the correct value is returned and is 0.
+   */
+  @Test
+  public void calculateRemainingCO2InYearNegativeTest() {
+    generalStatsCalculator.setCarbonEmissionsGoal(8000000.0);
+    generalStatsCalculator.setTotalCarbonEmissions(1000000000.0);
+    double expectedValue = 0.0;
+    generalStatsCalculator.calculateRemainingCO2InYear();
+    assertEquals(expectedValue, generalStatsCalculator.getRemainingCO2InYear(), 0.0001);
+  }
+
+  /**
+   * Verify that when calculateRemainingCO2InYear is called and
+   * totalCarbonEmissions then is 0, then the correct value is returned which is the goal.
+   */
+  @Test
+  public void calculateRemainingCO2InYearZeroTest() {
+    generalStatsCalculator.setCarbonEmissionsGoal(78000000.00);
+    generalStatsCalculator.setTotalCarbonEmissions(0.00);
+    double expectedValue = 78000000.00;
+    generalStatsCalculator.calculateRemainingCO2InYear();
+    assertEquals(expectedValue, generalStatsCalculator.getRemainingCO2InYear(), 0.01);
+  }
 
   // --------------------------------- Testing for calculateOffsetTrees
 

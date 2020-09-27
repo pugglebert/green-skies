@@ -90,7 +90,7 @@ public class GeneralStatsCalculator {
   public void calculateRemainingDaysInYear() {
     try {
       this.remainingDaysInYear = 365 - this.dayInYear;
-      if (this.remainingDaysInYear < 0) {
+      if (this.remainingDaysInYear <= 0) {
         throw new Exception("It is not possible to have a negative amount of days in the year.");
         }
     } catch (Exception e) {
