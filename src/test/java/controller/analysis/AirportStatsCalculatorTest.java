@@ -226,7 +226,7 @@ public class AirportStatsCalculatorTest {
   }
 
   // TODO write tests for these methods and rerun coverage once completed! HK 26/09/2020
-  // --------------------------------- resetAirportArrays() tests
+  // --------------------------------- Testing for resetAirportArrays()
 
   /**
    * Verify that when resetRoutesArrays is called when there are no values in the arrays, then they
@@ -364,10 +364,9 @@ public class AirportStatsCalculatorTest {
         expectedLeastVisitedDestAirports, airportStatsCalculator.getLeastVisitedDestAirports());
   }
 
-  // TODO write these tests! 26/09/2020 HK
-  // ------------------------------------ Testing for updateLeastVisitedDestAirports()
+    // ------------------------------------ Testing for updateLeastVisitedSrcAirports()
 
-  /**
+    /**
    * Verify that when updateLeastVisitedSrcAiport is called when there is one source aiport entry,
    * then the least visited source airport is this entry
    */
@@ -384,8 +383,8 @@ public class AirportStatsCalculatorTest {
 
   /**
    * Verify that when updateLeastVisitedSrcAiport is called when there are two source aiport
-   * entries, where one is leasst visited than the other, then the least visit source airport is the
-   * one that is least visted out of the two entries.
+   * entries, where one is less visited than the other, then the least visit source airport is the
+   * one that is less visted out of the two entries.
    */
   @Test
   public void updateLeastVisitedSrcAirportTwoTest() {
@@ -458,7 +457,96 @@ public class AirportStatsCalculatorTest {
     assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedSrcAirports());
   }
 
-  // ------------------------------------ updateLeastVisitedSrcAirports(HashMap<String, Integer>
-  // srcAirportCounts) tests
+    // ------------------------------------ Testing for updateLeastVisitedDestAirports()
 
+    /**
+     * Verify that when updateLeastVisitedDestAiport is called when there is one destination aiport entry,
+     * then the least visited destination airport is this entry.
+     */
+    @Test
+    public void updateLeastVisitedDestAirportOneTest() {
+        ArrayList<String> expectedResults = new ArrayList<>();
+        String testString = "Wellington Aiport";
+        expectedResults.add(testString);
+        HashMap<String, Integer> testDestAirports = new HashMap<>();
+        testDestAirports.put("Wellington Aiport", 100);
+        airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
+        assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
+    }
+
+    /**
+     * Verify that when updateLeastVisitedDestAiport is called when there are two destination aiport
+     * entries, where one is less visited than the other, then the least visited destination airport is the
+     * one that is least visited out of the two entries.
+     */
+    @Test
+    public void updateLeastVisitedDestAirportTwoTest() {
+        ArrayList<String> expectedResults = new ArrayList<>();
+        expectedResults.add("Wellington Aiport");
+        HashMap<String, Integer> testDestAirports = new HashMap<>();
+        testDestAirports.put("Wellington Aiport", 84);
+        testDestAirports.put("Auckland Aiport", 100);
+        airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
+        assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
+    }
+
+    /**
+     * Verify that when updateLeastVisitedDestAiport is called when there are multiple destination airports
+     * in history i.e. 9 and one of them is of the least visited destination airports, then this airport is
+     * the only airport added to the least visited destination airports array.
+     */
+    @Test
+    public void updateLeastVisitedDestAirportTenDiffOneMostTest() {
+        ArrayList<String> expectedResults = new ArrayList<>();
+        expectedResults.add("Christchurch Aiport");
+        HashMap<String, Integer> testDestAirports = new HashMap<>();
+        testDestAirports.put("Wellington Aiport", 100);
+        testDestAirports.put("Auckland Aiport", 84);
+        testDestAirports.put("Christchurch Aiport", 2);
+        testDestAirports.put("Queenstown Aiport", 44);
+        testDestAirports.put("Nelson Aiport", 44);
+        testDestAirports.put("Hamilton Aiport", 14);
+        testDestAirports.put("Rotorua Aiport", 57);
+        testDestAirports.put("Hawke's Bay Aiport", 45);
+        testDestAirports.put("Palmerston North Aiport", 4);
+        airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
+        assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
+    }
+
+    /**
+     * Verify that when updateLeastVisitedDestAiport is called when there are multiple destination airports
+     * in history i.e. 9 and more than one of them e.g. 3 are of the least visited destination airports,
+     * then those airports are the only airports added to the least visited destination airports array.
+     */
+    @Test
+    public void updateLeastVisitedDestAirportTenDiffThreeMostTest() {
+        ArrayList<String> expectedResults = new ArrayList<>();
+        expectedResults.add("Wellington Aiport");
+        expectedResults.add("Hamilton Aiport");
+        expectedResults.add("Auckland Aiport");
+        HashMap<String, Integer> testDestAirports = new HashMap<>();
+        testDestAirports.put("Wellington Aiport", 2);
+        testDestAirports.put("Auckland Aiport", 2);
+        testDestAirports.put("Christchurch Aiport", 147);
+        testDestAirports.put("Queenstown Aiport", 44);
+        testDestAirports.put("Nelson Aiport", 44);
+        testDestAirports.put("Hamilton Aiport", 2);
+        testDestAirports.put("Rotorua Aiport", 57);
+        testDestAirports.put("Hawke's Bay Aiport", 45);
+        testDestAirports.put("Palmerston North Aiport", 4);
+        airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
+        assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
+    }
+
+    /**
+     * Verify that when updateLeastVisitedDestAiport is called when there are no destination aiport entries,
+     * then the least visited destination airport array should be empty.
+     */
+    @Test
+    public void updateLeastVisitedDestAirportNoRoutesTest() {
+        ArrayList<String> expectedResults = new ArrayList<>();
+        HashMap<String, Integer> testDestAirports = new HashMap<>();
+        airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
+        assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
+    }
 }
