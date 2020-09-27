@@ -257,64 +257,64 @@ public class Storage {
    */
   public void setData(List<DataType> data, String type, String filename) {
     //close auto commite for database
-    database.closeAutoCommite();
+//    database.closeAutoCommite();
 
     if (type.matches("Airline")) {
       List<Airline> airlines = new ArrayList<>();
       if (filename == null) {
         filename = currentAirlineFile;
-        database.setTableName(filename);
-        database.initialiseTable("Airline");
+//        database.setTableName(filename);
+//        database.initialiseTable("Airline");
       } else {
         currentAirlineFile = filename;
-        database.setTableName(filename);
-        database.initialiseTable("Airline");
+//        database.setTableName(filename);
+//        database.initialiseTable("Airline");
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
         if (airline != null) {
           airlines.add(airline);
-          database.addAirlines(airline);
+//          database.addAirlines(airline);
         }
       }
       airlineFiles.put(filename, airlines);
-      database.startCommite();
+//      database.startCommite();
     } else if (type.matches("Airport")) {
       List<Airport> airports = new ArrayList<>();
       if (filename == null) {
         filename = currentAirportFile;
-        database.setTableName(filename);
-        database.initialiseTable("Airport");
+//        database.setTableName(filename);
+//        database.initialiseTable("Airport");
       } else {
         currentAirportFile = filename;
-        database.setTableName(filename);
-        database.initialiseTable("Airport");
+//        database.setTableName(filename);
+//        database.initialiseTable("Airport");
       }
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
         airports.add(airport);
-        database.addAirports(airport);
+//        database.addAirports(airport);
       }
       airportFiles.put(filename, airports);
-      database.startCommite();
+//      database.startCommite();
     } else if (type.matches("Route")) {
       List<Route> routes = new ArrayList<>();
       if (filename == null) {
         filename = currentRouteFile;
-        database.setTableName(filename);
-        database.initialiseTable("Route");
+//        database.setTableName(filename);
+//        database.initialiseTable("Route");
       } else {
         currentRouteFile = filename;
-        database.setTableName(filename);
-        database.initialiseTable("Route");
+//        database.setTableName(filename);
+//        database.initialiseTable("Route");
       }
       for (DataType entry : data) {
         Route route = (Route) entry;
         routes.add(route);
-        database.addRoutes(route);
+//        database.addRoutes(route);
       }
       routeFiles.put(filename, routes);
-      database.startCommite();
+//      database.startCommite();
     } else {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }

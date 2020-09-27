@@ -209,7 +209,7 @@ public class SQLiteDatabase {
     }
 
     try {
-      prep = con.prepareStatement("insert into airports values(?,?,?,?,?,?,?,?,?,?,?,?);");
+      prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setInt(1, airport.getAirportID());
       prep.setString(2, airport.getName());
       prep.setString(3, airport.getCity());
@@ -246,7 +246,7 @@ public class SQLiteDatabase {
     }
 
     try {
-      prep = con.prepareStatement("insert into routes values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
+      prep = con.prepareStatement("insert into " + tableName +" values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setString(2, route.getAirlineName());
       prep.setInt(3, route.getAirlineID());
       prep.setString(4, route.getSourceAirport());
