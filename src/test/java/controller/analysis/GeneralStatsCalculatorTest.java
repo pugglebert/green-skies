@@ -268,7 +268,7 @@ public class GeneralStatsCalculatorTest {
    */
   @Test
   public void getDateAsIntPositiveIntTest() {
-    int expectedDate = 271;
+    int expectedDate = 272;
     generalStatsCalculator.calculateDateAsInt();
     assertEquals(expectedDate, generalStatsCalculator.getDayInYear());
   }
@@ -285,8 +285,8 @@ public class GeneralStatsCalculatorTest {
    */
   @Test
   public void calculateRemainingDaysInYearTest() {
-    int expectedDate = 94;
-    generalStatsCalculator.setDayInYear(271);
+    int expectedDate = 93;
+    generalStatsCalculator.setDayInYear(272); //need to update to the current day to pass this test
     generalStatsCalculator.calculateRemainingDaysInYear();
     assertEquals(expectedDate, generalStatsCalculator.getRemainingDaysInYear());
   }
@@ -316,7 +316,7 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setTotalCarbonEmissions(100000);
     generalStatsCalculator.setDayInYear(0);
     try {
-      generalStatsCalculator.calculateEmissionsPerYear();
+      generalStatsCalculator.calculateEmissionsPerYearCurrentRate();
     } catch (Exception e) {
       assertTrue(true);
     }
@@ -331,7 +331,7 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setTotalCarbonEmissions(206000);
     generalStatsCalculator.setDayInYear(271);
     double expectedValue = 206000 / 271;
-    generalStatsCalculator.calculateEmissionsPerYear();
+    generalStatsCalculator.calculateEmissionsPerYearCurrentRate();
     assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerDayBaseOnCurrDate(), 1.0);
   }
 
@@ -344,7 +344,7 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setTotalCarbonEmissions(10000);
     generalStatsCalculator.setDayInYear(100);
     double expectedValue = 36500.0;
-    generalStatsCalculator.calculateEmissionsPerYear();
+    generalStatsCalculator.calculateEmissionsPerYearCurrentRate();
     assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerYear(), 0.000000000000001);
   }
 
@@ -442,6 +442,9 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.calculateOffsetTrees();
     assertEquals(expectedValue, generalStatsCalculator.getTreesToGrow(), 0.01);
   }
+
+  //TODO write tests for createCarbonEmissionsComment and calculateCO2ReductionNeeded.
+
 
   // --------------------------------- Testing for createCarbonEmissionsComment()
 

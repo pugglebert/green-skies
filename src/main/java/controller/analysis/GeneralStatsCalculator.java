@@ -54,6 +54,10 @@ public class GeneralStatsCalculator {
    * The current day in the year.
    */
   private Integer dayInYear;
+  /**
+   * The maximum rate that carbon emissions can be produced by per day within the year whilst still meeting the goal.
+   */
+  private double emissionsPerDayGoal;
 
   /**
    * This method updates the total carbon emissions from flight travel.
@@ -86,6 +90,8 @@ public class GeneralStatsCalculator {
     this.dayInYear = dayAsInt;
   }
 
+  // TODO tests this! HK 27/09/2020
+
   /** This method determines how many remaining days in the year there are. */
   public void calculateRemainingDaysInYear() {
     try {
@@ -98,11 +104,12 @@ public class GeneralStatsCalculator {
     }
   }
 
+  // TODO tests this! HK 27/09/2020
   /**
    * This method determines the amount of emissions per year based on the current rate of carbon
    * emissions produced at the current time of the year.
    */
-  public void calculateEmissionsPerYear() {
+  public void calculateEmissionsPerYearCurrentRate() {
     try {
       this.emissionsPerDayBaseOnCurrDate = getTotalCarbonEmissions() / this.dayInYear;
     } catch (ArithmeticException e) {
@@ -111,12 +118,22 @@ public class GeneralStatsCalculator {
     this.emissionsPerYear = emissionsPerDayBaseOnCurrDate * 365;
   }
 
-  // TODO implement this!
+  // TODO tests this! HK 27/09/2020
+  /**
+   * This method calculates the maximum rate that carbon emissions can be produced by per day within the year whilst still meeting the goal.
+   */
+  public void calculateEmissionsPerYearGoalRate() {
+    this.emissionsPerDayGoal = getCarbonEmissionGoal() / 365;
+  }
+
+  // TODO tests this! HK 27/09/2020
   /**
    * This method calculates the carbon emissions production reduction percentage required to meet
    * the user's goal by the end of the year.
    */
-  public void calculateReductionPercentage() {}
+  public void calculateReductionPercentage() {
+    this.reductionPercentage = (1 - emissionsPerDayBaseOnCurrDate /emissionsPerDayGoal) * 100;
+  }
 
   /**
    * This method gets the current year.
