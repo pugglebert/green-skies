@@ -73,13 +73,14 @@ public class GraphsController extends SideNavBarController {
             });
         int i = 0;
         int limit = 10;
+
         while(i<limit) {
 
-          //@TODO issue, graph wont display if there is NaN for any emissions value in the top 10
-          if (sortedByEmissions.get(i).getEmissions() != NaN) {
+          if (!Double.isNaN(sortedByEmissions.get(i).getEmissions())) {
             String dest = sortedByEmissions.get(i).getDestinationAirport();
             String src = sortedByEmissions.get(i).getSourceAirport();
-            String axisString = String.format("%s - %s", src, dest);
+            double distance = sortedByEmissions.get(i).getDistance();
+            String axisString = String.format("%s - %s\n(%.0f km)", src, dest, distance);
             double emissions = sortedByEmissions.get(i).getEmissions();
             data.getData().add(new XYChart.Data(axisString, emissions));
             i += 1;
