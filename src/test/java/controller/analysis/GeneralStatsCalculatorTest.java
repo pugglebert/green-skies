@@ -348,7 +348,7 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerYear(), 0.000000000000001);
   }
 
-  //TODO write tests
+  //TODO write tests for calculateReductionPercentage
 
   // --------------------------------- calculateReductionPercentage() tests
 
@@ -405,21 +405,45 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getRemainingCO2InYear(), 0.01);
   }
 
-  // --------------------------------- Testing for calculateOffsetTrees
+  // --------------------------------- Testing for calculateOffsetTrees()
 
-  /** */
+  /**
+   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is small,
+   * that the correct number of trees to offset it is calculated correctly.
+   */
   @Test
-  public void calculateOffsetTreesSmallTest() {}
+  public void calculateOffsetTreesSmallTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(10000.0);
+    double expectedValue = 172.84;
+    generalStatsCalculator.calculateOffsetTrees();
+    assertEquals(expectedValue, generalStatsCalculator.getTreesToGrow(), 0.01);
+  }
 
-  /** */
+  /**
+   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is large,
+   * that the correct number of trees to offset it is calculated correctly.
+   */
   @Test
-  public void calculateOffsetTreesLargeTest() {}
+  public void calculateOffsetTreesLargeTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(28901890869.0);
+    double expectedValue = 4.995487221550055E8;
+    generalStatsCalculator.calculateOffsetTrees();
+    assertEquals(expectedValue, generalStatsCalculator.getTreesToGrow(), 0.01);
+  }
 
-  /** */
+  /**
+   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is zero,
+   * that the correct number of trees to offset it is calculated correctly as zero trees.
+   */
   @Test
-  public void calculateOffsetTreesNegTest() {}
+  public void calculateOffsetTreesZeroTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(0.0);
+    double expectedValue = 0.0;
+    generalStatsCalculator.calculateOffsetTrees();
+    assertEquals(expectedValue, generalStatsCalculator.getTreesToGrow(), 0.01);
+  }
 
-  // --------------------------------- createCarbonEmissionsComment()
+  // --------------------------------- Testing for createCarbonEmissionsComment()
 
   // --------------------------------- Testing for calculateCO2ReductionNeeded
 
