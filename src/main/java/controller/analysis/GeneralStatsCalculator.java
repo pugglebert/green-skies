@@ -306,4 +306,8 @@ public class GeneralStatsCalculator {
   public int getDayInYear() {
     return dayInYear;
   }
+
+  public void setEmissionsPerDayBaseOnCurrDate(int rate) {
+    this.emissionsPerDayBaseOnCurrDate = rate;
+  }
 }

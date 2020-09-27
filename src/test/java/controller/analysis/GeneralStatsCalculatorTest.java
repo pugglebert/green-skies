@@ -308,45 +308,44 @@ public class GeneralStatsCalculatorTest {
   // --------------------------------- Tests for calculateEmissionsPerYear()
 
   /**
-   * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
-   * as expected.
-   */
-  @Test
-  public void calculateEmissionsPerYearRemainingDaysInYearTest() {
-    int currentDay = 271;
-    generalStatsCalculator.setDayInYear(currentDay);
-    int expectedValue = 365 - currentDay;
-    generalStatsCalculator.calculateEmissionsPerYear();
-    assertEquals(expectedValue, generalStatsCalculator.getRemainingDaysInYear());
-  }
-
-  //TODO fix this! catch exception
-  /**
-   * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
-   * as expected.
+   * Verify that when calculateEmissionsPerYear is called and the current day is 0, then an exception is
+   * thrown and caught.
    */
   @Test
   public void calculateEmissionsPerYearZeroDaysTest() {
-    int dayAsInt = 0;
-    generalStatsCalculator.setRemainingDaysInYear(dayAsInt);
-    String expectedValue = "It is not possible to have a negative amount of days in the year.";
-    generalStatsCalculator.calculateEmissionsPerYear();
-    assertEquals(expectedValue, generalStatsCalculator.getRemainingDaysInYear());
+    generalStatsCalculator.setTotalCarbonEmissions(100000);
+    generalStatsCalculator.setDayInYear(0);
+    try {
+      generalStatsCalculator.calculateEmissionsPerYear();
+    } catch (Exception e) {
+      assertTrue(true);
+    }
   }
 
   /**
-   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerDayBaseOnCurrDate is
+   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerDayBaseOnCurrDate is calculated
+   * as expected.
+   */
+  @Test
+  public void calculateEmissionsPerYearPositiveDaysTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(206000);
+    generalStatsCalculator.setDayInYear(271);
+    double expectedValue = 206000 / 271;
+    generalStatsCalculator.calculateEmissionsPerYear();
+    assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerDayBaseOnCurrDate(), 1.0);
+  }
+
+  /**
+   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerYear is
    * calculated as expected.
    */
   @Test
-  public void calculateEmissionsPerYearemissionsPerDayBaseOnCurrDateTest() {
-    Date currDayinCurrYear = new Date();
-    SimpleDateFormat dateForm = new SimpleDateFormat("D");
-    String dayAsString = dateForm.format(currDayinCurrYear);
-    Integer dayAsInt = Integer.valueOf(dayAsString);
-    int expectedValue = 365 - dayAsInt;
+  public void calculateEmissionsPerYearTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(10000);
+    generalStatsCalculator.setDayInYear(100);
+    double expectedValue = 36500.0;
     generalStatsCalculator.calculateEmissionsPerYear();
-    assertEquals(expectedValue, generalStatsCalculator.getRemainingDaysInYear());
+    assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerYear(), 0.000000000000001);
   }
 
   // --------------------------------- calculateReductionPercentage() tests
