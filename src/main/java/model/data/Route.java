@@ -130,6 +130,8 @@ public class Route implements DataType {
     return emissions;
   }
 
+  public String getEmissionsDisplayString() {return String.format("%.2f", emissions);}
+
   public void setEmissions(double emissions) {
     this.emissions = emissions;
   }
@@ -137,6 +139,8 @@ public class Route implements DataType {
   public double getDistance() {
     return distance;
   }
+
+  public String getDistanceDisplayString() {return String.format("%.2f", distance);}
 
   public void setDistance(double distance) {
     this.distance = distance;

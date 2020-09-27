@@ -47,7 +47,7 @@ public class FlightHistoryController extends DataViewController {
   @FXML
   private TableColumn<Route, Integer> timesTakenColumn;
   @FXML
-  private TableColumn<Route, Double> distanceColumn;
+  private TableColumn<Route, String> distanceColumn;
   @FXML
   private TableColumn<Route, String> emissionsColumn;
   @FXML
@@ -94,8 +94,8 @@ public class FlightHistoryController extends DataViewController {
               routeChanged.setTimesTaken(routeIntegerCellEditEvent.getNewValue());
             });
 
-    distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
-    emissionsColumn.setCellValueFactory(new PropertyValueFactory<>("emissions"));
+    distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distanceDisplayString"));
+    emissionsColumn.setCellValueFactory(new PropertyValueFactory<>("emissionsDisplayString"));
 
     routes = FXCollections.observableList(Main.getStorage().getHistory());
     tableView.setItems(routes);
