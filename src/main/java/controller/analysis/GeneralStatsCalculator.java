@@ -13,13 +13,9 @@ import java.util.*;
  * @version 1.0
  */
 public class GeneralStatsCalculator {
-  /**
-   * This total distance the user has travelled via flying in km.
-   */
+  /** This total distance the user has travelled via flying in km. */
   private double totalDistanceTravelled = 0.0;
-  /**
-   * The total carbon emissions produced in g from the user's flight travel.
-   */
+  /** The total carbon emissions produced in g from the user's flight travel. */
   private double totalCarbonEmissions = 0.0;
 
   /**
@@ -27,9 +23,7 @@ public class GeneralStatsCalculator {
    * below within the current year, in grams.
    */
   private double carbonEmissionGoal = 0.0;
-  /**
-   * The rate of emissions produced so far in the current year.
-   */
+  /** The rate of emissions produced so far in the current year. */
   private double emissionsPerDayBaseOnCurrDate;
   /**
    * The rate of emissions produced at the year in total if the user continues at their current
@@ -41,23 +35,25 @@ public class GeneralStatsCalculator {
    * emissions goal.
    */
   private double remainingCO2InYear;
-  /**
-   * The percentage that the user needs to reduce their flight travel by to meet their goal.
-   */
+  /** The percentage that the user needs to reduce their flight travel by to meet their goal. */
   public double reductionPercentage;
   /**
    * The amount the user needs to reduce their carbon emission production by via flight travel to
    * ensure their goal is met.
    */
   private double howMuchToReduceCO2By = 0.0;
-  /**
-   * The number of trees the user would need to plant to counter their current carbon emissions.
-   */
+  /** The number of trees the user would need to plant to counter their current carbon emissions. */
   private double treesToGrow = 0.0;
   /**
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
-  public String carbonEmissionsComment;
+  private String carbonEmissionsComment;
+  /** The remaining days in the year. */
+  private int remainingDaysInYear;
+  /**
+   * The current day in the year.
+   */
+  private Integer dayInYear;
 
   /**
    * This method updates the total carbon emissions from flight travel.
@@ -81,17 +77,37 @@ public class GeneralStatsCalculator {
         (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
   }
 
+  /** This method calculates the current day of the year and returns the integer of it. */
+  public void calculateDateAsInt() {
+    Date currDayinCurrYear = new Date();
+    SimpleDateFormat dateForm = new SimpleDateFormat("D");
+    String dayAsString = dateForm.format(currDayinCurrYear);
+    Integer dayAsInt = Integer.valueOf(dayAsString);
+    this.dayInYear = dayAsInt;
+  }
+
+  /** This method determines how many remaining days in the year there are. */
+  public void calculateRemainingDaysInYear() {
+    try {
+      this.remainingDaysInYear = 365 - this.dayInYear;
+      if (this.remainingDaysInYear < 0) {
+        throw new Exception("It is not possible to have a negative amount of days in the year.");
+        }
+    } catch (Exception e) {
+      System.out.println("Error: " + e.getMessage());
+    }
+  }
+
   /**
    * This method determines the amount of emissions per year based on the current rate of carbon
    * emissions produced at the current time of the year.
    */
   public void calculateEmissionsPerYear() {
-    Date currDayinCurrYear = new Date();
-    SimpleDateFormat dateForm = new SimpleDateFormat("D");
-    String dayAsString = dateForm.format(currDayinCurrYear);
-    Integer dayAsInt = Integer.valueOf(dayAsString);
-    this.remainingCO2InYear = 365 - dayAsInt;
-    this.emissionsPerDayBaseOnCurrDate = getTotalCarbonEmissions() / dayAsInt;
+    try {
+      this.emissionsPerDayBaseOnCurrDate = getTotalCarbonEmissions() / this.dayInYear;
+    } catch (ArithmeticException e) {
+      System.out.println("Cannot divide the total amount of carbon emissions by zero days " + e);
+    }
     this.emissionsPerYear = emissionsPerDayBaseOnCurrDate * 365;
   }
 
@@ -120,9 +136,9 @@ public class GeneralStatsCalculator {
    * yearly CO2 production goal.
    */
   public void calculateRemainingCO2InYear() {
-    this.howMuchToReduceCO2By = this.carbonEmissionGoal - this.totalCarbonEmissions;
-    if (howMuchToReduceCO2By < 0) {
-      throw new IllegalArgumentException();
+    this.remainingCO2InYear = this.carbonEmissionGoal - this.totalCarbonEmissions;
+    if (remainingCO2InYear < 0) {
+      this.remainingCO2InYear = 0;
     }
   }
 
@@ -145,18 +161,18 @@ public class GeneralStatsCalculator {
   public void createCarbonEmissionsComment() {
     calculateRemainingCO2InYear();
     this.carbonEmissionsComment =
-            "Currently, in "
-                    + getCurrentYear()
-                    + ", you are producing "
-                    + getEmissionsPerDayBaseOnCurrDate()
-                    + " kg of carbon emissions per day."
-                    + "If you continue at this rate, you will produce "
-                    + getEmissionsPerYear()
-                    + "by the end of this year. This means you can only produce "
-                    + getRemainingCO2InYear()
-                    + " this year. To do so, you will need to reduce your flight travel by "
-                    + getReductionPercentage()
-                    + ".";
+        "Currently, in "
+            + getCurrentYear()
+            + ", you are producing "
+            + getEmissionsPerDayBaseOnCurrDate()
+            + " kg of carbon emissions per day."
+            + "If you continue at this rate, you will produce "
+            + getEmissionsPerYear()
+            + "by the end of this year. This means you can only produce "
+            + getRemainingCO2InYear()
+            + " this year. To do so, you will need to reduce your flight travel by "
+            + getReductionPercentage()
+            + ".";
     // TODO remove later!
     System.out.println(this.carbonEmissionsComment);
   }
@@ -262,8 +278,13 @@ public class GeneralStatsCalculator {
     return this.reductionPercentage;
   }
 
+  // TODO write method for calculating this!
   public double getHowMuchToReduceCO2By() {
     return howMuchToReduceCO2By;
+  }
+
+  public int getRemainingDaysInYear() {
+    return remainingDaysInYear;
   }
 
   public double getTreesToGrow() {
@@ -274,4 +295,15 @@ public class GeneralStatsCalculator {
     return carbonEmissionsComment;
   }
 
+  public void setRemainingDaysInYear(int days) {
+    this.remainingDaysInYear = days;
+  }
+
+  public void setDayInYear(int day) {
+    this.dayInYear = day;
+  }
+
+  public int getDayInYear() {
+    return dayInYear;
+  }
 }

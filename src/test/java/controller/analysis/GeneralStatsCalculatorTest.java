@@ -7,6 +7,8 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -125,40 +127,38 @@ public class GeneralStatsCalculatorTest {
     assertEquals(345231863432.98, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
   }
 
-    /**
-     * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
-     * emissions, which has been taken multipe times, that the total emissions is updated
-     * accordingly.The carbon emissions are starting at 0.0 g.
-     */
-    @Test
-    public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
-      generalStatsCalculator.setTotalCarbonEmissions(0.0);
-      Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-      testRoute.setEmissions(20000000.50);
-      testRoute.setTimesTaken(0);
-      generalStatsCalculator.updateTotalEmissions(testRoute);
-      assertEquals(0.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-    }
+  /**
+   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
+   * emissions, which has been taken multipe times, that the total emissions is updated
+   * accordingly.The carbon emissions are starting at 0.0 g.
+   */
+  @Test
+  public void updateTotalEmissionsLargeEmissionsZeroTakenTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(0.0);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(20000000.50);
+    testRoute.setTimesTaken(0);
+    generalStatsCalculator.updateTotalEmissions(testRoute);
+    assertEquals(0.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
 
-    /**
-     * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
-     * emissions, which has been taken zero times, that the total emissions is not updated. The
-   carbon
-     * emissions are starting at 0.0 g.
-     */
-    @Test
-    public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
-      generalStatsCalculator.setTotalCarbonEmissions(0.0);
-      Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-      testRoute.setEmissions(8760.0);
-      testRoute.setTimesTaken(1000);
-      generalStatsCalculator.updateTotalEmissions(testRoute);
-      assertEquals(8760000.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-    }
+  /**
+   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
+   * emissions, which has been taken zero times, that the total emissions is not updated. The carbon
+   * emissions are starting at 0.0 g.
+   */
+  @Test
+  public void updateTotalEmissionsSmallEmissionsManyTakenTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(0.0);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(8760.0);
+    testRoute.setTimesTaken(1000);
+    generalStatsCalculator.updateTotalEmissions(testRoute);
+    assertEquals(8760000.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
 
   // ------------------------------------- Testing for updateTotalDistance
 
-  //TODO fix me! HK 26/09/2020 --> Gives 0.0 instead of 4157987.41
   /**
    * Verify that when updateTotalDistance is called with a route that is of large distance that the
    * total distance is updated accordingly.The total distance is started as 0.0 km.
@@ -168,11 +168,11 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setTotalDistanceTravelled(0.0);
     Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
     testRoute.setDistance(4157987.41);
+    testRoute.setTimesTaken(1);
     generalStatsCalculator.updateTotalDistance(testRoute);
     assertEquals(4157987.41, generalStatsCalculator.getTotalDistanceTravelled(), 0.0001);
   }
 
-  //TODO fix me! HK 26/09/2020 --> Gives 0.0 instead of 3902.79
   /**
    * Verify that when updateTotalDistance is called with a route that is of small distance that the
    * total * distance is updated accordingly.The total distance is started as 0.0 km.
@@ -182,8 +182,24 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setTotalDistanceTravelled(0.0);
     Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
     testRoute.setDistance(3902.79);
+    testRoute.setTimesTaken(1);
     generalStatsCalculator.updateTotalDistance(testRoute);
     assertEquals(3902.79, generalStatsCalculator.getTotalDistanceTravelled(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalDistance is called with a route that is of small distance and the
+   * times taken is more than 1 that the total distance is updated accordingly.The total distance is
+   * started as 0.0 km.
+   */
+  @Test
+  public void updateTotalDistanceSmallDistanceInitiallyZeroManyTest() {
+    generalStatsCalculator.setTotalDistanceTravelled(0.0);
+    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
+    testRoute.setDistance(3902.79);
+    testRoute.setTimesTaken(10);
+    generalStatsCalculator.updateTotalDistance(testRoute);
+    assertEquals(39027.90, generalStatsCalculator.getTotalDistanceTravelled(), 0.0001);
   }
 
   /**
@@ -199,7 +215,6 @@ public class GeneralStatsCalculatorTest {
     assertEquals(0.0, generalStatsCalculator.getTotalDistanceTravelled(), 0.0001);
   }
 
-  //TODO fix me! HK 26/09/2020 --> Gives 5.890000004637293E13 instead of 5.890000000000002E13
   /**
    * Verify that when updateTotalDistance is called with a route that is of large distance that the
    * total distance is updated accordingly. The total distance is started at a large distance in km.
@@ -209,11 +224,12 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setTotalDistanceTravelled(58900000000000.02);
     Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
     testRoute.setDistance(46372.91);
+    testRoute.setTimesTaken(1);
     generalStatsCalculator.updateTotalDistance(testRoute);
-    assertEquals(58900000046372.93, generalStatsCalculator.getTotalDistanceTravelled(), 0.000000001);
+    assertEquals(
+        58900000046372.93, generalStatsCalculator.getTotalDistanceTravelled(), 0.000000001);
   }
 
-  //TODO fix me! HK 26/09/2020 --> Gives 6.755444090000007E13 instead of 6.755444090415748E13
   /**
    * Verify that when updateTotalDistance is called with a route that is of small distance that the
    * total distance is updated accordingly. The total distance is started at a large distance in km.
@@ -223,6 +239,7 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setTotalDistanceTravelled(67554440900000.07);
     Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
     testRoute.setDistance(4157.41);
+    testRoute.setTimesTaken(1);
     generalStatsCalculator.updateTotalDistance(testRoute);
     assertEquals(67554440904157.48, generalStatsCalculator.getTotalDistanceTravelled(), 0.0001);
   }
@@ -240,9 +257,97 @@ public class GeneralStatsCalculatorTest {
     assertEquals(345231863432.98, generalStatsCalculator.getTotalDistanceTravelled(), 0.0001);
   }
 
-  //TODO write tests for these and rerun coverage
+  // --------------------------------- Tests for calculateDateAsInt()
 
-  // --------------------------------- calculateEmissionsPerYear() tests
+  // TODO: find a better way of testing this other than having to manually change the expectedDate
+  // value
+  // each time the day changes. HK 27/09/2020
+  /**
+   * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
+   * as expected.
+   */
+  @Test
+  public void getDateAsIntPositiveIntTest() {
+    int expectedDate = 271;
+    generalStatsCalculator.calculateDateAsInt();
+    assertEquals(expectedDate, generalStatsCalculator.getDayInYear());
+  }
+
+  // --------------------------------- Tests for calculateRemainingDaysInYear()
+
+  // TODO: find a better way of testing this other than having to manually change the expectedDate
+  // value
+  // each time the day changes. HK 27/09/2020
+
+  /**
+   * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
+   * as expected.
+   */
+  @Test
+  public void calculateRemainingDaysInYearTest() {
+    int expectedDate = 94;
+    generalStatsCalculator.setDayInYear(271);
+    generalStatsCalculator.calculateRemainingDaysInYear();
+    assertEquals(expectedDate, generalStatsCalculator.getRemainingDaysInYear());
+  }
+
+  /**
+   * Verify that when calculateRemainingDaysInYear is called and the day in the year is 0, then an
+   * exception is thrown.
+   */
+  @Test
+  public void calculateRemainingDaysInYearNegIntTest() {
+    try {
+      generalStatsCalculator.setDayInYear(0);
+      generalStatsCalculator.calculateRemainingDaysInYear();
+    } catch (Exception e) {
+      assertTrue(true);
+    }
+  }
+
+  // --------------------------------- Tests for calculateEmissionsPerYear()
+
+  /**
+   * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
+   * as expected.
+   */
+  @Test
+  public void calculateEmissionsPerYearRemainingDaysInYearTest() {
+    int currentDay = 271;
+    generalStatsCalculator.setDayInYear(currentDay);
+    int expectedValue = 365 - currentDay;
+    generalStatsCalculator.calculateEmissionsPerYear();
+    assertEquals(expectedValue, generalStatsCalculator.getRemainingDaysInYear());
+  }
+
+  //TODO fix this! catch exception
+  /**
+   * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
+   * as expected.
+   */
+  @Test
+  public void calculateEmissionsPerYearZeroDaysTest() {
+    int dayAsInt = 0;
+    generalStatsCalculator.setRemainingDaysInYear(dayAsInt);
+    String expectedValue = "It is not possible to have a negative amount of days in the year.";
+    generalStatsCalculator.calculateEmissionsPerYear();
+    assertEquals(expectedValue, generalStatsCalculator.getRemainingDaysInYear());
+  }
+
+  /**
+   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerDayBaseOnCurrDate is
+   * calculated as expected.
+   */
+  @Test
+  public void calculateEmissionsPerYearemissionsPerDayBaseOnCurrDateTest() {
+    Date currDayinCurrYear = new Date();
+    SimpleDateFormat dateForm = new SimpleDateFormat("D");
+    String dayAsString = dateForm.format(currDayinCurrYear);
+    Integer dayAsInt = Integer.valueOf(dayAsString);
+    int expectedValue = 365 - dayAsInt;
+    generalStatsCalculator.calculateEmissionsPerYear();
+    assertEquals(expectedValue, generalStatsCalculator.getRemainingDaysInYear());
+  }
 
   // --------------------------------- calculateReductionPercentage() tests
 
@@ -266,9 +371,6 @@ public class GeneralStatsCalculatorTest {
 
   // --------------------------------- createCarbonEmissionsComment()
 
-
-
   // --------------------------------- Testing for calculateCO2ReductionNeeded
-
 
 }
