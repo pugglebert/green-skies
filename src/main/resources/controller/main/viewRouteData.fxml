@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="238.0" layoutY="155.0" prefHeight="453.0" prefWidth="1134.0">
             <columns>
@@ -15,7 +15,7 @@
                 <TableColumn fx:id="destinationAirportColumn" prefWidth="181.0" text="Destination Airport" />
                 <TableColumn fx:id="codeShareColumn" minWidth="0.0" prefWidth="169.0" text="Code Share" />
                 <TableColumn fx:id="numOfStopsColumn" minWidth="0.0" prefWidth="146.0" text="Number of Stops" />
-                <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="300.0" style="background: WHITE;" text="Equipment" />
+                <TableColumn fx:id="equipmentColumn" minWidth="0.0" prefWidth="286.0" style="background: WHITE;" text="Equipment" />
             </columns>
         </TableView>
         <Button fx:id="searchButton" layoutX="815.0" layoutY="98.0" mnemonicParsing="false" onAction="#search" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #116754;" text="Search" textFill="WHITE">

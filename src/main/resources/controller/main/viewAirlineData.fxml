@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirlineDataViewController">
+<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AirlineDataViewController">
     <children>
-        <TableView fx:id="tableView" layoutX="244.0" layoutY="162.0" prefHeight="441.0" prefWidth="1142.0">
+        <TableView fx:id="tableView" layoutX="238.0" layoutY="155.0" prefHeight="453.0" prefWidth="1134.0">
             <columns>
                 <TableColumn fx:id="addColumn" prefWidth="50.0" text="Add" />
                 <TableColumn fx:id="airlineIDColumn" prefWidth="94.0" text="Airline ID" />
@@ -18,38 +17,35 @@
                 <TableColumn fx:id="ICAOColumn" minWidth="0.0" prefWidth="126.0" text="ICAO" />
                 <TableColumn fx:id="callsignColumn" minWidth="0.0" prefWidth="116.0" text="Callsign" />
                 <TableColumn fx:id="countryColumn" minWidth="0.0" prefWidth="150.0" text="Country" />
-                <TableColumn fx:id="activeStatusColumn" minWidth="0.0" prefWidth="156.0" text="Active Status" />
+                <TableColumn fx:id="activeStatusColumn" minWidth="0.0" prefWidth="133.0" text="Active Status" />
             </columns>
         </TableView>
-        <Button fx:id="searchButton" layoutX="1006.0" layoutY="51.0" mnemonicParsing="false" onAction="#search" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #116754;" text="Search" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <TextField fx:id="searchBar" layoutX="473.0" layoutY="51.0" prefHeight="40.0" prefWidth="491.0" promptText="Select search type then enter search value here">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font></TextField>
-        <ChoiceBox fx:id="searchTypeSelection" layoutX="270.0" layoutY="51.0" prefHeight="40.0" prefWidth="188.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;">
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor></ChoiceBox>
-        <Label fx:id="errorText" layoutX="474.0" layoutY="111.0" prefHeight="27.0" prefWidth="558.0" text="Search error message goes here" textFill="RED" visible="false">
+        <Button fx:id="searchButton" layoutX="815.0" layoutY="98.0" mnemonicParsing="false" onAction="#search" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #116754;" text="Search" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <TextField fx:id="searchBar" layoutX="446.0" layoutY="50.0" prefHeight="40.0" prefWidth="356.0" promptText="Select search type then enter search value here">
+            <font>
+                <Font size="16.0" />
+            </font></TextField>
+        <ChoiceBox fx:id="searchTypeSelection" layoutX="241.0" layoutY="50.0" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;" />
+        <Label fx:id="errorText" layoutX="444.0" layoutY="110.0" prefHeight="27.0" prefWidth="345.0" text="Search error mesage goes here" textFill="RED" visible="false">
             <font>
                 <Font name="Arial" size="20.0" />
             </font>
         </Label>
-        <Button fx:id="filterOptionsButton" layoutX="1116.0" layoutY="51.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="40.0" prefWidth="268.0" style="-fx-background-color: #116754;" text="Filter Options" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="clearSearchButton" layoutX="1007.0" layoutY="100.0" mnemonicParsing="false" onAction="#clearSearch" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #116754;" text="Clear" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button layoutX="1116.0" layoutY="100.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="268.0" style="-fx-background-color: #116754;" text="Remove Airline Record(s)" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
+        <Button fx:id="filterOptionsButton" layoutX="926.0" layoutY="98.0" mnemonicParsing="false" onAction="#filterOptions" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Filter Options" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="clearSearchButton" layoutX="815.0" layoutY="50.0" mnemonicParsing="false" onAction="#clearSearch" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #116754;" text="Clear" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+        <Button fx:id="removeBtn" layoutX="926.0" layoutY="50.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Remove Airline Record(s)" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
       <VBox prefHeight="703.0" prefWidth="214.0" style="-fx-background-color: #116754;">
          <children>
             <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0" style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
