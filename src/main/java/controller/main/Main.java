@@ -49,7 +49,7 @@ public class Main {
    */
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-    storage.initialiseStorage();
+//    storage.initialiseStorage();
     GreenSkiesApplication.main(args);
   }
 }

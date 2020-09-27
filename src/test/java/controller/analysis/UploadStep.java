@@ -28,9 +28,9 @@ public class UploadStep {
 //        storage.resetRoutesList();
 //        storage.resetAirportsList();
 //        storage.resetAirlinesList();
-        database.initialiseTable("airport");
-        database.initialiseTable("airlines");
-        database.initialiseTable("routes");
+//        database.initialiseTable("airport");
+//        database.initialiseTable("airlines");
+//        database.initialiseTable("routes");
     }
 
     @Given("the data type is {string} and the local path of the data file is {string}")
