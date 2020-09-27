@@ -27,6 +27,10 @@ public class AnalyseResultController implements Initializable {
   @FXML public Text DistanceDifference;
   @FXML public Text EmissionDifference;
   @FXML private Button BackButton;
+  @FXML private Text route1DistanceHeading;
+  @FXML private Text route2DistanceHeading;
+  @FXML private Text route1EmissionsHeading;
+  @FXML private Text route2EmissionsHeading;
 
   /**
    * This method is required for Initializable interface show distance and emissions of each route
@@ -37,6 +41,10 @@ public class AnalyseResultController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     Storage storage = Main.getStorage();
+    route1DistanceHeading.setText(String.format("Distance of route 1 (%s):", storage.getComparedRoutes().getKey()));
+    route2DistanceHeading.setText(String.format("Distance of route 2 (%s):", storage.getComparedRoutes().getValue()));
+    route1EmissionsHeading.setText(String.format("Emissions of route 1 (%s):", storage.getComparedRoutes().getKey()));
+    route2EmissionsHeading.setText(String.format("Emissions of route 2 (%s):", storage.getComparedRoutes().getValue()));
     if (storage.getAnalyseDistanceResult().size() == 0
         || storage.getAnalyseEmissionResult().size() == 0) {
 

@@ -1,6 +1,7 @@
 package model.data;
 
 import io.cucumber.java.hu.Ha;
+import javafx.util.Pair;
 import model.database.SQLiteDatabase;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class Storage {
 
   /** A list of all the values calculated for the emissions of the routes in the history. */
   private List<Double> analyseEmissionResult = new ArrayList<>();
+
+  /** The names of routes compared using the analyse distance button. */
+  private Pair<String, String> comparedRoutes;
 
   /** A list of all the routes that have been added to the user's personal history. */
   private List<Route> history = new ArrayList<>();
@@ -374,5 +378,21 @@ public class Storage {
 
   public HashMap<String, List<Route>> getRouteFileList() {
     return routeFiles;
+  }
+
+  /**
+   * This method returns the names of the most recently compared routes.
+   * @return A pair of two route names.
+   */
+  public Pair<String, String> getComparedRoutes() {
+    return comparedRoutes;
+  }
+
+  /**
+   * This method sets the two compared route names to the given values.
+   * @param comparedRoutes Pair of strings corresponding to the names of two routes.
+   */
+  public void setComparedRoutes(Pair<String, String> comparedRoutes) {
+    this.comparedRoutes = comparedRoutes;
   }
 }

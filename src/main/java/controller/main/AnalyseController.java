@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import model.data.Airport;
 import model.data.Route;
 import org.controlsfx.control.textfield.TextFields;
@@ -159,6 +160,8 @@ public class AnalyseController extends SideNavBarController implements Initializ
       storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
       storage.setAnalyseEmissionResult(analyser.getPath1Emission());
       storage.setAnalyseEmissionResult(analyser.getPath2Emission());
+      storage.setComparedRoutes(new Pair(String.format("%s - %s", pathSource1.getText(), pathDestination1.getText()),
+              String.format("%s - %s", pathSource2.getText(), pathDestination2.getText())));
 
       Stage stage1 = new Stage();
       Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
