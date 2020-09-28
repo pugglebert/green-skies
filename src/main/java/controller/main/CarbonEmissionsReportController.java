@@ -125,6 +125,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     reportGenerator.resetReportGenerator();
   }
 
+  //todo write document for this method//
   public void setUpData() {
     reportGenerator.calculateOffsetTrees();
     System.out.println(MostEmissionsRouteString);

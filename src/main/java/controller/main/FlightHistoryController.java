@@ -153,6 +153,7 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
+  //todo write document for this method or delete this function seens it havent been used//
   public void makeBarChart() {
 
     if (!Main.getStorage().getTempRoutes().isEmpty()) {
@@ -169,6 +170,7 @@ public class FlightHistoryController extends DataViewController {
 
   }
 
+  //todo write document for this method//
   public void removeSelected() {
     errorText.setVisible(false);
     if (getAnySelected()) {
@@ -182,13 +184,14 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
-
+  //todo write document for this method//
   public void selectAll() {
     for (Route route : Main.getStorage().getHistory()) {
       route.getSelect().setSelected(true);
     }
   }
 
+  //todo write document for this method//
   public void deselectAll() {
     for (Route route : Main.getStorage().getHistory()) {
       route.getSelect().setSelected(false);

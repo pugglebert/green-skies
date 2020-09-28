@@ -205,6 +205,7 @@ public class RouteDataViewController extends DataViewController {
     }
   }
 
+  //todo write document for this method//
   public void removeSelected() {
     errorText.setVisible(false);
     if (getAnySelected()) {
@@ -218,12 +219,14 @@ public class RouteDataViewController extends DataViewController {
     }
   }
 
+  //todo write document for this method//
   public void selectAll() {
     for (Route route : Main.getStorage().getRoutes()) {
       route.getSelect().setSelected(true);
     }
   }
 
+  //todo write document for this method//
   public void deselectAll() {
     for (Route route : Main.getStorage().getRoutes()) {
       route.getSelect().setSelected(false);

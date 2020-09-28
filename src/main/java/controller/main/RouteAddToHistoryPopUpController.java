@@ -135,6 +135,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
+  //todo write document for this method//
   public void updateReportStats(Route route) {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
@@ -150,6 +151,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     reportGenerator.updateLeastEmissionsRoute(route);
   }
 
+  //todo write document for this method//
   public void cancel() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(0);
@@ -159,6 +161,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
+  //todo write document for this method//
   public void setAllPassengerTo1(ActionEvent event) {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(1);
