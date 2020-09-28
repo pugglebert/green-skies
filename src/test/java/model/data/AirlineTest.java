@@ -7,25 +7,22 @@ import org.testfx.framework.junit.ApplicationTest;
 
 import java.lang.reflect.Field;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class AirlineTest extends ApplicationTest {
 
-  Airline airline;
+  private Airline airline;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     // given
-    airline =
-            new Airline(
-                    2, "Private flight", "\\N", "-", "N/A", "", "", true);
+    airline = new Airline(2, "Private flight", "\\N", "-", "N/A", "", "", true);
+    airline.initCheckBox();
   }
 
   @Test
   public void getAirlineIDTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("airlineID");
     field.setAccessible(true);
     assertEquals(field.get(airline), 2);
@@ -33,9 +30,7 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getNameTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("name");
     field.setAccessible(true);
     assertEquals(field.get(airline), "Private flight");
@@ -43,9 +38,7 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getAirlineAliasTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("alias");
     field.setAccessible(true);
     assertEquals(field.get(airline), "\\N");
@@ -53,9 +46,7 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getIATATest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("IATA");
     field.setAccessible(true);
     assertEquals(field.get(airline), "-");
@@ -63,9 +54,7 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getICAOTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("ICAO");
     field.setAccessible(true);
     assertEquals(field.get(airline), "N/A");
@@ -73,9 +62,7 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getCallsignTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("callsign");
     field.setAccessible(true);
     assertEquals(field.get(airline), "");
@@ -83,9 +70,7 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getCountryTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("country");
     field.setAccessible(true);
     assertEquals(field.get(airline), "");
@@ -93,9 +78,7 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getActiveStatusTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    int airlineID = airline.getAirlineID();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("activeStatus");
     field.setAccessible(true);
     assertEquals(field.get(airline), true);
@@ -103,19 +86,44 @@ public class AirlineTest extends ApplicationTest {
 
   @Test
   public void getSelectTest() throws NoSuchFieldException, IllegalAccessException {
-    //when
-    airline.initCheckBox();
-    //then
+    // then
     final Field field = airline.getClass().getDeclaredField("select");
     field.setAccessible(true);
-    assertEquals(((CheckBox) field.get(airline)).isSelected(), true);
+    assertEquals(((CheckBox) field.get(airline)).isSelected(), airline.getSelect().isSelected());
   }
 
   @Test
-  public void setSelectTest() throws NoSuchFieldException, IllegalAccessException {
+  public void setSelect() throws NoSuchFieldException, IllegalAccessException {
+    // when
+    CheckBox checkBox = new CheckBox();
+    checkBox.setSelected(true);
+    airline.setSelect(checkBox);
+    // then
+    final Field field = airline.getClass().getDeclaredField("select");
+    field.setAccessible(true);
+    assertTrue(((CheckBox) field.get(airline)).isSelected());
   }
 
   @Test
-  public void testEqualsTest() throws NoSuchFieldException, IllegalAccessException {
+  public void testEqualsTest() {
+    // given
+    Airline airline1 = new Airline(2, "Private flight", "\\N", "-", "N/A", "", "", true);
+    Airport airport =
+            new Airport(
+                    1,
+                    "Goroka",
+                    "Goroka",
+                    "Papua New Guinea",
+                    "GKA",
+                    "AYGA",
+                    -6.081689,
+                    145.391881,
+                    5282,
+                    10,
+                    "U",
+                    "Port_Moresby");
+    // then
+    assertEquals(airline, airline1);
+    assertNotEquals(airline, airport);
   }
 }
