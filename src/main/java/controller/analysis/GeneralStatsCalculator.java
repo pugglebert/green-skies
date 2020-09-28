@@ -9,7 +9,7 @@ import java.util.*;
  * carbon emissions report.
  *
  * @author Hayley Krippner
- * @since 26/09/20
+ * @since 28/09/20
  * @version 1.0
  */
 public class GeneralStatsCalculator {
@@ -91,7 +91,7 @@ public class GeneralStatsCalculator {
     this.dayInYear = dayAsInt;
   }
 
-  // TODO tests this! HK 27/09/2020 --> test exception
+  // TODO tests this! HK 27/09/2020 --> test exception is thrown and test exception is caught
 
   /** This method determines how many remaining days in the year there are. */
   public void calculateRemainingDaysInYear() {
@@ -105,7 +105,7 @@ public class GeneralStatsCalculator {
     }
   }
 
-  // TODO tests this! HK 27/09/2020 --> test exception
+  // TODO tests this! HK 27/09/2020 --> test exception is caught
   /**
    * This method determines the amount of emissions per year based on the current rate of carbon
    * emissions produced at the current time of the year.
@@ -127,7 +127,7 @@ public class GeneralStatsCalculator {
     this.emissionsPerDayGoal = getCarbonEmissionGoal() / 365;
   }
 
-  // TODO tests this! HK 28/09/2020 --> need to revisit --> confused.
+  // TODO tests this! HK 28/09/2020 --> test exception is caught
   /**
    * This method calculates the carbon emissions production reduction percentage required to meet
    * the user's goal by the end of the year.
@@ -137,7 +137,9 @@ public class GeneralStatsCalculator {
       this.reductionPercentage = 0;
     } else {
       try {
-        this.reductionPercentage = 100 - ((1 - emissionsPerDayBaseOnCurrDate / emissionsPerDayGoal) * - 100);
+        double negReductionDec = 1 - (emissionsPerDayBaseOnCurrDate / emissionsPerDayGoal);
+        double posReductionPercentage = 100 - (negReductionDec * - 100);
+        this.reductionPercentage = posReductionPercentage;
       } catch (ArithmeticException e) {
         System.out.println(
             "Cannot divide the emissionsPerDayBaseOnCurrDate by a rate of zero carbon emissios per day "
@@ -187,9 +189,6 @@ public class GeneralStatsCalculator {
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
   public void createCarbonEmissionsComment() {
-    // calculateRemainingCO2InYear();
-    // TODO move this call to somewhere else
-
     this.carbonEmissionsComment =
         "Currently, in "
             + getCurrentYear()
@@ -205,6 +204,7 @@ public class GeneralStatsCalculator {
             + " percent.";
   }
 
+  //TODO write test to get -1
   /**
    * This function implements the binary search algorithm.
    *
@@ -306,11 +306,6 @@ public class GeneralStatsCalculator {
     return this.reductionPercentage;
   }
 
-  // TODO write method for calculating this!
-  public double getHowMuchToReduceCO2By() {
-    return howMuchToReduceCO2By;
-  }
-
   public int getRemainingDaysInYear() {
     return remainingDaysInYear;
   }
@@ -321,10 +316,6 @@ public class GeneralStatsCalculator {
 
   public String getCarbonEmissionsComment() {
     return carbonEmissionsComment;
-  }
-
-  public void setRemainingDaysInYear(int days) {
-    this.remainingDaysInYear = days;
   }
 
   public void setDayInYear(int day) {

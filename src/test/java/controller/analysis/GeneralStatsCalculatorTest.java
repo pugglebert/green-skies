@@ -7,8 +7,6 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -330,7 +328,7 @@ public class GeneralStatsCalculatorTest {
   public void calculateEmissionsPerYearCurrentRatePositiveDaysTest() {
     generalStatsCalculator.setTotalCarbonEmissions(206000);
     generalStatsCalculator.setDayInYear(271);
-    double expectedValue = 206000 / 271;
+    double expectedValue = 206000.00 / 271.00;
     generalStatsCalculator.calculateEmissionsPerYearCurrentRate();
     assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerDayBaseOnCurrDate(), 1.0);
   }
@@ -510,8 +508,6 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getTreesToGrow(), 0.01);
   }
 
-  // TODO write tests for createCarbonEmissionsComment and calculateCO2ReductionNeeded.
-
   // --------------------------------- Testing for createCarbonEmissionsComment()
 
   /**
@@ -533,9 +529,6 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.createCarbonEmissionsComment();
     assertEquals(expectedString, generalStatsCalculator.getCarbonEmissionsComment());
   }
-
-  // TODO is this needed?
-  // --------------------------------- Testing for calculateCO2ReductionNeeded
 
 }
 
