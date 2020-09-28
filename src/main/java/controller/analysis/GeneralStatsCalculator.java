@@ -50,14 +50,15 @@ public class GeneralStatsCalculator {
   private String carbonEmissionsComment;
   /** The remaining days in the year. */
   private int remainingDaysInYear;
-  /**
-   * The current day in the year.
-   */
+  /** The current day in the year. */
   private Integer dayInYear;
   /**
-   * The maximum rate that carbon emissions can be produced by per day within the year whilst still meeting the goal.
+   * The maximum rate that carbon emissions can be produced by per day within the year whilst still
+   * meeting the goal.
    */
   private double emissionsPerDayGoal;
+  /** The current year; */
+  private int currentYear;
 
   /**
    * This method updates the total carbon emissions from flight travel.
@@ -90,7 +91,7 @@ public class GeneralStatsCalculator {
     this.dayInYear = dayAsInt;
   }
 
-  // TODO tests this! HK 27/09/2020
+  // TODO tests this! HK 27/09/2020 --> test exception
 
   /** This method determines how many remaining days in the year there are. */
   public void calculateRemainingDaysInYear() {
@@ -98,13 +99,13 @@ public class GeneralStatsCalculator {
       this.remainingDaysInYear = 365 - this.dayInYear;
       if (this.remainingDaysInYear <= 0) {
         throw new Exception("It is not possible to have a negative amount of days in the year.");
-        }
+      }
     } catch (Exception e) {
       System.out.println("Error: " + e.getMessage());
     }
   }
 
-  // TODO tests this! HK 27/09/2020
+  // TODO tests this! HK 27/09/2020 --> test exception
   /**
    * This method determines the amount of emissions per year based on the current rate of carbon
    * emissions produced at the current time of the year.
@@ -118,21 +119,31 @@ public class GeneralStatsCalculator {
     this.emissionsPerYear = emissionsPerDayBaseOnCurrDate * 365;
   }
 
-  // TODO tests this! HK 27/09/2020
   /**
-   * This method calculates the maximum rate that carbon emissions can be produced by per day within the year whilst still meeting the goal.
+   * This method calculates the maximum rate that carbon emissions can be produced by per day within
+   * the year whilst still meeting the goal.
    */
   public void calculateEmissionsPerYearGoalRate() {
     this.emissionsPerDayGoal = getCarbonEmissionGoal() / 365;
   }
 
-  // TODO tests this! HK 27/09/2020
+  // TODO tests this! HK 28/09/2020 --> need to revisit --> confused.
   /**
    * This method calculates the carbon emissions production reduction percentage required to meet
    * the user's goal by the end of the year.
    */
   public void calculateReductionPercentage() {
-    this.reductionPercentage = (1 - emissionsPerDayBaseOnCurrDate /emissionsPerDayGoal) * 100;
+    if (emissionsPerDayGoal > emissionsPerDayBaseOnCurrDate) {
+      this.reductionPercentage = 0;
+    } else {
+      try {
+        this.reductionPercentage = 100 - ((1 - emissionsPerDayBaseOnCurrDate / emissionsPerDayGoal) * - 100);
+      } catch (ArithmeticException e) {
+        System.out.println(
+            "Cannot divide the emissionsPerDayBaseOnCurrDate by a rate of zero carbon emissios per day "
+                + e);
+      }
+    }
   }
 
   /**
@@ -176,22 +187,22 @@ public class GeneralStatsCalculator {
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
   public void createCarbonEmissionsComment() {
-    calculateRemainingCO2InYear();
+    // calculateRemainingCO2InYear();
+    // TODO move this call to somewhere else
+
     this.carbonEmissionsComment =
         "Currently, in "
             + getCurrentYear()
             + ", you are producing "
-            + getEmissionsPerDayBaseOnCurrDate()
+            + String.format("%.2f", getEmissionsPerDayBaseOnCurrDate())
             + " kg of carbon emissions per day."
-            + "If you continue at this rate, you will produce "
-            + getEmissionsPerYear()
-            + "by the end of this year. This means you can only produce "
-            + getRemainingCO2InYear()
-            + " this year. To do so, you will need to reduce your flight travel by "
-            + getReductionPercentage()
-            + ".";
-    // TODO remove later!
-    System.out.println(this.carbonEmissionsComment);
+            + " If you continue at this rate, you will produce "
+            + String.format("%.2f", getEmissionsPerYear())
+            + " kg by the end of this year. This means you can only produce "
+            + String.format("%.2f", getRemainingCO2InYear())
+            + " in the remaining part of this year. To ensure you stay under your goal, you will need to reduce your flight travel by "
+            + String.format("%.2f", getReductionPercentage())
+            + " percent.";
   }
 
   /**
@@ -326,5 +337,29 @@ public class GeneralStatsCalculator {
 
   public void setEmissionsPerDayBaseOnCurrDate(int rate) {
     this.emissionsPerDayBaseOnCurrDate = rate;
+  }
+
+  public double getEmissionsPerDayGoal() {
+    return this.emissionsPerDayGoal;
+  }
+
+  public void setEmissionsPerDayGoal(int rate) {
+    this.emissionsPerDayGoal = rate;
+  }
+
+  public void setCurrentYear(int year) {
+    this.currentYear = year;
+  }
+
+  public void setEmissionsPerYear(double rate) {
+    this.emissionsPerYear = rate;
+  }
+
+  public void setRemainingCO2InYear(int amount) {
+    this.remainingCO2InYear = amount;
+  }
+
+  public void setReductionPercentage(int percentage) {
+    this.reductionPercentage = percentage;
   }
 }

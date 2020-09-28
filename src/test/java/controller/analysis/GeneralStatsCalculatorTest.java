@@ -286,7 +286,7 @@ public class GeneralStatsCalculatorTest {
   @Test
   public void calculateRemainingDaysInYearTest() {
     int expectedDate = 93;
-    generalStatsCalculator.setDayInYear(272); //need to update to the current day to pass this test
+    generalStatsCalculator.setDayInYear(272); // need to update to the current day to pass this test
     generalStatsCalculator.calculateRemainingDaysInYear();
     assertEquals(expectedDate, generalStatsCalculator.getRemainingDaysInYear());
   }
@@ -305,14 +305,14 @@ public class GeneralStatsCalculatorTest {
     }
   }
 
-  // --------------------------------- Tests for calculateEmissionsPerYear()
+  // --------------------------------- Tests for calculateEmissionsPerYearCurrentRate()
 
   /**
-   * Verify that when calculateEmissionsPerYear is called and the current day is 0, then an exception is
-   * thrown and caught.
+   * Verify that when calculateEmissionsPerYear is called and the current day is 0, then an
+   * exception is thrown and caught.
    */
   @Test
-  public void calculateEmissionsPerYearZeroDaysTest() {
+  public void calculateEmissionsPerYearCurrentRateZeroDaysTest() {
     generalStatsCalculator.setTotalCarbonEmissions(100000);
     generalStatsCalculator.setDayInYear(0);
     try {
@@ -323,11 +323,11 @@ public class GeneralStatsCalculatorTest {
   }
 
   /**
-   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerDayBaseOnCurrDate is calculated
-   * as expected.
+   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerDayBaseOnCurrDate is
+   * calculated as expected.
    */
   @Test
-  public void calculateEmissionsPerYearPositiveDaysTest() {
+  public void calculateEmissionsPerYearCurrentRatePositiveDaysTest() {
     generalStatsCalculator.setTotalCarbonEmissions(206000);
     generalStatsCalculator.setDayInYear(271);
     double expectedValue = 206000 / 271;
@@ -336,11 +336,11 @@ public class GeneralStatsCalculatorTest {
   }
 
   /**
-   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerYear is
-   * calculated as expected.
+   * Verify that when calculateEmissionsPerYear is called, then the emissionsPerYear is calculated
+   * as expected.
    */
   @Test
-  public void calculateEmissionsPerYearTest() {
+  public void calculateEmissionsPerYearCurrentRateTest() {
     generalStatsCalculator.setTotalCarbonEmissions(10000);
     generalStatsCalculator.setDayInYear(100);
     double expectedValue = 36500.0;
@@ -348,16 +348,83 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerYear(), 0.000000000000001);
   }
 
-  //TODO write tests for calculateReductionPercentage
+  // TODO write tests for calculateReductionPercentage
+
+  // --------------------------------- calculateEmissionsPerYearGoalRate() tests
+
+  /**
+   * Verify that when calculateEmissionsPerYearGoalRate is called, then the correct rate is given.
+   */
+  @Test
+  public void calculateEmissionsPerYearGoalRateTest() {
+    generalStatsCalculator.setCarbonEmissionsGoal(1000000.00);
+    double expectedValue = 2739.72;
+    generalStatsCalculator.calculateEmissionsPerYearGoalRate();
+    assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerDayGoal(), 0.01);
+  }
+
+  /**
+   * Verify that when calculateEmissionsPerYearGoalRate is called with a large goal, then the
+   * correct rate is given.
+   */
+  @Test
+  public void calculateEmissionsPerYearGoalRateLargeTest() {
+    generalStatsCalculator.setCarbonEmissionsGoal(225555555958898.25);
+    double expectedValue = 6.179604272846527E11;
+    generalStatsCalculator.calculateEmissionsPerYearGoalRate();
+    assertEquals(
+        expectedValue,
+        generalStatsCalculator.getEmissionsPerDayGoal(),
+        0.0000000000000000000000000000000000000001);
+  }
+
+  /**
+   * Verify that when calculateEmissionsPerYearGoalRate is called and the goal is 0, then the
+   * emissions per day based on the goal will be a rate of 0.
+   */
+  @Test
+  public void calculateEmissionsPerYearGoalRateZeroTest() {
+    generalStatsCalculator.setCarbonEmissionsGoal(0);
+    double expectedValue = 0;
+    generalStatsCalculator.calculateEmissionsPerYearGoalRate();
+    assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerDayGoal(), 0.01);
+  }
 
   // --------------------------------- calculateReductionPercentage() tests
+  // TODO: need to revisit --> confused. HK 28/09/2020
+
+  /**
+   * Verify that when calculateReductionPercentage is called, then the correct reduction percentage
+   * is given.
+   */
+  @Test
+  public void calculateReductionPercentageTest() {
+    generalStatsCalculator.setEmissionsPerDayBaseOnCurrDate(20);
+    generalStatsCalculator.setEmissionsPerDayGoal(12);
+    double expectedValue = 33.33;
+    generalStatsCalculator.calculateReductionPercentage();
+    assertEquals(expectedValue, generalStatsCalculator.getReductionPercentage(), 0.01);
+  }
+
+  /**
+   * Verify that when calculateReductionPercentage is called and the EmissionsPerDayBaseOnCurrDate
+   * rate is greater than the EmissionsPerDayGoal rate, then no reduction is needed so the reduction
+   * percentage is 0 percent.
+   */
+  @Test
+  public void calculateReductionPercentageZeroTest() {
+    generalStatsCalculator.setEmissionsPerDayBaseOnCurrDate(6);
+    generalStatsCalculator.setEmissionsPerDayGoal(15);
+    double expectedValue = 0;
+    generalStatsCalculator.calculateReductionPercentage();
+    assertEquals(expectedValue, generalStatsCalculator.getReductionPercentage(), 0.01);
+  }
+
+  // TODO write test to test exception
 
   // --------------------------------- getCurrentYear() tests
 
-  /**
-   * Verify that when getCurrentYear is called, then the correct year as in integer
-   * is given.
-   */
+  /** Verify that when getCurrentYear is called, then the correct year as in integer is given. */
   @Test
   public void getCurrentYearTest() {
     int expectedValue = 2020;
@@ -367,8 +434,8 @@ public class GeneralStatsCalculatorTest {
   // --------------------------------- calculateRemainingCO2InYear() tests
 
   /**
-   * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is greater than
-   * totalCarbonEmissionsthen, then the correct value is returned and is positive.
+   * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is greater
+   * than totalCarbonEmissionsthen, then the correct value is returned and is positive.
    */
   @Test
   public void calculateRemainingCO2InYearPositiveTest() {
@@ -380,8 +447,8 @@ public class GeneralStatsCalculatorTest {
   }
 
   /**
-   * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is smaller than
-   * totalCarbonEmissionsthen, then the correct value is returned and is 0.
+   * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is smaller
+   * than totalCarbonEmissionsthen, then the correct value is returned and is 0.
    */
   @Test
   public void calculateRemainingCO2InYearNegativeTest() {
@@ -393,8 +460,8 @@ public class GeneralStatsCalculatorTest {
   }
 
   /**
-   * Verify that when calculateRemainingCO2InYear is called and
-   * totalCarbonEmissions then is 0, then the correct value is returned which is the goal.
+   * Verify that when calculateRemainingCO2InYear is called and totalCarbonEmissions then is 0, then
+   * the correct value is returned which is the goal.
    */
   @Test
   public void calculateRemainingCO2InYearZeroTest() {
@@ -408,8 +475,8 @@ public class GeneralStatsCalculatorTest {
   // --------------------------------- Testing for calculateOffsetTrees()
 
   /**
-   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is small,
-   * that the correct number of trees to offset it is calculated correctly.
+   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is small, that the
+   * correct number of trees to offset it is calculated correctly.
    */
   @Test
   public void calculateOffsetTreesSmallTest() {
@@ -420,8 +487,8 @@ public class GeneralStatsCalculatorTest {
   }
 
   /**
-   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is large,
-   * that the correct number of trees to offset it is calculated correctly.
+   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is large, that the
+   * correct number of trees to offset it is calculated correctly.
    */
   @Test
   public void calculateOffsetTreesLargeTest() {
@@ -432,8 +499,8 @@ public class GeneralStatsCalculatorTest {
   }
 
   /**
-   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is zero,
-   * that the correct number of trees to offset it is calculated correctly as zero trees.
+   * Verify that when calculateOffsetTrees is called and the totalCarbonEmissions is zero, that the
+   * correct number of trees to offset it is calculated correctly as zero trees.
    */
   @Test
   public void calculateOffsetTreesZeroTest() {
@@ -443,11 +510,32 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getTreesToGrow(), 0.01);
   }
 
-  //TODO write tests for createCarbonEmissionsComment and calculateCO2ReductionNeeded.
-
+  // TODO write tests for createCarbonEmissionsComment and calculateCO2ReductionNeeded.
 
   // --------------------------------- Testing for createCarbonEmissionsComment()
 
+  /**
+   * Verify that when createCarbonEmissionsComment is called, then the correct comment is generated.
+   */
+  @Test
+  public void createCarbonEmissionsCommentTest1() {
+    generalStatsCalculator.setCurrentYear(2020);
+    generalStatsCalculator.setEmissionsPerDayBaseOnCurrDate(50);
+    generalStatsCalculator.setEmissionsPerYear(8900000);
+    generalStatsCalculator.setRemainingCO2InYear(14000);
+    generalStatsCalculator.setReductionPercentage(26);
+    String expectedString =
+        "Currently, in 2020, you are producing 50.00 kg of carbon emissions per" +
+                " day. If you continue at this rate, you will produce 8900000.00 kg" +
+                " by the end of this year. This means you can only produce 14000.00 in" +
+                " the remaining part of this year. To ensure you stay under your goal, you will need to reduce" +
+                " your flight travel by 26.00 percent.";
+    generalStatsCalculator.createCarbonEmissionsComment();
+    assertEquals(expectedString, generalStatsCalculator.getCarbonEmissionsComment());
+  }
+
+  // TODO is this needed?
   // --------------------------------- Testing for calculateCO2ReductionNeeded
 
 }
+
