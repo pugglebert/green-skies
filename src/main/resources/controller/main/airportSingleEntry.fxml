@@ -65,7 +65,7 @@
          <font>
             <Font name="Arial" size="20.0" />
          </font></Button>
-        <TextField fx:id="nameFld" layoutX="109.0" layoutY="167.0" prefHeight="40.0" prefWidth="190.0" promptText="Enter airport's IATA">
+        <TextField fx:id="iataFld" layoutX="109.0" layoutY="167.0" prefHeight="40.0" prefWidth="190.0" promptText="Enter airport's IATA">
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
@@ -101,7 +101,7 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
-        <TextField fx:id="iataFld" layoutX="109.0" layoutY="95.0" prefHeight="40.0" prefWidth="190.0" promptText="Enter aiport's name">
+        <TextField fx:id="nameFld" layoutX="109.0" layoutY="95.0" prefHeight="40.0" prefWidth="190.0" promptText="Enter aiport's name">
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
