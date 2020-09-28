@@ -46,7 +46,7 @@
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <Button fx:id="removeBtn" layoutX="1100.0" layoutY="50.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Remove Airline Record(s)" textFill="WHITE">
+        <Button fx:id="removeBtn" layoutX="1100.0" layoutY="50.0" mnemonicParsing="false" onAction="#removeSelected" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #116754;" text="Remove Airport Record(s)" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font></Button>
