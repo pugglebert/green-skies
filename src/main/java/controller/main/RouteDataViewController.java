@@ -1,6 +1,6 @@
 package controller.main;
 
-import controller.analysis.ReportGenerator;
+import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.Searcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,7 +61,7 @@ public class RouteDataViewController extends DataViewController {
   /**
    * Class to generate reports on history.
    */
-  private ReportGenerator reportGenerator;
+  private GeneralStatsCalculator generalStatsCalculator;
 
   /**
    * Pop up to launch when adding route to history.
@@ -79,7 +79,7 @@ public class RouteDataViewController extends DataViewController {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    this.reportGenerator = Main.getReportGenerator();
+    this.generalStatsCalculator = Main.getGeneralStatsCalculator();
     addColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
     airlineNameColumn.setCellValueFactory(new PropertyValueFactory<>("airlineName"));
     sourceAirportColumn.setCellValueFactory(new PropertyValueFactory<>("sourceAirport"));

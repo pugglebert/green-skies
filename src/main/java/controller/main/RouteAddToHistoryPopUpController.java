@@ -1,7 +1,8 @@
 package controller.main;
 
 import controller.analysis.FlightAnalyser;
-import controller.analysis.ReportGenerator;
+import controller.analysis.GeneralStatsCalculator;
+import controller.analysis.RouteStatsCalculator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the route data view.
  *
- * @author Nathan Huynh
+ * @author Hayley Krippner
  * @version 1.0
  * @since 15/09/2020
  */
@@ -58,11 +59,25 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   private Button cancelBtn;
 
   /**
-   * Class to generate reports on history.
+   * The GeneralStatsCalculator to generate reports about flight history.
    */
-  private final ReportGenerator reportGenerator = Main.getReportGenerator();
+  private final GeneralStatsCalculator generalStatsCalculator = Main.getGeneralStatsCalculator();
+  /**
+   * The RouteStatsCalculator to generate route stats for the reports about flight history.
+   */
+  private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
+  //TODO: Nathan please write. HK 26/09/2020
+  /**
+   *
+   */
   private final Storage storage = Main.getStorage();
+
+  //TODO: Nathan please write. HK 26/09/2020
+  /**
+   *
+   */
+  private ObservableList<Route> tempRoute;
 
   /**
    * This method displays the content for the history.
@@ -107,7 +122,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
     equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
 
-    ObservableList<Route> tempRoute = FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
+    tempRoute = FXCollections.observableArrayList(Main.getStorage().getTempRoutes());
     tableView.setEditable(true);
     tableView.setItems(tempRoute);
   }
@@ -115,9 +130,11 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   /** This method is to confirm the selected Routes. */
   public void confirm() {
     for (Route route : Main.getStorage().getTempRoutes()) {
-      // Have not edit number of passenger => invalid history
-      if (route.getTimesTaken() <= 0) continue; // drop
-      else {
+      if (route.getTimesTaken() <= 0) {
+        // Have not edit number of passenger => invalid history
+        continue; // drop
+
+      } else {
         int index = Main.getStorage().getHistory().indexOf(route);
         if (index != -1) {
           // Route have been added to histoy
@@ -135,33 +152,29 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
-  //todo write document for this method//
   public void updateReportStats(Route route) {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
     route.setEmissions(flightAnalyser.getPath1Emission());
     route.setDistance(flightAnalyser.getTotalDistancePath1());
-    reportGenerator.updateTotalDistance(route);
-    reportGenerator.updateTotalEmissions(route);
+    generalStatsCalculator.updateTotalDistance(route);
+    generalStatsCalculator.updateTotalEmissions(route);
     storage.addToHistorySrcAirports(route.getSourceAirport());
     storage.addToHistoryDestAirports(route.getDestinationAirport());
-    reportGenerator.updateLeastDistanceRoute(route);
-    reportGenerator.updateMostDistanceRoute(route);
-    reportGenerator.updateMostEmissionsRoute(route);
-    reportGenerator.updateLeastEmissionsRoute(route);
+    routeStatsCalculator.updateLeastDistanceRoute(route);
+    routeStatsCalculator.updateMostDistanceRoute(route);
+    routeStatsCalculator.updateMostEmissionsRoute(route);
+    routeStatsCalculator.updateLeastEmissionsRoute(route);
   }
 
-  //todo write document for this method//
   public void cancel() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(0);
     }
-    Main.getStorage().getTempRoutes().clear();
     Stage stage = (Stage) cancelBtn.getScene().getWindow();
     stage.close();
   }
 
-  //todo write document for this method//
   public void setAllPassengerTo1(ActionEvent event) {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(1);
