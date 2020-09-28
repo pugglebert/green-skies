@@ -296,21 +296,20 @@ public class SearcherTest {
   public void searchAirportsCaseSensitiveTest() {
     ArrayList<Airport> expectedResults = new ArrayList<>();
     expectedResults.add(
-        new Airport(
-            6,
-            "Wewak Intl",
-            "Wewak",
-            "Papua New Guinea",
-            "WWK",
-            "AYWK",
-            -3.583828,
-            143.669186,
-            19,
-            10,
-            "U",
-            "Pacific/Port_Moresby"));
+        new Airport(25,
+                "Tofino",
+                "Tofino",
+                "Canada",
+                "YAZ",
+                "CYAZ",
+                49.082222,
+                -125.7725,
+                80,
+                -8,
+                "A",
+                "America/Vancouver"));
     ArrayList<Airport> results =
-        Searcher.searchAirports("WEWAK INTL", "Name", storage.getAirports());
+        Searcher.searchAirports("TOFINO", "City", storage.getAirports());
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -417,6 +416,23 @@ public class SearcherTest {
         new Airline(29, "Askari Aviation", "\\N", "4K", "AAS", "AL-AAS", "Pakistan", true));
     ArrayList<Airline> results =
         Searcher.searchAirlines("askari aviation", "Name", storage.getAirlines());
+    assertArrayEquals(expectedResults.toArray(), results.toArray());
+  }
+
+  /**
+   * Verify that searchAirlines returns the expected results when a string is converted into a boolean by
+   * searching for active status.
+   */
+  @Test
+  public void searchAirlinesActiveStatusTest() throws FileNotFoundException, FileSystemException, SQLException {
+    ArrayList<Airline> expectedResults = new ArrayList<>();
+    expectedResults.add(
+            new Airline(3,"1Time Airline","\\N","1T","RNX","NEXTIME","South Africa", true));
+    expectedResults.add(
+            new Airline(10,"40-Mile Air","\\N","Q5","MLA","MILE-AIR","United States", true));
+    loader.loadFile("../seng202_project/src/test/java/TestFiles/SearcherAirlinesActiveStatusTest.csv", "Airline");
+    ArrayList<Airline> results =
+            Searcher.searchAirlines("True", "Active status", storage.getAirlines());
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 }
