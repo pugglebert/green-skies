@@ -181,7 +181,7 @@ public class Loader {
 
     Parser parser = constructParser(dataType, lines, false);
 
-    return parser.getErrorMessage();
+    return parser.getErrorMessage(true);
   }
 
   /**
@@ -215,7 +215,7 @@ public class Loader {
     List<DataType> data = parser.getData();
     storage.setData(data, dataType, fileName);
 
-    return parser.getErrorMessage();
+    return parser.getErrorMessage(true);
   }
 
   /**
@@ -273,6 +273,6 @@ public class Loader {
 
     List<DataType> data = parser.getData();
     storage.setData(data, dataType, fileName);
-    return parser.getErrorMessage();
+    return String.format("%s successfully uploaded", dataType);
   }
 }

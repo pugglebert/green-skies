@@ -1,6 +1,5 @@
 package model.loader;
 
-import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
 import org.junit.Before;
@@ -312,7 +311,7 @@ public class RouteParserTest {
     testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
-    assertEquals("File uploaded with 0 invalid lines rejected\n", testParser.getErrorMessage());
+    assertEquals("File uploaded with 0 invalid lines rejected\n", testParser.getErrorMessage(true));
   }
 
   /** Test that invalid line is not added to routes */
@@ -337,7 +336,7 @@ public class RouteParserTest {
     assertEquals(
         "File uploaded with 1 invalid lines rejected\n"
             + "Error [2] Invalid airline ID: 1 occurances\n",
-        testParser.getErrorMessage());
+        testParser.getErrorMessage(true));
   }
 
   /** Verify that no exception is thrown when 100 or fewer errors have been counted. */
@@ -412,7 +411,7 @@ public class RouteParserTest {
     assertEquals(
         "File uploaded with 1 invalid lines rejected\n"
             + "Error [2] Invalid airline ID: 1 occurances\n",
-        routeParser.getErrorMessage());
+        routeParser.getErrorMessage(true));
   }
 
   /** Verify that validater returns false for a line with the wrong number of parameters. */
@@ -431,7 +430,7 @@ public class RouteParserTest {
     RouteParser duplicateParser = new RouteParser(duplicateLines, existingLines);
     assertEquals(
         "File uploaded with 1 invalid lines rejected\nError [10] Duplicate route: 1 occurances\n",
-        duplicateParser.getErrorMessage());
+        duplicateParser.getErrorMessage(true));
   }
 
   /**

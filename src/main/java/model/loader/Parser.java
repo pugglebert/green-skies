@@ -93,14 +93,15 @@ public abstract class Parser {
   }
 
   /**
-   * Create and return a message detailing the errors found in the file
+   * This method creates and return a message detailing the errors found in the file.
    *
-   * @return String with information about error types in fiile
+   * @return String with information about error types in file.
    */
-  public String getErrorMessage() {
-    StringBuilder errorMessage =
-        new StringBuilder(
-            String.format("File uploaded with %d invalid lines rejected\n", totalErrors));
+  public String getErrorMessage(boolean uploadSuccess) {
+    StringBuilder errorMessage = new StringBuilder();
+    if (uploadSuccess) {
+      errorMessage.append(String.format("File uploaded with %d invalid lines rejected\n", totalErrors));
+    }
     String template = "Error [%d] %s: %d occurances\n";
     for (int i = 0; i < numCodes; i++) {
       if (errorCollection.get(i) > 0) {
@@ -109,6 +110,26 @@ public abstract class Parser {
     }
     return errorMessage.toString();
   }
+
+  /**
+   * This method creates and returns a message detailing any errors found in a line.
+   * @return String with informatino about error types in line.
+   */
+  public String getLineErrorMessage() {
+    String errorMessage = "Entry successfully uploaded.";
+    if (totalErrors > 0)  {
+      errorMessage = "Entry not uploaded. ";
+      for (int i = 0; i < numCodes; i++) {
+        if (errorCollection.get(i) > 0) {
+          errorMessage += String.format("Error [%d] %s", i, errorLookup[i]);
+          break;
+        }
+      }
+
+    }
+    return errorMessage;
+  }
+
 
   /**
    * Checks if the number of errors in the file is less than the size of the file.

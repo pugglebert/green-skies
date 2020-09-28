@@ -46,7 +46,11 @@ public class RouteParser extends Parser {
     }
     dataParser();
     if (!getValidFile()) {
-      throw new RuntimeException("File rejected: All lines contain errors.");
+      if (totalErrors == 1) {
+        throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
+      } else {
+        throw new RuntimeException("File rejected: All lines contain errors.\n" + getErrorMessage(false));
+      }
     }
   }
 
@@ -95,7 +99,7 @@ public class RouteParser extends Parser {
     for (String dataLine : dataFile) {
       if (totalErrors > 200) {
         totalErrors = 0;
-        throw new RuntimeException("File rejected: more than 200 lines contain errors");
+        throw new RuntimeException("File rejected: more than 200 lines contain errors\n" + getErrorMessage(false));
       }
       parseLine(dataLine);
     }

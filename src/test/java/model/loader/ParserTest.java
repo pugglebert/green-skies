@@ -145,7 +145,7 @@ public class ParserTest {
    */
   @Test
   public void getErrorMessageNoErrorTest() {
-    String errorMessage = airlineParser.getErrorMessage();
+    String errorMessage = airlineParser.getErrorMessage(true);
     assertEquals("File uploaded with 0 invalid lines rejected\n", errorMessage);
   }
 
@@ -155,7 +155,7 @@ public class ParserTest {
    */
   public void getErrorMessageErrorTest() {
     airlineParser.errorCounter(3);
-    String errorMessage = airlineParser.getErrorMessage();
+    String errorMessage = airlineParser.getErrorMessage(true);
     assertEquals(
         "File uploaded with 1 invalid lines rejected\n"
             + "Error [3] Invalid airport name: 1 occurances\n",
