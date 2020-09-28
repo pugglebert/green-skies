@@ -236,7 +236,7 @@ public class UploadController extends SideNavBarController {
     @FXML
     public void deleteFile() {
         if (currentAirlineFile != null) {
-            Optional<ButtonType> result = AlertPopUp.showDeleteAlert("Airline");
+            Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airline file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirlineFileList().remove(currentAirlineFile);
                 storage.setCurrentAirlineFile(null);
@@ -244,14 +244,14 @@ public class UploadController extends SideNavBarController {
             }
 
         }  if (currentAirportFile != null) {
-            Optional<ButtonType> result = AlertPopUp.showDeleteAlert("Airport");
+            Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airport file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirportFileList().remove(currentAirportFile);
                 storage.setCurrentAirportFile(null);
                 airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
             }
         } if (currentRouteFile != null) {
-            Optional<ButtonType> result = AlertPopUp.showDeleteAlert("Route");
+            Optional<ButtonType> result = AlertPopUp.showDeleteAlert("route file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getRouteFileList().remove(currentRouteFile);
                 storage.setCurrentRouteFile(null);

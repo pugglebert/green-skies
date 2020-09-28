@@ -10,13 +10,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.data.Airport;
 import model.data.Route;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * The controller class which contains the controls for the route data view.
@@ -70,6 +69,8 @@ public class RouteDataViewController extends DataViewController {
   private final RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
 
   private ObservableList<Route> routes;
+
+  private HashSet<String> airports;
   /**
    * Initializes the controller class. The checkboxes are added to each record.
    *
@@ -95,7 +96,18 @@ public class RouteDataViewController extends DataViewController {
     tableView.setItems(routes);
     tableView.setEditable(true);
     searchTypeSelection.setItems(searchTypes); // Setup choice boxes
-  }}
+    }
+
+    airports = new HashSet<>();
+    for (Airport airport : Main.getStorage().getAirports()) {
+      if (!airport.getIATA().equals("")) {
+        airports.add(airport.getIATA());
+      }
+      if(!airport.getICAO().equals("")) {
+        airports.add(airport.getICAO());
+      }
+    }
+  }
 
 
   /**
@@ -126,12 +138,48 @@ public class RouteDataViewController extends DataViewController {
         }
       }
 
-      addPopUp.display();
+      checkAirports();
     } else {
       errorText.setText("No routes selected.");
       errorText.setVisible(true);
     }
   }
+
+  /**
+   * This method creates a warning pop up to tell the user that route(s) they are trying to add to their history
+   * does not have associated airport(s) in the current airport file.
+   * @throws IOException if the pop up cannot be launched.
+   * @param invalidAirports a set of airport codes contained in the routes but not in the airport file.
+   */
+  public void airportWarning(HashSet<String> invalidAirports) throws IOException {
+    Optional<ButtonType> result = AlertPopUp.showAirportAlert(invalidAirports);
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+      addPopUp.display();
+    }
+  }
+
+  /**
+   * This method checks if all the airports from the routes that the user is trying to add to their history are
+   * contained in the airport file. If they are not, asks the user for confirmation before proceeding.
+   * @throws IOException If the warning pop up cannot be launched.
+   */
+  public void checkAirports() throws IOException {
+    HashSet<String> invalidAirports = new HashSet<>();
+    for (Route route : storage.getTempRoutes()) {
+      if (!airports.contains(route.getDestinationAirport())) {
+        invalidAirports.add(route.getDestinationAirport());
+      }
+      if (!airports.contains(route.getSourceAirport())) {
+        invalidAirports.add(route.getSourceAirport());
+      }
+    }
+    if (invalidAirports.size() > 0) {
+      airportWarning(invalidAirports);
+    } else {
+      addPopUp.display();
+    }
+  }
+
 
   /** This method clears the search bar and displays all routes in table view. */
   @Override
