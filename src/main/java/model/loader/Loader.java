@@ -23,6 +23,8 @@ public class Loader {
 
   /** Expected file extension */
   private final ArrayList<String> supportedExtensions;
+  /** Filenames used by application. Cannot be used as names of user files. */
+  private final ArrayList<String> reservedFilenames;
   /** The storage used in the application. */
   private final Storage storage;
 
@@ -31,8 +33,10 @@ public class Loader {
     this.storage = storage;
     supportedExtensions = new ArrayList<>();
     supportedExtensions.add("csv");
-    supportedExtensions.add("txt");
-    supportedExtensions.add("dat");
+    reservedFilenames = new ArrayList<>();
+    reservedFilenames.add("singleEntryAirlines.csv");
+    reservedFilenames.add("singleEntryAirports.csv");
+    reservedFilenames.add("singleEntryRoutes.csv");
   }
 
   /**
@@ -86,6 +90,9 @@ public class Loader {
     }
     if (duplicate) {
       throw new RuntimeException(String.format("There is already a file with the name %s in the system", fileName));
+    }
+    if (reservedFilenames.contains(fileName)) {
+      throw new RuntimeException(String.format("Filename %s is used by the system. User files cannot have this name", fileName));
     }
   }
 
@@ -265,7 +272,6 @@ public class Loader {
 
     String fileName = getLineFileName(dataType);
 
-    checkDuplicateFileName(fileName);
     ArrayList<String> line = new ArrayList<>();
     line.add(entryString);
 
