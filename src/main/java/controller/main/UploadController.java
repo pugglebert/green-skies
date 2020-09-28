@@ -179,7 +179,8 @@ public class UploadController extends SideNavBarController {
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
-                    airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
+                    airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
+                    airportFileList.getSelectionModel().select(storage.getCurrentAirportFile());
                     break;
                 }
                 case "Airline": {
@@ -188,7 +189,8 @@ public class UploadController extends SideNavBarController {
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
-                    airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
+                    airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
+                    airlineFileList.getSelectionModel().select(storage.getCurrentAirlineFile());
                     break;
                 }
                 case "Route": {
@@ -198,6 +200,7 @@ public class UploadController extends SideNavBarController {
                     newStage.setScene(scene);
                     newStage.showAndWait();
                     routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
+                    routeFileList.getSelectionModel().select(storage.getCurrentRouteFile());
                     break;
                 }
             }
