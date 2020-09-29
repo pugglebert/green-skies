@@ -319,11 +319,23 @@ public class Storage {
    * @param fileType The string shows what type of data user may uploaded.
    */
   public void updateDatabase(String fileType){
+    if(!(fileType.matches("Airport") || fileType.matches("Airline") || fileType.matches("Route"))){
+      System.out.println(fileType);
+
+      throw new IllegalArgumentException("Type must be Airport, Airline or Route");
+    }
     switch(fileType){
       case "Airport":
         database.initialiseTable("Airport", getCurrentAirportFile());
         database.updateAirportTable(getAirports());
         break;
+      case "Airline":
+        database.initialiseTable("Airline", getCurrentAirlineFile());
+        database.updateAirlineTable(getAirlines());
+        break;
+      case "Route":
+        database.initialiseTable("Route", getCurrentRouteFile());
+        database.updateRoute(getRoutes());
     }
   }
 

@@ -580,10 +580,43 @@ public class SQLiteDatabase {
     }
   }
 
+  /**
+   * This method update airport table with given airports list, this method can be used after call to initialiseTable
+   * method.
+   * @param airports A list contains all airports needs to be uploaded to database.
+   */
   public void updateAirportTable(List<Airport> airports) {
     if (!airports.isEmpty()) {
       for (Airport airport : airports) {
         addAirports(airport);
+      }
+      startCommite();
+    }
+  }
+
+  /**
+   * This method update airline table with given airlines list, this method can be used after call to initialiseTable
+   * method.
+   * @param airlines A list contains all airlines needs to be uploaded to database.
+   */
+  public void updateAirlineTable(List<Airline> airlines){
+    if (!airlines.isEmpty()) {
+      for (Airline airline : airlines) {
+        addAirlines(airline);
+      }
+      startCommite();
+    }
+  }
+
+  /**
+   * This method update route table with given route list, this method can be used after call to initialiseTable
+   * method.
+   * @param routes A list contains all routes needs to be uploaded to database.
+   */
+  public void updateRoute(List<Route> routes){
+    if (!routes.isEmpty()) {
+      for (Route route : routes) {
+        addRoutes(route);
       }
       startCommite();
     }

@@ -116,23 +116,19 @@ public class UploadController extends SideNavBarController {
                 Optional<ButtonType> result = ConfirmAlert.showAndWait();
                 if (result.get() == yesButton) {
                     loader.loadFile(stringFile, fileType);
-//                    storage.updateDatabase(fileType);
+                    storage.updateDatabase(fileType);
                     switch (fileType) {
                         case "Airport":
                             airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
                             airportFileList.getSelectionModel().select(storage.getCurrentAirportFile());
-                            storage.updateDatabase("Airport");
-//              storage.resetAirportsList();
                             break;
                         case "Airline":
                             airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
                             airlineFileList.getSelectionModel().select(storage.getCurrentAirlineFile());
-//              storage.resetAirlinesList();
                             break;
                         case "Route":
                             routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
                             routeFileList.getSelectionModel().select(storage.getCurrentRouteFile());
-//              storage.resetRoutesList();
                             break;
                     }
                     ConfirmAlert.close();
