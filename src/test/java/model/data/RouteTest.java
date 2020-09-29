@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class RouteTest /*extends ApplicationTest*/ {
+public class RouteTest extends ApplicationTest {
 
     private Route route;
 

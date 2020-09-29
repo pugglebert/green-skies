@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 
 import static org.junit.Assert.*;
 
-public class AirlineTest /*extends ApplicationTest*/ {
+public class AirlineTest extends ApplicationTest {
 
   private Airline airline;
 
