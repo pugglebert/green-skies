@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 
 import static org.junit.Assert.*;
 
-public class AirportTest extends ApplicationTest {
+public class AirportTest /*extends ApplicationTest*/ {
 
   private Airport airport;
 
