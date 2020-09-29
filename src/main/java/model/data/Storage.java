@@ -253,7 +253,7 @@ public class Storage {
    */
   public void setData(List<DataType> data, String type, String filename) {
     //close auto commite for database
-    database.closeAutoCommite();
+//    database.closeAutoCommite();
 
     if (type.matches("Airline")) {
       List<Airline> airlines = new ArrayList<>();
@@ -324,18 +324,22 @@ public class Storage {
 
       throw new IllegalArgumentException("Type must be Airport, Airline or Route");
     }
+    database.closeAutoCommite();
     switch(fileType){
       case "Airport":
         database.initialiseTable("Airport", getCurrentAirportFile());
         database.updateAirportTable(getAirports());
+        database.updateTableList(getCurrentAirportFile(), "Airport");
         break;
       case "Airline":
         database.initialiseTable("Airline", getCurrentAirlineFile());
         database.updateAirlineTable(getAirlines());
+        database.updateTableList(getCurrentAirlineFile(), "Airline");
         break;
       case "Route":
         database.initialiseTable("Route", getCurrentRouteFile());
         database.updateRoute(getRoutes());
+        database.updateTableList(getCurrentRouteFile(), "AirRouteline");
     }
   }
 

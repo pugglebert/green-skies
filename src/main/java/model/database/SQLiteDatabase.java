@@ -208,8 +208,8 @@ public class SQLiteDatabase {
     }
   }
 
-  /** This method create a table that contains all table names and corresponding types */
-  protected void buildTableList(){
+  /** This method create a table that contains all file names and corresponding types */
+  protected void buildTableList() {
     if (con == null) {
       // get connection
       buildConnection();
@@ -217,11 +217,11 @@ public class SQLiteDatabase {
     try {
       builtTable = con.createStatement();
       builtTable.executeUpdate(
-              "create table table_list"
-                      + "(table_id integer,"
-                      + "table_name varchar(255),"
-                      + "table_type varchar(10),"
-                      + " primary key (table_id))");
+          "create table file_list"
+              + "(file_id integer,"
+              + "file_name varchar(255),"
+              + "file_type varchar(10),"
+              + " primary key (file_id))");
       startCommite();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
@@ -371,8 +371,8 @@ public class SQLiteDatabase {
     try {
       state = con.createStatement();
       res =
-              state.executeQuery(
-                      "SELECT name FROM sqlite_master WHERE type='table' AND name='table_list'");
+          state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name='file_list'");
       if (!res.next()) {
         buildTableList();
       }
@@ -459,7 +459,6 @@ public class SQLiteDatabase {
         break;
     }
   }
-
 
   /**
    * This method initialise storage with data from database.
@@ -628,8 +627,9 @@ public class SQLiteDatabase {
   }
 
   /**
-   * This method update airport table with given airports list, this method can be used after call to initialiseTable
-   * method.
+   * This method update airport table with given airports list, this method can be used after call
+   * to initialiseTable method.
+   *
    * @param airports A list contains all airports needs to be uploaded to database.
    */
   public void updateAirportTable(List<Airport> airports) {
@@ -642,11 +642,12 @@ public class SQLiteDatabase {
   }
 
   /**
-   * This method update airline table with given airlines list, this method can be used after call to initialiseTable
-   * method.
+   * This method update airline table with given airlines list, this method can be used after call
+   * to initialiseTable method.
+   *
    * @param airlines A list contains all airlines needs to be uploaded to database.
    */
-  public void updateAirlineTable(List<Airline> airlines){
+  public void updateAirlineTable(List<Airline> airlines) {
     if (!airlines.isEmpty()) {
       for (Airline airline : airlines) {
         addAirlines(airline);
@@ -656,11 +657,12 @@ public class SQLiteDatabase {
   }
 
   /**
-   * This method update route table with given route list, this method can be used after call to initialiseTable
-   * method.
+   * This method update route table with given route list, this method can be used after call to
+   * initialiseTable method.
+   *
    * @param routes A list contains all routes needs to be uploaded to database.
    */
-  public void updateRoute(List<Route> routes){
+  public void updateRoute(List<Route> routes) {
     if (!routes.isEmpty()) {
       for (Route route : routes) {
         addRoutes(route);
@@ -669,7 +671,58 @@ public class SQLiteDatabase {
     }
   }
 
-//  public HashMap<String, List<DataType>> getFileNames(){
-//
-//  }
+  /** this method update table name list when user upload a data file.
+   * @param fileName Name of the file that user uploaded.
+   * @param fileType Type of the file that user uploaded.
+   */
+  public void updateTableList(String fileName, String fileType) {
+    try {
+      state = con.createStatement();
+      res = state.executeQuery("select * from 'file_list' where file_name='" + fileName + "' and file_type='" + fileType + "'");
+      if(!res.next()){
+        prep = con.prepareStatement("insert into 'file_list' values(?,?,?);");
+        prep.setString(2, fileName);
+        prep.setString(3, fileType);
+        prep.execute();
+        startCommite();
+      }
+
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        res.close();
+        prep.close();
+        state.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+  }
+
+
+    public List<String> getFileNamesByType(String fileType){
+        ArrayList<String> file_names = new ArrayList<>();
+        try{
+          state = con.createStatement();
+          res = state.executeQuery("select * from 'file_list' where file_type='" + fileType + "'");
+          while (res.next()){
+//            file_names.add(res.)
+          }
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        } finally {
+          try {
+
+          } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+          }
+        }
+
+    }
+
+
+
+
+
 }
