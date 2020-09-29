@@ -7,3 +7,4 @@ target/
 app.sqlite
 *.iml
 
+dependency-reduced-pom.xml
