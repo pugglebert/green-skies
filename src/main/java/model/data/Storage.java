@@ -375,7 +375,6 @@ public class Storage {
     return historyDestAirports;
   }
 
-
   public HashMap<String, List<Airline>> getAirlineFileList() {
     return airlineFiles;
   }
