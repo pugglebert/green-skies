@@ -367,12 +367,28 @@ public class RouteParserTest {
     }
   }
 
-  /** Verify that changeNulls changes \N strings to zero. */
+  /** Verify that changeNulls changes \N string for airline ID to zero. */
   @Test
-  public void changeNullsNullTest() {
+  public void changeNullsAirlineIDNullTest() {
+    String[] testString = {"MI", "\\N", "HYD", "43", "SIN", "3316", "", "0", "320 738"};
+    routeParser.changeNulls(testString);
+    assertEquals("0", testString[1]);
+  }
+
+  /** Verify that changeNulls changes \N string for source ID to zero. */
+  @Test
+  public void changeNullsSourceIDNullTest() {
     String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "3316", "", "0", "320 738"};
     routeParser.changeNulls(testString);
     assertEquals("0", testString[3]);
+  }
+
+  /** Verify that changeNulls changes \N string for destination ID to zero. */
+  @Test
+  public void changeNullsDestinationIDNullTest() {
+    String[] testString = {"MI", "4750", "HYD", "43", "SIN", "\\N", "", "0", "320 738"};
+    routeParser.changeNulls(testString);
+    assertEquals("0", testString[5]);
   }
 
   /** Verify that changeNulls doesn't change non-null strings. */
@@ -514,5 +530,21 @@ public class RouteParserTest {
         loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateRouteTest.csv");
     RouteParser duplicateParser = new RouteParser(duplicateLines, existingLines);
     assertEquals(1, duplicateParser.getData().size());
+  }
+
+  /**
+   * Verfiy that expected error message is given when attempting to upload a single invalid line.
+   */
+  @Test
+  public void singleInvalidUploadErrorMessageTest() {
+    Storage storage = new Storage();
+    ArrayList<String> invalidLines = new ArrayList<>();
+    invalidLines.add("2609,\"Great Plains Airlines\",\\N,\"\",\"GRP\",\"GREAT PLAINS\",\"United States\",\"N\"");
+    try {
+      new RouteParser(invalidLines, storage.getRoutes());
+      fail();
+    } catch (RuntimeException e) {
+      assertEquals("Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurances\n", e.getMessage());
+    }
   }
 }

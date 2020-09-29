@@ -1,5 +1,6 @@
-package controller.main;
+package controller.main.dataview;
 
+import controller.main.dataview.FilterPopUpController;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -66,6 +67,6 @@ public class AirportFilterPopUpController extends FilterPopUpController {
    */
   @Override
   public String getFXMLFilename() {
-    return "airportFilterPopUp.fxml";
+    return "/controller/main/airportFilterPopUp.fxml";
   }
 }

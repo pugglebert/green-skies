@@ -56,7 +56,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("upload.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/upload.fxml"));
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../upload.fxml"));
     }
@@ -73,7 +73,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("viewRouteData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/viewRouteData.fxml"));
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../viewRouteData.fxml"));
     }
@@ -90,7 +90,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("viewAirportData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/viewAirportData.fxml"));
 
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../viewAirportData.fxml"));
@@ -109,7 +109,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("viewAirlineData.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/viewAirlineData.fxml"));
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../viewAirlineData.fxml"));
     }
@@ -126,7 +126,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("flightHistory.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/flightHistory.fxml"));
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../flightHistory.fxml"));
     }
@@ -143,7 +143,8 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("carbonEmissionsReport.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/carbonEmissionsReport.fxml"));
+      System.out.println(getClass());
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../carbonEmissionsReport.fxml"));
     }
@@ -160,7 +161,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("mapOfRoutes.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/mapOfRoutes.fxml"));
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../mapOfRoutes.fxml"));
     }
@@ -177,7 +178,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("graphs.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/graphs.fxml"));
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../graphs.fxml"));
     }
@@ -194,7 +195,7 @@ public abstract class SideNavBarController implements Initializable {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root;
     try {
-      root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
+      root = FXMLLoader.load(getClass().getResource("/controller/main/analyse.fxml"));
     } catch (NullPointerException e) {
       root = FXMLLoader.load(getClass().getResource("../analyse.fxml"));
     }

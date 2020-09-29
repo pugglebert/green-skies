@@ -1,5 +1,6 @@
-package controller.main;
+package controller.main.dataview;
 
+import controller.main.dataview.FilterPopUpController;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -70,6 +71,6 @@ public class HistoryFilterPopUpController extends FilterPopUpController {
    */
   @Override
   public String getFXMLFilename() {
-    return "historyFilterPopUp.fxml";
+    return "/controller/main/historyFilterPopUp.fxml";
   }
 }

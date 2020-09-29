@@ -50,7 +50,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
    */
   public void start(Stage primaryStage) throws IOException {
 
-    Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/analyse.fxml"));
     primaryStage.setTitle("Welcome");
     primaryStage.setScene(new Scene(root, 1024, 640));
     primaryStage.show();

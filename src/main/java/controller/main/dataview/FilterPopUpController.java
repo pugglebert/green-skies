@@ -1,6 +1,7 @@
-package controller.main;
+package controller.main.dataview;
 
 import controller.analysis.Filterer;
+import controller.main.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
