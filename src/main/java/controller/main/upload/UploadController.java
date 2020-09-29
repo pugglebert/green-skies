@@ -1,5 +1,9 @@
-package controller.main;
+package controller.main.upload;
 
+import controller.main.AlertPopUp;
+import controller.main.GreenSkiesApplication;
+import controller.main.Main;
+import controller.main.SideNavBarController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -175,7 +179,7 @@ public class UploadController extends SideNavBarController {
             switch (fileType) {
                 case "Airport": {
                     Stage newStage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("airportSingleEntry.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/airportSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
@@ -185,7 +189,7 @@ public class UploadController extends SideNavBarController {
                 }
                 case "Airline": {
                     Stage newStage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("airlineSingleEntry.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/airlineSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
@@ -195,7 +199,7 @@ public class UploadController extends SideNavBarController {
                 }
                 case "Route": {
                     Stage newStage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("routeSingleEntry.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/routeSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
@@ -215,7 +219,7 @@ public class UploadController extends SideNavBarController {
   public void backToWelcome() throws IOException {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root =
-        FXMLLoader.load(getClass().getResource("welcome.fxml")); // open the Welcome page
+        FXMLLoader.load(getClass().getResource("/controller/main/welcome.fxml")); // open the Welcome page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
   }

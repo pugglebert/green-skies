@@ -1,8 +1,9 @@
-package controller.main;
+package controller.main.dataview;
 
 import controller.analysis.FlightAnalyser;
 import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
+import controller.main.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -86,7 +87,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
    */
   public void display() throws IOException {
 
-    Parent root = FXMLLoader.load(getClass().getResource("routeAddToHistoryPopUp.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/routeAddToHistoryPopUp.fxml"));
     Stage addPopUp = new Stage();
     addPopUp.setTitle("Add To History ");
     addPopUp.initModality(Modality.APPLICATION_MODAL);

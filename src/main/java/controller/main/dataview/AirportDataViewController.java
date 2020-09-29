@@ -1,6 +1,7 @@
-package controller.main;
+package controller.main.dataview;
 
 import controller.analysis.Searcher;
+import controller.main.AlertPopUp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airport;
-import model.data.Route;
 
 import java.io.IOException;
 import java.net.URL;

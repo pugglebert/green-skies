@@ -1,5 +1,6 @@
-package controller.main;
+package controller.main.dataview;
 
+import controller.main.dataview.FilterPopUpController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -76,6 +77,6 @@ public class AirlineFilterPopUpController extends FilterPopUpController {
    */
   @Override
   public String getFXMLFilename() {
-    return "airlineFilterPopUp.fxml";
+    return "/controller/main/airlineFilterPopUp.fxml";
   }
 }

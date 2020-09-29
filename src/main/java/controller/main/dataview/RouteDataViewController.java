@@ -1,7 +1,9 @@
-package controller.main;
+package controller.main.dataview;
 
 import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.Searcher;
+import controller.main.AlertPopUp;
+import controller.main.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

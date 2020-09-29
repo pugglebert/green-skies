@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="647.0" prefWidth="1064.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.RouteAddToHistoryPopUpController">
+<AnchorPane prefHeight="647.0" prefWidth="1064.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.dataview.RouteAddToHistoryPopUpController">
     <children>
         <TableView fx:id="tableView" layoutX="41.0" layoutY="165.0" prefHeight="382.0" prefWidth="993.0">
             <columns>
