@@ -67,15 +67,15 @@
         </VBox>
       <Pane layoutX="563.0" layoutY="101.0" prefHeight="375.0" prefWidth="404.0">
          <children>
-            <BarChart fx:id="barChart" layoutX="-270.0" layoutY="-23.0" prefHeight="570.0" prefWidth="958.0" title="CO2 Emissions per Route ">
+            <BarChart fx:id="barChart" layoutX="-283.0" layoutY="-33.0" prefHeight="570.0" prefWidth="958.0" title="CO2 Emissions per Route ">
               <xAxis>
                 <CategoryAxis label="Route" side="BOTTOM" fx:id="xAxis" />
               </xAxis>
               <yAxis>
-                <NumberAxis fx:id="yAxis" label="Carbon Emissions" side="LEFT" />
+                <NumberAxis fx:id="yAxis" label="Carbon Emissions (kg)" side="LEFT" />
               </yAxis>
             </BarChart>
-            <Text fx:id="warningText" fill="#e40707" layoutX="-39.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You do not have any routes in your flight history to show on the graph.&#10;&#10;Note you must have uploaded airport data for &#10;emissions calculations." textAlignment="CENTER" visible="false" wrappingWidth="520.6239013671875">
+            <Text fx:id="warningText" fill="#e40707" layoutX="-91.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You do not have any routes in your flight history to show on the graph. &#10;&#10;Go to the Route Data page to select flights to add to your history.&#10;&#10;Note you must have uploaded airport data for  emissions calculations." textAlignment="CENTER" visible="false" wrappingWidth="572.449951171875">
                <font>
                   <Font name="Arial Bold" size="21.0" />
                </font>

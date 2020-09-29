@@ -161,10 +161,10 @@ public class ReportGeneratorTest {
 
   // ------------------------------------- Testing for updateTotalDistance
 
-  /**
-   * Verify that when updateTotalDistance is called with a route that is of large distance that the
-   * total distance is updated accordingly.The total distance is started as 0.0 km.
-   */
+//  /**
+//   * Verify that when updateTotalDistance is called with a route that is of large distance that the
+//   * total distance is updated accordingly.The total distance is started as 0.0 km.
+//   */
 //  @Test
 //  public void updateTotalDistanceLargeDistanceInitiallyZeroTest() {
 //    reportGenerator.setTotalDistanceTravelled(0.0);
@@ -174,10 +174,10 @@ public class ReportGeneratorTest {
 //    assertEquals(4157987.41, reportGenerator.getTotalDistanceTravelled(), 0.0001);
 //  }
 
-  /**
-   * Verify that when updateTotalDistance is called with a route that is of small distance that the
-   * total * distance is updated accordingly.The total distance is started as 0.0 km.
-   */
+//  /**
+//   * Verify that when updateTotalDistance is called with a route that is of small distance that the
+//   * total * distance is updated accordingly.The total distance is started as 0.0 km.
+//   */
 //  @Test
 //  public void updateTotalDistanceSmallDistanceInitiallyZeroTest() {
 //    reportGenerator.setTotalDistanceTravelled(0.0);
@@ -213,10 +213,10 @@ public class ReportGeneratorTest {
 //    assertEquals(58900000046372.93, reportGenerator.getTotalDistanceTravelled(), 0.0001);
 //  }
 
-  /**
-   * Verify that when updateTotalDistance is called with a route that is of small distance that the
-   * total distance is updated accordingly. The total distance is started at a large distance in km.
-   */
+//  /**
+//   * Verify that when updateTotalDistance is called with a route that is of small distance that the
+//   * total distance is updated accordingly. The total distance is started at a large distance in km.
+//   */
 //  @Test
 //  public void updateTotalDistanceSmallDistanceInitiallyLargeTest() {
 //    reportGenerator.setTotalDistanceTravelled(67554440900000.07);
