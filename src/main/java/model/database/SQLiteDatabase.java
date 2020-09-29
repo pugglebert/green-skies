@@ -247,6 +247,7 @@ public class SQLiteDatabase {
 
     try {
       prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
+      System.out.println(airport.getAirportID());
       prep.setInt(1, airport.getAirportID());
       prep.setString(2, airport.getName());
       prep.setString(3, airport.getCity());
@@ -328,7 +329,6 @@ public class SQLiteDatabase {
       // get connections
       buildConnection();
     }
-
     try {
       prep = con.prepareStatement("insert into" + tableName + "values(?,?,?,?,?,?,?,?);");
       prep.setInt(1, airline.getAirlineID());
@@ -759,9 +759,5 @@ public class SQLiteDatabase {
         }
       return file_names;
     }
-
-
-
-
 
 }
