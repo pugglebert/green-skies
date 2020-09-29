@@ -116,7 +116,6 @@ public class UploadController extends SideNavBarController {
                 Optional<ButtonType> result = ConfirmAlert.showAndWait();
                 if (result.get() == yesButton) {
                     loader.loadFile(stringFile, fileType);
-//                    storage.updateDatabase(fileType);
                     switch (fileType) {
                         case "Airport":
                             airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));

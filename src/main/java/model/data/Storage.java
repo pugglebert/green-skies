@@ -1,8 +1,8 @@
 package model.data;
 
-import io.cucumber.java.hu.Ha;
 import javafx.util.Pair;
 import model.database.SQLiteDatabase;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -257,7 +257,7 @@ public class Storage {
    */
   public void setData(List<DataType> data, String type, String filename) {
     //close auto commite for database
-    database.closeAutoCommite();
+//    database.closeAutoCommite();
 
     if (type.matches("Airline")) {
       List<Airline> airlines = new ArrayList<>();
@@ -266,9 +266,9 @@ public class Storage {
 //        database.setTableName(filename);
 //        database.initialiseTable("Airline");
       } else {
-        currentAirlineFile = filename;
-        database.setTableName(filename);
-        database.initialiseTable("Airline");
+          currentAirlineFile = filename;
+//        database.setTableName(filename);
+//        database.initialiseTable("Airline");
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
@@ -319,16 +319,6 @@ public class Storage {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
   }
-
-//  /**
-//   * This method update database after user uplaod data.
-//   * @param fileType The string shows what type of data user may uploaded.
-//   */
-//  public void updateDatabase(String fileType){
-//    switch(fileType){
-//      case
-//    }
-//  }
 
   /**
    * This method initilises storage with data from database after user start the application
