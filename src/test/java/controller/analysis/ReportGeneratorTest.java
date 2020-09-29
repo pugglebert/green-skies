@@ -165,27 +165,27 @@ public class ReportGeneratorTest {
    * Verify that when updateTotalDistance is called with a route that is of large distance that the
    * total distance is updated accordingly.The total distance is started as 0.0 km.
    */
-  @Test
-  public void updateTotalDistanceLargeDistanceInitiallyZeroTest() {
-    reportGenerator.setTotalDistanceTravelled(0.0);
-    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
-    testRoute.setDistance(4157987.41);
-    reportGenerator.updateTotalDistance(testRoute);
-    assertEquals(4157987.41, reportGenerator.getTotalDistanceTravelled(), 0.0001);
-  }
+//  @Test
+//  public void updateTotalDistanceLargeDistanceInitiallyZeroTest() {
+//    reportGenerator.setTotalDistanceTravelled(0.0);
+//    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
+//    testRoute.setDistance(4157987.41);
+//    reportGenerator.updateTotalDistance(testRoute);
+//    assertEquals(4157987.41, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+//  }
 
   /**
    * Verify that when updateTotalDistance is called with a route that is of small distance that the
    * total * distance is updated accordingly.The total distance is started as 0.0 km.
    */
-  @Test
-  public void updateTotalDistanceSmallDistanceInitiallyZeroTest() {
-    reportGenerator.setTotalDistanceTravelled(0.0);
-    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
-    testRoute.setDistance(3902.79);
-    reportGenerator.updateTotalDistance(testRoute);
-    assertEquals(3902.79, reportGenerator.getTotalDistanceTravelled(), 0.0001);
-  }
+//  @Test
+//  public void updateTotalDistanceSmallDistanceInitiallyZeroTest() {
+//    reportGenerator.setTotalDistanceTravelled(0.0);
+//    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
+//    testRoute.setDistance(3902.79);
+//    reportGenerator.updateTotalDistance(testRoute);
+//    assertEquals(3902.79, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+//  }
 
   /**
    * Verify that when updateTotalDistance is called with a route with zero distance that the total
@@ -200,31 +200,31 @@ public class ReportGeneratorTest {
     assertEquals(0.0, reportGenerator.getTotalDistanceTravelled(), 0.0001);
   }
 
-  /**
-   * Verify that when updateTotalDistance is called with a route that is of large distance that the
-   * total distance is updated accordingly. The total distance is started at a large distance in km.
-   */
-  @Test
-  public void updateTotalDistanceLargeDistanceInitiallyLargeTest() {
-    reportGenerator.setTotalDistanceTravelled(58900000000000.02);
-    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
-    testRoute.setDistance(46372.91);
-    reportGenerator.updateTotalDistance(testRoute);
-    assertEquals(58900000046372.93, reportGenerator.getTotalDistanceTravelled(), 0.0001);
-  }
+//  /**
+//   * Verify that when updateTotalDistance is called with a route that is of large distance that the
+//   * total distance is updated accordingly. The total distance is started at a large distance in km.
+//   */
+//  @Test
+//  public void updateTotalDistanceLargeDistanceInitiallyLargeTest() {
+//    reportGenerator.setTotalDistanceTravelled(58900000000000.02);
+//    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
+//    testRoute.setDistance(46372.91);
+//    reportGenerator.updateTotalDistance(testRoute);
+//    assertEquals(58900000046372.93, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+//  }
 
   /**
    * Verify that when updateTotalDistance is called with a route that is of small distance that the
    * total distance is updated accordingly. The total distance is started at a large distance in km.
    */
-  @Test
-  public void updateTotalDistanceSmallDistanceInitiallyLargeTest() {
-    reportGenerator.setTotalDistanceTravelled(67554440900000.07);
-    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
-    testRoute.setDistance(4157.41);
-    reportGenerator.updateTotalDistance(testRoute);
-    assertEquals(67554440904157.48, reportGenerator.getTotalDistanceTravelled(), 0.0001);
-  }
+//  @Test
+//  public void updateTotalDistanceSmallDistanceInitiallyLargeTest() {
+//    reportGenerator.setTotalDistanceTravelled(67554440900000.07);
+//    Route testRoute = new Route("7K", 392, "PKL", 3920, "MDC", 2523, "", 2, "PDS".split(" "));
+//    testRoute.setDistance(4157.41);
+//    reportGenerator.updateTotalDistance(testRoute);
+//    assertEquals(67554440904157.48, reportGenerator.getTotalDistanceTravelled(), 0.0001);
+//  }
 
   /**
    * Verify that when updateTotalDistance is called with a route that is of zero distance that the
