@@ -5,6 +5,7 @@ import model.data.*;
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -207,6 +208,32 @@ public class SQLiteDatabase {
     }
   }
 
+  /** This method create a table that contains all table names and corresponding types */
+  protected void buildTableList(){
+    if (con == null) {
+      // get connection
+      buildConnection();
+    }
+    try {
+      builtTable = con.createStatement();
+      builtTable.executeUpdate(
+              "create table table_list"
+                      + "(table_id integer,"
+                      + "table_name varchar(255),"
+                      + "table_type varchar(10),"
+                      + " primary key (table_id))");
+      startCommite();
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        builtTable.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+  }
+
   /**
    * This method insert all attributes of an airport object into database.
    *
@@ -341,6 +368,25 @@ public class SQLiteDatabase {
     // interact with.
     this.tableName = "'" + fileName.split("\\.")[0] + "'";
 
+    try {
+      state = con.createStatement();
+      res =
+              state.executeQuery(
+                      "SELECT name FROM sqlite_master WHERE type='table' AND name='table_list'");
+      if (!res.next()) {
+        buildTableList();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        res.close();
+        state.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+
     switch (tableType) {
       case "Airport":
         try {
@@ -413,6 +459,7 @@ public class SQLiteDatabase {
         break;
     }
   }
+
 
   /**
    * This method initialise storage with data from database.
@@ -621,4 +668,8 @@ public class SQLiteDatabase {
       startCommite();
     }
   }
+
+//  public HashMap<String, List<DataType>> getFileNames(){
+//
+//  }
 }
