@@ -266,7 +266,7 @@ public class GeneralStatsCalculatorTest {
    */
   @Test
   public void getDateAsIntPositiveIntTest() {
-    int expectedDate = 272;
+    int expectedDate = 273;
     generalStatsCalculator.calculateDateAsInt();
     assertEquals(expectedDate, generalStatsCalculator.getDayInYear());
   }
