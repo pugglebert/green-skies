@@ -49,10 +49,11 @@ public class GraphsController extends SideNavBarController {
 
     routes = storage.getHistory();
 
+    //Check if flights exist in the users history
     if (routes.size() == 0) {
       warningText.setVisible(true);
     } else {
-
+      //If there are less than 10 fights in history, not need to sort them
       if (routes.size() <= 10) {
         for (Route route : routes) {
           String dest = route.getDestinationAirport();
@@ -62,6 +63,7 @@ public class GraphsController extends SideNavBarController {
           data.getData().add(new XYChart.Data(axisString, emissions));
         }
       } else {
+        //If there are more than 10 flights in history, they need to be sorted to obtain the top ten carbon emitters
         ArrayList<Route> sortedByEmissions = new ArrayList<Route>(routes);
         Collections.sort(
             sortedByEmissions,
