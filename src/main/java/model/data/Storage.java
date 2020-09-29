@@ -156,10 +156,6 @@ public class Storage {
     }
     return airportFiles.get(currentAirportFile);
   }
-//  /** This method reset airports list. */
-//  public void resetAirportsList() {
-//    airports = new ArrayList<>();
-//  }
 
   /**
    * This method returns a List of all the names of the stored Route files, or an empty List if no Route files
@@ -267,8 +263,8 @@ public class Storage {
 //        database.initialiseTable("Airline");
       } else {
         currentAirlineFile = filename;
-        database.setTableName(filename);
-        database.initialiseTable("Airline");
+//        database.setTableName(filename);
+//        database.initialiseTable("Airline");
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
@@ -287,8 +283,6 @@ public class Storage {
 //        database.initialiseTable("Airport");
       } else {
         currentAirportFile = filename;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airport");
       }
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
@@ -320,15 +314,18 @@ public class Storage {
     }
   }
 
-//  /**
-//   * This method update database after user uplaod data.
-//   * @param fileType The string shows what type of data user may uploaded.
-//   */
-//  public void updateDatabase(String fileType){
-//    switch(fileType){
-//      case
-//    }
-//  }
+  /**
+   * This method update database after user uplaod data.
+   * @param fileType The string shows what type of data user may uploaded.
+   */
+  public void updateDatabase(String fileType){
+    switch(fileType){
+      case "Airport":
+        database.initialiseTable("Airport", getCurrentAirportFile());
+        database.updateAirportTable(getAirports());
+        break;
+    }
+  }
 
   /**
    * This method initilises storage with data from database after user start the application

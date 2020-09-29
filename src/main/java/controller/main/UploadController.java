@@ -121,6 +121,7 @@ public class UploadController extends SideNavBarController {
                         case "Airport":
                             airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
                             airportFileList.getSelectionModel().select(storage.getCurrentAirportFile());
+                            storage.updateDatabase("Airport");
 //              storage.resetAirportsList();
                             break;
                         case "Airline":

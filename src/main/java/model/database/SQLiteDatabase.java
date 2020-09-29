@@ -5,6 +5,7 @@ import model.data.*;
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to store presistent data in database.
@@ -79,21 +80,21 @@ public class SQLiteDatabase {
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     }
-//    finally {
-//      try {
-//      } catch (Exception e) {
-//        JOptionPane.showMessageDialog(null, e);
-//      }
-//    }
+    //    finally {
+    //      try {
+    //      } catch (Exception e) {
+    //        JOptionPane.showMessageDialog(null, e);
+    //      }
+    //    }
   }
 
-  /**
-   * This method sets table name that is going to be created in database.
-   * @param fileName Provided file name.
-   */
-  public void setTableName(String fileName){
-    this.tableName = "'" + fileName.split("\\.")[0] + "'";
-  }
+  //  /**
+  //   * This method sets table name that is going to be created in database.
+  //   * @param fileName Provided file name.
+  //   */
+  //  public void setTableName(String fileName){
+  //    this.tableName = "'" + fileName.split("\\.")[0] + "'";
+  //  }
 
   /** This method builds airports table with airport attributes as colunms in dastabase. */
   protected void buildAirportsTable() {
@@ -105,7 +106,9 @@ public class SQLiteDatabase {
     try {
       builtTable = con.createStatement();
       builtTable.executeUpdate(
-          "create table "+ tableName + "(airport_id integer,"
+          "create table "
+              + tableName
+              + "(airport_id integer,"
               + "name varchar(60),"
               + "city varchar(60),"
               + "country varchar(60),"
@@ -140,7 +143,9 @@ public class SQLiteDatabase {
     try {
       builtTable = con.createStatement();
       builtTable.executeUpdate(
-          "create table " + tableName + "(route_id integer,"
+          "create table "
+              + tableName
+              + "(route_id integer,"
               + "airlineName varchar(60),"
               + "airlineID integer,"
               + "sourceAirport varchar(60),"
@@ -166,7 +171,10 @@ public class SQLiteDatabase {
     }
   }
 
-  /** This method builds airlines table with given name and with airline attributes as colunms in dastabase. */
+  /**
+   * This method builds airlines table with given name and with airline attributes as colunms in
+   * dastabase.
+   */
   protected void buildAirlinesTable() {
     if (con == null) {
       // get connection
@@ -176,7 +184,9 @@ public class SQLiteDatabase {
     try {
       builtTable = con.createStatement();
       builtTable.executeUpdate(
-          "create table" + tableName +"(airline_id integer,"
+          "create table"
+              + tableName
+              + "(airline_id integer,"
               + "airlineName varchar(60),"
               + "alias varchar(60),"
               + "IATA varchar(5),"
@@ -246,7 +256,8 @@ public class SQLiteDatabase {
     }
 
     try {
-      prep = con.prepareStatement("insert into " + tableName +" values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
+      prep =
+          con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setString(2, route.getAirlineName());
       prep.setInt(3, route.getAirlineID());
       prep.setString(4, route.getSourceAirport());
@@ -315,15 +326,21 @@ public class SQLiteDatabase {
 
   /**
    * This method initialise table according to provided tabletype, it deletes table and recreates
-   * it.
+   * it. This method also set table name for globle attribute for other method to interact to
+   * desired table.
    *
    * @param tableType Three types of table conresponding to airport, route and airline.
    */
-  public void initialiseTable(String tableType) {
+  public void initialiseTable(String tableType, String fileName) {
     if (con == null) {
       // get connection
       buildConnection();
     }
+
+    // Set table name as attributes of the class, so that other method know what table they are
+    // interact with.
+    this.tableName = "'" + fileName.split("\\.")[0] + "'";
+
     switch (tableType) {
       case "Airport":
         try {
@@ -376,7 +393,7 @@ public class SQLiteDatabase {
           state = con.createStatement();
           res =
               state.executeQuery(
-                      "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+                  "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
           if (res.next()) {
             state = con.createStatement();
             state.executeUpdate("Delete from " + tableName);
@@ -560,6 +577,15 @@ public class SQLiteDatabase {
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
+    }
+  }
+
+  public void updateAirportTable(List<Airport> airports) {
+    if (!airports.isEmpty()) {
+      for (Airport airport : airports) {
+        addAirports(airport);
+      }
+      startCommite();
     }
   }
 }
