@@ -392,12 +392,83 @@ public class RouteParserTest {
   }
 
   /**
-   * Verify that the validator method returns false for a line which doesn't pass one of the isValid
-   * tests.
+   * Verify that the validator method returns false for a line with an invalid airline id.
    */
   @Test
-  public void validatorInvalidLineTest() {
+  public void validatorInvalidAilineIDTest() {
     String[] testString = {"MI", "475000", "HYD", "\\N", "SIN", "3316", "", "0", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid airline name.
+   */
+  @Test
+  public void validatorInvalidAilineNameTest() {
+    String[] testString = {"M", "4750", "HYD", "\\N", "SIN", "3316", "", "0", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid source airport name.
+   */
+  @Test
+  public void validatorInvalidSourceNameTest() {
+    String[] testString = {"MI", "4750", "HYDDD", "\\N", "SIN", "3316", "", "0", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid source airport id.
+   */
+  @Test
+  public void validatorInvalidSourceIDTest() {
+    String[] testString = {"MI", "4750", "HYD", "-3", "SIN", "3316", "", "0", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid destination airport name.
+   */
+  @Test
+  public void validatorInvalidDestinationNameTest() {
+    String[] testString = {"MI", "4750", "HYD", "\\N", "SI!", "3316", "", "0", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid destination airport id.
+   */
+  @Test
+  public void validatorInvalidDestinationIDTest() {
+    String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "331600000", "", "0", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid codeshare value.
+   */
+  @Test
+  public void validatorInvalidCodeShareTest() {
+    String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "3316", "P", "0", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid number of stops.
+   */
+  @Test
+  public void validatorInvalidStopsTest() {
+    String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "3316", "", "11", "320 738"};
+    assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the validator method returns false for a line with an invalid equipement array.
+   */
+  @Test
+  public void validatorInvalidEquipmentTest() {
+    String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "3316", "", "0", "32 738"};
     assertFalse(routeParser.validater(testString));
   }
 

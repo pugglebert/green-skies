@@ -60,15 +60,6 @@ public abstract class Parser {
   }
 
   /**
-   * Getter for error collection.
-   *
-   * @return the HashMap errorCollection.
-   */
-  protected Map<Integer, Integer> getErrorCollection() {
-    return errorCollection;
-  }
-
-  /**
    * Initialize error code key in errorCollection.
    *
    * @param errorCodeNum number of error code that are expected to be generated in hashmap1
@@ -110,26 +101,6 @@ public abstract class Parser {
     }
     return errorMessage.toString();
   }
-
-  /**
-   * This method creates and returns a message detailing any errors found in a line.
-   * @return String with informatino about error types in line.
-   */
-  public String getLineErrorMessage() {
-    String errorMessage = "Entry successfully uploaded.";
-    if (totalErrors > 0)  {
-      errorMessage = "Entry not uploaded. ";
-      for (int i = 0; i < numCodes; i++) {
-        if (errorCollection.get(i) > 0) {
-          errorMessage += String.format("Error [%d] %s", i, errorLookup[i]);
-          break;
-        }
-      }
-
-    }
-    return errorMessage;
-  }
-
 
   /**
    * Checks if the number of errors in the file is less than the size of the file.
