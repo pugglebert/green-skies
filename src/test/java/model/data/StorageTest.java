@@ -1,11 +1,12 @@
 package model.data;
 
+import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -69,6 +70,7 @@ public class StorageTest {
     return testAirports;
   }
 
+
   /** Create a list of routes to use in tests */
   private List<DataType> createRouteList() {
     List<DataType> testRoutes = new ArrayList<>();
@@ -77,6 +79,68 @@ public class StorageTest {
     testRoutes.add(new Route("MH", 3378, "MYY", 3266, "BTU", 3262, "Y", 0, "AT7".split(" ")));
     return testRoutes;
   }
+
+  /**
+   * Test that the comparedRoutes are set to the correct value when setComparedRoutes is called
+   */
+  @Test
+  public void setComparedRoutesTest() {
+    Pair<String, String> testComparedRoutes = new Pair("KZN - AER", "AEY - YFR");
+    storage.setComparedRoutes(new Pair("KZN - AER", "AEY - YFR"));
+    assertEquals(storage.getComparedRoutes(), testComparedRoutes);
+  }
+
+  /**
+   * Test that AnalyseEmissionResult is set to the correct value when setAnalyseEmissionResult is called
+   */
+  @Test
+  public void setAnalyseEmissionResultTest() {
+    List<Double> testingList = new ArrayList<>();
+    double emission = 1010.590;
+    testingList.add(emission);
+    storage.setAnalyseEmissionResult(emission);
+    assertEquals(storage.getAnalyseEmissionResult(), testingList);
+  }
+
+  /**
+   * Test that AnalyseDistanceResult is set to the correct value when setAnalyseDistanceResult is called
+   */
+  @Test
+  public void setAnalyseDistanceResultTest() {
+    List<Double> testingList = new ArrayList<>();
+    double emission = 12345.4311;
+    testingList.add(emission);
+    storage.setAnalyseDistanceResult(emission);
+    assertEquals(storage.getAnalyseDistanceResult(), testingList);
+  }
+
+  /**
+   * Test that the hashmap holding the history Dest airpots is set to a given value
+   * when addToHistoryDestAirports is called
+   */
+  @Test
+  public void addToHistoryDestAirportsTest() {
+    HashMap<String, Integer> testMap = new HashMap<>();
+    testMap.put("TestDestAirport", 1);
+    storage.addToHistoryDestAirports("TestDestAirport");
+    assertEquals(storage.getHistoryDestAirports(), testMap);
+
+  }
+
+  /**
+   * Test that the hashmap holding the history src airpots is set to a given value
+   * when addToHistorySrcAirports is called
+   */
+  @Test
+  public void addToHistorySrcAirportsTest() {
+    HashMap<String, Integer>  testMap1 = new HashMap<>();
+    testMap1.put("TestSrcAirport", 1);
+    storage.addToHistoryDestAirports("TestSrcAirport");
+    assertEquals(storage.getHistoryDestAirports(), testMap1);
+
+  }
+
+
 
   /**
    * Test that airlines is set to given values when setData is called with airlines as the datatype.
