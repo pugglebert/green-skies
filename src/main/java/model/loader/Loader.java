@@ -162,41 +162,8 @@ public class Loader {
   }
 
   /**
-   * This method is the same as the loadFile method except it does not upload any data. Checks if
-   * filename and datatype fields are empty. If they aren't, processes file by calling
-   * checkFileType, openFile and constructParser. If an error occurs while trying to open the file,
-   * returns a message about the error. Otherwise, returns message abount number of rejected lines
-   * from file.
-   *
-   * @param fileName Name of the file to be opened.
-   * @param dataType The type of data in the file (one of airport, airline, or route).
-   * @return Error information string.
-   */
-  public String checkFile(String fileName, String dataType)
-      throws FileSystemException, FileNotFoundException {
-
-    if (fileName.isEmpty()) {
-      throw new RuntimeException("Filename cannot be empty.");
-    } else if (dataType.isEmpty()) {
-      throw new RuntimeException("Datatype cannot be empty.");
-    }
-
-    checkFileType(fileName);
-    checkDuplicateFileName(fileName);
-    ArrayList<String> lines;
-    lines = openFile(fileName);
-
-    Parser parser = constructParser(dataType, lines, false);
-
-    return parser.getErrorMessage(true);
-  }
-
-  /**
-   * This method checks if filename and datatype fields are empty. If they aren't, processes file by
-   * calling checkFileType, getFileName, checkDuplicateFileName, openFile and constructParser. Then
-   * adds the resulting data to that stored in the storage class. If an error occurs while trying to
-   * open the file, returns a message about the error. Otherwise, returns message abount number of
-   * rejected lines from file.
+   * This method calls processFile to preform error checks and process the data. It then stores
+   * the data in the storage class and returns an error message obtained form the parser.
    *
    * @param filePath Path of the file to be opened.
    * @param dataType The type of data in the file (one of airport, airline, or route).
@@ -204,6 +171,41 @@ public class Loader {
    */
   public String loadFile(String filePath, String dataType)
       throws FileSystemException, FileNotFoundException, SQLException {
+
+    String fileName = getFileName(filePath);
+    Parser parser = processFile(filePath, dataType);
+    List<DataType> data = parser.getData();
+    storage.setData(data, dataType, fileName);
+
+    return parser.getErrorMessage(true);
+  }
+
+  /**
+   * This method calls processFile to preform error checks and process the data. It does not
+   * store any data, but it does return the same error message as loadFile
+   *
+   * @param filePath Path of the file to be opened.
+   * @param dataType The type of data in the file (one of airport, airline, or route).
+   * @return Error information string.
+   */
+  public String checkFile(String filePath, String dataType)
+          throws FileSystemException, FileNotFoundException {
+
+    Parser parser = processFile(filePath, dataType);
+    return parser.getErrorMessage(true);
+  }
+
+  /**
+   * This method checks if the filepath and datatype fields are empty, if the file is in an illegal type
+   * or if the filename is a duplicate. If any of these things are true it raises and error. If not, it
+   * creates a parser and processes all the lines in the file.
+   * @param filePath the local path of the file.
+   * @param dataType the type of data to be processed, one of Airline, Airport, Route.
+   * @return a parser which has processed all the lines in the file.
+   * @throws FileSystemException If the file is not in a supported format.
+   * @throws FileNotFoundException If the file cannot be found.
+   */
+  public Parser processFile(String filePath, String dataType) throws FileSystemException, FileNotFoundException {
 
     if (filePath.isEmpty()) {
       throw new RuntimeException("Filename cannot be empty.");
@@ -219,10 +221,7 @@ public class Loader {
     lines = openFile(filePath);
 
     Parser parser = constructParser(dataType, lines, false);
-    List<DataType> data = parser.getData();
-    storage.setData(data, dataType, fileName);
-
-    return parser.getErrorMessage(true);
+    return parser;
   }
 
   /**

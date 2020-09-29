@@ -42,7 +42,7 @@ public class RouteParser extends Parser {
   public RouteParser(ArrayList<String> dataFile, List<Route> existingRoutes) {
     super(dataFile, 12);
     for (Route route : existingRoutes) {
-      addToRouteCodes(route);
+      addRoute(route);
     }
     dataParser();
     if (!getValidFile()) {
