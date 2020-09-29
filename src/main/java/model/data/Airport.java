@@ -29,17 +29,25 @@ public class Airport implements DataType {
   /** 4-letter ICAO code */
   private final String ICAO;
 
-  /** Decimal degrees, usually to six significant digits. Negative is South, positive is North. */
+  /**
+   * Decimal degrees, usually to six significant digits. Negative is South, positive is North.
+   */
   private final double latitude;
 
-  /** Decimal degrees, usually to six significant digits. Negative is West, positive is East. */
+  /**
+   * Decimal degrees, usually to six significant digits. Negative is West, positive is East.
+   */
   private final double longitude;
 
-  /** Unit of alltitude is in feet */
+  /**
+   * Unit of alltitude is in feet
+   */
   private final int altitude;
 
-  /** Hours offset from UTC. Fractional hours are expressed as decimals, eg. India is 5.5. */
-  private final float timezone;
+  /**
+   * Hours offset from UTC. Fractional hours are expressed as decimals, eg. India is 5.5.
+   */
+  private final double timezone;
 
   /**
    * Daylight savings time. One of E (Europe), A (US/Canada), S (South America), O (Australia), Z
@@ -130,7 +138,7 @@ public class Airport implements DataType {
     return altitude;
   }
 
-  public float getTimezone() {
+  public double getTimezone() {
     return timezone;
   }
 

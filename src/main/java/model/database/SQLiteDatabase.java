@@ -219,7 +219,7 @@ public class SQLiteDatabase {
       prep.setDouble(7, airport.getLatitude());
       prep.setDouble(8, airport.getLongitude());
       prep.setInt(9, airport.getAltitude());
-      prep.setFloat(10, airport.getTimezone());
+      prep.setDouble(10, airport.getTimezone());
       prep.setString(11, airport.getDST());
       prep.setString(12, airport.getDataBaseTimeZone());
       prep.execute();

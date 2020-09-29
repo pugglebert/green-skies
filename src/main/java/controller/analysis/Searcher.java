@@ -46,7 +46,7 @@ public class Searcher {
           break;
         default:
           throw new IllegalArgumentException(
-              "Search type must be one of: Name, Country, IATA, ICAO.");
+              "Search type must be one of: Name, Country, City, IATA, ICAO.");
       }
       if (attribute.toLowerCase().equals(searchTerm.toLowerCase())) {
         matches.add(entry);
@@ -90,7 +90,7 @@ public class Searcher {
             break;
           default:
             throw new IllegalArgumentException(
-                "Search type must be one of: Name, Country, IATA, ICAO.");
+                "Search type must be one of: Name, Country, IATA, ICAO, Active status.");
         }
         if (attribute.toLowerCase().equals(searchTerm.toLowerCase())) {
           matches.add(entry);

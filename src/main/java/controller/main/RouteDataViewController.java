@@ -15,7 +15,10 @@ import model.data.Route;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 /**
  * The controller class which contains the controls for the route data view.
@@ -238,13 +241,11 @@ public class RouteDataViewController extends DataViewController {
    * @return true if any have been selected or false otherwise.
    */
   public boolean getAnySelected() {
-    boolean selected = false;
     for (Route route : routes) {
       if (route.getSelect().isSelected()) {
-        selected = true;
-        break;
+        return true;
       }
     }
-    return selected;
+    return false;
   }
 }

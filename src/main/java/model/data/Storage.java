@@ -1,8 +1,8 @@
 package model.data;
 
-import io.cucumber.java.hu.Ha;
 import javafx.util.Pair;
 import model.database.SQLiteDatabase;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -266,7 +266,7 @@ public class Storage {
 //        database.setTableName(filename);
 //        database.initialiseTable("Airline");
       } else {
-        currentAirlineFile = filename;
+          currentAirlineFile = filename;
 //        database.setTableName(filename);
 //        database.initialiseTable("Airline");
       }
