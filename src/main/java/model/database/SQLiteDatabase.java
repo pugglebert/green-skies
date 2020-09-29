@@ -89,13 +89,13 @@ public class SQLiteDatabase {
     //    }
   }
 
-  //  /**
-  //   * This method sets table name that is going to be created in database.
-  //   * @param fileName Provided file name.
-  //   */
-  //  public void setTableName(String fileName){
-  //    this.tableName = "'" + fileName.split("\\.")[0] + "'";
-  //  }
+    /**
+     * This method sets table name that is going to be created in database.
+     * @param fileName Provided file name.
+     */
+    public void setTableName(String fileName){
+      this.tableName = "'" + fileName.split("\\.")[0] + "'";
+    }
 
   /** This method builds airports table with airport attributes as colunms in dastabase. */
   protected void buildAirportsTable() {
@@ -366,7 +366,14 @@ public class SQLiteDatabase {
 
     // Set table name as attributes of the class, so that other method know what table they are
     // interact with.
-    this.tableName = "'" + fileName.split("\\.")[0] + "'";
+//    this.tableName = "'" + fileName.split("\\.")[0] + "'";
+    setTableName(fileName);
+
+
+//    for(String name: getFileNamesByType("Airport")){
+//      System.out.println(name);
+//    }
+
 
     try {
       state = con.createStatement();
@@ -471,157 +478,183 @@ public class SQLiteDatabase {
       // get connections
       buildConnection();
     }
-    try {
-      state = con.createStatement();
-      res =
-          state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
 
-      if (res.next()) {
-        state = con.createStatement();
-        res = state.executeQuery("select * from 'airports'");
-        ArrayList<DataType> airports = new ArrayList<>();
-        while (res.next()) {
-          int airportId = res.getInt("airport_id");
-          String name = res.getString("name");
-          String city = res.getString("city");
-          String country = res.getString("country");
-          String IATA = res.getString("IATA");
-          String ICAO = res.getString("ICAO");
-          double lat = res.getDouble("lat");
-          double lon = res.getDouble("lon");
-          int alt = res.getInt("alt");
-          float timezone = res.getFloat("timezone");
-          String DST = res.getString("DST");
-          String DBTimezone = res.getString("DBTimezone");
-          Airport airport =
-              new Airport(
-                  airportId,
-                  name,
-                  city,
-                  country,
-                  IATA,
-                  ICAO,
-                  lat,
-                  lon,
-                  alt,
-                  timezone,
-                  DST,
-                  DBTimezone);
-          airports.add(airport);
-        }
-        storage.setData(airports, "Airport", null);
-      }
-    } catch (Exception e) {
-      JOptionPane.showMessageDialog(null, e);
-    } finally {
+    List<String> airportfileNames = getFileNamesByType("Airport");
+
+    for (String airportsName : airportfileNames) {
+      setTableName(airportsName);
+
       try {
-        res.close();
-        state.close();
-        //        con.close();
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      }
-    }
-
-    try {
-      state = con.createStatement();
-      res =
-          state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
-
-      if (res.next()) {
         state = con.createStatement();
-        res = state.executeQuery("select * from 'airlines'");
-        ArrayList<DataType> airlines = new ArrayList<>();
-        while (res.next()) {
-          int airlineId = res.getInt("airline_id");
-          String airlineName = res.getString("airlineName");
-          String alias = res.getString("alias");
-          String IATA = res.getString("IATA");
-          String ICAO = res.getString("ICAO");
-          String callsign = res.getString("callsign");
-          String country = res.getString("country");
-          Boolean activeStatus = res.getBoolean("activeStatus");
-          Airline airline =
-              new Airline(
-                  airlineId, airlineName, alias, IATA, ICAO, callsign, country, activeStatus);
-          airlines.add(airline);
-        }
-        storage.setData(airlines, "Airline", null);
-      }
-    } catch (Exception e) {
-      JOptionPane.showMessageDialog(null, e);
-    } finally {
-      try {
-        res.close();
-        state.close();
-        //        con.close();
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      }
-    }
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
 
-    try {
-      state = con.createStatement();
-      res =
-          state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
-
-      if (res.next()) {
-        state = con.createStatement();
-        res = state.executeQuery("select * from 'routes'");
-        ArrayList<DataType> routes = new ArrayList<>();
-        while (res.next()) {
-          //                int route_id = routesRow.getInt("route_id");
-          String airlineName = res.getString("airlineName");
-          int airlineID = res.getInt("airlineID");
-          String sourceAirport = res.getString("sourceAirport");
-          int sourceAirportID = res.getInt("sourceAirportID");
-          String destinationAirport = res.getString("destinationAirport");
-          int destinationAirportID = res.getInt("destinationAirportID");
-          String codeShare = res.getString("codeShare");
-          int numOfStops = res.getInt("numOfStops");
-
-          String equipment = res.getString("equipment");
-          String[] equipmentArray;
-          if (equipment != null) {
-            equipmentArray = equipment.split(" ");
-          } else {
-            equipmentArray = null;
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> airports = new ArrayList<>();
+          while (res.next()) {
+            int airportId = res.getInt("airport_id");
+            String name = res.getString("name");
+            String city = res.getString("city");
+            String country = res.getString("country");
+            String IATA = res.getString("IATA");
+            String ICAO = res.getString("ICAO");
+            double lat = res.getDouble("lat");
+            double lon = res.getDouble("lon");
+            int alt = res.getInt("alt");
+            float timezone = res.getFloat("timezone");
+            String DST = res.getString("DST");
+            String DBTimezone = res.getString("DBTimezone");
+            Airport airport =
+                new Airport(
+                    airportId,
+                    name,
+                    city,
+                    country,
+                    IATA,
+                    ICAO,
+                    lat,
+                    lon,
+                    alt,
+                    timezone,
+                    DST,
+                    DBTimezone);
+            airports.add(airport);
           }
 
-          double emissions = res.getDouble("emissions");
-          double distance = res.getDouble("distance");
-          int timesTaken = res.getInt("timesTaken");
+          storage.setData(airports, "Airport", airportsName);
 
-          assert equipmentArray != null;
-          Route route =
-              new Route(
-                  airlineName,
-                  airlineID,
-                  sourceAirport,
-                  sourceAirportID,
-                  destinationAirport,
-                  destinationAirportID,
-                  codeShare,
-                  numOfStops,
-                  equipmentArray);
-          route.setEmissions(emissions);
-          route.setTimesTaken(timesTaken);
-          route.setDistance(distance);
-          routes.add(route);
         }
-        storage.setData(routes, "Route", null);
-      }
-    } catch (Exception e) {
-      JOptionPane.showMessageDialog(null, e);
-    } finally {
-      try {
-        res.close();
-        state.close();
-        //        con.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+          //        con.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
+      }
+}
+
+    List<String> airlinesFileNames = getFileNamesByType("Airline");
+
+    for (String airlinesName: airlinesFileNames) {
+      setTableName(airlinesName);
+
+      try {
+        state = con.createStatement();
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> airlines = new ArrayList<>();
+          while (res.next()) {
+            int airlineId = res.getInt("airline_id");
+            String airlineName = res.getString("airlineName");
+            String alias = res.getString("alias");
+            String IATA = res.getString("IATA");
+            String ICAO = res.getString("ICAO");
+            String callsign = res.getString("callsign");
+            String country = res.getString("country");
+            Boolean activeStatus = res.getBoolean("activeStatus");
+            Airline airline =
+                new Airline(
+                    airlineId, airlineName, alias, IATA, ICAO, callsign, country, activeStatus);
+            airlines.add(airline);
+          }
+
+          storage.setData(airlines, "Airline", airlinesName);
+
+        }
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+          //        con.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
+      }
+}
+
+    List<String> routeNames = getFileNamesByType("Route");
+
+    for (String routesName : routeNames) {
+      setTableName(routesName);
+
+      try {
+        state = con.createStatement();
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> routes = new ArrayList<>();
+          while (res.next()) {
+            //                int route_id = routesRow.getInt("route_id");
+            String airlineName = res.getString("airlineName");
+            int airlineID = res.getInt("airlineID");
+            String sourceAirport = res.getString("sourceAirport");
+            int sourceAirportID = res.getInt("sourceAirportID");
+            String destinationAirport = res.getString("destinationAirport");
+            int destinationAirportID = res.getInt("destinationAirportID");
+            String codeShare = res.getString("codeShare");
+            int numOfStops = res.getInt("numOfStops");
+
+            String equipment = res.getString("equipment");
+            String[] equipmentArray;
+            if (equipment != null) {
+              equipmentArray = equipment.split(" ");
+            } else {
+              equipmentArray = null;
+            }
+
+            double emissions = res.getDouble("emissions");
+            double distance = res.getDouble("distance");
+            int timesTaken = res.getInt("timesTaken");
+
+            assert equipmentArray != null;
+            Route route =
+                new Route(
+                    airlineName,
+                    airlineID,
+                    sourceAirport,
+                    sourceAirportID,
+                    destinationAirport,
+                    destinationAirportID,
+                    codeShare,
+                    numOfStops,
+                    equipmentArray);
+            route.setEmissions(emissions);
+            route.setTimesTaken(timesTaken);
+            route.setDistance(distance);
+            routes.add(route);
+          }
+
+          storage.setData(routes, "Route", routesName);
+
+        }
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+          //        con.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
       }
     }
   }
@@ -701,13 +734,19 @@ public class SQLiteDatabase {
   }
 
 
+  /**
+   * This method get specific type of file name from database and returns a list containing them.
+   * @param fileType File type includes Airport, Airline and route.
+   * @return A list that contains all specified type name in it.
+   */
     public List<String> getFileNamesByType(String fileType){
         ArrayList<String> file_names = new ArrayList<>();
         try{
           state = con.createStatement();
           res = state.executeQuery("select * from 'file_list' where file_type='" + fileType + "'");
           while (res.next()){
-//            file_names.add(res.)
+            String fileName = res.getString("file_name");
+            file_names.add(fileName);
           }
         } catch (Exception e) {
           JOptionPane.showMessageDialog(null, e);
@@ -718,7 +757,7 @@ public class SQLiteDatabase {
             JOptionPane.showMessageDialog(null, e);
           }
         }
-
+      return file_names;
     }
 
 

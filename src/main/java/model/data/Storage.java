@@ -339,7 +339,7 @@ public class Storage {
       case "Route":
         database.initialiseTable("Route", getCurrentRouteFile());
         database.updateRoute(getRoutes());
-        database.updateTableList(getCurrentRouteFile(), "AirRouteline");
+        database.updateTableList(getCurrentRouteFile(), "Route");
     }
   }
 
