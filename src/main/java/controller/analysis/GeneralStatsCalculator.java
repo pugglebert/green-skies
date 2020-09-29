@@ -91,8 +91,6 @@ public class GeneralStatsCalculator {
     this.dayInYear = dayAsInt;
   }
 
-  // TODO tests this! HK 27/09/2020 --> test exception is thrown and test exception is caught
-
   /** This method determines how many remaining days in the year there are. */
   public void calculateRemainingDaysInYear() {
     try {
@@ -105,7 +103,6 @@ public class GeneralStatsCalculator {
     }
   }
 
-  // TODO tests this! HK 27/09/2020 --> test exception is caught
   /**
    * This method determines the amount of emissions per year based on the current rate of carbon
    * emissions produced at the current time of the year.
@@ -204,7 +201,6 @@ public class GeneralStatsCalculator {
             + " percent.";
   }
 
-  //TODO write test to get -1
   /**
    * This function implements the binary search algorithm.
    *

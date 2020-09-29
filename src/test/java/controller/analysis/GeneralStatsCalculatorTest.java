@@ -257,9 +257,8 @@ public class GeneralStatsCalculatorTest {
 
   // --------------------------------- Tests for calculateDateAsInt()
 
-  // TODO: find a better way of testing this other than having to manually change the expectedDate
-  // value
-  // each time the day changes. HK 27/09/2020
+  // TODO: find a better way of testing this other than having to manually change the expectedDate @Hayley
+
   /**
    * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
    * as expected.
@@ -273,9 +272,7 @@ public class GeneralStatsCalculatorTest {
 
   // --------------------------------- Tests for calculateRemainingDaysInYear()
 
-  // TODO: find a better way of testing this other than having to manually change the expectedDate
-  // value
-  // each time the day changes. HK 27/09/2020
+  // TODO: find a better way of testing this other than having to manually change the expectedDate @Hayley
 
   /**
    * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
@@ -294,9 +291,23 @@ public class GeneralStatsCalculatorTest {
    * exception is thrown.
    */
   @Test
-  public void calculateRemainingDaysInYearNegIntTest() {
+  public void calculateRemainingDaysInYearZeroTest() {
     try {
       generalStatsCalculator.setDayInYear(0);
+      generalStatsCalculator.calculateRemainingDaysInYear();
+    } catch (Exception e) {
+      assertTrue(true);
+    }
+  }
+
+  /**
+   * Verify that when calculateRemainingDaysInYear is called and the day in the year is more than
+   * 365, then an exception is thrown.
+   */
+  @Test
+  public void calculateRemainingDaysInYearNegIntTest() {
+    try {
+      generalStatsCalculator.setDayInYear(400);
       generalStatsCalculator.calculateRemainingDaysInYear();
     } catch (Exception e) {
       assertTrue(true);
@@ -346,7 +357,20 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getEmissionsPerYear(), 0.000000000000001);
   }
 
-  // TODO write tests for calculateReductionPercentage
+  /**
+   * Verify that when calculateEmissionsPerYear is called and the day in the year is 0, then an
+   * ArithmeticException is thrown due to the division by 0.
+   */
+  @Test
+  public void calculateEmissionsPerYearCurrentRateExceptionTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(10000);
+    generalStatsCalculator.setDayInYear(0);
+    try {
+      generalStatsCalculator.calculateEmissionsPerYearCurrentRate();
+    } catch (ArithmeticException e) {
+      assertTrue(true);
+    }
+  }
 
   // --------------------------------- calculateEmissionsPerYearGoalRate() tests
 
@@ -389,7 +413,6 @@ public class GeneralStatsCalculatorTest {
   }
 
   // --------------------------------- calculateReductionPercentage() tests
-  // TODO: need to revisit --> confused. HK 28/09/2020
 
   /**
    * Verify that when calculateReductionPercentage is called, then the correct reduction percentage
@@ -418,7 +441,19 @@ public class GeneralStatsCalculatorTest {
     assertEquals(expectedValue, generalStatsCalculator.getReductionPercentage(), 0.01);
   }
 
-  // TODO write test to test exception
+    /** Verify that when calculateReductionPercentage is called and EmissionsPerDayGoal is 0,
+     * then an ArithmeticException is thrown for the divison by 0 error.
+     */
+  @Test
+  public void calculateReductionPercentageExceptionTest() {
+    generalStatsCalculator.setEmissionsPerDayBaseOnCurrDate(30);
+    generalStatsCalculator.setEmissionsPerDayGoal(0);
+    try {
+      generalStatsCalculator.calculateReductionPercentage();
+    } catch (ArithmeticException e) {
+      assertTrue(true);
+    }
+  }
 
   // --------------------------------- getCurrentYear() tests
 
@@ -521,14 +556,12 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setRemainingCO2InYear(14000);
     generalStatsCalculator.setReductionPercentage(26);
     String expectedString =
-        "Currently, in 2020, you are producing 50.00 kg of carbon emissions per" +
-                " day. If you continue at this rate, you will produce 8900000.00 kg" +
-                " by the end of this year. This means you can only produce 14000.00 in" +
-                " the remaining part of this year. To ensure you stay under your goal, you will need to reduce" +
-                " your flight travel by 26.00 percent.";
+        "Currently, in 2020, you are producing 50.00 kg of carbon emissions per"
+            + " day. If you continue at this rate, you will produce 8900000.00 kg"
+            + " by the end of this year. This means you can only produce 14000.00 in"
+            + " the remaining part of this year. To ensure you stay under your goal, you will need to reduce"
+            + " your flight travel by 26.00 percent.";
     generalStatsCalculator.createCarbonEmissionsComment();
     assertEquals(expectedString, generalStatsCalculator.getCarbonEmissionsComment());
   }
-
 }
-
