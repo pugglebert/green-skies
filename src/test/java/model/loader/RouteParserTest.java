@@ -311,7 +311,7 @@ public class RouteParserTest {
     testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
-    assertEquals("File uploaded with 0 invalid lines rejected\n", testParser.getErrorMessage(true));
+    assertEquals("File uploaded with 0 invalid lines rejected.\n", testParser.getErrorMessage(true));
   }
 
   /** Test that invalid line is not added to routes */
@@ -334,7 +334,7 @@ public class RouteParserTest {
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410A,AER,2965,KZN,2990,,0,CR2");
     assertEquals(
-        "File uploaded with 1 invalid lines rejected\n"
+        "File uploaded with 1 invalid lines rejected.\n"
             + "Error [2] Invalid airline ID: 1 occurances\n",
         testParser.getErrorMessage(true));
   }
@@ -496,16 +496,50 @@ public class RouteParserTest {
     String[] testString = {"MI", "475000", "HYD", "\\N", "SIN", "3316", "", "0", "320 738"};
     routeParser.validater(testString);
     assertEquals(
-        "File uploaded with 1 invalid lines rejected\n"
+        "File uploaded with 1 invalid lines rejected.\n"
             + "Error [2] Invalid airline ID: 1 occurances\n",
         routeParser.getErrorMessage(true));
   }
 
-  /** Verify that validater returns false for a line with the wrong number of parameters. */
+  /**
+   *  Verify that validater returns false for a line with the wrong number of parameters.
+   */
   @Test
   public void validatorWrongParamsLineTest() {
     String[] testString = {"MI", "475000", "HYD", "\\N", "SIN", "3316", "", "0", "320 738", ""};
     assertFalse(routeParser.validater(testString));
+  }
+
+  /**
+   * Verify that the correct error message is produced when attempting to add a file where over
+   * 200 lines are wrong.
+   */
+  @Test
+  public void errorMessageTest200WrongLines() throws FileNotFoundException {
+    Loader loader = new Loader(new Storage());
+    ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airports.csv");
+    try {
+      RouteParser routeParser = new RouteParser(lines, new ArrayList<>());
+      fail();
+    } catch (RuntimeException e) {
+      assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurances\n", e.getMessage());
+    }
+  }
+
+  /**
+   * Verify that the correct error message is produced when attempting to add a file all lines contain errors
+   * but the file is less than 200 lines.
+   */
+  @Test
+  public void errorMessageTestAllWrongLines() throws FileNotFoundException {
+    Loader loader = new Loader(new Storage());
+    ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/SearcherAirlinesTest.csv");
+    try {
+      RouteParser routeParser = new RouteParser(lines, new ArrayList<>());
+      fail();
+    } catch (RuntimeException e) {
+      assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurances\n", e.getMessage());
+    }
   }
 
   /** Verify that the correct error code is produced when attempting to add a duplicate route */
@@ -516,7 +550,7 @@ public class RouteParserTest {
         loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateRouteTest.csv");
     RouteParser duplicateParser = new RouteParser(duplicateLines, existingLines);
     assertEquals(
-        "File uploaded with 1 invalid lines rejected\nError [10] Duplicate route: 1 occurances\n",
+        "File uploaded with 1 invalid lines rejected.\nError [10] Duplicate route: 1 occurances\n",
         duplicateParser.getErrorMessage(true));
   }
 

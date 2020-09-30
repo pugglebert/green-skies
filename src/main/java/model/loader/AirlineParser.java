@@ -43,7 +43,7 @@ public class AirlineParser extends Parser {
   /** This method initializes error lookup array with message for each error code. */
   @Override
   protected void initErrorLookup() {
-    errorLookup[0] = "Not enough parameters";
+    errorLookup[0] = "Wrong number of parameters";
     errorLookup[1] = "Duplicate airline";
     errorLookup[2] = "Invalid airline ID";
     errorLookup[3] = "Invalid airline name";
@@ -73,7 +73,7 @@ public class AirlineParser extends Parser {
       if (totalErrors == 1) {
         throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
       } else {
-        throw new RuntimeException("File rejected: All lines contain errors.\n" + getErrorMessage(false));
+        throw new RuntimeException("File rejected: all lines contain errors.\n" + getErrorMessage(false));
       }
     }
   }

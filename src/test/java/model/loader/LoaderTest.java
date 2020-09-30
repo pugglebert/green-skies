@@ -405,7 +405,7 @@ public class LoaderTest {
   @Test
   public void testCheckFileValidErrorMessage() throws FileNotFoundException, FileSystemException {
     String message = loader.checkFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
-    assertEquals("File uploaded with 0 invalid lines rejected\n", message);
+    assertEquals("File uploaded with 0 invalid lines rejected.\n", message);
   }
 
   /**
