@@ -339,7 +339,7 @@ public class RouteParserTest {
         testParser.getErrorMessage(true));
   }
 
-  /** Verify that no exception is thrown when 100 or fewer errors have been counted. */
+  /** Verify that no exception is thrown when 200 or fewer errors have been counted. */
   @Test
   public void dataParseLowErrorsTest() {
     for (int i = 0; i < 197; i++) {
