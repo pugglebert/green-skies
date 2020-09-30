@@ -1,5 +1,6 @@
 package controller.analysis;
 
+import controller.main.dataview.RouteAddToHistoryPopUpController;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 
-import controller.main.RouteAddToHistoryPopUpController;
 
 //TODO write comments for this class. HK 26/09/2020
 
