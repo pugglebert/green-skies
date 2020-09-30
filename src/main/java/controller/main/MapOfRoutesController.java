@@ -29,7 +29,7 @@ public class MapOfRoutesController extends SideNavBarController {
     mapEngine = mapView.getEngine();
     mapEngine.load(
         MapOfRoutesController.class
-            .getResource("/controller/main/googleMap.html")
+            .getResource("/view/googleMap.html")
             .toExternalForm());
   }
 }

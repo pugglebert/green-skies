@@ -91,7 +91,7 @@ public abstract class Parser {
   public String getErrorMessage(boolean uploadSuccess) {
     StringBuilder errorMessage = new StringBuilder();
     if (uploadSuccess) {
-      errorMessage.append(String.format("File uploaded with %d invalid lines rejected\n", totalErrors));
+      errorMessage.append(String.format("File uploaded with %d invalid lines rejected.\n", totalErrors));
     }
     String template = "Error [%d] %s: %d occurances\n";
     for (int i = 0; i < numCodes; i++) {

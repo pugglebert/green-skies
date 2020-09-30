@@ -146,7 +146,7 @@ public class ParserTest {
   @Test
   public void getErrorMessageNoErrorTest() {
     String errorMessage = airlineParser.getErrorMessage(true);
-    assertEquals("File uploaded with 0 invalid lines rejected\n", errorMessage);
+    assertEquals("File uploaded with 0 invalid lines rejected.\n", errorMessage);
   }
 
   /**
