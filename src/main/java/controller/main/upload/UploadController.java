@@ -179,7 +179,7 @@ public class UploadController extends SideNavBarController {
             switch (fileType) {
                 case "Airport": {
                     Stage newStage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/airportSingleEntry.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/upload/airportSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
@@ -189,7 +189,7 @@ public class UploadController extends SideNavBarController {
                 }
                 case "Airline": {
                     Stage newStage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/airlineSingleEntry.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/upload/airlineSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
@@ -199,7 +199,7 @@ public class UploadController extends SideNavBarController {
                 }
                 case "Route": {
                     Stage newStage = new Stage();
-                    Parent root = FXMLLoader.load(getClass().getResource("/controller/main/routeSingleEntry.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/upload/routeSingleEntry.fxml"));
                     Scene scene = new Scene(root);
                     newStage.setScene(scene);
                     newStage.showAndWait();
@@ -219,7 +219,7 @@ public class UploadController extends SideNavBarController {
   public void backToWelcome() throws IOException {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root =
-        FXMLLoader.load(getClass().getResource("/controller/main/welcome.fxml")); // open the Welcome page
+        FXMLLoader.load(getClass().getResource("/view/welcome.fxml")); // open the Welcome page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
   }

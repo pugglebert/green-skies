@@ -9,7 +9,7 @@
     <children>
         <ImageView fitHeight="943.0" fitWidth="1415.0" layoutX="-8.0" layoutY="-241.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../images/plane3.jpg" />
+                <Image url="@../images/plane3.jpg" />
             </image>
         </ImageView>
         <Text fill="WHITE" layoutX="541.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GREEN SKIES" textAlignment="CENTER" wrappingWidth="304.8984375">
