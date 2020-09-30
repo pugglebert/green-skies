@@ -1,9 +1,12 @@
 package controller.main;
 
+import controller.analysis.AirportStatsCalculator;
 import controller.analysis.Filterer;
-import controller.analysis.ReportGenerator;
+import controller.analysis.GeneralStatsCalculator;
+import controller.analysis.RouteStatsCalculator;
 import model.data.Storage;
 import model.loader.Loader;
+
 import java.sql.SQLException;
 
 /**
@@ -20,8 +23,12 @@ public class Main {
   private static Loader loader = new Loader(storage);
   /** The filter for the application. */
   private static Filterer filterer = new Filterer();
-  /** The report generator for the application. */
-  private static ReportGenerator reportGenerator = new ReportGenerator();
+  /** The GeneralStatsCalculator for the application. */
+  private static GeneralStatsCalculator generalStatsCalculator = new GeneralStatsCalculator();
+  /** The RouteStatsCalculator for the application. */
+  private static RouteStatsCalculator routeStatsCalculator = new RouteStatsCalculator();
+  /** The AirportStatsCalculator for the application. */
+  private static AirportStatsCalculator airportStatsCalculator = new AirportStatsCalculator();
 
   public static Storage getStorage() {
     return storage;
@@ -35,8 +42,16 @@ public class Main {
     return filterer;
   }
 
-  public static ReportGenerator getReportGenerator() {
-    return reportGenerator;
+  public static GeneralStatsCalculator getGeneralStatsCalculator() {
+    return generalStatsCalculator;
+  }
+
+  public static RouteStatsCalculator getRouteStatsCalculator() {
+    return routeStatsCalculator;
+  }
+
+  public static AirportStatsCalculator getAirportStatsCalculator() {
+    return airportStatsCalculator;
   }
 
   /**
@@ -48,7 +63,8 @@ public class Main {
    */
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-    storage.initialiseStorage();
+//    storage.initialiseStorage();
     GreenSkiesApplication.main(args);
   }
+
 }

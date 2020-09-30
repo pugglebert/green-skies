@@ -35,7 +35,7 @@ public class FlightAnalyserTest {
   String[] rubbish2 = {"abc"};
 
   Route route1 =
-      new Route("Air Inter Gabon", 219, "AER", 2965, "KZN", 2990, "dont know", 0, rubbish1);
+          new Route("Air Inter Gabon", 219, "AER", 2965, "KZN", 2990, "dont know", 0, rubbish1);
   Route route2 = new Route("Air Cess", 55, "ASF", 2966, "SVX", 2975, "dont know", 0, rubbish2);
   Route route3 = new Route(null, 296, "CEK", 2968, "DME", 4029, null, 0, rubbish1);
   Route route4 = new Route(null, 297, "EGO", 2968, "UUA", 4029, null, 0, rubbish2);
@@ -77,18 +77,18 @@ public class FlightAnalyserTest {
     }
 
     double pathDistance1 =
-        calculatedistance(
-            listOfAirportPath1.get(0).getLatitude(),
-            listOfAirportPath1.get(0).getLongitude(),
-            listOfAirportPath1.get(1).getLatitude(),
-            listOfAirportPath1.get(1).getLongitude());
+            calculatedistance(
+                    listOfAirportPath1.get(0).getLatitude(),
+                    listOfAirportPath1.get(0).getLongitude(),
+                    listOfAirportPath1.get(1).getLatitude(),
+                    listOfAirportPath1.get(1).getLongitude());
 
     double pathDistance2 =
-        calculatedistance(
-            listOfAirportPath2.get(0).getLatitude(),
-            listOfAirportPath2.get(0).getLongitude(),
-            listOfAirportPath2.get(1).getLatitude(),
-            listOfAirportPath2.get(1).getLongitude());
+            calculatedistance(
+                    listOfAirportPath2.get(0).getLatitude(),
+                    listOfAirportPath2.get(0).getLongitude(),
+                    listOfAirportPath2.get(1).getLatitude(),
+                    listOfAirportPath2.get(1).getLongitude());
     distance1 = pathDistance1;
     distance2 = pathDistance2;
     distance3 = pathDistance1;
@@ -114,11 +114,11 @@ public class FlightAnalyserTest {
     }
 
     singleDistance =
-        calculatedistance(
-            listOfAirportPath.get(0).getLatitude(),
-            listOfAirportPath.get(0).getLongitude(),
-            listOfAirportPath.get(1).getLatitude(),
-            listOfAirportPath.get(1).getLongitude());
+            calculatedistance(
+                    listOfAirportPath.get(0).getLatitude(),
+                    listOfAirportPath.get(0).getLongitude(),
+                    listOfAirportPath.get(1).getLatitude(),
+                    listOfAirportPath.get(1).getLongitude());
   }
 
   /**
@@ -139,13 +139,13 @@ public class FlightAnalyserTest {
     FuelUsed = distance * 12 / 1250; // fuel in tonns
 
     double FuelPerPassenger =
-        (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
+            (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
 
     double Co2PerPassengerPerKm =
-        FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
+            FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
 
     double Co2Hour =
-        (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
+            (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
 
     double flytime = distance / CruisingSpeed; // in hour
 
@@ -158,14 +158,14 @@ public class FlightAnalyserTest {
    * @return distance
    */
   private double calculatedistance(double Lati1, double Long1, double Lati2, double Long2) {
-    double φ1 = Lati1 * Math.PI / 180;
-    double φ2 = Lati2 * Math.PI / 180;
-    double Δφ = (Lati2 - Lati1) * Math.PI / 180;
-    double Δλ = (Long2 - Long1) * Math.PI / 180;
+    double need1 = Lati1 * Math.PI / 180;
+    double need2 = Lati2 * Math.PI / 180;
+    double need3 = (Lati2 - Lati1) * Math.PI / 180;
+    double need4 = (Long2 - Long1) * Math.PI / 180;
 
     double a =
-        Math.sin(Δφ / 2) * Math.sin(Δφ / 2)
-            + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+            Math.sin(need3 / 2) * Math.sin(need3 / 2)
+                    + Math.cos(need1) * Math.cos(need2) * Math.sin(need4 / 2) * Math.sin(need4 / 2);
 
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -178,8 +178,8 @@ public class FlightAnalyserTest {
    * Set up are the arraylist for testing
    *
    * @throws FileNotFoundException This throws a FileNotFoundException.
-   * @throws FileSystemException This throws a FileSystemException.
-   * @throws SQLException This throws an SQLException.
+   * @throws FileSystemException   This throws a FileSystemException.
+   * @throws SQLException          This throws an SQLException.
    */
   @Before
   public void setUp() throws FileNotFoundException, FileSystemException, SQLException {

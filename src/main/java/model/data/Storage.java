@@ -1,6 +1,8 @@
 package model.data;
 
+import javafx.util.Pair;
 import model.database.SQLiteDatabase;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,13 +19,22 @@ import java.util.List;
 public class Storage {
 
   /** A list of all the airlines that have been uploaded to the application. */
-  private List<Airline> airlines = new ArrayList<>();
+  private HashMap<String, List<Airline>> airlineFiles = new HashMap<>();
+
+  /** The name of the airline files which is currently in use. */
+  private String currentAirlineFile;
 
   /** A list of all the airports that have been uploaded to the application. */
-  private List<Airport> airports = new ArrayList<>();
+  private HashMap<String, List<Airport>> airportFiles = new HashMap<>();
+
+  /** The name of the airport file which is2 currently in use. */
+  private String currentAirportFile;
 
   /** A list of all the routes that have been uploaded to the application. */
-  private List<Route> routes = new ArrayList<>();
+  private HashMap<String, List<Route>> routeFiles = new HashMap<>();
+
+  /** The name of the route file which is currently in use. */
+  private String currentRouteFile;
 
   /** Temporary list of routes used when adding routes to history. */
   private List<Route> tempRoutes = new ArrayList<>();
@@ -33,6 +44,9 @@ public class Storage {
 
   /** A list of all the values calculated for the emissions of the routes in the history. */
   private List<Double> analyseEmissionResult = new ArrayList<>();
+
+  /** The names of routes compared using the analyse distance button. */
+  private Pair<String, String> comparedRoutes;
 
   /** A list of all the routes that have been added to the user's personal history. */
   private List<Route> history = new ArrayList<>();
@@ -52,35 +66,149 @@ public class Storage {
   /** The database in which data added to the application is stored. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
-  /** @return a list of Airline objects from the currently open file cast as Datatype objects. */
+  /**
+   * This method returns a List of all the names of the stored airline files, or an empty List if no Airline files
+   * have been stored.
+   * @return a List of the names of files in AirlineFiles.
+   */
+  public List<String> getAirlineFileNames() {
+    List<String> airlineFileNames = new ArrayList<>();
+    for (String filename : airlineFiles.keySet()) {
+      airlineFileNames.add(filename);
+    }
+    return airlineFileNames;
+  }
+
+  /**
+   * This method returns the name of the Airline file which is currently open, or null if none is open.
+   * @return the name of the currently open Airline file.
+   */
+  public String getCurrentAirlineFile() {return currentAirlineFile;}
+
+  /**
+   * This method changes the name of the current file to the given name if the name matches one of the stored files
+   * and throws an IllegalArgumentException if the name does not match one of the stored files.
+   * @param newCurrentFile the name of an airline file to change currentAirlineFile to.
+   */
+  public void setCurrentAirlineFile(String newCurrentFile) {
+    if (airlineFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
+      currentAirlineFile = newCurrentFile;
+    }
+  }
+
+  /**
+   * This method returns an empty List if there is not current file, or all the Airlines in the current file
+   * if there is a current file.
+   * @return a list of Airlines in the current file.
+   */
   public List<Airline> getAirlines() {
-    return airlines;
+    if (currentAirlineFile == null) {
+      return new ArrayList<>();
+    }
+    return airlineFiles.get(currentAirlineFile);
   }
 
-  /** This method reset airlines list. */
-  public void resetAirlinesList() {
-    airlines = new ArrayList<>();
+//  /** This method reset airlines list. */
+//  public void resetAirlinesList() {
+//    airlines = new ArrayList<>();
+//  }
+
+  /**
+   * This method returns a List of all the names of the stored airport files, or an empty List if no Airport files
+   * have been stored.
+   * @return a List of the names of files in AirportFiles.
+   */
+  public List<String> getAirportFileNames() {
+    List<String> airportFileNames = new ArrayList<>();
+    for (String filename : airportFiles.keySet()) {
+      airportFileNames.add(filename);
+    }
+    return airportFileNames;
   }
 
-  /** @return a list of Airport objects from the currently open file cast as Datatype objects. */
+  /**
+   * This method returns the name of the Airport file which is currently open, or null if none is open.
+   * @return the name of the currently open Airport file.
+   */
+  public String getCurrentAirportFile() {
+    return currentAirportFile;
+  }
+
+  /**
+   * This method changes the name of the current file to the given name if the name matches one of the stored files
+   * and throws an IllegalArgumentException if the name does not match one of the stored files.
+   * @param newCurrentFile the name of an airport file to change currentAirportFile to.
+   */
+  public void setCurrentAirportFile(String newCurrentFile) {
+    if (airportFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
+      currentAirportFile = newCurrentFile;
+    }
+  }
+
+  /**
+   * This method returns an empty List if there is not current file, or all the Airports in the current file
+   * if there is a current file.
+   * @return a list of Airports in the current file.
+   */
   public List<Airport> getAirports() {
-    return airports;
+    if (currentAirportFile == null) {
+      return new ArrayList<>();
+    }
+    return airportFiles.get(currentAirportFile);
+  }
+//  /** This method reset airports list. */
+//  public void resetAirportsList() {
+//    airports = new ArrayList<>();
+//  }
+
+  /**
+   * This method returns a List of all the names of the stored Route files, or an empty List if no Route files
+   * have been stored.
+   * @return a List of the names of files in RouteFiles.
+   */
+  public List<String> getRouteFileNames() {
+    List<String> routeFileNames = new ArrayList<>();
+    for (String filename : routeFiles.keySet()) {
+      routeFileNames.add(filename);
+    }
+    return routeFileNames;
   }
 
-  /** This method reset airports list. */
-  public void resetAirportsList() {
-    airports = new ArrayList<>();
+  /**
+   * This method returns the name of the Route file which is currently open, or null if none is open.
+   * @return the name of the currently open Route file.
+   */
+  public String getCurrentRouteFile() {
+    return currentRouteFile;
   }
 
-  /** @return a list of Route object from the currently open file cast as Datatype objects. */
+  /**
+   * This method changes the name of the current file to the given name if the name matches one of the stored files
+   * and throws an IllegalArgumentException if the name does not match one of the stored files.
+   * @param newCurrentFile the name of an airline file to change currentRouteFile to.
+   */
+  public void setCurrentRouteFile(String newCurrentFile) {
+    if (routeFiles.containsKey(newCurrentFile) || newCurrentFile == null) {
+      currentRouteFile = newCurrentFile;
+    }
+  }
+
+  /**
+   * This method returns an empty List if there is not current file, or all the Routes in the current file
+   * if there is a current file.
+   * @return a list of Routes in the current file.
+   */
   public List<Route> getRoutes() {
-    return routes;
+    if (currentRouteFile == null) {
+      return new ArrayList<>();
+    }
+    return routeFiles.get(currentRouteFile);
   }
 
-  /** This method reset routes list. */
-  public void resetRoutesList() {
-    routes = new ArrayList<>();
-  }
+//  /** This method reset routes list. */
+//  public void resetRoutesList() {
+//    routes = new ArrayList<>();
+//  }
 
   /** @return a list of Route object from route to add to history. */
   public List<Route> getTempRoutes() {
@@ -127,39 +255,66 @@ public class Storage {
    * @param data The list of data.
    * @param type Type of data to be stored.
    */
-  public void setData(List<DataType> data, String type) {
+  public void setData(List<DataType> data, String type, String filename) {
+    //close auto commite for database
+//    database.closeAutoCommite();
 
     if (type.matches("Airline")) {
-      //      airlines = new ArrayList<Airline>();
-      database.initialiseTable("airlines");
-      database.closeAutoCommite();
+      List<Airline> airlines = new ArrayList<>();
+      if (filename == null) {
+        filename = currentAirlineFile;
+//        database.setTableName(filename);
+//        database.initialiseTable("Airline");
+      } else {
+          currentAirlineFile = filename;
+//        database.setTableName(filename);
+//        database.initialiseTable("Airline");
+      }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
         if (airline != null) {
           airlines.add(airline);
-          database.addAirlines(airline);
+//          database.addAirlines(airline);
         }
       }
-      database.startCommite();
+      airlineFiles.put(filename, airlines);
+//      database.startCommite();
     } else if (type.matches("Airport")) {
-      //      airports = new ArrayList<Airport>();
-      database.initialiseTable("airports");
-      database.closeAutoCommite();
+      List<Airport> airports = new ArrayList<>();
+      if (filename == null) {
+        filename = currentAirportFile;
+//        database.setTableName(filename);
+//        database.initialiseTable("Airport");
+      } else {
+        currentAirportFile = filename;
+//        database.setTableName(filename);
+//        database.initialiseTable("Airport");
+      }
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
         airports.add(airport);
-        database.addAirports(airport);
+//        database.addAirports(airport);
       }
-      database.startCommite();
+      airportFiles.put(filename, airports);
+//      database.startCommite();
     } else if (type.matches("Route")) {
-      database.initialiseTable("routes");
-      database.closeAutoCommite();
+      List<Route> routes = new ArrayList<>();
+      if (filename == null) {
+        filename = currentRouteFile;
+//        database.setTableName(filename);
+//        database.initialiseTable("Route");
+      } else {
+        currentRouteFile = filename;
+//        database.setTableName(filename);
+//        database.initialiseTable("Route");
+      }
       for (DataType entry : data) {
         Route route = (Route) entry;
         routes.add(route);
-        database.addRoutes(route);
+//        database.addRoutes(route);
       }
-      database.startCommite();
+      routeFiles.put(filename, routes);
+//      database.startCommite();
     } else {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
@@ -218,5 +373,33 @@ public class Storage {
    */
   public HashMap<String, Integer> getHistoryDestAirports() {
     return historyDestAirports;
+  }
+
+  public HashMap<String, List<Airline>> getAirlineFileList() {
+    return airlineFiles;
+  }
+
+  public HashMap<String, List<Airport>> getAirportFileList() {
+    return airportFiles;
+  }
+
+  public HashMap<String, List<Route>> getRouteFileList() {
+    return routeFiles;
+  }
+
+  /**
+   * This method returns the names of the most recently compared routes.
+   * @return A pair of two route names.
+   */
+  public Pair<String, String> getComparedRoutes() {
+    return comparedRoutes;
+  }
+
+  /**
+   * This method sets the two compared route names to the given values.
+   * @param comparedRoutes Pair of strings corresponding to the names of two routes.
+   */
+  public void setComparedRoutes(Pair<String, String> comparedRoutes) {
+    this.comparedRoutes = comparedRoutes;
   }
 }

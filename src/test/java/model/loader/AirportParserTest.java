@@ -46,7 +46,7 @@ public class AirportParserTest {
      */
     @Test
     public void isAirportIdValidDupId() {
-        assertTrue(airportParser.isIdValid("3"));
+        assertTrue(airportParser.isIdValid("4"));
     }
 
     /**

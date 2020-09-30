@@ -60,15 +60,6 @@ public abstract class Parser {
   }
 
   /**
-   * Getter for error collection.
-   *
-   * @return the HashMap errorCollection.
-   */
-  protected Map<Integer, Integer> getErrorCollection() {
-    return errorCollection;
-  }
-
-  /**
    * Initialize error code key in errorCollection.
    *
    * @param errorCodeNum number of error code that are expected to be generated in hashmap1
@@ -93,14 +84,15 @@ public abstract class Parser {
   }
 
   /**
-   * Create and return a message detailing the errors found in the file
+   * This method creates and return a message detailing the errors found in the file.
    *
-   * @return String with information about error types in fiile
+   * @return String with information about error types in file.
    */
-  public String getErrorMessage() {
-    StringBuilder errorMessage =
-        new StringBuilder(
-            String.format("File uploaded with %d invalid lines rejected\n", totalErrors));
+  public String getErrorMessage(boolean uploadSuccess) {
+    StringBuilder errorMessage = new StringBuilder();
+    if (uploadSuccess) {
+      errorMessage.append(String.format("File uploaded with %d invalid lines rejected.\n", totalErrors));
+    }
     String template = "Error [%d] %s: %d occurances\n";
     for (int i = 0; i < numCodes; i++) {
       if (errorCollection.get(i) > 0) {
@@ -108,5 +100,13 @@ public abstract class Parser {
       }
     }
     return errorMessage.toString();
+  }
+
+  /**
+   * Checks if the number of errors in the file is less than the size of the file.
+   * @return true if there are less errors than lines in the file, false otherwise.
+   */
+  public boolean getValidFile() {
+    return (totalErrors < dataFile.size());
   }
 }

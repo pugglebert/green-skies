@@ -23,6 +23,8 @@ public class Loader {
 
   /** Expected file extension */
   private final ArrayList<String> supportedExtensions;
+  /** Filenames used by application. Cannot be used as names of user files. */
+  private final ArrayList<String> reservedFilenames;
   /** The storage used in the application. */
   private final Storage storage;
 
@@ -31,8 +33,10 @@ public class Loader {
     this.storage = storage;
     supportedExtensions = new ArrayList<>();
     supportedExtensions.add("csv");
-    supportedExtensions.add("txt");
-    supportedExtensions.add("dat");
+    reservedFilenames = new ArrayList<>();
+    reservedFilenames.add("singleEntryAirlines.csv");
+    reservedFilenames.add("singleEntryAirports.csv");
+    reservedFilenames.add("singleEntryRoutes.csv");
   }
 
   /**
@@ -51,6 +55,44 @@ public class Loader {
     if (!supportedExtensions.contains(extension)) {
       throw new FileSystemException(
           "Unsupported file type", extension, "Only CSV files can be processed.");
+    }
+  }
+
+  /**
+   * This method gets the name of the file from its full path.
+   * @param filePath full path of the file on the computer.
+   * @return the last part of the file path (after the last slash).
+   */
+  protected String getFileName(String filePath) {
+    String fileName;
+    if (filePath.contains("/")) {
+      fileName = filePath.substring(filePath.lastIndexOf("/")+1);
+    } else {
+      fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
+    }
+    return fileName;
+  }
+
+  /**
+   * This method checks if file is already uploaded to the system.
+   *
+   * @param fileName Name of file to be checked.
+   * @throws RuntimeException If filename is already in the system.
+   */
+  protected void checkDuplicateFileName(String fileName) {
+    boolean duplicate = false;
+    if (storage.getAirportFileNames().contains(fileName)) {
+      duplicate = true;
+    } else if (storage.getAirlineFileNames().contains(fileName)) {
+      duplicate = true;
+    } else if (storage.getRouteFileNames().contains(fileName)) {
+      duplicate = true;
+    }
+    if (duplicate) {
+      throw new RuntimeException(String.format("There is already a file with the name %s in the system", fileName));
+    }
+    if (reservedFilenames.contains(fileName)) {
+      throw new RuntimeException(String.format("Filename %s is used by the system. User files cannot have this name", fileName));
     }
   }
 
@@ -85,22 +127,31 @@ public class Loader {
    * @throws IllegalArgumentException Thrown if datatype is not one of airline, airport, flight or
    *     route.
    */
-  protected Parser constructParser(String dataType, ArrayList<String> lines)
+  protected Parser constructParser(String dataType, ArrayList<String> lines, boolean appendToExisting)
       throws IllegalArgumentException {
 
     Parser parser;
 
     switch (dataType) {
       case "Airport":
-        List<Airport> existingAirports = storage.getAirports();
+        List<Airport> existingAirports = new ArrayList<>();
+        if (appendToExisting) {
+          existingAirports = storage.getAirports();
+        }
         parser = new AirportParser(lines, existingAirports);
         break;
       case "Airline":
-        List<Airline> exisitingAirlines = storage.getAirlines();
-        parser = new AirlineParser(lines, exisitingAirlines);
+        List<Airline> existingAirlines = new ArrayList<>();
+        if (appendToExisting) {
+          existingAirlines = storage.getAirlines();
+        }
+        parser = new AirlineParser(lines, existingAirlines);
         break;
       case "Route":
-        List<Route> existingRoutes = storage.getRoutes();
+        List<Route> existingRoutes = new ArrayList<>();
+        if (appendToExisting) {
+          existingRoutes = storage.getRoutes();
+        }
         parser = new RouteParser(lines, existingRoutes);
         break;
       default:
@@ -111,62 +162,101 @@ public class Loader {
   }
 
   /**
-   * This method is the same as the loadFile method except it does not upload any data. Checks if
-   * filename and datatype fields are empty. If they aren't, processes file by calling
-   * checkFileType, openFile and constructParser. If an error occurs while trying to open the file,
-   * returns a message about the error. Otherwise, returns message abount number of rejected lines
-   * from file.
+   * This method calls processFile to preform error checks and process the data. It then stores
+   * the data in the storage class and returns an error message obtained form the parser.
    *
-   * @param fileName Name of the file to be opened.
+   * @param filePath Path of the file to be opened.
    * @param dataType The type of data in the file (one of airport, airline, or route).
    * @return Error information string.
    */
-  public String checkFile(String fileName, String dataType)
-      throws FileSystemException, FileNotFoundException {
+  public String loadFile(String filePath, String dataType)
+      throws FileSystemException, FileNotFoundException, SQLException {
 
-    if (fileName.isEmpty()) {
-      throw new RuntimeException("Filename cannot be empty.");
-    } else if (dataType.isEmpty()) {
-      throw new RuntimeException("Datatype cannot be empty.");
-    }
+    String fileName = getFileName(filePath);
+    Parser parser = processFile(filePath, dataType);
+    List<DataType> data = parser.getData();
+    storage.setData(data, dataType, fileName);
 
-    checkFileType(fileName);
-    ArrayList<String> lines;
-    lines = openFile(fileName);
-
-    Parser parser = constructParser(dataType, lines);
-
-    return parser.getErrorMessage();
+    return parser.getErrorMessage(true);
   }
 
   /**
-   * This method checks if filename and datatype fields are empty. If they aren't, processes file by
-   * calling checkFileType, openFile and constructParser. If an error occurs while trying to open
-   * the file, returns a message about the error. Otherwise, returns message abount number of
-   * rejected lines from file.
+   * This method calls processFile to preform error checks and process the data. It does not
+   * store any data, but it does return the same error message as loadFile
    *
-   * @param fileName Name of the file to be opened.
+   * @param filePath Path of the file to be opened.
    * @param dataType The type of data in the file (one of airport, airline, or route).
    * @return Error information string.
    */
-  public String loadFile(String fileName, String dataType)
-      throws FileSystemException, FileNotFoundException, SQLException {
+  public String checkFile(String filePath, String dataType)
+          throws FileSystemException, FileNotFoundException {
 
-    if (fileName.isEmpty()) {
+    Parser parser = processFile(filePath, dataType);
+    return parser.getErrorMessage(true);
+  }
+
+  /**
+   * This method checks if the filepath and datatype fields are empty, if the file is in an illegal type
+   * or if the filename is a duplicate. If any of these things are true it raises and error. If not, it
+   * creates a parser and processes all the lines in the file.
+   * @param filePath the local path of the file.
+   * @param dataType the type of data to be processed, one of Airline, Airport, Route.
+   * @return a parser which has processed all the lines in the file.
+   * @throws FileSystemException If the file is not in a supported format.
+   * @throws FileNotFoundException If the file cannot be found.
+   */
+  public Parser processFile(String filePath, String dataType) throws FileSystemException, FileNotFoundException {
+
+    if (filePath.isEmpty()) {
       throw new RuntimeException("Filename cannot be empty.");
     } else if (dataType.isEmpty()) {
       throw new RuntimeException("Datatype cannot be empty.");
     }
 
-    checkFileType(fileName);
+    checkFileType(filePath);
+
+    String fileName = getFileName(filePath);
+    checkDuplicateFileName(fileName);
     ArrayList<String> lines;
-    lines = openFile(fileName);
+    lines = openFile(filePath);
 
-    Parser parser = constructParser(dataType, lines);
-    List<DataType> data = parser.getData();
-    storage.setData(data, dataType);
+    Parser parser = constructParser(dataType, lines, false);
+    return parser;
+  }
 
-    return parser.getErrorMessage();
+  /**
+   * Returns the current filename for that datatype, or if current filename is null returns the name of the single
+   * entry file.
+   * @return The filename to use when adding the file to storage.
+   */
+  public String getLineFileName(String dataType) {
+    String fileName;
+    switch (dataType) {
+      case "Airline":
+        if (storage.getCurrentAirlineFile() == null) {
+          fileName = "singleEntryAirlines.csv";
+        } else {
+          fileName = storage.getCurrentAirlineFile();
+        }
+        break;
+      case "Airport":
+        if (storage.getCurrentAirportFile() == null) {
+          fileName = "singleEntryAirports.csv";
+        } else {
+          fileName = storage.getCurrentAirportFile();
+        }
+        break;
+      case "Route":
+        if (storage.getCurrentRouteFile() == null) {
+          fileName = "singleEntryRoutes.csv";
+        } else {
+          fileName = storage.getCurrentRouteFile();
+        }
+        break;
+      default:
+        throw new IllegalArgumentException("Datatype must be one of: Airline, Airport, Route");
+    }
+    return fileName;
   }
 
   /**
@@ -179,15 +269,15 @@ public class Loader {
    */
   public String loadLine(String entryString, String dataType) throws SQLException {
 
+    String fileName = getLineFileName(dataType);
+
     ArrayList<String> line = new ArrayList<>();
     line.add(entryString);
 
-    Parser parser;
-
-    parser = constructParser(dataType, line);
+    Parser parser = constructParser(dataType, line, true);
 
     List<DataType> data = parser.getData();
-    storage.setData(data, dataType);
-    return parser.getErrorMessage();
+    storage.setData(data, dataType, fileName);
+    return String.format("%s successfully uploaded", dataType);
   }
 }

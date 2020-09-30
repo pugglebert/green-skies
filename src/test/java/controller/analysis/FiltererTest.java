@@ -310,6 +310,7 @@ public class FiltererTest {
       assertTrue(true);
     }
   }
+
   /**
    * Verify that when filterAirports is called with two filter terms and there is only one record in
    * the data storage where the first record's name attribute matches the filter's name and the
@@ -507,8 +508,8 @@ public class FiltererTest {
   public void filterAirlinesTwoTermsNoRecordsTest() {
     try {
       HashMap<String, String> testFilterTerms = new HashMap<>();
-      testFilterTerms.put("Name", "France Airlines");
-      testFilterTerms.put("Country", "France");
+      testFilterTerms.put("Name", "Aero Biniza");
+      testFilterTerms.put("Country", "Canada");
       filterer.filterAirlines(testFilterTerms, storage.getAirlines());
       fail();
     } catch (RuntimeException e) {
@@ -666,8 +667,8 @@ public class FiltererTest {
   public void filterRoutesTwoTermsNoRecordsTest() {
     try {
       HashMap<String, String> testFilterTerms = new HashMap<>();
-      testFilterTerms.put("Airline", "2X");
-      testFilterTerms.put("Destination", "FRC");
+      testFilterTerms.put("Airline", "2K");
+      testFilterTerms.put("Destination", "OVC");
       filterer.filterRoutes(testFilterTerms, storage.getRoutes());
       fail();
     } catch (RuntimeException e) {

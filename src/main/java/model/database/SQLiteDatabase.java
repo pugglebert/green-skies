@@ -29,6 +29,9 @@ public class SQLiteDatabase {
   /** Variable that contains result fetched form database. */
   private ResultSet res;
 
+  /** Variable for table name that is going to be created in database. */
+  private String tableName;
+
   /**
    * This method create connection to local database, and will create one if there is no database.
    */
@@ -54,6 +57,10 @@ public class SQLiteDatabase {
    * will help to significantly improve insertion speed.
    */
   public void closeAutoCommite() {
+    if (con == null) {
+      // get connection
+      buildConnection();
+    }
     try {
       con.setAutoCommit(false);
     } catch (Exception e) {
@@ -63,16 +70,29 @@ public class SQLiteDatabase {
 
   /** This method manully starts commite for database. */
   public void startCommite() {
+    if (con == null) {
+      // get connection
+      buildConnection();
+    }
     try {
       con.commit();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
-    } finally {
-      try {
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      }
     }
+//    finally {
+//      try {
+//      } catch (Exception e) {
+//        JOptionPane.showMessageDialog(null, e);
+//      }
+//    }
+  }
+
+  /**
+   * This method sets table name that is going to be created in database.
+   * @param fileName Provided file name.
+   */
+  public void setTableName(String fileName){
+    this.tableName = "'" + fileName.split("\\.")[0] + "'";
   }
 
   /** This method builds airports table with airport attributes as colunms in dastabase. */
@@ -85,7 +105,7 @@ public class SQLiteDatabase {
     try {
       builtTable = con.createStatement();
       builtTable.executeUpdate(
-          "create table airports(airport_id integer,"
+          "create table "+ tableName + "(airport_id integer,"
               + "name varchar(60),"
               + "city varchar(60),"
               + "country varchar(60),"
@@ -98,6 +118,7 @@ public class SQLiteDatabase {
               + "DST varchar(60),"
               + "DBTimezone varchar(60),"
               + "primary key (airport_id))");
+      startCommite();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     } finally {
@@ -119,7 +140,7 @@ public class SQLiteDatabase {
     try {
       builtTable = con.createStatement();
       builtTable.executeUpdate(
-          "create table routes(route_id integer,"
+          "create table " + tableName + "(route_id integer,"
               + "airlineName varchar(60),"
               + "airlineID integer,"
               + "sourceAirport varchar(60),"
@@ -133,6 +154,7 @@ public class SQLiteDatabase {
               + "distance double(100, 10),"
               + "timesTaken integer,"
               + "primary key (route_id))");
+      startCommite();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     } finally {
@@ -144,7 +166,7 @@ public class SQLiteDatabase {
     }
   }
 
-  /** This method builds airlines table with airline attributes as colunms in dastabase. */
+  /** This method builds airlines table with given name and with airline attributes as colunms in dastabase. */
   protected void buildAirlinesTable() {
     if (con == null) {
       // get connection
@@ -154,7 +176,7 @@ public class SQLiteDatabase {
     try {
       builtTable = con.createStatement();
       builtTable.executeUpdate(
-          "create table airlines(airline_id integer,"
+          "create table" + tableName +"(airline_id integer,"
               + "airlineName varchar(60),"
               + "alias varchar(60),"
               + "IATA varchar(5),"
@@ -163,6 +185,7 @@ public class SQLiteDatabase {
               + "country varchar(60),"
               + "activeStatus boolean,"
               + " primary key (airline_id))");
+      startCommite();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     } finally {
@@ -186,7 +209,7 @@ public class SQLiteDatabase {
     }
 
     try {
-      prep = con.prepareStatement("insert into airports values(?,?,?,?,?,?,?,?,?,?,?,?);");
+      prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setInt(1, airport.getAirportID());
       prep.setString(2, airport.getName());
       prep.setString(3, airport.getCity());
@@ -196,7 +219,7 @@ public class SQLiteDatabase {
       prep.setDouble(7, airport.getLatitude());
       prep.setDouble(8, airport.getLongitude());
       prep.setInt(9, airport.getAltitude());
-      prep.setFloat(10, airport.getTimezone());
+      prep.setDouble(10, airport.getTimezone());
       prep.setString(11, airport.getDST());
       prep.setString(12, airport.getDataBaseTimeZone());
       prep.execute();
@@ -223,7 +246,7 @@ public class SQLiteDatabase {
     }
 
     try {
-      prep = con.prepareStatement("insert into routes values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
+      prep = con.prepareStatement("insert into " + tableName +" values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setString(2, route.getAirlineName());
       prep.setInt(3, route.getAirlineID());
       prep.setString(4, route.getSourceAirport());
@@ -269,7 +292,7 @@ public class SQLiteDatabase {
     }
 
     try {
-      prep = con.prepareStatement("insert into airlines values(?,?,?,?,?,?,?,?);");
+      prep = con.prepareStatement("insert into" + tableName + "values(?,?,?,?,?,?,?,?);");
       prep.setInt(1, airline.getAirlineID());
       prep.setString(2, airline.getName());
       prep.setString(3, airline.getAirlineAlias());
@@ -301,17 +324,16 @@ public class SQLiteDatabase {
       // get connection
       buildConnection();
     }
-
     switch (tableType) {
-      case "airports":
+      case "Airport":
         try {
           state = con.createStatement();
           res =
               state.executeQuery(
-                  "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
+                  "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
           if (res.next()) {
             state = con.createStatement();
-            state.executeUpdate("Delete from 'airports'");
+            state.executeUpdate("Delete from " + tableName);
           } else {
             buildAirportsTable();
           }
@@ -326,15 +348,15 @@ public class SQLiteDatabase {
           }
         }
         break;
-      case "routes":
+      case "Route":
         try {
           state = con.createStatement();
           res =
               state.executeQuery(
-                  "SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
+                  "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
           if (res.next()) {
             state = con.createStatement();
-            state.executeUpdate("Delete from 'routes'");
+            state.executeUpdate("Delete from " + tableName);
           } else {
             buildRoutesTable();
           }
@@ -349,15 +371,15 @@ public class SQLiteDatabase {
           }
         }
         break;
-      case "airlines":
+      case "Airline":
         try {
           state = con.createStatement();
           res =
               state.executeQuery(
-                  "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+                      "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
           if (res.next()) {
             state = con.createStatement();
-            state.executeUpdate("Delete from 'airlines'");
+            state.executeUpdate("Delete from " + tableName);
           } else {
             buildAirlinesTable();
           }
@@ -425,7 +447,7 @@ public class SQLiteDatabase {
                   DBTimezone);
           airports.add(airport);
         }
-        storage.setData(airports, "Airport");
+        storage.setData(airports, "Airport", null);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
@@ -463,7 +485,7 @@ public class SQLiteDatabase {
                   airlineId, airlineName, alias, IATA, ICAO, callsign, country, activeStatus);
           airlines.add(airline);
         }
-        storage.setData(airlines, "Airline");
+        storage.setData(airlines, "Airline", null);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
@@ -498,7 +520,6 @@ public class SQLiteDatabase {
           int numOfStops = res.getInt("numOfStops");
 
           String equipment = res.getString("equipment");
-          //                System.out.println(equipment);
           String[] equipmentArray;
           if (equipment != null) {
             equipmentArray = equipment.split(" ");
@@ -527,7 +548,7 @@ public class SQLiteDatabase {
           route.setDistance(distance);
           routes.add(route);
         }
-        storage.setData(routes, "Route");
+        storage.setData(routes, "Route", null);
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);

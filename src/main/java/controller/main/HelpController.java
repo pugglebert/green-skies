@@ -26,12 +26,9 @@ public class HelpController {
    * @throws IOException This throws an IOException.
    */
   public void BackToPreviousWindow() throws IOException {
-    Stage stage = (Stage) BackButton.getScene().getWindow(); // get current window
-    stage.close(); // close current window
-    Stage stage1 = new Stage();
+    Stage stage1 = GreenSkiesApplication.getPrimaryStage();
     Parent root = FXMLLoader.load(getClass().getResource("welcome.fxml"));
     Scene scene = new Scene(root);
     stage1.setScene(scene);
-    stage1.show();
   }
 }

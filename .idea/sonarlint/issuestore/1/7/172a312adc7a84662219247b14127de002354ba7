@@ -1,16 +1,0 @@
-
-l	java:S117""QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â•;8€™ñàÉ.
-]	java:S107"BConstructor has 12 parameters, which is greater than 7 authorized.(»±ñ8€™ñàÉ.
-T
-java:S1135"2Complete the task associated to this TODO comment.(™»Î®şÿÿÿÿ8€™ñàÉ.
-k	java:S116"ORename this field "ICAO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¦á8€™ñàÉ.
-o	java:S116"NRename this field "DST" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€çÅşÿÿÿÿ8€™ñàÉ.
-p	java:S116"ORename this field "IATA" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÑÄ€üÿÿÿÿ8€™ñàÉ.
-m	java:S117!"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸òş²8€™ñàÉ.
-m	java:S117'"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§Ì¼İ8€™ñàÉ.
-s
-java:S1206¦"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ8ù±£É.
-T
-java:S1135"2Complete the task associated to this TODO comment.(¬Ó¹’üÿÿÿÿ8€™ñàÉ.
-U
-java:S1135£"2Complete the task associated to this TODO comment.(ôÒ³¶ûÿÿÿÿ8€™ñàÉ.

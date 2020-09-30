@@ -50,7 +50,7 @@ public class AirportParser extends Parser {
   /** This method initializes the error messages for each error code */
   @Override
   protected void initErrorLookup() {
-    errorLookup[0] = "Not enough parameters";
+    errorLookup[0] = "Wrong number of parameters";
     errorLookup[1] = "Duplicate airport ID";
     errorLookup[2] = "Invalid airport ID";
     errorLookup[3] = "Invalid airport name";
@@ -78,9 +78,16 @@ public class AirportParser extends Parser {
     for (String dataLine : dataFile) {
       if (totalErrors > 200) {
         totalErrors = 0;
-        throw new RuntimeException("File rejected: more than 100 lines contain errors");
+        throw new RuntimeException("File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
       }
       parseLine(dataLine);
+    }
+    if (!getValidFile()) {
+      if (totalErrors == 1) {
+        throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
+      } else {
+        throw new RuntimeException("File rejected: all lines contain errors.\n" + getErrorMessage(false));
+      }
     }
   }
 
@@ -123,59 +130,58 @@ public class AirportParser extends Parser {
    */
   @Override
   protected boolean validater(String[] line) {
-    boolean isValid = true;
     if (line.length != 12) {
       errorCounter(0);
-      isValid = false;
+      return false;
     }
     if(!isIdValid(line[airportID])){
-      isValid = false;
+      return false;
     }
     if (!isNameValid(line[name])) {
-      isValid = false;
+      return false;
     }
 
     if (!isCityValid(line[city])) {
-      isValid = false;
+      return false;
     }
 
     if (!isCountryValid(line[country])) {
-      isValid = false;
+      return false;
     }
 
     if (!isIATAValid(line[IATA])) {
-      isValid = false;
+      return false;
     }
 
     if (!isICAOValid(line[ICAO])) {
-      isValid = false;
+      return false;
     }
 
     if (!isLatValid(line[latitude])) {
-      isValid = false;
+      return false;
     }
 
     if (!isLonValid(line[longtitude])) {
-      isValid = false;
+      return false;
     }
 
     if (!isAltValid(line[altitude])) {
-      isValid = false;
+      return false;
     }
 
     if (!isTZValid(line[timezone])) {
-      isValid = false;
+      return false;
     }
 
     if (!isDSTValid(line[DST])) {
-      isValid = false;
+      return false;
     }
 
     if (!isDBTZValid(line[dataBaseTimeZone])) {
-      isValid = false;
+      return false;
     }
 
-    return isValid;
+    return true;
   }
 
   /**

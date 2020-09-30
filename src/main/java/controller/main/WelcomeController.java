@@ -32,15 +32,11 @@ public class WelcomeController {
    */
   @FXML
   public void continueToMainScreen(ActionEvent event) throws IOException {
-    Stage stage = (Stage) continueButton.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root =
-        FXMLLoader.load(getClass().getResource("upload.fxml")); // open the Upload Data page
+        FXMLLoader.load(getClass().getResource("/view/upload/upload.fxml")); // open the Upload Data page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 
   /**
@@ -51,13 +47,9 @@ public class WelcomeController {
    */
   @FXML
   public void toInfoScreen(ActionEvent event) throws IOException {
-    Stage stage = (Stage) continueButton.getScene().getWindow();
-    stage.close();
-    Stage newStage = new Stage();
-    Parent root = FXMLLoader.load(getClass().getResource("help.fxml"));
+    Stage newStage = GreenSkiesApplication.getPrimaryStage();
+    Parent root = FXMLLoader.load(getClass().getResource("/view/help.fxml"));
     Scene scene = new Scene(root);
     newStage.setScene(scene);
-
-    newStage.show();
   }
 }

@@ -1,13 +1,15 @@
 package controller.main;
 
-import controller.analysis.ReportGenerator;
+import controller.analysis.AirportStatsCalculator;
+import controller.analysis.GeneralStatsCalculator;
+import controller.analysis.RouteStatsCalculator;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.data.Route;
+import model.data.Storage;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -32,10 +34,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayCarbonEmissionGoalField;
   @FXML private TextField displaycarbonEmissionGoalDurationField;
   @FXML private TextField displayTreeOffsetField;
-  @FXML private TextField carbonEmissionGoalDurationField;
   @FXML private TextField carbonEmissionGoalField;
+  @FXML private TextField displayStatusCommentField;
+
   /** This reportGenerator for the application. */
-  private ReportGenerator reportGenerator;
+  private GeneralStatsCalculator generalStatsCalculator;
   /** A string of the most emission routes. */
   private String MostEmissionsRouteString = "";
   /** A string of the least emission routes. */
@@ -45,13 +48,26 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   /** A string of the least distance routes. */
   private String LeastDistanceRouteString;
   /** A string of the most visited source airports. */
-  private String MostVisitedSourceAirport;
+  private String MostVisitedSourceAirportString;
   /** A string of the least visited source airports. */
-  private String LeastVisitedSourceAirport;
+  private String LeastVisitedSourceAirportString;
   /** A string of the most visited destination airports. */
-  private String MostVisitedDestAirport;
+  private String MostVisitedDestAirportString;
   /** A string of the least visited destination airports. */
-  private String LeastVisitedDestAirport;
+  private String LeastVisitedDestAirportString;
+  /**
+   * A string of the number of trees required to offset the provided amount of carbon emissions.
+   */
+  private String numOfTreesString;
+  /**
+   * The RouteStatsCalculator used in the application.
+   */
+  private RouteStatsCalculator routeStatsCalculator;
+  /**
+   * The AirportStatsCalculator used in the application.
+   */
+  private AirportStatsCalculator airportStatsCalculator;
+
 
   public CarbonEmissionsReportController() {}
 
@@ -63,7 +79,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    this.reportGenerator = Main.getReportGenerator();
+    this.generalStatsCalculator = Main.getGeneralStatsCalculator();
+    this.routeStatsCalculator = Main.getRouteStatsCalculator();
+    this.airportStatsCalculator = Main.getAirportStatsCalculator();
   }
 
   /**
@@ -72,26 +90,29 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    */
   @FXML
   private void generateReportData() {
+    updateTravelledAndVisited();
     setUpData();
 
     String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
     displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
-    String carbonEmissionGoalDurationValue = carbonEmissionGoalDurationField.getText();
-    displaycarbonEmissionGoalDurationField.setText(carbonEmissionGoalDurationValue);
-    displayTotalEmissionsField.setText(Double.toString(reportGenerator.getTotalCarbonEmissions()));
-    displayTotalDistanceTravelledField.setText(
-        Double.toString(reportGenerator.getTotalDistanceTravelled()));
+    //TODO: fix this line below! It's creating issues and crashing the app.
+    generalStatsCalculator.setCarbonEmissionsGoal(Double.parseDouble(carbonEmissionGoalValue)); //TODO write test for handling different errors
+
+    displayTotalEmissionsField.setText(String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
+    displayTotalDistanceTravelledField.setText(String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
     displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
     displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
     displayMostDistanceRouteField.setText(MostDistanceRouteString);
     displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
-    displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirport);
-    displayLeastVisitedSourceAirportField.setText("To be implemented!");
-    displayMostVisitedDestinationAirportField.setText("To be implemented!");
-    displayLeastVisitedDestinationAirportField.setText("To be implemented!");
-    displayTreeOffsetField.setText("To be implemented!");
+    displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
+    displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
+    displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
+    displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
 
-    reportGenerator.resetReportGenerator();
+    displayTreeOffsetField.setText(numOfTreesString);
+    displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
+
+    resetReport();
   }
 
   /** This method clears all fields in the report generator page to be empty. */
@@ -100,7 +121,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayCarbonEmissionGoalField.setText("");
     carbonEmissionGoalField.setText("");
     displaycarbonEmissionGoalDurationField.setText("");
-    carbonEmissionGoalDurationField.setText("");
     displayTotalEmissionsField.setText("");
     displayTotalDistanceTravelledField.setText("");
     displayMostEmissionsRouteField.setText("");
@@ -115,31 +135,34 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
 
-    reportGenerator.resetReportGenerator();
+    resetReport();
   }
 
+  //todo write document for this method//
   public void setUpData() {
+    generalStatsCalculator.calculateOffsetTrees();
     System.out.println(MostEmissionsRouteString);
     this.MostEmissionsRouteString =
-        RoutesArrayToString(reportGenerator.getMostEmissionsRoutes());
+        RoutesArrayToString(routeStatsCalculator.getMostEmissionsRoutes());
     this.LeastEmissionsRouteString =
-        RoutesArrayToString(reportGenerator.getLeastEmissionsRoutes());
+        RoutesArrayToString(routeStatsCalculator.getLeastEmissionsRoutes());
     this.MostDistanceRouteString =
-        RoutesArrayToString(reportGenerator.getMostDistanceRoutes());
+        RoutesArrayToString(routeStatsCalculator.getMostDistanceRoutes());
     this.LeastDistanceRouteString =
-        RoutesArrayToString(reportGenerator.getLeastDistanceRoutes());
-    this.MostVisitedSourceAirport =
+        RoutesArrayToString(routeStatsCalculator.getLeastDistanceRoutes());
+    this.MostVisitedSourceAirportString =
         CombineAirportsToOneString(
-            reportGenerator.getMostVisitedSrcAirports());
-    this.LeastVisitedSourceAirport =
+                airportStatsCalculator.getMostVisitedSrcAirports());
+    this.LeastVisitedSourceAirportString =
         CombineAirportsToOneString(
-            reportGenerator.getLeastVisitedSrcAirports());
-    this.MostVisitedDestAirport =
+                airportStatsCalculator.getLeastVisitedSrcAirports());
+    this.MostVisitedDestAirportString =
         CombineAirportsToOneString(
-            reportGenerator.getMostVisitedDestAirports());
-    this.LeastVisitedDestAirport =
+                airportStatsCalculator.getMostVisitedDestAirports());
+    this.LeastVisitedDestAirportString =
         CombineAirportsToOneString(
-            reportGenerator.getLeastVisitedDestAirports());
+                airportStatsCalculator.getLeastVisitedDestAirports());
+    numOfTreesToString(generalStatsCalculator.getTreesToGrow());
   }
 
   /**
@@ -158,7 +181,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         if (i == arrayToConvert.size() - 1) {
           resultStringBuilder.append(arrayToConvert.get(i).getAirlineID());
         } else {
-          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID()).append(" , ");
+          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID()).append(", ");
         }
     }
     resultString = resultStringBuilder.toString();
@@ -181,10 +204,40 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       if (i == airportArrayToConvert.size() - 1) {
         resultStringBuilder.append(airportArrayToConvert.get(i));
       } else {
-        resultStringBuilder.append(airportArrayToConvert.get(i)).append(" , ");
+        resultStringBuilder.append(airportArrayToConvert.get(i)).append(", ");
       }
     }
     resultString = resultStringBuilder.toString();
     return resultString;
   }
+
+  /**
+   * This method converts the number of trees to offset emissions to a string that has been ceiled.
+   * @param trees The number of trees to offset as a double.
+   */
+  public void numOfTreesToString(Double trees) {
+    this.numOfTreesString = String.format("%.0f", Math.ceil(trees));
+  }
+
+  //TODO fix this!
+  /**
+   * This methods updates all the most and least travelled route(s) arrays and visited airport(s)
+   * arrays at once.
+   */
+  public void updateTravelledAndVisited() {
+    Storage storage = Main.getStorage();
+    routeStatsCalculator.updateLeastTravelledRoute(storage.getHistory());
+    routeStatsCalculator.updateMostTravelledRoute(storage.getHistory());
+    airportStatsCalculator.updateMostVisitedSrcAirports(storage.getHistorySrcAirports());
+    airportStatsCalculator.updateLeastVisitedSrcAirports(storage.getHistorySrcAirports());
+    airportStatsCalculator.updateMostVisitedDestAirports(storage.getHistoryDestAirports());
+    airportStatsCalculator.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
+  }
+
+  //TODO fix this!
+  public void resetReport() {
+    routeStatsCalculator.resetRoutesArrays();
+    airportStatsCalculator.resetAirportArrays();
+  }
+
 }
