@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 
+//TODO write comments for this class. HK 26/09/2020
+
 public class UploadStep {
     private String fileType;
     private String filePath;

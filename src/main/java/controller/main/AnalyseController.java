@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -50,7 +49,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
    */
   public void start(Stage primaryStage) throws IOException {
 
-    Parent root = FXMLLoader.load(getClass().getResource("analyse.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/view/analyse.fxml"));
     primaryStage.setTitle("Welcome");
     primaryStage.setScene(new Scene(root, 1024, 640));
     primaryStage.show();

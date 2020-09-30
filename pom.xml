@@ -90,13 +90,6 @@
 
     <dependency>
       <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-java</artifactId>
-      <version>6.6.1</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit</artifactId>
       <version>6.6.1</version>
       <scope>test</scope>
@@ -108,7 +101,6 @@
       <version>6.6.1</version>
       <scope>compile</scope>
     </dependency>
-
 
   </dependencies>
 

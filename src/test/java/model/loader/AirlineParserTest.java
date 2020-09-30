@@ -2,6 +2,7 @@ package model.loader;
 
 
 import model.data.Airline;
+import model.data.DataType;
 import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
@@ -273,5 +274,67 @@ public class AirlineParserTest {
             "-1", "N@me", "@LI@S", "NotIATA", "NotICAO", "1Callsign", "1Country", "Yes", "Redundant"
     };
     assertFalse(airlineParser.validater(invalidValider));
+  }
+
+  /**
+   * Verify that the correct error message is produced when attempting to add a file where over
+   * 200 lines are wrong.
+   */
+  @Test
+  public void errorMessageTest200WrongLines() throws FileNotFoundException {
+    Loader loader = new Loader(new Storage());
+    ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airports.csv");
+    try {
+      AirlineParser airlineParser = new AirlineParser(lines, new ArrayList<>());
+      fail();
+    } catch (RuntimeException e) {
+      assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurances\n", e.getMessage());
+    }
+  }
+
+  /**
+   * Verify that the correct error message is produced when attempting to add a file all lines contain errors
+   * but the file is less than 200 lines.
+   */
+  @Test
+  public void errorMessageTestAllWrongLines() throws FileNotFoundException {
+    Loader loader = new Loader(new Storage());
+    ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/SearcherRoutesTest.csv");
+    try {
+      AirlineParser airlineParser = new AirlineParser(lines, new ArrayList<>());
+      fail();
+    } catch (RuntimeException e) {
+      assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurances\n", e.getMessage());
+    }
+  }
+
+  /** Verify that the correct error code is produced when attempting to add a duplicate airline */
+  @Test
+  public void duplicateErrorMessageTest() throws FileNotFoundException {
+    Loader loader = new Loader(new Storage());
+    ArrayList<String> duplicateLines =
+            loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateAirlinesTest.csv");
+    AirlineParser airlineParser = new AirlineParser(duplicateLines, new ArrayList<>());
+    assertEquals(
+            "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airline: 1 occurances\n",
+            airlineParser.getErrorMessage(true));
+  }
+
+  /**
+   * Verify that the airline is only added to the data once when attempting to add a duplicate airline
+   */
+  @Test
+  public void duplicateNotAddedTest() throws FileNotFoundException {
+    Loader loader = new Loader(new Storage());
+    ArrayList<String> duplicateLines =
+            loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateAirlinesTest.csv");
+    AirlineParser airlineParser = new AirlineParser(duplicateLines, new ArrayList<>());
+    int numAirlines = 0;
+    for (DataType dataType : airlineParser.getData()) {
+      if (dataType != null) {
+        numAirlines++;
+      }
+    };
+    assertEquals(1, numAirlines);
   }
 }
