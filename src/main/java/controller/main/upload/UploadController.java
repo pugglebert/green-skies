@@ -16,11 +16,13 @@ import javafx.stage.Stage;
 import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
+import model.database.SQLiteDatabase;
 import model.loader.Loader;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -43,6 +45,8 @@ public class UploadController extends SideNavBarController {
     private String currentAirportFile;
 
     private String currentRouteFile;
+
+    private SQLiteDatabase database = new SQLiteDatabase();
 
     // Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
     ObservableList<String> dataTypeList =
@@ -236,11 +240,12 @@ public class UploadController extends SideNavBarController {
      * method to delete select file and rise alertBox.
      */
     @FXML
-    public void deleteFile() {
+    public void deleteFile() throws SQLException {
         if (currentAirlineFile != null) {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airline file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirlineFileList().remove(currentAirlineFile);
+                database.deleteFile(currentAirlineFile);
                 storage.setCurrentAirlineFile(null);
                 airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
             }
@@ -249,6 +254,7 @@ public class UploadController extends SideNavBarController {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airport file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirportFileList().remove(currentAirportFile);
+                database.deleteFile(currentAirportFile);
                 storage.setCurrentAirportFile(null);
                 airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
             }
@@ -256,6 +262,7 @@ public class UploadController extends SideNavBarController {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("route file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getRouteFileList().remove(currentRouteFile);
+                database.deleteFile(currentRouteFile);
                 storage.setCurrentRouteFile(null);
                 routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
             }
