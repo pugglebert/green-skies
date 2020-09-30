@@ -240,21 +240,20 @@ public class UploadController extends SideNavBarController {
      * method to delete select file and rise alertBox.
      */
     @FXML
-    public void deleteFile() throws SQLException {
+    public void deleteFile() {
         if (currentAirlineFile != null) {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airline file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirlineFileList().remove(currentAirlineFile);
-                database.deleteFile(currentAirlineFile);
+                database.deleteFile(currentAirlineFile, "Airline");
                 storage.setCurrentAirlineFile(null);
                 airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
             }
-
         }  if (currentAirportFile != null) {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airport file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirportFileList().remove(currentAirportFile);
-                database.deleteFile(currentAirportFile);
+                database.deleteFile(currentAirportFile, "Airport");
                 storage.setCurrentAirportFile(null);
                 airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
             }
@@ -262,7 +261,7 @@ public class UploadController extends SideNavBarController {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("route file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getRouteFileList().remove(currentRouteFile);
-                database.deleteFile(currentRouteFile);
+                database.deleteFile(currentRouteFile, "Route");
                 storage.setCurrentRouteFile(null);
                 routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
             }

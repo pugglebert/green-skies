@@ -45,7 +45,7 @@ public class SQLiteDatabase {
      */
     private String tableName;
 
-    public SQLiteDatabase(){
+    public SQLiteDatabase() {
         buildConnection();
     }
 
@@ -128,7 +128,7 @@ public class SQLiteDatabase {
     /**
      * This method builds airports table with airport attributes as colunms in dastabase.
      */
-    protected void buildAirportsTable()  {
+    protected void buildAirportsTable() {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -255,7 +255,7 @@ public class SQLiteDatabase {
     /**
      * This method create a table that contains all file names and corresponding types
      */
-    protected void buildTableList(){
+    protected void buildTableList() {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -289,7 +289,7 @@ public class SQLiteDatabase {
      *
      * @param airport Object of airport contains information of airport as attributes.
      */
-    public void addAirports(Airport airport)  {
+    public void addAirports(Airport airport) {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -301,7 +301,6 @@ public class SQLiteDatabase {
 
         try {
             prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
-            System.out.println(airport.getAirportID());
             prep.setInt(1, airport.getAirportID());
             prep.setString(2, airport.getName());
             prep.setString(3, airport.getCity());
@@ -331,7 +330,7 @@ public class SQLiteDatabase {
      *
      * @param route Object of route contains information of route as attributes.
      */
-    public void addRoutes(Route route){
+    public void addRoutes(Route route) {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -413,6 +412,37 @@ public class SQLiteDatabase {
         }
     }
 
+//    public void addFlightHistory(){
+//        try {
+//            if (con.isClosed()) {
+//                // get connection
+//                buildConnection();
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//        try {
+//            prep = con.prepareStatement("insert into" + tableName + "values(?,?,?,?,?,?,?,?);");
+//            prep.setInt(1, airline.getAirlineID());
+//            prep.setString(2, airline.getName());
+//            prep.setString(3, airline.getAirlineAlias());
+//            prep.setString(4, airline.getIATA());
+//            prep.setString(5, airline.getICAO());
+//            prep.setString(6, airline.getCallsign());
+//            prep.setString(7, airline.getCountry());
+//            prep.setBoolean(8, airline.getActiveStatus());
+//            prep.execute();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        } finally {
+//            try {
+//                prep.close();
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, e);
+//            }
+//        }
+//    }
+
     /**
      * This method initialise table according to provided tabletype, it deletes table and recreates
      * it. This method also set table name for globle attribute for other method to interact to
@@ -420,7 +450,7 @@ public class SQLiteDatabase {
      *
      * @param tableType Three types of table conresponding to airport, route and airline.
      */
-    public void initialiseTable(String tableType, String fileName)  {
+    public void initialiseTable(String tableType, String fileName) {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -430,16 +460,7 @@ public class SQLiteDatabase {
             JOptionPane.showMessageDialog(null, e);
         }
 
-        // Set table name as attributes of the class, so that other method know what table they are
-        // interact with.
-//    this.tableName = "'" + fileName.split("\\.")[0] + "'";
         setTableName(fileName);
-
-
-//    for(String name: getFileNamesByType("Airport")){
-//      System.out.println(name);
-//    }
-
 
         try {
             state = con.createStatement();
@@ -798,7 +819,7 @@ public class SQLiteDatabase {
      *
      * @param routes A list contains all routes needs to be uploaded to database.
      */
-    public void updateRoute(List<Route> routes)  {
+    public void updateRoute(List<Route> routes) {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -827,7 +848,7 @@ public class SQLiteDatabase {
      * @param fileName Name of the file that user uploaded.
      * @param fileType Type of the file that user uploaded.
      */
-    public void updateTableList(String fileName, String fileType){
+    public void updateTableList(String fileName, String fileType) {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -879,10 +900,13 @@ public class SQLiteDatabase {
         ArrayList<String> file_names = new ArrayList<>();
         try {
             state = con.createStatement();
-            res = state.executeQuery("select * from 'file_list' where file_type='" + fileType + "'");
-            while (res.next()) {
-                String fileName = res.getString("file_name");
-                file_names.add(fileName);
+            res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='file_list'");
+            if (res.next()) {
+                res = state.executeQuery("select * from 'file_list' where file_type='" + fileType + "'");
+                while (res.next()) {
+                    String fileName = res.getString("file_name");
+                    file_names.add(fileName);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -897,7 +921,12 @@ public class SQLiteDatabase {
         return file_names;
     }
 
-    public void deleteFile(String fileName) {
+    /**
+     * This method delete the row in file_list table where file_name and file_Type column is as provided from input.
+     * @param fileName The file_name of the row that will be deleted.
+     * @param fileType The file_type of the row that will be deleted.
+     */
+    public void deleteFile(String fileName, String fileType) {
         try {
             if (con.isClosed()) {
                 // get connection
@@ -908,21 +937,20 @@ public class SQLiteDatabase {
         }
 
         setTableName(fileName);
-
         try {
             state = con.createStatement();
             state.executeUpdate("drop table " + tableName);
+            state.executeUpdate("delete from file_list where file_name='" + fileName + "' and file_type='" + fileType + "'");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
             try {
                 state.close();
-                res.close();
             } catch (Exception e) {
+                System.out.println(1);
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-
     }
 
 
