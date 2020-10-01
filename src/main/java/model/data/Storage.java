@@ -320,8 +320,6 @@ public class Storage {
    */
   public void updateDatabase(String fileType){
     if(!(fileType.matches("Airport") || fileType.matches("Airline") || fileType.matches("Route"))){
-      System.out.println(fileType);
-
       throw new IllegalArgumentException("Type must be Airport, Airline or Route");
     }
     database.closeAutoCommite();
@@ -348,7 +346,7 @@ public class Storage {
    *
    * @throws SQLException This throws an SQLException.
    */
-  public void initialiseStorage() throws SQLException {
+  public void initialiseStorage() {
     database.initialiseStorage(this);
   }
 
