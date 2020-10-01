@@ -46,9 +46,25 @@ public class AirportParserTest {
      */
     @Test
     public void isAirportIdValidDupId() {
-        assertTrue(airportParser.isIdValid("4"));
+        airportParser.parseLine("4,\"Nadzab\",\"Nadzab\",\"Papua New Guinea\",\"LAE\",\"AYNZ\",-6.569828,146.726242,239,10,\"U\",\"Pacific/Port_Moresby\"");
+        assertFalse(airportParser.isIdValid("4"));
     }
 
+    /**
+     * Test if method rejects negative number as airport ID.
+     */
+    @Test
+    public void isAirportIDValidNegativeTest() {
+        assertFalse(airportParser.isIdValid("-4"));
+    }
+
+    /**
+     * Test if method rejects letter as airport ID
+     */
+    @Test
+    public void isAirportIDValidLetterTest() {
+        assertFalse(airportParser.isIdValid("a"));
+    }
     /**
      * Test if method accept valid airport name without space.
      */
@@ -275,5 +291,203 @@ public class AirportParserTest {
     @Test
     public void isDBValidWrong2() {
         assertFalse(airportParser.isDBTZValid("a1"));
+    }
+
+    /**
+     * Verify that the correct error message is produced when attempting to add a file where over
+     * 200 lines are wrong.
+     */
+    @Test
+    public void errorMessageTest200WrongLines() throws FileNotFoundException {
+        Loader loader = new Loader(new Storage());
+        ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/routes.csv");
+        try {
+            AirportParser airportParser = new AirportParser(lines, new ArrayList<>());
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurances\n", e.getMessage());
+        }
+    }
+
+    /**
+     * Verify that the correct error message is produced when attempting to add a file all lines contain errors
+     * but the file is less than 200 lines.
+     */
+    @Test
+    public void errorMessageTestAllWrongLines() throws FileNotFoundException {
+        Loader loader = new Loader(new Storage());
+        ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/SearcherAirlinesTest.csv");
+        try {
+            AirportParser airportParser = new AirportParser(lines, new ArrayList<>());
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurances\n", e.getMessage());
+        }
+    }
+
+    /** Verify that the correct error code is produced when attempting to add a duplicate airport */
+    @Test
+    public void duplicateErrorMessageTest() throws FileNotFoundException {
+        Loader loader = new Loader(new Storage());
+        ArrayList<String> duplicateLines =
+                loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateAirportTest.csv");
+        AirportParser duplicateParser = new AirportParser(duplicateLines, new ArrayList<>());
+        assertEquals(
+                "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airport ID: 1 occurances\n",
+                duplicateParser.getErrorMessage(true));
+    }
+
+    /**
+     * Verify that the route is only added to the data once when attempting to add a duplicate airport
+     */
+    @Test
+    public void duplicateNotAddedTest() throws FileNotFoundException {
+        Loader loader = new Loader(new Storage());
+        ArrayList<String> duplicateLines =
+                loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateAirportTest.csv");
+        AirportParser duplicateParser = new AirportParser(duplicateLines, new ArrayList<>());
+        assertEquals(1, duplicateParser.getData().size());
+    }
+
+    /**
+     * Verfiy that expected error message is given when attempting to upload a single invalid line.
+     */
+    @Test
+    public void singleInvalidUploadErrorMessageTest() {
+        Storage storage = new Storage();
+        ArrayList<String> invalidLines = new ArrayList<>();
+        invalidLines.add("2609,\"Great Plains Airlines\",\\N,\"\",\"GRP\",\"GREAT PLAINS\",\"United States\",\"N\"");
+        try {
+            new AirportParser(invalidLines, storage.getAirports());
+            fail();
+        } catch (RuntimeException e) {
+            assertEquals("Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurances\n", e.getMessage());
+        }
+    }
+
+    /**
+     * Test that validator returns true for a valid line.
+     */
+    @Test
+    public void validatorValidLineTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","650","-5","A","America/Toronto"});
+        assertTrue(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with the wrong number of parameters.
+     */
+    @Test
+    public void validatorInvalidNumParamsTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","650","-5","A","America/Toronto", ""});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with an invalid airport ID.
+     */
+    @Test
+    public void validatorInvalidAirportIDTest() {
+        boolean outcome = airportParser.validater(new String[]{"-2","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid airport name.
+     */
+    @Test
+    public void validatorInvalidAirportNameTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","*Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid city.
+     */
+    @Test
+    public void validatorInvalidCityTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto?","Canada","YKZ","CYKZ","43.862221","-79.37","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid country.
+     */
+    @Test
+    public void validatorInvalidCountryTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada,","YKZ","CYKZ","43.862221","-79.37","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid iata.
+     */
+    @Test
+    public void validatorInvalidIATATest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YK","CYKZ","43.862221","-79.37","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid icao.
+     */
+    @Test
+    public void validatorInvalidICAOTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZZ","43.862221","-79.37","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid latitude.
+     */
+    @Test
+    public void validatorInvalidLatitudeTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","a","-79.37","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid longitude.
+     */
+    @Test
+    public void validatorInvalidLongitudeTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37.11","650","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid altitude.
+     */
+    @Test
+    public void validatorInvalidAltitudeTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","","-5","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid timezone.
+     */
+    @Test
+    public void validatorInvalidTimezoneTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","650","-55","A","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid DST.
+     */
+    @Test
+    public void validatorInvalidDSTTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","650","-5","AA","America/Toronto"});
+        assertFalse(outcome);
+    }
+
+    /**
+     * Test that validator returns false for a line with invalid database timezone.
+     */
+    @Test
+    public void validatorInvalidDBSTTest() {
+        boolean outcome = airportParser.validater(new String[]{"82","Buttonville Muni","Toronto","Canada","YKZ","CYKZ","43.862221","-79.37","650","-5","A","1/Toronto"});
+        assertFalse(outcome);
     }
 }
