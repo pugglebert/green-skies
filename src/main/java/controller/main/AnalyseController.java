@@ -163,7 +163,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
               String.format("%s - %s", pathSource2.getText(), pathDestination2.getText())));
 
       Stage stage1 = new Stage();
-      Parent root = FXMLLoader.load(getClass().getResource("analyseResult.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("/view/analyseResult.fxml"));
       Scene scene = new Scene(root);
       stage1.setScene(scene);
       stage1.show();
