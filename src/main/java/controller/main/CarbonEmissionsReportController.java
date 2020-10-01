@@ -4,6 +4,7 @@ import controller.analysis.AirportStatsCalculator;
 import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import model.data.Route;
 import model.data.Storage;
@@ -90,29 +91,37 @@ public class CarbonEmissionsReportController extends SideNavBarController {
    */
   @FXML
   private void generateReportData() {
-    updateTravelledAndVisited();
-    setUpData();
 
-    String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
-    displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
-    //TODO: fix this line below! It's creating issues and crashing the app.
-    generalStatsCalculator.setCarbonEmissionsGoal(Double.parseDouble(carbonEmissionGoalValue)); //TODO write test for handling different errors
+    if (storage.getHistory().size() == 0) {
+      Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+      ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+      ErrorAlert.setContentText("You have not selected any data to be in your Flight History");
+      ErrorAlert.show();
+    } else {
+      updateTravelledAndVisited();
+      setUpData();
 
-    displayTotalEmissionsField.setText(String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
-    displayTotalDistanceTravelledField.setText(String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
-    displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
-    displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
-    displayMostDistanceRouteField.setText(MostDistanceRouteString);
-    displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
-    displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
-    displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
-    displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
-    displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
+      String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
+      displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
+      //TODO: fix this line below! It's creating issues and crashing the app.
+      generalStatsCalculator.setCarbonEmissionsGoal(Double.parseDouble(carbonEmissionGoalValue)); //TODO write test for handling different errors
 
-    displayTreeOffsetField.setText(numOfTreesString);
-    displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
+      displayTotalEmissionsField.setText(String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
+      displayTotalDistanceTravelledField.setText(String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
+      displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
+      displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
+      displayMostDistanceRouteField.setText(MostDistanceRouteString);
+      displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
+      displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
+      displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
+      displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
+      displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
 
-    resetReport();
+      displayTreeOffsetField.setText(numOfTreesString);
+      displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
+
+      resetReport();
+    }
   }
 
   /** This method clears all fields in the report generator page to be empty. */

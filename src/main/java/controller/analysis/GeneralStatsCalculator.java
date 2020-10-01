@@ -67,8 +67,10 @@ public class GeneralStatsCalculator {
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
-    totalCarbonEmissions +=
-        (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+    if (!Double.isNaN(currentRouteRecord.getEmissions())) {
+      totalCarbonEmissions +=
+              (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+    }
   }
 
   /**

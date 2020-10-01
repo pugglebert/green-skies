@@ -44,7 +44,7 @@ public class UploadController extends SideNavBarController {
 
     private String currentRouteFile;
 
-    // Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
+    // Iniitialize the list of possible data types to be added to the ChoiceBox 'dataTypeSelect'
     ObservableList<String> dataTypeList =
             FXCollections.observableArrayList("Airport", "Route", "Airline");
 
