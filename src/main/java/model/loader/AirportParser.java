@@ -204,7 +204,7 @@ public class AirportParser extends Parser {
         return false;
       }
     }
-    return true;
+    return Integer.parseInt(id) >= 0;
   }
 
   /**
