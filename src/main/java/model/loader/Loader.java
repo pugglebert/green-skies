@@ -27,6 +27,8 @@ public class Loader {
   private final ArrayList<String> reservedFilenames;
   /** The storage used in the application. */
   private final Storage storage;
+  /** The parser constructed for single entry. */
+  private Parser parser;
 
   /** This constructor adds extensions for supported fileTypes to supportedExtensions. */
   public Loader(Storage storage) {
@@ -127,7 +129,8 @@ public class Loader {
    * @throws IllegalArgumentException Thrown if datatype is not one of airline, airport, flight or
    *     route.
    */
-  protected Parser constructParser(String dataType, ArrayList<String> lines, boolean appendToExisting)
+  //Changed to public for database using.
+  public Parser constructParser(String dataType, ArrayList<String> lines, boolean appendToExisting)
       throws IllegalArgumentException {
 
     Parser parser;
@@ -274,10 +277,18 @@ public class Loader {
     ArrayList<String> line = new ArrayList<>();
     line.add(entryString);
 
-    Parser parser = constructParser(dataType, line, true);
+    parser = constructParser(dataType, line, true);
 
     List<DataType> data = parser.getData();
     storage.setData(data, dataType, fileName);
     return String.format("%s successfully uploaded", dataType);
+  }
+
+  /**
+   * This method returns the parser constructed for single entry.
+   * @return parser that constructed for single entry.
+   */
+  public Parser getParser(){
+    return (this.parser);
   }
 }

@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 import model.data.Route;
+import model.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,6 +60,9 @@ public class FlightHistoryController extends DataViewController {
   @FXML
   private ChoiceBox<String> RankSelection;
 
+  /** The database object. */
+  private SQLiteDatabase database = new SQLiteDatabase();
+
   /**
    * The types of search which can be performed on history.
    */
@@ -99,11 +103,17 @@ public class FlightHistoryController extends DataViewController {
     distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distanceDisplayString"));
     emissionsColumn.setCellValueFactory(new PropertyValueFactory<>("emissionsDisplayString"));
 
+    for (Route route : storage.getHistory()) {
+      route.initCheckBox();
+    }
+
     routes = FXCollections.observableList(Main.getStorage().getHistory());
     tableView.setItems(routes);
     tableView.setEditable(true);
 
     searchTypeSelection.setItems(searchTypes);
+
+
   }
 
   /**
@@ -179,6 +189,7 @@ public class FlightHistoryController extends DataViewController {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         routes.removeIf(route -> route.getSelect().isSelected());
+        database.updateHistoryTable(storage.getHistory());
       }
     } else {
       errorText.setText("No routes selected.");

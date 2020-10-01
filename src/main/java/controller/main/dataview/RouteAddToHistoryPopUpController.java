@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import model.data.Route;
 import model.data.Storage;
+import model.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,6 +80,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
    *
    */
   private ObservableList<Route> tempRoute;
+
+  /** The database for adding history to history table in database. */
+  private SQLiteDatabase database = new SQLiteDatabase();
 
   /**
    * This method displays the content for the history.
@@ -140,7 +144,6 @@ public class RouteAddToHistoryPopUpController implements Initializable {
         if (index != -1) {
           // Route have been added to histoy
           Main.getStorage().getHistory().get(index).setTimesTaken(route.getTimesTaken());
-
         } else {
           // Route have been added to history + have been set number of passenger
           Main.getStorage().getHistory().add(route);
@@ -149,6 +152,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
         updateReportStats(route);
       }
     }
+    //Update database with history
+    database.updateHistoryTable(Main.getStorage().getHistory());
+
     Stage stage = (Stage) cancelBtn.getScene().getWindow();
     stage.close();
   }

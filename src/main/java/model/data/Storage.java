@@ -156,10 +156,6 @@ public class Storage {
     }
     return airportFiles.get(currentAirportFile);
   }
-//  /** This method reset airports list. */
-//  public void resetAirportsList() {
-//    airports = new ArrayList<>();
-//  }
 
   /**
    * This method returns a List of all the names of the stored Route files, or an empty List if no Route files
@@ -287,8 +283,6 @@ public class Storage {
 //        database.initialiseTable("Airport");
       } else {
         currentAirportFile = filename;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airport");
       }
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
@@ -321,11 +315,38 @@ public class Storage {
   }
 
   /**
+   * This method update database after user uplaod data.
+   * @param fileType The string shows what type of data user may uploaded.
+   */
+  public void updateDatabase(String fileType){
+    if(!(fileType.matches("Airport") || fileType.matches("Airline") || fileType.matches("Route"))){
+      throw new IllegalArgumentException("Type must be Airport, Airline or Route");
+    }
+    database.closeAutoCommite();
+    switch(fileType){
+      case "Airport":
+        database.initialiseTable("Airport", getCurrentAirportFile());
+        database.updateAirportTable(getAirports());
+        database.updateTableList(getCurrentAirportFile(), "Airport");
+        break;
+      case "Airline":
+        database.initialiseTable("Airline", getCurrentAirlineFile());
+        database.updateAirlineTable(getAirlines());
+        database.updateTableList(getCurrentAirlineFile(), "Airline");
+        break;
+      case "Route":
+        database.initialiseTable("Route", getCurrentRouteFile());
+        database.updateRoute(getRoutes());
+        database.updateTableList(getCurrentRouteFile(), "Route");
+    }
+  }
+
+  /**
    * This method initilises storage with data from database after user start the application
    *
    * @throws SQLException This throws an SQLException.
    */
-  public void initialiseStorage() throws SQLException {
+  public void initialiseStorage() {
     database.initialiseStorage(this);
   }
 
