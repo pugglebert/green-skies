@@ -58,7 +58,8 @@ public class GraphsController extends SideNavBarController {
         for (Route route : routes) {
           String dest = route.getDestinationAirport();
           String src = route.getSourceAirport();
-          String axisString = String.format("%s - %s", src, dest);
+          double distance = route.getDistance();
+          String axisString = String.format("%s - %s\n(%.0f km)", src, dest, distance);
           double emissions = route.getEmissions();
           data.getData().add(new XYChart.Data(axisString, emissions));
         }
