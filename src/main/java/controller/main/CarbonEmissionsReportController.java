@@ -97,6 +97,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       ErrorAlert.setAlertType(Alert.AlertType.ERROR);
       ErrorAlert.setContentText("You have not selected any data to be in your Flight History");
       ErrorAlert.show();
+    } else if (carbonEmissionGoalField.getText().isEmpty()) {
+      Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+      ErrorAlert.setAlertType(Alert.AlertType.ERROR);
+      ErrorAlert.setContentText("You have not entered a carbon emissions goal, please do so to view a report");
+      ErrorAlert.show();
     } else {
       updateTravelledAndVisited();
       setUpData();
