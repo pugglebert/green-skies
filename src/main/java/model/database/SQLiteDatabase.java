@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.CheckBox;
 
 /**
  * Class to store persistent data in database.
@@ -33,7 +34,7 @@ public class SQLiteDatabase {
   /** Variable for table name that is going to be created in database. */
   private String tableName;
 
-  public SQLiteDatabase() {
+  public SQLiteDatabase(){
     buildConnection();
     closeAutoCommite();
   }
@@ -313,7 +314,6 @@ public class SQLiteDatabase {
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     }
-
     try {
       prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setInt(1, airport.getAirportID());
@@ -563,6 +563,7 @@ public class SQLiteDatabase {
         }
         break;
     }
+    startCommite();
   }
 
   /**
@@ -755,11 +756,84 @@ public class SQLiteDatabase {
         }
       }
     }
+
+      setTableName("history");
+
+      try {
+        state = con.createStatement();
+        res =
+                state.executeQuery(
+                        "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> routesHistory = new ArrayList<>();
+          while (res.next()) {
+            //                int route_id = routesRow.getInt("route_id");
+            String airlineName = res.getString("airlineName");
+            int airlineID = res.getInt("airlineID");
+            String sourceAirport = res.getString("sourceAirport");
+            int sourceAirportID = res.getInt("sourceAirportID");
+            String destinationAirport = res.getString("destinationAirport");
+            int destinationAirportID = res.getInt("destinationAirportID");
+            String codeShare = res.getString("codeShare");
+            int numOfStops = res.getInt("numOfStops");
+
+            String equipment = res.getString("equipment");
+            String[] equipmentArray;
+            if (equipment != null) {
+              equipmentArray = equipment.split(" ");
+            } else {
+              equipmentArray = null;
+            }
+
+            double emissions = res.getDouble("emissions");
+            double distance = res.getDouble("distance");
+            int timesTaken = res.getInt("timesTaken");
+
+            assert equipmentArray != null;
+            Route route =
+                    new Route(
+                            airlineName,
+                            airlineID,
+                            sourceAirport,
+                            sourceAirportID,
+                            destinationAirport,
+                            destinationAirportID,
+                            codeShare,
+                            numOfStops,
+                            equipmentArray);
+            route.setEmissions(emissions);
+            route.setTimesTaken(timesTaken);
+            route.setDistance(distance);
+            routesHistory.add(route);
+          }
+
+          List<Route> history = storage.getHistory();
+          for(DataType route: routesHistory){
+            Route bufferRoute =(Route)route;
+            history.add(bufferRoute);
+          }
+
+        }
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
+      }
+
     try {
-      con.close();
-    } catch (Exception e) {
-      JOptionPane.showMessageDialog(null, e);
-    }
+    con.close();
+  } catch (Exception e) {
+    JOptionPane.showMessageDialog(null, e);
+  }
+
   }
 
   /**
@@ -925,7 +999,6 @@ public class SQLiteDatabase {
         startCommite();
       }
     } catch (Exception e) {
-      System.out.println(1);
       JOptionPane.showMessageDialog(null, e);
     } finally{
       try {
@@ -1016,5 +1089,9 @@ public class SQLiteDatabase {
         JOptionPane.showMessageDialog(null, e);
       }
     }
+  }
+
+  public void deleteAirportRecords(){
+
   }
 }

@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airport;
 import model.data.Route;
+import model.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +57,9 @@ public class RouteDataViewController extends DataViewController {
   private Button AddToHistoryButton;
   @FXML
   private Button removeBtn;
+
+  /** The database object. */
+  private SQLiteDatabase database = new SQLiteDatabase();
 
   /**
    * The types of search which can be performed on routes.
@@ -217,6 +221,8 @@ public class RouteDataViewController extends DataViewController {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("route(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         routes.removeIf(route -> route.getSelect().isSelected());
+        database.initialiseTable("Route", storage.getCurrentRouteFile());
+        database.updateRoute(storage.getRoutes());
       }
     } else {
       errorText.setText("No routes selected.");

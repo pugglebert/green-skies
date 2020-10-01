@@ -53,10 +53,12 @@ public class AirlineSingleEntryController {
       //Add single entry to specified table.
       List<DataType> data = loader.getParser().getData();
       String fileName = loader.getLineFileName("Airline");
+
       SQLiteDatabase database = new SQLiteDatabase();
       database.setTableName(fileName);
       while (data.remove(null));
-      database.addAirlines((Airline) data.get(0));
+      database.addAirlines((Airline) data.get(data.size()-1));
+      database.startCommite();
 
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Confirm data entry upload");
