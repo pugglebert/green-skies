@@ -1,6 +1,5 @@
 package controller.analysis;
 
-import controller.main.dataview.RouteAddToHistoryPopUpController;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 
+import controller.main.dataview.RouteAddToHistoryPopUpController;
 
 //TODO write comments for this class. HK 26/09/2020
 
@@ -30,7 +30,7 @@ public class ReportStep {
     private RouteStatsCalculator routeStatsCalculator = new RouteStatsCalculator();
 
     @Before
-    private void beforeSenario() throws FileNotFoundException, FileSystemException, SQLException {
+    private void beforeScenario() throws FileNotFoundException, FileSystemException, SQLException {
         System.out.println(1);
         loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
         loader.loadFile("../seng202_project/src/test/java/TestFiles/routes.csv", "Route");
