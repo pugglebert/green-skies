@@ -6,7 +6,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.data.Airport;
+import model.data.DataType;
+import model.database.SQLiteDatabase;
 import model.loader.Loader;
+import model.loader.Parser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The controller class which contains the controls for data entry of a single Airport.
@@ -47,6 +54,17 @@ public class AirportSingleEntryController {
 
     try {
       String message = loader.loadLine(entryString, "Airport");
+
+      //Add single entry to specified table.
+      List<DataType> data = loader.getParser().getData();
+      String fileName = loader.getLineFileName("Airport");
+
+      SQLiteDatabase database = new SQLiteDatabase();
+      database.setTableName(fileName);
+      while (data.remove(null));
+      database.addAirports((Airport) data.get(data.size()-1));
+      database.startCommite();
+
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Confirm data entry upload");
       alert.setHeaderText(null);

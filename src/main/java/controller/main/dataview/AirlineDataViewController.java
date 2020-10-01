@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airline;
 import model.data.Route;
+import model.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +42,9 @@ public class AirlineDataViewController extends DataViewController {
   @FXML private TableColumn<Airline, String> callsignColumn;
   @FXML private TableColumn<Airline, String> countryColumn;
   @FXML private TableColumn<Airline, Boolean> activeStatusColumn;
+
+  /** The database object. */
+  private SQLiteDatabase database = new SQLiteDatabase();
 
   /** Initialize the strings in the searchTypes list. */
   private final ObservableList<String> searchTypes =
@@ -117,6 +121,8 @@ public class AirlineDataViewController extends DataViewController {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airline(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         airlines.removeIf(airline -> airline.getSelect().isSelected());
+        database.initialiseTable("Airline", storage.getCurrentAirlineFile());
+        database.updateAirlineTable(storage.getAirlines());
       }
     } else {
       errorText.setText("No airlines selected");

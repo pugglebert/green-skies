@@ -16,11 +16,13 @@ import javafx.stage.Stage;
 import model.data.DataType;
 import model.data.Route;
 import model.data.Storage;
+import model.database.SQLiteDatabase;
 import model.loader.Loader;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -44,7 +46,9 @@ public class UploadController extends SideNavBarController {
 
     private String currentRouteFile;
 
-    // Iniitialize the list of possible data types to be added to the ChoiceBox 'dataTypeSelect'
+    private SQLiteDatabase database = new SQLiteDatabase();
+
+    // Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
     ObservableList<String> dataTypeList =
             FXCollections.observableArrayList("Airport", "Route", "Airline");
 
@@ -120,21 +124,19 @@ public class UploadController extends SideNavBarController {
                 Optional<ButtonType> result = ConfirmAlert.showAndWait();
                 if (result.get() == yesButton) {
                     loader.loadFile(stringFile, fileType);
+                    storage.updateDatabase(fileType);
                     switch (fileType) {
                         case "Airport":
                             airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
                             airportFileList.getSelectionModel().select(storage.getCurrentAirportFile());
-//              storage.resetAirportsList();
                             break;
                         case "Airline":
                             airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
                             airlineFileList.getSelectionModel().select(storage.getCurrentAirlineFile());
-//              storage.resetAirlinesList();
                             break;
                         case "Route":
                             routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
                             routeFileList.getSelectionModel().select(storage.getCurrentRouteFile());
-//              storage.resetRoutesList();
                             break;
                     }
                     ConfirmAlert.close();
@@ -243,14 +245,15 @@ public class UploadController extends SideNavBarController {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airline file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirlineFileList().remove(currentAirlineFile);
+                database.deleteFile(currentAirlineFile, "Airline");
                 storage.setCurrentAirlineFile(null);
                 airlineFileList.setItems(FXCollections.observableList(storage.getAirlineFileNames()));
             }
-
         }  if (currentAirportFile != null) {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airport file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getAirportFileList().remove(currentAirportFile);
+                database.deleteFile(currentAirportFile, "Airport");
                 storage.setCurrentAirportFile(null);
                 airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
             }
@@ -258,6 +261,7 @@ public class UploadController extends SideNavBarController {
             Optional<ButtonType> result = AlertPopUp.showDeleteAlert("route file");
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 storage.getRouteFileList().remove(currentRouteFile);
+                database.deleteFile(currentRouteFile, "Route");
                 storage.setCurrentRouteFile(null);
                 routeFileList.setItems(FXCollections.observableList(storage.getRouteFileNames()));
             }

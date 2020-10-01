@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airport;
+import model.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,6 +56,9 @@ public class AirportDataViewController extends DataViewController {
   private TableColumn<Airport, String> DSTColumn;
   @FXML
   private TableColumn<Airport, String> dataBaseTimeZoneColumn;
+
+  /** The database object. */
+  private SQLiteDatabase database = new SQLiteDatabase();
 
   /**
    * Initialize the list of attribute to be added tp the searchTypes list
@@ -133,6 +137,8 @@ public class AirportDataViewController extends DataViewController {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airport(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         airports.removeIf(airport -> airport.getSelect().isSelected());
+        database.initialiseTable("Airport", storage.getCurrentAirportFile());
+        database.updateAirportTable(airports);
       }
     } else {
       errorText.setText("No airports selected.");

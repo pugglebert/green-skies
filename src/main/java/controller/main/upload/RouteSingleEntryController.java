@@ -6,7 +6,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.data.Airline;
+import model.data.DataType;
+import model.data.Route;
+import model.database.SQLiteDatabase;
 import model.loader.Loader;
+
+import java.util.List;
 
 /**
  * The controller class which contains the controls for data entry of a single Route.
@@ -44,6 +50,17 @@ public class RouteSingleEntryController {
 
     try {
       String message = loader.loadLine(entryString, "Route");
+
+      //Add single entry to specified table.
+      List<DataType> data = loader.getParser().getData();
+      String fileName = loader.getLineFileName("Route");
+
+      SQLiteDatabase database = new SQLiteDatabase();
+      database.setTableName(fileName);
+      while (data.remove(null));
+      database.addRoutes((Route) data.get(data.size()-1));
+      database.startCommite();
+
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Confirm data entry upload");
       alert.setHeaderText(null);

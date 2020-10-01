@@ -5,20 +5,22 @@ import model.data.*;
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import javafx.scene.control.CheckBox;
 
 /**
- * Class to store presistent data in database.
+ * Class to store persistent data in database.
  *
  * @author Lambert
- * @since 18/09/2020
- * @version 1.2
+ * @version 2.0
+ * @since 1/10/2020
  */
 public class SQLiteDatabase {
   /** database connection. */
   private static Connection con;
 
   /** statement for building tables. */
-  private Statement builtTable;
+  private Statement buildTable;
 
   /** Vairable that contains statement for database. */
   private Statement state;
@@ -32,11 +34,15 @@ public class SQLiteDatabase {
   /** Variable for table name that is going to be created in database. */
   private String tableName;
 
+  public SQLiteDatabase(){
+    buildConnection();
+    closeAutoCommite();
+  }
+
   /**
    * This method create connection to local database, and will create one if there is no database.
    */
   protected void buildConnection() {
-
     try {
       // sqlite driver
       Class.forName("org.sqlite.JDBC");
@@ -57,10 +63,15 @@ public class SQLiteDatabase {
    * will help to significantly improve insertion speed.
    */
   public void closeAutoCommite() {
-    if (con == null) {
-      // get connection
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
+
     try {
       con.setAutoCommit(false);
     } catch (Exception e) {
@@ -70,42 +81,47 @@ public class SQLiteDatabase {
 
   /** This method manully starts commite for database. */
   public void startCommite() {
-    if (con == null) {
-      // get connection
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
     try {
       con.commit();
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     }
-//    finally {
-//      try {
-//      } catch (Exception e) {
-//        JOptionPane.showMessageDialog(null, e);
-//      }
-//    }
   }
 
   /**
    * This method sets table name that is going to be created in database.
+   *
    * @param fileName Provided file name.
    */
-  public void setTableName(String fileName){
+  public void setTableName(String fileName) {
     this.tableName = "'" + fileName.split("\\.")[0] + "'";
   }
 
   /** This method builds airports table with airport attributes as colunms in dastabase. */
   protected void buildAirportsTable() {
-    if (con == null) {
-      // get connection
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
 
     try {
-      builtTable = con.createStatement();
-      builtTable.executeUpdate(
-          "create table "+ tableName + "(airport_id integer,"
+      buildTable = con.createStatement();
+      buildTable.executeUpdate(
+          "create table "
+              + tableName
+              + "(airport_id integer,"
               + "name varchar(60),"
               + "city varchar(60),"
               + "country varchar(60),"
@@ -123,7 +139,7 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {
-        builtTable.close();
+        buildTable.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
@@ -132,15 +148,21 @@ public class SQLiteDatabase {
 
   /** This method builds routes table with routes attributes as colunms in dastabase. */
   protected void buildRoutesTable() {
-    if (con == null) {
-      // get connection
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
 
     try {
-      builtTable = con.createStatement();
-      builtTable.executeUpdate(
-          "create table " + tableName + "(route_id integer,"
+      buildTable = con.createStatement();
+      buildTable.executeUpdate(
+          "create table "
+              + tableName
+              + "(route_id integer,"
               + "airlineName varchar(60),"
               + "airlineID integer,"
               + "sourceAirport varchar(60),"
@@ -159,24 +181,33 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {
-        builtTable.close();
+        buildTable.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
     }
   }
 
-  /** This method builds airlines table with given name and with airline attributes as colunms in dastabase. */
+  /**
+   * This method builds airlines table with given name and with airline attributes as colunms in
+   * dastabase.
+   */
   protected void buildAirlinesTable() {
-    if (con == null) {
-      // get connection
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
 
     try {
-      builtTable = con.createStatement();
-      builtTable.executeUpdate(
-          "create table" + tableName +"(airline_id integer,"
+      buildTable = con.createStatement();
+      buildTable.executeUpdate(
+          "create table"
+              + tableName
+              + "(airline_id integer,"
               + "airlineName varchar(60),"
               + "alias varchar(60),"
               + "IATA varchar(5),"
@@ -190,7 +221,79 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {
-        builtTable.close();
+        buildTable.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+  }
+
+  /** This method create a table that contains all file names and corresponding types */
+  protected void buildTableList() {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+    try {
+      buildTable = con.createStatement();
+      buildTable.executeUpdate(
+          "create table file_list"
+              + "(file_id integer,"
+              + "file_name varchar(255),"
+              + "file_type varchar(10),"
+              + " primary key (file_id))");
+      startCommite();
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        buildTable.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+  }
+
+  /** * This method insert all attributes of an route object into history table in the database. */
+  public void buildHistoryTable() {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+
+    try {
+      buildTable = con.createStatement();
+      buildTable.executeUpdate(
+          "create table "
+              + "history"
+              + "(route_id integer,"
+              + "airlineName varchar(60),"
+              + "airlineID integer,"
+              + "sourceAirport varchar(60),"
+              + "sourceAirportID integer,"
+              + "destinationAirport varchar(60),"
+              + "destinationAirportID integer,"
+              + "codeShare varchar(60),"
+              + "numOfStops integer,"
+              + "equipment varchar(256),"
+              + "emissions double(100, 10),"
+              + "distance double(100, 10),"
+              + "timesTaken integer,"
+              + "primary key (route_id))");
+      startCommite();
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        buildTable.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
@@ -203,11 +306,14 @@ public class SQLiteDatabase {
    * @param airport Object of airport contains information of airport as attributes.
    */
   public void addAirports(Airport airport) {
-    if (con == null) {
-      // get connection
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
-
     try {
       prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setInt(1, airport.getAirportID());
@@ -240,13 +346,18 @@ public class SQLiteDatabase {
    * @param route Object of route contains information of route as attributes.
    */
   public void addRoutes(Route route) {
-    if (con == null) {
-      // get connection
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
 
     try {
-      prep = con.prepareStatement("insert into " + tableName +" values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
+      prep =
+          con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setString(2, route.getAirlineName());
       prep.setInt(3, route.getAirlineID());
       prep.setString(4, route.getSourceAirport());
@@ -286,11 +397,14 @@ public class SQLiteDatabase {
    * @param airline Object of airline contains information of airline as attributes.
    */
   public void addAirlines(Airline airline) {
-    if (con == null) {
-      // get connections
-      buildConnection();
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
-
     try {
       prep = con.prepareStatement("insert into" + tableName + "values(?,?,?,?,?,?,?,?);");
       prep.setInt(1, airline.getAirlineID());
@@ -313,17 +427,71 @@ public class SQLiteDatabase {
     }
   }
 
+  //
+  //  public void updateHistoryTimesTaken(Route route) {
+  //    try {
+  //      if (con.isClosed()) {
+  //        // get connection
+  //        buildConnection();
+  //      }
+  //    } catch (Exception e) {
+  //      JOptionPane.showMessageDialog(null, e);
+  //    }
+  //
+  //    try {
+  //        state = con.createStatement();
+  //        state.executeUpdate("")
+  //
+  //    } catch (Exception e) {
+  //      JOptionPane.showMessageDialog(null, e);
+  //    } finally {
+  //      try {
+  //        state.close();
+  //        res.close();
+  //      } catch (Exception e) {
+  //        JOptionPane.showMessageDialog(null, e);
+  //      }
+  //    }
+  //  }
+
   /**
    * This method initialise table according to provided tabletype, it deletes table and recreates
-   * it.
+   * it. This method also set table name for globle attribute for other method to interact to
+   * desired table.
    *
    * @param tableType Three types of table conresponding to airport, route and airline.
    */
-  public void initialiseTable(String tableType) {
-    if (con == null) {
-      // get connection
-      buildConnection();
+  public void initialiseTable(String tableType, String fileName) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
     }
+
+    setTableName(fileName);
+
+    try {
+      state = con.createStatement();
+      res =
+          state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name='file_list'");
+      if (!res.next()) {
+        buildTableList();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        res.close();
+        state.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+
     switch (tableType) {
       case "Airport":
         try {
@@ -376,7 +544,7 @@ public class SQLiteDatabase {
           state = con.createStatement();
           res =
               state.executeQuery(
-                      "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+                  "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
           if (res.next()) {
             state = con.createStatement();
             state.executeUpdate("Delete from " + tableName);
@@ -395,6 +563,7 @@ public class SQLiteDatabase {
         }
         break;
     }
+    startCommite();
   }
 
   /**
@@ -404,162 +573,525 @@ public class SQLiteDatabase {
    * @throws ClassNotFoundException This throws a ClassNotFoundException.
    */
   public void initialiseStorage(Storage storage) {
-    if (con == null) {
-      // get connections
-      buildConnection();
-    }
     try {
-      state = con.createStatement();
-      res =
-          state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name='airports'");
-
-      if (res.next()) {
-        state = con.createStatement();
-        res = state.executeQuery("select * from 'airports'");
-        ArrayList<DataType> airports = new ArrayList<>();
-        while (res.next()) {
-          int airportId = res.getInt("airport_id");
-          String name = res.getString("name");
-          String city = res.getString("city");
-          String country = res.getString("country");
-          String IATA = res.getString("IATA");
-          String ICAO = res.getString("ICAO");
-          double lat = res.getDouble("lat");
-          double lon = res.getDouble("lon");
-          int alt = res.getInt("alt");
-          float timezone = res.getFloat("timezone");
-          String DST = res.getString("DST");
-          String DBTimezone = res.getString("DBTimezone");
-          Airport airport =
-              new Airport(
-                  airportId,
-                  name,
-                  city,
-                  country,
-                  IATA,
-                  ICAO,
-                  lat,
-                  lon,
-                  alt,
-                  timezone,
-                  DST,
-                  DBTimezone);
-          airports.add(airport);
-        }
-        storage.setData(airports, "Airport", null);
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
-    } finally {
-      try {
-        res.close();
-        state.close();
-        //        con.close();
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      }
     }
 
-    try {
-      state = con.createStatement();
-      res =
-          state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name='airlines'");
+    List<String> airportfileNames = getFileNamesByType("Airport");
 
-      if (res.next()) {
-        state = con.createStatement();
-        res = state.executeQuery("select * from 'airlines'");
-        ArrayList<DataType> airlines = new ArrayList<>();
-        while (res.next()) {
-          int airlineId = res.getInt("airline_id");
-          String airlineName = res.getString("airlineName");
-          String alias = res.getString("alias");
-          String IATA = res.getString("IATA");
-          String ICAO = res.getString("ICAO");
-          String callsign = res.getString("callsign");
-          String country = res.getString("country");
-          Boolean activeStatus = res.getBoolean("activeStatus");
-          Airline airline =
-              new Airline(
-                  airlineId, airlineName, alias, IATA, ICAO, callsign, country, activeStatus);
-          airlines.add(airline);
-        }
-        storage.setData(airlines, "Airline", null);
-      }
-    } catch (Exception e) {
-      JOptionPane.showMessageDialog(null, e);
-    } finally {
+    for (String airportsName : airportfileNames) {
+      setTableName(airportsName);
+
       try {
-        res.close();
-        state.close();
-        //        con.close();
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      }
-    }
-
-    try {
-      state = con.createStatement();
-      res =
-          state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routes'");
-
-      if (res.next()) {
         state = con.createStatement();
-        res = state.executeQuery("select * from 'routes'");
-        ArrayList<DataType> routes = new ArrayList<>();
-        while (res.next()) {
-          //                int route_id = routesRow.getInt("route_id");
-          String airlineName = res.getString("airlineName");
-          int airlineID = res.getInt("airlineID");
-          String sourceAirport = res.getString("sourceAirport");
-          int sourceAirportID = res.getInt("sourceAirportID");
-          String destinationAirport = res.getString("destinationAirport");
-          int destinationAirportID = res.getInt("destinationAirportID");
-          String codeShare = res.getString("codeShare");
-          int numOfStops = res.getInt("numOfStops");
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
 
-          String equipment = res.getString("equipment");
-          String[] equipmentArray;
-          if (equipment != null) {
-            equipmentArray = equipment.split(" ");
-          } else {
-            equipmentArray = null;
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> airports = new ArrayList<>();
+          while (res.next()) {
+            int airportId = res.getInt("airport_id");
+            String name = res.getString("name");
+            String city = res.getString("city");
+            String country = res.getString("country");
+            String IATA = res.getString("IATA");
+            String ICAO = res.getString("ICAO");
+            double lat = res.getDouble("lat");
+            double lon = res.getDouble("lon");
+            int alt = res.getInt("alt");
+            float timezone = res.getFloat("timezone");
+            String DST = res.getString("DST");
+            String DBTimezone = res.getString("DBTimezone");
+            Airport airport =
+                new Airport(
+                    airportId,
+                    name,
+                    city,
+                    country,
+                    IATA,
+                    ICAO,
+                    lat,
+                    lon,
+                    alt,
+                    timezone,
+                    DST,
+                    DBTimezone);
+            airports.add(airport);
           }
 
-          double emissions = res.getDouble("emissions");
-          double distance = res.getDouble("distance");
-          int timesTaken = res.getInt("timesTaken");
-
-          assert equipmentArray != null;
-          Route route =
-              new Route(
-                  airlineName,
-                  airlineID,
-                  sourceAirport,
-                  sourceAirportID,
-                  destinationAirport,
-                  destinationAirportID,
-                  codeShare,
-                  numOfStops,
-                  equipmentArray);
-          route.setEmissions(emissions);
-          route.setTimesTaken(timesTaken);
-          route.setDistance(distance);
-          routes.add(route);
+          storage.setData(airports, "Airport", airportsName);
         }
-        storage.setData(routes, "Route", null);
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+          //          con.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
       }
+    }
+
+    List<String> airlinesFileNames = getFileNamesByType("Airline");
+
+    for (String airlinesName : airlinesFileNames) {
+      setTableName(airlinesName);
+
+      try {
+        state = con.createStatement();
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> airlines = new ArrayList<>();
+          while (res.next()) {
+            int airlineId = res.getInt("airline_id");
+            String airlineName = res.getString("airlineName");
+            String alias = res.getString("alias");
+            String IATA = res.getString("IATA");
+            String ICAO = res.getString("ICAO");
+            String callsign = res.getString("callsign");
+            String country = res.getString("country");
+            Boolean activeStatus = res.getBoolean("activeStatus");
+            Airline airline =
+                new Airline(
+                    airlineId, airlineName, alias, IATA, ICAO, callsign, country, activeStatus);
+            airlines.add(airline);
+          }
+
+          storage.setData(airlines, "Airline", airlinesName);
+        }
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+          //        con.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
+      }
+    }
+
+    List<String> routeNames = getFileNamesByType("Route");
+
+    for (String routesName : routeNames) {
+      setTableName(routesName);
+
+      try {
+        state = con.createStatement();
+        res =
+            state.executeQuery(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> routes = new ArrayList<>();
+          while (res.next()) {
+            //                int route_id = routesRow.getInt("route_id");
+            String airlineName = res.getString("airlineName");
+            int airlineID = res.getInt("airlineID");
+            String sourceAirport = res.getString("sourceAirport");
+            int sourceAirportID = res.getInt("sourceAirportID");
+            String destinationAirport = res.getString("destinationAirport");
+            int destinationAirportID = res.getInt("destinationAirportID");
+            String codeShare = res.getString("codeShare");
+            int numOfStops = res.getInt("numOfStops");
+
+            String equipment = res.getString("equipment");
+            String[] equipmentArray;
+            if (equipment != null) {
+              equipmentArray = equipment.split(" ");
+            } else {
+              equipmentArray = null;
+            }
+
+            double emissions = res.getDouble("emissions");
+            double distance = res.getDouble("distance");
+            int timesTaken = res.getInt("timesTaken");
+
+            assert equipmentArray != null;
+            Route route =
+                new Route(
+                    airlineName,
+                    airlineID,
+                    sourceAirport,
+                    sourceAirportID,
+                    destinationAirport,
+                    destinationAirportID,
+                    codeShare,
+                    numOfStops,
+                    equipmentArray);
+            route.setEmissions(emissions);
+            route.setTimesTaken(timesTaken);
+            route.setDistance(distance);
+            routes.add(route);
+          }
+
+          storage.setData(routes, "Route", routesName);
+        }
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
+      }
+    }
+
+      setTableName("history");
+
+      try {
+        state = con.createStatement();
+        res =
+                state.executeQuery(
+                        "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+        if (res.next()) {
+          state = con.createStatement();
+          res = state.executeQuery("select * from " + tableName);
+          ArrayList<DataType> routesHistory = new ArrayList<>();
+          while (res.next()) {
+            //                int route_id = routesRow.getInt("route_id");
+            String airlineName = res.getString("airlineName");
+            int airlineID = res.getInt("airlineID");
+            String sourceAirport = res.getString("sourceAirport");
+            int sourceAirportID = res.getInt("sourceAirportID");
+            String destinationAirport = res.getString("destinationAirport");
+            int destinationAirportID = res.getInt("destinationAirportID");
+            String codeShare = res.getString("codeShare");
+            int numOfStops = res.getInt("numOfStops");
+
+            String equipment = res.getString("equipment");
+            String[] equipmentArray;
+            if (equipment != null) {
+              equipmentArray = equipment.split(" ");
+            } else {
+              equipmentArray = null;
+            }
+
+            double emissions = res.getDouble("emissions");
+            double distance = res.getDouble("distance");
+            int timesTaken = res.getInt("timesTaken");
+
+            assert equipmentArray != null;
+            Route route =
+                    new Route(
+                            airlineName,
+                            airlineID,
+                            sourceAirport,
+                            sourceAirportID,
+                            destinationAirport,
+                            destinationAirportID,
+                            codeShare,
+                            numOfStops,
+                            equipmentArray);
+            route.setEmissions(emissions);
+            route.setTimesTaken(timesTaken);
+            route.setDistance(distance);
+            routesHistory.add(route);
+          }
+
+          List<Route> history = storage.getHistory();
+          for(DataType route: routesHistory){
+            Route bufferRoute =(Route)route;
+            history.add(bufferRoute);
+          }
+
+        }
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      } finally {
+        try {
+          res.close();
+          state.close();
+        } catch (Exception e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
+      }
+
+    try {
+    con.close();
+  } catch (Exception e) {
+    JOptionPane.showMessageDialog(null, e);
+  }
+
+  }
+
+  /**
+   * This method update airport table with given airports list, this method can be used after call
+   * to initialiseTable method.
+   *
+   * @param airports A list contains all airports needs to be uploaded to database.
+   */
+  public void updateAirportTable(List<Airport> airports) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+
+    try {
+      if (!airports.isEmpty()) {
+        for (Airport airport : airports) {
+          addAirports(airport);
+        }
+        startCommite();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+  }
+
+  /**
+   * This method update airline table with given airlines list, this method can be used after call
+   * to initialiseTable method.
+   *
+   * @param airlines A list contains all airlines needs to be uploaded to database.
+   */
+  public void updateAirlineTable(List<Airline> airlines) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+
+    try {
+      if (!airlines.isEmpty()) {
+        for (Airline airline : airlines) {
+          addAirlines(airline);
+        }
+        startCommite();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+  }
+
+  /**
+   * This method update route table with given route list, this method can be used after call to
+   * initialiseTable method.
+   *
+   * @param routes A list contains all routes needs to be uploaded to database.
+   */
+  public void updateRoute(List<Route> routes) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+
+    try {
+      if (!routes.isEmpty()) {
+        for (Route route : routes) {
+          addRoutes(route);
+        }
+        startCommite();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+  }
+
+  /**
+   * this method update table name list when user upload a data file.
+   *
+   * @param fileName Name of the file that user uploaded.
+   * @param fileType Type of the file that user uploaded.
+   */
+  public void updateTableList(String fileName, String fileType) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+    try {
+      state = con.createStatement();
+      res =
+          state.executeQuery(
+              "select * from 'file_list' where file_name='"
+                  + fileName
+                  + "' and file_type='"
+                  + fileType
+                  + "'");
+      if (!res.next()) {
+        prep = con.prepareStatement("insert into 'file_list' values(?,?,?);");
+        prep.setString(2, fileName);
+        prep.setString(3, fileType);
+        prep.execute();
+        startCommite();
+      }
+
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {
         res.close();
+        prep.close();
         state.close();
-        //        con.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
     }
+  }
+
+  /** This method will update history in database when user add routes to history.
+   * @param routes Route Object of route contains information of route as attributes.
+   */
+  public void updateHistoryTable(List<Route> routes) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+
+    setTableName("history");
+    try {
+      state = con.createStatement();
+      res =
+          state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name='history'");
+
+      if (res.next()) {
+        state.executeUpdate("delete from 'history'");
+        startCommite();
+      } else {
+        buildHistoryTable();
+      }
+      setTableName("history");
+      if (!routes.isEmpty()) {
+        for (Route route : routes) {
+          addRoutes(route);
+        }
+        startCommite();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally{
+      try {
+        res.close();
+        state.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+  }
+
+  /**
+   * This method get specific type of file name from database and returns a list containing them.
+   *
+   * @param fileType File type includes Airport, Airline and route.
+   * @return A list that contains all specified type name in it.
+   */
+  public List<String> getFileNamesByType(String fileType) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+    ArrayList<String> file_names = new ArrayList<>();
+    try {
+      state = con.createStatement();
+      res =
+          state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name='file_list'");
+      if (res.next()) {
+        res = state.executeQuery("select * from 'file_list' where file_type='" + fileType + "'");
+        while (res.next()) {
+          String fileName = res.getString("file_name");
+          file_names.add(fileName);
+        }
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        state.close();
+        res.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+    return file_names;
+  }
+
+  /**
+   * This method delete the row in file_list table where file_name and file_Type column is as
+   * provided from input.
+   *
+   * @param fileName The file_name of the row that will be deleted.
+   * @param fileType The file_type of the row that will be deleted.
+   */
+  public void deleteFile(String fileName, String fileType) {
+    try {
+      if (con.isClosed()) {
+        // get connection
+        buildConnection();
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+
+    setTableName(fileName);
+    try {
+      state = con.createStatement();
+      state.executeUpdate("drop table " + tableName);
+      state.executeUpdate(
+          "delete from file_list where file_name='"
+              + fileName
+              + "' and file_type='"
+              + fileType
+              + "'");
+      startCommite();
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        state.close();
+      } catch (Exception e) {
+        System.out.println(1);
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+  }
+
+  public void deleteAirportRecords(){
+
   }
 }
