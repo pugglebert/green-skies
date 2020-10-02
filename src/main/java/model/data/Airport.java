@@ -6,10 +6,6 @@ import java.util.ArrayList;
 
 /**
  * The Airport class which contains all data for one unique airport.
- *
- * @author Enyang Zhang, Nathan Huynh
- * @version 1.3
- * @since 21/08/2020
  */
 public class Airport implements DataType {
 
@@ -42,7 +38,7 @@ public class Airport implements DataType {
   private final double longitude;
 
   /**
-   * Unit of alltitude is in feet
+   * Unit of altitudes is in feet
    */
   private final int altitude;
 

@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.CheckBox;
 
 /**
  * Class to store persistent data in database.
@@ -315,6 +314,13 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     }
     try {
+      state = con.createStatement();
+      res = state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+      if(!res.next()){
+        buildAirportsTable();
+      }
       prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setInt(1, airport.getAirportID());
       prep.setString(2, airport.getName());
@@ -333,6 +339,8 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {
+        state.close();
+        res.close();
         prep.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
@@ -356,6 +364,13 @@ public class SQLiteDatabase {
     }
 
     try {
+      state = con.createStatement();
+      res = state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+      if(!res.next()){
+        buildRoutesTable();
+      }
       prep =
           con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setString(2, route.getAirlineName());
@@ -406,6 +421,13 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     }
     try {
+      state = con.createStatement();
+      res = state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+
+      if(!res.next()){
+        buildAirlinesTable();
+      }
       prep = con.prepareStatement("insert into" + tableName + "values(?,?,?,?,?,?,?,?);");
       prep.setInt(1, airline.getAirlineID());
       prep.setString(2, airline.getName());
@@ -427,32 +449,7 @@ public class SQLiteDatabase {
     }
   }
 
-  //
-  //  public void updateHistoryTimesTaken(Route route) {
-  //    try {
-  //      if (con.isClosed()) {
-  //        // get connection
-  //        buildConnection();
-  //      }
-  //    } catch (Exception e) {
-  //      JOptionPane.showMessageDialog(null, e);
-  //    }
-  //
-  //    try {
-  //        state = con.createStatement();
-  //        state.executeUpdate("")
-  //
-  //    } catch (Exception e) {
-  //      JOptionPane.showMessageDialog(null, e);
-  //    } finally {
-  //      try {
-  //        state.close();
-  //        res.close();
-  //      } catch (Exception e) {
-  //        JOptionPane.showMessageDialog(null, e);
-  //      }
-  //    }
-  //  }
+
 
   /**
    * This method initialise table according to provided tabletype, it deletes table and recreates
@@ -1091,7 +1088,4 @@ public class SQLiteDatabase {
     }
   }
 
-  public void deleteAirportRecords(){
-
-  }
 }

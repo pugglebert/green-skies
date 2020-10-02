@@ -558,9 +558,9 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.setReductionPercentage(26);
     String expectedString =
         "Currently, in 2020, you are producing 50.00 kg of carbon emissions per"
-            + " day. If you continue at this rate, you will produce 8900000.00 kg"
-            + " by the end of this year. This means you can only produce 14000.00 in"
-            + " the remaining part of this year. To ensure you stay under your goal, you will need to reduce"
+            + " day. If you continue at \nthis rate, you will produce 8900000.00 kg"
+            + " by the end of this year. This means you can only produce \n14000.00 in"
+            + " the remaining part of this year. To ensure you stay under your goal, you will need to \nreduce"
             + " your flight travel by 26.00 percent.";
     generalStatsCalculator.createCarbonEmissionsComment();
     assertEquals(expectedString, generalStatsCalculator.getCarbonEmissionsComment());

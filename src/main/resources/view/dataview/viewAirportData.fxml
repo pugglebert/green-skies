@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.dataview.AirportDataViewController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.dataview.AirportDataViewController">
     <children>
         <TableView fx:id="tableView" layoutX="238.0" layoutY="155.0" prefHeight="453.0" prefWidth="1134.0">
             <columns>
@@ -32,7 +32,7 @@
             <font>
                 <Font size="16.0" />
             </font></TextField>
-        <ChoiceBox fx:id="searchTypeSelection" layoutX="241.0" layoutY="50.0" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #116754; -fx-font-size:20; -fx-text-fill: white;" />
+        <ChoiceBox fx:id="searchTypeSelection" layoutX="241.0" layoutY="50.0" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: b3b3b3; -fx-font-size: 20; -fx-text-fill: white;" />
         <Label fx:id="errorText" layoutX="444.0" layoutY="110.0" prefHeight="27.0" prefWidth="345.0" text="Search error mesage goes here" textFill="RED" visible="false">
             <font>
                 <Font name="Arial" size="20.0" />
@@ -90,7 +90,7 @@
                   <Font name="Arial" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Graphs" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Graph" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>

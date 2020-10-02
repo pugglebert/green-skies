@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="481.0" maxWidth="807.0" minHeight="400" minWidth="600" prefHeight="481.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.AnalyseResultController">
+<AnchorPane maxHeight="481.0" maxWidth="807.0" minHeight="400" minWidth="600" prefHeight="481.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.AnalyseResultController">
     <children>
         <Text fx:id="route1DistanceHeading" layoutX="20.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance of Route 1 :" textAlignment="RIGHT" wrappingWidth="348.767578125">
          <font>

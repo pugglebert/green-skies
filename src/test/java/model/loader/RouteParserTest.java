@@ -335,7 +335,7 @@ public class RouteParserTest {
     testParser.parseLine("2B,410A,AER,2965,KZN,2990,,0,CR2");
     assertEquals(
         "File uploaded with 1 invalid lines rejected.\n"
-            + "Error [2] Invalid airline ID: 1 occurances\n",
+            + "Error [2] Invalid airline ID: 1 occurrences\n",
         testParser.getErrorMessage(true));
   }
 
@@ -497,7 +497,7 @@ public class RouteParserTest {
     routeParser.validater(testString);
     assertEquals(
         "File uploaded with 1 invalid lines rejected.\n"
-            + "Error [2] Invalid airline ID: 1 occurances\n",
+            + "Error [2] Invalid airline ID: 1 occurrences\n",
         routeParser.getErrorMessage(true));
   }
 
@@ -522,7 +522,7 @@ public class RouteParserTest {
       RouteParser routeParser = new RouteParser(lines, new ArrayList<>());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurances\n", e.getMessage());
+      assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurrences\n", e.getMessage());
     }
   }
 
@@ -538,7 +538,7 @@ public class RouteParserTest {
       RouteParser routeParser = new RouteParser(lines, new ArrayList<>());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurances\n", e.getMessage());
+      assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurrences\n", e.getMessage());
     }
   }
 
@@ -550,7 +550,7 @@ public class RouteParserTest {
         loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateRouteTest.csv");
     RouteParser duplicateParser = new RouteParser(duplicateLines, existingLines);
     assertEquals(
-        "File uploaded with 1 invalid lines rejected.\nError [10] Duplicate route: 1 occurances\n",
+        "File uploaded with 1 invalid lines rejected.\nError [10] Duplicate route: 1 occurrences\n",
         duplicateParser.getErrorMessage(true));
   }
 
@@ -567,7 +567,7 @@ public class RouteParserTest {
   }
 
   /**
-   * Verfiy that expected error message is given when attempting to upload a single invalid line.
+   * Verify that expected error message is given when attempting to upload a single invalid line.
    */
   @Test
   public void singleInvalidUploadErrorMessageTest() {
@@ -578,7 +578,7 @@ public class RouteParserTest {
       new RouteParser(invalidLines, storage.getRoutes());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurances\n", e.getMessage());
+      assertEquals("Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurrences\n", e.getMessage());
     }
   }
 }

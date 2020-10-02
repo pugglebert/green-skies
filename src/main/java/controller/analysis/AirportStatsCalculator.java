@@ -70,7 +70,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
    *     of the airport as the key.
    */
   public void updateLeastVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
-    int currSrcAirportMin = 0;
+    int currSrcAirportMin = 1;
     if (leastVisitedSrcAirports.isEmpty() == true & srcAirportCounts.isEmpty() == false) {
       currSrcAirportMin = (Integer) srcAirportCounts.values().toArray()[0];
     }
@@ -94,7 +94,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
    *     with the name of the airport as the key.
    */
   public void updateLeastVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
-    int currDestAirportMin = 0;
+    int currDestAirportMin = 1;
     if (leastVisitedSrcAirports.isEmpty() == true & destAirportCounts.isEmpty() == false) {
       currDestAirportMin = (Integer) destAirportCounts.values().toArray()[0];
     }
@@ -118,18 +118,22 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
     leastVisitedDestAirports.clear();
   }
 
+  // todo write comment for this function
   public ArrayList<String> getMostVisitedSrcAirports() {
     return mostVisitedSrcAirports;
   }
 
+  // todo write comment for this function
   public ArrayList<String> getMostVisitedDestAirports() {
     return mostVisitedDestAirports;
   }
 
+  // todo write comment for this function
   public ArrayList<String> getLeastVisitedSrcAirports() {
     return leastVisitedSrcAirports;
   }
 
+  // todo write comment for this function
   public ArrayList<String> getLeastVisitedDestAirports() {
     return leastVisitedDestAirports;
   }
