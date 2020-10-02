@@ -86,7 +86,7 @@
                   <Font name="Arial" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Graphs" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Graph" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>

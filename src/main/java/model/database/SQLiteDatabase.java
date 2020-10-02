@@ -496,10 +496,7 @@ public class SQLiteDatabase {
           res =
               state.executeQuery(
                   "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-          if (res.next()) {
-            state = con.createStatement();
-            state.executeUpdate("Delete from " + tableName);
-          } else {
+          if (!res.next()) {
             buildAirportsTable();
           }
         } catch (Exception e) {
@@ -519,10 +516,7 @@ public class SQLiteDatabase {
           res =
               state.executeQuery(
                   "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-          if (res.next()) {
-            state = con.createStatement();
-            state.executeUpdate("Delete from " + tableName);
-          } else {
+          if (!res.next()) {
             buildRoutesTable();
           }
         } catch (Exception e) {
@@ -542,10 +536,7 @@ public class SQLiteDatabase {
           res =
               state.executeQuery(
                   "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-          if (res.next()) {
-            state = con.createStatement();
-            state.executeUpdate("Delete from " + tableName);
-          } else {
+          if (!res.next()) {
             buildAirlinesTable();
           }
         } catch (Exception e) {

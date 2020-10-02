@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.dataview.FlightHistoryController">
+<AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.dataview.FlightHistoryController">
     <children>
         <TableView fx:id="tableView" layoutX="238.0" layoutY="155.0" prefHeight="453.0" prefWidth="1134.0">
             <columns>
@@ -101,7 +95,7 @@
                   <Font name="Arial" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Graphs" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Button fx:id="btnGraphs" alignment="CENTER" mnemonicParsing="false" onAction="#toGraphs" onMouseClicked="#toUploadData" prefHeight="60.0" prefWidth="218.0" style="-fx-background-color: transparent;" text="Graph" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Arial" size="24.0" />
                </font>

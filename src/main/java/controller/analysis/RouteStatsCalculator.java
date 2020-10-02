@@ -35,9 +35,11 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
         int maxRouteCounter =
             routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTaken();
-        int firstOccuranceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
-        for (int i = firstOccuranceIndex; i < routeHistoryEntries.size(); i++) {
-          mostTravelledRoutes.add(routeHistoryEntries.get(i));
+        int firstOccurrenceIndex = binarySearch(routeHistoryEntries, maxRouteCounter);
+        for (int i = firstOccurrenceIndex; i < routeHistoryEntries.size(); i++) {
+          if (!mostTravelledRoutes.contains(routeHistoryEntries.get(i))) {
+            mostTravelledRoutes.add(routeHistoryEntries.get(i));
+          }
         }
       }
     }
@@ -57,9 +59,12 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
       } else {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
         int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
-        int firstOccuranceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
-        for (int i = 0; i < firstOccuranceIndex + 1; i++) {
-          leastTravelledRoutes.add(routeHistoryEntries.get(i));
+        int firstOccurrenceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
+        for (int i = 0; i < firstOccurrenceIndex + 1; i++) {
+          if (!leastTravelledRoutes.contains(routeHistoryEntries.get(i))) {
+
+            leastTravelledRoutes.add(routeHistoryEntries.get(i));
+            }
         }
       }
     }
