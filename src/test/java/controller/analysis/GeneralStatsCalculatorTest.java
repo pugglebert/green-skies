@@ -155,11 +155,8 @@ public class GeneralStatsCalculatorTest {
     assertEquals(8760000.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
   }
 
-  //////////////////////
+  // --------------------------------------- Testing for updateTotalEmissionsRemoval
 
-  // --------------------------------------- Testing for updateTotalEmissions
-
-  //PASSES
   /**
    * Verify that when updateTotalEmissionsRemoval is called with a route with a large amount of carbon
    * emissions and the current total emissions is 0.0 kg that the total emissions remains at 0.0 kg and does not go into
@@ -181,7 +178,7 @@ public class GeneralStatsCalculatorTest {
    * The carbon emissions are starting at the amount of this route's carbon emissions.
    */
   @Test
-  public void updateTotalEmissionsRemovalSmallEmissionsInitiallyZeroTest() {
+  public void updateTotalEmissionsRemovalSmallEmissionsInitiallySameTest() {
     generalStatsCalculator.setTotalCarbonEmissions(70000.0);
     Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
     testRoute.setEmissions(70000.0);
@@ -190,99 +187,94 @@ public class GeneralStatsCalculatorTest {
     assertEquals(0.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
   }
 
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a zero carbon emissions that
-//   * the total emissions is updated accordingly.The carbon emissions are starting at large amount.
-//   */
-//  @Test
-//  public void updateTotalEmissionsRemovalZeroEmissionsInitiallyZeroTest() {
-//    generalStatsCalculator.setTotalCarbonEmissions(0.0);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(0.0);
-//    testRoute.setTimesTaken(1);
-//    generalStatsCalculator.updateTotalEmissions(testRoute);
-//    assertEquals(0.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-//  }
-//
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
-//   * emissions that the total emissions is updated accordingly.The carbon emissions are starting at
-//   * large amount.
-//   */
-//  @Test
-//  public void updateTotalEmissionsRemovalLargeEmissionsInitiallyLargeTest() {
-//    generalStatsCalculator.setTotalCarbonEmissions(80000000000.10);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(1700000.20);
-//    testRoute.setTimesTaken(1);
-//    generalStatsCalculator.updateTotalEmissions(testRoute);
-//    assertEquals(80001700000.30, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-//  }
-//
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
-//   * emissions that the total emissions is updated accordingly.The carbon emissions are starting at
-//   * large amount.
-//   */
-//  @Test
-//  public void updateTotalEmissionsRemovalSmallEmissionsInitiallyLargeTest() {
-//    generalStatsCalculator.setTotalCarbonEmissions(90000000000.10);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(4500.08);
-//    testRoute.setTimesTaken(1);
-//    generalStatsCalculator.updateTotalEmissions(testRoute);
-//    assertEquals(90000004500.18, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-//  }
-//
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a zero carbon emissions that
-//   * the total emissions is updated accordingly.The carbon emissions are starting at large amount.
-//   */
-//  @Test
-//  public void updateTotalEmissionsRemovalZeroEmissionsInitiallyLargeTest() {
-//    generalStatsCalculator.setTotalCarbonEmissions(345231863432.98);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(0.0);
-//    testRoute.setTimesTaken(1);
-//    generalStatsCalculator.updateTotalEmissions(testRoute);
-//    assertEquals(345231863432.98, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-//  }
-//
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
-//   * emissions, which has been taken multiple times, that the total emissions is updated
-//   * accordingly.The carbon emissions are starting at 0.0 g.
-//   */
-//  @Test
-//  public void updateTotalEmissionsRemovalLargeEmissionsZeroTakenTest() {
-//    generalStatsCalculator.setTotalCarbonEmissions(0.0);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(20000000.50);
-//    testRoute.setTimesTaken(0);
-//    generalStatsCalculator.updateTotalEmissions(testRoute);
-//    assertEquals(0.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-//  }
-//
-//  /**
-//   * Verify that when updateTotalEmissions is called with a route with a small amount of carbon
-//   * emissions, which has been taken zero times, that the total emissions is not updated. The carbon
-//   * emissions are starting at 0.0 g.
-//   */
-//  @Test
-//  public void updateTotalEmissionsRemovalSmallEmissionsManyTakenTest() {
-//    generalStatsCalculator.setTotalCarbonEmissions(0.0);
-//    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
-//    testRoute.setEmissions(8760.0);
-//    testRoute.setTimesTaken(1000);
-//    generalStatsCalculator.updateTotalEmissions(testRoute);
-//    assertEquals(8760000.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
-//  }
-//
-//
+  /**
+   * Verify that when updateTotalEmissionsRemoval is called with a route with a zero carbon emissions that
+   * the total emissions is updated accordingly.The carbon emissions are starting at large amount.
+   */
+  @Test
+  public void updateTotalEmissionsRemovalZeroEmissionsInitiallySameTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(55555.0);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(0.0);
+    testRoute.setTimesTaken(1);
+    generalStatsCalculator.updateTotalEmissions(testRoute);
+    assertEquals(55555.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
 
+  /**
+   * Verify that when updateTotalEmissionsRemoval is called with a route with a large amount of carbon
+   * emissions that the total emissions is updated accordingly.The carbon emissions are starting at
+   * large amount which is greater than the route's carbon emissions.
+   */
+  @Test
+  public void updateTotalEmissionsRemovalLargeEmissionsInitiallyLargeTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(80000000000.00);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(1700000.00);
+    testRoute.setTimesTaken(1);
+    generalStatsCalculator.updateTotalEmissionsRemoval(testRoute);
+    assertEquals(79998300000.00, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
 
+  /**
+   * Verify that when updateTotalEmissionsRemoval is called with a route with a small amount of carbon
+   * emissions that the total emissions is updated accordingly.The carbon emissions are starting at
+   * large amount that is greater than the route's carbon emissions.
+   */
+  @Test
+  public void updateTotalEmissionsRemovalSmallEmissionsInitiallyLargeTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(90000000000.10);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(4500.08);
+    testRoute.setTimesTaken(1);
+    generalStatsCalculator.updateTotalEmissionsRemoval(testRoute);
+    assertEquals(89999995500.02, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
 
-///////////////////
+  /**
+   * Verify that when updateTotalEmissionsRemoval is called with a route with a zero carbon emissions that
+   * the total emissions is updated accordingly.The carbon emissions are starting at large amount.
+   */
+  @Test
+  public void updateTotalEmissionsRemovalZeroEmissionsInitiallyLargeTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(345231863432.98);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(0.0);
+    testRoute.setTimesTaken(1);
+    generalStatsCalculator.updateTotalEmissionsRemoval(testRoute);
+    assertEquals(345231863432.98, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalEmissionsRemoval is called with a route with a large amount of carbon
+   * emissions, which has been taken multiple times, that the total emissions is updated
+   * accordingly.The carbon emissions is greater than the route's carbon emissions.
+   */
+  @Test
+  public void updateTotalEmissionsRemovalLargeEmissionsZeroTakenTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(20000000.50);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(20000000.50);
+    testRoute.setTimesTaken(0);
+    generalStatsCalculator.updateTotalEmissionsRemoval(testRoute);
+    assertEquals(20000000.50, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
+
+  /**
+   * Verify that when updateTotalEmissionsRemoval is called with a route with a small amount of carbon
+   * emissions, which has been taken zero times, that the total emissions is not updated. The carbon
+   * emissions are starting at 0.0 g.
+   */
+  @Test
+  public void updateTotalEmissionsRemovalSmallEmissionsManyTakenTest() {
+    generalStatsCalculator.setTotalCarbonEmissions(18760000.0);
+    Route testRoute = new Route("2W", 410, "SVX", 2975, "OVC", 4078, "", 0, "CR2".split(" "));
+    testRoute.setEmissions(8760.0);
+    testRoute.setTimesTaken(1000);
+    generalStatsCalculator.updateTotalEmissionsRemoval(testRoute);
+    assertEquals(10000000.0, generalStatsCalculator.getTotalCarbonEmissions(), 0.0001);
+  }
+
   // ------------------------------------- Testing for updateTotalDistance
 
   /**
