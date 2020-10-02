@@ -34,4 +34,3 @@ public class HelpController {
     stage1.setScene(scene);
   }
 }
-

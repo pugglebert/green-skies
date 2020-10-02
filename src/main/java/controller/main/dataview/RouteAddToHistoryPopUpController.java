@@ -37,48 +37,29 @@ import java.util.ResourceBundle;
  */
 public class RouteAddToHistoryPopUpController implements Initializable {
 
-
   public Button setAllPassengerBtn;
-  @FXML
-  private TableView<Route> tableView;
-  @FXML
-  private TableColumn<Route, Integer> passengerNumber;
-  @FXML
-  private TableColumn<Route, String> airlineNameColumn;
-  @FXML
-  private TableColumn<Route, String> sourceAirportColumn;
-  @FXML
-  private TableColumn<Route, String> destinationAirportColumn;
-  @FXML
-  private TableColumn<Route, String> codeShareColumn;
-  @FXML
-  private TableColumn<Route, Integer> numOfStopsColumn;
-  @FXML
-  private TableColumn<Route, String> equipmentColumn;
-  @FXML
-  private Button confirmBtn;
-  @FXML
-  private Button cancelBtn;
+  @FXML private TableView<Route> tableView;
+  @FXML private TableColumn<Route, Integer> passengerNumber;
+  @FXML private TableColumn<Route, String> airlineNameColumn;
+  @FXML private TableColumn<Route, String> sourceAirportColumn;
+  @FXML private TableColumn<Route, String> destinationAirportColumn;
+  @FXML private TableColumn<Route, String> codeShareColumn;
+  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML private Button confirmBtn;
+  @FXML private Button cancelBtn;
 
-  /**
-   * The GeneralStatsCalculator to generate reports about flight history.
-   */
+  /** The GeneralStatsCalculator to generate reports about flight history. */
   private final GeneralStatsCalculator generalStatsCalculator = Main.getGeneralStatsCalculator();
-  /**
-   * The RouteStatsCalculator to generate route stats for the reports about flight history.
-   */
+  /** The RouteStatsCalculator to generate route stats for the reports about flight history. */
   private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
-  //TODO: Nathan please write. HK 26/09/2020
-  /**
-   *
-   */
+  // TODO: Nathan please write. HK 26/09/2020
+  /** */
   private final Storage storage = Main.getStorage();
 
-  //TODO: Nathan please write. HK 26/09/2020
-  /**
-   *
-   */
+  // TODO: Nathan please write. HK 26/09/2020
+  /** */
   private ObservableList<Route> tempRoute;
 
   /** The database for adding history to history table in database. */
@@ -91,7 +72,8 @@ public class RouteAddToHistoryPopUpController implements Initializable {
    */
   public void display() throws IOException {
 
-    Parent root = FXMLLoader.load(getClass().getResource("/view/dataview/routeAddToHistoryPopUp.fxml"));
+    Parent root =
+        FXMLLoader.load(getClass().getResource("/view/dataview/routeAddToHistoryPopUp.fxml"));
     Stage addPopUp = new Stage();
     addPopUp.setTitle("Add To History ");
     addPopUp.initModality(Modality.APPLICATION_MODAL);
@@ -152,13 +134,14 @@ public class RouteAddToHistoryPopUpController implements Initializable {
         updateReportStats(route);
       }
     }
-    //Update database with history
+    // Update database with history
     database.updateHistoryTable(Main.getStorage().getHistory());
 
     Stage stage = (Stage) cancelBtn.getScene().getWindow();
     stage.close();
   }
 
+  // todo write comment for this function
   public void updateReportStats(Route route) {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
@@ -174,6 +157,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     routeStatsCalculator.updateLeastEmissionsRoute(route);
   }
 
+  // todo write comment for this function
   public void cancel() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(0);
@@ -182,6 +166,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
+  // todo write comment for this function
   public void setAllPassengerTo1(ActionEvent event) {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(1);

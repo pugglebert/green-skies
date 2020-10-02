@@ -32,49 +32,30 @@ import java.util.ResourceBundle;
  */
 public class RouteDataViewController extends DataViewController {
 
-
-  @FXML
-  private TableView<Route> tableView;
-  @FXML
-  private TableColumn<Route, Boolean> addColumn;
-  @FXML
-  private TableColumn<Route, String> airlineNameColumn;
-  @FXML
-  private TableColumn<Route, String> sourceAirportColumn;
-  @FXML
-  private TableColumn<Route, String> destinationAirportColumn;
-  @FXML
-  private TableColumn<Route, String> codeShareColumn;
-  @FXML
-  private TableColumn<Route, Integer> numOfStopsColumn;
-  @FXML
-  private TableColumn<Route, String> equipmentColumn;
-  @FXML
-  private Button selectAllBtn;
-  @FXML
-  private Button deselectAllBtn;
-  @FXML
-  private Button AddToHistoryButton;
-  @FXML
-  private Button removeBtn;
+  @FXML private TableView<Route> tableView;
+  @FXML private TableColumn<Route, Boolean> addColumn;
+  @FXML private TableColumn<Route, String> airlineNameColumn;
+  @FXML private TableColumn<Route, String> sourceAirportColumn;
+  @FXML private TableColumn<Route, String> destinationAirportColumn;
+  @FXML private TableColumn<Route, String> codeShareColumn;
+  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML private Button selectAllBtn;
+  @FXML private Button deselectAllBtn;
+  @FXML private Button AddToHistoryButton;
+  @FXML private Button removeBtn;
 
   /** The database object. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
-  /**
-   * The types of search which can be performed on routes.
-   */
+  /** The types of search which can be performed on routes. */
   private final ObservableList<String> searchTypes =
-          FXCollections.observableArrayList("Airline", "Source", "Destination");
+      FXCollections.observableArrayList("Airline", "Source", "Destination");
 
-  /**
-   * Class to generate reports on history.
-   */
+  /** Class to generate reports on history. */
   private GeneralStatsCalculator generalStatsCalculator;
 
-  /**
-   * Pop up to launch when adding route to history.
-   */
+  /** Pop up to launch when adding route to history. */
   private final RouteAddToHistoryPopUpController addPopUp = new RouteAddToHistoryPopUpController();
 
   private ObservableList<Route> routes;
@@ -97,14 +78,14 @@ public class RouteDataViewController extends DataViewController {
     numOfStopsColumn.setCellValueFactory(new PropertyValueFactory<>("numOfStops"));
     equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("firstEquipment"));
 
-    if (storage.getRoutes() != null){
-    for (Route route : storage.getRoutes()) {
-      route.initCheckBox();
-    }
-    routes = FXCollections.observableList(storage.getRoutes());
-    tableView.setItems(routes);
-    tableView.setEditable(true);
-    searchTypeSelection.setItems(searchTypes); // Setup choice boxes
+    if (storage.getRoutes() != null) {
+      for (Route route : storage.getRoutes()) {
+        route.initCheckBox();
+      }
+      routes = FXCollections.observableList(storage.getRoutes());
+      tableView.setItems(routes);
+      tableView.setEditable(true);
+      searchTypeSelection.setItems(searchTypes); // Setup choice boxes
     }
 
     airports = new HashSet<>();
@@ -112,12 +93,11 @@ public class RouteDataViewController extends DataViewController {
       if (!airport.getIATA().equals("")) {
         airports.add(airport.getIATA());
       }
-      if(!airport.getICAO().equals("")) {
+      if (!airport.getICAO().equals("")) {
         airports.add(airport.getICAO());
       }
     }
   }
-
 
   /**
    * This method calls searchRoutes method from searcher class and upldates table to display results
@@ -155,10 +135,12 @@ public class RouteDataViewController extends DataViewController {
   }
 
   /**
-   * This method creates a warning pop up to tell the user that route(s) they are trying to add to their history
-   * does not have associated airport(s) in the current airport file.
+   * This method creates a warning pop up to tell the user that route(s) they are trying to add to
+   * their history does not have associated airport(s) in the current airport file.
+   *
    * @throws IOException if the pop up cannot be launched.
-   * @param invalidAirports a set of airport codes contained in the routes but not in the airport file.
+   * @param invalidAirports a set of airport codes contained in the routes but not in the airport
+   *     file.
    */
   public void airportWarning(HashSet<String> invalidAirports) throws IOException {
     Optional<ButtonType> result = AlertPopUp.showAirportAlert(invalidAirports);
@@ -168,8 +150,10 @@ public class RouteDataViewController extends DataViewController {
   }
 
   /**
-   * This method checks if all the airports from the routes that the user is trying to add to their history are
-   * contained in the airport file. If they are not, asks the user for confirmation before proceeding.
+   * This method checks if all the airports from the routes that the user is trying to add to their
+   * history are contained in the airport file. If they are not, asks the user for confirmation
+   * before proceeding.
+   *
    * @throws IOException If the warning pop up cannot be launched.
    */
   public void checkAirports() throws IOException {
@@ -188,7 +172,6 @@ public class RouteDataViewController extends DataViewController {
       addPopUp.display();
     }
   }
-
 
   /** This method clears the search bar and displays all routes in table view. */
   @Override
@@ -214,7 +197,7 @@ public class RouteDataViewController extends DataViewController {
     }
   }
 
-  //todo write document for this method//
+  // todo write document for this method//
   public void removeSelected() {
     errorText.setVisible(false);
     if (getAnySelected()) {
@@ -230,14 +213,14 @@ public class RouteDataViewController extends DataViewController {
     }
   }
 
-  //todo write document for this method//
+  // todo write document for this method//
   public void selectAll() {
     for (Route route : Main.getStorage().getRoutes()) {
       route.getSelect().setSelected(true);
     }
   }
 
-  //todo write document for this method//
+  // todo write document for this method//
   public void deselectAll() {
     for (Route route : Main.getStorage().getRoutes()) {
       route.getSelect().setSelected(false);
@@ -246,6 +229,7 @@ public class RouteDataViewController extends DataViewController {
 
   /**
    * Check if at least one entry has been selected.
+   *
    * @return true if any have been selected or false otherwise.
    */
   public boolean getAnySelected() {

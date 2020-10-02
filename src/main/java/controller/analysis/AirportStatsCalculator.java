@@ -118,18 +118,22 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
     leastVisitedDestAirports.clear();
   }
 
+  // todo write comment for this function
   public ArrayList<String> getMostVisitedSrcAirports() {
     return mostVisitedSrcAirports;
   }
 
+  // todo write comment for this function
   public ArrayList<String> getMostVisitedDestAirports() {
     return mostVisitedDestAirports;
   }
 
+  // todo write comment for this function
   public ArrayList<String> getLeastVisitedSrcAirports() {
     return leastVisitedSrcAirports;
   }
 
+  // todo write comment for this function
   public ArrayList<String> getLeastVisitedDestAirports() {
     return leastVisitedDestAirports;
   }
