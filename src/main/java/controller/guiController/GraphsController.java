@@ -20,27 +20,22 @@ import java.util.*;
  */
 public class GraphsController extends SideNavBarController {
 
-  @FXML NumberAxis yAxis;
-  @FXML CategoryAxis xAxis;
-  @FXML BarChart<String, Number> barChart;
-  @FXML Text warningText;
+  @FXML
+  NumberAxis yAxis;
+  @FXML
+  CategoryAxis xAxis;
+  @FXML
+  BarChart<String, Number> barChart;
+  @FXML
+  Text warningText;
 
   List<Route> routes;
   private double NaN;
 
-  //@TODO simplify code
-//  public String createAxisString(Route route) {
-//    String dest = route.getDestinationAirport();
-//    String src = route.getSourceAirport();
-//    double distance = route.getDistance();
-//    String axisString = String.format("%s - %s\n(%.0f km)", src, dest, distance);
-//    return axisString;
-//  }
 
   /**
    * This method is the initializer for this class. Displays graph of routes from history
-   *
-   * @param url The provided resoure bundle.
+   * @param url            The provided resoure bundle.
    * @param resourceBundle The resoure bundle.
    */
   @Override
@@ -58,11 +53,7 @@ public class GraphsController extends SideNavBarController {
       /**If there are less than 10 fights in history, no need to sort them*/
       if (routes.size() <= 10) {
         for (Route route : routes) {
-          //String axisString = createAxisString(route);
-          String dest = route.getDestinationAirport();
-          String src = route.getSourceAirport();
-          double distance = route.getDistance();
-          String axisString = String.format("%s - %s\n(%.0f km)", src, dest, distance);
+          String axisString = createAxisString(route);
           double emissions = route.getEmissions();
           data.getData().add(new XYChart.Data(axisString, emissions));
         }
@@ -70,33 +61,37 @@ public class GraphsController extends SideNavBarController {
         /**If there are more than 10 flights in history, they need to be sorted*/
         ArrayList<Route> sortedByEmissions = new ArrayList<Route>(routes);
         Collections.sort(sortedByEmissions, new Comparator<Route>() {
-              @Override
-              public int compare(Route o1, Route o2) {
-                return Double.valueOf(o2.getEmissions()).compareTo(o1.getEmissions());
-              } });
+          @Override
+          public int compare(Route o1, Route o2) {
+            return Double.valueOf(o2.getEmissions()).compareTo(o1.getEmissions());
+          }
+        });
 
         int i = 0;
         int limit = 10;
-
         while (i < limit) {
-
           if (!Double.isNaN(sortedByEmissions.get(i).getEmissions())) {
-            String dest = sortedByEmissions.get(i).getDestinationAirport();
-            String src = sortedByEmissions.get(i).getSourceAirport();
-            double distance = sortedByEmissions.get(i).getDistance();
-            String axisString = String.format("%s - %s\n(%.0f km)", src, dest, distance);
+            String axisString = createAxisString(sortedByEmissions.get(i));
             double emissions = sortedByEmissions.get(i).getEmissions();
             data.getData().add(new XYChart.Data(axisString, emissions));
             i += 1;
-            System.out.println(emissions);
           } else {
             limit += 1;
             i += 1;
           }
         }
       }
-
       barChart.getData().add(data);
     }
   }
+
+  /** This method creates the string to be placed on the x axis for each route*/
+  public String createAxisString(Route route) {
+    String dest = route.getDestinationAirport();
+    String src = route.getSourceAirport();
+    double distance = route.getDistance();
+    String axisString = String.format("%s - %s\n(%.0f km)", src, dest, distance);
+    return axisString;
+  }
+
 }
