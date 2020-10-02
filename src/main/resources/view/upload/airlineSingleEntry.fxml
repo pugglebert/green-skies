@@ -79,5 +79,10 @@
             <Font name="Arial" size="30.0" />
          </font>
       </Label>
+      <Button fx:id="helpButton" layoutX="806.0" layoutY="328.0" mnemonicParsing="false" onAction="#airlineHelp" text="Help">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
