@@ -48,10 +48,6 @@ public class FlightHistoryController extends DataViewController {
   /** The database object. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
-  /** The types of search which can be performed on history. */
-  private ArrayList<Airport> airports = new ArrayList<>();
-
-
   /**
    * The types of search which can be performed on history.
    */

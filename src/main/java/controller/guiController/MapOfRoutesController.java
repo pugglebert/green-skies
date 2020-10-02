@@ -20,7 +20,10 @@ public class MapOfRoutesController extends SideNavBarController {
 
   @FXML private WebView mapView;
   @FXML private WebEngine mapEngine;
+
+  /** The airport that user selected to display in google map. */
   private ArrayList<Airport> mapAirport = new ArrayList<>();
+
   /**
    * This method initializes the controller class.
    *
@@ -39,17 +42,17 @@ public class MapOfRoutesController extends SideNavBarController {
   }
 
   public void displayRoute() {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("[");
-    mapAirport.forEach(pos -> stringBuilder.append(
-            String.format("{lat: %f, lng: %f}, ",pos.getLatitude(), pos.getLongitude())));
-    stringBuilder.append("]");
-    String scriptToExecute = "displayRoute(" + stringBuilder.toString() + ");";
-    System.out.println(scriptToExecute);
-    mapEngine.executeScript(scriptToExecute);
+//    StringBuilder stringBuilder = new StringBuilder();
+//    stringBuilder.append("[");
+//    mapAirport.forEach(pos -> stringBuilder.append(
+//            String.format("{lat: %f, lng: %f}, ",pos.getLatitude(), pos.getLongitude())));
+//    stringBuilder.append("]");
+//    String scriptToExecute = "displayRoute(" + stringBuilder.toString() + ");";
+//    System.out.println(scriptToExecute);
+//    mapEngine.executeScript(scriptToExecute);
+
 
   }
-  //
 
   public void showMap() {
     displayRoute();

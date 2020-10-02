@@ -62,6 +62,7 @@ public class Storage {
   /** The database in which data added to the application is stored. */
   private final SQLiteDatabase database = new SQLiteDatabase();
 
+  /** Airport to display in google map. */
   public ArrayList<Airport> MapAirport = new ArrayList<>();
 
   /**
@@ -105,11 +106,6 @@ public class Storage {
     }
     return airlineFiles.get(currentAirlineFile);
   }
-
-//  /** This method reset airlines list. */
-//  public void resetAirlinesList() {
-//    airlines = new ArrayList<>();
-//  }
 
   /**
    * This method returns a List of all the names of the stored airport files, or an empty List if no Airport files
@@ -238,63 +234,50 @@ public class Storage {
    * @param type Type of data to be stored.
    */
   public void setData(List<DataType> data, String type, String filename) {
-    //close auto commite for database
-//    database.closeAutoCommite();
+
 
     if (type.matches("Airline")) {
       List<Airline> airlines = new ArrayList<>();
       if (filename == null) {
         filename = currentAirlineFile;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airline");
+
       } else {
           currentAirlineFile = filename;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airline");
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
         if (airline != null) {
           airlines.add(airline);
-//          database.addAirlines(airline);
         }
       }
       airlineFiles.put(filename, airlines);
-//      database.startCommite();
     } else if (type.matches("Airport")) {
       List<Airport> airports = new ArrayList<>();
       if (filename == null) {
         filename = currentAirportFile;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airport");
+
       } else {
         currentAirportFile = filename;
       }
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
         airports.add(airport);
-//        database.addAirports(airport);
       }
       airportFiles.put(filename, airports);
-//      database.startCommite();
     } else if (type.matches("Route")) {
       List<Route> routes = new ArrayList<>();
       if (filename == null) {
         filename = currentRouteFile;
-//        database.setTableName(filename);
-//        database.initialiseTable("Route");
+
       } else {
         currentRouteFile = filename;
-//        database.setTableName(filename);
-//        database.initialiseTable("Route");
+
       }
       for (DataType entry : data) {
         Route route = (Route) entry;
         routes.add(route);
-//        database.addRoutes(route);
       }
       routeFiles.put(filename, routes);
-//      database.startCommite();
     } else {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
