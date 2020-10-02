@@ -25,8 +25,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
-
 /**
  * The controller class which contains the controls for the upload data view.
  *
@@ -226,7 +224,7 @@ public class UploadController extends SideNavBarController {
   }
 
     /**
-     * change the currentAirlinefile to the select airline file name
+     * This method changes the currentAirlinefile to the select airline file name.
      */
     public void changeAirlineFile() {
         currentAirlineFile = airlineFileList.getSelectionModel().getSelectedItem();
@@ -236,7 +234,7 @@ public class UploadController extends SideNavBarController {
 
 
     /**
-     * method to delete select file and rise alertBox.
+     * This method deletes selected file and raises alertBox.
      */
     @FXML
     public void deleteFile() {
@@ -269,7 +267,7 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * change the currentAirportfile to the select airport file name
+     * This method changes the currentAirportfile to the select airport file name.
      */
     public void changeAirportFile() {
         currentAirportFile = airportFileList.getSelectionModel().getSelectedItem();
@@ -278,7 +276,7 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * change the currentRoutefile to the select Route file name
+     * This method changes the currentRoutefile to the select Route file name.
      */
     public void changeRouteFile() {
         currentRouteFile = routeFileList.getSelectionModel().getSelectedItem();
@@ -288,8 +286,8 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * check the type of file user wish to delete
-     * @param filetype
+     * This method checks the type of file user wish to delete.
+     * @param filetype The type of file the user has selected.
      */
     private void checkState(String filetype) {
         if(filetype == "Airport") {

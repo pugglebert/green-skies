@@ -201,7 +201,7 @@ public class Loader {
    * @throws FileSystemException If the file is not in a supported format.
    * @throws FileNotFoundException If the file cannot be found.
    */
-  public Parser processFile(String filePath, String dataType) throws FileSystemException, FileNotFoundException {
+  private Parser processFile(String filePath, String dataType) throws FileSystemException, FileNotFoundException {
 
     if (filePath.isEmpty()) {
       throw new RuntimeException("Filename cannot be empty.");

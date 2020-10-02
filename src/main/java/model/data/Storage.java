@@ -104,11 +104,6 @@ public class Storage {
     return airlineFiles.get(currentAirlineFile);
   }
 
-//  /** This method reset airlines list. */
-//  public void resetAirlinesList() {
-//    airlines = new ArrayList<>();
-//  }
-
   /**
    * This method returns a List of all the names of the stored airport files, or an empty List if no Airport files
    * have been stored.

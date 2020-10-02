@@ -15,12 +15,11 @@ import static org.junit.Assert.*;
 
 
 /**
- * Test cases for routePaser.
+ * Test cases for AirlineParser.
  *
  * @author Nathan
  */
 public class AirlineParserTest {
-  // todo change to using loader
   private AirlineParser airlineParser;
   Loader loader = new Loader(new Storage());
   List<Airline> existingLines = new ArrayList<>();

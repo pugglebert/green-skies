@@ -54,12 +54,10 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   /** The RouteStatsCalculator to generate route stats for the reports about flight history. */
   private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
-  // TODO: Nathan please write. HK 26/09/2020
-  /** */
+  /** The classs from which stored data can be accessed. */
   private final Storage storage = Main.getStorage();
 
-  // TODO: Nathan please write. HK 26/09/2020
-  /** */
+  /** List of routes to be added to history. */
   private ObservableList<Route> tempRoute;
 
   /** The database for adding history to history table in database. */
@@ -141,7 +139,11 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
-  // todo write comment for this function
+  /**
+   * This methods updates the calculations of the stats calculator classes to include the route which
+   * has just been added to history.
+   * @param route Route which has been added to history.
+   */
   public void updateReportStats(Route route) {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
@@ -157,7 +159,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     routeStatsCalculator.updateLeastEmissionsRoute(route);
   }
 
-  // todo write comment for this function
+  /**
+   * This method closes the stage without adding any routes to history.
+   */
   public void cancel() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(0);
@@ -166,7 +170,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
-  // todo write comment for this function
+  /**
+   * This method sets the times taken for each of the routes in tempRoutes to 1.
+   */
   public void setAllPassengerTo1(ActionEvent event) {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(1);
