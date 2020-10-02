@@ -137,7 +137,7 @@
                 <Font name="Arial" size="18.0" />
             </font>
         </Text>
-        <TextField fx:id="carbonEmissionGoalField" layoutX="420.0" layoutY="51.0" prefHeight="32.0" prefWidth="411.0" promptText="Enter your carbon emissions goal">
+        <TextField fx:id="carbonEmissionGoalField" layoutX="420.0" layoutY="51.0" prefHeight="32.0" prefWidth="411.0" promptText="Enter your carbon emissions goal as a double">
             <font>
                 <Font name="Arial" size="16.0" />
             </font>
@@ -234,7 +234,7 @@
                 <Font name="Arial" size="18.0" />
             </font>
         </Text>
-      <TextArea fx:id="displayStatusCommentField" editable="false" layoutX="592.0" layoutY="562.0" mouseTransparent="true" prefHeight="94.0" prefWidth="730.0" promptText="Generate report to diplay data">
+      <TextArea fx:id="displayStatusCommentField" editable="false" layoutX="592.0" layoutY="562.0" mouseTransparent="true" prefHeight="127.0" prefWidth="730.0" promptText="Generate report to diplay data">
          <font>
             <Font name="Arial" size="16.0" />
          </font>

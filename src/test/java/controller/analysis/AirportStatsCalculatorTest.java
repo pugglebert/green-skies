@@ -41,86 +41,86 @@ public class AirportStatsCalculatorTest {
   // --------------------------------- Testing for updateMostVisitedSrcAirport
 
   /**
-   * Verify that when updateMostVisitedSrcAiport is called when there is one source aiport entry,
+   * Verify that when updateMostVisitedSrcAirport is called when there is one source aiport entry,
    * then the most visited source airport is this entry
    */
   @Test
   public void updateMostVisitedSrcAirportOneTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    String testString = "Wellington Aiport";
+    String testString = "Wellington Airport";
     expectedResults.add(testString);
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 100);
+    testSrcAirports.put("Wellington Airport", 100);
     airportStatsCalculator.updateMostVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedSrcAiport is called when there are two source aiport entries,
+   * Verify that when updateMostVisitedSrcAirport is called when there are two source airport entries,
    * where one is most visited than the other, then the most visit source airport is the one that is
-   * most visted out of the two entries.
+   * most visited out of the two entries.
    */
   @Test
   public void updateMostVisitedSrcAirportTwoTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Aiport");
+    expectedResults.add("Wellington Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 100);
-    testSrcAirports.put("Auckland Aiport", 84);
+    testSrcAirports.put("Wellington Airport", 100);
+    testSrcAirports.put("Auckland Airport", 84);
     airportStatsCalculator.updateMostVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedSrcAiport is called when there are multiple source airports
+   * Verify that when updateMostVisitedSrcAirport is called when there are multiple source airports
    * in history i.e. 9 and one of them is of the most visited source airports, then this airport is
    * the only airport added to the most visited source airports array.
    */
   @Test
   public void updateMostVisitedSrcAirportTenDiffOneMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Christchurch Aiport");
+    expectedResults.add("Christchurch Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 100);
-    testSrcAirports.put("Auckland Aiport", 84);
-    testSrcAirports.put("Christchurch Aiport", 147);
-    testSrcAirports.put("Queenstown Aiport", 44);
-    testSrcAirports.put("Nelson Aiport", 44);
-    testSrcAirports.put("Hamilton Aiport", 14);
-    testSrcAirports.put("Rotorua Aiport", 57);
-    testSrcAirports.put("Hawke's Bay Aiport", 45);
-    testSrcAirports.put("Palmerston North Aiport", 4);
+    testSrcAirports.put("Wellington Airport", 100);
+    testSrcAirports.put("Auckland Airport", 84);
+    testSrcAirports.put("Christchurch Airport", 147);
+    testSrcAirports.put("Queenstown Airport", 44);
+    testSrcAirports.put("Nelson Airport", 44);
+    testSrcAirports.put("Hamilton Airport", 14);
+    testSrcAirports.put("Rotorua Airport", 57);
+    testSrcAirports.put("Hawke's Bay Airport", 45);
+    testSrcAirports.put("Palmerston North Airport", 4);
     airportStatsCalculator.updateMostVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedSrcAiport is called when there are multiple source airports
+   * Verify that when updateMostVisitedSrcAirport is called when there are multiple source airports
    * in history i.e. 9 and more than one of them e.g. 3 are of the most visited source airports,
    * then those airports are the only airports added to the most visited source airports array.
    */
   @Test
   public void updateMostVisitedSrcAirportTenDiffThreeMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Aiport");
-    expectedResults.add("Hamilton Aiport");
-    expectedResults.add("Auckland Aiport");
+    expectedResults.add("Wellington Airport");
+    expectedResults.add("Hamilton Airport");
+    expectedResults.add("Auckland Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 251);
-    testSrcAirports.put("Auckland Aiport", 251);
-    testSrcAirports.put("Christchurch Aiport", 147);
-    testSrcAirports.put("Queenstown Aiport", 44);
-    testSrcAirports.put("Nelson Aiport", 44);
-    testSrcAirports.put("Hamilton Aiport", 251);
-    testSrcAirports.put("Rotorua Aiport", 57);
-    testSrcAirports.put("Hawke's Bay Aiport", 45);
-    testSrcAirports.put("Palmerston North Aiport", 4);
+    testSrcAirports.put("Wellington Airport", 251);
+    testSrcAirports.put("Auckland Airport", 251);
+    testSrcAirports.put("Christchurch Airport", 147);
+    testSrcAirports.put("Queenstown Airport", 44);
+    testSrcAirports.put("Nelson Airport", 44);
+    testSrcAirports.put("Hamilton Airport", 251);
+    testSrcAirports.put("Rotorua Airport", 57);
+    testSrcAirports.put("Hawke's Bay Airport", 45);
+    testSrcAirports.put("Palmerston North Airport", 4);
     airportStatsCalculator.updateMostVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedSrcAiport is called when there are no source aiport entries,
+   * Verify that when updateMostVisitedSrcAirport is called when there are no source aiport entries,
    * then the most visited source airport array should be empty.
    */
   @Test
@@ -134,61 +134,61 @@ public class AirportStatsCalculatorTest {
   // --------------------------------- Testing for updateMostVisitedDestAirport
 
   /**
-   * Verify that when updateMostVisitedDestAiport is called when there is one destionation aiport
+   * Verify that when updateMostVisitedDestAirport is called when there is one destionation aiport
    * entry, then the most visit destination airport is this entry.
    */
   @Test
   public void updateMostVisitedDestAirportOneTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    String testString = "Wellington Aiport";
+    String testString = "Wellington Airport";
     expectedResults.add(testString);
     HashMap<String, Integer> testDestAirports = new HashMap<>();
-    testDestAirports.put("Wellington Aiport", 100);
+    testDestAirports.put("Wellington Airport", 100);
     airportStatsCalculator.updateMostVisitedDestAirports(testDestAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedDestAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedDestAiport is called when there are two destination aiport
+   * Verify that when updateMostVisitedDestAirport is called when there are two destination aiport
    * entries, where one is most visited than the other, then the most visit destination airport is
    * the one that is most visted out of the two entries.
    */
   @Test
   public void updateMostVisitedDestAirportTwoTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Aiport");
+    expectedResults.add("Wellington Airport");
     HashMap<String, Integer> testDestAirports = new HashMap<>();
-    testDestAirports.put("Wellington Aiport", 100);
-    testDestAirports.put("Auckland Aiport", 84);
+    testDestAirports.put("Wellington Airport", 100);
+    testDestAirports.put("Auckland Airport", 84);
     airportStatsCalculator.updateMostVisitedDestAirports(testDestAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedDestAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedDestAiport is called when there are multiple destination
+   * Verify that when updateMostVisitedDestAirport is called when there are multiple destination
    * airports in history i.e. 9 and one of them is of the most visited destination airports, then
    * this airport is the only airport added to the most visited destination airports array.
    */
   @Test
   public void updateMostVisitedDestAirportTenTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Christchurch Aiport");
+    expectedResults.add("Christchurch Airport");
     HashMap<String, Integer> testDestAirports = new HashMap<>();
-    testDestAirports.put("Wellington Aiport", 100);
-    testDestAirports.put("Auckland Aiport", 84);
-    testDestAirports.put("Christchurch Aiport", 147);
-    testDestAirports.put("Queenstown Aiport", 44);
-    testDestAirports.put("Nelson Aiport", 44);
-    testDestAirports.put("Hamilton Aiport", 14);
-    testDestAirports.put("Rotorua Aiport", 57);
-    testDestAirports.put("Hawke's Bay Aiport", 45);
-    testDestAirports.put("Palmerston North Aiport", 4);
+    testDestAirports.put("Wellington Airport", 100);
+    testDestAirports.put("Auckland Airport", 84);
+    testDestAirports.put("Christchurch Airport", 147);
+    testDestAirports.put("Queenstown Airport", 44);
+    testDestAirports.put("Nelson Airport", 44);
+    testDestAirports.put("Hamilton Airport", 14);
+    testDestAirports.put("Rotorua Airport", 57);
+    testDestAirports.put("Hawke's Bay Airport", 45);
+    testDestAirports.put("Palmerston North Airport", 4);
     airportStatsCalculator.updateMostVisitedDestAirports(testDestAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedDestAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedDestAiport is called when there are multiple destination
+   * Verify that when updateMostVisitedDestAirport is called when there are multiple destination
    * airports in history i.e. 9 and more than one of them e.g. 3 are of the most visited destination
    * airports, then those airports are the only airports added to the most visited destination
    * airports array.
@@ -196,25 +196,25 @@ public class AirportStatsCalculatorTest {
   @Test
   public void updateMostVisitedDestAirportTenDiffThreeMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Aiport");
-    expectedResults.add("Hamilton Aiport");
-    expectedResults.add("Auckland Aiport");
+    expectedResults.add("Wellington Airport");
+    expectedResults.add("Hamilton Airport");
+    expectedResults.add("Auckland Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 251);
-    testSrcAirports.put("Auckland Aiport", 251);
-    testSrcAirports.put("Christchurch Aiport", 147);
-    testSrcAirports.put("Queenstown Aiport", 44);
-    testSrcAirports.put("Nelson Aiport", 44);
-    testSrcAirports.put("Hamilton Aiport", 251);
-    testSrcAirports.put("Rotorua Aiport", 57);
-    testSrcAirports.put("Hawke's Bay Aiport", 45);
-    testSrcAirports.put("Palmerston North Aiport", 4);
+    testSrcAirports.put("Wellington Airport", 251);
+    testSrcAirports.put("Auckland Airport", 251);
+    testSrcAirports.put("Christchurch Airport", 147);
+    testSrcAirports.put("Queenstown Airport", 44);
+    testSrcAirports.put("Nelson Airport", 44);
+    testSrcAirports.put("Hamilton Airport", 251);
+    testSrcAirports.put("Rotorua Airport", 57);
+    testSrcAirports.put("Hawke's Bay Airport", 45);
+    testSrcAirports.put("Palmerston North Airport", 4);
     airportStatsCalculator.updateMostVisitedDestAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedDestAirports());
   }
 
   /**
-   * Verify that when updateMostVisitedDestAiport is called when there are no destination aiport
+   * Verify that when updateMostVisitedDestAirport is called when there are no destination aiport
    * entries, then the most visited destination airport array should be empty.
    */
   @Test
@@ -365,86 +365,86 @@ public class AirportStatsCalculatorTest {
     // ------------------------------------ Testing for updateLeastVisitedSrcAirports()
 
     /**
-   * Verify that when updateLeastVisitedSrcAiport is called when there is one source aiport entry,
+   * Verify that when updateLeastVisitedSrcAirport is called when there is one source aiport entry,
    * then the least visited source airport is this entry
    */
   @Test
   public void updateLeastVisitedSrcAirportOneTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    String testString = "Wellington Aiport";
+    String testString = "Wellington Airport";
     expectedResults.add(testString);
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 100);
+    testSrcAirports.put("Wellington Airport", 100);
     airportStatsCalculator.updateLeastVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateLeastVisitedSrcAiport is called when there are two source aiport
+   * Verify that when updateLeastVisitedSrcAirport is called when there are two source aiport
    * entries, where one is less visited than the other, then the least visit source airport is the
    * one that is less visted out of the two entries.
    */
   @Test
   public void updateLeastVisitedSrcAirportTwoTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Aiport");
+    expectedResults.add("Wellington Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 84);
-    testSrcAirports.put("Auckland Aiport", 100);
+    testSrcAirports.put("Wellington Airport", 84);
+    testSrcAirports.put("Auckland Airport", 100);
     airportStatsCalculator.updateLeastVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateLeastVisitedSrcAiport is called when there are multiple source airports
+   * Verify that when updateLeastVisitedSrcAirport is called when there are multiple source airports
    * in history i.e. 9 and one of them is of the least visited source airports, then this airport is
    * the only airport added to the least visited source airports array.
    */
   @Test
   public void updateLeastVisitedSrcAirportTenDiffOneMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Christchurch Aiport");
+    expectedResults.add("Christchurch Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 100);
-    testSrcAirports.put("Auckland Aiport", 84);
-    testSrcAirports.put("Christchurch Aiport", 2);
-    testSrcAirports.put("Queenstown Aiport", 44);
-    testSrcAirports.put("Nelson Aiport", 44);
-    testSrcAirports.put("Hamilton Aiport", 14);
-    testSrcAirports.put("Rotorua Aiport", 57);
-    testSrcAirports.put("Hawke's Bay Aiport", 45);
-    testSrcAirports.put("Palmerston North Aiport", 4);
+    testSrcAirports.put("Wellington Airport", 100);
+    testSrcAirports.put("Auckland Airport", 84);
+    testSrcAirports.put("Christchurch Airport", 2);
+    testSrcAirports.put("Queenstown Airport", 44);
+    testSrcAirports.put("Nelson Airport", 44);
+    testSrcAirports.put("Hamilton Airport", 14);
+    testSrcAirports.put("Rotorua Airport", 57);
+    testSrcAirports.put("Hawke's Bay Airport", 45);
+    testSrcAirports.put("Palmerston North Airport", 4);
     airportStatsCalculator.updateLeastVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateLeastVisitedSrcAiport is called when there are multiple source airports
+   * Verify that when updateLeastVisitedSrcAirport is called when there are multiple source airports
    * in history i.e. 9 and more than one of them e.g. 3 are of the least visited source airports,
    * then those airports are the only airports added to the least visited source airports array.
    */
   @Test
   public void updateLeastVisitedSrcAirportTenDiffThreeMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Aiport");
-    expectedResults.add("Hamilton Aiport");
-    expectedResults.add("Auckland Aiport");
+    expectedResults.add("Wellington Airport");
+    expectedResults.add("Hamilton Airport");
+    expectedResults.add("Auckland Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 2);
-    testSrcAirports.put("Auckland Aiport", 2);
-    testSrcAirports.put("Christchurch Aiport", 147);
-    testSrcAirports.put("Queenstown Aiport", 44);
-    testSrcAirports.put("Nelson Aiport", 44);
-    testSrcAirports.put("Hamilton Aiport", 2);
-    testSrcAirports.put("Rotorua Aiport", 57);
-    testSrcAirports.put("Hawke's Bay Aiport", 45);
-    testSrcAirports.put("Palmerston North Aiport", 4);
+    testSrcAirports.put("Wellington Airport", 2);
+    testSrcAirports.put("Auckland Airport", 2);
+    testSrcAirports.put("Christchurch Airport", 147);
+    testSrcAirports.put("Queenstown Airport", 44);
+    testSrcAirports.put("Nelson Airport", 44);
+    testSrcAirports.put("Hamilton Airport", 2);
+    testSrcAirports.put("Rotorua Airport", 57);
+    testSrcAirports.put("Hawke's Bay Airport", 45);
+    testSrcAirports.put("Palmerston North Airport", 4);
     airportStatsCalculator.updateLeastVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedSrcAirports());
   }
 
   /**
-   * Verify that when updateLeastVisitedSrcAiport is called when there are no source aiport entries,
+   * Verify that when updateLeastVisitedSrcAirport is called when there are no source aiport entries,
    * then the least visited source airport array should be empty.
    */
   @Test
@@ -458,86 +458,86 @@ public class AirportStatsCalculatorTest {
     // ----------------------------------- Testing for updateLeastVisitedDestAirports()
 
     /**
-     * Verify that when updateLeastVisitedDestAiport is called when there is one destination aiport entry,
+     * Verify that when updateLeastVisitedDestAirport is called when there is one destination aiport entry,
      * then the least visited destination airport is this entry.
      */
     @Test
     public void updateLeastVisitedDestAirportOneTest() {
         ArrayList<String> expectedResults = new ArrayList<>();
-        String testString = "Wellington Aiport";
+        String testString = "Wellington Airport";
         expectedResults.add(testString);
         HashMap<String, Integer> testDestAirports = new HashMap<>();
-        testDestAirports.put("Wellington Aiport", 100);
+        testDestAirports.put("Wellington Airport", 100);
         airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
         assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
     }
 
     /**
-     * Verify that when updateLeastVisitedDestAiport is called when there are two destination aiport
+     * Verify that when updateLeastVisitedDestAirport is called when there are two destination aiport
      * entries, where one is less visited than the other, then the least visited destination airport is the
      * one that is least visited out of the two entries.
      */
     @Test
     public void updateLeastVisitedDestAirportTwoTest() {
         ArrayList<String> expectedResults = new ArrayList<>();
-        expectedResults.add("Wellington Aiport");
+        expectedResults.add("Wellington Airport");
         HashMap<String, Integer> testDestAirports = new HashMap<>();
-        testDestAirports.put("Wellington Aiport", 84);
-        testDestAirports.put("Auckland Aiport", 100);
+        testDestAirports.put("Wellington Airport", 84);
+        testDestAirports.put("Auckland Airport", 100);
         airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
         assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
     }
 
     /**
-     * Verify that when updateLeastVisitedDestAiport is called when there are multiple destination airports
+     * Verify that when updateLeastVisitedDestAirport is called when there are multiple destination airports
      * in history i.e. 9 and one of them is of the least visited destination airports, then this airport is
      * the only airport added to the least visited destination airports array.
      */
     @Test
     public void updateLeastVisitedDestAirportTenDiffOneMostTest() {
         ArrayList<String> expectedResults = new ArrayList<>();
-        expectedResults.add("Christchurch Aiport");
+        expectedResults.add("Christchurch Airport");
         HashMap<String, Integer> testDestAirports = new HashMap<>();
-        testDestAirports.put("Wellington Aiport", 100);
-        testDestAirports.put("Auckland Aiport", 84);
-        testDestAirports.put("Christchurch Aiport", 2);
-        testDestAirports.put("Queenstown Aiport", 44);
-        testDestAirports.put("Nelson Aiport", 44);
-        testDestAirports.put("Hamilton Aiport", 14);
-        testDestAirports.put("Rotorua Aiport", 57);
-        testDestAirports.put("Hawke's Bay Aiport", 45);
-        testDestAirports.put("Palmerston North Aiport", 4);
+        testDestAirports.put("Wellington Airport", 100);
+        testDestAirports.put("Auckland Airport", 84);
+        testDestAirports.put("Christchurch Airport", 2);
+        testDestAirports.put("Queenstown Airport", 44);
+        testDestAirports.put("Nelson Airport", 44);
+        testDestAirports.put("Hamilton Airport", 14);
+        testDestAirports.put("Rotorua Airport", 57);
+        testDestAirports.put("Hawke's Bay Airport", 45);
+        testDestAirports.put("Palmerston North Airport", 4);
         airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
         assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
     }
 
     /**
-     * Verify that when updateLeastVisitedDestAiport is called when there are multiple destination airports
+     * Verify that when updateLeastVisitedDestAirport is called when there are multiple destination airports
      * in history i.e. 9 and more than one of them e.g. 3 are of the least visited destination airports,
      * then those airports are the only airports added to the least visited destination airports array.
      */
     @Test
     public void updateLeastVisitedDestAirportTenDiffThreeMostTest() {
         ArrayList<String> expectedResults = new ArrayList<>();
-        expectedResults.add("Wellington Aiport");
-        expectedResults.add("Hamilton Aiport");
-        expectedResults.add("Auckland Aiport");
+        expectedResults.add("Wellington Airport");
+        expectedResults.add("Hamilton Airport");
+        expectedResults.add("Auckland Airport");
         HashMap<String, Integer> testDestAirports = new HashMap<>();
-        testDestAirports.put("Wellington Aiport", 2);
-        testDestAirports.put("Auckland Aiport", 2);
-        testDestAirports.put("Christchurch Aiport", 147);
-        testDestAirports.put("Queenstown Aiport", 44);
-        testDestAirports.put("Nelson Aiport", 44);
-        testDestAirports.put("Hamilton Aiport", 2);
-        testDestAirports.put("Rotorua Aiport", 57);
-        testDestAirports.put("Hawke's Bay Aiport", 45);
-        testDestAirports.put("Palmerston North Aiport", 4);
+        testDestAirports.put("Wellington Airport", 2);
+        testDestAirports.put("Auckland Airport", 2);
+        testDestAirports.put("Christchurch Airport", 147);
+        testDestAirports.put("Queenstown Airport", 44);
+        testDestAirports.put("Nelson Airport", 44);
+        testDestAirports.put("Hamilton Airport", 2);
+        testDestAirports.put("Rotorua Airport", 57);
+        testDestAirports.put("Hawke's Bay Airport", 45);
+        testDestAirports.put("Palmerston North Airport", 4);
         airportStatsCalculator.updateLeastVisitedDestAirports(testDestAirports);
         assertEquals(expectedResults, airportStatsCalculator.getLeastVisitedDestAirports());
     }
 
     /**
-     * Verify that when updateLeastVisitedDestAiport is called when there are no destination aiport entries,
+     * Verify that when updateLeastVisitedDestAirport is called when there are no destination aiport entries,
      * then the least visited destination airport array should be empty.
      */
     @Test

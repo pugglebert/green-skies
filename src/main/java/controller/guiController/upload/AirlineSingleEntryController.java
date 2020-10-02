@@ -67,7 +67,7 @@ public class AirlineSingleEntryController {
       String fileName = loader.getLineFileName("Airline");
 
       SQLiteDatabase database = new SQLiteDatabase();
-      database.setTableName(fileName);
+      database.initialiseTable("Airline", fileName);
       while (data.remove(null));
       database.addAirlines((Airline) data.get(data.size()-1));
       database.startCommite();

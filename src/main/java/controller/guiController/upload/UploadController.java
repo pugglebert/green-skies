@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-// TODO: check all method comments start with "This method ..."
 
 /**
  * The controller class which contains the controls for the upload data view.
@@ -47,7 +46,7 @@ public class UploadController extends SideNavBarController {
 
     private SQLiteDatabase database = new SQLiteDatabase();
 
-    // Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
+    /**Initialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'*/
     ObservableList<String> dataTypeList =
             FXCollections.observableArrayList("Airport", "Route", "Airline");
 
@@ -138,18 +137,14 @@ public class UploadController extends SideNavBarController {
                     }
                     ConfirmAlert.close();
 
-                    // only load data if it is not erroneous
+                    /**only load data if it is not erroneous*/
                     for (DataType line : storage.getRoutes()) {
                         Route test = (Route) line;
                     }
-                    // if user wishes to cancel the file chosne to upload they push cancel and no data is
-                    // uploaded
                 } else if (result.get() == cancelButton) {
                     ConfirmAlert.close();
                 }
             }
-            // catches errors in uploading file and alerts user by displaying the error message in an
-            // error box
             catch (Exception e) {
                 if (e.getMessage() != null) {
                     Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
