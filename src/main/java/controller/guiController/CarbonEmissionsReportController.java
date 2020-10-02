@@ -37,7 +37,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayMostVisitedDestinationAirportField;
   @FXML private TextField displayLeastVisitedDestinationAirportField;
   @FXML private TextField displayCarbonEmissionGoalField;
-  @FXML private TextField displayCarbonEmissionGoalDurationField;
   @FXML private TextField displayTreeOffsetField;
   @FXML private TextField carbonEmissionGoalField;
   @FXML private TextField displayStatusCommentField;
@@ -133,7 +132,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   private void clearReportData() {
     displayCarbonEmissionGoalField.setText("");
     carbonEmissionGoalField.setText("");
-    displayCarbonEmissionGoalDurationField.setText("");
     displayTotalEmissionsField.setText("");
     displayTotalDistanceTravelledField.setText("");
     displayMostEmissionsRouteField.setText("");
