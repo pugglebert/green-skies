@@ -67,7 +67,7 @@ public class AnalyseController extends SideNavBarController implements Initializ
     for (Airport airport : Main.getStorage().getAirports()) {
       if (!airport.getIATA().equals("")) {
         airports.add(airport.getIATA());
-      } else if(!airport.getICAO().equals("")){
+      } else if (!airport.getICAO().equals("")) {
         airports.add(airport.getICAO());
       }
     }
@@ -78,20 +78,21 @@ public class AnalyseController extends SideNavBarController implements Initializ
   }
 
   /**
-   * This method checks if all data has been entered correctly. If it has, it calls the analyse method to analyse
-   * the routes and display the results.
+   * This method checks if all data has been entered correctly. If it has, it calls the analyse
+   * method to analyse the routes and display the results.
+   *
    * @throws IOException
    */
   public void analyseButton() throws IOException {
     errorText.setVisible(false);
     if (pathSource1.getText().isEmpty()
-            || pathSource2.getText().isEmpty()
-            || pathDestination1.getText().isEmpty()
-            || pathDestination2.getText().isEmpty()) {
+        || pathSource2.getText().isEmpty()
+        || pathDestination1.getText().isEmpty()
+        || pathDestination2.getText().isEmpty()) {
       errorText.setText("Please enter information into all fields to proceed.");
       errorText.setVisible(true);
     } else if (pathSource1.getText().equals(pathDestination1.getText())
-            || pathSource2.getText().equals(pathDestination2.getText())) {
+        || pathSource2.getText().equals(pathDestination2.getText())) {
       errorText.setText("Source cannot be the same as destination.");
       errorText.setVisible(true);
     } else {
@@ -117,9 +118,9 @@ public class AnalyseController extends SideNavBarController implements Initializ
     String[] equipment2 = {"abc"};
     int check = 0;
     if (airports.contains(pathSource1.getText())
-            && airports.contains(pathDestination1.getText())
-            && airports.contains(pathSource2.getText())
-            && airports.contains(pathDestination2.getText())) {
+        && airports.contains(pathDestination1.getText())
+        && airports.contains(pathSource2.getText())
+        && airports.contains(pathDestination2.getText())) {
 
       check = 1;
     }
@@ -154,12 +155,13 @@ public class AnalyseController extends SideNavBarController implements Initializ
               equipment2);
       FlightAnalyser analyser = new FlightAnalyser(route1, route2, Main.getStorage());
 
-
       storage.setAnalyseDistanceResult(analyser.getTotalDistancePath1());
       storage.setAnalyseDistanceResult(analyser.getTotalDistancePath2());
       storage.setAnalyseEmissionResult(analyser.getPath1Emission());
       storage.setAnalyseEmissionResult(analyser.getPath2Emission());
-      storage.setComparedRoutes(new Pair(String.format("%s - %s", pathSource1.getText(), pathDestination1.getText()),
+      storage.setComparedRoutes(
+          new Pair(
+              String.format("%s - %s", pathSource1.getText(), pathDestination1.getText()),
               String.format("%s - %s", pathSource2.getText(), pathDestination2.getText())));
 
       Stage stage1 = new Stage();

@@ -16,9 +16,7 @@ import java.io.IOException;
  */
 public class GreenSkiesApplication extends Application {
 
-  /**
-   * The main window for the application
-   */
+  /** The main window for the application */
   private static Stage primaryStage;
 
   /**
@@ -38,6 +36,7 @@ public class GreenSkiesApplication extends Application {
 
   /**
    * The method returns the primary stage of the application.
+   *
    * @return the stage for the application's main window.
    */
   public static Stage getPrimaryStage() {

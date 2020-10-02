@@ -3,14 +3,15 @@ package controller.analysis;
 import model.data.Airline;
 import model.data.Airport;
 import model.data.Route;
+
 import java.util.*;
 
 /**
  * Class for filtering data based on one or more filter options.
  *
  * @author Hayley Krippner, Ella Johnson
- * @since 30/08/2020
  * @version 1.0
+ * @since 30/08/2020
  */
 public class Filterer {
 

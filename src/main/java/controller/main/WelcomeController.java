@@ -34,7 +34,8 @@ public class WelcomeController {
   public void continueToMainScreen(ActionEvent event) throws IOException {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
     Parent root =
-        FXMLLoader.load(getClass().getResource("/view/upload/upload.fxml")); // open the Upload Data page
+        FXMLLoader.load(
+            getClass().getResource("/view/upload/upload.fxml")); // open the Upload Data page
     Scene scene = new Scene(root);
     newStage.setScene(scene);
   }

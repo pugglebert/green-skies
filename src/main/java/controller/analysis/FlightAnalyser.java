@@ -238,6 +238,7 @@ public class FlightAnalyser {
 
   /**
    * Get path1 emission
+   *
    * @return emission
    */
   public double getPath1Emission() {
@@ -245,6 +246,7 @@ public class FlightAnalyser {
   }
   /**
    * Get path2 emission
+   *
    * @return emission
    */
   public double getPath2Emission() {
@@ -252,6 +254,7 @@ public class FlightAnalyser {
   }
   /**
    * Get path1 distance
+   *
    * @return distance
    */
   public double getTotalDistancePath1() {
@@ -259,6 +262,7 @@ public class FlightAnalyser {
   }
   /**
    * Get path2 distance
+   *
    * @return distance
    */
   public double getTotalDistancePath2() {

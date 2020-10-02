@@ -20,22 +20,16 @@ import java.util.*;
  */
 public class GraphsController extends SideNavBarController {
 
-
-  @FXML
-  NumberAxis yAxis;
-  @FXML
-  CategoryAxis xAxis;
-  @FXML
-  BarChart<String, Number> barChart;
-  @FXML
-  Text warningText;
+  @FXML NumberAxis yAxis;
+  @FXML CategoryAxis xAxis;
+  @FXML BarChart<String, Number> barChart;
+  @FXML Text warningText;
 
   List<Route> routes;
   private double NaN;
 
   /**
-   * This method is the initializer for this class.
-   * Displays graph of routes from history
+   * This method is the initializer for this class. Displays graph of routes from history
    *
    * @param url The provided resoure bundle.
    * @param resourceBundle The resoure bundle.
@@ -43,17 +37,18 @@ public class GraphsController extends SideNavBarController {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     /**
-     * Initialise the series to which route details will be added and then added from here to the graph
+     * Initialise the series to which route details will be added and then added from here to the
+     * graph
      */
     XYChart.Series<String, Number> data = new XYChart.Series();
 
     routes = storage.getHistory();
 
-    //Check if flights exist in the users history
+    // Check if flights exist in the users history
     if (routes.size() == 0) {
       warningText.setVisible(true);
     } else {
-      //If there are less than 10 fights in history, not need to sort them
+      // If there are less than 10 fights in history, not need to sort them
       if (routes.size() <= 10) {
         for (Route route : routes) {
           String dest = route.getDestinationAirport();
@@ -63,7 +58,8 @@ public class GraphsController extends SideNavBarController {
           data.getData().add(new XYChart.Data(axisString, emissions));
         }
       } else {
-        //If there are more than 10 flights in history, they need to be sorted to obtain the top ten carbon emitters
+        // If there are more than 10 flights in history, they need to be sorted to obtain the top
+        // ten carbon emitters
         ArrayList<Route> sortedByEmissions = new ArrayList<Route>(routes);
         Collections.sort(
             sortedByEmissions,
@@ -76,7 +72,7 @@ public class GraphsController extends SideNavBarController {
         int i = 0;
         int limit = 10;
 
-        while(i<limit) {
+        while (i < limit) {
 
           if (!Double.isNaN(sortedByEmissions.get(i).getEmissions())) {
             String dest = sortedByEmissions.get(i).getDestinationAirport();
@@ -92,15 +88,9 @@ public class GraphsController extends SideNavBarController {
             i += 1;
           }
         }
-
-
       }
 
       barChart.getData().add(data);
     }
-    }
-
-
-
-
+  }
 }

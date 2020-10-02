@@ -41,10 +41,14 @@ public class AnalyseResultController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     Storage storage = Main.getStorage();
-    route1DistanceHeading.setText(String.format("Distance of route 1 (%s):", storage.getComparedRoutes().getKey()));
-    route2DistanceHeading.setText(String.format("Distance of route 2 (%s):", storage.getComparedRoutes().getValue()));
-    route1EmissionsHeading.setText(String.format("Emissions of route 1 (%s):", storage.getComparedRoutes().getKey()));
-    route2EmissionsHeading.setText(String.format("Emissions of route 2 (%s):", storage.getComparedRoutes().getValue()));
+    route1DistanceHeading.setText(
+        String.format("Distance of route 1 (%s):", storage.getComparedRoutes().getKey()));
+    route2DistanceHeading.setText(
+        String.format("Distance of route 2 (%s):", storage.getComparedRoutes().getValue()));
+    route1EmissionsHeading.setText(
+        String.format("Emissions of route 1 (%s):", storage.getComparedRoutes().getKey()));
+    route2EmissionsHeading.setText(
+        String.format("Emissions of route 2 (%s):", storage.getComparedRoutes().getValue()));
     if (storage.getAnalyseDistanceResult().size() == 0
         || storage.getAnalyseEmissionResult().size() == 0) {
 

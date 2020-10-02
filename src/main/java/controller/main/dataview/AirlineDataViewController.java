@@ -28,13 +28,9 @@ import java.util.ResourceBundle;
  */
 public class AirlineDataViewController extends DataViewController {
 
-
-  @FXML
-  private TableView<Airline> tableView;
-  @FXML
-  private TableColumn<Route, Boolean> addColumn;
-  @FXML
-  private TableColumn<Airline, Integer> airlineIDColumn;
+  @FXML private TableView<Airline> tableView;
+  @FXML private TableColumn<Route, Boolean> addColumn;
+  @FXML private TableColumn<Airline, Integer> airlineIDColumn;
   @FXML private TableColumn<Airline, String> airlineNameColumn;
   @FXML private TableColumn<Airline, String> airlineAliasColumn;
   @FXML private TableColumn<Airline, String> airlineIATAColumn;
@@ -132,6 +128,7 @@ public class AirlineDataViewController extends DataViewController {
 
   /**
    * Check if at least one entry has been selected.
+   *
    * @return true if any have been selected or false otherwise.
    */
   public boolean getAnySelected() {
