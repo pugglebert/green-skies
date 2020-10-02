@@ -195,11 +195,11 @@ public class GeneralStatsCalculator {
             + ", you are producing "
             + String.format("%.2f", getEmissionsPerDayBaseOnCurrDate())
             + " kg of carbon emissions per day."
-            + " If you continue at this rate, you will produce "
+            + " If you continue at \nthis rate, you will produce "
             + String.format("%.2f", getEmissionsPerYear())
-            + " kg by the end of this year. This means you can only produce "
+            + " kg by the end of this year. This means you can only produce \n"
             + String.format("%.2f", getRemainingCO2InYear())
-            + " in the remaining part of this year. To ensure you stay under your goal, you will need to reduce your flight travel by "
+            + " in the remaining part of this year. To ensure you stay under your goal, you will need to \nreduce your flight travel by "
             + String.format("%.2f", getReductionPercentage())
             + " percent.";
     setCarbonEmissionsComment(carbonEmissionsComment);

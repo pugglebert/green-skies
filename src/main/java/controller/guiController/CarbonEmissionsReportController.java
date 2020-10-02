@@ -3,16 +3,12 @@ package controller.guiController;
 import controller.analysis.AirportStatsCalculator;
 import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
-import controller.guiController.Main;
-import controller.guiController.SideNavBarController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.data.Route;
 import model.data.Storage;
-
-import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -39,7 +35,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayCarbonEmissionGoalField;
   @FXML private TextField displayTreeOffsetField;
   @FXML private TextField carbonEmissionGoalField;
-  @FXML private TextField displayStatusCommentField;
+  @FXML private TextArea displayStatusCommentField;
 
   /** This reportGenerator for the application. */
   private GeneralStatsCalculator generalStatsCalculator;
