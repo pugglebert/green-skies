@@ -79,9 +79,9 @@
             <Font name="Arial" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="helpButton" layoutX="806.0" layoutY="328.0" mnemonicParsing="false" onAction="#airlineHelp" text="Help">
+      <Button fx:id="helpButton" layoutX="806.0" layoutY="328.0" mnemonicParsing="false" onAction="#airlineHelp" style="-fx-background-color: #116754;" text="Help" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font size="20.0" />
          </font>
       </Button>
     </children>
