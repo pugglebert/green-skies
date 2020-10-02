@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.CarbonEmissionsReportController">
     <children>
         <Text fontSmoothingType="LCD" layoutX="402.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Emissions:" textAlignment="RIGHT" wrappingWidth="150.6708984375">
@@ -120,7 +121,7 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
-        <TextField fx:id="displaycarbonEmissionGoalDurationField" editable="false" layoutX="955.0" layoutY="546.0" mouseTransparent="true" prefHeight="32.0" prefWidth="237.0" promptText="Generate report to diplay data">
+        <TextField fx:id="displayCarbonEmissionGoalDurationField" editable="false" layoutX="955.0" layoutY="546.0" mouseTransparent="true" prefHeight="32.0" prefWidth="237.0" promptText="Generate report to diplay data">
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
@@ -142,6 +143,11 @@
          <font>
             <Font name="Arial" size="16.0" />
          </font></TextField>
+        <Label fx:id="errorText" layoutX="444.0" layoutY="110.0" prefHeight="27.0" prefWidth="345.0" text="Please enter a carbon emissions goal" textFill="RED" visible="false">
+            <font>
+                <Font name="Arial" size="20.0" />
+            </font>
+        </Label>
         <Button fx:id="generateReportButton" layoutX="923.0" layoutY="40.0" mnemonicParsing="false" onAction="#generateReportData" prefHeight="49.0" prefWidth="263.0" style="-fx-background-color: #116754;" text="Generate Report" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="Arial" size="20.0" />
