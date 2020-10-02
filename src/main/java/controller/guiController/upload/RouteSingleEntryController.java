@@ -44,6 +44,18 @@ public class RouteSingleEntryController {
     stage.close();
   }
 
+  /**
+   * This method presents the user with a confirmation box before uploading a file
+   * @param message
+   */
+  public void showConfirmDialog(String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Confirm data entry upload");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+  }
+
   /** This method loads the data entered for a route as a singular line. */
   public void addEntry() {
     String entryString = makeRouteString();
@@ -56,16 +68,12 @@ public class RouteSingleEntryController {
       String fileName = loader.getLineFileName("Route");
 
       SQLiteDatabase database = new SQLiteDatabase();
-      database.setTableName(fileName);
+      database.initialiseTable("Route", fileName);
       while (data.remove(null));
       database.addRoutes((Route) data.get(data.size()-1));
       database.startCommite();
 
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Confirm data entry upload");
-      alert.setHeaderText(null);
-      alert.setContentText(message);
-      alert.showAndWait();
+      showConfirmDialog(message);
 
       Stage stage = (Stage) addEntryButton.getScene().getWindow();
       stage.close();

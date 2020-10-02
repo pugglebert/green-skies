@@ -28,6 +28,15 @@ public class GraphsController extends SideNavBarController {
   List<Route> routes;
   private double NaN;
 
+  //@TODO simplify code
+//  public String createAxisString(Route route) {
+//    String dest = route.getDestinationAirport();
+//    String src = route.getSourceAirport();
+//    double distance = route.getDistance();
+//    String axisString = String.format("%s - %s\n(%.0f km)", src, dest, distance);
+//    return axisString;
+//  }
+
   /**
    * This method is the initializer for this class. Displays graph of routes from history
    *
@@ -41,16 +50,15 @@ public class GraphsController extends SideNavBarController {
      * graph
      */
     XYChart.Series<String, Number> data = new XYChart.Series();
-
     routes = storage.getHistory();
-
-    // Check if flights exist in the users history
+    /**Check if flights exist in the users history*/
     if (routes.size() == 0) {
       warningText.setVisible(true);
     } else {
-      // If there are less than 10 fights in history, not need to sort them
+      /**If there are less than 10 fights in history, no need to sort them*/
       if (routes.size() <= 10) {
         for (Route route : routes) {
+          //String axisString = createAxisString(route);
           String dest = route.getDestinationAirport();
           String src = route.getSourceAirport();
           double distance = route.getDistance();
@@ -59,17 +67,14 @@ public class GraphsController extends SideNavBarController {
           data.getData().add(new XYChart.Data(axisString, emissions));
         }
       } else {
-        // If there are more than 10 flights in history, they need to be sorted to obtain the top
-        // ten carbon emitters
+        /**If there are more than 10 flights in history, they need to be sorted*/
         ArrayList<Route> sortedByEmissions = new ArrayList<Route>(routes);
-        Collections.sort(
-            sortedByEmissions,
-            new Comparator<Route>() {
+        Collections.sort(sortedByEmissions, new Comparator<Route>() {
               @Override
               public int compare(Route o1, Route o2) {
                 return Double.valueOf(o2.getEmissions()).compareTo(o1.getEmissions());
-              }
-            });
+              } });
+
         int i = 0;
         int limit = 10;
 

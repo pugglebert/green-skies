@@ -46,6 +46,18 @@ public class AirportSingleEntryController {
     stage.close();
   }
 
+  /**
+   * This method presents the user with a confirmation box before uploading a file
+   * @param message
+   */
+  public void showConfirmDialog(String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Confirm data entry upload");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+  }
+
   /** This method loads the data entered for an aiport as a singular line. */
   public void addEntry() {
     String entryString = makeAirportString();
@@ -58,16 +70,12 @@ public class AirportSingleEntryController {
       String fileName = loader.getLineFileName("Airport");
 
       SQLiteDatabase database = new SQLiteDatabase();
-      database.setTableName(fileName);
+      database.initialiseTable("Airport", fileName);
       while (data.remove(null));
       database.addAirports((Airport) data.get(data.size()-1));
       database.startCommite();
 
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Confirm data entry upload");
-      alert.setHeaderText(null);
-      alert.setContentText(message);
-      alert.showAndWait();
+      showConfirmDialog(message);
 
       Stage stage = (Stage) addButton.getScene().getWindow();
       stage.close();
