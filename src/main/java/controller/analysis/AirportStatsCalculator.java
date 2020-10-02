@@ -40,6 +40,33 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
     }
   }
 
+
+  /**
+   * Calculates the source airport(s) that was the most visited, based on the user's flight history
+   * entries.
+   *
+   * @param srcAirportCounts A count of the number of times each source airport has been visited
+   *     with the name of the airport as the key.
+   */
+  public void updateMostVisitedSrcAirportsRemoval(HashMap<String, Integer> srcAirportCounts) {
+    int currSrcAirportMax = 0;
+    if (leastVisitedSrcAirports.isEmpty() == true & srcAirportCounts.isEmpty() == false) {
+      currSrcAirportMax = (Integer) srcAirportCounts.values().toArray()[0];
+    }
+    for (Map.Entry<String, Integer> entry : srcAirportCounts.entrySet()) {
+      if (entry.getValue() > currSrcAirportMax) {
+        currSrcAirportMax = entry.getValue();
+        mostVisitedSrcAirports.clear();
+        mostVisitedSrcAirports.add(entry.getKey());
+      } else if (entry.getValue() == currSrcAirportMax) {
+        currSrcAirportMax = entry.getValue();
+        if (!mostVisitedSrcAirports.contains(entry.getKey())) {
+          mostVisitedSrcAirports.add(entry.getKey());
+        }
+      }
+    }
+  }
+
   /**
    * Calculates the destination airport(s) that was the most visited, based on the user's flight
    * history entries.
