@@ -201,14 +201,30 @@ public class GeneralStatsCalculator {
             + getCurrentYear()
             + ", you are producing "
             + String.format("%.2f", getEmissionsPerDayBaseOnCurrDate())
-            + " kg of carbon emissions per day."
-            + " If you continue at \nthis rate, you will produce "
+            + " kg of carbon emissions per day from your \nflight travel."
+            + " If you continue at this rate, you will produce "
             + String.format("%.2f", getEmissionsPerYear())
-            + " kg by the end of this year. This means you can only produce \n"
-            + String.format("%.2f", getRemainingCO2InYear())
-            + " in the remaining part of this year. To ensure you stay under your goal, you will need to \nreduce your flight travel by "
-            + String.format("%.2f", getReductionPercentage())
-            + " percent.";
+            + " kg by the end of this year \nfrom flight travel. ";
+
+    if (getReductionPercentage() == 0.00) {
+      carbonEmissionsComment += "This means that you will be below your carbon emissions goal.";
+    } else if (getRemainingCO2InYear() == 0.00) {
+      carbonEmissionsComment +=
+          "This means you have breached your goal and should not produce any \nmore carbon emissions"
+              + " in the remaining part of this year. To ensure you stay under\n your goal in "
+              + (getCurrentYear() + 1)
+              + ", you will need to reduce your flight travel by "
+              + String.format("%.2f", (-1 * getReductionPercentage()))
+              + " percent.";
+
+    } else {
+      carbonEmissionsComment +=
+          "This means you can only produce "
+              + String.format("%.2f", getRemainingCO2InYear())
+              + " kg in the remaining part of this year.\n To ensure you stay under your goal, you will need to reduce your flight travel by "
+              + String.format("%.2f", getReductionPercentage())
+              + " percent.";
+    }
     setCarbonEmissionsComment(carbonEmissionsComment);
   }
 
