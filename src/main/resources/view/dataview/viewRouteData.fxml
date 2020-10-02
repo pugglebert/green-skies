@@ -59,14 +59,6 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-        <Button fx:id="selectAllBtn" layoutX="238.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="37.0" prefWidth="188.0" style="-fx-background-color: #116754;" text="Select All Routes" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="deselectAllBtn" layoutX="448.0" layoutY="626.0" mnemonicParsing="false" onAction="#deselectAll" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #116754;" text="Deselect All Routes" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
       <VBox prefHeight="703.0" prefWidth="214.0" style="-fx-background-color: #116754;">
          <children>
             <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0" style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
