@@ -1,6 +1,6 @@
-package controller.main.upload;
+package controller.guiController.upload;
 
-import controller.main.Main;
+import controller.guiController.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,9 +10,7 @@ import model.data.Airport;
 import model.data.DataType;
 import model.database.SQLiteDatabase;
 import model.loader.Loader;
-import model.loader.Parser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

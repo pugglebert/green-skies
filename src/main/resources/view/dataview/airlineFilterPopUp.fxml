@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="321.0" prefWidth="414.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.dataview.AirlineFilterPopUpController">
+<AnchorPane prefHeight="321.0" prefWidth="414.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.dataview.AirlineFilterPopUpController">
     <children>
         <CheckBox fx:id="countryCheckBox" layoutX="59.0" layoutY="85.0" mnemonicParsing="false" text="Country">
          <font>

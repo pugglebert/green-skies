@@ -1,9 +1,9 @@
-package controller.main.upload;
+package controller.guiController.upload;
 
-import controller.main.AlertPopUp;
-import controller.main.GreenSkiesApplication;
-import controller.main.Main;
-import controller.main.SideNavBarController;
+import controller.guiController.AlertPopUp;
+import controller.guiController.GreenSkiesApplication;
+import controller.guiController.Main;
+import controller.guiController.SideNavBarController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +22,6 @@ import model.loader.Loader;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 

@@ -1,4 +1,4 @@
-package controller.main.dataview;
+package controller.guiController.dataview;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

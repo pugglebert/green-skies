@@ -1,8 +1,8 @@
-package controller.main.dataview;
+package controller.guiController.dataview;
 
 import controller.analysis.Filterer;
-import controller.main.Main;
-import controller.main.SideNavBarController;
+import controller.guiController.Main;
+import controller.guiController.SideNavBarController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

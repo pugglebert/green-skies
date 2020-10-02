@@ -4,7 +4,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
 import model.database.SQLiteDatabase;
@@ -15,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 
-import controller.main.dataview.RouteAddToHistoryPopUpController;
+import controller.guiController.dataview.RouteAddToHistoryPopUpController;
 
 //TODO write comments for this class. HK 26/09/2020
 

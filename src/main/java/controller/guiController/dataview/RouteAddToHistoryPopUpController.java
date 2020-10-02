@@ -1,9 +1,9 @@
-package controller.main.dataview;
+package controller.guiController.dataview;
 
 import controller.analysis.FlightAnalyser;
 import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
-import controller.main.Main;
+import controller.guiController.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

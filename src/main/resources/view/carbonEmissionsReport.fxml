@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.Label?>
-<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.CarbonEmissionsReportController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.CarbonEmissionsReportController">
     <children>
         <Text fontSmoothingType="LCD" layoutX="402.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Emissions:" textAlignment="RIGHT" wrappingWidth="150.6708984375">
             <font>
