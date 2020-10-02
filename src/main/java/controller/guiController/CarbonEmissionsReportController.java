@@ -103,26 +103,26 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 
       try {
         generalStatsCalculator.setCarbonEmissionsGoal(
-            Double.parseDouble(
-                carbonEmissionGoalValue)); // TODO write test for handling different errors
+            Double.parseDouble(carbonEmissionGoalValue));
+
+        displayTotalEmissionsField.setText(
+                String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
+        displayTotalDistanceTravelledField.setText(
+                String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
+        displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
+        displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
+        displayMostDistanceRouteField.setText(MostDistanceRouteString);
+        displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
+        displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
+        displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
+        displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
+        displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
+        displayTreeOffsetField.setText(numOfTreesString);
+        generalStatsCalculator.createCarbonEmissionsComment();
+        displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
       } catch (NumberFormatException e) {
         carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL.");
       }
-      displayTotalEmissionsField.setText(
-          String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
-      displayTotalDistanceTravelledField.setText(
-          String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
-      displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
-      displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
-      displayMostDistanceRouteField.setText(MostDistanceRouteString);
-      displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
-      displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
-      displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
-      displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
-      displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
-
-      displayTreeOffsetField.setText(numOfTreesString);
-      displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
 
       // resetReport();
     }
@@ -147,7 +147,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayMostVisitedDestinationAirportField.setText("");
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
-    generalStatsCalculator.createCarbonEmissionsComment();
+    displayStatusCommentField.setText("");
+
 
     // resetReport();
   }
