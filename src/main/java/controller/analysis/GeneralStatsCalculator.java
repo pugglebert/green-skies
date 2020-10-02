@@ -61,9 +61,9 @@ public class GeneralStatsCalculator {
   private int currentYear;
 
   /**
-   * This method updates the total carbon emissions from flight travel.
+   * This method adds the added route's carbon emissions to the total carbon emissions from flight travel.
    *
-   * @param currentRouteRecord The current route record that is being added to user's flight
+   * @param currentRouteRecord The current route record that is being added to the user's flight
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
@@ -73,15 +73,44 @@ public class GeneralStatsCalculator {
     }
   }
 
+  //TODO test this method.
   /**
-   * This method updates the total distance travelled via flight travel.
+   * This method adds the removes route's carbon emissions from the total carbon emissions from flight travel.
    *
-   * @param currentRouteRecord The current route record that is being added to user's flight
+   * @param currentRouteRecord The current route record that is being removed for the user's flight
+   *     history.
+   */
+  public void updateTotalEmissionsRemoval(Route currentRouteRecord) {
+    if (!Double.isNaN(currentRouteRecord.getEmissions())) {
+      totalCarbonEmissions -=
+              (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+      if (totalCarbonEmissions < 0.00) {
+        totalCarbonEmissions = 0.00;
+      }
+    }
+  }
+
+  /**
+   * This method adds the removes route's distance the total distance travelled via flight travel.
+   *
+   * @param currentRouteRecord The current route record that is being removed from the user's flight
    *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
     totalDistanceTravelled +=
-        (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+  }
+
+  //TODO test this method.
+  /**
+   * This method adds the added route's distance the total distance travelled via flight travel.
+   *
+   * @param currentRouteRecord The current route record that is being added to the user's flight
+   *     history.
+   */
+  public void updateTotalDistanceRemoval(Route currentRouteRecord) {
+    totalDistanceTravelled -=
+            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
   }
 
   /** This method calculates the current day of the year and returns the integer of it. */
