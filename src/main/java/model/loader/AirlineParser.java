@@ -47,7 +47,7 @@ public class AirlineParser extends Parser {
     errorLookup[1] = "Duplicate airline";
     errorLookup[2] = "Invalid airline ID";
     errorLookup[3] = "Invalid airline name";
-    errorLookup[4] = "Invalid ailias";
+    errorLookup[4] = "Invalid alias";
     errorLookup[5] = "Invalid IATA code";
     errorLookup[6] = "Invalid ICAO code";
     errorLookup[7] = "Invalid callsign";
@@ -57,8 +57,8 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method iterate throught each line of input file and calls parseData if there are less than
-   * 200 erors in the file. If there are more than 200 errors raises exception.
+   * This method iterate through each line of input file and calls parseData if there are less than
+   * 200 errors in the file. If there are more than 200 errors raises exception.
    */
   @Override
   public void dataParser() {
@@ -80,7 +80,7 @@ public class AirlineParser extends Parser {
 
   /**
    * This method splits the line into data segments, calls the validator method to check each
-   * segment, and then adds that line to paserData if it is valid.
+   * segment, and then adds that line to parserData if it is valid.
    *
    * @param dataLine line from file to split into segments.
    */
@@ -113,7 +113,7 @@ public class AirlineParser extends Parser {
 
   /**
    * This method add airline to index matches with airLineID. First check if there are any airline
-   * currently sit at index. If it is null then replace with airline param. If parserset size is too
+   * currently sit at index. If it is null then replace with airline param. If parserSet size is too
    * small then init it with null value. If there is an airline at index then check if the airline
    * is the same with the one we want to add. If it is the same then treat as duplicate (do nothing)
    * If is is not then add to error.
@@ -142,7 +142,7 @@ public class AirlineParser extends Parser {
    * This method checks that line has expected number of entries and calls isValid method to check
    * that each token on the line matches the expected pattern.
    *
-   * @param line A string made up of comma-seperated tokens representing data about a route
+   * @param line A string made up of comma-separated tokens representing data about a route
    * @return True if all tokens are valid, false otherwise
    */
   @Override
@@ -172,7 +172,7 @@ public class AirlineParser extends Parser {
       return false;
     }
 
-    if (!isCallsignValid(line[callsign])) {
+    if (!isCallSignValid(line[callsign])) {
       return false;
     }
 
@@ -187,7 +187,7 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method check if id is valid.
+   * This method check if id is valid (duplication and valid integer).
    *
    * @param airlineID airline id as a string.
    * @return true if valid, false if invalid.
@@ -279,14 +279,13 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method checks if the callsign is valid.
+   * This method checks if the callSign is valid.
    *
-   * @param callsign airline latitude as a string.
+   * @param callSign airline latitude as a string.
    * @return true if valid, false if invalid.
    */
-  protected boolean isCallsignValid(String callsign) {
-    // airline callsign check
-    if (!callsign.matches("([A-Za-z -]+)|(^$)")) {
+  protected boolean isCallSignValid(String callSign) {
+    if (!callSign.matches("([A-Za-z -]+)|(^$)")) {
       errorCounter(7);
       return false;
     }
@@ -315,7 +314,6 @@ public class AirlineParser extends Parser {
    * @return true if valid, false if invalid.
    */
   protected boolean isActiveStatusValid(String activeStatus) {
-
     if (!activeStatus.matches("[YN]")) {
       errorCounter(9);
       return false;

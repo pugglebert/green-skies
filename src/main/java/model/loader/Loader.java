@@ -1,6 +1,7 @@
 package model.loader;
 
 import model.data.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
@@ -8,16 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import static com.google.common.io.Files.getFileExtension;
 
 /**
  * The Loader class checks that a file has the expected extension, opens that file and creates an
  * instance of the Parser class to parse the file. It then stores the processed data in the Storage
  * class.
- *
- * @author Ella Johnson
- * @version 1.0
- * @since 2020-08-09
  */
 public class Loader {
 
@@ -109,22 +107,18 @@ public class Loader {
     ArrayList<String> lines = new ArrayList<>();
     File file = new File(fileName);
     Scanner scanner;
-
     scanner = new Scanner(file);
-
     while (scanner.hasNextLine()) {
       lines.add(scanner.nextLine());
     }
-
     scanner.close();
-
     return lines;
   }
 
   /**
    * This method constructs a parser of the relevant type.
    *
-   * @param dataType The type of data to be procesed.
+   * @param dataType The type of data to be processed.
    * @param lines An ArrayList of Strings of data to be processed by the parser.
    * @throws IllegalArgumentException Thrown if datatype is not one of airline, airport, flight or
    *     route.
@@ -179,7 +173,6 @@ public class Loader {
     Parser parser = processFile(filePath, dataType);
     List<DataType> data = parser.getData();
     storage.setData(data, dataType, fileName);
-
     return parser.getErrorMessage(true);
   }
 
@@ -263,7 +256,7 @@ public class Loader {
   }
 
   /**
-   * This method parses a single line and returns a message about whether any errors occured when
+   * This method parses a single line and returns a message about whether any errors occurred when
    * processing that line.
    *
    * @param entryString The entry to be parsed.

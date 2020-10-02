@@ -1,15 +1,13 @@
 package model.loader;
 
 import model.data.DataType;
-import java.util.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-
-/**
- * The super class of whole sub_parser classes
- * @author Ella Lambert Tom
- * @since 2020-08-09
- */
+/** The super class of whole sub_parser classes */
 public abstract class Parser {
 
   protected final List<String> dataFile;
@@ -32,7 +30,7 @@ public abstract class Parser {
   protected List<DataType> parserData = new ArrayList<>();
 
   /**
-   * Constructor of Paser class.
+   * Constructor of Parser class.
    *
    * @param dataFile passed from loader, contains all data from datafile, one line per element in
    *     the list.
@@ -48,7 +46,7 @@ public abstract class Parser {
   /** Initialize errorLookup with message for each error code */
   protected abstract void initErrorLookup();
 
-  /** Abstract class of dataPasrser. */
+  /** Abstract class of dataParser. */
   protected abstract void dataParser();
 
   /** Abstract class of validater. */
@@ -91,9 +89,10 @@ public abstract class Parser {
   public String getErrorMessage(boolean uploadSuccess) {
     StringBuilder errorMessage = new StringBuilder();
     if (uploadSuccess) {
-      errorMessage.append(String.format("File uploaded with %d invalid lines rejected.\n", totalErrors));
+      errorMessage.append(
+          String.format("File uploaded with %d invalid lines rejected.\n", totalErrors));
     }
-    String template = "Error [%d] %s: %d occurances\n";
+    String template = "Error [%d] %s: %d occurrences\n";
     for (int i = 0; i < numCodes; i++) {
       if (errorCollection.get(i) > 0) {
         errorMessage.append(String.format(template, i, errorLookup[i], errorCollection.get(i)));
@@ -104,6 +103,7 @@ public abstract class Parser {
 
   /**
    * Checks if the number of errors in the file is less than the size of the file.
+   *
    * @return true if there are less errors than lines in the file, false otherwise.
    */
   public boolean getValidFile() {
