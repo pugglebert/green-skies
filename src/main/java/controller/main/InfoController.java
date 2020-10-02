@@ -17,7 +17,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 04/09/20
  */
-public class HelpController {
+public class InfoController {
 
   @FXML public Button BackButton;
 
@@ -34,4 +34,3 @@ public class HelpController {
     stage1.setScene(scene);
   }
 }
-

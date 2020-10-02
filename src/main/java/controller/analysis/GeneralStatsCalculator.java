@@ -47,7 +47,7 @@ public class GeneralStatsCalculator {
   /**
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
-  private String carbonEmissionsComment;
+  private String carbonEmissionsComment = "Temporary string for debugging"; //TODO set this back to an empty string once finished debugging HK 2/10 4:30pm
   /** The remaining days in the year. */
   private int remainingDaysInYear;
   /** The current day in the year. */
@@ -69,7 +69,7 @@ public class GeneralStatsCalculator {
   public void updateTotalEmissions(Route currentRouteRecord) {
     if (!Double.isNaN(currentRouteRecord.getEmissions())) {
       totalCarbonEmissions +=
-              (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+          (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
     }
   }
 
@@ -137,11 +137,11 @@ public class GeneralStatsCalculator {
     } else {
       try {
         double negReductionDec = 1 - (emissionsPerDayBaseOnCurrDate / emissionsPerDayGoal);
-        double posReductionPercentage = 100 - (negReductionDec * - 100);
+        double posReductionPercentage = 100 - (negReductionDec * -100);
         this.reductionPercentage = posReductionPercentage;
       } catch (ArithmeticException e) {
         System.out.println(
-            "Cannot divide the emissionsPerDayBaseOnCurrDate by a rate of zero carbon emissios per day "
+            "Cannot divide the emissionsPerDayBaseOnCurrDate by a rate of zero carbon emissions per day "
                 + e);
       }
     }
@@ -153,9 +153,9 @@ public class GeneralStatsCalculator {
    * @return The current year as an integer.
    */
   public int getCurrentYear() {
-    Date currDayinCurrYear = new Date();
+    Date currDayInCurrYear = new Date();
     SimpleDateFormat dateForm = new SimpleDateFormat("Y");
-    String yearAsString = dateForm.format(currDayinCurrYear);
+    String yearAsString = dateForm.format(currDayInCurrYear);
     Integer yearAsInt = Integer.valueOf(yearAsString);
     return yearAsInt;
   }
@@ -188,7 +188,7 @@ public class GeneralStatsCalculator {
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
   public void createCarbonEmissionsComment() {
-    this.carbonEmissionsComment =
+    String carbonEmissionsComment =
         "Currently, in "
             + getCurrentYear()
             + ", you are producing "
@@ -201,6 +201,7 @@ public class GeneralStatsCalculator {
             + " in the remaining part of this year. To ensure you stay under your goal, you will need to reduce your flight travel by "
             + String.format("%.2f", getReductionPercentage())
             + " percent.";
+    setCarbonEmissionsComment(carbonEmissionsComment);
   }
 
   /**
@@ -228,39 +229,39 @@ public class GeneralStatsCalculator {
   /**
    * This method sets up the quick sort algorithm.
    *
-   * @param arraytoSort The array which needs to be sorted.
+   * @param arrayToSort The array which needs to be sorted.
    * @param start The starting index of the arrayToSort.
    * @param end The ending index of the arrayToSort.
    */
-  public static void quickSort(List<Route> arraytoSort, int start, int end) {
+  public static void quickSort(List<Route> arrayToSort, int start, int end) {
     if (end <= start) return;
-    int pivot = quickSortPartition(arraytoSort, start, end);
-    quickSort(arraytoSort, start, pivot - 1);
-    quickSort(arraytoSort, pivot + 1, end);
+    int pivot = quickSortPartition(arrayToSort, start, end);
+    quickSort(arrayToSort, start, pivot - 1);
+    quickSort(arrayToSort, pivot + 1, end);
   }
 
   /**
    * This function implements the main logic of the quick sort algoirthm.
    *
-   * @param arraytoSort The array which needs to be sorted.
+   * @param arrayToSort The array which needs to be sorted.
    * @param start The starting index of the arrayToSort.
    * @param end The ending index of the arrayToSort.
    * @return
    */
-  static int quickSortPartition(List<Route> arraytoSort, int start, int end) {
+  static int quickSortPartition(List<Route> arrayToSort, int start, int end) {
     int pivot = end;
     int counter = start;
     for (int i = start; i < end; i++) {
-      if (arraytoSort.get(i).getTimesTaken() < arraytoSort.get(pivot).getTimesTaken()) {
-        Route temp = arraytoSort.get(counter);
-        arraytoSort.set(counter, arraytoSort.get(i));
-        arraytoSort.set(i, temp);
+      if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
+        Route temp = arrayToSort.get(counter);
+        arrayToSort.set(counter, arrayToSort.get(i));
+        arrayToSort.set(i, temp);
         counter++;
       }
     }
-    Route temp = arraytoSort.get(pivot);
-    arraytoSort.set(pivot, arraytoSort.get(counter));
-    arraytoSort.set(counter, temp);
+    Route temp = arrayToSort.get(pivot);
+    arrayToSort.set(pivot, arrayToSort.get(counter));
+    arrayToSort.set(counter, temp);
     return counter;
   }
 
@@ -314,6 +315,10 @@ public class GeneralStatsCalculator {
 
   public String getCarbonEmissionsComment() {
     return carbonEmissionsComment;
+  }
+
+  public void setCarbonEmissionsComment(String comment) {
+    this.carbonEmissionsComment = comment;
   }
 
   public void setDayInYear(int day) {

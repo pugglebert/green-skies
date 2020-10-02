@@ -4,7 +4,10 @@ import model.data.Airline;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -158,7 +161,7 @@ public class ParserTest {
     String errorMessage = airlineParser.getErrorMessage(true);
     assertEquals(
         "File uploaded with 1 invalid lines rejected\n"
-            + "Error [3] Invalid airport name: 1 occurances\n",
+            + "Error [3] Invalid airport name: 1 occurrences\n",
         errorMessage);
   }
 }

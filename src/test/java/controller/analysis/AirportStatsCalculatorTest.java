@@ -225,8 +225,6 @@ public class AirportStatsCalculatorTest {
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedDestAirports());
   }
 
-  // TODO write tests for these methods and rerun coverage once completed! HK 26/09/2020
-  // --------------------------------- Testing for resetAirportArrays()
 
   /**
    * Verify that when resetRoutesArrays is called when there are no values in the arrays, then they

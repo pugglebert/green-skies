@@ -209,13 +209,13 @@ public class AirlineParserTest {
   /** Test if method accept Callsign that have 2 aphabetic characters. */
   @Test
   public void isCallsignValid() {
-    assertTrue(airlineParser.isCallsignValid("AN"));
+    assertTrue(airlineParser.isCallSignValid("AN"));
   }
 
   /** Test if method reject invalid Callsign that contain numeral characters. */
   @Test
   public void isCallsignValidStartedWithNumerals() {
-    assertFalse(airlineParser.isCallsignValid("a1b"));
+    assertFalse(airlineParser.isCallSignValid("a1b"));
   }
 
   /** Test if method accept valid country without space. */
@@ -288,7 +288,7 @@ public class AirlineParserTest {
       AirlineParser airlineParser = new AirlineParser(lines, new ArrayList<>());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurances\n", e.getMessage());
+      assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurrences\n", e.getMessage());
     }
   }
 
@@ -304,7 +304,7 @@ public class AirlineParserTest {
       AirlineParser airlineParser = new AirlineParser(lines, new ArrayList<>());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurances\n", e.getMessage());
+      assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurrences\n", e.getMessage());
     }
   }
 
@@ -316,7 +316,7 @@ public class AirlineParserTest {
             loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateAirlinesTest.csv");
     AirlineParser airlineParser = new AirlineParser(duplicateLines, new ArrayList<>());
     assertEquals(
-            "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airline: 1 occurances\n",
+            "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airline: 1 occurrences\n",
             airlineParser.getErrorMessage(true));
   }
 

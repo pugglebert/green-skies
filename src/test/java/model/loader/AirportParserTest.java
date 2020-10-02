@@ -305,7 +305,7 @@ public class AirportParserTest {
             AirportParser airportParser = new AirportParser(lines, new ArrayList<>());
             fail();
         } catch (RuntimeException e) {
-            assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurances\n", e.getMessage());
+            assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurrences\n", e.getMessage());
         }
     }
 
@@ -321,7 +321,7 @@ public class AirportParserTest {
             AirportParser airportParser = new AirportParser(lines, new ArrayList<>());
             fail();
         } catch (RuntimeException e) {
-            assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurances\n", e.getMessage());
+            assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurrences\n", e.getMessage());
         }
     }
 
@@ -333,7 +333,7 @@ public class AirportParserTest {
                 loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateAirportTest.csv");
         AirportParser duplicateParser = new AirportParser(duplicateLines, new ArrayList<>());
         assertEquals(
-                "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airport ID: 1 occurances\n",
+                "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airport ID: 1 occurrences\n",
                 duplicateParser.getErrorMessage(true));
     }
 
@@ -361,7 +361,7 @@ public class AirportParserTest {
             new AirportParser(invalidLines, storage.getAirports());
             fail();
         } catch (RuntimeException e) {
-            assertEquals("Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurances\n", e.getMessage());
+            assertEquals("Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurrences\n", e.getMessage());
         }
     }
 

@@ -1,6 +1,7 @@
 package model.loader;
 
 import model.data.Route;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +48,11 @@ public class RouteParser extends Parser {
     dataParser();
     if (!getValidFile()) {
       if (totalErrors == 1) {
-        throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
       } else {
-        throw new RuntimeException("File rejected: all lines contain errors.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "File rejected: all lines contain errors.\n" + getErrorMessage(false));
       }
     }
   }
@@ -99,7 +102,8 @@ public class RouteParser extends Parser {
     for (String dataLine : dataFile) {
       if (totalErrors > 200) {
         totalErrors = 0;
-        throw new RuntimeException("File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
       }
       parseLine(dataLine);
     }
@@ -137,7 +141,7 @@ public class RouteParser extends Parser {
    * This method checks that line has expected number of entries and calls isValid method to check
    * that each token on the line matches the expected pattern.
    *
-   * @param line A string made up of comma-seperated tokens representing data about a route
+   * @param line A string made up of comma-separated tokens representing data about a route
    * @return True if all tokens are valid, false otherwise
    */
   @Override
@@ -227,10 +231,10 @@ public class RouteParser extends Parser {
   }
 
   /**
-   * This method verifies whether string is a valid openflight airport id code.
+   * This method verifies whether string is a valid openFlight airport id code.
    *
    * @param airportID The string to be verified.
-   * @return True if string matches openflights format, false otherwise.
+   * @return True if string matches openFlights format, false otherwise.
    */
   protected boolean isAirportIDValid(String airportID) {
     return (airportID.length() <= 5 && airportID.matches("[0-9]+"));
@@ -247,10 +251,10 @@ public class RouteParser extends Parser {
   }
 
   /**
-   * This method verifies whether string is a valid openflights airline id code.
+   * This method verifies whether string is a valid openFlights airline id code.
    *
    * @param airlineID The string to be verified.
-   * @return True if string matches openflights format, false otherwise.
+   * @return True if string matches openFlights format, false otherwise.
    */
   protected boolean isAirlineIDValid(String airlineID) {
     return airlineID.length() <= 5 && airlineID.matches("[0-9]+");
@@ -294,7 +298,7 @@ public class RouteParser extends Parser {
   }
 
   /**
-   * This method checks for duplicates in data. If there are no duplicates, addes route to data.
+   * This method checks for duplicates in data. If there are no duplicates, added route to data.
    *
    * @param newRoute Route to be added.
    */
