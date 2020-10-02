@@ -1,14 +1,11 @@
 package model.data;
 
 import javafx.scene.control.CheckBox;
+
 import java.util.Arrays;
 
 /**
  * The Route class for containing all data for one unique flight route.
- *
- * @author Hayley Krippner, Ella Johnson
- * @version 1.0
- * @since 11/08/2020
  */
 public class Route implements DataType {
 

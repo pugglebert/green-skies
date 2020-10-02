@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.CheckBox;
 
 /**
  * Class to store persistent data in database.
