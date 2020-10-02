@@ -149,7 +149,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayTreeOffsetField.setText("");
     displayStatusCommentField.setText("");
 
-
     // resetReport();
   }
 
