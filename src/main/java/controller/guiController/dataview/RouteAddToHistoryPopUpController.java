@@ -131,7 +131,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
                           route.getTimesTaken()
                                   + Main.getStorage().getHistory().get(index).getTimesTaken());
         } else {
-          // Route have been added to history + have been set number of passenger
+          // Route have not been added to history + have been set number of passenger
           Main.getStorage().getHistory().add(route);
         }
         route.getSelect().setSelected(false);
