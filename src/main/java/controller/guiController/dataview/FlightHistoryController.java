@@ -223,11 +223,9 @@ public class FlightHistoryController extends DataViewController {
 
 
   public void selectRoute() {
-    errorText.setVisible(false);
-    Main.getStorage().MapAirport = new ArrayList<>();
-    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
+    ArrayList<Airport> mapAirport = Main.getStorage().getMapAirport();
 
-    if (result.isPresent() && result.get() == ButtonType.OK) {
+    mapAirport.clear();
 
       for(Route route: this.routes){
 
@@ -237,7 +235,7 @@ public class FlightHistoryController extends DataViewController {
 
             if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
 
-              Main.getStorage().MapAirport.add(airport);
+              mapAirport.add(airport);
 
             }
           }
@@ -245,8 +243,11 @@ public class FlightHistoryController extends DataViewController {
 
         }
       }
-    }
 
+    if(mapAirport.size() > 2){
+      AlertPopUp.showGoogleMapAlert();
+      mapAirport.clear();
+    }
 
   }
 }

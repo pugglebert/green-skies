@@ -35,7 +35,7 @@ public class MapOfRoutesController extends SideNavBarController {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     iniMap();
-    mapAirport = Main.getStorage().MapAirport;
+    mapAirport = Main.getStorage().getMapAirport();
   }
 
   public void iniMap() {
@@ -56,9 +56,7 @@ public class MapOfRoutesController extends SideNavBarController {
       } else {
       errorText.setText("Please wait until google map loaded.");
       errorText.setVisible(true);
-
     }
-
   }
 
   public void showMap() {
