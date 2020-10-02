@@ -1,5 +1,6 @@
 package controller.guiController.dataview;
 
+import controller.analysis.FlightAnalyser;
 import controller.analysis.Searcher;
 import controller.guiController.AlertPopUp;
 import controller.guiController.Main;
@@ -98,7 +99,7 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * This method earches history for routes which match the search type and term and displays them
+   * This method searches history for routes which match the search type and term and displays them
    * in the table view.
    *
    * @param searchTerm String to match attributes to.
@@ -206,4 +207,21 @@ public class FlightHistoryController extends DataViewController {
     }
     return selected;
   }
+
+//  // todo write comment for this function
+//  public void updateReportStatsDeletion(Route route) {
+//
+//    FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
+//    route.setEmissions(flightAnalyser.getPath1Emission());
+//    route.setDistance(flightAnalyser.getTotalDistancePath1());
+//    generalStatsCalculator.updateTotalDistance(route);
+//    generalStatsCalculator.updateTotalEmissions(route);
+//    storage.addToHistorySrcAirports(route.getSourceAirport());
+//    storage.addToHistoryDestAirports(route.getDestinationAirport());
+//    routeStatsCalculator.updateLeastDistanceRoute(route);
+//    routeStatsCalculator.updateMostDistanceRoute(route);
+//    routeStatsCalculator.updateMostEmissionsRoute(route);
+//    routeStatsCalculator.updateLeastEmissionsRoute(route);
+//  }
+
 }
