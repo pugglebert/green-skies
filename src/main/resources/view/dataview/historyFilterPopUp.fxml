@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="364.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.main.dataview.HistoryFilterPopUpController">
+<AnchorPane prefHeight="364.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.dataview.HistoryFilterPopUpController">
     <children>
         <Label fx:id="errorText" layoutX="33.0" layoutY="236.0" prefHeight="32.0" prefWidth="437.0" text="No matches found" textFill="RED" visible="false">
          <font>

@@ -1,4 +1,4 @@
-package controller.main;
+package controller.guiController;
 
 import controller.analysis.FlightAnalyser;
 import javafx.fxml.FXML;

@@ -1,6 +1,6 @@
-package controller.main.upload;
+package controller.guiController.upload;
 
-import controller.main.Main;
+import controller.guiController.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -10,9 +10,7 @@ import model.data.Airport;
 import model.data.DataType;
 import model.database.SQLiteDatabase;
 import model.loader.Loader;
-import model.loader.Parser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -128,4 +126,27 @@ public class AirportSingleEntryController {
 
     return airportString;
   }
+
+  /**
+   * This method launches alert giving user information on expected format of airport entry.
+   */
+  public void airportHelp() {
+    Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+    ErrorAlert.setAlertType(Alert.AlertType.INFORMATION);
+    ErrorAlert.setContentText("Expected format of airport entry:\n" +
+            "Airport name: a combination of letters and spaces\n" +
+            "City: a combination of letters and spaces\n" +
+            "Country: 'a combination of letters and spaces\n" +
+            "IATA: 'null' if IATA is unknown, three capital letters or numbers otherwise\n" +
+            "ICAO: 'null' if ICAO is unknown, four capital letters or numbers otherwise\n" +
+            "Timezone: an integer between -12 and 14 indicating deviation from GMT\n" +
+            "Latitude: a positive or negative decimal number\n" +
+            "Longitude: a positive or negative decimal number\n" +
+            "Altitude: a positive or negative integer\n" +
+            "DST: single capital letter corresponding to daylight savings time. One of: EASOZNU\n" +
+            "Database timezone: the name of the timezone e.g. 'Pacific/Auckland'\n" +
+            "Airport ID: an integer, must be unique within the airport file");
+    ErrorAlert.show();
+  }
+
 }

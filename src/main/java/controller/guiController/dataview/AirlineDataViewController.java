@@ -1,7 +1,7 @@
-package controller.main.dataview;
+package controller.guiController.dataview;
 
 import controller.analysis.Searcher;
-import controller.main.AlertPopUp;
+import controller.guiController.AlertPopUp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
