@@ -3,12 +3,16 @@ package controller.guiController;
 import controller.analysis.AirportStatsCalculator;
 import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
+import controller.guiController.Main;
+import controller.guiController.SideNavBarController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.data.Route;
 import model.data.Storage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -90,11 +94,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       ErrorAlert.setAlertType(Alert.AlertType.ERROR);
       ErrorAlert.setContentText("You have not selected any data to be in your Flight History");
       ErrorAlert.show();
-    } else if (carbonEmissionGoalField.getText().isEmpty()) {
-      Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
-      ErrorAlert.setAlertType(Alert.AlertType.ERROR);
-      ErrorAlert.setContentText("You have not entered a carbon emissions goal, please do so to view a report");
-      ErrorAlert.show();
     } else {
       updateTravelledAndVisited();
       setUpData();
@@ -123,11 +122,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
 
       displayTreeOffsetField.setText(numOfTreesString);
-//
-//      // TODO remove after debugging:
-//      System.out.println(generalStatsCalculator.getCarbonEmissionsComment());
-//
-//      displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
+      displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
 
       // resetReport();
     }
@@ -178,12 +173,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     this.LeastVisitedDestAirportString =
         CombineAirportsToOneString(airportStatsCalculator.getLeastVisitedDestAirports());
     numOfTreesToString(generalStatsCalculator.getTreesToGrow());
-
     generalStatsCalculator.createCarbonEmissionsComment();
   }
 
   /**
-   * This methods takes an arrary containing either routes with most or least emissions or most or
+   * This methods takes an array containing either routes with most or least emissions or most or
    * least distance and produces a string of its routes' AirlineIDs.
    *
    * @param arrayToConvert Either the most or least emissions or most or least distance array that
