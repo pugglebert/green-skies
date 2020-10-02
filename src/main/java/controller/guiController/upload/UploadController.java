@@ -109,9 +109,7 @@ public class UploadController extends SideNavBarController {
                 String fileType = dataTypeSelect.getValue().toString();
                 String stringFile;
                 stringFile = selectedFile.toString();
-                // loadFile returns a String when the file is accepted, with the number of reject lines,
-                // this string
-                // pops up in the ConfirmALert message
+
                 String resultString = loader.checkFile(stringFile, fileType);
                 Alert ConfirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
                 ConfirmAlert.setContentText(resultString);
