@@ -146,7 +146,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     // resetReport();
   }
 
-  // todo write document for this method//
+  /**
+   * This method sets up the data for the report to display the statistics as strings.
+   */
   public void setUpData() {
     generalStatsCalculator.calculateOffsetTrees();
     System.out.println(MostEmissionsRouteString);
