@@ -37,6 +37,7 @@ public class RouteSingleEntryController {
   @FXML Button cancelButton;
   @FXML Button addEntryButton;
 
+
   /** This method closes window when the 'Cancel' button is pushed. */
   public void closeWindow() {
     Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -116,9 +117,8 @@ public class RouteSingleEntryController {
   }
 
   /**
-   * This method launches alert giving user information on expected format of airline entry.
+   * This method launches alert giving user information on expected format of route entry.
    */
-  @FXML
   public void routeHelp() {
     Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
     ErrorAlert.setAlertType(Alert.AlertType.INFORMATION);
