@@ -115,4 +115,25 @@ public class RouteSingleEntryController {
 
     return routeLine;
   }
+
+  /**
+   * This method launches alert giving user information on expected format of airline entry.
+   */
+  @FXML
+  public void routeHelp() {
+    Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
+    ErrorAlert.setAlertType(Alert.AlertType.INFORMATION);
+    ErrorAlert.setContentText("Expected format of route entry:\n" +
+            "Airline name: a number followed by a capital letter e.g. 2B\n" +
+            "Airline ID: '\\N' if Airline ID is unknown, an integer otherwise\n" +
+            "Number of Stops: an integer\n" +
+            "Source Airport: a combination of three capital letters e.g. 'AER'\n" +
+            "Destination Airport: a combination of three capital letters e.g. 'AER'\n" +
+            "Code Share: 'Y' or blank if unknown\n" +
+            "Source Airport ID: a four digit number, otherwise '\\N' if unknown\n" +
+            "Destination Airport ID: a four digit number, otherwise '\\N' if unknown\n" +
+            "Equipment: a combination of three letters or numbers\n");
+    ErrorAlert.show();
+  }
+
 }
