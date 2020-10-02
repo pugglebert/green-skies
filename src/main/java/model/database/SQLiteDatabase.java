@@ -364,13 +364,13 @@ public class SQLiteDatabase {
     }
 
     try {
-      state = con.createStatement();
-      res = state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-
-      if(!res.next()){
-        buildRoutesTable();
-      }
+//      state = con.createStatement();
+//      res = state.executeQuery(
+//              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
+//
+//      if(!res.next()){
+//        buildRoutesTable();
+//      }
       prep =
           con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setString(2, route.getAirlineName());
@@ -496,10 +496,8 @@ public class SQLiteDatabase {
           res =
               state.executeQuery(
                   "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-          if (res.next()) {
-            state = con.createStatement();
-            state.executeUpdate("Delete from " + tableName);
-          } else {
+
+          if (!res.next()) {
             buildAirportsTable();
           }
         } catch (Exception e) {
@@ -519,10 +517,8 @@ public class SQLiteDatabase {
           res =
               state.executeQuery(
                   "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-          if (res.next()) {
-            state = con.createStatement();
-            state.executeUpdate("Delete from " + tableName);
-          } else {
+
+          if (!res.next()) {
             buildRoutesTable();
           }
         } catch (Exception e) {
@@ -542,13 +538,10 @@ public class SQLiteDatabase {
           res =
               state.executeQuery(
                   "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-          if (res.next()) {
-            state = con.createStatement();
-            state.executeUpdate("Delete from " + tableName);
-          } else {
+
+          if (!res.next()) {
             buildAirlinesTable();
-          }
-        } catch (Exception e) {
+          }        } catch (Exception e) {
           JOptionPane.showMessageDialog(null, e);
         } finally {
           try {
