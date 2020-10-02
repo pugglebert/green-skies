@@ -23,6 +23,28 @@
     var marker2;
     var path;
 
+    function loadMapLibrary(ver, key, lang, region) {
+        //alert('loadMapLibrary');
+        var opts = [];
+        if (key !== 'null') {
+            opts[opts.length] = 'key='+key;
+        }
+        if (lang !== 'null') {
+            opts[opts.length] = 'language='+lang;
+        }
+        if (region !== 'null') {
+            opts[opts.length] = 'region='+region;
+        }
+        var sOpts = opts.join('&');
+
+        if (ver === 'null') {
+            ver = '3.exp';
+        }
+
+        //google.load('maps', ver, { 'other_params' : sOpts, 'callback': 'initMap()' });
+        initMap();
+    }
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -43.523537, lng: 172.583923},

@@ -1,6 +1,7 @@
 package controller.guiController;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import model.data.Airport;
@@ -20,6 +21,7 @@ public class MapOfRoutesController extends SideNavBarController {
 
   @FXML private WebView mapView;
   @FXML private WebEngine mapEngine;
+  @FXML protected Label errorText;
 
   /** The airport that user selected to display in google map. */
   private ArrayList<Airport> mapAirport = new ArrayList<>();
@@ -42,15 +44,20 @@ public class MapOfRoutesController extends SideNavBarController {
   }
 
   public void displayRoute() {
-//    StringBuilder stringBuilder = new StringBuilder();
-//    stringBuilder.append("[");
-//    mapAirport.forEach(pos -> stringBuilder.append(
-//            String.format("{lat: %f, lng: %f}, ",pos.getLatitude(), pos.getLongitude())));
-//    stringBuilder.append("]");
-//    String scriptToExecute = "displayRoute(" + stringBuilder.toString() + ");";
-//    System.out.println(scriptToExecute);
-//    mapEngine.executeScript(scriptToExecute);
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append("[");
+    mapAirport.forEach(pos -> stringBuilder.append(
+            String.format("{lat: %f, lng: %f}, ",pos.getLatitude(), pos.getLongitude())));
+    stringBuilder.append("]");
+    String scriptToExecute = "displayRoute(" + stringBuilder.toString() + ");";
+    System.out.println(scriptToExecute);
+    if(mapEngine.isJavaScriptEnabled()){
+    mapEngine.executeScript(scriptToExecute);
+      } else {
+      errorText.setText("Please wait until google map loaded.");
+      errorText.setVisible(true);
 
+    }
 
   }
 

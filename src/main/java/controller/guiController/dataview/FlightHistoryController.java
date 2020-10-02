@@ -206,31 +206,60 @@ public class FlightHistoryController extends DataViewController {
     return selected;
   }
 
-  public void selectFlightHistory() {
+//  public void selectFlightHistory() {
+//    errorText.setVisible(false);
+//      Main.getStorage().MapAirport = new ArrayList<>();
+//      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
+//
+//      if (result.isPresent() && result.get() == ButtonType.OK) {
+//
+//        for(Route route: this.routes){
+//
+//          if(route.getSelect().isSelected()){
+//
+//              for(Airport airport: Main.getStorage().getAirports()){
+//
+//
+//                if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
+//
+//                  Main.getStorage().MapAirport.add(airport);
+//
+//                }
+//              }
+//
+//
+//            }
+//          }
+//      }
+//
+//
+//  }
+
+
+  public void selectRoute() {
     errorText.setVisible(false);
-      Main.getStorage().MapAirport = new ArrayList<>();
-      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
+    Main.getStorage().MapAirport = new ArrayList<>();
+    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
 
-      if (result.isPresent() && result.get() == ButtonType.OK) {
+    if (result.isPresent() && result.get() == ButtonType.OK) {
 
-        for(Route route: this.routes){
+      for(Route route: this.routes){
 
-          if(route.getSelect().isSelected()){
+        if(route.getSelect().isSelected()){
 
-              for(Airport airport: Main.getStorage().getAirports()){
+          for(Airport airport: Main.getStorage().getAirports()){
 
+            if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
 
-                if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
-
-                  Main.getStorage().MapAirport.add(airport);
-
-                }
-              }
-
+              Main.getStorage().MapAirport.add(airport);
 
             }
           }
+
+
+        }
       }
+    }
 
 
   }
