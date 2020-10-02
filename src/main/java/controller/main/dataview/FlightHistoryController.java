@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
+import model.data.Airport;
 import model.data.Route;
 import model.database.SQLiteDatabase;
 
@@ -62,6 +63,9 @@ public class FlightHistoryController extends DataViewController {
 
   /** The database object. */
   private SQLiteDatabase database = new SQLiteDatabase();
+
+  private ArrayList<Airport> airports = new ArrayList<>();
+
 
   /**
    * The types of search which can be performed on history.
@@ -224,5 +228,34 @@ public class FlightHistoryController extends DataViewController {
       }
     }
     return selected;
+  }
+
+  public void selectFlightHistory() {
+    errorText.setVisible(false);
+      Main.getStorage().MapAirport = new ArrayList<>();
+      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
+
+      if (result.isPresent() && result.get() == ButtonType.OK) {
+
+        for(Route route: this.routes){
+
+          if(route.getSelect().isSelected()){
+
+              for(Airport airport: Main.getStorage().getAirports()){
+
+
+                if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
+
+                  Main.getStorage().MapAirport.add(airport);
+
+                }
+              }
+
+
+            }
+          }
+      }
+
+
   }
 }

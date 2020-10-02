@@ -66,6 +66,8 @@ public class Storage {
   /** The database in which data added to the application is stored. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
+  public ArrayList<Airport> MapAirport = new ArrayList<>();
+
   /**
    * This method returns a List of all the names of the stored airline files, or an empty List if no Airline files
    * have been stored.
