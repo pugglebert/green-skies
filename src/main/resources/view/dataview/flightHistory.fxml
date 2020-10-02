@@ -47,14 +47,6 @@
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <Button fx:id="selectAllBtn" layoutX="238.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="37.0" prefWidth="188.0" style="-fx-background-color: #116754;" text="Select All Flights" textFill="WHITE">
-            <font>
-                <Font size="18.0" />
-            </font></Button>
-        <Button fx:id="deselectAllBtn" layoutX="448.0" layoutY="626.0" mnemonicParsing="false" onAction="#deselectAll" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #116754;" text="Deselect All Flights" textFill="WHITE">
-            <font>
-                <Font size="18.0" />
-            </font></Button>
         <Button fx:id="selectRouteToDisplay" layoutX="948.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectRoute" prefHeight="37.0" prefWidth="328.0" style="-fx-background-color: #116754;" text="Select route to display on map" textFill="WHITE">
             <font>
                 <Font size="18.0" />

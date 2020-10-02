@@ -226,7 +226,6 @@ public class Storage {
     history.add(routes);
   }
 
-  //todo Lambert delete the code that you are not done
   /**
    * This method adds a list of data from a file to storage.
    *

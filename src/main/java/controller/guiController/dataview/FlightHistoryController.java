@@ -176,20 +176,6 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
-  /** select all checkboxes */
-  public void selectAll() {
-    for (Route route : Main.getStorage().getHistory()) {
-      route.getSelect().setSelected(true);
-    }
-  }
-
-  /** deselect all checkboxes */
-  public void deselectAll() {
-    for (Route route : Main.getStorage().getHistory()) {
-      route.getSelect().setSelected(false);
-    }
-  }
-
   /**
    * Check if at least one entry has been selected.
    *
