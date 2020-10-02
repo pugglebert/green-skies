@@ -56,17 +56,17 @@ public class AirportStatsCalculatorTest {
   }
 
   /**
-   * Verify that when updateMostVisitedSrcAiport is called when there are two source aiport entries,
+   * Verify that when updateMostVisitedSrcAirport is called when there are two source airport entries,
    * where one is most visited than the other, then the most visit source airport is the one that is
-   * most visted out of the two entries.
+   * most visited out of the two entries.
    */
   @Test
   public void updateMostVisitedSrcAirportTwoTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Aiport");
+    expectedResults.add("Wellington Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
-    testSrcAirports.put("Wellington Aiport", 100);
-    testSrcAirports.put("Auckland Aiport", 84);
+    testSrcAirports.put("Wellington Airport", 100);
+    testSrcAirports.put("Auckland Airport", 84);
     airportStatsCalculator.updateMostVisitedSrcAirports(testSrcAirports);
     assertEquals(expectedResults, airportStatsCalculator.getMostVisitedSrcAirports());
   }

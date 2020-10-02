@@ -27,11 +27,12 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
       currSrcAirportMax = (Integer) srcAirportCounts.values().toArray()[0];
     }
     for (Map.Entry<String, Integer> entry : srcAirportCounts.entrySet()) {
-      currSrcAirportMax = entry.getValue();
       if (entry.getValue() > currSrcAirportMax) {
+        currSrcAirportMax = entry.getValue();
         mostVisitedSrcAirports.clear();
         mostVisitedSrcAirports.add(entry.getKey());
       } else if (entry.getValue() == currSrcAirportMax) {
+        currSrcAirportMax = entry.getValue();
         if (!mostVisitedSrcAirports.contains(entry.getKey())) {
           mostVisitedSrcAirports.add(entry.getKey());
         }
@@ -40,7 +41,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
   }
 
   /**
-   * Calculates the destionation airport(s) that was the most visited, based on the user's flight
+   * Calculates the destination airport(s) that was the most visited, based on the user's flight
    * history entries.
    *
    * @param destAirportCounts A count of how many times each destination airport has been visited
@@ -52,11 +53,12 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
       currDestAirportMax = (Integer) destAirportCounts.values().toArray()[0];
     }
     for (Map.Entry<String, Integer> entry : destAirportCounts.entrySet()) {
-      currDestAirportMax = entry.getValue();
       if (entry.getValue() > currDestAirportMax) {
+        currDestAirportMax = entry.getValue();
         mostVisitedDestAirports.clear();
         mostVisitedDestAirports.add(entry.getKey());
       } else if (entry.getValue() == currDestAirportMax) {
+        currDestAirportMax = entry.getValue();
         if (!mostVisitedDestAirports.contains(entry.getKey())) {
           mostVisitedDestAirports.add(entry.getKey());
           }
@@ -72,16 +74,17 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
    *     of the airport as the key.
    */
   public void updateLeastVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
-    int currSrcAirportMin = 2;
+    int currSrcAirportMin = 0;
     if (leastVisitedSrcAirports.isEmpty() == true & srcAirportCounts.isEmpty() == false) {
       currSrcAirportMin = (Integer) srcAirportCounts.values().toArray()[0];
     }
     for (Map.Entry<String, Integer> entry : srcAirportCounts.entrySet()) {
-      currSrcAirportMin = entry.getValue();
       if (entry.getValue() < currSrcAirportMin) {
+        currSrcAirportMin = entry.getValue();
         leastVisitedSrcAirports.clear();
         leastVisitedSrcAirports.add(entry.getKey());
       } else if (entry.getValue() == currSrcAirportMin) {
+        currSrcAirportMin = entry.getValue();
         if (!leastVisitedSrcAirports.contains(entry.getKey())) {
           leastVisitedSrcAirports.add(entry.getKey());
           }
@@ -97,16 +100,17 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
    *     with the name of the airport as the key.
    */
   public void updateLeastVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
-    int currDestAirportMin = 2;
+    int currDestAirportMin = 0;
     if (leastVisitedSrcAirports.isEmpty() == true & destAirportCounts.isEmpty() == false) {
       currDestAirportMin = (Integer) destAirportCounts.values().toArray()[0];
     }
     for (Map.Entry<String, Integer> entry : destAirportCounts.entrySet()) {
-      currDestAirportMin = entry.getValue();
       if (entry.getValue() < currDestAirportMin) {
+        currDestAirportMin = entry.getValue();
         leastVisitedDestAirports.clear();
         leastVisitedDestAirports.add(entry.getKey());
       } else if (entry.getValue() == currDestAirportMin) {
+        currDestAirportMin = entry.getValue();
         if (!leastVisitedDestAirports.contains(entry.getKey())) {
           leastVisitedDestAirports.add(entry.getKey());
           }
