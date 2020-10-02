@@ -7,9 +7,10 @@
   <version>1.0-SNAPSHOT</version>
   <name>seng202_project</name>
   <url>http://maven.apache.org</url>
-  <!-- Java version setup -->
+
   <properties>
 
+    <itext.version>7.1.12</itext.version>
     <cucumber.version>6.6.1</cucumber.version>
     <junit.version>4.13</junit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,6 +35,20 @@
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-web</artifactId>
       <version>11.0.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-core</artifactId>
+      <version>4.0.16-alpha</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-junit</artifactId>
+      <version>4.0.15-alpha</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -75,13 +90,6 @@
 
     <dependency>
       <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-java</artifactId>
-      <version>6.6.1</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit</artifactId>
       <version>6.6.1</version>
       <scope>test</scope>
@@ -94,10 +102,8 @@
       <scope>compile</scope>
     </dependency>
 
-
-
-
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -110,7 +116,7 @@
             <transformer
                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
               <manifestEntries>
-                <Main-Class>controller.main.Main</Main-Class>
+                <Main-Class>controller.guiController.Main</Main-Class>
                 <X-Compile-Source-JDK>11</X-Compile-Source-JDK>
                 <X-Compile-Target-JDK>11</X-Compile-Target-JDK>
               </manifestEntries>
@@ -133,7 +139,7 @@
         <version>0.0.4</version>
         <configuration>
 
-          <mainClass>controller.main.Main</mainClass>
+          <mainClass>controller.guiController.Main</mainClass>
         </configuration>
       </plugin>
 
@@ -157,6 +163,7 @@
           <release>11</release>
         </configuration>
       </plugin>
+
     </plugins>
 
 

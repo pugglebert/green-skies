@@ -1,9 +1,0 @@
-
-[	java:S106‘"9Replace this use of System.out or System.err by a logger.(æÄßûÿÿÿÿ8ıÈÊÈ.
-[	java:S106“"9Replace this use of System.out or System.err by a logger.(˜Ÿıùÿÿÿÿ8ıÈÊÈ.
-[	java:S106’"9Replace this use of System.out or System.err by a logger.(‡Ó²±ùÿÿÿÿ8ıÈÊÈ.
-[	java:S106”"9Replace this use of System.out or System.err by a logger.(¨±ˆ­şÿÿÿÿ8ıÈÊÈ.
-n	java:S117¢"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¢ó¯8‰³ââÉ.
-Y
-java:S1128
-"<Remove this unused import 'javafx.scene.control.ButtonType'.(úêÿ»8‰³ââÉ.

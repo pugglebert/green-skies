@@ -43,11 +43,11 @@ public class AirlineParser extends Parser {
   /** This method initializes error lookup array with message for each error code. */
   @Override
   protected void initErrorLookup() {
-    errorLookup[0] = "Not enough parameters";
+    errorLookup[0] = "Wrong number of parameters";
     errorLookup[1] = "Duplicate airline";
     errorLookup[2] = "Invalid airline ID";
-    errorLookup[3] = "Invalid airport name";
-    errorLookup[4] = "Invalid ailias";
+    errorLookup[3] = "Invalid airline name";
+    errorLookup[4] = "Invalid alias";
     errorLookup[5] = "Invalid IATA code";
     errorLookup[6] = "Invalid ICAO code";
     errorLookup[7] = "Invalid callsign";
@@ -57,43 +57,63 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method iterate throught each line of input file, strip line in to data segment. Then call
-   * validator method to check a singke line then add that line to parserData if it is valid.
+   * This method iterate through each line of input file and calls parseData if there are less than
+   * 200 errors in the file. If there are more than 200 errors raises exception.
    */
   @Override
   public void dataParser() {
-
     for (String dataLine : dataFile) {
-      dataLine = dataLine.replaceAll("[\"]", "");
-      String[] line = dataLine.split(",");
+      if (totalErrors > 200) {
+        totalErrors = 0;
+        throw new RuntimeException("File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
+      }
+      parseLine(dataLine);
+    }
+    if (!getValidFile()) {
+      if (totalErrors == 1) {
+        throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
+      } else {
+        throw new RuntimeException("File rejected: all lines contain errors.\n" + getErrorMessage(false));
+      }
+    }
+  }
 
-      if (validater(line)) {
-        try {
-          boolean active = false;
-          if (line[activeStatus].matches("Y")) {
-            active = true;
-          }
-          Airline airline =
-              new Airline(
-                  Integer.parseInt(line[airlineID]),
-                  line[name],
-                  line[alias],
-                  line[IATA],
-                  line[ICAO],
-                  line[callsign],
-                  line[country],
-                  active);
-          addAirLine(airline.getAirlineID(), airline);
-        } catch (Exception e) {
-          errorCounter(10);
+  /**
+   * This method splits the line into data segments, calls the validator method to check each
+   * segment, and then adds that line to parserData if it is valid.
+   *
+   * @param dataLine line from file to split into segments.
+   */
+  protected void parseLine(String dataLine) {
+    dataLine = dataLine.replaceAll("[\"]", "");
+    String[] line = dataLine.split(",");
+
+    if (validater(line)) {
+      try {
+        boolean active = false;
+        if (line[activeStatus].matches("Y")) {
+          active = true;
         }
+        Airline airline =
+            new Airline(
+                Integer.parseInt(line[airlineID]),
+                line[name],
+                line[alias],
+                line[IATA],
+                line[ICAO],
+                line[callsign],
+                line[country],
+                active);
+        addAirLine(airline.getAirlineID(), airline);
+      } catch (Exception e) {
+        errorCounter(10);
       }
     }
   }
 
   /**
    * This method add airline to index matches with airLineID. First check if there are any airline
-   * currently sit at index. If it is null then replace with airline param. If parserset size is too
+   * currently sit at index. If it is null then replace with airline param. If parserSet size is too
    * small then init it with null value. If there is an airline at index then check if the airline
    * is the same with the one we want to add. If it is the same then treat as duplicate (do nothing)
    * If is is not then add to error.
@@ -101,7 +121,7 @@ public class AirlineParser extends Parser {
    * @param airlineID airline ID we want to add
    * @param airline Airline Object we wanted to add
    */
-  private void addAirLine(int airlineID, Airline airline) {
+  protected void addAirLine(int airlineID, Airline airline) {
     if (airlineID >= parserData.size()) {
       int i = parserData.size();
       while (i < airlineID + 2) {
@@ -122,57 +142,57 @@ public class AirlineParser extends Parser {
    * This method checks that line has expected number of entries and calls isValid method to check
    * that each token on the line matches the expected pattern.
    *
-   * @param line A string made up of comma-seperated tokens representing data about a route
+   * @param line A string made up of comma-separated tokens representing data about a route
    * @return True if all tokens are valid, false otherwise
    */
+  @Override
   protected boolean validater(String[] line) {
-
-    boolean isValid = true;
     if (line.length != 8) {
       errorCounter(0);
+      return false;
     }
 
     if (!isIdValid(line[airlineID])) {
-      isValid = false;
+      return false;
     }
 
     if (!isNameValid(line[name])) {
-      isValid = false;
+      return false;
     }
 
     if (!isAliasValid(line[alias])) {
-      isValid = false;
+      return false;
     }
 
     if (!isIATAValid(line[IATA])) {
-      isValid = false;
+      return false;
     }
 
     if (!isICAOValid(line[ICAO])) {
-      isValid = false;
+      return false;
     }
 
-    if (!isCallsignValid(line[callsign])) {
-      isValid = false;
+    if (!isCallSignValid(line[callsign])) {
+      return false;
     }
 
     if (!isCountryValid(line[country])) {
-      isValid = false;
+      return false;
     }
 
     if (!isActiveStatusValid(line[activeStatus])) {
-      isValid = false;
+      return false;
     }
-    return isValid;
+    return true;
   }
 
   /**
-   * This method check if id is valid.
+   * This method check if id is valid (duplication and valid integer).
    *
    * @param airlineID airline id as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isIdValid(String airlineID) {
+  protected boolean isIdValid(String airlineID) {
 
     // airline ID Duplication and Negative check
     try {
@@ -203,7 +223,7 @@ public class AirlineParser extends Parser {
    * @param name airline name as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isNameValid(String name) {
+  protected boolean isNameValid(String name) {
     if (!name.matches("[a-zA-Z0-9 -.]+")) {
       errorCounter(3);
       return false;
@@ -217,7 +237,7 @@ public class AirlineParser extends Parser {
    * @param alias airline city as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isAliasValid(String alias) {
+  protected boolean isAliasValid(String alias) {
     if (!alias.matches("(\\\\N)|([\\w ]+)|(^$)")) {
       errorCounter(4);
       return false;
@@ -231,7 +251,7 @@ public class AirlineParser extends Parser {
    * @param IATA airline IATA as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isIATAValid(String IATA) {
+  protected boolean isIATAValid(String IATA) {
 
     // airline IATA check
     if (!IATA.matches("-|([A-Z0-9]{2})|(^$)")) {
@@ -248,7 +268,7 @@ public class AirlineParser extends Parser {
    * @param ICAO airline ICAO as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isICAOValid(String ICAO) {
+  protected boolean isICAOValid(String ICAO) {
 
     if (!ICAO.matches("(\\\\N)|(N/A)|([A-Z0-9]{3})|(^$)")) {
       errorCounter(6);
@@ -259,14 +279,13 @@ public class AirlineParser extends Parser {
   }
 
   /**
-   * This method checks if the callsign is valid.
+   * This method checks if the callSign is valid.
    *
-   * @param callsign airline latitude as a string.
+   * @param callSign airline latitude as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isCallsignValid(String callsign) {
-    // airline callsign check
-    if (!callsign.matches("([A-Za-z -]+)|(^$)")) {
+  protected boolean isCallSignValid(String callSign) {
+    if (!callSign.matches("([A-Za-z -]+)|(^$)")) {
       errorCounter(7);
       return false;
     }
@@ -279,7 +298,7 @@ public class AirlineParser extends Parser {
    * @param country airline country as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isCountryValid(String country) {
+  protected boolean isCountryValid(String country) {
     // ISO 3166-1 codes not implemented
     if (!country.matches("(\\\\N)|([a-zA-Z ]+)|(^$)")) {
       errorCounter(8);
@@ -294,8 +313,7 @@ public class AirlineParser extends Parser {
    * @param activeStatus as a string.
    * @return true if valid, false if invalid.
    */
-  private boolean isActiveStatusValid(String activeStatus) {
-
+  protected boolean isActiveStatusValid(String activeStatus) {
     if (!activeStatus.matches("[YN]")) {
       errorCounter(9);
       return false;

@@ -1,11 +1,9 @@
 package model.data;
 
+import javafx.scene.control.CheckBox;
+
 /**
  * The Airport class which contains all data for one unique airport.
- *
- * @author Enyang Zhang, Nathan Huynh
- * @version 1.3
- * @since 21/08/2020
  */
 public class Airport implements DataType {
 
@@ -27,17 +25,25 @@ public class Airport implements DataType {
   /** 4-letter ICAO code */
   private final String ICAO;
 
-  /** Decimal degrees, usually to six significant digits. Negative is South, positive is North. */
+  /**
+   * Decimal degrees, usually to six significant digits. Negative is South, positive is North.
+   */
   private final double latitude;
 
-  /** Decimal degrees, usually to six significant digits. Negative is West, positive is East. */
+  /**
+   * Decimal degrees, usually to six significant digits. Negative is West, positive is East.
+   */
   private final double longitude;
 
-  /** Unit of alltitude is in feet */
+  /**
+   * Unit of altitudes is in feet
+   */
   private final int altitude;
 
-  /** Hours offset from UTC. Fractional hours are expressed as decimals, eg. India is 5.5. */
-  private final float timezone;
+  /**
+   * Hours offset from UTC. Fractional hours are expressed as decimals, eg. India is 5.5.
+   */
+  private final double timezone;
 
   /**
    * Daylight savings time. One of E (Europe), A (US/Canada), S (South America), O (Australia), Z
@@ -45,23 +51,32 @@ public class Airport implements DataType {
    */
   private final String DST;
 
-  /** Timezone in "tz" (Olson) format, eg. "America/Los_Angeles". */
+  /**
+   * Timezone in "tz" (Olson) format, eg. "America/Los_Angeles".
+   */
   private final String dataBaseTimeZone;
 
-  /** The Airport constructor. */
+  /**
+   * A checkbox to tell whether this route has been selected.
+   */
+  private CheckBox select;
+
+  /**
+   * The Airport constructor.
+   */
   public Airport(
-      int airportID,
-      String name,
-      String city,
-      String country,
-      String IATA,
-      String ICAO,
-      double latitude,
-      double longitude,
-      int altitude,
-      float timezone,
-      String DST,
-      String dataBaseTimeZone) {
+          int airportID,
+          String name,
+          String city,
+          String country,
+          String IATA,
+          String ICAO,
+          double latitude,
+          double longitude,
+          int altitude,
+          float timezone,
+          String DST,
+          String dataBaseTimeZone) {
     this.airportID = airportID;
     this.name = name;
     this.city = city;
@@ -74,6 +89,13 @@ public class Airport implements DataType {
     this.timezone = timezone;
     this.DST = DST;
     this.dataBaseTimeZone = dataBaseTimeZone;
+  }
+
+  /**
+   * This method initializes the routes checkbox to use with JavaFx.
+   */
+  public void initCheckBox() {
+    this.select = new CheckBox();
   }
 
   public int getAirportID() {
@@ -112,7 +134,7 @@ public class Airport implements DataType {
     return altitude;
   }
 
-  public float getTimezone() {
+  public double getTimezone() {
     return timezone;
   }
 
@@ -122,6 +144,24 @@ public class Airport implements DataType {
 
   public String getDataBaseTimeZone() {
     return dataBaseTimeZone;
+  }
+
+  /**
+   * This method returns the routes selection checkbox.
+   *
+   * @return select.
+   */
+  public CheckBox getSelect() {
+    return select;
+  }
+
+  /**
+   * This method adds a selection checkbox to the route.
+   *
+   * @param select The selection checkbox to be added.
+   */
+  public void setSelect(CheckBox select) {
+    this.select = select;
   }
 
   /**

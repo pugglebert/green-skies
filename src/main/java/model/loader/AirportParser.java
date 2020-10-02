@@ -2,6 +2,7 @@ package model.loader;
 
 import model.data.Airport;
 import model.data.DataType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,19 +10,15 @@ import java.util.List;
  * The sub-class Parser for airport. AirportParser class receives a list of airport data, validates
  * each of the data line and create airport object. Then put the object into a hashSet for return
  * value.
- *
- * @author Enyang Zhang(Lambert)
- * @version 2.4
- * @since 18/09/2020
  */
 public class AirportParser extends Parser {
   /**
    * AirportParser Error code: 100: not enough parameters 101: airport id exists 102: invalid id
    * number 103: invalid airport name 104: invalid airport city 105: invalid airport country 106:
    * invalid airport IATA code 107: invalid airport ICAO code 108: invalid latitude 109: invalid
-   * lontitude 110: invalid altitude 111: invalid timezone 112: invalid DST 113: invalid database
+   * longitude 110: invalid altitude 111: invalid timezone 112: invalid DST 113: invalid database
    * timezone 114: invalid unknown error 115: number of failed insertions 116: invalid alias 117:
-   * invalid callsign 118: invalid activestatus
+   * invalid callsign 118: invalid activeStatus
    */
   private final int airportID = 0;
   private final int name = 1;
@@ -30,7 +27,7 @@ public class AirportParser extends Parser {
   private final int IATA = 4;
   private final int ICAO = 5;
   private final int latitude = 6;
-  private final int longtitude = 7;
+  private final int longitude = 7;
   private final int altitude = 8;
   private final int timezone = 9;
   private final int DST = 10;
@@ -50,7 +47,7 @@ public class AirportParser extends Parser {
   /** This method initializes the error messages for each error code */
   @Override
   protected void initErrorLookup() {
-    errorLookup[0] = "Not enough parameters";
+    errorLookup[0] = "Wrong number of parameters";
     errorLookup[1] = "Duplicate airport ID";
     errorLookup[2] = "Invalid airport ID";
     errorLookup[3] = "Invalid airport name";
@@ -58,7 +55,7 @@ public class AirportParser extends Parser {
     errorLookup[5] = "Invalid airport country";
     errorLookup[6] = "Invalid IATA code";
     errorLookup[7] = "Invalid ICAO code";
-    errorLookup[8] = "Invalid lattitude";
+    errorLookup[8] = "Invalid latitude";
     errorLookup[9] = "Invalid longitude";
     errorLookup[10] = "Invalid altitude";
     errorLookup[11] = "Invalid timezone";
@@ -78,15 +75,24 @@ public class AirportParser extends Parser {
     for (String dataLine : dataFile) {
       if (totalErrors > 200) {
         totalErrors = 0;
-        throw new RuntimeException("File rejected: more than 100 lines contain errors");
+        throw new RuntimeException("File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
       }
       parseLine(dataLine);
+    }
+    if (!getValidFile()) {
+      if (totalErrors == 1) {
+        throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
+      } else {
+        throw new RuntimeException("File rejected: all lines contain errors.\n" + getErrorMessage(false));
+      }
     }
   }
 
   /**
    * This method is a data parser to convert airport data from list into airport objects and add to
    * HashSet. It will also call validater to verify each airport data.
+   *
+   * @param dataLine line from file to split into segments.
    */
   protected void parseLine(String dataLine) {
     String[] line = dataLine.replaceAll("\"", "").split(",");
@@ -101,7 +107,7 @@ public class AirportParser extends Parser {
                 line[IATA],
                 line[ICAO],
                 Double.parseDouble(line[latitude]),
-                Double.parseDouble(line[longtitude]),
+                Double.parseDouble(line[longitude]),
                 Integer.parseInt(line[altitude]),
                 Float.parseFloat(line[timezone]),
                 line[DST],
@@ -110,8 +116,6 @@ public class AirportParser extends Parser {
       } catch (Exception e) {
         errorCounter(14);
       }
-      //            } else {
-      //                errorCounter(15);
     }
   }
 
@@ -123,69 +127,67 @@ public class AirportParser extends Parser {
    */
   @Override
   protected boolean validater(String[] line) {
-    boolean isValid = true;
     if (line.length != 12) {
       errorCounter(0);
-      isValid = false;
+      return false;
     }
     if(!isIdValid(line[airportID])){
-      isValid = false;
+      return false;
     }
     if (!isNameValid(line[name])) {
-      isValid = false;
+      return false;
     }
 
     if (!isCityValid(line[city])) {
-      isValid = false;
+      return false;
     }
 
     if (!isCountryValid(line[country])) {
-      isValid = false;
+      return false;
     }
 
     if (!isIATAValid(line[IATA])) {
-      isValid = false;
+      return false;
     }
 
     if (!isICAOValid(line[ICAO])) {
-      isValid = false;
+      return false;
     }
 
     if (!isLatValid(line[latitude])) {
-      isValid = false;
+      return false;
     }
 
-    if (!isLonValid(line[longtitude])) {
-      isValid = false;
+    if (!isLonValid(line[longitude])) {
+      return false;
     }
 
     if (!isAltValid(line[altitude])) {
-      isValid = false;
+      return false;
     }
 
     if (!isTZValid(line[timezone])) {
-      isValid = false;
+      return false;
     }
 
     if (!isDSTValid(line[DST])) {
-      isValid = false;
+      return false;
     }
 
     if (!isDBTZValid(line[dataBaseTimeZone])) {
-      isValid = false;
+      return false;
     }
 
-    return isValid;
+    return true;
   }
 
   /**
-   * This method checks if the id is valid.
+   * This method checks if the id is valid (duplication and valid integer).
    *
    * @param id airport id as a string.
    * @return true if valid, false if invalid.
    */
   protected boolean isIdValid(String id) {
-    // airport ID Duplication check
     for (DataType data : parserData) {
       try {
         Airport airport = (Airport) data;
@@ -198,7 +200,7 @@ public class AirportParser extends Parser {
         return false;
       }
     }
-    return true;
+    return Integer.parseInt(id) >= 0;
   }
 
   /**
@@ -251,7 +253,6 @@ public class AirportParser extends Parser {
    * @return true if valid, false if invalid.
    */
   protected boolean isIATAValid(String IATA) {
-    // airport IATA check
     if (!IATA.equalsIgnoreCase("null")
         && !IATA.equalsIgnoreCase("unknown")
         && !IATA.equalsIgnoreCase("")) {
@@ -270,7 +271,6 @@ public class AirportParser extends Parser {
    * @return true if valid, false if invalid.
    */
   protected boolean isICAOValid(String ICAO) {
-    // airport ICAO check
     if (!ICAO.equalsIgnoreCase("null")
         && !ICAO.equalsIgnoreCase("unknown")
         && !ICAO.equalsIgnoreCase("\\N")
@@ -365,7 +365,7 @@ public class AirportParser extends Parser {
    */
   protected boolean isDBTZValid(String DBTZ) {
     if (!DBTZ.equalsIgnoreCase("\\N")) {
-      if (!DBTZ.matches("[a-zA-Z-/a-zA-Z-_]+")) {
+      if (!DBTZ.matches("[a-zA-Z-/a-zA-Z_]+")) {
         errorCounter(13);
         return false;
       }
