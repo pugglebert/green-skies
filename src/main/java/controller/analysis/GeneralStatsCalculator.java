@@ -111,6 +111,9 @@ public class GeneralStatsCalculator {
   public void updateTotalDistanceRemoval(Route currentRouteRecord) {
     totalDistanceTravelled -=
             (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+    if (totalDistanceTravelled < 0.00) {
+      totalDistanceTravelled = 0.00;
+    }
   }
 
   /** This method calculates the current day of the year and returns the integer of it. */
