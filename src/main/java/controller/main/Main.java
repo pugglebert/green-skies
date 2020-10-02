@@ -66,5 +66,4 @@ public class Main {
     storage.initialiseStorage();
     GreenSkiesApplication.main(args);
   }
-
 }

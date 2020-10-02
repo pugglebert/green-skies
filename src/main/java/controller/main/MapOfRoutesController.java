@@ -28,8 +28,6 @@ public class MapOfRoutesController extends SideNavBarController {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     mapEngine = mapView.getEngine();
     mapEngine.load(
-        MapOfRoutesController.class
-            .getResource("/view/googleMap.html")
-            .toExternalForm());
+        MapOfRoutesController.class.getResource("/view/googleMap.html").toExternalForm());
   }
 }

@@ -69,7 +69,7 @@ public class GeneralStatsCalculator {
   public void updateTotalEmissions(Route currentRouteRecord) {
     if (!Double.isNaN(currentRouteRecord.getEmissions())) {
       totalCarbonEmissions +=
-              (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+          (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
     }
   }
 
@@ -137,7 +137,7 @@ public class GeneralStatsCalculator {
     } else {
       try {
         double negReductionDec = 1 - (emissionsPerDayBaseOnCurrDate / emissionsPerDayGoal);
-        double posReductionPercentage = 100 - (negReductionDec * - 100);
+        double posReductionPercentage = 100 - (negReductionDec * -100);
         this.reductionPercentage = posReductionPercentage;
       } catch (ArithmeticException e) {
         System.out.println(
