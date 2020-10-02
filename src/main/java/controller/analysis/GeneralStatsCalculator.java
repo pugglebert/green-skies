@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * This class contains the methods for calcuting and updating the analysis data for the user's
+ * This class contains the methods for calculating and updating the analysis data for the user's
  * carbon emissions report.
  *
  * @author Hayley Krippner
@@ -47,7 +47,7 @@ public class GeneralStatsCalculator {
   /**
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
-  private String carbonEmissionsComment = "Temporary string for debugging"; //TODO set this back to an empty string once finished debugging HK 2/10 4:30pm
+  private String carbonEmissionsComment = "";
   /** The remaining days in the year. */
   private int remainingDaysInYear;
   /** The current day in the year. */
@@ -161,7 +161,7 @@ public class GeneralStatsCalculator {
   }
 
   /**
-   * This method calcuates the amount of CO2 that the user can produce whilst meeting their maximum
+   * This method calculates the amount of CO2 that the user can produce whilst meeting their maximum
    * yearly CO2 production goal.
    */
   public void calculateRemainingCO2InYear() {
@@ -188,17 +188,25 @@ public class GeneralStatsCalculator {
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
   public void createCarbonEmissionsComment() {
+    calculateDateAsInt();
+    calculateRemainingDaysInYear();
+    calculateEmissionsPerYearCurrentRate();
+    calculateEmissionsPerYearGoalRate();
+    calculateReductionPercentage();
+    calculateRemainingCO2InYear();
+    calculateOffsetTrees();
+
     String carbonEmissionsComment =
         "Currently, in "
             + getCurrentYear()
             + ", you are producing "
             + String.format("%.2f", getEmissionsPerDayBaseOnCurrDate())
             + " kg of carbon emissions per day."
-            + " If you continue at this rate, you will produce "
+            + " If you continue at \nthis rate, you will produce "
             + String.format("%.2f", getEmissionsPerYear())
-            + " kg by the end of this year. This means you can only produce "
+            + " kg by the end of this year. This means you can only produce \n"
             + String.format("%.2f", getRemainingCO2InYear())
-            + " in the remaining part of this year. To ensure you stay under your goal, you will need to reduce your flight travel by "
+            + " in the remaining part of this year. To ensure you stay under your goal, you will need to \nreduce your flight travel by "
             + String.format("%.2f", getReductionPercentage())
             + " percent.";
     setCarbonEmissionsComment(carbonEmissionsComment);
@@ -207,20 +215,20 @@ public class GeneralStatsCalculator {
   /**
    * This function implements the binary search algorithm.
    *
-   * @param arraryToSearch The array which is being searched.
+   * @param arrayToSearch The array which is being searched.
    * @param searchElement The element that is being search for.
    * @return
    */
-  public static int binarySearch(List<Route> arraryToSearch, int searchElement) {
+  public static int binarySearch(List<Route> arrayToSearch, int searchElement) {
     int firstIndex = 0;
-    int lastIndex = arraryToSearch.size() - 1;
+    int lastIndex = arrayToSearch.size() - 1;
     while (firstIndex <= lastIndex) {
       int middleIndex = (firstIndex + lastIndex) / 2;
-      if (arraryToSearch.get(middleIndex).getTimesTaken() == searchElement) {
+      if (arrayToSearch.get(middleIndex).getTimesTaken() == searchElement) {
         return middleIndex;
-      } else if (arraryToSearch.get(middleIndex).getTimesTaken() < searchElement)
+      } else if (arrayToSearch.get(middleIndex).getTimesTaken() < searchElement)
         firstIndex = middleIndex + 1;
-      else if (arraryToSearch.get(middleIndex).getTimesTaken() > searchElement)
+      else if (arrayToSearch.get(middleIndex).getTimesTaken() > searchElement)
         lastIndex = middleIndex - 1;
     }
     return -1;
@@ -248,7 +256,7 @@ public class GeneralStatsCalculator {
    * @param end The ending index of the arrayToSort.
    * @return
    */
-  static int quickSortPartition(List<Route> arrayToSort, int start, int end) {
+  public static int quickSortPartition(List<Route> arrayToSort, int start, int end) {
     int pivot = end;
     int counter = start;
     for (int i = start; i < end; i++) {

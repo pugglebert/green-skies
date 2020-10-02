@@ -5,10 +5,10 @@ import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.data.Route;
 import model.data.Storage;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -33,10 +33,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayMostVisitedDestinationAirportField;
   @FXML private TextField displayLeastVisitedDestinationAirportField;
   @FXML private TextField displayCarbonEmissionGoalField;
-  @FXML private TextField displayCarbonEmissionGoalDurationField;
   @FXML private TextField displayTreeOffsetField;
   @FXML private TextField carbonEmissionGoalField;
-  @FXML private TextField displayStatusCommentField;
+  @FXML private TextArea displayStatusCommentField;
 
   /** This reportGenerator for the application. */
   private GeneralStatsCalculator generalStatsCalculator;
@@ -90,11 +89,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       ErrorAlert.setAlertType(Alert.AlertType.ERROR);
       ErrorAlert.setContentText("You have not selected any data to be in your Flight History");
       ErrorAlert.show();
-    } else if (carbonEmissionGoalField.getText().isEmpty()) {
-      Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
-      ErrorAlert.setAlertType(Alert.AlertType.ERROR);
-      ErrorAlert.setContentText("You have not entered a carbon emissions goal, please do so to view a report");
-      ErrorAlert.show();
     } else {
       updateTravelledAndVisited();
       setUpData();
@@ -104,30 +98,26 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 
       try {
         generalStatsCalculator.setCarbonEmissionsGoal(
-            Double.parseDouble(
-                carbonEmissionGoalValue)); // TODO write test for handling different errors
+            Double.parseDouble(carbonEmissionGoalValue));
+
+        displayTotalEmissionsField.setText(
+                String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
+        displayTotalDistanceTravelledField.setText(
+                String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
+        displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
+        displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
+        displayMostDistanceRouteField.setText(MostDistanceRouteString);
+        displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
+        displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
+        displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
+        displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
+        displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
+        displayTreeOffsetField.setText(numOfTreesString);
+        generalStatsCalculator.createCarbonEmissionsComment();
+        displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
       } catch (NumberFormatException e) {
         carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL.");
       }
-      displayTotalEmissionsField.setText(
-          String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
-      displayTotalDistanceTravelledField.setText(
-          String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
-      displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
-      displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
-      displayMostDistanceRouteField.setText(MostDistanceRouteString);
-      displayLeastDistanceRouteField.setText(LeastDistanceRouteString);
-      displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
-      displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
-      displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
-      displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
-
-      displayTreeOffsetField.setText(numOfTreesString);
-//
-//      // TODO remove after debugging:
-//      System.out.println(generalStatsCalculator.getCarbonEmissionsComment());
-//
-//      displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
 
       // resetReport();
     }
@@ -138,7 +128,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   private void clearReportData() {
     displayCarbonEmissionGoalField.setText("");
     carbonEmissionGoalField.setText("");
-    displayCarbonEmissionGoalDurationField.setText("");
     displayTotalEmissionsField.setText("");
     displayTotalDistanceTravelledField.setText("");
     displayMostEmissionsRouteField.setText("");
@@ -152,7 +141,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayMostVisitedDestinationAirportField.setText("");
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
-    generalStatsCalculator.createCarbonEmissionsComment();
+    displayStatusCommentField.setText("");
 
     // resetReport();
   }
@@ -178,12 +167,11 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     this.LeastVisitedDestAirportString =
         CombineAirportsToOneString(airportStatsCalculator.getLeastVisitedDestAirports());
     numOfTreesToString(generalStatsCalculator.getTreesToGrow());
-
     generalStatsCalculator.createCarbonEmissionsComment();
   }
 
   /**
-   * This methods takes an arrary containing either routes with most or least emissions or most or
+   * This methods takes an array containing either routes with most or least emissions or most or
    * least distance and produces a string of its routes' AirlineIDs.
    *
    * @param arrayToConvert Either the most or least emissions or most or least distance array that
