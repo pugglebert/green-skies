@@ -116,7 +116,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         generalStatsCalculator.createCarbonEmissionsComment();
         displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
       } catch (NumberFormatException e) {
-        carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL.");
+        carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL AS A DOUBLE.");
       }
 
       // resetReport();
