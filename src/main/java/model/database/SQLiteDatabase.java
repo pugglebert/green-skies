@@ -314,13 +314,6 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     }
     try {
-      state = con.createStatement();
-      res = state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-
-      if(!res.next()){
-        buildAirportsTable();
-      }
       prep = con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setInt(1, airport.getAirportID());
       prep.setString(2, airport.getName());
@@ -364,13 +357,6 @@ public class SQLiteDatabase {
     }
 
     try {
-      state = con.createStatement();
-      res = state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-
-      if(!res.next()){
-        buildRoutesTable();
-      }
       prep =
           con.prepareStatement("insert into " + tableName + " values(?,?,?,?,?,?,?,?,?,?,?,?,?);");
       prep.setString(2, route.getAirlineName());
@@ -421,13 +407,6 @@ public class SQLiteDatabase {
       JOptionPane.showMessageDialog(null, e);
     }
     try {
-      state = con.createStatement();
-      res = state.executeQuery(
-              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-
-      if(!res.next()){
-        buildAirlinesTable();
-      }
       prep = con.prepareStatement("insert into" + tableName + "values(?,?,?,?,?,?,?,?);");
       prep.setInt(1, airline.getAirlineID());
       prep.setString(2, airline.getName());
