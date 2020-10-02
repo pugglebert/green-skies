@@ -49,7 +49,7 @@ public class WelcomeController {
   @FXML
   public void toInfoScreen(ActionEvent event) throws IOException {
     Stage newStage = GreenSkiesApplication.getPrimaryStage();
-    Parent root = FXMLLoader.load(getClass().getResource("/view/help.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/view/info.fxml"));
     Scene scene = new Scene(root);
     newStage.setScene(scene);
   }
