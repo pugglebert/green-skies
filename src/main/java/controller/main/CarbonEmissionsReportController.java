@@ -5,10 +5,12 @@ import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.data.Route;
 import model.data.Storage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -33,7 +35,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayMostVisitedDestinationAirportField;
   @FXML private TextField displayLeastVisitedDestinationAirportField;
   @FXML private TextField displayCarbonEmissionGoalField;
-  @FXML private TextField displaycarbonEmissionGoalDurationField;
+  @FXML private TextField displayCarbonEmissionGoalDurationField;
   @FXML private TextField displayTreeOffsetField;
   @FXML private TextField carbonEmissionGoalField;
   @FXML private TextField displayStatusCommentField;
@@ -96,11 +98,14 @@ public class CarbonEmissionsReportController extends SideNavBarController {
 
       String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
       displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
-      // TODO: fix this line below! It's creating issues and crashing the app.
-      generalStatsCalculator.setCarbonEmissionsGoal(
-          Double.parseDouble(
-              carbonEmissionGoalValue)); // TODO write test for handling different errors
 
+      try {
+        generalStatsCalculator.setCarbonEmissionsGoal(
+            Double.parseDouble(
+                carbonEmissionGoalValue)); // TODO write test for handling different errors
+      } catch (NumberFormatException e) {
+        carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL.");
+      }
       displayTotalEmissionsField.setText(
           String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
       displayTotalDistanceTravelledField.setText(
@@ -115,9 +120,13 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
 
       displayTreeOffsetField.setText(numOfTreesString);
-      displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
+//
+//      // TODO remove after debugging:
+//      System.out.println(generalStatsCalculator.getCarbonEmissionsComment());
+//
+//      displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
 
-      resetReport();
+      // resetReport();
     }
   }
 
@@ -126,7 +135,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   private void clearReportData() {
     displayCarbonEmissionGoalField.setText("");
     carbonEmissionGoalField.setText("");
-    displaycarbonEmissionGoalDurationField.setText("");
+    displayCarbonEmissionGoalDurationField.setText("");
     displayTotalEmissionsField.setText("");
     displayTotalDistanceTravelledField.setText("");
     displayMostEmissionsRouteField.setText("");
@@ -140,8 +149,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayMostVisitedDestinationAirportField.setText("");
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
+    generalStatsCalculator.createCarbonEmissionsComment();
 
-    resetReport();
+    // resetReport();
   }
 
   // todo write document for this method//
@@ -165,6 +175,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     this.LeastVisitedDestAirportString =
         CombineAirportsToOneString(airportStatsCalculator.getLeastVisitedDestAirports());
     numOfTreesToString(generalStatsCalculator.getTreesToGrow());
+
+    generalStatsCalculator.createCarbonEmissionsComment();
   }
 
   /**
