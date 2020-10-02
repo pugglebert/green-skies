@@ -74,7 +74,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
    *     of the airport as the key.
    */
   public void updateLeastVisitedSrcAirports(HashMap<String, Integer> srcAirportCounts) {
-    int currSrcAirportMin = 1;
+    int currSrcAirportMin = 2;
     if (leastVisitedSrcAirports.isEmpty() == true & srcAirportCounts.isEmpty() == false) {
       currSrcAirportMin = (Integer) srcAirportCounts.values().toArray()[0];
     }
@@ -100,7 +100,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
    *     with the name of the airport as the key.
    */
   public void updateLeastVisitedDestAirports(HashMap<String, Integer> destAirportCounts) {
-    int currDestAirportMin = 1;
+    int currDestAirportMin = 2;
     if (leastVisitedSrcAirports.isEmpty() == true & destAirportCounts.isEmpty() == false) {
       currDestAirportMin = (Integer) destAirportCounts.values().toArray()[0];
     }
