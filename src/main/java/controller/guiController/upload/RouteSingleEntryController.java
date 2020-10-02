@@ -68,7 +68,7 @@ public class RouteSingleEntryController {
       String fileName = loader.getLineFileName("Route");
 
       SQLiteDatabase database = new SQLiteDatabase();
-      database.setTableName(fileName);
+      database.initialiseTable("Route", fileName);
       while (data.remove(null));
       database.addRoutes((Route) data.get(data.size()-1));
       database.startCommite();
