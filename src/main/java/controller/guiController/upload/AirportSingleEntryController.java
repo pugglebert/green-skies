@@ -70,7 +70,7 @@ public class AirportSingleEntryController {
       String fileName = loader.getLineFileName("Airport");
 
       SQLiteDatabase database = new SQLiteDatabase();
-      database.setTableName(fileName);
+      database.initialiseTable("Airport", fileName);
       while (data.remove(null));
       database.addAirports((Airport) data.get(data.size()-1));
       database.startCommite();
