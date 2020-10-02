@@ -116,7 +116,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         generalStatsCalculator.createCarbonEmissionsComment();
         displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
       } catch (NumberFormatException e) {
-        carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL.");
+        carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL AS A DOUBLE.");
       }
 
       // resetReport();
@@ -146,7 +146,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     // resetReport();
   }
 
-  // todo write document for this method//
+  /**
+   * This method sets up the data for the report to display the statistics as strings.
+   */
   public void setUpData() {
     generalStatsCalculator.calculateOffsetTrees();
     System.out.println(MostEmissionsRouteString);

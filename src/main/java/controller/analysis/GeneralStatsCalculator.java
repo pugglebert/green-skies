@@ -61,9 +61,9 @@ public class GeneralStatsCalculator {
   private int currentYear;
 
   /**
-   * This method updates the total carbon emissions from flight travel.
+   * This method adds the added route's carbon emissions to the total carbon emissions from flight travel.
    *
-   * @param currentRouteRecord The current route record that is being added to user's flight
+   * @param currentRouteRecord The current route record that is being added to the user's flight
    *     history.
    */
   public void updateTotalEmissions(Route currentRouteRecord) {
@@ -73,15 +73,47 @@ public class GeneralStatsCalculator {
     }
   }
 
+  //TODO test this method.
   /**
-   * This method updates the total distance travelled via flight travel.
+   * This method adds the removes route's carbon emissions from the total carbon emissions from flight travel.
    *
-   * @param currentRouteRecord The current route record that is being added to user's flight
+   * @param currentRouteRecord The current route record that is being removed for the user's flight
+   *     history.
+   */
+  public void updateTotalEmissionsRemoval(Route currentRouteRecord) {
+    if (!Double.isNaN(currentRouteRecord.getEmissions())) {
+      totalCarbonEmissions -=
+              (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+      if (totalCarbonEmissions < 0.00) {
+        totalCarbonEmissions = 0.00;
+      }
+    }
+  }
+
+  /**
+   * This method adds the removes route's distance the total distance travelled via flight travel.
+   *
+   * @param currentRouteRecord The current route record that is being removed from the user's flight
    *     history.
    */
   public void updateTotalDistance(Route currentRouteRecord) {
     totalDistanceTravelled +=
-        (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+  }
+
+  //TODO test this method.
+  /**
+   * This method adds the added route's distance the total distance travelled via flight travel.
+   *
+   * @param currentRouteRecord The current route record that is being added to the user's flight
+   *     history.
+   */
+  public void updateTotalDistanceRemoval(Route currentRouteRecord) {
+    totalDistanceTravelled -=
+            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+    if (totalDistanceTravelled < 0.00) {
+      totalDistanceTravelled = 0.00;
+    }
   }
 
   /** This method calculates the current day of the year and returns the integer of it. */
@@ -201,14 +233,30 @@ public class GeneralStatsCalculator {
             + getCurrentYear()
             + ", you are producing "
             + String.format("%.2f", getEmissionsPerDayBaseOnCurrDate())
-            + " kg of carbon emissions per day."
-            + " If you continue at \nthis rate, you will produce "
+            + " kg of carbon emissions per day from your \nflight travel."
+            + " If you continue at this rate, you will produce "
             + String.format("%.2f", getEmissionsPerYear())
-            + " kg by the end of this year. This means you can only produce \n"
-            + String.format("%.2f", getRemainingCO2InYear())
-            + " in the remaining part of this year. To ensure you stay under your goal, you will need to \nreduce your flight travel by "
-            + String.format("%.2f", getReductionPercentage())
-            + " percent.";
+            + " kg by the end of this year \nfrom flight travel. ";
+
+    if (getReductionPercentage() == 0.00) {
+      carbonEmissionsComment += "This means that you will be below your carbon emissions goal.";
+    } else if (getRemainingCO2InYear() == 0.00) {
+      carbonEmissionsComment +=
+          "This means you have breached your goal and should not produce any \nmore carbon emissions"
+              + " in the remaining part of this year. To ensure you stay under\n your goal in "
+              + (getCurrentYear() + 1)
+              + ", you will need to reduce your flight travel by "
+              + String.format("%.2f", (-1 * getReductionPercentage()))
+              + " percent.";
+
+    } else {
+      carbonEmissionsComment +=
+          "This means you can only produce "
+              + String.format("%.2f", getRemainingCO2InYear())
+              + " kg in the remaining part of this year.\n To ensure you stay under your goal, you will need to reduce your flight travel by "
+              + String.format("%.2f", getReductionPercentage())
+              + " percent.";
+    }
     setCarbonEmissionsComment(carbonEmissionsComment);
   }
 
