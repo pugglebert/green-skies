@@ -153,16 +153,15 @@ public class GeneralStatsCalculator {
    * @return The current year as an integer.
    */
   public int getCurrentYear() {
-    Date currDayinCurrYear = new Date();
     Date currDayInCurrYear = new Date();
     SimpleDateFormat dateForm = new SimpleDateFormat("Y");
-    String yearAsString = dateForm.format(currDayinCurrYear);
+    String yearAsString = dateForm.format(currDayInCurrYear);
     Integer yearAsInt = Integer.valueOf(yearAsString);
     return yearAsInt;
   }
 
   /**
-   * This method calcuates the amount of CO2 that the user can produce whilst meeting their maximum
+   * This method calculates the amount of CO2 that the user can produce whilst meeting their maximum
    * yearly CO2 production goal.
    */
   public void calculateRemainingCO2InYear() {
@@ -189,6 +188,14 @@ public class GeneralStatsCalculator {
    * This method creates the comment of the user's carbon emission status in terms of their goal.
    */
   public void createCarbonEmissionsComment() {
+    calculateDateAsInt();
+    calculateRemainingDaysInYear();
+    calculateEmissionsPerYearCurrentRate();
+    calculateEmissionsPerYearGoalRate();
+    calculateReductionPercentage();
+    calculateRemainingCO2InYear();
+    calculateOffsetTrees();
+
     String carbonEmissionsComment =
         "Currently, in "
             + getCurrentYear()
