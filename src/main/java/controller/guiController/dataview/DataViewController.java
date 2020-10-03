@@ -17,8 +17,7 @@ import java.util.ResourceBundle;
  * Superclass for all data view pages. All such pages contain a table of data, tools for searching
  * and filtering that data, and a navigation bar which can be used to navigate to other pages.
  *
- * @author Ella Johnson, Hayley Krippner.
- * @since 04/09/2020
+ * @since 04/10/2020
  * @version 1.0
  */
 public abstract class DataViewController extends SideNavBarController {
@@ -34,7 +33,7 @@ public abstract class DataViewController extends SideNavBarController {
   @FXML protected Button clearSearchButton;
   @FXML protected Button filterOptionsButton;
 
-  /** The types of searches which can be chosen from for a particular datatype. */
+  /** The types of searches which can be chosen from for a particular data type. */
   protected ObservableList<String> searchTypes;
 
   /** Class to get filtered data from. */

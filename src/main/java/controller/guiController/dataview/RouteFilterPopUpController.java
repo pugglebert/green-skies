@@ -10,9 +10,8 @@ import java.util.ResourceBundle;
 /**
  * Pop up scene on which users can apply filters for the route table.
  *
- * @author Ella Johnson
  * @version 1.0
- * @since 12/09/2020
+ * @since 04/10/2020
  */
 public class RouteFilterPopUpController extends FilterPopUpController {
 

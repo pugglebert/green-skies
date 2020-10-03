@@ -11,7 +11,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airport;
 import model.database.SQLiteDatabase;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,9 +20,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the airport data view.
  *
- * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 2020-09-04
+ * @since 04/10/2020
  */
 public class AirportDataViewController extends DataViewController {
 

@@ -10,9 +10,8 @@ import java.util.ResourceBundle;
 /**
  * Pop up screen in which uses can apply filters to the flight history.
  *
- * @author Ella Johnson
  * @version 1.0
- * @since 14/09/2020
+ * @since 04/10/2020
  */
 public class HistoryFilterPopUpController extends FilterPopUpController {
 

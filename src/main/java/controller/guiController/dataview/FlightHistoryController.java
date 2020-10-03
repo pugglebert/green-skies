@@ -17,7 +17,6 @@ import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
 import model.database.SQLiteDatabase;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -25,61 +24,36 @@ import java.util.*;
 /**
  * The controller class which contains the controls for the history data view.
  *
- * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui, ELla Johnson, Lambert
  * @version 1.0
- * @since 03/10/2020
+ * @since 04/10/2020
  */
 public class FlightHistoryController extends DataViewController {
-  ;
-  @FXML
-  private TableView<Route> tableView;
-  @FXML
-  private TableColumn<Route, Boolean> addColumn;
-  @FXML
-  private TableColumn<Route, String> airlineNameColumn;
-  @FXML
-  private TableColumn<Route, String> sourceAirportColumn;
-  @FXML
-  private TableColumn<Route, String> destinationAirportColumn;
-  @FXML
-  private TableColumn<Route, String> codeShareColumn;
-  @FXML
-  private TableColumn<Route, Integer> numOfStopsColumn;
-  @FXML
-  private TableColumn<Route, String> equipmentColumn;
-  @FXML
-  private TableColumn<Route, Integer> timesTakenColumn;
-  @FXML
-  private TableColumn<Route, String> distanceColumn;
-  @FXML
-  private TableColumn<Route, String> emissionsColumn;
-  @FXML
-  private ChoiceBox<String> searchTypeSelection;
-  @FXML
-  private TextField searchBar;
-  @FXML
-  private ChoiceBox<String> RankSelection;
 
-  /**
-   * The database object.
-   */
+  @FXML private TableView<Route> tableView;
+  @FXML private TableColumn<Route, Boolean> addColumn;
+  @FXML private TableColumn<Route, String> airlineNameColumn;
+  @FXML private TableColumn<Route, String> sourceAirportColumn;
+  @FXML private TableColumn<Route, String> destinationAirportColumn;
+  @FXML private TableColumn<Route, String> codeShareColumn;
+  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML private TableColumn<Route, Integer> timesTakenColumn;
+  @FXML private TableColumn<Route, String> distanceColumn;
+  @FXML private TableColumn<Route, String> emissionsColumn;
+  @FXML private ChoiceBox<String> searchTypeSelection;
+  @FXML private TextField searchBar;
+  @FXML private ChoiceBox<String> RankSelection;
+
+  /** The database object. */
   private SQLiteDatabase database = new SQLiteDatabase();
-  /**
-   * The types of search which can be performed on history.
-   */
+  /** The types of search which can be performed on history. */
   private final ObservableList<String> searchTypes =
-          FXCollections.observableArrayList("Airline", "Source", "Destination");
-  /**
-   * The GeneralStatsCalculator to generate reports about flight history.
-   */
+      FXCollections.observableArrayList("Airline", "Source", "Destination");
+  /** The GeneralStatsCalculator to generate reports about flight history. */
   private final GeneralStatsCalculator generalStatsCalculator = Main.getGeneralStatsCalculator();
-  /**
-   * The RouteStatsCalculator to generate route stats for the reports about flight history.
-   */
+  /** The RouteStatsCalculator to generate route stats for the reports about flight history. */
   private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
-  /**
-   * The class from which stored data can be accessed.
-   */
+  /** The class from which stored data can be accessed. */
   private final Storage storage = Main.getStorage();
 
   ObservableList<Route> routes;
@@ -88,7 +62,7 @@ public class FlightHistoryController extends DataViewController {
    * This method initializes the controller class.
    *
    * @param url The URL used.
-   * @param rb  The resource bundle used.
+   * @param rb The resource bundle used.
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -151,7 +125,7 @@ public class FlightHistoryController extends DataViewController {
 
   /**
    * This method launches the filter pop up box. If filtering is successful displays filtered
-   * history in tableview.
+   * history in table view.
    *
    * @throws IOException if fxml file cannot be opened.
    */
@@ -175,7 +149,7 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
-  // todo write document for this method or delete this function seens it havent been used//
+  /** This method is used for making the bar chart. */
   public void makeBarChart() {
 
     if (!Main.getStorage().getTempRoutes().isEmpty()) {
@@ -189,7 +163,7 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
-  /** remove all the selection from checkboxes which have been selected */
+  /** This method removes all the selected routes */
   public void removeSelected() {
     errorText.setVisible(false);
     if (getAnySelected()) {
@@ -203,11 +177,10 @@ public class FlightHistoryController extends DataViewController {
         }
         for (Route route : routesToRemove) {
           routes.remove(route);
-          updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
-
-          }
+          updateReportStatsDeletionSingleRoute(route);
         }
-        database.updateHistoryTable(storage.getHistory());
+      }
+      database.updateHistoryTable(storage.getHistory());
 
     } else {
       errorText.setText("No routes selected.");
@@ -216,7 +189,7 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * Check if at least one entry has been selected.
+   * This method checks if at least one entry has been selected.
    *
    * @return true if any have been selected or false otherwise.
    */
@@ -231,19 +204,24 @@ public class FlightHistoryController extends DataViewController {
     return selected;
   }
 
-  // todo write comment for this function
+  /**
+   * This method is used for updating the report's statistics once a route is removed from flight
+   * history.
+   *
+   * @param route The route that is being deleted.
+   */
   public void updateReportStatsDeletionSingleRoute(Route route) {
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
     route.setEmissions(flightAnalyser.getPath1Emission());
     route.setDistance(flightAnalyser.getTotalDistancePath1());
     generalStatsCalculator.updateTotalDistanceRemoval(route);
     generalStatsCalculator.updateTotalEmissionsRemoval(route);
-    storage.removeFromHistorySrcAirports(route.getSourceAirport()); //TODO test this works
-    storage.removeFromHistoryDestAirports(route.getDestinationAirport()); //TODO test this works
+    storage.removeFromHistorySrcAirports(route.getSourceAirport());
+    storage.removeFromHistoryDestAirports(route.getDestinationAirport());
     routeStatsCalculator.updateLeastDistanceRouteRemoval(route, storage.getHistory());
-    routeStatsCalculator.updateMostDistanceRouteRemoval(route, storage.getHistory()); //TODO test these methods actually remove the route.
+    routeStatsCalculator.updateMostDistanceRouteRemoval(route, storage.getHistory());
     routeStatsCalculator.updateMostEmissionsRouteRemoval(route, storage.getHistory());
-    routeStatsCalculator.updateLeastEmissionsRouteRemoval(route, storage.getHistory()); //TODO test these methods actually remove the route.
+    routeStatsCalculator.updateLeastEmissionsRouteRemoval(route, storage.getHistory());
   }
 
   /** This method select the route that user chooses and put it in storage for google map to use. */
@@ -256,16 +234,16 @@ public class FlightHistoryController extends DataViewController {
         ArrayList<Airport> sourDestAirport = new ArrayList<>();
         for (Airport airport : storage.getAirports()) {
           if (airport.getIATA().equals(route.getSourceAirport())
-                  || airport.getICAO().equals(route.getSourceAirport())) {
+              || airport.getICAO().equals(route.getSourceAirport())) {
             sourDestAirport.add(airport);
           }
           if (airport.getIATA().equals(route.getDestinationAirport())
-                  || airport.getICAO().equals(route.getDestinationAirport())) {
+              || airport.getICAO().equals(route.getDestinationAirport())) {
             sourDestAirport.add(airport);
           }
         }
         mapAirport.put(pathNum, sourDestAirport);
-        pathNum+=1;
+        pathNum += 1;
       }
     }
     if (mapAirport.size() > 1) {

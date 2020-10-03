@@ -11,16 +11,14 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.data.Storage;
-
 import java.io.IOException;
 import java.util.HashMap;
 
 /**
  * This is the parent class of the filter pop up window classes for each datatype.
  *
- * @author Ella Johnson
  * @version 1.0
- * @since 12/09/2020
+ * @since 04/10/2020
  */
 public abstract class FilterPopUpController implements Initializable {
 

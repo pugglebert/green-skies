@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airline;
 import model.data.Route;
 import model.database.SQLiteDatabase;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,9 +21,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the airline data view.
  *
- * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 04/09/2020
+ * @since 04/10/2020
  */
 public class AirlineDataViewController extends DataViewController {
 

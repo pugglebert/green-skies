@@ -13,9 +13,8 @@ import java.util.ResourceBundle;
 /**
  * A pop up window in which the user can select filters to apply to the list of Routes.
  *
- * @author Ella Johnson
  * @version 1.0
- * @since 12/09/2020
+ * @since 04/10/2020
  */
 public class AirlineFilterPopUpController extends FilterPopUpController {
 

@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.data.Airport;
 import model.data.Route;
 import model.database.SQLiteDatabase;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,9 +25,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the route data view.
  *
- * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 2020-09-04
+ * @since 04/10/2020
  */
 public class RouteDataViewController extends DataViewController {
 
@@ -183,7 +181,7 @@ public class RouteDataViewController extends DataViewController {
 
   /**
    * This method launches the filter pop up box. If filtering is successful displays filtered routes
-   * in tableview.
+   * in table view.
    *
    * @throws IOException If fxml file cannot be launched.
    */
@@ -197,9 +195,7 @@ public class RouteDataViewController extends DataViewController {
     }
   }
 
-  /**
-   * This method removes all routes that have been selected by the user from the current file.
-   */
+  /** This method removes all routes that have been selected by the user from the current file. */
   public void removeSelected() {
     errorText.setVisible(false);
     if (getAnySelected()) {

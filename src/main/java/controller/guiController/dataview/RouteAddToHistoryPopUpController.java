@@ -30,9 +30,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the route data view.
  *
- * @author Hayley Krippner
  * @version 1.0
- * @since 15/09/2020
+ * @since 04/10/2020
  */
 public class RouteAddToHistoryPopUpController implements Initializable {
 
@@ -43,37 +42,23 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   @FXML private TableColumn<Route, String> sourceAirportColumn;
   @FXML private TableColumn<Route, String> destinationAirportColumn;
   @FXML private TableColumn<Route, String> codeShareColumn;
-  @FXML
-  private TableColumn<Route, Integer> numOfStopsColumn;
-  @FXML
-  private TableColumn<Route, String> equipmentColumn;
-  @FXML
-  private Button confirmBtn;
-  @FXML
-  private Button cancelBtn;
+  @FXML private TableColumn<Route, Integer> numOfStopsColumn;
+  @FXML private TableColumn<Route, String> equipmentColumn;
+  @FXML private Button confirmBtn;
+  @FXML private Button cancelBtn;
 
-  /**
-   * The GeneralStatsCalculator to generate reports about flight history.
-   */
+  /** The GeneralStatsCalculator to generate reports about flight history. */
   private final GeneralStatsCalculator generalStatsCalculator = Main.getGeneralStatsCalculator();
-  /**
-   * The RouteStatsCalculator to generate route stats for the reports about flight history.
-   */
+  /** The RouteStatsCalculator to generate route stats for the reports about flight history. */
   private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
-  /**
-   * The class from which stored data can be accessed.
-   */
+  /** The class from which stored data can be accessed. */
   private final Storage storage = Main.getStorage();
 
-  /**
-   * List of routes to be added to history.
-   */
+  /** List of routes to be added to history. */
   private ObservableList<Route> tempRoute;
 
-  /**
-   * The database for adding history to history table in database.
-   */
+  /** The database for adding history to history table in database. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
   /**
@@ -100,8 +85,6 @@ public class RouteAddToHistoryPopUpController implements Initializable {
    */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    // below is initialize the cell of number of passenger, when double click the cell will be
-    // turned to textField
     passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
     passengerNumber.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     passengerNumber.setOnEditCommit(
@@ -125,8 +108,11 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     tableView.setItems(tempRoute);
   }
 
-  /** This method called when user clicked on the confirm button. It will check for route that is already inside history.
-   * If so, it will modify the number of passengers. If not, the route will be added to history */
+  /**
+   * This method called when user clicked on the confirm button. It will check for route that is
+   * already inside history. If so, it will modify the number of passengers. If not, the route will
+   * be added to history
+   */
   public void confirm() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       if (route.getTimesTaken() <= 0) {
@@ -136,20 +122,17 @@ public class RouteAddToHistoryPopUpController implements Initializable {
       } else {
         int index = Main.getStorage().getHistory().indexOf(route);
         if (index != -1) {
-          // Route have been added to history
           Main.getStorage()
-                  .getHistory()
-                  .get(index)
-                  .setTimesTaken(storage.getHistory().get(index).getTimesTaken());
+              .getHistory()
+              .get(index)
+              .setTimesTaken(storage.getHistory().get(index).getTimesTaken());
         } else {
-          // Route have not been added to history + have been set number of passenger
           Main.getStorage().getHistory().add(route);
         }
         route.getSelect().setSelected(false);
         updateReportStats(route);
       }
     }
-    // Update database with history
     database.updateHistoryTable(storage.getHistory());
 
     tempRoute.clear();
@@ -158,8 +141,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   }
 
   /**
-   * This methods updates the calculations of the stats calculator classes to include the route which
-   * has just been added to history.
+   * This methods updates the calculations of the stats calculator classes to include the route
+   * which has just been added to history.
+   *
    * @param route Route which has been added to history.
    */
   public void updateReportStats(Route route) {
@@ -177,9 +161,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     routeStatsCalculator.updateLeastEmissionsRoute(route);
   }
 
-  /**
-   * This method closes the stage without adding any routes to history.
-   */
+  /** This method closes the stage without adding any routes to history. */
   public void cancel() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(0);
@@ -188,9 +170,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
-  /**
-   * This method sets the times taken for each of the routes in tempRoutes to 1.
-   */
+  /** This method sets the times taken for each of the routes in tempRoutes to 1. */
   public void setAllPassengerTo1() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(1);

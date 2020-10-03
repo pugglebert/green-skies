@@ -8,12 +8,11 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
- * The controlleer for the pop up window in which user can select filters to apply to the list of
+ * The controller for the pop up window in which user can select filters to apply to the list of
  * airports.
  *
- * @author Ella Johnson
  * @version 1.0
- * @since 2020-09-12
+ * @since 04/10/2020
  */
 public class AirportFilterPopUpController extends FilterPopUpController {
 

@@ -8,7 +8,7 @@ import java.util.*;
  * This class contains the methods for calculating and updating the analysis data for the user's
  * carbon emissions report.
  *
- * @since 04/10/20
+ * @since 04/10/2020
  * @version 1.0
  */
 public class GeneralStatsCalculator {
