@@ -106,6 +106,7 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
    * @param rootToRemove
    */
   public void updateMostEmissionsRouteRemoval(Route rootToRemove, List<Route> routeHistoryEntries) {
+    routeHistoryEntries.remove(rootToRemove);
     //check if route is in the most emissions array
     if (mostEmissionsRoutes.contains(rootToRemove)) {
       // if yes, check if there are other routes
