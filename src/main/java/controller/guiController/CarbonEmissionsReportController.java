@@ -16,9 +16,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the carbon emissions report page.
  *
- * @author Hayley Krippner
  * @version 1.0
- * @since 19/09/20
+ * @since 04/10/2020
  */
 public class CarbonEmissionsReportController extends SideNavBarController {
 
@@ -118,8 +117,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         carbonEmissionGoalField.setPromptText(
             "NO GOAL WAS ENTERED. PLEASE ENTER A GOAL AS A DOUBLE.");
       }
-
-      // resetReport();
     }
   }
 
@@ -142,8 +139,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
     displayStatusCommentField.setText("");
-
-    // resetReport();
   }
 
   /** This method sets up the data for the report to display the statistics as strings. */
@@ -229,7 +224,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     this.numOfTreesString = String.format("%.0f", Math.ceil(trees));
   }
 
-  // TODO fix this!
   /**
    * This methods updates all the most and least travelled route(s) arrays and visited airport(s)
    * arrays at once.
@@ -244,7 +238,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     airportStatsCalculator.updateLeastVisitedDestAirports(storage.getHistoryDestAirports());
   }
 
-  // TODO fix this!
   public void resetReport() {
     routeStatsCalculator.resetRoutesArrays();
     airportStatsCalculator.resetAirportArrays();

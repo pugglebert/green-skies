@@ -13,21 +13,17 @@ import javafx.util.Pair;
 import model.data.Airport;
 import model.data.Route;
 import org.controlsfx.control.textfield.TextFields;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
-import static javafx.application.Application.launch;
-
 /**
  * The controller class which contains the controls for the analyse page.
  *
- * @author ZhengJingRui He and Enyang Zhang
  * @version 1.0
- * @since 13/09/20
+ * @since 04/10/2020
  */
 public class AnalyseController extends SideNavBarController implements Initializable {
 

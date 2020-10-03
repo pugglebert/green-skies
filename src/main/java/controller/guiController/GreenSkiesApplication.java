@@ -10,9 +10,8 @@ import java.io.IOException;
 /**
  * The controller class which contains the controls for starting the application.
  *
- * @author Hayley Krippner
  * @version 1.0
- * @since 04/09/20
+ * @since 04/10/2020
  */
 public class GreenSkiesApplication extends Application {
 
@@ -46,7 +45,7 @@ public class GreenSkiesApplication extends Application {
   /**
    * This method is where the application is called from.
    *
-   * @param args The passed in arguements.
+   * @param args The passed in arguments.
    */
   public static void main(String[] args) {
     launch(args);

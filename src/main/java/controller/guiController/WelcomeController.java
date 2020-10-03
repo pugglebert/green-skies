@@ -7,16 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
  * The Controller class which contains the controls for the Welcome page, the first page shown to
  * users.
  *
- * @author Grace Hanlon, Hayley Krippner, ZhengJingRui He
  * @version 1.0
- * @since 26/08/2020
+ * @since 04/10/2020
  */
 public class WelcomeController {
   /** The continue button. */

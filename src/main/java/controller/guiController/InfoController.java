@@ -6,15 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
  * The controller class which contains the controls for the help page on the welcome page.
  *
- * @author ZhengJingRui He, Hayley Krippner
  * @version 1.0
- * @since 04/09/20
+ * @since 04/10/2020
  */
 public class InfoController {
 
