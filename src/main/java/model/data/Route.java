@@ -1,11 +1,13 @@
 package model.data;
 
 import javafx.scene.control.CheckBox;
-
 import java.util.Arrays;
 
 /**
  * The Route class for containing all data for one unique flight route.
+ *
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class Route implements DataType {
 
@@ -127,7 +129,9 @@ public class Route implements DataType {
     return emissions;
   }
 
-  public String getEmissionsDisplayString() {return String.format("%.2f", emissions);}
+  public String getEmissionsDisplayString() {
+    return String.format("%.2f", emissions);
+  }
 
   public void setEmissions(double emissions) {
     this.emissions = emissions;
@@ -137,7 +141,9 @@ public class Route implements DataType {
     return distance;
   }
 
-  public String getDistanceDisplayString() {return String.format("%.2f", distance);}
+  public String getDistanceDisplayString() {
+    return String.format("%.2f", distance);
+  }
 
   public void setDistance(double distance) {
     this.distance = distance;

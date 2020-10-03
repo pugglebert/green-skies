@@ -2,7 +2,6 @@ package model.data;
 
 import javafx.util.Pair;
 import model.database.SQLiteDatabase;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +10,9 @@ import java.util.List;
 /**
  * Class to keep track of all the data that has been uploaded to the application, also interact with
  * database.
+ *
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class Storage {
 
@@ -66,8 +68,8 @@ public class Storage {
   private HashMap<Integer, ArrayList<Airport>> MapAirport = new HashMap<>();
 
   /**
-   * This method returns a List of all the names of the stored airline files, or an empty List if no Airline files
-   * have been stored.
+   * This method returns a List of all the names of the stored airline files, or an empty List if no
+   * Airline files have been stored.
    *
    * @return a List of the names of files in AirlineFiles.
    */
@@ -76,15 +78,19 @@ public class Storage {
   }
 
   /**
-   * This method returns the name of the Airline file which is currently open, or null if none is open.
+   * This method returns the name of the Airline file which is currently open, or null if none is
+   * open.
    *
    * @return the name of the currently open Airline file.
    */
-  public String getCurrentAirlineFile() {return currentAirlineFile;}
+  public String getCurrentAirlineFile() {
+    return currentAirlineFile;
+  }
 
   /**
-   * This method changes the name of the current file to the given name if the name matches one of the stored files
-   * and throws an IllegalArgumentException if the name does not match one of the stored files.
+   * This method changes the name of the current file to the given name if the name matches one of
+   * the stored files and throws an IllegalArgumentException if the name does not match one of the
+   * stored files.
    *
    * @param newCurrentFile the name of an airline file to change currentAirlineFile to.
    */
@@ -95,8 +101,8 @@ public class Storage {
   }
 
   /**
-   * This method returns an empty List if there is not current file, or all the Airlines in the current file
-   * if there is a current file.
+   * This method returns an empty List if there is not current file, or all the Airlines in the
+   * current file if there is a current file.
    *
    * @return a list of Airlines in the current file.
    */
@@ -108,8 +114,9 @@ public class Storage {
   }
 
   /**
-   * This method returns a List of all the names of the stored airport files, or an empty List if no Airport files
-   * have been stored.
+   * This method returns a List of all the names of the stored airport files, or an empty List if no
+   * Airport files have been stored.
+   *
    * @return a List of the names of files in AirportFiles.
    */
   public List<String> getAirportFileNames() {
@@ -117,7 +124,9 @@ public class Storage {
   }
 
   /**
-   * This method returns the name of the Airport file which is currently open, or null if none is open.
+   * This method returns the name of the Airport file which is currently open, or null if none is
+   * open.
+   *
    * @return the name of the currently open Airport file.
    */
   public String getCurrentAirportFile() {
@@ -125,8 +134,10 @@ public class Storage {
   }
 
   /**
-   * This method changes the name of the current file to the given name if the name matches one of the stored files
-   * and throws an IllegalArgumentException if the name does not match one of the stored files.
+   * This method changes the name of the current file to the given name if the name matches one of
+   * the stored files and throws an IllegalArgumentException if the name does not match one of the
+   * stored files.
+   *
    * @param newCurrentFile the name of an airport file to change currentAirportFile to.
    */
   public void setCurrentAirportFile(String newCurrentFile) {
@@ -136,8 +147,9 @@ public class Storage {
   }
 
   /**
-   * This method returns an empty List if there is not current file, or all the Airports in the current file
-   * if there is a current file.
+   * This method returns an empty List if there is not current file, or all the Airports in the
+   * current file if there is a current file.
+   *
    * @return a list of Airports in the current file.
    */
   public List<Airport> getAirports() {
@@ -148,8 +160,9 @@ public class Storage {
   }
 
   /**
-   * This method returns a List of all the names of the stored Route files, or an empty List if no Route files
-   * have been stored.
+   * This method returns a List of all the names of the stored Route files, or an empty List if no
+   * Route files have been stored.
+   *
    * @return a List of the names of files in RouteFiles.
    */
   public List<String> getRouteFileNames() {
@@ -157,7 +170,9 @@ public class Storage {
   }
 
   /**
-   * This method returns the name of the Route file which is currently open, or null if none is open.
+   * This method returns the name of the Route file which is currently open, or null if none is
+   * open.
+   *
    * @return the name of the currently open Route file.
    */
   public String getCurrentRouteFile() {
@@ -165,8 +180,10 @@ public class Storage {
   }
 
   /**
-   * This method changes the name of the current file to the given name if the name matches one of the stored files
-   * and throws an IllegalArgumentException if the name does not match one of the stored files.
+   * This method changes the name of the current file to the given name if the name matches one of
+   * the stored files and throws an IllegalArgumentException if the name does not match one of the
+   * stored files.
+   *
    * @param newCurrentFile the name of an airline file to change currentRouteFile to.
    */
   public void setCurrentRouteFile(String newCurrentFile) {
@@ -176,8 +193,9 @@ public class Storage {
   }
 
   /**
-   * This method returns an empty List if there is not current file, or all the Routes in the current file
-   * if there is a current file.
+   * This method returns an empty List if there is not current file, or all the Routes in the
+   * current file if there is a current file.
+   *
    * @return a list of Routes in the current file.
    */
   public List<Route> getRoutes() {
@@ -239,8 +257,7 @@ public class Storage {
         filename = currentAirlineFile;
 
       } else {
-          currentAirlineFile = filename;
-
+        currentAirlineFile = filename;
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
@@ -283,12 +300,14 @@ public class Storage {
    *
    * @param fileType The string shows what type of data user may uploaded.
    */
-  public void updateDatabase(String fileType){
-    if(!(fileType.matches("Airport") || fileType.matches("Airline") || fileType.matches("Route"))){
+  public void updateDatabase(String fileType) {
+    if (!(fileType.matches("Airport")
+        || fileType.matches("Airline")
+        || fileType.matches("Route"))) {
       throw new IllegalArgumentException("Type must be Airport, Airline or Route");
     }
     database.closeAutoCommite();
-    switch(fileType){
+    switch (fileType) {
       case "Airport":
         database.initialiseTable("Airport", getCurrentAirportFile());
         database.updateAirportTable(getAirports());
@@ -362,7 +381,8 @@ public class Storage {
   }
 
   /**
-   * This method updates the count of source airport visits in the flight history when the route is removed.
+   * This method updates the count of source airport visits in the flight history when the route is
+   * removed.
    *
    * @param airportName The name of the source airport of the route being remove from history.
    */
@@ -376,7 +396,8 @@ public class Storage {
   }
 
   /**
-   * This method updates the count of destination airport visits in the flight history when the route is removed.
+   * This method updates the count of destination airport visits in the flight history when the
+   * route is removed.
    *
    * @param airportName The name of the destination airport of the route being remove from history.
    */
@@ -392,7 +413,8 @@ public class Storage {
   /**
    * This method gets the airline file list.
    *
-   * @return A HashMap of the names of airline file as key and the list of airlines that is parsed in the file.
+   * @return A HashMap of the names of airline file as key and the list of airlines that is parsed
+   *     in the file.
    */
   public HashMap<String, List<Airline>> getAirlineFileList() {
     return airlineFiles;
@@ -401,7 +423,8 @@ public class Storage {
   /**
    * This method gets the airport file list.
    *
-   * @return A HashMap of the names of airport file as key and the list of airports that is parsed in the file.
+   * @return A HashMap of the names of airport file as key and the list of airports that is parsed
+   *     in the file.
    */
   public HashMap<String, List<Airport>> getAirportFileList() {
     return airportFiles;
@@ -410,7 +433,8 @@ public class Storage {
   /**
    * This method gets the route file list.
    *
-   * @return A HashMap of the names of route file as key and the list of routes that is parsed in the file.
+   * @return A HashMap of the names of route file as key and the list of routes that is parsed in
+   *     the file.
    */
   public HashMap<String, List<Route>> getRouteFileList() {
     return routeFiles;
@@ -418,6 +442,7 @@ public class Storage {
 
   /**
    * This method returns the names of the most recently compared routes.
+   *
    * @return A pair of two route names.
    */
   public Pair<String, String> getComparedRoutes() {
@@ -426,6 +451,7 @@ public class Storage {
 
   /**
    * This method sets the two compared route names to the given values.
+   *
    * @param comparedRoutes Pair of strings corresponding to the names of two routes.
    */
   public void setComparedRoutes(Pair<String, String> comparedRoutes) {
@@ -434,11 +460,10 @@ public class Storage {
 
   /**
    * This method gets the route for google map.
-   * @return An arraylist with the route the user want to display on google map.
+   *
+   * @return An array list with the route the user want to display on google map.
    */
   public HashMap<Integer, ArrayList<Airport>> getMapAirport() {
     return MapAirport;
   }
-
-
 }
