@@ -175,11 +175,13 @@ public class FlightHistoryController extends DataViewController {
           }
         }
         for (Route route : routesToRemove) {
-            routes.remove(route);
-            updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
+          routes.remove(route);
+          updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
+
           }
         }
         database.updateHistoryTable(storage.getHistory());
+
     } else {
       errorText.setText("No routes selected.");
       errorText.setVisible(true);
@@ -204,7 +206,6 @@ public class FlightHistoryController extends DataViewController {
 
   // todo write comment for this function
   public void updateReportStatsDeletionSingleRoute(Route route) {
-
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
     route.setEmissions(flightAnalyser.getPath1Emission());
     route.setDistance(flightAnalyser.getTotalDistancePath1());

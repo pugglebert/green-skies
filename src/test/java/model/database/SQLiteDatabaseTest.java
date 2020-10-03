@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class SQLiteDatabaseTest {
   private Storage storage = new Storage();
   private Loader loader = new Loader(storage);
-  private SQLiteDatabase database = new SQLiteDatabase();
+  private SQLiteDatabase database;
   private Statement state;
   private PreparedStatement prep;
   private ResultSet res;
@@ -36,21 +36,53 @@ public class SQLiteDatabaseTest {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairport.csv", "Airport");
       loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
       loader.loadFile("../seng202_project/src/test/java/TestFiles/singleRoute.csv", "Route");
+      database = new SQLiteDatabase();
       con = database.getCon();
+      database.closeAutoCommite();
     } catch (FileNotFoundException ignored) {
     }
   }
 
+  @Test
+  public void isTableNameSetAndProcessed(){
+    assertEquals("'testFile'", database.setTableName("testFile.csv"));
+  }
+
 //  @Test
-//  public void isAutoCommitClosed() throws SQLException {
-//     Route route = new Route("2B", 410, "AER", 2965, "KZN", 2990, "", 0, new String[]{"CR2"});
-//      database.closeAutoCommite();
-//      database.initialiseTable("Route", "routetest.csv");
-//      database.addRoutes(route);
+//  public void isAirportsTable() throws SQLException {
+//    state = con.createStatement();
+//    state.executeUpdate("drop table IF EXISTS 'airportTest'");
+//    database.startCommite();
 //
-//      state = con.createStatement();
-//      res = state.executeQuery("select  count(*) from table 'routetest' where sourceAirport='AER'");
-//      assertEquals(0, res.getInt("count"));
+//    database.setTableName("airportTest");
+//    database.buildAirportsTable();
+//    res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airportTest'");
+//    assertTrue(res.next());
+//  }
+//
+//  @Test
+//  public void isAirlinesTable() throws SQLException {
+//    state = con.createStatement();
+//    state.executeUpdate("drop table IF EXISTS 'airlineTest'");
+//    database.startCommite();
+//
+//    database.setTableName("airlineTest");
+//    database.buildAirlinesTable();
+//    res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='airlineTest'");
+//    assertTrue(res.next());
+//  }
+//
+//  @Test
+//  public void isRouteTable() throws SQLException {
+//    state = con.createStatement();
+//    state.executeUpdate("drop table IF EXISTS 'routeTest'");
+//    database.startCommite();
+//
+//    database.setTableName("routeTest");
+//    database.buildRoutesTable();
+//    res = state.executeQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='routeTest'");
+//    assertTrue(res.next());
+//
 //  }
   //@TODO uncomment once file separation fully implemented
 //  /**

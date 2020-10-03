@@ -99,9 +99,11 @@ public class SQLiteDatabase {
    * This method sets table name that is going to be created in database.
    *
    * @param fileName Provided file name.
+   * @return Return fileName without extension name.
    */
-  public void setTableName(String fileName) {
+  public String setTableName(String fileName) {
     this.tableName = "'" + fileName.split("\\.")[0] + "'";
+    return tableName;
   }
 
   /** This method builds airports table with airport attributes as colunms in dastabase. */
