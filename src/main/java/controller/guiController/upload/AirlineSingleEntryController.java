@@ -133,10 +133,10 @@ public class AirlineSingleEntryController {
             "Airline name: a combination of letters and spaces\n" +
             "Airline ID: a positive integer\n" +
             "Alias: '\\N' if the airline has no alias, or a combination of letters and spaces\n" +
-            "IATA: '\\N' if IATA is unknown, two capital letters or numbers otherwise\n" +
+            "IATA: two capital letters or numbers\n" +
             "ICAO: '\\N' or N/A if ICAO is unknown, three capital letters otherwise\n" +
             "Callsign: a combination of capital letters and spaces, or blank if unknown\n" +
-            "Country: a combination of letters and spaces\n" +
+            "Country: '\\N' if country is unknown, a combination of letters and spaces otherwise\n" +
             "Active status: check if active, leave unchecked if inactive");
     ErrorAlert.show();
   }
