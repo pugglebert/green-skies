@@ -2,6 +2,7 @@ package controller.analysis;
 
 import model.data.*;
 import model.loader.Loader;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
@@ -34,6 +35,7 @@ public class GeneralStatsCalculatorTest {
       e.printStackTrace();
     }
   }
+
 
   // --------------------------------------- Testing for updateTotalEmissions
 
