@@ -305,6 +305,28 @@ public class GeneralStatsCalculator {
   }
 
   /**
+   * This function implements the binary search algorithm for searching for a double of emissions.
+   *
+   * @param arrayToSearch The array which is being searched.
+   * @param searchElement The element that is being search for which is a double
+   * @return
+   */
+  public static int binarySearchDistance(List<Route> arrayToSearch, double searchElement) {
+    int firstIndex = 0;
+    int lastIndex = arrayToSearch.size() - 1;
+    while (firstIndex <= lastIndex) {
+      int middleIndex = (firstIndex + lastIndex) / 2;
+      if (arrayToSearch.get(middleIndex).getDistance() == searchElement) {
+        return middleIndex;
+      } else if (arrayToSearch.get(middleIndex).getDistance() < searchElement)
+        firstIndex = middleIndex + 1;
+      else if (arrayToSearch.get(middleIndex).getDistance() > searchElement)
+        lastIndex = middleIndex - 1;
+    }
+    return -1;
+  }
+
+  /**
    * This method sets up the quick sort algorithm.
    *
    * @param arrayToSort The array which needs to be sorted.
@@ -328,6 +350,20 @@ public class GeneralStatsCalculator {
   public static void quickSortEmissions(List<Route> arrayToSort, int start, int end) {
     if (end <= start) return;
     int pivot = quickSortPartitionEmissions(arrayToSort, start, end);
+    quickSort(arrayToSort, start, pivot - 1);
+    quickSort(arrayToSort, pivot + 1, end);
+  }
+
+  /**
+   * This method sets up the quick sort algorithm for comparing emissions.
+   *
+   * @param arrayToSort The array which needs to be sorted.
+   * @param start The starting index of the arrayToSort.
+   * @param end The ending index of the arrayToSort.
+   */
+  public static void quickSortDistance(List<Route> arrayToSort, int start, int end) {
+    if (end <= start) return;
+    int pivot = quickSortPartitionDistance(arrayToSort, start, end);
     quickSort(arrayToSort, start, pivot - 1);
     quickSort(arrayToSort, pivot + 1, end);
   }
@@ -369,7 +405,32 @@ public class GeneralStatsCalculator {
     int pivot = end;
     int counter = start;
     for (int i = start; i < end; i++) {
-      if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
+      if (arrayToSort.get(i).getEmissions() < arrayToSort.get(pivot).getEmissions()) {
+        Route temp = arrayToSort.get(counter);
+        arrayToSort.set(counter, arrayToSort.get(i));
+        arrayToSort.set(i, temp);
+        counter++;
+      }
+    }
+    Route temp = arrayToSort.get(pivot);
+    arrayToSort.set(pivot, arrayToSort.get(counter));
+    arrayToSort.set(counter, temp);
+    return counter;
+  }
+
+  /**
+   * This function implements the main logic of the quick sort algorithm.
+   *
+   * @param arrayToSort The array which needs to be sorted.
+   * @param start The starting index of the arrayToSort.
+   * @param end The ending index of the arrayToSort.
+   * @return
+   */
+  public static int quickSortPartitionDistance(List<Route> arrayToSort, int start, int end) {
+    int pivot = end;
+    int counter = start;
+    for (int i = start; i < end; i++) {
+      if (arrayToSort.get(i).getDistance() < arrayToSort.get(pivot).getDistance()) {
         Route temp = arrayToSort.get(counter);
         arrayToSort.set(counter, arrayToSort.get(i));
         arrayToSort.set(i, temp);

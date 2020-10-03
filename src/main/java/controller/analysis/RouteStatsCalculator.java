@@ -111,11 +111,11 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
       if (mostEmissionsRoutes.size() > 1) {
         mostEmissionsRoutes.indexOf(routeToRemove);
       } else if (mostEmissionsRoutes.size() == 1) {
-        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        quickSortEmissions(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
         double maxRouteCounter =
             routeHistoryEntries.get(routeHistoryEntries.size() - 1).getEmissions();
         int firstOccurrenceIndex = binarySearchEmissions(routeHistoryEntries, maxRouteCounter);
-        findEmissionsRoutes(routeHistoryEntries, mostTravelledRoutes, firstOccurrenceIndex);
+        findEmissionsRoutes(routeHistoryEntries, mostEmissionsRoutes, firstOccurrenceIndex);
       }
     }
   }
@@ -162,9 +162,9 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
       if (leastEmissionsRoutes.size() > 1) {
         leastEmissionsRoutes.indexOf(routeToRemove);
       } else if (leastEmissionsRoutes.size() == 1) {
-        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        quickSortEmissions(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
         int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
-        int firstOccurrenceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
+        int firstOccurrenceIndex = binarySearchEmissions(routeHistoryEntries, minRouteCounter);
         findEmissionsRoutes(routeHistoryEntries, leastTravelledRoutes, firstOccurrenceIndex);
       }
     }
@@ -214,6 +214,28 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
   }
 
   /**
+   * This method updates which routes is of the most distance when a route is removed from the
+   * flight history.
+   *
+   * @param routeToRemove The route to remove from the flight history.
+   * @param routeHistoryEntries The flight history.
+   */
+  public void updateMostDistanceRouteRemoval(Route routeToRemove, List<Route> routeHistoryEntries) {
+    routeHistoryEntries.remove(routeToRemove);
+    if (mostDistanceRoutes.contains(routeToRemove)) {
+      if (mostDistanceRoutes.size() > 1) {
+        mostDistanceRoutes.indexOf(routeToRemove);
+      } else if (mostDistanceRoutes.size() == 1) {
+        quickSortDistance(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        double maxRouteCounter =
+                routeHistoryEntries.get(routeHistoryEntries.size() - 1).getEmissions();
+        int firstOccurrenceIndex = binarySearchDistance(routeHistoryEntries, maxRouteCounter);
+        findEmissionsRoutes(routeHistoryEntries, mostDistanceRoutes, firstOccurrenceIndex);
+      }
+    }
+  }
+
+  /**
    * This method updates which route is of the least distance. The currentRouteRecord is checked
    * against the current route with the least emissions so far.
    *
@@ -237,6 +259,27 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
         if (!found) {
           leastDistanceRoutes.add(currentRouteRecord);
         }
+      }
+    }
+  }
+
+  /**
+   * This method updates which routes produces the least emissions when a route is removed from the
+   * flight history.
+   *
+   * @param routeToRemove The route to remove from the flight history.
+   * @param routeHistoryEntries The flight history.
+   */
+  public void updateLeastDistanceRouteRemoval(Route routeToRemove, List<Route> routeHistoryEntries) {
+    routeHistoryEntries.remove(routeToRemove);
+    if (leastDistanceRoutes.contains(routeToRemove)) {
+      if (leastDistanceRoutes.size() > 1) {
+        leastDistanceRoutes.indexOf(routeToRemove);
+      } else if (leastDistanceRoutes.size() == 1) {
+        quickSortDistance(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        double minRouteCounter = routeHistoryEntries.get(0).getDistance();
+        int firstOccurrenceIndex = binarySearchDistance(routeHistoryEntries, minRouteCounter);
+        findEmissionsRoutes(routeHistoryEntries, leastDistanceRoutes, firstOccurrenceIndex);
       }
     }
   }
