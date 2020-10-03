@@ -1,7 +1,6 @@
 package model.loader;
 
 import model.data.Route;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +10,8 @@ import java.util.List;
  * attributes determined by the data in the line. If the line contains an error this is added to the
  * ErrorCounter and the parser moves onto the next line without creating a route object.
  *
- * @author Ella Johnson
  * @version 1.0
- * @since 11/08/2020
+ * @since 04/10/2020
  */
 public class RouteParser extends Parser {
 

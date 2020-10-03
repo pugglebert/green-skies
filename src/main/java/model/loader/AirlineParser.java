@@ -11,9 +11,8 @@ import java.util.List;
  * attributes determined by the data in the line. If the line contains an error this is added to the
  * ErrorCounter and the parser moves onto the next line without creating a route object.
  *
- * @author Nathan Huynh
  * @version 1.0
- * @since 11/08/2020
+ * @since 04/10/2020
  */
 public class AirlineParser extends Parser {
 
@@ -65,15 +64,18 @@ public class AirlineParser extends Parser {
     for (String dataLine : dataFile) {
       if (totalErrors > 200) {
         totalErrors = 0;
-        throw new RuntimeException("File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
       }
       parseLine(dataLine);
     }
     if (!getValidFile()) {
       if (totalErrors == 1) {
-        throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
       } else {
-        throw new RuntimeException("File rejected: all lines contain errors.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "File rejected: all lines contain errors.\n" + getErrorMessage(false));
       }
     }
   }

@@ -1,15 +1,20 @@
 package model.loader;
 
 import model.data.DataType;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** The super class of whole sub_parser classes */
+/**
+ * The super class of whole sub_parser classes
+ *
+ * @version 1.0
+ * @since 04/10/2020
+ */
 public abstract class Parser {
 
+  /** The database file. */
   protected final List<String> dataFile;
 
   /** Stores int key for error code and int value for error quantity. */

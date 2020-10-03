@@ -2,7 +2,6 @@ package model.loader;
 
 import model.data.Airport;
 import model.data.DataType;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +9,9 @@ import java.util.List;
  * The sub-class Parser for airport. AirportParser class receives a list of airport data, validates
  * each of the data line and create airport object. Then put the object into a hashSet for return
  * value.
+ *
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class AirportParser extends Parser {
   /**
@@ -21,6 +23,7 @@ public class AirportParser extends Parser {
    * invalid callsign 118: invalid activeStatus
    */
   private final int airportID = 0;
+
   private final int name = 1;
   private final int city = 2;
   private final int country = 3;
@@ -75,15 +78,18 @@ public class AirportParser extends Parser {
     for (String dataLine : dataFile) {
       if (totalErrors > 200) {
         totalErrors = 0;
-        throw new RuntimeException("File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "File rejected: more than 200 lines contain errors.\n" + getErrorMessage(false));
       }
       parseLine(dataLine);
     }
     if (!getValidFile()) {
       if (totalErrors == 1) {
-        throw new RuntimeException("Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "Entry contains errors and was not uploaded.\n" + getErrorMessage(false));
       } else {
-        throw new RuntimeException("File rejected: all lines contain errors.\n" + getErrorMessage(false));
+        throw new RuntimeException(
+            "File rejected: all lines contain errors.\n" + getErrorMessage(false));
       }
     }
   }
@@ -131,7 +137,7 @@ public class AirportParser extends Parser {
       errorCounter(0);
       return false;
     }
-    if(!isIdValid(line[airportID])){
+    if (!isIdValid(line[airportID])) {
       return false;
     }
     if (!isNameValid(line[name])) {
@@ -290,7 +296,6 @@ public class AirportParser extends Parser {
    * @return true if valid, false if invalid.
    */
   protected boolean isLatValid(String lat) {
-    // airport Latitude check
     try {
       Float.parseFloat(lat);
       return true;
@@ -354,7 +359,7 @@ public class AirportParser extends Parser {
    * @return true if valid, false if invalid.
    */
   protected boolean isDSTValid(String DST) {
-    if( DST.matches("[EASOZNU]+") && DST.length() == 1){
+    if (DST.matches("[EASOZNU]+") && DST.length() == 1) {
       return true;
     } else {
       errorCounter(12);

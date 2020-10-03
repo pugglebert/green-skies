@@ -1,7 +1,6 @@
 package model.loader;
 
 import model.data.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
@@ -9,13 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import static com.google.common.io.Files.getFileExtension;
 
 /**
  * The Loader class checks that a file has the expected extension, opens that file and creates an
  * instance of the Parser class to parse the file. It then stores the processed data in the Storage
  * class.
+ *
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class Loader {
 
@@ -60,15 +61,16 @@ public class Loader {
 
   /**
    * This method gets the name of the file from its full path.
+   *
    * @param filePath full path of the file on the computer.
    * @return the last part of the file path (after the last slash).
    */
   protected String getFileName(String filePath) {
     String fileName;
     if (filePath.contains("/")) {
-      fileName = filePath.substring(filePath.lastIndexOf("/")+1);
+      fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
     } else {
-      fileName = filePath.substring(filePath.lastIndexOf("\\")+1);
+      fileName = filePath.substring(filePath.lastIndexOf("\\") + 1);
     }
     return fileName;
   }
@@ -89,10 +91,13 @@ public class Loader {
       duplicate = true;
     }
     if (duplicate) {
-      throw new RuntimeException(String.format("There is already a file with the name %s in the system", fileName));
+      throw new RuntimeException(
+          String.format("There is already a file with the name %s in the system", fileName));
     }
     if (reservedFilenames.contains(fileName)) {
-      throw new RuntimeException(String.format("Filename %s is used by the system. User files cannot have this name", fileName));
+      throw new RuntimeException(
+          String.format(
+              "Filename %s is used by the system. User files cannot have this name", fileName));
     }
   }
 
@@ -120,10 +125,9 @@ public class Loader {
    *
    * @param dataType The type of data to be processed.
    * @param lines An ArrayList of Strings of data to be processed by the parser.
-   * @throws IllegalArgumentException Thrown if datatype is not one of airline, airport, flight or
+   * @throws IllegalArgumentException Thrown if data type is not one of airline, airport, flight or
    *     route.
    */
-  //Changed to public for database using.
   public Parser constructParser(String dataType, ArrayList<String> lines, boolean appendToExisting)
       throws IllegalArgumentException {
 
@@ -159,8 +163,8 @@ public class Loader {
   }
 
   /**
-   * This method calls processFile to preform error checks and process the data. It then stores
-   * the data in the storage class and returns an error message obtained form the parser.
+   * This method calls processFile to preform error checks and process the data. It then stores the
+   * data in the storage class and returns an error message obtained form the parser.
    *
    * @param filePath Path of the file to be opened.
    * @param dataType The type of data in the file (one of airport, airline, or route).
@@ -177,31 +181,33 @@ public class Loader {
   }
 
   /**
-   * This method calls processFile to preform error checks and process the data. It does not
-   * store any data, but it does return the same error message as loadFile
+   * This method calls processFile to preform error checks and process the data. It does not store
+   * any data, but it does return the same error message as loadFile
    *
    * @param filePath Path of the file to be opened.
    * @param dataType The type of data in the file (one of airport, airline, or route).
    * @return Error information string.
    */
   public String checkFile(String filePath, String dataType)
-          throws FileSystemException, FileNotFoundException {
+      throws FileSystemException, FileNotFoundException {
 
     Parser parser = processFile(filePath, dataType);
     return parser.getErrorMessage(true);
   }
 
   /**
-   * This method checks if the filepath and datatype fields are empty, if the file is in an illegal type
-   * or if the filename is a duplicate. If any of these things are true it raises and error. If not, it
-   * creates a parser and processes all the lines in the file.
+   * This method checks if the filepath and datatype fields are empty, if the file is in an illegal
+   * type or if the filename is a duplicate. If any of these things are true it raises and error. If
+   * not, it creates a parser and processes all the lines in the file.
+   *
    * @param filePath the local path of the file.
    * @param dataType the type of data to be processed, one of Airline, Airport, Route.
    * @return a parser which has processed all the lines in the file.
    * @throws FileSystemException If the file is not in a supported format.
    * @throws FileNotFoundException If the file cannot be found.
    */
-  private Parser processFile(String filePath, String dataType) throws FileSystemException, FileNotFoundException {
+  private Parser processFile(String filePath, String dataType)
+      throws FileSystemException, FileNotFoundException {
 
     if (filePath.isEmpty()) {
       throw new RuntimeException("Filename cannot be empty.");
@@ -221,8 +227,9 @@ public class Loader {
   }
 
   /**
-   * Returns the current filename for that datatype, or if current filename is null returns the name of the single
-   * entry file.
+   * Returns the current filename for that datatype, or if current filename is null returns the name
+   * of the single entry file.
+   *
    * @return The filename to use when adding the file to storage.
    */
   public String getLineFileName(String dataType) {
@@ -279,9 +286,10 @@ public class Loader {
 
   /**
    * This method returns the parser constructed for single entry.
+   *
    * @return parser that constructed for single entry.
    */
-  public Parser getParser(){
+  public Parser getParser() {
     return (this.parser);
   }
 }
