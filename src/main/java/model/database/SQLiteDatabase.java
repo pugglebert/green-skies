@@ -1039,7 +1039,7 @@ public class SQLiteDatabase {
       state.executeUpdate("drop table " + tableName);
       res =
           state.executeQuery(
-              "select count(*) as row_count where file_name='"
+              "select count(*) as row_count from 'file_list' where file_name='"
                   + fileName
                   + "' and file_type='"
                   + fileType
@@ -1055,7 +1055,6 @@ public class SQLiteDatabase {
       }
       startCommite();
     } catch (Exception e) {
-      System.out.println(11);
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {

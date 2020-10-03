@@ -501,9 +501,7 @@ public class SQLiteDatabaseTest {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='fileToBeDeleted'");
     if (res.next()) {
       state.close();
-      res.close();
       database.deleteFile("fileToBeDeleted.csv", "Airport");
-      System.out.println(database.setTableName("abc.csv"));
       res =
           state.executeQuery(
               "SELECT name FROM sqlite_master WHERE type='table' AND name='fileToBeDeleted'");
@@ -524,12 +522,12 @@ public class SQLiteDatabaseTest {
     database.startCommite();
     database.initialiseTable("Airport", "fileToBeDeleted.csv");
     database.updateTableList("fileToBeDeleted.csv", "Airport");
-    state = con.createStatement();
-
     res =
         state.executeQuery(
             "SELECT name FROM sqlite_master WHERE type='table' AND name='fileToBeDeleted'");
     if (res.next()) {
+      state.close();
+      state = con.createStatement();
       database.deleteFile("fileToBeDeleted.csv", "Airport");
       res = state.executeQuery("select count(*) as row_count from 'file_list'");
       assertEquals(0, res.getInt("row_count"));
