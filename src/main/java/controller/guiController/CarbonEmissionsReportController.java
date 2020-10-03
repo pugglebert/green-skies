@@ -97,13 +97,12 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
 
       try {
-        generalStatsCalculator.setCarbonEmissionsGoal(
-            Double.parseDouble(carbonEmissionGoalValue));
+        generalStatsCalculator.setCarbonEmissionsGoal(Double.parseDouble(carbonEmissionGoalValue));
 
         displayTotalEmissionsField.setText(
-                String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
+            String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
         displayTotalDistanceTravelledField.setText(
-                String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
+            String.format("%.2f", generalStatsCalculator.getTotalDistanceTravelled()));
         displayMostEmissionsRouteField.setText(MostEmissionsRouteString);
         displayLeastEmissionsRouteField.setText(LeastEmissionsRouteString);
         displayMostDistanceRouteField.setText(MostDistanceRouteString);
@@ -116,7 +115,8 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         generalStatsCalculator.createCarbonEmissionsComment();
         displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
       } catch (NumberFormatException e) {
-        carbonEmissionGoalField.setPromptText("NO GOAL WAS ENTERED. PLEASE ENTER A GOAL AS A DOUBLE.");
+        carbonEmissionGoalField.setPromptText(
+            "NO GOAL WAS ENTERED. PLEASE ENTER A GOAL AS A DOUBLE.");
       }
 
       // resetReport();
@@ -146,9 +146,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     // resetReport();
   }
 
-  /**
-   * This method sets up the data for the report to display the statistics as strings.
-   */
+  /** This method sets up the data for the report to display the statistics as strings. */
   public void setUpData() {
     generalStatsCalculator.calculateOffsetTrees();
     System.out.println(MostEmissionsRouteString);
@@ -184,12 +182,17 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     String resultString = "";
     StringBuilder resultStringBuilder = new StringBuilder(resultString);
     for (int i = 0; i < arrayToConvert.size(); i++) {
-      if (arrayToConvert.get(i).getAirlineID() >= 0)
+      if (arrayToConvert.get(i).getAirlineID() >= 0) {
+        String routeString =
+            arrayToConvert.get(i).getSourceAirport()
+                + " to "
+                + arrayToConvert.get(i).getDestinationAirport();
         if (i == arrayToConvert.size() - 1) {
-          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID());
+          resultStringBuilder.append(routeString);
         } else {
-          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID()).append(", ");
+          resultStringBuilder.append(routeString).append(", ");
         }
+      }
     }
     resultString = resultStringBuilder.toString();
     return resultString;
