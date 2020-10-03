@@ -125,7 +125,8 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     tableView.setItems(tempRoute);
   }
 
-  /** This method is to confirm the selected Routes. */
+  /** This method called when user clicked on the confirm button. It will check for route that is already inside history.
+   * If so, it will modify the number of passengers. If not, the route will be added to history */
   public void confirm() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       if (route.getTimesTaken() <= 0) {
@@ -139,9 +140,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
           Main.getStorage()
                   .getHistory()
                   .get(index)
-                  .setTimesTaken(
-                          route.getTimesTaken()
-                                  + storage.getHistory().get(index).getTimesTaken());
+                  .setTimesTaken(storage.getHistory().get(index).getTimesTaken());
         } else {
           // Route have not been added to history + have been set number of passenger
           Main.getStorage().getHistory().add(route);
