@@ -117,6 +117,7 @@ public class AirlineDataViewController extends DataViewController {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airline(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         airlines.removeIf(airline -> airline.getSelect().isSelected());
+        database.deleteFile(storage.getCurrentAirlineFile(), "Airline");
         database.initialiseTable("Airline", storage.getCurrentAirlineFile());
         database.updateAirlineTable(storage.getAirlines());
       }
