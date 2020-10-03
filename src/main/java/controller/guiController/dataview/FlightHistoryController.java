@@ -168,19 +168,18 @@ public class FlightHistoryController extends DataViewController {
     if (getAnySelected()) {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
+        List<Route> routesToRemove = new ArrayList<>();
         for (Route route : routes) {
           if (route.getSelect().isSelected()) {
-            System.out.println(routes.size());
+            routesToRemove.add(route);
+          }
+        }
+        for (Route route : routesToRemove) {
             routes.remove(route);
-
             updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
-            System.out.println(routes.size());
-
-            System.out.println(routes.size());
           }
         }
         database.updateHistoryTable(storage.getHistory());
-      }
     } else {
       errorText.setText("No routes selected.");
       errorText.setVisible(true);
