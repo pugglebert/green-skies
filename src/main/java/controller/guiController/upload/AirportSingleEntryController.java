@@ -145,8 +145,8 @@ public class AirportSingleEntryController {
             "Airport name: a combination of letters and spaces\n" +
             "City: a combination of letters, numbers and spaces\n" +
             "Country: a combination of letters and spaces\n" +
-            "IATA: 'null' if IATA is unknown, three capital letters or numbers otherwise\n" +
-            "ICAO: 'null' if ICAO is unknown, four capital letters or numbers otherwise\n" +
+            "IATA: 'null' if IATA is unknown, three letters or numbers otherwise\n" +
+            "ICAO: 'null' if ICAO is unknown, four letters or numbers otherwise\n" +
             "Timezone: an integer between -12 and 14 indicating deviation from GMT\n" +
             "Latitude: a positive or negative decimal number\n" +
             "Longitude: a positive or negative decimal number\n" +

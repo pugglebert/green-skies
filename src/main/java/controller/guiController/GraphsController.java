@@ -35,7 +35,7 @@ public class GraphsController extends SideNavBarController {
 
   /**
    * This method is the initializer for this class. Displays graph of routes from history
-   * @param url            The provided resoure bundle.
+   * @param url The provided resoure bundle.
    * @param resourceBundle The resoure bundle.
    */
   @Override
