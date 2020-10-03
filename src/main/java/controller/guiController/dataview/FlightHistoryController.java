@@ -170,8 +170,13 @@ public class FlightHistoryController extends DataViewController {
       if (result.isPresent() && result.get() == ButtonType.OK) {
         for (Route route : routes) {
           if (route.getSelect().isSelected()) {
-            updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
+            System.out.println(routes.size());
             routes.remove(route);
+
+            updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
+            System.out.println(routes.size());
+
+            System.out.println(routes.size());
           }
         }
         database.updateHistoryTable(storage.getHistory());
