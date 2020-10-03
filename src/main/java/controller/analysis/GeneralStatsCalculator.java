@@ -61,7 +61,8 @@ public class GeneralStatsCalculator {
   private int currentYear;
 
   /**
-   * This method adds the added route's carbon emissions to the total carbon emissions from flight travel.
+   * This method adds the added route's carbon emissions to the total carbon emissions from flight
+   * travel.
    *
    * @param currentRouteRecord The current route record that is being added to the user's flight
    *     history.
@@ -73,9 +74,10 @@ public class GeneralStatsCalculator {
     }
   }
 
-  //TODO test this method.
+  // TODO test this method.
   /**
-   * This method adds the removes route's carbon emissions from the total carbon emissions from flight travel.
+   * This method adds the removes route's carbon emissions from the total carbon emissions from
+   * flight travel.
    *
    * @param currentRouteRecord The current route record that is being removed for the user's flight
    *     history.
@@ -83,7 +85,7 @@ public class GeneralStatsCalculator {
   public void updateTotalEmissionsRemoval(Route currentRouteRecord) {
     if (!Double.isNaN(currentRouteRecord.getEmissions())) {
       totalCarbonEmissions -=
-              (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+          (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
       if (totalCarbonEmissions < 0.00) {
         totalCarbonEmissions = 0.00;
       }
@@ -98,10 +100,10 @@ public class GeneralStatsCalculator {
    */
   public void updateTotalDistance(Route currentRouteRecord) {
     totalDistanceTravelled +=
-            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+        (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
   }
 
-  //TODO test this method.
+  // TODO test this method.
   /**
    * This method adds the added route's distance the total distance travelled via flight travel.
    *
@@ -110,7 +112,7 @@ public class GeneralStatsCalculator {
    */
   public void updateTotalDistanceRemoval(Route currentRouteRecord) {
     totalDistanceTravelled -=
-            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+        (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
     if (totalDistanceTravelled < 0.00) {
       totalDistanceTravelled = 0.00;
     }
@@ -382,32 +384,50 @@ public class GeneralStatsCalculator {
     for (int i = start; i < end; i++) {
       int isIndexValLessThanPivotVal = 0;
       if (type == "distance") {
-        if (arrayToSort.get(i).getDistance() < arrayToSort.get(pivot).getDistance()) {
-          Route temp = arrayToSort.get(counter);
-          arrayToSort.set(counter, arrayToSort.get(i));
-          arrayToSort.set(i, temp);
-          counter++;
-        }
+        isIndexValLessThanPivotVal = checkIndexValLessThanPivotValDistance(arrayToSort, i, pivot);
       } else if (type == "emissions") {
-        if (arrayToSort.get(i).getEmissions() < arrayToSort.get(pivot).getEmissions()) {
-          Route temp = arrayToSort.get(counter);
-          arrayToSort.set(counter, arrayToSort.get(i));
-          arrayToSort.set(i, temp);
-          counter++;
-        }
+        isIndexValLessThanPivotVal = checkIndexValLessThanPivotValEmissions(arrayToSort, i, pivot);
       } else if (type == "times taken") {
-        if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
-          Route temp = arrayToSort.get(counter);
-          arrayToSort.set(counter, arrayToSort.get(i));
-          arrayToSort.set(i, temp);
-          counter++;
-        }
+        isIndexValLessThanPivotVal = checkIndexValLessThanPivotValTimesTaken(arrayToSort, i, pivot);
+      }
+      if (isIndexValLessThanPivotVal == 1) {
+        Route temp = arrayToSort.get(counter);
+        arrayToSort.set(counter, arrayToSort.get(i));
+        arrayToSort.set(i, temp);
+        counter++;
       }
     }
     Route temp = arrayToSort.get(pivot);
     arrayToSort.set(pivot, arrayToSort.get(counter));
     arrayToSort.set(counter, temp);
     return counter;
+  }
+
+  public static int checkIndexValLessThanPivotValDistance(
+      List<Route> arrayToSort, int i, int pivot) {
+    if (arrayToSort.get(i).getDistance() < arrayToSort.get(pivot).getDistance()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  public static int checkIndexValLessThanPivotValEmissions(
+      List<Route> arrayToSort, int i, int pivot) {
+    if (arrayToSort.get(i).getEmissions() < arrayToSort.get(pivot).getEmissions()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  public static int checkIndexValLessThanPivotValTimesTaken(
+      List<Route> arrayToSort, int i, int pivot) {
+    if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   /**
@@ -551,5 +571,4 @@ public class GeneralStatsCalculator {
   public void setReductionPercentage(int percentage) {
     this.reductionPercentage = percentage;
   }
-
 }
