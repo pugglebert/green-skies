@@ -233,8 +233,6 @@ public class Storage {
    * @param type Type of data to be stored.
    */
   public void setData(List<DataType> data, String type, String filename) {
-
-
     if (type.matches("Airline")) {
       List<Airline> airlines = new ArrayList<>();
       if (filename == null) {
@@ -242,6 +240,7 @@ public class Storage {
 
       } else {
           currentAirlineFile = filename;
+
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
@@ -254,7 +253,6 @@ public class Storage {
       List<Airport> airports = new ArrayList<>();
       if (filename == null) {
         filename = currentAirportFile;
-
       } else {
         currentAirportFile = filename;
       }
@@ -267,10 +265,8 @@ public class Storage {
       List<Route> routes = new ArrayList<>();
       if (filename == null) {
         filename = currentRouteFile;
-
       } else {
         currentRouteFile = filename;
-
       }
       for (DataType entry : data) {
         Route route = (Route) entry;
@@ -366,6 +362,34 @@ public class Storage {
   }
 
   /**
+   * This method updates the count of source airport visits in the flight history when the route is removed.
+   *
+   * @param airportName The name of the source airport of the route being remove from history.
+   */
+  public void removeFromHistorySrcAirports(String airportName) {
+    if (historySrcAirports.containsKey(airportName)) {
+      historySrcAirports.put(airportName, historySrcAirports.get(airportName) - 1);
+      if (historySrcAirports.get(airportName) < 0) {
+        historySrcAirports.put(airportName, 0);
+      }
+    }
+  }
+
+  /**
+   * This method updates the count of destination airport visits in the flight history when the route is removed.
+   *
+   * @param airportName The name of the destination airport of the route being remove from history.
+   */
+  public void removeFromHistoryDestAirports(String airportName) {
+    if (historyDestAirports.containsKey(airportName)) {
+      historyDestAirports.put(airportName, historyDestAirports.get(airportName) - 1);
+      if (historyDestAirports.get(airportName) < 0) {
+        historyDestAirports.put(airportName, 0);
+      }
+    }
+  }
+
+  /**
    * This method gets the airline file list.
    *
    * @return A HashMap of the names of airline file as key and the list of airlines that is parsed in the file.
@@ -415,4 +439,6 @@ public class Storage {
   public HashMap<Integer, ArrayList<Airport>> getMapAirport() {
     return MapAirport;
   }
+
+
 }

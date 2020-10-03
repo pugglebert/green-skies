@@ -412,4 +412,5 @@ public class GeneralStatsCalculator {
   public void setReductionPercentage(int percentage) {
     this.reductionPercentage = percentage;
   }
+
 }
