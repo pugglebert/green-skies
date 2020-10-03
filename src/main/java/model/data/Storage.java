@@ -63,7 +63,7 @@ public class Storage {
   private final SQLiteDatabase database = new SQLiteDatabase();
 
   /** Airport to display in google map. */
-  public ArrayList<Airport> MapAirport = new ArrayList<>();
+  private HashMap<Integer, ArrayList<Airport>> MapAirport = new HashMap<>();
 
   /**
    * This method returns a List of all the names of the stored airline files, or an empty List if no Airline files
@@ -240,6 +240,7 @@ public class Storage {
 
       } else {
           currentAirlineFile = filename;
+
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
@@ -429,6 +430,14 @@ public class Storage {
    */
   public void setComparedRoutes(Pair<String, String> comparedRoutes) {
     this.comparedRoutes = comparedRoutes;
+  }
+
+  /**
+   * This method gets the route for google map.
+   * @return An arraylist with the route the user want to display on google map.
+   */
+  public HashMap<Integer, ArrayList<Airport>> getMapAirport() {
+    return MapAirport;
   }
 
 

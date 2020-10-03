@@ -30,7 +30,6 @@ public class ReportStep {
 
     @Before
     private void setUp() throws FileNotFoundException, FileSystemException, SQLException {
-        System.out.println(1);
         loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
         loader.loadFile("../seng202_project/src/test/java/TestFiles/routes.csv", "Route");
     }

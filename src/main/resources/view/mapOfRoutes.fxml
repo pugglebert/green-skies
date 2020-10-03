@@ -6,10 +6,10 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.MapOfRoutesController">
+<AnchorPane prefHeight="700.0" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.MapOfRoutesController">
     <children>
-        <Text layoutX="277.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Map Of Routes To Be Implemented Here]" />
-        <WebView fx:id="mapView" layoutX="277.0" layoutY="235.0" prefHeight="367.0" prefWidth="535.0" />
+        <Text layoutX="277.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+        <WebView fx:id="mapView" layoutX="300.0" layoutY="25.0" prefHeight="500.0" prefWidth="1000.0" />
       <VBox prefHeight="703.0" prefWidth="214.0" style="-fx-background-color: #116754;">
          <children>
             <Button fx:id="btnUpload" alignment="CENTER" mnemonicParsing="false" onAction="#toUploadData" onMouseClicked="#toUploadData" prefHeight="68.0" prefWidth="225.0" style="-fx-background-color: transparent;" text="Upload Data" textAlignment="CENTER" textFill="WHITE" wrapText="true">
@@ -62,6 +62,9 @@
             </Button>
          </children>
       </VBox>
-      <Button fx:id="buttonShow" layoutX="1225.0" layoutY="419.0" mnemonicParsing="false" onAction="#showMap" text="Button" />
+      <Button fx:id="buttonShow" layoutX="700.0" layoutY="602.0" mnemonicParsing="false" onAction="#showMap" style="-fx-background-color: #116754;" text="Show selected route" textFill="WHITE">
+       <font>
+          <Font size="18.0" />
+       </font></Button>
     </children>
 </AnchorPane>

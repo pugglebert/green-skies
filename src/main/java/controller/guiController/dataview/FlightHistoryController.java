@@ -19,17 +19,14 @@ import model.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
- * The controller class which contains the controls for the airline data view.
+ * The controller class which contains the controls for the history data view.
  *
- * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui, ELla Johnson
+ * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui, ELla Johnson, Lambert
  * @version 1.0
- * @since 04/09/2020
+ * @since 03/10/2020
  */
 public class FlightHistoryController extends DataViewController {
   ;
@@ -173,8 +170,13 @@ public class FlightHistoryController extends DataViewController {
       if (result.isPresent() && result.get() == ButtonType.OK) {
         for (Route route : routes) {
           if (route.getSelect().isSelected()) {
-            updateReportStatsDeletionSingleRoute(route); //TODO test this!
+            System.out.println(routes.size());
             routes.remove(route);
+
+            updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
+            System.out.println(routes.size());
+
+            System.out.println(routes.size());
           }
         }
         database.updateHistoryTable(storage.getHistory());
@@ -217,61 +219,31 @@ public class FlightHistoryController extends DataViewController {
     routeStatsCalculator.updateLeastEmissionsRouteRemoval(route, storage.getHistory()); //TODO test these methods actually remove the route.
   }
 
-//  public void selectFlightHistory() {
-//    errorText.setVisible(false);
-//      Main.getStorage().MapAirport = new ArrayList<>();
-//      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
-//
-//      if (result.isPresent() && result.get() == ButtonType.OK) {
-//
-//        for(Route route: this.routes){
-//
-//          if(route.getSelect().isSelected()){
-//
-//              for(Airport airport: Main.getStorage().getAirports()){
-//
-//
-//                if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
-//
-//                  Main.getStorage().MapAirport.add(airport);
-//
-//                }
-//              }
-//
-//
-//            }
-//          }
-//      }
-//
-//
-//  }
-
-
+  /** This method select the route that user chooses and put it in storage for google map to use. */
   public void selectRoute() {
-    errorText.setVisible(false);
-    Main.getStorage().MapAirport = new ArrayList<>();
-    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
-
-    if (result.isPresent() && result.get() == ButtonType.OK) {
-
-      for(Route route: this.routes){
-
-        if(route.getSelect().isSelected()){
-
-          for(Airport airport: Main.getStorage().getAirports()){
-
-            if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
-
-              Main.getStorage().MapAirport.add(airport);
-
-            }
+    HashMap<Integer, ArrayList<Airport>> mapAirport = Main.getStorage().getMapAirport();
+    mapAirport.clear();
+    int pathNum = 0;
+    for (Route route : this.routes) {
+      if (route.getSelect().isSelected()) {
+        ArrayList<Airport> sourDestAirport = new ArrayList<>();
+        for (Airport airport : Main.getStorage().getAirports()) {
+          if (airport.getIATA().equals(route.getSourceAirport())
+              || airport.getICAO().equals(route.getSourceAirport())) {
+            sourDestAirport.add(airport);
           }
-
-
+          if (airport.getIATA().equals(route.getDestinationAirport())
+              || airport.getICAO().equals(route.getDestinationAirport())) {
+            sourDestAirport.add(airport);
+          }
         }
+        mapAirport.put(pathNum, sourDestAirport);
+        pathNum+=1;
       }
     }
-
-
+    if (mapAirport.size() > 1) {
+      AlertPopUp.showGoogleMapAlert();
+      mapAirport.clear();
+    }
   }
 }
