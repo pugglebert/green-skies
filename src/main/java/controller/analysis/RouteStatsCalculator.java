@@ -64,7 +64,7 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
           if (!leastTravelledRoutes.contains(routeHistoryEntries.get(i))) {
 
             leastTravelledRoutes.add(routeHistoryEntries.get(i));
-            }
+          }
         }
       }
     }
@@ -73,7 +73,7 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
   /**
    * This method updates which routes produce the most emissions when a route is added the history.
    *
-   * @param currentRouteRecord
+   * @param currentRouteRecord The
    */
   public void updateMostEmissionsRoute(Route currentRouteRecord) {
     if (currentRouteRecord.getEmissions() > 0.0) {
@@ -97,66 +97,28 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
     }
   }
 
-
-  /////////////////TODO
-
   /**
-   * This method updates which routes produces the most emissions when a route is removed from the flight history.
+   * This method updates which routes produces the most emissions when a route is removed from the
+   * flight history.
    *
-   * @param rootToRemove
+   * @param routeToRemove The route to remove from the flight history.
+   * @param routeHistoryEntries The flight history.
    */
-  public void updateMostEmissionsRouteRemoval(Route rootToRemove, List<Route> routeHistoryEntries) {
-    routeHistoryEntries.remove(rootToRemove);
-    //check if route is in the most emissions array
-    if (mostEmissionsRoutes.contains(rootToRemove)) {
-      // if yes, check if there are other routes
+  public void updateMostEmissionsRouteRemoval(
+      Route routeToRemove, List<Route> routeHistoryEntries) {
+    routeHistoryEntries.remove(routeToRemove);
+    if (mostEmissionsRoutes.contains(routeToRemove)) {
       if (mostEmissionsRoutes.size() > 1) {
-        // if yes, remove the currentRouteRecord
-        mostEmissionsRoutes.indexOf(rootToRemove);
+        mostEmissionsRoutes.indexOf(routeToRemove);
       } else if (mostEmissionsRoutes.size() == 1) {
-        mostEmissionsRoutes.indexOf(rootToRemove);
-        // if no, need to remove and recalculate entire array
-        //call another method to recalculate
-
-        //TODO refactor this into one method for all calls to this.
-        quickSortEmissions(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
-        double maxEmissions = routeHistoryEntries.get(0).getEmissions();
-        int firstOccurrenceIndex = binarySearchEmissions(routeHistoryEntries, maxEmissions);
-        for (int i = 0; i < firstOccurrenceIndex + 1; i++) {
-          if (!mostEmissionsRoutes.contains(routeHistoryEntries.get(i))) {
-            mostEmissionsRoutes.add(routeHistoryEntries.get(i));
-          }
-        }
-
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        double maxRouteCounter =
+            routeHistoryEntries.get(routeHistoryEntries.size() - 1).getEmissions();
+        int firstOccurrenceIndex = binarySearchEmissions(routeHistoryEntries, maxRouteCounter);
+        findEmissionsRoutes(routeHistoryEntries, mostTravelledRoutes, firstOccurrenceIndex);
       }
     }
-    //if no, do nothing
-
-
-
-
-//    if (currentRouteRecord.getEmissions() > 0.0) {
-//      if (this.mostEmissionsRoutes.size() == 0) {
-//        mostEmissionsRoutes.add(currentRouteRecord);
-//      } else if (currentRouteRecord.getEmissions() > mostEmissionsRoutes.get(0).getEmissions()) {
-//        mostEmissionsRoutes.clear();
-//        mostEmissionsRoutes.add(currentRouteRecord);
-//      } else if (currentRouteRecord.getEmissions() == mostEmissionsRoutes.get(0).getEmissions()) {
-//        Boolean found = false;
-//        for (Route route : mostEmissionsRoutes) {
-//          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
-//            found = true;
-//            break;
-//          }
-//        }
-//        if (!found) {
-//          mostEmissionsRoutes.add(currentRouteRecord);
-//        }
-//      }
-//    }
   }
-
-  /////////////////TODO
 
   /**
    * This method updates the which route produces the least emissions. The currentRouteRecord is
@@ -182,6 +144,43 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
         if (!found) {
           leastEmissionsRoutes.add(currentRouteRecord);
         }
+      }
+    }
+  }
+
+  /**
+   * This method updates which routes produces the least emissions when a route is removed from the
+   * flight history.
+   *
+   * @param routeToRemove The route to remove from the flight history.
+   * @param routeHistoryEntries The flight history.
+   */
+  public void updateLeastEmissionsRouteRemoval(
+      Route routeToRemove, List<Route> routeHistoryEntries) {
+    routeHistoryEntries.remove(routeToRemove);
+    if (leastEmissionsRoutes.contains(routeToRemove)) {
+      if (leastEmissionsRoutes.size() > 1) {
+        leastEmissionsRoutes.indexOf(routeToRemove);
+      } else if (leastEmissionsRoutes.size() == 1) {
+        quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
+        int firstOccurrenceIndex = binarySearch(routeHistoryEntries, minRouteCounter);
+        findEmissionsRoutes(routeHistoryEntries, leastTravelledRoutes, firstOccurrenceIndex);
+      }
+    }
+  }
+
+  /**
+   * This method finds either the most or least emission producing routes and updates the
+   * corresponding array.
+   *
+   * @param arrayToSearch The list containing the routes from the flight history.
+   * @param arrayToUpdate Either mostEmissionsRoutes or leastEmissionsRoutes to update.
+   */
+  public void findEmissionsRoutes(List<Route> arrayToSearch, List<Route> arrayToUpdate, int firstOccurrenceIndex) {
+    for (int i = 0; i < firstOccurrenceIndex + 1; i++) {
+      if (!arrayToUpdate.contains(arrayToSearch.get(i))) {
+        arrayToUpdate.add(arrayToSearch.get(i));
       }
     }
   }
