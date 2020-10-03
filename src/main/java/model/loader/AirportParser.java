@@ -354,7 +354,12 @@ public class AirportParser extends Parser {
    * @return true if valid, false if invalid.
    */
   protected boolean isDSTValid(String DST) {
-    return DST.matches("[EASOZNU]+") && DST.length() == 1;
+    if( DST.matches("[EASOZNU]+") && DST.length() == 1){
+      return true;
+    } else {
+      errorCounter(12);
+      return false;
+    }
   }
 
   /**

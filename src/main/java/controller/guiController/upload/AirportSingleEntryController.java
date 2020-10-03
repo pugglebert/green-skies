@@ -143,16 +143,16 @@ public class AirportSingleEntryController {
     ErrorAlert.setAlertType(Alert.AlertType.INFORMATION);
     ErrorAlert.setContentText("Expected format of airport entry:\n" +
             "Airport name: a combination of letters and spaces\n" +
-            "City: a combination of letters and spaces\n" +
+            "City: a combination of letters, numbers and spaces\n" +
             "Country: a combination of letters and spaces\n" +
-            "IATA: 'null' if IATA is unknown, three capital letters or numbers otherwise\n" +
-            "ICAO: 'null' if ICAO is unknown, four capital letters or numbers otherwise\n" +
+            "IATA: 'null' if IATA is unknown, three letters or numbers otherwise\n" +
+            "ICAO: 'null' if ICAO is unknown, four letters or numbers otherwise\n" +
             "Timezone: an integer between -12 and 14 indicating deviation from GMT\n" +
             "Latitude: a positive or negative decimal number\n" +
             "Longitude: a positive or negative decimal number\n" +
             "Altitude: a positive or negative integer\n" +
             "DST: single capital letter corresponding to daylight savings time. One of: 'E','A','S','O','Z','N' or 'U'\n" +
-            "Database timezone: the name of the timezone e.g. 'Pacific/Auckland'\n" +
+            "Database timezone: the name of the timezone, a combination of letters and no spaces e.g. 'Pacific/Auckland'\n" +
             "Airport ID: an integer, must be unique within the airport file");
     ErrorAlert.show();
   }
