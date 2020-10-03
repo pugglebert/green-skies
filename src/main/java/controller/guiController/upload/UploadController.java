@@ -45,7 +45,7 @@ public class UploadController extends SideNavBarController {
 
     private SQLiteDatabase database = new SQLiteDatabase();
 
-    // Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
+    /**Iniitialize the list of data types to be added to the ChoiceBox 'dataTypeSelect'*/
     ObservableList<String> dataTypeList =
             FXCollections.observableArrayList("Airport", "Route", "Airline");
 
@@ -119,7 +119,7 @@ public class UploadController extends SideNavBarController {
                 Optional<ButtonType> result = ConfirmAlert.showAndWait();
                 if (result.get() == yesButton) {
                     loader.loadFile(stringFile, fileType);
-                    //storage.updateDatabase(fileType);
+                    storage.updateDatabase(fileType);
                     switch (fileType) {
                         case "Airport":
                             airportFileList.setItems(FXCollections.observableList(storage.getAirportFileNames()));
@@ -135,19 +135,14 @@ public class UploadController extends SideNavBarController {
                             break;
                     }
                     ConfirmAlert.close();
-
-                    // only load data if it is not erroneous
+                    /**only load data if it is not erroneous*/
                     for (DataType line : storage.getRoutes()) {
                         Route test = (Route) line;
                     }
-                    // if user wishes to cancel the file chosne to upload they push cancel and no data is
-                    // uploaded
                 } else if (result.get() == cancelButton) {
                     ConfirmAlert.close();
                 }
             }
-            // catches errors in uploading file and alerts user by displaying the error message in an
-            // error box
             catch (Exception e) {
                 if (e.getMessage() != null) {
                     Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
@@ -168,11 +163,8 @@ public class UploadController extends SideNavBarController {
      */
     public void addSingle() throws IOException {
 
-        // Checks to see that the user has chosen a data type
         if (checkDataTypeSelected()) {
             String fileType = dataTypeSelect.getValue().toString();
-            // checks which data type was chosen by the user so the correct single data entry window is
-            // opened
             switch (fileType) {
                 case "Airport": {
                     Stage newStage = new Stage();
