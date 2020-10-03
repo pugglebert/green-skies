@@ -361,6 +361,34 @@ public class Storage {
   }
 
   /**
+   * This method updates the count of source airport visits in the flight history when the route is removed.
+   *
+   * @param airportName The name of the source airport of the route being remove from history.
+   */
+  public void removeFromHistorySrcAirports(String airportName) {
+    if (historySrcAirports.containsKey(airportName)) {
+      historySrcAirports.put(airportName, historySrcAirports.get(airportName) - 1);
+      if (historySrcAirports.get(airportName) < 0) {
+        historySrcAirports.put(airportName, 0);
+      }
+    }
+  }
+
+  /**
+   * This method updates the count of destination airport visits in the flight history when the route is removed.
+   *
+   * @param airportName The name of the destination airport of the route being remove from history.
+   */
+  public void removeFromHistoryDestAirports(String airportName) {
+    if (historyDestAirports.containsKey(airportName)) {
+      historyDestAirports.put(airportName, historyDestAirports.get(airportName) - 1);
+      if (historyDestAirports.get(airportName) < 0) {
+        historyDestAirports.put(airportName, 0);
+      }
+    }
+  }
+
+  /**
    * This method gets the airline file list.
    *
    * @return A HashMap of the names of airline file as key and the list of airlines that is parsed in the file.
@@ -402,4 +430,6 @@ public class Storage {
   public void setComparedRoutes(Pair<String, String> comparedRoutes) {
     this.comparedRoutes = comparedRoutes;
   }
+
+
 }

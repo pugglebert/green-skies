@@ -1,5 +1,8 @@
 package controller.guiController.dataview;
 
+import controller.analysis.FlightAnalyser;
+import controller.analysis.GeneralStatsCalculator;
+import controller.analysis.RouteStatsCalculator;
 import controller.analysis.Searcher;
 import controller.guiController.AlertPopUp;
 import controller.guiController.Main;
@@ -47,12 +50,13 @@ public class FlightHistoryController extends DataViewController {
 
   /** The database object. */
   private SQLiteDatabase database = new SQLiteDatabase();
-
-  /**
-   * The types of search which can be performed on history.
-   */
+  /** The types of search which can be performed on history. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Airline", "Source", "Destination");
+  /** The GeneralStatsCalculator to generate reports about flight history. */
+  private final GeneralStatsCalculator generalStatsCalculator = Main.getGeneralStatsCalculator();
+  /** The RouteStatsCalculator to generate route stats for the reports about flight history. */
+  private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
   ObservableList<Route> routes;
 
@@ -101,7 +105,7 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /**
-   * This method earches history for routes which match the search type and term and displays them
+   * This method searches history for routes which match the search type and term and displays them
    * in the table view.
    *
    * @param searchTerm String to match attributes to.
@@ -167,7 +171,12 @@ public class FlightHistoryController extends DataViewController {
     if (getAnySelected()) {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
-        routes.removeIf(route -> route.getSelect().isSelected());
+        for (Route route : routes) {
+          if (route.getSelect().isSelected()) {
+            updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
+            routes.remove(route);
+          }
+        }
         database.updateHistoryTable(storage.getHistory());
       }
     } else {
@@ -190,6 +199,22 @@ public class FlightHistoryController extends DataViewController {
       }
     }
     return selected;
+  }
+
+  // todo write comment for this function
+  public void updateReportStatsDeletionSingleRoute(Route route) {
+
+    FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
+    route.setEmissions(flightAnalyser.getPath1Emission());
+    route.setDistance(flightAnalyser.getTotalDistancePath1());
+    generalStatsCalculator.updateTotalDistanceRemoval(route);
+    generalStatsCalculator.updateTotalEmissionsRemoval(route);
+    storage.removeFromHistorySrcAirports(route.getSourceAirport()); //TODO test this works
+    storage.removeFromHistoryDestAirports(route.getDestinationAirport()); //TODO test this works
+    //routeStatsCalculator.updateLeastDistanceRoute(route); //TODO test these methods actually remove the route.
+    //routeStatsCalculator.updateMostDistanceRoute(route); //TODO test these methods actually remove the route.
+    //routeStatsCalculator.updateMostEmissionsRoute(route); //TODO test these methods actually remove the route.
+    //routeStatsCalculator.updateLeastEmissionsRoute(route); //TODO test these methods actually remove the route.
   }
 
 //  public void selectFlightHistory() {
