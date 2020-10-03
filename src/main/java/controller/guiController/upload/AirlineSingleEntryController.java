@@ -136,7 +136,7 @@ public class AirlineSingleEntryController {
             "IATA: two capital letters or numbers\n" +
             "ICAO: '\\N' or N/A if ICAO is unknown, three capital letters otherwise\n" +
             "Callsign: a combination of capital letters and spaces, or blank if unknown\n" +
-            "Country: a combination of letters and spaces\n" +
+            "Country: '\\N' if country is unknown, a combination of letters and spaces otherwise\n" +
             "Active status: check if active, leave unchecked if inactive");
     ErrorAlert.show();
   }
