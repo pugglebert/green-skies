@@ -33,7 +33,7 @@ public class SQLiteDatabase {
   /** Variable for table name that is going to be created in database. */
   private String tableName;
 
-  public SQLiteDatabase(){
+  public SQLiteDatabase() {
     buildConnection();
     closeAutoCommite();
   }
@@ -428,8 +428,6 @@ public class SQLiteDatabase {
     }
   }
 
-
-
   /**
    * This method initialise table according to provided tabletype, it deletes table and recreates
    * it. This method also set table name for globle attribute for other method to interact to
@@ -724,83 +722,81 @@ public class SQLiteDatabase {
       }
     }
 
-      setTableName("history");
-
-      try {
-        state = con.createStatement();
-        res =
-                state.executeQuery(
-                        "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
-
-        if (res.next()) {
-          state = con.createStatement();
-          res = state.executeQuery("select * from " + tableName);
-          ArrayList<DataType> routesHistory = new ArrayList<>();
-          while (res.next()) {
-            //                int route_id = routesRow.getInt("route_id");
-            String airlineName = res.getString("airlineName");
-            int airlineID = res.getInt("airlineID");
-            String sourceAirport = res.getString("sourceAirport");
-            int sourceAirportID = res.getInt("sourceAirportID");
-            String destinationAirport = res.getString("destinationAirport");
-            int destinationAirportID = res.getInt("destinationAirportID");
-            String codeShare = res.getString("codeShare");
-            int numOfStops = res.getInt("numOfStops");
-
-            String equipment = res.getString("equipment");
-            String[] equipmentArray;
-            if (equipment != null) {
-              equipmentArray = equipment.split(" ");
-            } else {
-              equipmentArray = null;
-            }
-
-            double emissions = res.getDouble("emissions");
-            double distance = res.getDouble("distance");
-            int timesTaken = res.getInt("timesTaken");
-
-            assert equipmentArray != null;
-            Route route =
-                    new Route(
-                            airlineName,
-                            airlineID,
-                            sourceAirport,
-                            sourceAirportID,
-                            destinationAirport,
-                            destinationAirportID,
-                            codeShare,
-                            numOfStops,
-                            equipmentArray);
-            route.setEmissions(emissions);
-            route.setTimesTaken(timesTaken);
-            route.setDistance(distance);
-            routesHistory.add(route);
-          }
-
-          List<Route> history = storage.getHistory();
-          for(DataType route: routesHistory){
-            Route bufferRoute =(Route)route;
-            history.add(bufferRoute);
-          }
-
-        }
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, e);
-      } finally {
-        try {
-          res.close();
-          state.close();
-        } catch (Exception e) {
-          JOptionPane.showMessageDialog(null, e);
-        }
-      }
+    setTableName("history");
 
     try {
-    con.close();
-  } catch (Exception e) {
-    JOptionPane.showMessageDialog(null, e);
-  }
+      state = con.createStatement();
+      res =
+          state.executeQuery(
+              "SELECT name FROM sqlite_master WHERE type='table' AND name=" + tableName);
 
+      if (res.next()) {
+        state = con.createStatement();
+        res = state.executeQuery("select * from " + tableName);
+        ArrayList<DataType> routesHistory = new ArrayList<>();
+        while (res.next()) {
+          //                int route_id = routesRow.getInt("route_id");
+          String airlineName = res.getString("airlineName");
+          int airlineID = res.getInt("airlineID");
+          String sourceAirport = res.getString("sourceAirport");
+          int sourceAirportID = res.getInt("sourceAirportID");
+          String destinationAirport = res.getString("destinationAirport");
+          int destinationAirportID = res.getInt("destinationAirportID");
+          String codeShare = res.getString("codeShare");
+          int numOfStops = res.getInt("numOfStops");
+
+          String equipment = res.getString("equipment");
+          String[] equipmentArray;
+          if (equipment != null) {
+            equipmentArray = equipment.split(" ");
+          } else {
+            equipmentArray = null;
+          }
+
+          double emissions = res.getDouble("emissions");
+          double distance = res.getDouble("distance");
+          int timesTaken = res.getInt("timesTaken");
+
+          assert equipmentArray != null;
+          Route route =
+              new Route(
+                  airlineName,
+                  airlineID,
+                  sourceAirport,
+                  sourceAirportID,
+                  destinationAirport,
+                  destinationAirportID,
+                  codeShare,
+                  numOfStops,
+                  equipmentArray);
+          route.setEmissions(emissions);
+          route.setTimesTaken(timesTaken);
+          route.setDistance(distance);
+          routesHistory.add(route);
+        }
+
+        List<Route> history = storage.getHistory();
+        for (DataType route : routesHistory) {
+          Route bufferRoute = (Route) route;
+          history.add(bufferRoute);
+        }
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    } finally {
+      try {
+        res.close();
+        state.close();
+      } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+      }
+    }
+
+    try {
+      con.close();
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
   }
 
   /**
@@ -916,6 +912,7 @@ public class SQLiteDatabase {
         prep.setString(2, fileName);
         prep.setString(3, fileType);
         prep.execute();
+        prep.close();
         startCommite();
       }
 
@@ -924,7 +921,6 @@ public class SQLiteDatabase {
     } finally {
       try {
         res.close();
-        prep.close();
         state.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
@@ -932,7 +928,9 @@ public class SQLiteDatabase {
     }
   }
 
-  /** This method will update history in database when user add routes to history.
+  /**
+   * This method will update history in database when user add routes to history.
+   *
    * @param routes Route Object of route contains information of route as attributes.
    */
   public void updateHistoryTable(List<Route> routes) {
@@ -967,7 +965,7 @@ public class SQLiteDatabase {
       }
     } catch (Exception e) {
       JOptionPane.showMessageDialog(null, e);
-    } finally{
+    } finally {
       try {
         res.close();
         state.close();
@@ -1039,22 +1037,33 @@ public class SQLiteDatabase {
     try {
       state = con.createStatement();
       state.executeUpdate("drop table " + tableName);
-      state.executeUpdate(
-          "delete from file_list where file_name='"
-              + fileName
-              + "' and file_type='"
-              + fileType
-              + "'");
+      res =
+          state.executeQuery(
+              "select count(*) as row_count where file_name='"
+                  + fileName
+                  + "' and file_type='"
+                  + fileType
+                  + "'");
+      if (res.getInt("row_count") != 0) {
+
+        state.executeUpdate(
+            "delete from file_list where file_name='"
+                + fileName
+                + "' and file_type='"
+                + fileType
+                + "'");
+      }
       startCommite();
     } catch (Exception e) {
+      System.out.println(11);
       JOptionPane.showMessageDialog(null, e);
     } finally {
       try {
+        res.close();
         state.close();
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e);
       }
     }
   }
-
 }
