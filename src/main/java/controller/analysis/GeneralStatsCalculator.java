@@ -333,11 +333,11 @@ public class GeneralStatsCalculator {
    * @param start The starting index of the arrayToSort.
    * @param end The ending index of the arrayToSort.
    */
-  public static void quickSort(List<Route> arrayToSort, int start, int end) {
+  public static void quickSort(List<Route> arrayToSort, int start, int end, String type) {
     if (end <= start) return;
-    int pivot = quickSortPartition(arrayToSort, start, end);
-    quickSort(arrayToSort, start, pivot - 1);
-    quickSort(arrayToSort, pivot + 1, end);
+    int pivot = quickSortPartition(arrayToSort, start, end, type);
+    quickSort(arrayToSort, start, pivot - 1, type);
+    quickSort(arrayToSort, pivot + 1, end, type);
   }
 
   /**
@@ -347,11 +347,11 @@ public class GeneralStatsCalculator {
    * @param start The starting index of the arrayToSort.
    * @param end The ending index of the arrayToSort.
    */
-  public static void quickSortEmissions(List<Route> arrayToSort, int start, int end) {
+  public static void quickSortEmissions(List<Route> arrayToSort, int start, int end, String type) {
     if (end <= start) return;
     int pivot = quickSortPartitionEmissions(arrayToSort, start, end);
-    quickSort(arrayToSort, start, pivot - 1);
-    quickSort(arrayToSort, pivot + 1, end);
+    quickSort(arrayToSort, start, pivot - 1, type);
+    quickSort(arrayToSort, pivot + 1, end, type);
   }
 
   /**
@@ -361,11 +361,11 @@ public class GeneralStatsCalculator {
    * @param start The starting index of the arrayToSort.
    * @param end The ending index of the arrayToSort.
    */
-  public static void quickSortDistance(List<Route> arrayToSort, int start, int end) {
+  public static void quickSortDistance(List<Route> arrayToSort, int start, int end, String type) {
     if (end <= start) return;
     int pivot = quickSortPartitionDistance(arrayToSort, start, end);
-    quickSort(arrayToSort, start, pivot - 1);
-    quickSort(arrayToSort, pivot + 1, end);
+    quickSort(arrayToSort, start, pivot - 1, type);
+    quickSort(arrayToSort, pivot + 1, end, type);
   }
 
   /**
@@ -376,15 +376,32 @@ public class GeneralStatsCalculator {
    * @param end The ending index of the arrayToSort.
    * @return
    */
-  public static int quickSortPartition(List<Route> arrayToSort, int start, int end) {
+  public static int quickSortPartition(List<Route> arrayToSort, int start, int end, String type) {
     int pivot = end;
     int counter = start;
     for (int i = start; i < end; i++) {
-      if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
-        Route temp = arrayToSort.get(counter);
-        arrayToSort.set(counter, arrayToSort.get(i));
-        arrayToSort.set(i, temp);
-        counter++;
+      int isIndexValLessThanPivotVal = 0;
+      if (type == "distance") {
+        if (arrayToSort.get(i).getDistance() < arrayToSort.get(pivot).getDistance()) {
+          Route temp = arrayToSort.get(counter);
+          arrayToSort.set(counter, arrayToSort.get(i));
+          arrayToSort.set(i, temp);
+          counter++;
+        }
+      } else if (type == "emissions") {
+        if (arrayToSort.get(i).getEmissions() < arrayToSort.get(pivot).getEmissions()) {
+          Route temp = arrayToSort.get(counter);
+          arrayToSort.set(counter, arrayToSort.get(i));
+          arrayToSort.set(i, temp);
+          counter++;
+        }
+      } else if (type == "times taken") {
+        if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
+          Route temp = arrayToSort.get(counter);
+          arrayToSort.set(counter, arrayToSort.get(i));
+          arrayToSort.set(i, temp);
+          counter++;
+        }
       }
     }
     Route temp = arrayToSort.get(pivot);
