@@ -102,9 +102,9 @@ public class AirportStatsCalculatorTest {
   @Test
   public void updateMostVisitedSrcAirportTenDiffThreeMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Airport");
     expectedResults.add("Hamilton Airport");
     expectedResults.add("Auckland Airport");
+    expectedResults.add("Wellington Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
     testSrcAirports.put("Wellington Airport", 251);
     testSrcAirports.put("Auckland Airport", 251);
@@ -196,9 +196,9 @@ public class AirportStatsCalculatorTest {
   @Test
   public void updateMostVisitedDestAirportTenDiffThreeMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Airport");
     expectedResults.add("Hamilton Airport");
     expectedResults.add("Auckland Airport");
+    expectedResults.add("Wellington Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
     testSrcAirports.put("Wellington Airport", 251);
     testSrcAirports.put("Auckland Airport", 251);
@@ -426,9 +426,9 @@ public class AirportStatsCalculatorTest {
   @Test
   public void updateLeastVisitedSrcAirportTenDiffThreeMostTest() {
     ArrayList<String> expectedResults = new ArrayList<>();
-    expectedResults.add("Wellington Airport");
     expectedResults.add("Hamilton Airport");
     expectedResults.add("Auckland Airport");
+    expectedResults.add("Wellington Airport");
     HashMap<String, Integer> testSrcAirports = new HashMap<>();
     testSrcAirports.put("Wellington Airport", 2);
     testSrcAirports.put("Auckland Airport", 2);
@@ -519,10 +519,10 @@ public class AirportStatsCalculatorTest {
     @Test
     public void updateLeastVisitedDestAirportTenDiffThreeMostTest() {
         ArrayList<String> expectedResults = new ArrayList<>();
-        expectedResults.add("Wellington Airport");
         expectedResults.add("Hamilton Airport");
         expectedResults.add("Auckland Airport");
-        HashMap<String, Integer> testDestAirports = new HashMap<>();
+      expectedResults.add("Wellington Airport");
+      HashMap<String, Integer> testDestAirports = new HashMap<>();
         testDestAirports.put("Wellington Airport", 2);
         testDestAirports.put("Auckland Airport", 2);
         testDestAirports.put("Christchurch Airport", 147);

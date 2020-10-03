@@ -173,7 +173,7 @@ public class FlightHistoryController extends DataViewController {
       if (result.isPresent() && result.get() == ButtonType.OK) {
         for (Route route : routes) {
           if (route.getSelect().isSelected()) {
-            updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
+            updateReportStatsDeletionSingleRoute(route); //TODO test this!
             routes.remove(route);
           }
         }
