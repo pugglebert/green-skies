@@ -17,9 +17,8 @@ import java.util.List;
 /**
  * The controller class which contains the controls for data entry of a single Airline.
  *
- * @author Grace Hanlon
  * @version 1.0
- * @since 12/09/20
+ * @since 04/10/2020
  */
 public class AirlineSingleEntryController {
   /** Initialize a loader object */
@@ -44,6 +43,7 @@ public class AirlineSingleEntryController {
 
   /**
    * This method presents the user with a confirmation box before uploading a file
+   *
    * @param message
    */
   public void showConfirmDialog(String message) {
@@ -54,7 +54,6 @@ public class AirlineSingleEntryController {
     alert.showAndWait();
   }
 
-
   /** This method loads the data entered for an airline as a singular line. */
   public void addEntry() {
     String entryString = makeAirlineString();
@@ -62,14 +61,13 @@ public class AirlineSingleEntryController {
     try {
       String message = loader.loadLine(entryString, "Airline");
 
-      //Add single entry to specified table.
       List<DataType> data = loader.getParser().getData();
       String fileName = loader.getLineFileName("Airline");
 
       SQLiteDatabase database = new SQLiteDatabase();
       database.initialiseTable("Airline", fileName);
-      while (data.remove(null));
-      database.addAirlines((Airline) data.get(data.size()-1));
+      while (data.remove(null)) ;
+      database.addAirlines((Airline) data.get(data.size() - 1));
       database.startCommite();
 
       showConfirmDialog(message);
@@ -123,21 +121,20 @@ public class AirlineSingleEntryController {
     return airlineString;
   }
 
-  /**
-   * This method launches alert giving user information on expected format of airline entry.
-   */
+  /** This method launches alert giving user information on expected format of airline entry. */
   public void airlineHelp() {
     Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
     ErrorAlert.setAlertType(Alert.AlertType.INFORMATION);
-    ErrorAlert.setContentText("Expected format of airline entry:\n" +
-            "Airline name: a combination of letters and spaces\n" +
-            "Airline ID: a positive integer\n" +
-            "Alias: '\\N' if the airline has no alias, or a combination of letters and spaces\n" +
-            "IATA: two capital letters or numbers\n" +
-            "ICAO: '\\N' or N/A if ICAO is unknown, three capital letters otherwise\n" +
-            "Callsign: a combination of capital letters and spaces, or blank if unknown\n" +
-            "Country: '\\N' if country is unknown, a combination of letters and spaces otherwise\n" +
-            "Active status: check if active, leave unchecked if inactive");
+    ErrorAlert.setContentText(
+        "Expected format of airline entry:\n"
+            + "Airline name: a combination of letters and spaces\n"
+            + "Airline ID: a positive integer\n"
+            + "Alias: '\\N' if the airline has no alias, or a combination of letters and spaces\n"
+            + "IATA: two capital letters or numbers\n"
+            + "ICAO: '\\N' or N/A if ICAO is unknown, three capital letters otherwise\n"
+            + "Callsign: a combination of capital letters and spaces, or blank if unknown\n"
+            + "Country: '\\N' if country is unknown, a combination of letters and spaces otherwise\n"
+            + "Active status: check if active, leave unchecked if inactive");
     ErrorAlert.show();
   }
 }

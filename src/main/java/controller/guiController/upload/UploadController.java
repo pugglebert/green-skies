@@ -18,7 +18,6 @@ import model.data.Route;
 import model.data.Storage;
 import model.database.SQLiteDatabase;
 import model.loader.Loader;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -28,9 +27,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the upload data view.
  *
- * @author Grace Hanlon, Lambert
  * @version 1.1
- * @since 2020-09-18
+ * @since 04/10/2020
  */
 public class UploadController extends SideNavBarController {
 
@@ -78,7 +76,7 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * This method returns a boolan value based on whether the user has selected a data type or not
+     * This method returns a boolean value based on whether the user has selected a data type or not
      */
     public boolean checkDataTypeSelected() {
 
@@ -277,18 +275,18 @@ public class UploadController extends SideNavBarController {
 
     /**
      * This method checks the type of file user wish to delete.
-     * @param filetype The type of file the user has selected.
+     * @param fileType The type of file the user has selected.
      */
-    private void checkState(String filetype) {
-        if(filetype == "Airport") {
+    private void checkState(String fileType) {
+        if(fileType == "Airport") {
             currentAirlineFile = null;
             currentRouteFile = null;
         }
-         else if(filetype == "Airline") {
+         else if(fileType == "Airline") {
             currentAirportFile = null;
             currentRouteFile = null;
         }
-        else if(filetype == "Route") {
+        else if(fileType == "Route") {
             currentAirportFile = null;
             currentAirlineFile = null;
         }

@@ -10,15 +10,13 @@ import model.data.Airport;
 import model.data.DataType;
 import model.database.SQLiteDatabase;
 import model.loader.Loader;
-
 import java.util.List;
 
 /**
  * The controller class which contains the controls for data entry of a single Airport.
  *
- * @author Grace Hanlon
  * @version 1.0
- * @since 12/09/20
+ * @since 04/10/2020
  */
 public class AirportSingleEntryController {
 
@@ -48,6 +46,7 @@ public class AirportSingleEntryController {
 
   /**
    * This method presents the user with a confirmation box before uploading a file
+   *
    * @param message
    */
   public void showConfirmDialog(String message) {
@@ -65,14 +64,13 @@ public class AirportSingleEntryController {
     try {
       String message = loader.loadLine(entryString, "Airport");
 
-      //Add single entry to specified table.
       List<DataType> data = loader.getParser().getData();
       String fileName = loader.getLineFileName("Airport");
 
       SQLiteDatabase database = new SQLiteDatabase();
       database.initialiseTable("Airport", fileName);
-      while (data.remove(null));
-      database.addAirports((Airport) data.get(data.size()-1));
+      while (data.remove(null)) ;
+      database.addAirports((Airport) data.get(data.size() - 1));
       database.startCommite();
 
       showConfirmDialog(message);
@@ -135,26 +133,24 @@ public class AirportSingleEntryController {
     return airportString;
   }
 
-  /**
-   * This method launches alert giving user information on expected format of airport entry.
-   */
+  /** This method launches alert giving user information on expected format of airport entry. */
   public void airportHelp() {
     Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
     ErrorAlert.setAlertType(Alert.AlertType.INFORMATION);
-    ErrorAlert.setContentText("Expected format of airport entry:\n" +
-            "Airport name: a combination of letters and spaces\n" +
-            "City: a combination of letters, numbers and spaces\n" +
-            "Country: a combination of letters and spaces\n" +
-            "IATA: 'null' if IATA is unknown, three letters or numbers otherwise\n" +
-            "ICAO: 'null' if ICAO is unknown, four letters or numbers otherwise\n" +
-            "Timezone: an integer between -12 and 14 indicating deviation from GMT\n" +
-            "Latitude: a positive or negative decimal number\n" +
-            "Longitude: a positive or negative decimal number\n" +
-            "Altitude: a positive or negative integer\n" +
-            "DST: single capital letter corresponding to daylight savings time. One of: 'E','A','S','O','Z','N' or 'U'\n" +
-            "Database timezone: the name of the timezone, a combination of letters and no spaces e.g. 'Pacific/Auckland'\n" +
-            "Airport ID: an integer, must be unique within the airport file");
+    ErrorAlert.setContentText(
+        "Expected format of airport entry:\n"
+            + "Airport name: a combination of letters and spaces\n"
+            + "City: a combination of letters, numbers and spaces\n"
+            + "Country: a combination of letters and spaces\n"
+            + "IATA: 'null' if IATA is unknown, three letters or numbers otherwise\n"
+            + "ICAO: 'null' if ICAO is unknown, four letters or numbers otherwise\n"
+            + "Timezone: an integer between -12 and 14 indicating deviation from GMT\n"
+            + "Latitude: a positive or negative decimal number\n"
+            + "Longitude: a positive or negative decimal number\n"
+            + "Altitude: a positive or negative integer\n"
+            + "DST: single capital letter corresponding to daylight savings time. One of: 'E','A','S','O','Z','N' or 'U'\n"
+            + "Database timezone: the name of the timezone, a combination of letters and no spaces e.g. 'Pacific/Auckland'\n"
+            + "Airport ID: an integer, must be unique within the airport file");
     ErrorAlert.show();
   }
-
 }

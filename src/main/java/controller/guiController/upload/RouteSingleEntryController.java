@@ -10,15 +10,13 @@ import model.data.DataType;
 import model.data.Route;
 import model.database.SQLiteDatabase;
 import model.loader.Loader;
-
 import java.util.List;
 
 /**
  * The controller class which contains the controls for data entry of a single Route.
  *
- * @author Grace Hanlon
  * @version 1.0
- * @since 12/09/20
+ * @since 04/10/2020
  */
 public class RouteSingleEntryController {
 
@@ -37,7 +35,6 @@ public class RouteSingleEntryController {
   @FXML Button cancelButton;
   @FXML Button addEntryButton;
 
-
   /** This method closes window when the 'Cancel' button is pushed. */
   public void closeWindow() {
     Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -46,6 +43,7 @@ public class RouteSingleEntryController {
 
   /**
    * This method presents the user with a confirmation box before uploading a file
+   *
    * @param message
    */
   public void showConfirmDialog(String message) {
@@ -63,14 +61,13 @@ public class RouteSingleEntryController {
     try {
       String message = loader.loadLine(entryString, "Route");
 
-      //Add single entry to specified table.
       List<DataType> data = loader.getParser().getData();
       String fileName = loader.getLineFileName("Route");
 
       SQLiteDatabase database = new SQLiteDatabase();
       database.initialiseTable("Route", fileName);
-      while (data.remove(null));
-      database.addRoutes((Route) data.get(data.size()-1));
+      while (data.remove(null)) ;
+      database.addRoutes((Route) data.get(data.size() - 1));
       database.startCommite();
 
       showConfirmDialog(message);
@@ -124,23 +121,21 @@ public class RouteSingleEntryController {
     return routeLine;
   }
 
-  /**
-   * This method launches alert giving user information on expected format of route entry.
-   */
+  /** This method launches alert giving user information on expected format of route entry. */
   public void routeHelp() {
     Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
     ErrorAlert.setAlertType(Alert.AlertType.INFORMATION);
-    ErrorAlert.setContentText("Expected format of route entry:\n" +
-            "Airline name: a combination of two or three capital letters or numbers e.g. 2B\n" +
-            "Airline ID: a number up to 5 digits long, otherwise '\\N' if unknown\n" +
-            "Number of Stops: an integer between zero and nine\n" +
-            "Source Airport: a combination of three or four capital letters e.g. 'AER'\n" +
-            "Destination Airport: a combination of three or four capital letters e.g. 'AER'\n" +
-            "Code Share: 'Y' or blank if unknown\n" +
-            "Source Airport ID: a number up to 5 digits long, otherwise '\\N' if unknown\n" +
-            "Destination Airport ID: a number up to 5 digits long, otherwise '\\N' if unknown\n" +
-            "Equipment: a combination of three letters or numbers\n");
+    ErrorAlert.setContentText(
+        "Expected format of route entry:\n"
+            + "Airline name: a combination of two or three capital letters or numbers e.g. 2B\n"
+            + "Airline ID: a number up to 5 digits long, otherwise '\\N' if unknown\n"
+            + "Number of Stops: an integer between zero and nine\n"
+            + "Source Airport: a combination of three or four capital letters e.g. 'AER'\n"
+            + "Destination Airport: a combination of three or four capital letters e.g. 'AER'\n"
+            + "Code Share: 'Y' or blank if unknown\n"
+            + "Source Airport ID: a number up to 5 digits long, otherwise '\\N' if unknown\n"
+            + "Destination Airport ID: a number up to 5 digits long, otherwise '\\N' if unknown\n"
+            + "Equipment: a combination of three letters or numbers\n");
     ErrorAlert.show();
   }
-
 }
