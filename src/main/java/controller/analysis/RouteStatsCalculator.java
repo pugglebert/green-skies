@@ -161,7 +161,6 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
    */
   public void updateLeastDistanceRoute(Route currentRouteRecord) {
     if (currentRouteRecord.getDistance() > 0.0) {
-
       if (leastDistanceRoutes.isEmpty() == true) {
         leastDistanceRoutes.add(currentRouteRecord);
       } else if (currentRouteRecord.getDistance() < leastDistanceRoutes.get(0).getDistance()) {

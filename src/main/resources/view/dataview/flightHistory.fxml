@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="700" prefWidth="1400" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.guiController.dataview.FlightHistoryController">
     <children>
-        <TableView fx:id="tableView" layoutX="238.0" layoutY="155.0" prefHeight="453.0" prefWidth="1134.0">
+        <TableView fx:id="tableView" layoutX="238.0" layoutY="155.0"  prefHeight="453.0" prefWidth="1134.0">
             <columns>
                 <TableColumn fx:id="addColumn" prefWidth="64.0" text="Select" />
                 <TableColumn fx:id="airlineNameColumn" text="Airline Name" />
@@ -47,11 +47,7 @@
             <font>
                 <Font size="18.0" />
             </font></Button>
-        <Button fx:id="selectAllBtn" layoutX="238.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="37.0" prefWidth="188.0" style="-fx-background-color: #116754;" text="Select All Flights" textFill="WHITE">
-            <font>
-                <Font size="18.0" />
-            </font></Button>
-        <Button fx:id="deselectAllBtn" layoutX="448.0" layoutY="626.0" mnemonicParsing="false" onAction="#deselectAll" prefHeight="37.0" prefWidth="228.0" style="-fx-background-color: #116754;" text="Deselect All Flights" textFill="WHITE">
+        <Button fx:id="selectRouteToDisplay" layoutX="948.0" layoutY="626.0" mnemonicParsing="false" onAction="#selectRoute" prefHeight="37.0" prefWidth="328.0" style="-fx-background-color: #116754;" text="Select route to display on map" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font></Button>

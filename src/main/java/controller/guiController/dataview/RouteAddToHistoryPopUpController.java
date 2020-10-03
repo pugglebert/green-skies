@@ -6,7 +6,6 @@ import controller.analysis.RouteStatsCalculator;
 import controller.guiController.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,12 +53,10 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   /** The RouteStatsCalculator to generate route stats for the reports about flight history. */
   private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
-  // TODO: Nathan please write. HK 26/09/2020
-  /** */
+  /** The classs from which stored data can be accessed. */
   private final Storage storage = Main.getStorage();
 
-  // TODO: Nathan please write. HK 26/09/2020
-  /** */
+  /** List of routes to be added to history. */
   private ObservableList<Route> tempRoute;
 
   /** The database for adding history to history table in database. */
@@ -90,7 +87,7 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     // below is initialize the cell of number of passenger, when double click the cell will be
-    // turned to textfield
+    // turned to textField
     passengerNumber.setCellValueFactory(new PropertyValueFactory<>("timesTaken"));
     passengerNumber.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     passengerNumber.setOnEditCommit(
@@ -124,10 +121,15 @@ public class RouteAddToHistoryPopUpController implements Initializable {
       } else {
         int index = Main.getStorage().getHistory().indexOf(route);
         if (index != -1) {
-          // Route have been added to histoy
-          Main.getStorage().getHistory().get(index).setTimesTaken(route.getTimesTaken());
+          // Route have been added to history
+          Main.getStorage()
+                  .getHistory()
+                  .get(index)
+                  .setTimesTaken(
+                          route.getTimesTaken()
+                                  + Main.getStorage().getHistory().get(index).getTimesTaken());
         } else {
-          // Route have been added to history + have been set number of passenger
+          // Route have not been added to history + have been set number of passenger
           Main.getStorage().getHistory().add(route);
         }
         route.getSelect().setSelected(false);
@@ -141,7 +143,11 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
-  // todo write comment for this function
+  /**
+   * This methods updates the calculations of the stats calculator classes to include the route which
+   * has just been added to history.
+   * @param route Route which has been added to history.
+   */
   public void updateReportStats(Route route) {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
@@ -157,7 +163,9 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     routeStatsCalculator.updateLeastEmissionsRoute(route);
   }
 
-  // todo write comment for this function
+  /**
+   * This method closes the stage without adding any routes to history.
+   */
   public void cancel() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(0);
@@ -166,8 +174,10 @@ public class RouteAddToHistoryPopUpController implements Initializable {
     stage.close();
   }
 
-  // todo write comment for this function
-  public void setAllPassengerTo1(ActionEvent event) {
+  /**
+   * This method sets the times taken for each of the routes in tempRoutes to 1.
+   */
+  public void setAllPassengerTo1() {
     for (Route route : Main.getStorage().getTempRoutes()) {
       route.setTimesTaken(1);
     }

@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 /**
  * This class tests airportParser.
  * @author Lambert
+ * @since 20/09/2020
  */
 public class AirportParserTest {
     private AirportParser airportParser;

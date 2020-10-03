@@ -62,6 +62,9 @@ public class Storage {
   /** The database in which data added to the application is stored. */
   private final SQLiteDatabase database = new SQLiteDatabase();
 
+  /** Airport to display in google map. */
+  public ArrayList<Airport> MapAirport = new ArrayList<>();
+
   /**
    * This method returns a List of all the names of the stored airline files, or an empty List if no Airline files
    * have been stored.
@@ -103,11 +106,6 @@ public class Storage {
     }
     return airlineFiles.get(currentAirlineFile);
   }
-
-//  /** This method reset airlines list. */
-//  public void resetAirlinesList() {
-//    airlines = new ArrayList<>();
-//  }
 
   /**
    * This method returns a List of all the names of the stored airport files, or an empty List if no Airport files
@@ -228,7 +226,6 @@ public class Storage {
     history.add(routes);
   }
 
-  //todo Lambert delete the code that you are not done
   /**
    * This method adds a list of data from a file to storage.
    *
@@ -236,63 +233,45 @@ public class Storage {
    * @param type Type of data to be stored.
    */
   public void setData(List<DataType> data, String type, String filename) {
-    //close auto commite for database
-//    database.closeAutoCommite();
-
     if (type.matches("Airline")) {
       List<Airline> airlines = new ArrayList<>();
       if (filename == null) {
         filename = currentAirlineFile;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airline");
+
       } else {
           currentAirlineFile = filename;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airline");
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;
         if (airline != null) {
           airlines.add(airline);
-//          database.addAirlines(airline);
         }
       }
       airlineFiles.put(filename, airlines);
-//      database.startCommite();
     } else if (type.matches("Airport")) {
       List<Airport> airports = new ArrayList<>();
       if (filename == null) {
         filename = currentAirportFile;
-//        database.setTableName(filename);
-//        database.initialiseTable("Airport");
       } else {
         currentAirportFile = filename;
       }
       for (DataType entry : data) {
         Airport airport = (Airport) entry;
         airports.add(airport);
-//        database.addAirports(airport);
       }
       airportFiles.put(filename, airports);
-//      database.startCommite();
     } else if (type.matches("Route")) {
       List<Route> routes = new ArrayList<>();
       if (filename == null) {
         filename = currentRouteFile;
-//        database.setTableName(filename);
-//        database.initialiseTable("Route");
       } else {
         currentRouteFile = filename;
-//        database.setTableName(filename);
-//        database.initialiseTable("Route");
       }
       for (DataType entry : data) {
         Route route = (Route) entry;
         routes.add(route);
-//        database.addRoutes(route);
       }
       routeFiles.put(filename, routes);
-//      database.startCommite();
     } else {
       throw new IllegalArgumentException("Type must be airline, airport or route");
     }
@@ -382,6 +361,34 @@ public class Storage {
   }
 
   /**
+   * This method updates the count of source airport visits in the flight history when the route is removed.
+   *
+   * @param airportName The name of the source airport of the route being remove from history.
+   */
+  public void removeFromHistorySrcAirports(String airportName) {
+    if (historySrcAirports.containsKey(airportName)) {
+      historySrcAirports.put(airportName, historySrcAirports.get(airportName) - 1);
+      if (historySrcAirports.get(airportName) < 0) {
+        historySrcAirports.put(airportName, 0);
+      }
+    }
+  }
+
+  /**
+   * This method updates the count of destination airport visits in the flight history when the route is removed.
+   *
+   * @param airportName The name of the destination airport of the route being remove from history.
+   */
+  public void removeFromHistoryDestAirports(String airportName) {
+    if (historyDestAirports.containsKey(airportName)) {
+      historyDestAirports.put(airportName, historyDestAirports.get(airportName) - 1);
+      if (historyDestAirports.get(airportName) < 0) {
+        historyDestAirports.put(airportName, 0);
+      }
+    }
+  }
+
+  /**
    * This method gets the airline file list.
    *
    * @return A HashMap of the names of airline file as key and the list of airlines that is parsed in the file.
@@ -423,4 +430,6 @@ public class Storage {
   public void setComparedRoutes(Pair<String, String> comparedRoutes) {
     this.comparedRoutes = comparedRoutes;
   }
+
+
 }

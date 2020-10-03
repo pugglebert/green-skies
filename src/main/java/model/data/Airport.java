@@ -2,6 +2,8 @@ package model.data;
 
 import javafx.scene.control.CheckBox;
 
+import java.util.ArrayList;
+
 /**
  * The Airport class which contains all data for one unique airport.
  */
@@ -60,6 +62,7 @@ public class Airport implements DataType {
    * A checkbox to tell whether this route has been selected.
    */
   private CheckBox select;
+
 
   /**
    * The Airport constructor.
@@ -190,5 +193,6 @@ public class Airport implements DataType {
     } else {
       return false;
     }
+
   }
 }

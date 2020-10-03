@@ -62,5 +62,6 @@
             </Button>
          </children>
       </VBox>
+      <Button fx:id="buttonShow" layoutX="1225.0" layoutY="419.0" mnemonicParsing="false" onAction="#showMap" text="Button" />
     </children>
 </AnchorPane>
