@@ -1052,7 +1052,6 @@ public class SQLiteDatabase {
       try {
         state.close();
       } catch (Exception e) {
-        System.out.println(1);
         JOptionPane.showMessageDialog(null, e);
       }
     }

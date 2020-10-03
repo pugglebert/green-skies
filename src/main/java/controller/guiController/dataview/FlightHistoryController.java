@@ -235,10 +235,10 @@ public class FlightHistoryController extends DataViewController {
         mapAirport.put(pathNum, sourDestAirport);
         pathNum+=1;
       }
-          if (mapAirport.size() > 1) {
-            AlertPopUp.showGoogleMapAlert();
-            mapAirport.clear();
-          }
+    }
+    if (mapAirport.size() > 1) {
+      AlertPopUp.showGoogleMapAlert();
+      mapAirport.clear();
     }
   }
 }

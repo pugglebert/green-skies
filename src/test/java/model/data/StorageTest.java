@@ -149,7 +149,6 @@ public class StorageTest {
   public void setDataAirlineUpdatedTest() {
     List<DataType> testAirlines = createAirlineList();
     storage.setData(testAirlines, "Airline", "airlinetest.csv");
-    System.out.println(storage.getCurrentAirlineFile());
     assertEquals(testAirlines, storage.getAirlines());
   }
 
@@ -176,7 +175,6 @@ public class StorageTest {
   public void setDataAirportTest() {
     List<DataType> testAirports = createAirportList();
     storage.setData(testAirports, "Airport", "airporttest.csv");
-    System.out.println(storage.getCurrentAirportFile());
     assertEquals(testAirports, storage.getAirports());
   }
 
