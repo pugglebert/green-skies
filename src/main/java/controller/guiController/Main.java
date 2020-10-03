@@ -6,15 +6,13 @@ import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
 import model.data.Storage;
 import model.loader.Loader;
-
 import java.sql.SQLException;
 
 /**
  * The controller class which contains the controls for the main.
  *
- * @author Hayley Krippner, Ella Johnson.
  * @version 1.0
- * @since 04/09/20
+ * @since 04/10/2020
  */
 public class Main {
   /** The storage for the application. */
@@ -55,7 +53,7 @@ public class Main {
   }
 
   /**
-   * This method is the main which initilizes the storage and starts the application.
+   * This method is the main which initializes the storage and starts the application.
    *
    * @param args The arguments passed in.
    * @throws SQLException This throws an SQLException.

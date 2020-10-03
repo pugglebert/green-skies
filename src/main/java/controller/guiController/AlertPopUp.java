@@ -3,10 +3,15 @@ package controller.guiController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
-
 import java.util.HashSet;
 import java.util.Optional;
 
+/**
+ * This class deals with the methods for alert pop up windows.
+ *
+ * @version 1.0
+ * @since 04/10/2020
+ */
 public class AlertPopUp {
 
   /**
@@ -44,23 +49,20 @@ public class AlertPopUp {
       headerText.append(airport).append(", ");
     }
     alert.setHeaderText(headerText.toString());
-    // alert.setContentText(null);
     alert.initStyle(StageStyle.UTILITY);
     return alert.showAndWait();
   }
 
   /**
-   * This method displays a warning to the user when they are about to select more than two route in history
-   * to display on google map.
+   * This method displays a warning to the user when they are about to select more than two route in
+   * history to display on google map.
    *
    * @return the option the user chooses (ok to proceed, cancel to abandon).
    */
-  public static Optional<ButtonType> showGoogleMapAlert(){
+  public static Optional<ButtonType> showGoogleMapAlert() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Google Map");
-    StringBuilder headerText =
-            new StringBuilder(
-                    "Please select only one route for google Map.");
+    StringBuilder headerText = new StringBuilder("Please select only one route for google Map.");
     alert.setHeaderText(headerText.toString());
     alert.initStyle(StageStyle.UTILITY);
     return alert.showAndWait();

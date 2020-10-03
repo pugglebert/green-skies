@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import model.data.Airport;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,9 +13,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the map of airports page.
  *
- * @author Lambert
- * @version 1.2
- * @since 14/09/20
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class MapOfRoutesController extends SideNavBarController {
 
@@ -31,7 +29,7 @@ public class MapOfRoutesController extends SideNavBarController {
    * This method initializes the controller class.
    *
    * @param url The provided url.
-   * @param resourceBundle The proided resource bundle.
+   * @param resourceBundle The provided resource bundle.
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,17 +37,14 @@ public class MapOfRoutesController extends SideNavBarController {
     mapAirport = Main.getStorage().getMapAirport();
   }
 
-  /**
-   * This method initilises the google map.
-   */
+  /** This method initialises the google map. */
   public void iniMap() {
     mapEngine = mapView.getEngine();
-    mapEngine.load(MapOfRoutesController.class.getResource("/view/googleMap.html").toExternalForm());
+    mapEngine.load(
+        MapOfRoutesController.class.getResource("/view/googleMap.html").toExternalForm());
   }
 
-  /**
-   * This method calls script to display the route on map.
-   */
+  /** This method calls script to display the route on map. */
   public void displayRoute() {
     if (mapAirport.size() != 0) {
       StringBuilder stringBuilder = new StringBuilder();
@@ -64,9 +59,8 @@ public class MapOfRoutesController extends SideNavBarController {
       stringBuilder.append("]");
       String scriptToExecute = "displayRoute(" + stringBuilder.toString() + ");";
       mapEngine.executeScript(scriptToExecute);
-}
     }
-
+  }
 
   public void showMap() {
     displayRoute();

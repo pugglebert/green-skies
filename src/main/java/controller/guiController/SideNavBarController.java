@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.data.Storage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,9 +17,8 @@ import java.util.ResourceBundle;
  * Superclass for all data view pages. All such pages contain a table of data, tools for searching
  * and filtering that data, and a navigation bar which can be used to navigate to other pages.
  *
- * @author Ella Johnson, Hayley Krippner, Enyang Zhang, ZhengJingRui He.
  * @version 1.0
- * @since 04/09/20
+ * @since 04/10/2020
  */
 public abstract class SideNavBarController implements Initializable {
 

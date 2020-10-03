@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.data.Storage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,9 +13,8 @@ import java.util.ResourceBundle;
 /**
  * The controller class which contains the controls for the analyseResult page.
  *
- * @author ZhengJingRui He
  * @version 1.0
- * @since 13/09/20
+ * @since 04/10/2020
  */
 public class AnalyseResultController implements Initializable {
 
@@ -36,7 +34,7 @@ public class AnalyseResultController implements Initializable {
    * This method is required for Initializable interface show distance and emissions of each route
    *
    * @param url The provided url.
-   * @param resourceBundle The provided resoure bundle.
+   * @param resourceBundle The provided resource bundle.
    */
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
