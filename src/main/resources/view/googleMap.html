@@ -61,31 +61,30 @@
             path.setMap(null);
         }
 
-        if (flightPath.length < 2) {
+        if (flightPath.length < 2 && flightPath % 2 !== 0) {
             return;
         }
+            // CREATE MARKERS AT START AND FINISH
+            marker1 = new google.maps.Marker({
+                position: flightPath[0],
+                map: map
+            });
 
-        // CREATE MARKERS AT START AND FINISH
-        marker1 = new google.maps.Marker({
-            position: flightPath[0],
-            map: map
-        });
+            marker2 = new google.maps.Marker({
+                position: flightPath[1],
+                map: map
+            });
 
-        marker2 = new google.maps.Marker({
-            position: flightPath[flightPath.length - 1],
-            map: map
-        });
+            // DRAW POLYLINE FOR ROUTE
+            path = new google.maps.Polyline({
+                path: flightPath,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
 
-        // DRAW POLYLINE FOR ROUTE
-        path = new google.maps.Polyline({
-            path: flightPath,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
-
-        path.setMap(map);
+            path.setMap(map);
 
         repositionMap(flightPath);
     }

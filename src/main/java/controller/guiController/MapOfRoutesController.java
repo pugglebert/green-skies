@@ -8,6 +8,7 @@ import model.data.Airport;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -24,7 +25,7 @@ public class MapOfRoutesController extends SideNavBarController {
   @FXML protected Label errorText;
 
   /** The airport that user selected to display in google map. */
-  private ArrayList<Airport> mapAirport = new ArrayList<>();
+  private HashMap<Integer, ArrayList<Airport>> mapAirport = new HashMap<>();
 
   /**
    * This method initializes the controller class.
@@ -38,26 +39,36 @@ public class MapOfRoutesController extends SideNavBarController {
     mapAirport = Main.getStorage().getMapAirport();
   }
 
+  /**
+   * This method initilises the google map.
+   */
   public void iniMap() {
     mapEngine = mapView.getEngine();
     mapEngine.load(MapOfRoutesController.class.getResource("/view/googleMap.html").toExternalForm());
   }
 
+  /**
+   * This method calls script to display the route on map.
+   */
   public void displayRoute() {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("[");
-    mapAirport.forEach(pos -> stringBuilder.append(
-            String.format("{lat: %f, lng: %f}, ",pos.getLatitude(), pos.getLongitude())));
-    stringBuilder.append("]");
-    String scriptToExecute = "displayRoute(" + stringBuilder.toString() + ");";
-    System.out.println(scriptToExecute);
-    if(mapEngine.isJavaScriptEnabled()){
-    mapEngine.executeScript(scriptToExecute);
+      StringBuilder stringBuilder = new StringBuilder();
+      stringBuilder.append("[");
+    mapAirport.get(0).forEach(
+          pos ->
+              stringBuilder.append(
+                  String.format("{lat: %f, lng: %f}, ", pos.getLatitude(), pos.getLongitude())));
+      stringBuilder.append("]");
+      String scriptToExecute = "displayRoute(" + stringBuilder.toString() + ");";
+      if (mapEngine.isJavaScriptEnabled()) {
+        mapEngine.executeScript(scriptToExecute);
       } else {
-      errorText.setText("Please wait until google map loaded.");
-      errorText.setVisible(true);
+        errorText.setText("Please wait until google map loaded.");
+        errorText.setVisible(true);
+      }
+
+
     }
-  }
+
 
   public void showMap() {
     displayRoute();

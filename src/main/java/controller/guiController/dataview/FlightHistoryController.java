@@ -16,23 +16,23 @@ import model.database.SQLiteDatabase;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
- * The controller class which contains the controls for the airline data view.
+ * The controller class which contains the controls for the history data view.
  *
- * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui, ELla Johnson
+ * @author Hayley Krippner, Nathan Huynh, He Zhengjingrui, ELla Johnson, Lambert
  * @version 1.0
- * @since 04/09/2020
+ * @since 03/10/2020
  */
 public class FlightHistoryController extends DataViewController {
   ;
   /** The types of search which can be performed on history. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Airline", "Source", "Destination");
+  /** The database object. */
+  private final SQLiteDatabase database = new SQLiteDatabase();
+
   ObservableList<Route> routes;
   @FXML private TableView<Route> tableView;
   @FXML private TableColumn<Route, Boolean> addColumn;
@@ -48,8 +48,6 @@ public class FlightHistoryController extends DataViewController {
   @FXML private ChoiceBox<String> searchTypeSelection;
   @FXML private TextField searchBar;
   @FXML private ChoiceBox<String> RankSelection;
-  /** The database object. */
-  private final SQLiteDatabase database = new SQLiteDatabase();
 
   /**
    * This method initializes the controller class.
@@ -187,31 +185,31 @@ public class FlightHistoryController extends DataViewController {
     return selected;
   }
 
-  /**
-   * This method select the route that user chooses and put it in storage for google map to use.
-   */
+  /** This method select the route that user chooses and put it in storage for google map to use. */
   public void selectRoute() {
-    ArrayList<Airport> mapAirport = Main.getStorage().getMapAirport();
+    HashMap<Integer, ArrayList<Airport>> mapAirport = Main.getStorage().getMapAirport();
     mapAirport.clear();
+    int pathNum = 0;
     for (Route route : this.routes) {
-
       if (route.getSelect().isSelected()) {
-
+        ArrayList<Airport> sourDestAirport = new ArrayList<>();
         for (Airport airport : Main.getStorage().getAirports()) {
-
           if (airport.getIATA().equals(route.getSourceAirport())
-              || airport.getICAO().equals(route.getSourceAirport())
-              || airport.getIATA().equals(route.getDestinationAirport())
+              || airport.getICAO().equals(route.getSourceAirport())) {
+            sourDestAirport.add(airport);
+          }
+          if (airport.getIATA().equals(route.getDestinationAirport())
               || airport.getICAO().equals(route.getDestinationAirport())) {
-
-            mapAirport.add(airport);
+            sourDestAirport.add(airport);
           }
         }
+        mapAirport.put(pathNum, sourDestAirport);
+        pathNum+=1;
       }
-    }
-    if (mapAirport.size() > 2) {
-      AlertPopUp.showGoogleMapAlert();
-      mapAirport.clear();
+          if (mapAirport.size() > 1) {
+            AlertPopUp.showGoogleMapAlert();
+            mapAirport.clear();
+          }
     }
   }
 }
