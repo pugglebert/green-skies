@@ -146,6 +146,11 @@ public class RouteAddToHistoryPopUpController implements Initializable {
   }
 
   // todo write comment for this function
+
+  /**
+   *
+   * @param route
+   */
   public void updateReportStats(Route route) {
 
     FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);

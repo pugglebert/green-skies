@@ -1,6 +1,8 @@
 package controller.guiController.dataview;
 
 import controller.analysis.FlightAnalyser;
+import controller.analysis.GeneralStatsCalculator;
+import controller.analysis.RouteStatsCalculator;
 import controller.analysis.Searcher;
 import controller.guiController.AlertPopUp;
 import controller.guiController.Main;
@@ -47,10 +49,13 @@ public class FlightHistoryController extends DataViewController {
 
   /** The database object. */
   private SQLiteDatabase database = new SQLiteDatabase();
-
   /** The types of search which can be performed on history. */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Airline", "Source", "Destination");
+  /** The GeneralStatsCalculator to generate reports about flight history. */
+  private final GeneralStatsCalculator generalStatsCalculator = Main.getGeneralStatsCalculator();
+  /** The RouteStatsCalculator to generate route stats for the reports about flight history. */
+  private final RouteStatsCalculator routeStatsCalculator = Main.getRouteStatsCalculator();
 
   ObservableList<Route> routes;
 
@@ -167,6 +172,7 @@ public class FlightHistoryController extends DataViewController {
       if (result.isPresent() && result.get() == ButtonType.OK) {
         for (Route route : routes) {
           if (route.getSelect().isSelected()) {
+            updateReportStatsDeletionSingleRoute(route); //TODO test this! May need to put after next line HK 12:46pm 2/10
             routes.remove(route);
           }
         }
@@ -208,20 +214,20 @@ public class FlightHistoryController extends DataViewController {
     return selected;
   }
 
-//  // todo write comment for this function
-//  public void updateReportStatsDeletion(Route route) {
-//
-//    FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
-//    route.setEmissions(flightAnalyser.getPath1Emission());
-//    route.setDistance(flightAnalyser.getTotalDistancePath1());
-//    generalStatsCalculator.updateTotalDistance(route);
-//    generalStatsCalculator.updateTotalEmissions(route);
-//    storage.addToHistorySrcAirports(route.getSourceAirport());
-//    storage.addToHistoryDestAirports(route.getDestinationAirport());
-//    routeStatsCalculator.updateLeastDistanceRoute(route);
-//    routeStatsCalculator.updateMostDistanceRoute(route);
-//    routeStatsCalculator.updateMostEmissionsRoute(route);
-//    routeStatsCalculator.updateLeastEmissionsRoute(route);
-//  }
+  // todo write comment for this function
+  public void updateReportStatsDeletionSingleRoute(Route route) {
+
+    FlightAnalyser flightAnalyser = new FlightAnalyser(route, storage);
+    route.setEmissions(flightAnalyser.getPath1Emission());
+    route.setDistance(flightAnalyser.getTotalDistancePath1());
+    generalStatsCalculator.updateTotalDistance(route);
+    generalStatsCalculator.updateTotalEmissions(route);
+    storage.removeFromHistorySrcAirports(route.getSourceAirport()); //TODO test this works
+    storage.removeFromHistoryDestAirports(route.getDestinationAirport()); //TODO test this works
+    routeStatsCalculator.updateLeastDistanceRoute(route); //TODO test these methods actually remove the route.
+    routeStatsCalculator.updateMostDistanceRoute(route); //TODO test these methods actually remove the route.
+    routeStatsCalculator.updateMostEmissionsRoute(route); //TODO test these methods actually remove the route.
+    routeStatsCalculator.updateLeastEmissionsRoute(route); //TODO test these methods actually remove the route.
+  }
 
 }
