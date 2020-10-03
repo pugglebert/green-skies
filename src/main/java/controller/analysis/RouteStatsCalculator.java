@@ -71,7 +71,7 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
   }
 
   /**
-   * This method updates the which route produces the most emissions.
+   * This method updates which routes produce the most emissions when a route is added the history.
    *
    * @param currentRouteRecord
    */
@@ -96,6 +96,66 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
       }
     }
   }
+
+
+  /////////////////TODO
+
+  /**
+   * This method updates which routes produces the most emissions when a route is removed from the flight history.
+   *
+   * @param rootToRemove
+   */
+  public void updateMostEmissionsRouteRemoval(Route rootToRemove, List<Route> routeHistoryEntries) {
+    //check if route is in the most emissions array
+    if (mostEmissionsRoutes.contains(rootToRemove)) {
+      // if yes, check if there are other routes
+      if (mostEmissionsRoutes.size() > 1) {
+        // if yes, remove the currentRouteRecord
+        mostEmissionsRoutes.indexOf(rootToRemove);
+      } else if (mostEmissionsRoutes.size() == 1) {
+        mostEmissionsRoutes.indexOf(rootToRemove);
+        // if no, need to remove and recalculate entire array
+        //call another method to recalculate
+
+        //TODO refactor this into one method for all calls to this.
+        quickSortEmissions(routeHistoryEntries, 0, routeHistoryEntries.size() - 1);
+        double maxEmissions = routeHistoryEntries.get(0).getEmissions();
+        int firstOccurrenceIndex = binarySearchEmissions(routeHistoryEntries, maxEmissions);
+        for (int i = 0; i < firstOccurrenceIndex + 1; i++) {
+          if (!mostEmissionsRoutes.contains(routeHistoryEntries.get(i))) {
+            mostEmissionsRoutes.add(routeHistoryEntries.get(i));
+          }
+        }
+
+      }
+    }
+    //if no, do nothing
+
+
+
+
+//    if (currentRouteRecord.getEmissions() > 0.0) {
+//      if (this.mostEmissionsRoutes.size() == 0) {
+//        mostEmissionsRoutes.add(currentRouteRecord);
+//      } else if (currentRouteRecord.getEmissions() > mostEmissionsRoutes.get(0).getEmissions()) {
+//        mostEmissionsRoutes.clear();
+//        mostEmissionsRoutes.add(currentRouteRecord);
+//      } else if (currentRouteRecord.getEmissions() == mostEmissionsRoutes.get(0).getEmissions()) {
+//        Boolean found = false;
+//        for (Route route : mostEmissionsRoutes) {
+//          if (route.getAirlineID() == currentRouteRecord.getAirlineID()) {
+//            found = true;
+//            break;
+//          }
+//        }
+//        if (!found) {
+//          mostEmissionsRoutes.add(currentRouteRecord);
+//        }
+//      }
+//    }
+  }
+
+  /////////////////TODO
 
   /**
    * This method updates the which route produces the least emissions. The currentRouteRecord is
