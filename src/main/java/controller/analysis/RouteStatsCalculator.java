@@ -221,7 +221,7 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
    * @param routeHistoryEntries The flight history.
    */
   public void updateMostDistanceRouteRemoval(Route routeToRemove, List<Route> routeHistoryEntries) {
-    routeHistoryEntries.remove(routeToRemove);
+    //routeHistoryEntries.remove(routeToRemove); //TODO delete if not needed HK
     if (mostDistanceRoutes.contains(routeToRemove)) {
       if (mostDistanceRoutes.size() > 1) {
         mostDistanceRoutes.indexOf(routeToRemove);
@@ -271,7 +271,7 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
    * @param routeHistoryEntries The flight history.
    */
   public void updateLeastDistanceRouteRemoval(Route routeToRemove, List<Route> routeHistoryEntries) {
-    routeHistoryEntries.remove(routeToRemove);
+    //routeHistoryEntries.remove(routeToRemove); //TODO delete if not needed HK
     if (leastDistanceRoutes.contains(routeToRemove)) {
       if (leastDistanceRoutes.size() > 1) {
         leastDistanceRoutes.indexOf(routeToRemove);
