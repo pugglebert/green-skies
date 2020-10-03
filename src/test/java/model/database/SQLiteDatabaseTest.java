@@ -4,9 +4,11 @@ import model.data.Airline;
 import model.data.Airport;
 import model.data.Route;
 import model.data.Storage;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -21,6 +23,9 @@ import static org.junit.Assert.*;
  */
 public class SQLiteDatabaseTest {
   private static Connection con;
+  private static Statement cleanState;
+  private static ResultSet tableNames;
+  private static SQLiteDatabase databaseForCleanUp;
   private Storage storage;
   private SQLiteDatabase database;
   private Statement state;
@@ -34,6 +39,8 @@ public class SQLiteDatabaseTest {
     con = database.getCon();
     database.closeAutoCommite();
   }
+
+
 
   /** Test that if the provided csv file will be processed and remove extension. */
   @Test

@@ -17,7 +17,7 @@
                 <Font name="Tahoma" size="80.0" />
             </font>
         </Text>
-        <Button fx:id="continueButton" layoutX="619.0" layoutY="446.0" mnemonicParsing="false" onAction="#continueToMainScreen" style="-fx-background-color: WHITE;" text="Continue">
+        <Button fx:id="continueButton" layoutX="619.0" layoutY="446.0" mnemonicParsing="false" onAction="#continueToMainScreen" prefHeight="49.0" prefWidth="153.0" style="-fx-background-color: WHITE;" text="Continue">
          <font>
             <Font name="Arial" size="26.0" />
          </font></Button>
