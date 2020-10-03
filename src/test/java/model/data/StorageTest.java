@@ -102,6 +102,33 @@ public class StorageTest {
     assertEquals(storage.getAnalyseEmissionResult(), testingList);
   }
 
+  @Test
+  public void addToHistoryTest() {
+    int lengthofHistory = storage.getHistory().size();
+    String[] rubbish1 = new String['A'];
+    Route testroute = new Route("sss", 123, "AFF", 999, "PPP", 977, null, 0,rubbish1);
+    storage.addToHistory(testroute);
+    assertEquals(storage.getHistory().size(), lengthofHistory+1);
+  }
+
+  @Test
+  public void removeFromHistorySrcAirports(){
+    storage.addToHistorySrcAirports("KZN");
+    storage.addToHistorySrcAirports("KZN");
+    storage.removeFromHistorySrcAirports("KZN");
+    assertEquals((Integer) 1, storage.getHistorySrcAirports().get("KZN"));
+
+  }
+
+  @Test
+  public void removeFromHistoryDestAirportsTest() {
+
+    storage.addToHistoryDestAirports("AEK");
+    storage.addToHistoryDestAirports("AEK");
+    storage.removeFromHistoryDestAirports("AEK");
+    assertEquals((Integer) 1, storage.getHistoryDestAirports().get("AEK"));
+  }
+
   /**
    * Test that AnalyseDistanceResult is set to the correct value when setAnalyseDistanceResult is called
    */
