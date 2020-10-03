@@ -44,7 +44,7 @@ public class AirportFilterPopUpController extends FilterPopUpController {
       filterTerms.put("Country", countryField.getText());
     }
     if (cityCheckBox.isSelected()) {
-      filterTerms.put("Active status", cityField.getText());
+      filterTerms.put("City", cityField.getText());
     }
     return filterTerms;
   }
