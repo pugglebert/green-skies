@@ -343,35 +343,7 @@ public class GeneralStatsCalculator {
   }
 
   /**
-   * This method sets up the quick sort algorithm for comparing emissions.
-   *
-   * @param arrayToSort The array which needs to be sorted.
-   * @param start The starting index of the arrayToSort.
-   * @param end The ending index of the arrayToSort.
-   */
-  public static void quickSortEmissions(List<Route> arrayToSort, int start, int end, String type) {
-    if (end <= start) return;
-    int pivot = quickSortPartitionEmissions(arrayToSort, start, end);
-    quickSort(arrayToSort, start, pivot - 1, type);
-    quickSort(arrayToSort, pivot + 1, end, type);
-  }
-
-  /**
-   * This method sets up the quick sort algorithm for comparing emissions.
-   *
-   * @param arrayToSort The array which needs to be sorted.
-   * @param start The starting index of the arrayToSort.
-   * @param end The ending index of the arrayToSort.
-   */
-  public static void quickSortDistance(List<Route> arrayToSort, int start, int end, String type) {
-    if (end <= start) return;
-    int pivot = quickSortPartitionDistance(arrayToSort, start, end);
-    quickSort(arrayToSort, start, pivot - 1, type);
-    quickSort(arrayToSort, pivot + 1, end, type);
-  }
-
-  /**
-   * This function implements the main logic of the quick sort algoirthm.
+   * This function implements the main logic of the quick sort algorithm.
    *
    * @param arrayToSort The array which needs to be sorted.
    * @param start The starting index of the arrayToSort.
@@ -428,56 +400,6 @@ public class GeneralStatsCalculator {
     } else {
       return 0;
     }
-  }
-
-  /**
-   * This function implements the main logic of the quick sort algorithm.
-   *
-   * @param arrayToSort The array which needs to be sorted.
-   * @param start The starting index of the arrayToSort.
-   * @param end The ending index of the arrayToSort.
-   * @return
-   */
-  public static int quickSortPartitionEmissions(List<Route> arrayToSort, int start, int end) {
-    int pivot = end;
-    int counter = start;
-    for (int i = start; i < end; i++) {
-      if (arrayToSort.get(i).getEmissions() < arrayToSort.get(pivot).getEmissions()) {
-        Route temp = arrayToSort.get(counter);
-        arrayToSort.set(counter, arrayToSort.get(i));
-        arrayToSort.set(i, temp);
-        counter++;
-      }
-    }
-    Route temp = arrayToSort.get(pivot);
-    arrayToSort.set(pivot, arrayToSort.get(counter));
-    arrayToSort.set(counter, temp);
-    return counter;
-  }
-
-  /**
-   * This function implements the main logic of the quick sort algorithm.
-   *
-   * @param arrayToSort The array which needs to be sorted.
-   * @param start The starting index of the arrayToSort.
-   * @param end The ending index of the arrayToSort.
-   * @return
-   */
-  public static int quickSortPartitionDistance(List<Route> arrayToSort, int start, int end) {
-    int pivot = end;
-    int counter = start;
-    for (int i = start; i < end; i++) {
-      if (arrayToSort.get(i).getDistance() < arrayToSort.get(pivot).getDistance()) {
-        Route temp = arrayToSort.get(counter);
-        arrayToSort.set(counter, arrayToSort.get(i));
-        arrayToSort.set(i, temp);
-        counter++;
-      }
-    }
-    Route temp = arrayToSort.get(pivot);
-    arrayToSort.set(pivot, arrayToSort.get(counter));
-    arrayToSort.set(counter, temp);
-    return counter;
   }
 
   public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
