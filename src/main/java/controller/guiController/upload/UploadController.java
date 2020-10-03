@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
 /**
  * The controller class which contains the controls for the upload data view.
  *
@@ -46,7 +45,7 @@ public class UploadController extends SideNavBarController {
 
     private SQLiteDatabase database = new SQLiteDatabase();
 
-    /**Initialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'*/
+    // Iniitialize the list of poosible data types to be added to the ChoiceBox 'dataTypeSelect'
     ObservableList<String> dataTypeList =
             FXCollections.observableArrayList("Airport", "Route", "Airline");
 
@@ -137,14 +136,18 @@ public class UploadController extends SideNavBarController {
                     }
                     ConfirmAlert.close();
 
-                    /**only load data if it is not erroneous*/
+                    // only load data if it is not erroneous
                     for (DataType line : storage.getRoutes()) {
                         Route test = (Route) line;
                     }
+                    // if user wishes to cancel the file chosne to upload they push cancel and no data is
+                    // uploaded
                 } else if (result.get() == cancelButton) {
                     ConfirmAlert.close();
                 }
             }
+            // catches errors in uploading file and alerts user by displaying the error message in an
+            // error box
             catch (Exception e) {
                 if (e.getMessage() != null) {
                     Alert ErrorAlert = new Alert(Alert.AlertType.NONE);
@@ -219,7 +222,7 @@ public class UploadController extends SideNavBarController {
   }
 
     /**
-     * change the currentAirlinefile to the select airline file name
+     * This method changes the currentAirlinefile to the select airline file name.
      */
     public void changeAirlineFile() {
         currentAirlineFile = airlineFileList.getSelectionModel().getSelectedItem();
@@ -229,7 +232,7 @@ public class UploadController extends SideNavBarController {
 
 
     /**
-     * method to delete select file and rise alertBox.
+     * This method deletes selected file and raises alertBox.
      */
     @FXML
     public void deleteFile() {
@@ -262,7 +265,7 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * change the currentAirportfile to the select airport file name
+     * This method changes the currentAirportfile to the select airport file name.
      */
     public void changeAirportFile() {
         currentAirportFile = airportFileList.getSelectionModel().getSelectedItem();
@@ -271,7 +274,7 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * change the currentRoutefile to the select Route file name
+     * This method changes the currentRoutefile to the select Route file name.
      */
     public void changeRouteFile() {
         currentRouteFile = routeFileList.getSelectionModel().getSelectedItem();
@@ -281,8 +284,8 @@ public class UploadController extends SideNavBarController {
     }
 
     /**
-     * check the type of file user wish to delete
-     * @param filetype
+     * This method checks the type of file user wish to delete.
+     * @param filetype The type of file the user has selected.
      */
     private void checkState(String filetype) {
         if(filetype == "Airport") {

@@ -266,7 +266,6 @@ public class SearcherTest {
     try {
       loader.loadFile("../seng202_project/src/test/java/TestFiles/airports.csv", "Airport");
     } catch (Exception e) {
-      // TODO work out why this test is failing
       fail();
     }
     ArrayList<Airport> expectedResults = new ArrayList<>();

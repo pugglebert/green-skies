@@ -62,6 +62,9 @@ public class Storage {
   /** The database in which data added to the application is stored. */
   private final SQLiteDatabase database = new SQLiteDatabase();
 
+  /** Airport to display in google map. */
+  public ArrayList<Airport> MapAirport = new ArrayList<>();
+
   /**
    * This method returns a List of all the names of the stored airline files, or an empty List if no Airline files
    * have been stored.
@@ -103,7 +106,6 @@ public class Storage {
     }
     return airlineFiles.get(currentAirlineFile);
   }
-
 
   /**
    * This method returns a List of all the names of the stored airport files, or an empty List if no Airport files
@@ -224,7 +226,6 @@ public class Storage {
     history.add(routes);
   }
 
-  //todo Lambert delete the code that you are not done
   /**
    * This method adds a list of data from a file to storage.
    *
@@ -239,7 +240,6 @@ public class Storage {
 
       } else {
           currentAirlineFile = filename;
-
       }
       for (DataType entry : data) {
         Airline airline = (Airline) entry;

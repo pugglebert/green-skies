@@ -197,7 +197,9 @@ public class RouteDataViewController extends DataViewController {
     }
   }
 
-  // todo write document for this method//
+  /**
+   * This method removes all routes that have been selected by the user from the current file.
+   */
   public void removeSelected() {
     errorText.setVisible(false);
     if (getAnySelected()) {
@@ -210,20 +212,6 @@ public class RouteDataViewController extends DataViewController {
     } else {
       errorText.setText("No routes selected.");
       errorText.setVisible(true);
-    }
-  }
-
-  // todo write document for this method//
-  public void selectAll() {
-    for (Route route : Main.getStorage().getRoutes()) {
-      route.getSelect().setSelected(true);
-    }
-  }
-
-  // todo write document for this method//
-  public void deselectAll() {
-    for (Route route : Main.getStorage().getRoutes()) {
-      route.getSelect().setSelected(false);
     }
   }
 

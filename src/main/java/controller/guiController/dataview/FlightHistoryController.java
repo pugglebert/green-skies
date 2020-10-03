@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
+import model.data.Airport;
 import model.data.Route;
 import model.database.SQLiteDatabase;
 
@@ -47,7 +48,9 @@ public class FlightHistoryController extends DataViewController {
   /** The database object. */
   private SQLiteDatabase database = new SQLiteDatabase();
 
-  /** The types of search which can be performed on history. */
+  /**
+   * The types of search which can be performed on history.
+   */
   private final ObservableList<String> searchTypes =
       FXCollections.observableArrayList("Airline", "Source", "Destination");
 
@@ -173,20 +176,6 @@ public class FlightHistoryController extends DataViewController {
     }
   }
 
-  /** select all checkboxes */
-  public void selectAll() {
-    for (Route route : Main.getStorage().getHistory()) {
-      route.getSelect().setSelected(true);
-    }
-  }
-
-  /** deselect all checkboxes */
-  public void deselectAll() {
-    for (Route route : Main.getStorage().getHistory()) {
-      route.getSelect().setSelected(false);
-    }
-  }
-
   /**
    * Check if at least one entry has been selected.
    *
@@ -201,5 +190,63 @@ public class FlightHistoryController extends DataViewController {
       }
     }
     return selected;
+  }
+
+//  public void selectFlightHistory() {
+//    errorText.setVisible(false);
+//      Main.getStorage().MapAirport = new ArrayList<>();
+//      Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
+//
+//      if (result.isPresent() && result.get() == ButtonType.OK) {
+//
+//        for(Route route: this.routes){
+//
+//          if(route.getSelect().isSelected()){
+//
+//              for(Airport airport: Main.getStorage().getAirports()){
+//
+//
+//                if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
+//
+//                  Main.getStorage().MapAirport.add(airport);
+//
+//                }
+//              }
+//
+//
+//            }
+//          }
+//      }
+//
+//
+//  }
+
+
+  public void selectRoute() {
+    errorText.setVisible(false);
+    Main.getStorage().MapAirport = new ArrayList<>();
+    Optional<ButtonType> result = AlertPopUp.showDeleteAlert("flight record(s)");
+
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+
+      for(Route route: this.routes){
+
+        if(route.getSelect().isSelected()){
+
+          for(Airport airport: Main.getStorage().getAirports()){
+
+            if(airport.getIATA().equals(route.getSourceAirport()) || airport.getICAO().equals(route.getSourceAirport()) || airport.getIATA().equals(route.getDestinationAirport()) || airport.getICAO().equals(route.getDestinationAirport())){
+
+              Main.getStorage().MapAirport.add(airport);
+
+            }
+          }
+
+
+        }
+      }
+    }
+
+
   }
 }
