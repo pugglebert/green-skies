@@ -61,7 +61,8 @@ public class GeneralStatsCalculator {
   private int currentYear;
 
   /**
-   * This method adds the added route's carbon emissions to the total carbon emissions from flight travel.
+   * This method adds the added route's carbon emissions to the total carbon emissions from flight
+   * travel.
    *
    * @param currentRouteRecord The current route record that is being added to the user's flight
    *     history.
@@ -73,9 +74,10 @@ public class GeneralStatsCalculator {
     }
   }
 
-  //TODO test this method.
+  // TODO test this method.
   /**
-   * This method adds the removes route's carbon emissions from the total carbon emissions from flight travel.
+   * This method adds the removes route's carbon emissions from the total carbon emissions from
+   * flight travel.
    *
    * @param currentRouteRecord The current route record that is being removed for the user's flight
    *     history.
@@ -83,7 +85,7 @@ public class GeneralStatsCalculator {
   public void updateTotalEmissionsRemoval(Route currentRouteRecord) {
     if (!Double.isNaN(currentRouteRecord.getEmissions())) {
       totalCarbonEmissions -=
-              (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
+          (currentRouteRecord.getEmissions() * currentRouteRecord.getTimesTaken());
       if (totalCarbonEmissions < 0.00) {
         totalCarbonEmissions = 0.00;
       }
@@ -98,10 +100,10 @@ public class GeneralStatsCalculator {
    */
   public void updateTotalDistance(Route currentRouteRecord) {
     totalDistanceTravelled +=
-            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+        (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
   }
 
-  //TODO test this method.
+  // TODO test this method.
   /**
    * This method adds the added route's distance the total distance travelled via flight travel.
    *
@@ -110,7 +112,7 @@ public class GeneralStatsCalculator {
    */
   public void updateTotalDistanceRemoval(Route currentRouteRecord) {
     totalDistanceTravelled -=
-            (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
+        (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
     if (totalDistanceTravelled < 0.00) {
       totalDistanceTravelled = 0.00;
     }
@@ -265,43 +267,67 @@ public class GeneralStatsCalculator {
    *
    * @param arrayToSearch The array which is being searched.
    * @param searchElement The element that is being search for.
+   * @param type The type of data used for comparison e.g. times a route is taken, a route's
+   *     emissions, a route's distance.
    * @return
    */
-  public static int binarySearch(List<Route> arrayToSearch, int searchElement) {
+  public static int binarySearch(List<Route> arrayToSearch, double searchElement, String type) {
+
     int firstIndex = 0;
     int lastIndex = arrayToSearch.size() - 1;
     while (firstIndex <= lastIndex) {
       int middleIndex = (firstIndex + lastIndex) / 2;
-      if (arrayToSearch.get(middleIndex).getTimesTaken() == searchElement) {
+      double middleIndexValue = 0;
+
+      if (type == "times taken") {
+        middleIndexValue = (int) middleIndexValue;
+        searchElement = (int) searchElement;
+      } else if (type == "distance" | type == "emissions") {
+        middleIndexValue = 0;
+      }
+
+      if (type == "times taken") {
+        middleIndexValue = getMiddleIndexTimesTaken(arrayToSearch, middleIndex);
+        searchElement = (int) searchElement;
+      } else if (type == "distance") {
+        middleIndexValue = getMiddleIndexDistance(arrayToSearch, middleIndex);
+      } else if (type == "emissions") {
+        middleIndexValue = getMiddleIndexEmissions(arrayToSearch, middleIndex);
+      }
+
+      if (middleIndexValue == searchElement) {
         return middleIndex;
-      } else if (arrayToSearch.get(middleIndex).getTimesTaken() < searchElement)
-        firstIndex = middleIndex + 1;
-      else if (arrayToSearch.get(middleIndex).getTimesTaken() > searchElement)
-        lastIndex = middleIndex - 1;
+      } else if (middleIndexValue < searchElement) firstIndex = middleIndex + 1;
+      else if (middleIndexValue > searchElement) lastIndex = middleIndex - 1;
     }
     return -1;
   }
 
   /**
-   * This function implements the binary search algorithm for searching for a double of emissions.
+   * This method gets the times taken of the route at the middle index to be used in binarySearch
    *
-   * @param arrayToSearch The array which is being searched.
-   * @param searchElement The element that is being search for which is a double
-   * @return
+   * @return The times the route has been taken.
    */
-  public static int binarySearchEmissions(List<Route> arrayToSearch, double searchElement) {
-    int firstIndex = 0;
-    int lastIndex = arrayToSearch.size() - 1;
-    while (firstIndex <= lastIndex) {
-      int middleIndex = (firstIndex + lastIndex) / 2;
-      if (arrayToSearch.get(middleIndex).getEmissions() == searchElement) {
-        return middleIndex;
-      } else if (arrayToSearch.get(middleIndex).getEmissions() < searchElement)
-        firstIndex = middleIndex + 1;
-      else if (arrayToSearch.get(middleIndex).getEmissions() > searchElement)
-        lastIndex = middleIndex - 1;
-    }
-    return -1;
+  public static int getMiddleIndexTimesTaken(List<Route> arrayToSearch, int middleIndex) {
+    return arrayToSearch.get(middleIndex).getTimesTaken();
+  }
+
+  /**
+   * This method gets the emissions of the route at the middle index to be used in binarySearch
+   *
+   * @return The emissions of the route.
+   */
+  public static double getMiddleIndexEmissions(List<Route> arrayToSearch, int middleIndex) {
+    return arrayToSearch.get(middleIndex).getEmissions();
+  }
+
+  /**
+   * This method gets the distance of the route at the middle index to be used in binarySearch
+   *
+   * @return The distance of the route.
+   */
+  public static double getMiddleIndexDistance(List<Route> arrayToSearch, int middleIndex) {
+    return arrayToSearch.get(middleIndex).getDistance();
   }
 
   /**
@@ -310,51 +336,13 @@ public class GeneralStatsCalculator {
    * @param arrayToSort The array which needs to be sorted.
    * @param start The starting index of the arrayToSort.
    * @param end The ending index of the arrayToSort.
+   * @param type The type of data used for comparison.
    */
-  public static void quickSort(List<Route> arrayToSort, int start, int end) {
+  public static void quickSort(List<Route> arrayToSort, int start, int end, String type) {
     if (end <= start) return;
-    int pivot = quickSortPartition(arrayToSort, start, end);
-    quickSort(arrayToSort, start, pivot - 1);
-    quickSort(arrayToSort, pivot + 1, end);
-  }
-
-  /**
-   * This method sets up the quick sort algorithm for comparing emissions.
-   *
-   * @param arrayToSort The array which needs to be sorted.
-   * @param start The starting index of the arrayToSort.
-   * @param end The ending index of the arrayToSort.
-   */
-  public static void quickSortEmissions(List<Route> arrayToSort, int start, int end) {
-    if (end <= start) return;
-    int pivot = quickSortPartitionEmissions(arrayToSort, start, end);
-    quickSort(arrayToSort, start, pivot - 1);
-    quickSort(arrayToSort, pivot + 1, end);
-  }
-
-  /**
-   * This function implements the main logic of the quick sort algoirthm.
-   *
-   * @param arrayToSort The array which needs to be sorted.
-   * @param start The starting index of the arrayToSort.
-   * @param end The ending index of the arrayToSort.
-   * @return
-   */
-  public static int quickSortPartition(List<Route> arrayToSort, int start, int end) {
-    int pivot = end;
-    int counter = start;
-    for (int i = start; i < end; i++) {
-      if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
-        Route temp = arrayToSort.get(counter);
-        arrayToSort.set(counter, arrayToSort.get(i));
-        arrayToSort.set(i, temp);
-        counter++;
-      }
-    }
-    Route temp = arrayToSort.get(pivot);
-    arrayToSort.set(pivot, arrayToSort.get(counter));
-    arrayToSort.set(counter, temp);
-    return counter;
+    int pivot = quickSortPartition(arrayToSort, start, end, type);
+    quickSort(arrayToSort, start, pivot - 1, type);
+    quickSort(arrayToSort, pivot + 1, end, type);
   }
 
   /**
@@ -363,13 +351,22 @@ public class GeneralStatsCalculator {
    * @param arrayToSort The array which needs to be sorted.
    * @param start The starting index of the arrayToSort.
    * @param end The ending index of the arrayToSort.
+   * @param type The type of data used for comparison.
    * @return
    */
-  public static int quickSortPartitionEmissions(List<Route> arrayToSort, int start, int end) {
+  public static int quickSortPartition(List<Route> arrayToSort, int start, int end, String type) {
     int pivot = end;
     int counter = start;
     for (int i = start; i < end; i++) {
-      if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
+      int isIndexValLessThanPivotVal = 0;
+      if (type == "distance") {
+        isIndexValLessThanPivotVal = checkIndexValLessThanPivotValDistance(arrayToSort, i, pivot);
+      } else if (type == "emissions") {
+        isIndexValLessThanPivotVal = checkIndexValLessThanPivotValEmissions(arrayToSort, i, pivot);
+      } else if (type == "times taken") {
+        isIndexValLessThanPivotVal = checkIndexValLessThanPivotValTimesTaken(arrayToSort, i, pivot);
+      }
+      if (isIndexValLessThanPivotVal == 1) {
         Route temp = arrayToSort.get(counter);
         arrayToSort.set(counter, arrayToSort.get(i));
         arrayToSort.set(i, temp);
@@ -380,6 +377,60 @@ public class GeneralStatsCalculator {
     arrayToSort.set(pivot, arrayToSort.get(counter));
     arrayToSort.set(counter, temp);
     return counter;
+  }
+
+  /**
+   * This method checks whether the distance of the route at the given index is less than the
+   * distance of the route at the pivot.
+   *
+   * @param arrayToSort The array to sort based on the comparison of emissions produced.
+   * @param i The current index in the search array.
+   * @param pivot The current pivot in the search array.
+   * @return 1 is the comparison is true, 0 is it is false
+   */
+  public static int checkIndexValLessThanPivotValDistance(
+      List<Route> arrayToSort, int i, int pivot) {
+    if (arrayToSort.get(i).getDistance() < arrayToSort.get(pivot).getDistance()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /**
+   * This method checks whether the emissions of the route at the given index is less than the
+   * emissions of the route at the pivot.
+   *
+   * @param arrayToSort The array to sort based on the comparison of emissions produced.
+   * @param i The current index in the search array.
+   * @param pivot The current pivot in the search array.
+   * @return 1 is the comparison is true, 0 is it is false
+   */
+  public static int checkIndexValLessThanPivotValEmissions(
+      List<Route> arrayToSort, int i, int pivot) {
+    if (arrayToSort.get(i).getEmissions() < arrayToSort.get(pivot).getEmissions()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /**
+   * This method checks whether the times taken of the route at the given index is less than the
+   * times taken of the route at the pivot.
+   *
+   * @param arrayToSort The array to sort based on the comparison of times a route has been taken.
+   * @param i The current index in the search array.
+   * @param pivot The current pivot in the search array.
+   * @return 1 is the comparison is true, 0 is it is false
+   */
+  public static int checkIndexValLessThanPivotValTimesTaken(
+      List<Route> arrayToSort, int i, int pivot) {
+    if (arrayToSort.get(i).getTimesTaken() < arrayToSort.get(pivot).getTimesTaken()) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   public void setCarbonEmissionsGoal(double carbonEmissionGoal) {
@@ -473,5 +524,4 @@ public class GeneralStatsCalculator {
   public void setReductionPercentage(int percentage) {
     this.reductionPercentage = percentage;
   }
-
 }

@@ -206,6 +206,7 @@ public class RouteDataViewController extends DataViewController {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("route(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         routes.removeIf(route -> route.getSelect().isSelected());
+        database.deleteFile(storage.getCurrentRouteFile(), "Route");
         database.initialiseTable("Route", storage.getCurrentRouteFile());
         database.updateRoute(storage.getRoutes());
       }

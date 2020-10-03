@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class RouteTest /*extends ApplicationTest*/ {
+public class RouteTest extends ApplicationTest {
 
     private Route route;
 
@@ -19,7 +19,7 @@ public class RouteTest /*extends ApplicationTest*/ {
     public void setUp() {
         route = new Route("2B", 410, "AER", 2965, "KZN", 2990, "", 0, new String[]{"CR2"});
         Route routeEquipmentTest = new Route("2B", 410, "AER", 2966, "KZN", 2990, "", 0, new String[]{});
-//        route.initCheckBox();
+        route.initCheckBox();
     }
 
     @Test
@@ -139,24 +139,24 @@ public class RouteTest /*extends ApplicationTest*/ {
         assertEquals(123, field.get(route));
     }
 
-//    @Test
-//    public void getSelect() throws NoSuchFieldException, IllegalAccessException {
-//        final Field field = route.getClass().getDeclaredField("select");
-//        field.setAccessible(true);
-//        assertEquals(((CheckBox) field.get(route)).isSelected(), route.getSelect().isSelected());
-//    }
+    @Test
+    public void getSelect() throws NoSuchFieldException, IllegalAccessException {
+        final Field field = route.getClass().getDeclaredField("select");
+        field.setAccessible(true);
+        assertEquals(((CheckBox) field.get(route)).isSelected(), route.getSelect().isSelected());
+    }
 
-//    @Test
-//    public void setSelect() throws NoSuchFieldException, IllegalAccessException {
-//        // when
-//        CheckBox checkBox = new CheckBox();
-//        checkBox.setSelected(true);
-//        route.setSelect(checkBox);
-//        // then
-//        final Field field = route.getClass().getDeclaredField("select");
-//        field.setAccessible(true);
-//        assertTrue(((CheckBox) field.get(route)).isSelected());
-//    }
+    @Test
+    public void setSelect() throws NoSuchFieldException, IllegalAccessException {
+        // when
+        CheckBox checkBox = new CheckBox();
+        checkBox.setSelected(true);
+        route.setSelect(checkBox);
+        // then
+        final Field field = route.getClass().getDeclaredField("select");
+        field.setAccessible(true);
+        assertTrue(((CheckBox) field.get(route)).isSelected());
+    }
 
     @Test
     public void testEquals() {

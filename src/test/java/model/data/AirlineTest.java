@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 
 import static org.junit.Assert.*;
 
-public class AirlineTest /* extends ApplicationTest*/ {
+public class AirlineTest extends ApplicationTest {
 
   private Airline airline;
 
@@ -17,7 +17,7 @@ public class AirlineTest /* extends ApplicationTest*/ {
   public void setUp() {
     // given
     airline = new Airline(2, "Private flight", "\\N", "-", "N/A", "", "", true);
-//    airline.initCheckBox();
+    airline.initCheckBox();
   }
 
   @Test
@@ -84,25 +84,25 @@ public class AirlineTest /* extends ApplicationTest*/ {
     assertEquals(field.get(airline), true);
   }
 
-//  @Test
-//  public void getSelectTest() throws NoSuchFieldException, IllegalAccessException {
-//    // then
-//    final Field field = airline.getClass().getDeclaredField("select");
-//    field.setAccessible(true);
-//    assertEquals(((CheckBox) field.get(airline)).isSelected(), airline.getSelect().isSelected());
-//  }
+  @Test
+  public void getSelectTest() throws NoSuchFieldException, IllegalAccessException {
+    // then
+    final Field field = airline.getClass().getDeclaredField("select");
+    field.setAccessible(true);
+    assertEquals(((CheckBox) field.get(airline)).isSelected(), airline.getSelect().isSelected());
+  }
 
-//  @Test
-//  public void setSelect() throws NoSuchFieldException, IllegalAccessException {
-//    // when
-//    CheckBox checkBox = new CheckBox();
-//    checkBox.setSelected(true);
-//    airline.setSelect(checkBox);
-//    // then
-//    final Field field = airline.getClass().getDeclaredField("select");
-//    field.setAccessible(true);
-//    assertTrue(((CheckBox) field.get(airline)).isSelected());
-//  }
+  @Test
+  public void setSelect() throws NoSuchFieldException, IllegalAccessException {
+    // when
+    CheckBox checkBox = new CheckBox();
+    checkBox.setSelected(true);
+    airline.setSelect(checkBox);
+    // then
+    final Field field = airline.getClass().getDeclaredField("select");
+    field.setAccessible(true);
+    assertTrue(((CheckBox) field.get(airline)).isSelected());
+  }
 
   @Test
   public void testEqualsTest() {

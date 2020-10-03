@@ -119,6 +119,7 @@ public class AirportDataViewController extends DataViewController {
       Optional<ButtonType> result = AlertPopUp.showDeleteAlert("airport(s)");
       if (result.isPresent() && result.get() == ButtonType.OK) {
         airports.removeIf(airport -> airport.getSelect().isSelected());
+        database.deleteFile(storage.getCurrentAirportFile(), "Airport");
         database.initialiseTable("Airport", storage.getCurrentAirportFile());
         database.updateAirportTable(airports);
       }
