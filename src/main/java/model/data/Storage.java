@@ -366,8 +366,11 @@ public class Storage {
    * @param airportName The name of the source airport of the route being remove from history.
    */
   public void removeFromHistorySrcAirports(String airportName) {
-    if (historySrcAirports.containsKey(airportName) & historySrcAirports.get(airportName) > 0) {
+    if (historySrcAirports.containsKey(airportName)) {
       historySrcAirports.put(airportName, historySrcAirports.get(airportName) - 1);
+      if (historySrcAirports.get(airportName) < 0) {
+        historySrcAirports.put(airportName, 0);
+      }
     }
   }
 
@@ -377,8 +380,11 @@ public class Storage {
    * @param airportName The name of the destination airport of the route being remove from history.
    */
   public void removeFromHistoryDestAirports(String airportName) {
-    if (historyDestAirports.containsKey(airportName) & historyDestAirports.get(airportName) > 0) {
+    if (historyDestAirports.containsKey(airportName)) {
       historyDestAirports.put(airportName, historyDestAirports.get(airportName) - 1);
+      if (historyDestAirports.get(airportName) < 0) {
+        historyDestAirports.put(airportName, 0);
+      }
     }
   }
 
