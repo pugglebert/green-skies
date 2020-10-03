@@ -1,7 +1,6 @@
 package model.database;
 
 import model.data.*;
-
 import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,9 +9,8 @@ import java.util.List;
 /**
  * Class to store persistent data in database.
  *
- * @author Lambert
- * @version 2.0
- * @since 1/10/2020
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class SQLiteDatabase {
   /** database connection. */
@@ -21,7 +19,7 @@ public class SQLiteDatabase {
   /** statement for building tables. */
   private Statement buildTable;
 
-  /** Vairable that contains statement for database. */
+  /** Variable that contains statement for database. */
   private Statement state;
 
   /** Variable that contains statement for prepare statement database. */
@@ -33,6 +31,7 @@ public class SQLiteDatabase {
   /** Variable for table name that is going to be created in database. */
   private String tableName;
 
+  /** The constructor for the SQLiteDatabase. */
   public SQLiteDatabase() {
     buildConnection();
     closeAutoCommite();
@@ -78,7 +77,7 @@ public class SQLiteDatabase {
     }
   }
 
-  /** This method manully starts commite for database. */
+  /** This method manually starts commit for database. */
   public void startCommite() {
     try {
       if (con.isClosed()) {
@@ -106,7 +105,7 @@ public class SQLiteDatabase {
     return tableName;
   }
 
-  /** This method builds airports table with airport attributes as colunms in dastabase. */
+  /** This method builds airports table with airport attributes as columns in database. */
   protected void buildAirportsTable() {
     try {
       if (con.isClosed()) {
@@ -147,7 +146,7 @@ public class SQLiteDatabase {
     }
   }
 
-  /** This method builds routes table with routes attributes as colunms in dastabase. */
+  /** This method builds routes table with routes attributes as columns in database. */
   protected void buildRoutesTable() {
     try {
       if (con.isClosed()) {
@@ -190,8 +189,8 @@ public class SQLiteDatabase {
   }
 
   /**
-   * This method builds airlines table with given name and with airline attributes as colunms in
-   * dastabase.
+   * This method builds airlines table with given name and with airline attributes as columns in
+   * database.
    */
   protected void buildAirlinesTable() {
     try {
@@ -429,11 +428,11 @@ public class SQLiteDatabase {
   }
 
   /**
-   * This method initialise table according to provided tabletype, it deletes table and recreates
-   * it. This method also set table name for globle attribute for other method to interact to
+   * This method initialise table according to provided table type, it deletes table and recreates
+   * it. This method also set table name for global attribute for other method to interact to
    * desired table.
    *
-   * @param tableType Three types of table conresponding to airport, route and airline.
+   * @param tableType Three types of table corresponding to airport, route and airline.
    */
   public void initialiseTable(String tableType, String fileName) {
     try {
