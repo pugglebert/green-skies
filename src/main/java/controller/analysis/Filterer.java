@@ -9,9 +9,8 @@ import java.util.*;
 /**
  * Class for filtering data based on one or more filter options.
  *
- * @author Hayley Krippner, Ella Johnson
  * @version 1.0
- * @since 30/08/2020
+ * @since 04/10/2020
  */
 public class Filterer {
 
@@ -35,7 +34,6 @@ public class Filterer {
   public void filterAirports(HashMap<String, String> filterTerms, List<Airport> airports) {
 
     ArrayList<ArrayList<Airport>> individualLists = new ArrayList<>();
-    // Iterate through and perform a search for each term and add these lists to an overall list.
     for (Map.Entry<String, String> entry : filterTerms.entrySet()) {
       String filterTermType = entry.getKey();
       String filterTerm = entry.getValue();
@@ -43,11 +41,8 @@ public class Filterer {
     }
 
     ArrayList<Airport> filteredAirports = individualLists.get(0);
-    // Iterate through the indivual lists and take the intersection of the Airport records.
     int filteredAirportsSize = individualLists.size();
     for (int index = 1; index < filteredAirportsSize; index++) {
-      // removes the elements from the current search return list that are not contained in the
-      // current list.
       filteredAirports.retainAll(individualLists.get(index));
     }
 
@@ -77,11 +72,8 @@ public class Filterer {
     }
 
     ArrayList<Airline> filteredAirlines = individualLists.get(0);
-    // Iterate through the indivual lists and take the intersection of the Airline records.
     int filteredAirlinesSize = individualLists.size();
     for (int index = 1; index < filteredAirlinesSize; index++) {
-      // removes the elements from the current search return list that are not contained in the
-      // current list.
       filteredAirlines.retainAll(individualLists.get(index));
     }
 
@@ -111,10 +103,8 @@ public class Filterer {
     }
 
     ArrayList<Route> filteredRoutes = individualLists.get(0);
-    // Iterate through the indivual lists and take the intersection of the Airline records.
     int filteredRoutesSize = individualLists.size();
     for (int index = 1; index < filteredRoutesSize; index++) {
-      // removes the elements from the current search return list that are not contained
       filteredRoutes.retainAll(individualLists.get(index));
     }
 
@@ -126,8 +116,8 @@ public class Filterer {
   }
 
   /**
-   * This method allows class calling filter datatype methods to set filter success to true if there
-   * were no errors or false if errors occured.
+   * This method allows class calling filter data type methods to set filter success to true if
+   * there were no errors or false if errors occurred.
    *
    * @param success The value to set filter success attribute to.
    */

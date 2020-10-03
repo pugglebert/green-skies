@@ -8,8 +8,7 @@ import java.util.*;
  * This class contains the methods for calculating and updating the analysis data for the user's
  * carbon emissions report.
  *
- * @author Hayley Krippner
- * @since 28/09/20
+ * @since 04/10/20
  * @version 1.0
  */
 public class GeneralStatsCalculator {
@@ -74,7 +73,6 @@ public class GeneralStatsCalculator {
     }
   }
 
-  // TODO test this method.
   /**
    * This method adds the removes route's carbon emissions from the total carbon emissions from
    * flight travel.
@@ -103,7 +101,6 @@ public class GeneralStatsCalculator {
         (currentRouteRecord.getDistance() * currentRouteRecord.getTimesTaken());
   }
 
-  // TODO test this method.
   /**
    * This method adds the added route's distance the total distance travelled via flight travel.
    *
@@ -120,9 +117,9 @@ public class GeneralStatsCalculator {
 
   /** This method calculates the current day of the year and returns the integer of it. */
   public void calculateDateAsInt() {
-    Date currDayinCurrYear = new Date();
+    Date currDayInCurrYear = new Date();
     SimpleDateFormat dateForm = new SimpleDateFormat("D");
-    String dayAsString = dateForm.format(currDayinCurrYear);
+    String dayAsString = dateForm.format(currDayInCurrYear);
     Integer dayAsInt = Integer.valueOf(dayAsString);
     this.dayInYear = dayAsInt;
   }
@@ -160,7 +157,6 @@ public class GeneralStatsCalculator {
     this.emissionsPerDayGoal = getCarbonEmissionGoal() / 365;
   }
 
-  // TODO tests this! HK 28/09/2020 --> test exception is caught
   /**
    * This method calculates the carbon emissions production reduction percentage required to meet
    * the user's goal by the end of the year.

@@ -10,31 +10,29 @@ import java.util.List;
  * The FlightAnalyser class which calculate two paths' carbon emission, total distance of the path,
  * and comparison of two paths' distance and emission.
  *
- * @author HeZhengJingRui and Enyang Zhang
  * @version 1.2
- * @since 24/08/2020
+ * @since 04/10/2020
  */
 public class FlightAnalyser {
   /** radius of the earth */
   private final double radius = 6371e3;
-
   /** the amount of fuel have been used */
   private double FuelUsed;
   /** the number of seats have been occupancy */
   private final int seatsOccupancy = 333;
   /** the amount of Co2 produce by one gram of fuel in grams */
   private final double Co2OfOneGramFuel = 3.15;
-  /** cruisingspeed of the aircraft in km per hour */
+  /** cruising speed of the aircraft in km per hour */
   private final int CruisingSpeed = 910;
-  /** arraylist path1 to store two airport code */
+  /** array list path1 to store two airport code */
   private ArrayList<String> path1 = new ArrayList<>();
-  /** arraylist path2 to store two airport code */
+  /** array list path2 to store two airport code */
   private ArrayList<String> path2 = new ArrayList<>();
-  /** arraylist to store all airport code which are available */
+  /** array list to store all airport code which are available */
   private List<Airport> airports = new ArrayList<>();
-  /** arraylist to store airport code */
+  /** array list to store airport code */
   private ArrayList<ArrayList<Double>> path1Coords = new ArrayList<>();
-  /** arraylist to store airport code */
+  /** array list to store airport code */
   private ArrayList<ArrayList<Double>> path2Coords = new ArrayList<>();
   /** The distance between one airport to another airport */
   private double totalDistancePath1 = 0;
@@ -198,7 +196,7 @@ public class FlightAnalyser {
    * @return carbon emission in kilograms.
    */
   private double calculateCarbonEmission(double distance) {
-    FuelUsed = distance * 12 / 1250; // fuel in tonns
+    FuelUsed = distance * 12 / 1250; // fuel in tonnes
 
     double FuelPerPassenger =
         (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
@@ -207,7 +205,7 @@ public class FlightAnalyser {
         FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
 
     double Co2Hour =
-        (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
+        (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 generate per hour in kg
 
     double flytime = distance / CruisingSpeed; // in hour
 

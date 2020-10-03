@@ -1,10 +1,15 @@
 package controller.analysis;
 
 import model.data.Route;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains the methods relating to the report's calculations corresponding to routes.
+ *
+ * @version 1.0
+ * @since 4/10/2020
+ */
 public class RouteStatsCalculator extends GeneralStatsCalculator {
 
   /** The routes which produce the most emissions. */
@@ -35,7 +40,8 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1, "times taken");
         int maxRouteCounter =
             routeHistoryEntries.get(routeHistoryEntries.size() - 1).getTimesTaken();
-        int firstOccurrenceIndex = binarySearch(routeHistoryEntries, maxRouteCounter, "times taken");
+        int firstOccurrenceIndex =
+            binarySearch(routeHistoryEntries, maxRouteCounter, "times taken");
         for (int i = firstOccurrenceIndex; i < routeHistoryEntries.size(); i++) {
           if (!mostTravelledRoutes.contains(routeHistoryEntries.get(i))) {
             mostTravelledRoutes.add(routeHistoryEntries.get(i));
@@ -59,7 +65,8 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
       } else {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1, "times taken");
         int minRouteCounter = routeHistoryEntries.get(0).getTimesTaken();
-        int firstOccurrenceIndex = binarySearch(routeHistoryEntries, minRouteCounter, "times taken");
+        int firstOccurrenceIndex =
+            binarySearch(routeHistoryEntries, minRouteCounter, "times taken");
         for (int i = 0; i < firstOccurrenceIndex + 1; i++) {
           if (!leastTravelledRoutes.contains(routeHistoryEntries.get(i))) {
 
@@ -177,7 +184,8 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
    * @param arrayToSearch The list containing the routes from the flight history.
    * @param arrayToUpdate Either mostEmissionsRoutes or leastEmissionsRoutes to update.
    */
-  public void findEmissionsRoutes(List<Route> arrayToSearch, List<Route> arrayToUpdate, int firstOccurrenceIndex) {
+  public void findEmissionsRoutes(
+      List<Route> arrayToSearch, List<Route> arrayToUpdate, int firstOccurrenceIndex) {
     for (int i = 0; i < firstOccurrenceIndex + 1; i++) {
       if (!arrayToUpdate.contains(arrayToSearch.get(i))) {
         arrayToUpdate.add(arrayToSearch.get(i));
@@ -221,14 +229,13 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
    * @param routeHistoryEntries The flight history.
    */
   public void updateMostDistanceRouteRemoval(Route routeToRemove, List<Route> routeHistoryEntries) {
-    //routeHistoryEntries.remove(routeToRemove); //TODO delete if not needed HK
     if (mostDistanceRoutes.contains(routeToRemove)) {
       if (mostDistanceRoutes.size() > 1) {
         mostDistanceRoutes.indexOf(routeToRemove);
       } else if (mostDistanceRoutes.size() == 1) {
         quickSort(routeHistoryEntries, 0, routeHistoryEntries.size() - 1, "distance");
         double maxRouteCounter =
-                routeHistoryEntries.get(routeHistoryEntries.size() - 1).getEmissions();
+            routeHistoryEntries.get(routeHistoryEntries.size() - 1).getEmissions();
         int firstOccurrenceIndex = binarySearch(routeHistoryEntries, maxRouteCounter, "distance");
         findEmissionsRoutes(routeHistoryEntries, mostDistanceRoutes, firstOccurrenceIndex);
       }
@@ -270,8 +277,8 @@ public class RouteStatsCalculator extends GeneralStatsCalculator {
    * @param routeToRemove The route to remove from the flight history.
    * @param routeHistoryEntries The flight history.
    */
-  public void updateLeastDistanceRouteRemoval(Route routeToRemove, List<Route> routeHistoryEntries) {
-    //routeHistoryEntries.remove(routeToRemove); //TODO delete if not needed HK
+  public void updateLeastDistanceRouteRemoval(
+      Route routeToRemove, List<Route> routeHistoryEntries) {
     if (leastDistanceRoutes.contains(routeToRemove)) {
       if (leastDistanceRoutes.size() > 1) {
         leastDistanceRoutes.indexOf(routeToRemove);

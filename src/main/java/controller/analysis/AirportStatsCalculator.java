@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains the methods relating to the report's calculations corresponding to airports.
+ *
+ * @version 1.0
+ * @since 4/10/2020
+ */
 public class AirportStatsCalculator extends GeneralStatsCalculator {
 
   private ArrayList<String> mostVisitedSrcAirports = new ArrayList<>();
@@ -61,7 +67,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
         currDestAirportMax = entry.getValue();
         if (!mostVisitedDestAirports.contains(entry.getKey())) {
           mostVisitedDestAirports.add(entry.getKey());
-          }
+        }
       }
     }
   }
@@ -87,7 +93,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
         currSrcAirportMin = entry.getValue();
         if (!leastVisitedSrcAirports.contains(entry.getKey())) {
           leastVisitedSrcAirports.add(entry.getKey());
-          }
+        }
       }
     }
   }
@@ -113,14 +119,12 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
         currDestAirportMin = entry.getValue();
         if (!leastVisitedDestAirports.contains(entry.getKey())) {
           leastVisitedDestAirports.add(entry.getKey());
-          }
+        }
       }
     }
   }
 
-  /**
-   * This method empties all the airport arrays.
-   */
+  /** This method empties all the airport arrays. */
   public void resetAirportArrays() {
     mostVisitedDestAirports.clear();
     mostVisitedSrcAirports.clear();
@@ -130,6 +134,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
 
   /**
    * This methods returns an array of the most visited source airports.
+   *
    * @return mostVisitedSrcAirports The most visited source airports.
    */
   public ArrayList<String> getMostVisitedSrcAirports() {
@@ -138,6 +143,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
 
   /**
    * This methods returns an array of the most visited destination airports.
+   *
    * @return mostVisitedDestAirports The most visited destination airports.
    */
   public ArrayList<String> getMostVisitedDestAirports() {
@@ -146,6 +152,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
 
   /**
    * This methods returns an array of the least visited source airports.
+   *
    * @return leastVisitedSrcAirports The least visited source airports.
    */
   public ArrayList<String> getLeastVisitedSrcAirports() {
@@ -154,6 +161,7 @@ public class AirportStatsCalculator extends GeneralStatsCalculator {
 
   /**
    * This methods returns an array of the least visited destination airports.
+   *
    * @return leastVisitedDestAirports The least visited destination airports.
    */
   public ArrayList<String> getLeastVisitedDestAirports() {

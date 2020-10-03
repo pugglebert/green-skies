@@ -9,14 +9,13 @@ import java.util.List;
 /**
  * Class for searching data for entry which matches specific search term.
  *
- * @author Ella Johnson, Hayley Krippner
- * @since 26/08/2020
+ * @since 04/10/2020
  * @version 1.0
  */
 public class Searcher {
 
   /**
-   * This method earches airport data for entries that match the given search term.
+   * This method searches airport data for entries that match the given search term.
    *
    * @param searchTerm A string entered by the user for something they want information on.
    * @param type The type of attribute the user.

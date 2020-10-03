@@ -71,22 +71,25 @@ public class FlightHistoryControllerTest extends ApplicationTest {
     routeAddToHistoryPopUpController.updateReportStats(ASF_MRV);
   }
 
-//  @Test //todo there are still 2 least distance
-//  public void updateLeastDistanceRouteRemoval() {
-//    assertEquals(
-//            ASF_MRV.getDistance(),
-//            routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
-//            0.0001);
-//
-//    storage.getHistory().remove(ASF_MRV);
-//    flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
-//
-//
-//    assertEquals(
-//            ASF_KZN.getDistance(),
-//            routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
-//            0.0001);
-//  }
+  @Test //todo there are still 2 least distance
+  public void updateLeastDistanceRouteRemoval() {
+    assertEquals(
+            ASF_MRV.getDistance(),
+            routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
+            0.0001);
+
+
+    storage.getHistory().remove(ASF_MRV);
+
+    flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
+    //System.out.println(routeStatsCalculator.getLeastDistanceRoutes());
+
+
+    assertEquals(
+            ASF_KZN.getDistance(),
+            routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
+            0.0001);
+  }
 
   @Test
   public void updateMostDistanceRoute() {
