@@ -184,11 +184,13 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     String resultString = "";
     StringBuilder resultStringBuilder = new StringBuilder(resultString);
     for (int i = 0; i < arrayToConvert.size(); i++) {
-      if (arrayToConvert.get(i).getAirlineID() >= 0)
+      if (arrayToConvert.get(i).getAirlineID() >= 0) {
+        String routeString = arrayToConvert.get(i).getSourceAirport() + " to " + arrayToConvert.get(i).getDestinationAirport();
         if (i == arrayToConvert.size() - 1) {
-          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID());
+          resultStringBuilder.append(routeString);
         } else {
-          resultStringBuilder.append(arrayToConvert.get(i).getAirlineID()).append(", ");
+          resultStringBuilder.append(routeString).append(", ");
+        }
         }
     }
     resultString = resultStringBuilder.toString();

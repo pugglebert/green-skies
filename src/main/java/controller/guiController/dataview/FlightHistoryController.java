@@ -213,7 +213,7 @@ public class FlightHistoryController extends DataViewController {
     storage.removeFromHistoryDestAirports(route.getDestinationAirport()); //TODO test this works
     //routeStatsCalculator.updateLeastDistanceRoute(route); //TODO test these methods actually remove the route.
     //routeStatsCalculator.updateMostDistanceRoute(route); //TODO test these methods actually remove the route.
-    //routeStatsCalculator.updateMostEmissionsRoute(route); //TODO test these methods actually remove the route.
+    routeStatsCalculator.updateMostEmissionsRouteRemoval(route, storage.getHistory()); //TODO test these methods actually remove the route.
     //routeStatsCalculator.updateLeastEmissionsRoute(route); //TODO test these methods actually remove the route.
   }
 
