@@ -256,11 +256,12 @@ public class AirlineParser extends Parser {
   protected boolean isIATAValid(String IATA) {
 
     // airline IATA check
-    if (!IATA.matches("-|([A-Z0-9]{2})|(^$)")) {
-      errorCounter(5);
-      return false;
+    if (!IATA.equalsIgnoreCase("")) {
+      if (!IATA.matches("-|([A-Z0-9]{2})")) {
+        errorCounter(5);
+        return false;
+      }
     }
-
     return true;
   }
 

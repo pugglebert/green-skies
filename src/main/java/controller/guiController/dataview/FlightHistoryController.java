@@ -5,13 +5,18 @@ import controller.analysis.GeneralStatsCalculator;
 import controller.analysis.RouteStatsCalculator;
 import controller.analysis.Searcher;
 import controller.guiController.AlertPopUp;
+import controller.guiController.GreenSkiesApplication;
 import controller.guiController.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import model.data.Airport;
 import model.data.Route;
@@ -225,7 +230,7 @@ public class FlightHistoryController extends DataViewController {
   }
 
   /** This method select the route that user chooses and put it in storage for google map to use. */
-  public void selectRoute() {
+  public void selectRoute() throws IOException {
     HashMap<Integer, ArrayList<Airport>> mapAirport = storage.getMapAirport();
     mapAirport.clear();
     int pathNum = 0;
@@ -249,6 +254,13 @@ public class FlightHistoryController extends DataViewController {
     if (mapAirport.size() > 1) {
       AlertPopUp.showGoogleMapAlert();
       mapAirport.clear();
+    } else {
+      Stage newStage = GreenSkiesApplication.getPrimaryStage();
+      Parent root = FXMLLoader.load(getClass().getResource("/view/mapOfRoutes.fxml"));
+      Scene scene = new Scene(root);
+      newStage.setScene(scene);
     }
+
   }
+
 }

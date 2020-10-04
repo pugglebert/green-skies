@@ -32,7 +32,6 @@ public class AirportTest {
             10,
             "U",
             "Port_Moresby");
-    airport.initCheckBox();
   }
 
   @Test
@@ -117,25 +116,6 @@ public class AirportTest {
     final Field field = airport.getClass().getDeclaredField("dataBaseTimeZone");
     field.setAccessible(true);
     assertEquals(field.get(airport), "Port_Moresby");
-  }
-
-  @Test
-  public void getSelect() throws NoSuchFieldException, IllegalAccessException {
-    final Field field = airport.getClass().getDeclaredField("select");
-    field.setAccessible(true);
-    assertEquals(((CheckBox) field.get(airport)).isSelected(), airport.getSelect().isSelected());
-  }
-
-  @Test
-  public void setSelect() throws NoSuchFieldException, IllegalAccessException {
-    // when
-    CheckBox checkBox = new CheckBox();
-    checkBox.setSelected(true);
-    airport.setSelect(checkBox);
-    // then
-    final Field field = airport.getClass().getDeclaredField("select");
-    field.setAccessible(true);
-    assertTrue(((CheckBox) field.get(airport)).isSelected());
   }
 
   @Test
