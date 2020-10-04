@@ -31,7 +31,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   @FXML private TextField displayMostVisitedSourceAirportField;
   @FXML private TextField displayLeastVisitedSourceAirportField;
   @FXML private TextField displayMostVisitedDestinationAirportField;
-  @FXML private TextField displayLeastVisitedDestinationAirportField;
   @FXML private TextField displayCarbonEmissionGoalField;
   @FXML private TextField displayTreeOffsetField;
   @FXML private TextField carbonEmissionGoalField;
@@ -109,7 +108,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         displayMostVisitedSourceAirportField.setText(MostVisitedSourceAirportString);
         displayLeastVisitedSourceAirportField.setText(LeastVisitedSourceAirportString);
         displayMostVisitedDestinationAirportField.setText(MostVisitedDestAirportString);
-        displayLeastVisitedDestinationAirportField.setText(LeastVisitedDestAirportString);
         displayTreeOffsetField.setText(numOfTreesString);
         generalStatsCalculator.createCarbonEmissionsComment();
         displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
@@ -137,7 +135,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     displayMostVisitedSourceAirportField.setText("");
     displayLeastVisitedSourceAirportField.setText("");
     displayMostVisitedDestinationAirportField.setText("");
-    displayLeastVisitedDestinationAirportField.setText("");
     displayTreeOffsetField.setText("");
     displayStatusCommentField.setText("");
   }
