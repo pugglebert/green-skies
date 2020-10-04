@@ -52,7 +52,7 @@ public class AirportParser extends Parser {
   @Override
   protected void initErrorLookup() {
     errorLookup[0] = "Wrong number of parameters";
-    errorLookup[1] = "Duplicate airport";
+    errorLookup[1] = "Duplicate airport ID";
     errorLookup[2] = "Invalid airport ID";
     errorLookup[3] = "Invalid airport name";
     errorLookup[4] = "Invalid airport city";
@@ -263,13 +263,6 @@ public class AirportParser extends Parser {
       if (!IATA.matches("[a-zA-Z0-9]+") || IATA.length() != 3) {
         errorCounter(6);
         return false;
-      }
-      for (DataType data : parserData) {
-        Airport airport = (Airport) data;
-        if (airport.getIATA().equals(IATA)) {
-          errorCounter(1);
-          return false;
-        }
       }
     }
     return true;
