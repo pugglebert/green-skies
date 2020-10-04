@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.data.Route;
 import model.data.Storage;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -144,7 +145,6 @@ public class CarbonEmissionsReportController extends SideNavBarController {
   /** This method sets up the data for the report to display the statistics as strings. */
   public void setUpData() {
     generalStatsCalculator.calculateOffsetTrees();
-    System.out.println(MostEmissionsRouteString);
     this.MostEmissionsRouteString =
         RoutesArrayToString(routeStatsCalculator.getMostEmissionsRoutes());
     this.LeastEmissionsRouteString =
