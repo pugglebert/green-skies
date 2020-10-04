@@ -318,7 +318,7 @@ public class AirportParserTest {
         loader.openFile("../seng202_project/src/test/java/TestFiles/duplicateAirportTest.csv");
     AirportParser duplicateParser = new AirportParser(duplicateLines, new ArrayList<>());
     assertEquals(
-        "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airport: 1 occurrences\n",
+        "File uploaded with 1 invalid lines rejected.\nError [1] Duplicate airport ID: 1 occurrences\n",
         duplicateParser.getErrorMessage(true));
   }
 
