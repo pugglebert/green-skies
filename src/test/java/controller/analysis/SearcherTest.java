@@ -7,21 +7,18 @@ import model.data.Storage;
 import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
  * Unit test for Searcher class.
  *
- * @author Ella Johnson
- * @since 26/08/2020
  * @version 1.0
+ * @since 04/10/2020
  */
 public class SearcherTest {
 
@@ -295,20 +292,20 @@ public class SearcherTest {
   public void searchAirportsCaseSensitiveTest() {
     ArrayList<Airport> expectedResults = new ArrayList<>();
     expectedResults.add(
-        new Airport(25,
-                "Tofino",
-                "Tofino",
-                "Canada",
-                "YAZ",
-                "CYAZ",
-                49.082222,
-                -125.7725,
-                80,
-                -8,
-                "A",
-                "America/Vancouver"));
-    ArrayList<Airport> results =
-        Searcher.searchAirports("TOFINO", "City", storage.getAirports());
+        new Airport(
+            25,
+            "Tofino",
+            "Tofino",
+            "Canada",
+            "YAZ",
+            "CYAZ",
+            49.082222,
+            -125.7725,
+            80,
+            -8,
+            "A",
+            "America/Vancouver"));
+    ArrayList<Airport> results = Searcher.searchAirports("TOFINO", "City", storage.getAirports());
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
@@ -419,19 +416,22 @@ public class SearcherTest {
   }
 
   /**
-   * Verify that searchAirlines returns the expected results when a string is converted into a boolean by
-   * searching for active status.
+   * Verify that searchAirlines returns the expected results when a string is converted into a
+   * boolean by searching for active status.
    */
   @Test
-  public void searchAirlinesActiveStatusTest() throws FileNotFoundException, FileSystemException, SQLException {
+  public void searchAirlinesActiveStatusTest()
+      throws FileNotFoundException, FileSystemException, SQLException {
     ArrayList<Airline> expectedResults = new ArrayList<>();
     expectedResults.add(
-            new Airline(3,"1Time Airline","\\N","1T","RNX","NEXTIME","South Africa", true));
+        new Airline(3, "1Time Airline", "\\N", "1T", "RNX", "NEXTIME", "South Africa", true));
     expectedResults.add(
-            new Airline(10,"40-Mile Air","\\N","Q5","MLA","MILE-AIR","United States", true));
-    loader.loadFile("../seng202_project/src/test/java/TestFiles/SearcherAirlinesActiveStatusTest.csv", "Airline");
+        new Airline(10, "40-Mile Air", "\\N", "Q5", "MLA", "MILE-AIR", "United States", true));
+    loader.loadFile(
+        "../seng202_project/src/test/java/TestFiles/SearcherAirlinesActiveStatusTest.csv",
+        "Airline");
     ArrayList<Airline> results =
-            Searcher.searchAirlines("True", "Active status", storage.getAirlines());
+        Searcher.searchAirlines("True", "Active status", storage.getAirlines());
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 }

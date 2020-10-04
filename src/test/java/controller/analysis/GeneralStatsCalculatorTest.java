@@ -2,21 +2,18 @@ package controller.analysis;
 
 import model.data.*;
 import model.loader.Loader;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
-
 import static org.junit.Assert.*;
 
 /**
- * Unit test for ReportGenerator class.
+ * Unit test for ReportStatsCalculator class.
  *
- * @author Hayley Krippner
- * @since 16/09/2020
  * @version 1.0
+ * @since 04/10/2020
  */
 public class GeneralStatsCalculatorTest {
 
@@ -35,7 +32,6 @@ public class GeneralStatsCalculatorTest {
       e.printStackTrace();
     }
   }
-
 
   // --------------------------------------- Testing for updateTotalEmissions
 
@@ -486,19 +482,16 @@ public class GeneralStatsCalculatorTest {
 
   // --------------------------------- Tests for calculateDateAsInt()
 
-  // TODO: find a better way of testing this other than having to manually change the expectedDate
-  // @Hayley
-
   /**
    * Verify that when calculateEmissionsPerYear is called, then the remainingCO2InYear is calculated
    * as expected.
    */
-//  @Test
-//  public void getDateAsIntPositiveIntTest() {
-//    int expectedDate = 277;
-//    generalStatsCalculator.calculateDateAsInt();
-//    assertEquals(expectedDate, generalStatsCalculator.getDayInYear());
-//  }
+  @Test
+  public void getDateAsIntPositiveIntTest() {
+    int expectedDate = 278;
+    generalStatsCalculator.calculateDateAsInt();
+    assertEquals(expectedDate, generalStatsCalculator.getDayInYear());
+  }
 
   // --------------------------------- Tests for calculateRemainingDaysInYear()
 
@@ -771,25 +764,4 @@ public class GeneralStatsCalculatorTest {
     generalStatsCalculator.calculateOffsetTrees();
     assertEquals(expectedValue, generalStatsCalculator.getTreesToGrow(), 0.01);
   }
-
-  // --------------------------------- Testing for createCarbonEmissionsComment()
-
-  // TODO fix me! @Hayley 3/10 9.50am
-
-  //  /**
-  //   * Verify that when createCarbonEmissionsComment is called, then the correct comment is
-  // generated.
-  //   */
-  //  @Test
-  //  public void createCarbonEmissionsCommentTest() {
-  //    String expectedString =
-  //    "Currently, in 2020, you are producing 0.00 kg of carbon emissions per day from your\n" +
-  //    "flight travel. If you continue at this rate, you will produce 0.00 kg by the end of this
-  // year\n" +
-  //    "from flight travel. This means you have breached your goal and should not produce any\n" +
-  //    "more carbon emissions in the remaining part of this year. To ensure you stay under\n" +
-  //    "your goal in 2021, you will need to reduce your flight travel by NaN percent.\n";
-  //    generalStatsCalculator.createCarbonEmissionsComment();
-  //    assertEquals(expectedString, generalStatsCalculator.getCarbonEmissionsComment());
-  //  }
 }

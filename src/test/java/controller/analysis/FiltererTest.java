@@ -17,9 +17,8 @@ import static org.junit.Assert.*;
 /**
  * Unit test for Filterer class.
  *
- * @author Hayley Krippner
- * @since 30/08/2020
  * @version 1.0
+ * @since 04/10/2020
  */
 public class FiltererTest {
 

@@ -6,22 +6,19 @@ import model.data.Storage;
 import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Unit test for ReportGenrator class.
+ * Unit test for FlightAnalysis class.
  *
- * @author ZhengJingRui He
  * @version 1.0
- * @since 16/09/2020
+ * @since 04/10/2020
  */
 public class FlightAnalyserTest {
 
@@ -35,7 +32,7 @@ public class FlightAnalyserTest {
   String[] rubbish2 = {"abc"};
 
   Route route1 =
-          new Route("Air Inter Gabon", 219, "AER", 2965, "KZN", 2990, "dont know", 0, rubbish1);
+      new Route("Air Inter Gabon", 219, "AER", 2965, "KZN", 2990, "dont know", 0, rubbish1);
   Route route2 = new Route("Air Cess", 55, "ASF", 2966, "SVX", 2975, "dont know", 0, rubbish2);
   Route route3 = new Route(null, 296, "CEK", 2968, "DME", 4029, null, 0, rubbish1);
   Route route4 = new Route(null, 297, "EGO", 2968, "UUA", 4029, null, 0, rubbish2);
@@ -51,7 +48,7 @@ public class FlightAnalyserTest {
 
   /**
    * check through two list, and find out whether their airport code are equal or not find their
-   * longitude and Latitude in order to caluclate distance call calculatedistance function to find
+   * longitude and Latitude in order to calculate distance call calculate distance function to find
    * out distance between two airports for two paths.
    */
   public void findCoordinateForTwoPath(ArrayList<String> firstPath, ArrayList<String> secondPath) {
@@ -77,18 +74,18 @@ public class FlightAnalyserTest {
     }
 
     double pathDistance1 =
-            calculatedistance(
-                    listOfAirportPath1.get(0).getLatitude(),
-                    listOfAirportPath1.get(0).getLongitude(),
-                    listOfAirportPath1.get(1).getLatitude(),
-                    listOfAirportPath1.get(1).getLongitude());
+        calculatedistance(
+            listOfAirportPath1.get(0).getLatitude(),
+            listOfAirportPath1.get(0).getLongitude(),
+            listOfAirportPath1.get(1).getLatitude(),
+            listOfAirportPath1.get(1).getLongitude());
 
     double pathDistance2 =
-            calculatedistance(
-                    listOfAirportPath2.get(0).getLatitude(),
-                    listOfAirportPath2.get(0).getLongitude(),
-                    listOfAirportPath2.get(1).getLatitude(),
-                    listOfAirportPath2.get(1).getLongitude());
+        calculatedistance(
+            listOfAirportPath2.get(0).getLatitude(),
+            listOfAirportPath2.get(0).getLongitude(),
+            listOfAirportPath2.get(1).getLatitude(),
+            listOfAirportPath2.get(1).getLongitude());
     distance1 = pathDistance1;
     distance2 = pathDistance2;
     distance3 = pathDistance1;
@@ -97,7 +94,7 @@ public class FlightAnalyserTest {
 
   /**
    * check through two list, and find out whether their airport code are equal or not find their
-   * longitude and Latitude in order to caluclate distance call calculatedistance function to find
+   * longitude and Latitude in order to calculate distance call calculate distance function to find
    * out distance between two airports for one path.
    */
   public void findCoordinateForOnePath(ArrayList<String> Path) {
@@ -114,15 +111,15 @@ public class FlightAnalyserTest {
     }
 
     singleDistance =
-            calculatedistance(
-                    listOfAirportPath.get(0).getLatitude(),
-                    listOfAirportPath.get(0).getLongitude(),
-                    listOfAirportPath.get(1).getLatitude(),
-                    listOfAirportPath.get(1).getLongitude());
+        calculatedistance(
+            listOfAirportPath.get(0).getLatitude(),
+            listOfAirportPath.get(0).getLongitude(),
+            listOfAirportPath.get(1).getLatitude(),
+            listOfAirportPath.get(1).getLongitude());
   }
 
   /**
-   * Caluclate emissons by using the distance between two aitports
+   * Calculate emissions by using the distance between two airports
    *
    * @return Co2 emission
    */
@@ -139,13 +136,13 @@ public class FlightAnalyserTest {
     FuelUsed = distance * 12 / 1250; // fuel in tonns
 
     double FuelPerPassenger =
-            (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
+        (FuelUsed / (distance * seatsOccupancy)) * 1000000; // fuel use per passenger per km
 
     double Co2PerPassengerPerKm =
-            FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
+        FuelPerPassenger * Co2OfOneGramFuel; // co2 emissions per passenger km in gram
 
     double Co2Hour =
-            (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
+        (Co2PerPassengerPerKm * CruisingSpeed) / 1000; // how much Co2 genate per hour in kg
 
     double flytime = distance / CruisingSpeed; // in hour
 
@@ -153,7 +150,7 @@ public class FlightAnalyserTest {
   }
 
   /**
-   * Caluclate distance by using the longitude and latitude of two aitports
+   * Calculate distance by using the longitude and latitude of two airports
    *
    * @return distance
    */
@@ -164,8 +161,8 @@ public class FlightAnalyserTest {
     double need4 = (Long2 - Long1) * Math.PI / 180;
 
     double a =
-            Math.sin(need3 / 2) * Math.sin(need3 / 2)
-                    + Math.cos(need1) * Math.cos(need2) * Math.sin(need4 / 2) * Math.sin(need4 / 2);
+        Math.sin(need3 / 2) * Math.sin(need3 / 2)
+            + Math.cos(need1) * Math.cos(need2) * Math.sin(need4 / 2) * Math.sin(need4 / 2);
 
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -175,11 +172,11 @@ public class FlightAnalyserTest {
   }
 
   /**
-   * Set up are the arraylist for testing
+   * Set up are the array list for testing
    *
    * @throws FileNotFoundException This throws a FileNotFoundException.
-   * @throws FileSystemException   This throws a FileSystemException.
-   * @throws SQLException          This throws an SQLException.
+   * @throws FileSystemException This throws a FileSystemException.
+   * @throws SQLException This throws an SQLException.
    */
   @Before
   public void setUp() throws FileNotFoundException, FileSystemException, SQLException {
@@ -206,7 +203,7 @@ public class FlightAnalyserTest {
   }
 
   /**
-   * check a single path distance calculate in the test class whether equal to the disatnce was
+   * check a single path distance calculate in the test class whether equal to the distance was
    * calculated in the FlightAnalyser class
    */
   @Test
@@ -232,7 +229,7 @@ public class FlightAnalyserTest {
   }
 
   /**
-   * check a single path distance calculate in the test class whether equal to the disatnce was
+   * check a single path distance calculate in the test class whether equal to the distance was
    * calculated in the FlightAnalyser class
    */
   @Test
@@ -353,7 +350,7 @@ public class FlightAnalyserTest {
   }
 
   /**
-   * check whether the differnece of the distance between two airports is a postive number if path1
+   * check whether the difference of the distance between two airports is a positive number if path1
    * distance is smaller than path2
    */
   @Test
@@ -364,7 +361,7 @@ public class FlightAnalyserTest {
   }
 
   /**
-   * check whether the differnece of the emission between two airports is a postive number if path1
+   * check whether the difference of the emission between two airports is a positive number if path1
    * emission is smaller than path2
    */
   @Test
