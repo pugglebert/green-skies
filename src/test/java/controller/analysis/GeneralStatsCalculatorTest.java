@@ -1,13 +1,17 @@
 package controller.analysis;
 
-import model.data.*;
+import model.data.Route;
+import model.data.Storage;
 import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for ReportStatsCalculator class.
@@ -125,7 +129,7 @@ public class GeneralStatsCalculatorTest {
 
   /**
    * Verify that when updateTotalEmissions is called with a route with a large amount of carbon
-   * emissions, which has been taken multipe times, that the total emissions is updated
+   * emissions, which has been taken multiple times, that the total emissions is updated
    * accordingly.The carbon emissions are starting at 0.0 g.
    */
   @Test
@@ -664,7 +668,7 @@ public class GeneralStatsCalculatorTest {
 
   /**
    * Verify that when calculateReductionPercentage is called and EmissionsPerDayGoal is 0, then an
-   * ArithmeticException is thrown for the divison by 0 error.
+   * ArithmeticException is thrown for the division by 0 error.
    */
   @Test
   public void calculateReductionPercentageExceptionTest() {
@@ -690,7 +694,7 @@ public class GeneralStatsCalculatorTest {
 
   /**
    * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is greater
-   * than totalCarbonEmissionsthen, then the correct value is returned and is positive.
+   * than totalCarbonEmissions, then the correct value is returned and is positive.
    */
   @Test
   public void calculateRemainingCO2InYearPositiveTest() {
@@ -703,7 +707,7 @@ public class GeneralStatsCalculatorTest {
 
   /**
    * Verify that when calculateRemainingCO2InYear is called and the carbonEmissionGoal is smaller
-   * than totalCarbonEmissionsthen, then the correct value is returned and is 0.
+   * than totalCarbonEmissions, then the correct value is returned and is 0.
    */
   @Test
   public void calculateRemainingCO2InYearNegativeTest() {
