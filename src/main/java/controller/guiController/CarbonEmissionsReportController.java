@@ -75,6 +75,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
     this.generalStatsCalculator = Main.getGeneralStatsCalculator();
     this.routeStatsCalculator = Main.getRouteStatsCalculator();
     this.airportStatsCalculator = Main.getAirportStatsCalculator();
+
   }
 
   /**
@@ -93,11 +94,9 @@ public class CarbonEmissionsReportController extends SideNavBarController {
       updateTravelledAndVisited();
       setUpData();
 
-      String carbonEmissionGoalValue = carbonEmissionGoalField.getText();
-      displayCarbonEmissionGoalField.setText(carbonEmissionGoalValue);
-
       try {
-        generalStatsCalculator.setCarbonEmissionsGoal(Double.parseDouble(carbonEmissionGoalValue));
+        displayCarbonEmissionGoalField.setText(String.valueOf(Double.parseDouble(carbonEmissionGoalField.getText())));
+        generalStatsCalculator.setCarbonEmissionsGoal(Double.parseDouble(carbonEmissionGoalField.getText()));
 
         displayTotalEmissionsField.setText(
             String.format("%.2f", generalStatsCalculator.getTotalCarbonEmissions()));
@@ -115,6 +114,7 @@ public class CarbonEmissionsReportController extends SideNavBarController {
         generalStatsCalculator.createCarbonEmissionsComment();
         displayStatusCommentField.setText(generalStatsCalculator.getCarbonEmissionsComment());
       } catch (NumberFormatException e) {
+        carbonEmissionGoalField.setText("");
         carbonEmissionGoalField.setPromptText(
             "NO GOAL WAS ENTERED. PLEASE ENTER A GOAL AS A DOUBLE.");
       }
