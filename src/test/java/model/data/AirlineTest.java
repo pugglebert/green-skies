@@ -20,7 +20,6 @@ public class AirlineTest {
   public void setUp() {
     // given
     airline = new Airline(2, "Private flight", "\\N", "-", "N/A", "", "", true);
-    airline.initCheckBox();
   }
 
   @Test
@@ -85,26 +84,6 @@ public class AirlineTest {
     final Field field = airline.getClass().getDeclaredField("activeStatus");
     field.setAccessible(true);
     assertEquals(field.get(airline), true);
-  }
-
-  @Test
-  public void getSelectTest() throws NoSuchFieldException, IllegalAccessException {
-    // then
-    final Field field = airline.getClass().getDeclaredField("select");
-    field.setAccessible(true);
-    assertEquals(((CheckBox) field.get(airline)).isSelected(), airline.getSelect().isSelected());
-  }
-
-  @Test
-  public void setSelect() throws NoSuchFieldException, IllegalAccessException {
-    // when
-    CheckBox checkBox = new CheckBox();
-    checkBox.setSelected(true);
-    airline.setSelect(checkBox);
-    // then
-    final Field field = airline.getClass().getDeclaredField("select");
-    field.setAccessible(true);
-    assertTrue(((CheckBox) field.get(airline)).isSelected());
   }
 
   @Test

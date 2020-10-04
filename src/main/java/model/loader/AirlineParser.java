@@ -261,13 +261,6 @@ public class AirlineParser extends Parser {
         errorCounter(5);
         return false;
       }
-      for (DataType data : parserData) {
-        Airline airline = (Airline) data;
-        if (airline.getIATA().equals(IATA)) {
-          errorCounter(1);
-          return false;
-        }
-      }
     }
     return true;
   }

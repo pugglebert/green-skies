@@ -264,13 +264,6 @@ public class AirportParser extends Parser {
         errorCounter(6);
         return false;
       }
-      for (DataType data : parserData) {
-        Airport airport = (Airport) data;
-        if (airport.getIATA().equals(IATA)) {
-          errorCounter(1);
-          return false;
-        }
-      }
     }
     return true;
   }
