@@ -154,12 +154,13 @@ public class ParserTest {
    * Verify that getErrorMessage returns the correct message when an error has been found in the
    * file.
    */
+  @Test
   public void getErrorMessageErrorTest() {
     airlineParser.errorCounter(3);
     String errorMessage = airlineParser.getErrorMessage(true);
     assertEquals(
-        "File uploaded with 1 invalid lines rejected\n"
-            + "Error [3] Invalid airport name: 1 occurrences\n",
+        "File uploaded with 1 invalid lines rejected.\n"
+            + "Error [3] Invalid airline name: 1 occurrences\n",
         errorMessage);
   }
 }

@@ -108,22 +108,22 @@ public class FlightHistoryControllerTest extends ApplicationTest {
         0.0001);
   }
 
-  //  @Test // TODO  least emission still wrong
-  //  public void updateLeastEmissionsRoute() {
-  //    assertEquals(
-  //            ASF_MRV.getEmissions(),
-  //            routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
-  //            0.0001);
-  //
-  //    storage.getHistory().remove(ASF_MRV);
-  //    flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
-  //
-  //
-  //    assertEquals(
-  //            ASF_KZN.getEmissions(),
-  //            routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
-  //            0.0001);
-  //  }
+    @Test // TODO  least emission still wrong
+    public void updateLeastEmissionsRoute() {
+      assertEquals(
+              ASF_MRV.getEmissions(),
+              routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
+              0.0001);
+
+      storage.getHistory().remove(ASF_MRV);
+      flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
+
+
+      assertEquals(
+              ASF_KZN.getEmissions(),
+              routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
+              0.0001);
+    }
 
   @Test
   public void updateMostEmissionsRoute() {

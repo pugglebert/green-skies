@@ -358,23 +358,6 @@ public class FiltererTest {
     assertArrayEquals(expectedResults.toArray(), results.toArray());
   }
 
-  //  /**
-  //   * Verify that when filterAirlines is called with a filter term that matches one entry in the
-  // file, an ArrayList
-  //   * containing just that entry is returned.
-  //   */
-  //  @Test
-  //  public void filterAirlinesOneTermOneRecordActiveStatusTest() {
-  //    ArrayList<Airline> expectedResults = new ArrayList<>();
-  //    HashMap<String, String> testFilterTerms = new HashMap<>();
-  //    testFilterTerms.put("Active Status", "Y");
-  //    expectedResults.add(new Airline(1,"Exclusive flight","\\N","-","N/A","",
-  //            "",true));
-  //    ArrayList<Airline> results = filterer.filterAirlines(testFilterTerms,
-  // storage.getAirlines());
-  //    assertArrayEquals(expectedResults.toArray(), results.toArray());
-  //  }
-
   /**
    * Verify that when filterAirlines is called with a name and country filter terms that matches one
    * entry in the file, an ArrayList containing just that entry is returned.
