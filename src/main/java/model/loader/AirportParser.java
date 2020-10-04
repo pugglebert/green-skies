@@ -2,6 +2,7 @@ package model.loader;
 
 import model.data.Airport;
 import model.data.DataType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,6 +138,7 @@ public class AirportParser extends Parser {
       errorCounter(0);
       return false;
     }
+
     if (!isIdValid(line[airportID])) {
       return false;
     }
@@ -180,11 +182,7 @@ public class AirportParser extends Parser {
       return false;
     }
 
-    if (!isDBTZValid(line[dataBaseTimeZone])) {
-      return false;
-    }
-
-    return true;
+    return isDBTZValid(line[dataBaseTimeZone]);
   }
 
   /**
