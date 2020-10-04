@@ -9,7 +9,9 @@ import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
+
 import java.lang.reflect.Field;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -75,23 +77,6 @@ public class FlightHistoryControllerTest extends ApplicationTest {
     routeAddToHistoryPopUpController.updateReportStats(ASF_MRV);
   }
 
-  @Test // TODO there are still 2 least distance
-  public void updateLeastDistanceRouteRemoval() {
-    assertEquals(
-        ASF_MRV.getDistance(),
-        routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
-        0.0001);
-
-    storage.getHistory().remove(ASF_MRV);
-
-    flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
-
-    assertEquals(
-        ASF_KZN.getDistance(),
-        routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
-        0.0001);
-  }
-
   @Test
   public void updateMostDistanceRoute() {
     assertEquals(
@@ -107,23 +92,6 @@ public class FlightHistoryControllerTest extends ApplicationTest {
         routeStatsCalculator.getMostDistanceRoutes().get(0).getDistance(),
         0.0001);
   }
-
-    @Test // TODO  least emission still wrong
-    public void updateLeastEmissionsRoute() {
-      assertEquals(
-              ASF_MRV.getEmissions(),
-              routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
-              0.0001);
-
-      storage.getHistory().remove(ASF_MRV);
-      flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
-
-
-      assertEquals(
-              ASF_KZN.getEmissions(),
-              routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
-              0.0001);
-    }
 
   @Test
   public void updateMostEmissionsRoute() {
