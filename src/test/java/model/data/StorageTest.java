@@ -3,18 +3,15 @@ package model.data;
 import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
- * Test cases for Storage class.
+ * JUnit test cases for Storage class.
  *
- * @author Ella Johnson
  * @since 22/08/2020
  * @version 1.0
  */
@@ -40,49 +37,46 @@ public class StorageTest {
   private List<DataType> createAirportList() {
     List<DataType> testAirports = new ArrayList<>();
     testAirports.add(
-            new Airport(
-                    11,
-                    "Akureyri Airport",
-                    "Akureyri",
-                    "Iceland",
-                    "AEY",
-                    "BIAR",
-                    65.66000366210938,
-                    -18.07270050048828,
-                    6,
-                    0,
-                    "N",
-                    "Atlantic/Reykjavik"));
+        new Airport(
+            11,
+            "Akureyri Airport",
+            "Akureyri",
+            "Iceland",
+            "AEY",
+            "BIAR",
+            65.66000366210938,
+            -18.07270050048828,
+            6,
+            0,
+            "N",
+            "Atlantic/Reykjavik"));
     testAirports.add(
-            new Airport(
-                    59,
-                    "Fort Resolution",
-                    "Fort Resolution",
-                    "Canada",
-                    "YFR",
-                    "CYFR",
-                    61.180832,
-                    -113.689722,
-                    526,
-                    -7,
-                    "A",
-                    "America/Edmonton"));
+        new Airport(
+            59,
+            "Fort Resolution",
+            "Fort Resolution",
+            "Canada",
+            "YFR",
+            "CYFR",
+            61.180832,
+            -113.689722,
+            526,
+            -7,
+            "A",
+            "America/Edmonton"));
     return testAirports;
   }
-
 
   /** Create a list of routes to use in tests */
   private List<DataType> createRouteList() {
     List<DataType> testRoutes = new ArrayList<>();
     testRoutes.add(
-            new Route("FM", 4609, "CTU", 3395, "SHA", 3391, "", 0, "757 737 738".split(" ")));
+        new Route("FM", 4609, "CTU", 3395, "SHA", 3391, "", 0, "757 737 738".split(" ")));
     testRoutes.add(new Route("MH", 3378, "MYY", 3266, "BTU", 3262, "Y", 0, "AT7".split(" ")));
     return testRoutes;
   }
 
-  /**
-   * Test that the comparedRoutes are set to the correct value when setComparedRoutes is called
-   */
+  /** Test that the comparedRoutes are set to the correct value when setComparedRoutes is called */
   @Test
   public void setComparedRoutesTest() {
     Pair<String, String> testComparedRoutes = new Pair("KZN - AER", "AEY - YFR");
@@ -91,7 +85,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that AnalyseEmissionResult is set to the correct value when setAnalyseEmissionResult is called
+   * Test that AnalyseEmissionResult is set to the correct value when setAnalyseEmissionResult is
+   * called
    */
   @Test
   public void setAnalyseEmissionResultTest() {
@@ -106,18 +101,17 @@ public class StorageTest {
   public void addToHistoryTest() {
     int lengthofHistory = storage.getHistory().size();
     String[] rubbish1 = new String['A'];
-    Route testroute = new Route("sss", 123, "AFF", 999, "PPP", 977, null, 0,rubbish1);
+    Route testroute = new Route("sss", 123, "AFF", 999, "PPP", 977, null, 0, rubbish1);
     storage.addToHistory(testroute);
-    assertEquals(storage.getHistory().size(), lengthofHistory+1);
+    assertEquals(storage.getHistory().size(), lengthofHistory + 1);
   }
 
   @Test
-  public void removeFromHistorySrcAirports(){
+  public void removeFromHistorySrcAirports() {
     storage.addToHistorySrcAirports("KZN");
     storage.addToHistorySrcAirports("KZN");
     storage.removeFromHistorySrcAirports("KZN");
     assertEquals((Integer) 1, storage.getHistorySrcAirports().get("KZN"));
-
   }
 
   @Test
@@ -130,7 +124,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that AnalyseDistanceResult is set to the correct value when setAnalyseDistanceResult is called
+   * Test that AnalyseDistanceResult is set to the correct value when setAnalyseDistanceResult is
+   * called
    */
   @Test
   public void setAnalyseDistanceResultTest() {
@@ -142,8 +137,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that the hashmap holding the history Dest airpots is set to a given value
-   * when addToHistoryDestAirports is called
+   * Test that the hashmap holding the history Dest airpots is set to a given value when
+   * addToHistoryDestAirports is called
    */
   @Test
   public void addToHistoryDestAirportsTest() {
@@ -151,23 +146,19 @@ public class StorageTest {
     testMap.put("TestDestAirport", 1);
     storage.addToHistoryDestAirports("TestDestAirport");
     assertEquals(storage.getHistoryDestAirports(), testMap);
-
   }
 
   /**
-   * Test that the hashmap holding the history src airpots is set to a given value
-   * when addToHistorySrcAirports is called
+   * Test that the hashmap holding the history src airpots is set to a given value when
+   * addToHistorySrcAirports is called
    */
   @Test
   public void addToHistorySrcAirportsTest() {
-    HashMap<String, Integer>  testMap1 = new HashMap<>();
+    HashMap<String, Integer> testMap1 = new HashMap<>();
     testMap1.put("TestSrcAirport", 1);
     storage.addToHistoryDestAirports("TestSrcAirport");
     assertEquals(storage.getHistoryDestAirports(), testMap1);
-
   }
-
-
 
   /**
    * Test that airlines is set to given values when setData is called with airlines as the datatype.
@@ -225,14 +216,18 @@ public class StorageTest {
     }
   }
 
-  /** Test that an empty list is returned when getAirlineFileNames is called and no data has been added to storage.
+  /**
+   * Test that an empty list is returned when getAirlineFileNames is called and no data has been
+   * added to storage.
    */
   @Test
   public void getAirlineFileNamesNoneAddedTest() {
     assertTrue(storage.getAirlineFileNames().isEmpty());
   }
 
-  /** Test when a file of another data type has been added, that filename is not returned by getAirlineFileNames.
+  /**
+   * Test when a file of another data type has been added, that filename is not returned by
+   * getAirlineFileNames.
    */
   @Test
   public void getAirlineFileNamesOtherAddedTest() {
@@ -240,7 +235,9 @@ public class StorageTest {
     assertTrue(storage.getAirlineFileNames().isEmpty());
   }
 
-  /** Test that a list containing one filename is returned when only one Airline file has been added. */
+  /**
+   * Test that a list containing one filename is returned when only one Airline file has been added.
+   */
   @Test
   public void getAirlineFileNamesOneFileTest() {
     storage.setData(createAirlineList(), "Airline", "airlinetest.csv");
@@ -249,7 +246,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that a list containing all added filenames is returned when multiple Airline files have been added.
+   * Test that a list containing all added filenames is returned when multiple Airline files have
+   * been added.
    */
   @Test
   public void getAirlineFileNamesMultipleTest() {
@@ -263,8 +261,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentAirlineFile changes the value of currentAirlineFile when called with the name of
-   * an Airline file which has been stored.
+   * Test that setCurrentAirlineFile changes the value of currentAirlineFile when called with the
+   * name of an Airline file which has been stored.
    */
   @Test
   public void setCurrentAirlineFileNameStoredTest() {
@@ -275,8 +273,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentAirlineFile does not change the value of currentAirlineFile if it is called with a name
-   * that is not stored in airlineFiles.
+   * Test that setCurrentAirlineFile does not change the value of currentAirlineFile if it is called
+   * with a name that is not stored in airlineFiles.
    */
   @Test
   public void setCurrentAirlienFileNameNotStoredTest() {
@@ -285,9 +283,7 @@ public class StorageTest {
     assertEquals("a.csv", storage.getCurrentAirlineFile());
   }
 
-  /**
-   * Test getAirlines returns an empty list when currentAirlineFile is set to null.
-   */
+  /** Test getAirlines returns an empty list when currentAirlineFile is set to null. */
   @Test
   public void getAirlinesNullTest() {
     storage.setCurrentAirlineFile(null);
@@ -295,7 +291,8 @@ public class StorageTest {
   }
 
   /**
-   * Test getAirlines returns a list of airlines in the current file when currentAirlineFile is not set to null.
+   * Test getAirlines returns a list of airlines in the current file when currentAirlineFile is not
+   * set to null.
    */
   @Test
   public void getAirlinesNotNullTest() {
@@ -304,14 +301,18 @@ public class StorageTest {
     assertArrayEquals(createAirlineList().toArray(), storage.getAirlines().toArray());
   }
 
-  /** Test that an empty list is returned when getAirportFileNames is called and no data has been added to storage.
+  /**
+   * Test that an empty list is returned when getAirportFileNames is called and no data has been
+   * added to storage.
    */
   @Test
   public void getAirportFileNamesNoneAddedTest() {
     assertTrue(storage.getAirportFileNames().isEmpty());
   }
 
-  /** Test when a file of another data type has been added, that filename is not returned by getAirportFileNames.
+  /**
+   * Test when a file of another data type has been added, that filename is not returned by
+   * getAirportFileNames.
    */
   @Test
   public void getAirportFileNamesOtherAddedTest() {
@@ -319,7 +320,9 @@ public class StorageTest {
     assertTrue(storage.getAirportFileNames().isEmpty());
   }
 
-  /** Test that a list containing one filename is returned when only one Airport file has been added. */
+  /**
+   * Test that a list containing one filename is returned when only one Airport file has been added.
+   */
   @Test
   public void getAirportFileNamesOneFileTest() {
     storage.setData(createAirportList(), "Airport", "airporttest.csv");
@@ -328,7 +331,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that a list containing all added filenames is returned when multiple Airport files have been added.
+   * Test that a list containing all added filenames is returned when multiple Airport files have
+   * been added.
    */
   @Test
   public void getAirportFileNamesMultipleTest() {
@@ -342,8 +346,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentAirportFile changes the value of currentAirportFile when called with the name of
-   * an Airport file which has been stored.
+   * Test that setCurrentAirportFile changes the value of currentAirportFile when called with the
+   * name of an Airport file which has been stored.
    */
   @Test
   public void setCurrentAirportFileNameStoredTest() {
@@ -354,8 +358,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentAirportFile does not change the current airport file when called with a filename that
-   * has not been stored.
+   * Test that setCurrentAirportFile does not change the current airport file when called with a
+   * filename that has not been stored.
    */
   @Test
   public void setCurrentAirportFileNameNotStoredTest() {
@@ -364,9 +368,7 @@ public class StorageTest {
     assertEquals("a.csv", storage.getCurrentAirportFile());
   }
 
-  /**
-   * Test getAirports returns an empty list when currentAirportFile is set to null.
-   */
+  /** Test getAirports returns an empty list when currentAirportFile is set to null. */
   @Test
   public void getAirportsNullTest() {
     storage.setCurrentAirportFile(null);
@@ -374,7 +376,8 @@ public class StorageTest {
   }
 
   /**
-   * Test getAirports returns a list of airports in the current file when currentAirportFile is not set to null.
+   * Test getAirports returns a list of airports in the current file when currentAirportFile is not
+   * set to null.
    */
   @Test
   public void getAirportsNotNullTest() {
@@ -383,14 +386,18 @@ public class StorageTest {
     assertArrayEquals(createAirportList().toArray(), storage.getAirports().toArray());
   }
 
-  /** Test that an empty list is returned when getRouteFileNames is called and no data has been added to storage.
+  /**
+   * Test that an empty list is returned when getRouteFileNames is called and no data has been added
+   * to storage.
    */
   @Test
   public void getRouteFileNamesNoneAddedTest() {
     assertTrue(storage.getRouteFileNames().isEmpty());
   }
 
-  /** Test when a file of another data type has been added, that filename is not returned by getRouteFileNames.
+  /**
+   * Test when a file of another data type has been added, that filename is not returned by
+   * getRouteFileNames.
    */
   @Test
   public void getRouteFileNamesOtherAddedTest() {
@@ -398,7 +405,9 @@ public class StorageTest {
     assertTrue(storage.getRouteFileNames().isEmpty());
   }
 
-  /** Test that a list containing one filename is returned when only one Route file has been added. */
+  /**
+   * Test that a list containing one filename is returned when only one Route file has been added.
+   */
   @Test
   public void getRouteFileNamesOneFileTest() {
     storage.setData(createRouteList(), "Route", "routetest.csv");
@@ -407,7 +416,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that a list containing all added filenames is returned when multiple Route files have been added.
+   * Test that a list containing all added filenames is returned when multiple Route files have been
+   * added.
    */
   @Test
   public void getRouteFileNamesMultipleTest() {
@@ -421,8 +431,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentRouteFile changes the value of currentRouteFile when called with the name of
-   * an Route file which has been stored.
+   * Test that setCurrentRouteFile changes the value of currentRouteFile when called with the name
+   * of an Route file which has been stored.
    */
   @Test
   public void setCurrentRouteFileNameStoredTest() {
@@ -433,8 +443,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that setCurrentRouteFile doesn't change the current route file when called with a filename that
-   * has not been stored.
+   * Test that setCurrentRouteFile doesn't change the current route file when called with a filename
+   * that has not been stored.
    */
   @Test
   public void setCurrentRouteFileNameNotStoredTest() {
@@ -443,9 +453,7 @@ public class StorageTest {
     assertEquals("a.csv", storage.getCurrentRouteFile());
   }
 
-  /**
-   * Test getRoutes returns an empty list when currentRouteFile is set to null.
-   */
+  /** Test getRoutes returns an empty list when currentRouteFile is set to null. */
   @Test
   public void getRoutesNullTest() {
     storage.setCurrentRouteFile(null);
@@ -453,7 +461,8 @@ public class StorageTest {
   }
 
   /**
-   * Test getRoutes returns a list of routes in the current file when currentRouteFile is not set to null.
+   * Test getRoutes returns a list of routes in the current file when currentRouteFile is not set to
+   * null.
    */
   @Test
   public void getRoutesNotNullTest() {
@@ -463,7 +472,8 @@ public class StorageTest {
   }
 
   /**
-   * Test that setData changes currentFilename to the given filename when the given filename is not null.
+   * Test that setData changes currentFilename to the given filename when the given filename is not
+   * null.
    */
   @Test
   public void setDataFileNameChangeTest() {
@@ -471,5 +481,4 @@ public class StorageTest {
     storage.setData(createAirportList(), "Airport", "airportstest2.csv");
     assertEquals("airportstest2.csv", storage.getCurrentAirportFile());
   }
-
 }

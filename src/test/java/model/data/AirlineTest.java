@@ -3,13 +3,16 @@ package model.data;
 import javafx.scene.control.CheckBox;
 import org.junit.Before;
 import org.junit.Test;
-import org.testfx.framework.junit.ApplicationTest;
-
 import java.lang.reflect.Field;
-
 import static org.junit.Assert.*;
 
-public class AirlineTest /*extends ApplicationTest*/ {
+/**
+ * Unit test for Airline class.
+ *
+ * @version 1.0
+ * @since 04/10/2020
+ */
+public class AirlineTest {
 
   private Airline airline;
 
@@ -109,19 +112,19 @@ public class AirlineTest /*extends ApplicationTest*/ {
     // given
     Airline airline1 = new Airline(2, "Private flight", "\\N", "-", "N/A", "", "", true);
     Airport airport =
-            new Airport(
-                    1,
-                    "Goroka",
-                    "Goroka",
-                    "Papua New Guinea",
-                    "GKA",
-                    "AYGA",
-                    -6.081689,
-                    145.391881,
-                    5282,
-                    10,
-                    "U",
-                    "Port_Moresby");
+        new Airport(
+            1,
+            "Goroka",
+            "Goroka",
+            "Papua New Guinea",
+            "GKA",
+            "AYGA",
+            -6.081689,
+            145.391881,
+            5282,
+            10,
+            "U",
+            "Port_Moresby");
     // then
     assertEquals(airline, airline1);
     assertNotEquals(airline, airport);

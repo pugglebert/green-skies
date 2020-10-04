@@ -1,4 +1,3 @@
-
 Feature: generating the carbon emission report
 
   Scenario: Report displays the correct total carbon emissions produced from the user's flight history.

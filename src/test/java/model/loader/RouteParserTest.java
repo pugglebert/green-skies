@@ -4,16 +4,16 @@ import model.data.Route;
 import model.data.Storage;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
 /**
  * Test cases for routePaser.
- * @author Ella
+ *
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class RouteParserTest {
 
@@ -296,7 +296,7 @@ public class RouteParserTest {
     testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
-    Route existingRoute = new Route("2B",410,"KZN",2990,"DME",4029,"",0,"CR2".split(" "));
+    Route existingRoute = new Route("2B", 410, "KZN", 2990, "DME", 4029, "", 0, "CR2".split(" "));
     Route addedRoute = new Route("2B", 410, "AER", 2965, "KZN", 2990, "", 0, "CR2".split(","));
     Route[] expectedArray = new Route[2];
     expectedArray[0] = existingRoute;
@@ -311,7 +311,8 @@ public class RouteParserTest {
     testLines.add("2B,410,KZN,2990,DME,4029,,0,CR2");
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410,AER,2965,KZN,2990,,0,CR2");
-    assertEquals("File uploaded with 0 invalid lines rejected.\n", testParser.getErrorMessage(true));
+    assertEquals(
+        "File uploaded with 0 invalid lines rejected.\n", testParser.getErrorMessage(true));
   }
 
   /** Test that invalid line is not added to routes */
@@ -322,7 +323,7 @@ public class RouteParserTest {
     RouteParser testParser = new RouteParser(testLines, existingLines);
     testParser.parseLine("2B,410A,AER,2965,KZN,2990,,0,CR2");
     ArrayList<Route> expected = new ArrayList<>();
-    expected.add(new Route("2B",410,"KZN",2990,"DME",4029,"",0,"CR2".split(" ")));
+    expected.add(new Route("2B", 410, "KZN", 2990, "DME", 4029, "", 0, "CR2".split(" ")));
     assertArrayEquals(expected.toArray(), testParser.getData().toArray());
   }
 
@@ -407,18 +408,14 @@ public class RouteParserTest {
     assertTrue(routeParser.validater(testString));
   }
 
-  /**
-   * Verify that the validator method returns false for a line with an invalid airline id.
-   */
+  /** Verify that the validator method returns false for a line with an invalid airline id. */
   @Test
   public void validatorInvalidAilineIDTest() {
     String[] testString = {"MI", "475000", "HYD", "\\N", "SIN", "3316", "", "0", "320 738"};
     assertFalse(routeParser.validater(testString));
   }
 
-  /**
-   * Verify that the validator method returns false for a line with an invalid airline name.
-   */
+  /** Verify that the validator method returns false for a line with an invalid airline name. */
   @Test
   public void validatorInvalidAilineNameTest() {
     String[] testString = {"M", "4750", "HYD", "\\N", "SIN", "3316", "", "0", "320 738"};
@@ -444,7 +441,8 @@ public class RouteParserTest {
   }
 
   /**
-   * Verify that the validator method returns false for a line with an invalid destination airport name.
+   * Verify that the validator method returns false for a line with an invalid destination airport
+   * name.
    */
   @Test
   public void validatorInvalidDestinationNameTest() {
@@ -453,7 +451,8 @@ public class RouteParserTest {
   }
 
   /**
-   * Verify that the validator method returns false for a line with an invalid destination airport id.
+   * Verify that the validator method returns false for a line with an invalid destination airport
+   * id.
    */
   @Test
   public void validatorInvalidDestinationIDTest() {
@@ -461,27 +460,21 @@ public class RouteParserTest {
     assertFalse(routeParser.validater(testString));
   }
 
-  /**
-   * Verify that the validator method returns false for a line with an invalid codeshare value.
-   */
+  /** Verify that the validator method returns false for a line with an invalid codeshare value. */
   @Test
   public void validatorInvalidCodeShareTest() {
     String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "3316", "P", "0", "320 738"};
     assertFalse(routeParser.validater(testString));
   }
 
-  /**
-   * Verify that the validator method returns false for a line with an invalid number of stops.
-   */
+  /** Verify that the validator method returns false for a line with an invalid number of stops. */
   @Test
   public void validatorInvalidStopsTest() {
     String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "3316", "", "11", "320 738"};
     assertFalse(routeParser.validater(testString));
   }
 
-  /**
-   * Verify that the validator method returns false for a line with an invalid equipement array.
-   */
+  /** Verify that the validator method returns false for a line with an invalid equipement array. */
   @Test
   public void validatorInvalidEquipmentTest() {
     String[] testString = {"MI", "4750", "HYD", "\\N", "SIN", "3316", "", "0", "32 738"};
@@ -501,9 +494,7 @@ public class RouteParserTest {
         routeParser.getErrorMessage(true));
   }
 
-  /**
-   *  Verify that validater returns false for a line with the wrong number of parameters.
-   */
+  /** Verify that validater returns false for a line with the wrong number of parameters. */
   @Test
   public void validatorWrongParamsLineTest() {
     String[] testString = {"MI", "475000", "HYD", "\\N", "SIN", "3316", "", "0", "320 738", ""};
@@ -511,34 +502,40 @@ public class RouteParserTest {
   }
 
   /**
-   * Verify that the correct error message is produced when attempting to add a file where over
-   * 200 lines are wrong.
+   * Verify that the correct error message is produced when attempting to add a file where over 200
+   * lines are wrong.
    */
   @Test
   public void errorMessageTest200WrongLines() throws FileNotFoundException {
     Loader loader = new Loader(new Storage());
-    ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/airports.csv");
+    ArrayList<String> lines =
+        loader.openFile("../seng202_project/src/test/java/TestFiles/airports.csv");
     try {
       RouteParser routeParser = new RouteParser(lines, new ArrayList<>());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurrences\n", e.getMessage());
+      assertEquals(
+          "File rejected: more than 200 lines contain errors.\nError [0] Wrong number of parameters: 201 occurrences\n",
+          e.getMessage());
     }
   }
 
   /**
-   * Verify that the correct error message is produced when attempting to add a file all lines contain errors
-   * but the file is less than 200 lines.
+   * Verify that the correct error message is produced when attempting to add a file all lines
+   * contain errors but the file is less than 200 lines.
    */
   @Test
   public void errorMessageTestAllWrongLines() throws FileNotFoundException {
     Loader loader = new Loader(new Storage());
-    ArrayList<String> lines = loader.openFile("../seng202_project/src/test/java/TestFiles/SearcherAirlinesTest.csv");
+    ArrayList<String> lines =
+        loader.openFile("../seng202_project/src/test/java/TestFiles/SearcherAirlinesTest.csv");
     try {
       RouteParser routeParser = new RouteParser(lines, new ArrayList<>());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurrences\n", e.getMessage());
+      assertEquals(
+          "File rejected: all lines contain errors.\nError [0] Wrong number of parameters: 50 occurrences\n",
+          e.getMessage());
     }
   }
 
@@ -573,12 +570,15 @@ public class RouteParserTest {
   public void singleInvalidUploadErrorMessageTest() {
     Storage storage = new Storage();
     ArrayList<String> invalidLines = new ArrayList<>();
-    invalidLines.add("2609,\"Great Plains Airlines\",\\N,\"\",\"GRP\",\"GREAT PLAINS\",\"United States\",\"N\"");
+    invalidLines.add(
+        "2609,\"Great Plains Airlines\",\\N,\"\",\"GRP\",\"GREAT PLAINS\",\"United States\",\"N\"");
     try {
       new RouteParser(invalidLines, storage.getRoutes());
       fail();
     } catch (RuntimeException e) {
-      assertEquals("Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurrences\n", e.getMessage());
+      assertEquals(
+          "Entry contains errors and was not uploaded.\nError [0] Wrong number of parameters: 1 occurrences\n",
+          e.getMessage());
     }
   }
 }

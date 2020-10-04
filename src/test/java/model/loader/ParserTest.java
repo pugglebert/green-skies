@@ -3,20 +3,18 @@ package model.loader;
 import model.data.Airline;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
  * Test cases for Parser superclass.
  *
  * @author Ella Johnson
- * @since 24/08/2020
  * @version 1.0
+ * @since 04/10/2020
  */
 public class ParserTest {
 

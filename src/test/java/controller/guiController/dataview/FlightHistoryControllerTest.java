@@ -9,11 +9,15 @@ import model.loader.Loader;
 import org.junit.Before;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-
 import java.lang.reflect.Field;
-
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Unit test for FlightHistoryController class.
+ *
+ * @version 1.0
+ * @since 04/10/2020
+ */
 public class FlightHistoryControllerTest extends ApplicationTest {
 
   private final FlightHistoryController flightHistoryController = new FlightHistoryController();
@@ -28,9 +32,9 @@ public class FlightHistoryControllerTest extends ApplicationTest {
   @Before
   public void setUp() throws NoSuchFieldException, IllegalAccessException {
     Field field_GeneralStatsCalculator =
-            flightHistoryController.getClass().getDeclaredField("generalStatsCalculator");
+        flightHistoryController.getClass().getDeclaredField("generalStatsCalculator");
     Field field_RouteStatsCalculator =
-            flightHistoryController.getClass().getDeclaredField("routeStatsCalculator");
+        flightHistoryController.getClass().getDeclaredField("routeStatsCalculator");
     Field field_Storage = flightHistoryController.getClass().getDeclaredField("storage");
     Field field_Database = flightHistoryController.getClass().getDeclaredField("database");
 
@@ -41,9 +45,9 @@ public class FlightHistoryControllerTest extends ApplicationTest {
 
     storage = (Storage) field_Storage.get(flightHistoryController);
     routeStatsCalculator =
-            (RouteStatsCalculator) field_RouteStatsCalculator.get(flightHistoryController);
+        (RouteStatsCalculator) field_RouteStatsCalculator.get(flightHistoryController);
     generalStatsCalculator =
-            (GeneralStatsCalculator) field_GeneralStatsCalculator.get(flightHistoryController);
+        (GeneralStatsCalculator) field_GeneralStatsCalculator.get(flightHistoryController);
     database = (SQLiteDatabase) field_Database.get(flightHistoryController);
 
     Loader loader = new Loader(storage);
@@ -65,78 +69,75 @@ public class FlightHistoryControllerTest extends ApplicationTest {
     storage.getHistory().add(ASF_KZN);
     storage.getHistory().add(ASF_MRV);
     RouteAddToHistoryPopUpController routeAddToHistoryPopUpController =
-            new RouteAddToHistoryPopUpController();
+        new RouteAddToHistoryPopUpController();
     routeAddToHistoryPopUpController.updateReportStats(AER_KZN);
     routeAddToHistoryPopUpController.updateReportStats(ASF_KZN);
     routeAddToHistoryPopUpController.updateReportStats(ASF_MRV);
   }
 
-  @Test //todo there are still 2 least distance
+  @Test // TODO there are still 2 least distance
   public void updateLeastDistanceRouteRemoval() {
     assertEquals(
-            ASF_MRV.getDistance(),
-            routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
-            0.0001);
-
+        ASF_MRV.getDistance(),
+        routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
+        0.0001);
 
     storage.getHistory().remove(ASF_MRV);
 
     flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
-    //System.out.println(routeStatsCalculator.getLeastDistanceRoutes());
-
 
     assertEquals(
-            ASF_KZN.getDistance(),
-            routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
-            0.0001);
+        ASF_KZN.getDistance(),
+        routeStatsCalculator.getLeastDistanceRoutes().get(0).getDistance(),
+        0.0001);
   }
 
   @Test
   public void updateMostDistanceRoute() {
     assertEquals(
-            AER_KZN.getDistance(),
-            routeStatsCalculator.getMostDistanceRoutes().get(0).getDistance(),
-            0.0001);
+        AER_KZN.getDistance(),
+        routeStatsCalculator.getMostDistanceRoutes().get(0).getDistance(),
+        0.0001);
 
     storage.getHistory().remove(AER_KZN);
     flightHistoryController.updateReportStatsDeletionSingleRoute(AER_KZN);
 
     assertEquals(
-            AER_KZN.getDistance(),
-            routeStatsCalculator.getMostDistanceRoutes().get(0).getDistance(),
-            0.0001);
+        AER_KZN.getDistance(),
+        routeStatsCalculator.getMostDistanceRoutes().get(0).getDistance(),
+        0.0001);
   }
 
-//  @Test // todo  least emission still wrong
-//  public void updateLeastEmissionsRoute() {
-//    assertEquals(
-//            ASF_MRV.getEmissions(),
-//            routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
-//            0.0001);
-//
-//    storage.getHistory().remove(ASF_MRV);
-//    flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
-//
-//
-//    assertEquals(
-//            ASF_KZN.getEmissions(),
-//            routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
-//            0.0001);
-//  }
+  //  @Test // TODO  least emission still wrong
+  //  public void updateLeastEmissionsRoute() {
+  //    assertEquals(
+  //            ASF_MRV.getEmissions(),
+  //            routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
+  //            0.0001);
+  //
+  //    storage.getHistory().remove(ASF_MRV);
+  //    flightHistoryController.updateReportStatsDeletionSingleRoute(ASF_MRV);
+  //
+  //
+  //    assertEquals(
+  //            ASF_KZN.getEmissions(),
+  //            routeStatsCalculator.getLeastDistanceRoutes().get(0).getEmissions(),
+  //            0.0001);
+  //  }
 
   @Test
   public void updateMostEmissionsRoute() {
     assertEquals(
-            AER_KZN.getEmissions(),
-            routeStatsCalculator.getMostEmissionsRoutes().get(0).getEmissions(),
-            0.0001);
+        AER_KZN.getEmissions(),
+        routeStatsCalculator.getMostEmissionsRoutes().get(0).getEmissions(),
+        0.0001);
 
     storage.getHistory().remove(AER_KZN);
     flightHistoryController.updateReportStatsDeletionSingleRoute(AER_KZN);
 
     assertEquals(
-            AER_KZN.getEmissions(),
-            routeStatsCalculator.getMostDistanceRoutes().get(0).getEmissions(),
-            0.0001);
+        AER_KZN.getEmissions(),
+        routeStatsCalculator.getMostDistanceRoutes().get(0).getEmissions(),
+        0.0001);
   }
 }

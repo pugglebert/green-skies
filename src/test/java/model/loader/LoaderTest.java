@@ -3,19 +3,18 @@ package model.loader;
 import model.data.*;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystemException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
  * Unit tests for the Loader class
- * @author Ella Johnson
- * @since 2020-09-08
+ *
+ * @version 1.0
+ * @since 04/10/2020
  */
 public class LoaderTest {
 
@@ -23,9 +22,7 @@ public class LoaderTest {
   private Storage storage;
   private ArrayList<String> testLines;
 
-  /**
-   * Set up before each test case.
-   */
+  /** Set up before each test case. */
   @Before
   public void setUp() {
     storage = new Storage();
@@ -67,10 +64,7 @@ public class LoaderTest {
     }
   }
 
-
-  /**
-   * Test that checkFileType throws an exception when called with a file with no extension
-   */
+  /** Test that checkFileType throws an exception when called with a file with no extension */
   @Test
   public void testCheckFileTypeNoExtension() {
     try {
@@ -86,22 +80,22 @@ public class LoaderTest {
    */
   @Test
   public void testGetFileNameForwardSlash() {
-    String filename = loader.getFileName("C:/Users/ellaj/Documents/GreenSkies/seng202_project/src/test/java/TestFiles/airlines.csv");
+    String filename =
+        loader.getFileName(
+            "C:/Users/ellaj/Documents/GreenSkies/seng202_project/src/test/java/TestFiles/airlines.csv");
     assertEquals("airlines.csv", filename);
   }
 
-  /**
-   * Test that getFileName returns the correct filename for a filepath contiaining back slashes.
-   */
+  /** Test that getFileName returns the correct filename for a filepath contiaining back slashes. */
   @Test
   public void testGetFileNameBackSlash() {
-    String filename = loader.getFileName("C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv");
+    String filename =
+        loader.getFileName(
+            "C:\\Users\\ellaj\\Documents\\GreenSkies\\seng202_project\\src\\test\\java\\TestFiles\\airlines.csv");
     assertEquals("airlines.csv", filename);
   }
 
-  /**
-   * Test that getFileName returns the correct filename for a file path containing no slashes.
-   */
+  /** Test that getFileName returns the correct filename for a file path containing no slashes. */
   @Test
   public void testGetFileNameNoSlash() {
     String filename = loader.getFileName("airlines.csv");
@@ -109,10 +103,12 @@ public class LoaderTest {
   }
 
   /**
-   * Test that checkDuplicateFileName raises an error when another file with the same name has been uploaded.
+   * Test that checkDuplicateFileName raises an error when another file with the same name has been
+   * uploaded.
    */
   @Test
-  public void testCheckDuplicateFileNameDuplicateUploaded() throws FileNotFoundException, FileSystemException, SQLException {
+  public void testCheckDuplicateFileNameDuplicateUploaded()
+      throws FileNotFoundException, FileSystemException, SQLException {
     loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     try {
       loader.checkDuplicateFileName("airlines.csv");
@@ -123,10 +119,12 @@ public class LoaderTest {
   }
 
   /**
-   * Test that checkDuplicateFileName does not raise an exception when another file with the same name has not been uploaded.
+   * Test that checkDuplicateFileName does not raise an exception when another file with the same
+   * name has not been uploaded.
    */
   @Test
-  public void testCheckDuplicatFileNameDuplicateNotUploaded() throws FileNotFoundException, FileSystemException, SQLException {
+  public void testCheckDuplicatFileNameDuplicateNotUploaded()
+      throws FileNotFoundException, FileSystemException, SQLException {
     loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     try {
       loader.checkDuplicateFileName("airports.csv");
@@ -136,12 +134,13 @@ public class LoaderTest {
     }
   }
 
-
   /**
-   * Test that checkDuplicateFileName does not raise an exception when another file with the same name has been uploaded and then deleted.
+   * Test that checkDuplicateFileName does not raise an exception when another file with the same
+   * name has been uploaded and then deleted.
    */
   @Test
-  public void testCheckDuplicateFileNameDuplicateDeleted() throws FileNotFoundException, FileSystemException, SQLException {
+  public void testCheckDuplicateFileNameDuplicateDeleted()
+      throws FileNotFoundException, FileSystemException, SQLException {
     loader.loadFile("../seng202_project/src/test/java/TestFiles/airlines.csv", "Airline");
     storage.getAirlineFileList().remove("airlines.csv");
     try {
@@ -152,9 +151,7 @@ public class LoaderTest {
     }
   }
 
-  /**
-   * Test that checkDuplicateFileName raises an error when called with a reserved filename.
-   */
+  /** Test that checkDuplicateFileName raises an error when called with a reserved filename. */
   @Test
   public void testCheckDuplicateFileNameReservedName() {
     try {
@@ -165,9 +162,9 @@ public class LoaderTest {
     }
   }
 
-
   /**
-   * Test that openFile instantiates the Parser class with an ArrayList of Lines matching the contents of the file
+   * Test that openFile instantiates the Parser class with an ArrayList of Lines matching the
+   * contents of the file
    */
   @Test
   public void testOpenFileValidFile() {
@@ -182,10 +179,7 @@ public class LoaderTest {
     assertArrayEquals(testLines.toArray(), actualLines.toArray());
   }
 
-
-  /**
-   * Test that openFile throws an exception when a file cannot be found
-   */
+  /** Test that openFile throws an exception when a file cannot be found */
   @Test
   public void testOpenFileNotFound() {
     try {
@@ -195,7 +189,6 @@ public class LoaderTest {
       assertTrue(true);
     }
   }
-
 
   /**
    * Test that constructParser instantiates a parser of the correct datatype when called with a
@@ -207,10 +200,7 @@ public class LoaderTest {
     assertTrue(testParser instanceof AirportParser);
   }
 
-
-  /**
-   * Test that constructParser throws an exception when called with an invalid datatype
-   */
+  /** Test that constructParser throws an exception when called with an invalid datatype */
   @Test
   public void testConstructParserInvalid() {
     try {
@@ -268,9 +258,7 @@ public class LoaderTest {
     assertArrayEquals(testRoutes.toArray(), storage.getRoutes().toArray());
   }
 
-  /**
-   * Test that getLineFileName returns default name for route when current route file is null.
-   */
+  /** Test that getLineFileName returns default name for route when current route file is null. */
   @Test
   public void testGetLineFileNameDefaultRoute() {
     String fileName = loader.getLineFileName("Route");
@@ -278,7 +266,8 @@ public class LoaderTest {
   }
 
   /**
-   * Test that getLineFileName returns the current filename for route when current route filename is not null.
+   * Test that getLineFileName returns the current filename for route when current route filename is
+   * not null.
    */
   @Test
   public void testGetLineFileNameCurrentRoute() {
@@ -296,7 +285,8 @@ public class LoaderTest {
   }
 
   /**
-   * Test that getLineFileName returns the current filename for airport when current airport filename is not null.
+   * Test that getLineFileName returns the current filename for airport when current airport
+   * filename is not null.
    */
   @Test
   public void testGetLineFileNameCurrentAirport() {
@@ -314,7 +304,8 @@ public class LoaderTest {
   }
 
   /**
-   * Test that getLineFileName returns the current filename for airline when current airline filename is not null.
+   * Test that getLineFileName returns the current filename for airline when current airline
+   * filename is not null.
    */
   @Test
   public void testGetLineFileNameCurrentAirline() {
@@ -323,7 +314,8 @@ public class LoaderTest {
   }
 
   /**
-   * Test that getLineFileName throws an illegal arguement exception when called with an illegal datatype.
+   * Test that getLineFileName throws an illegal arguement exception when called with an illegal
+   * datatype.
    */
   @Test
   public void testGetLineFileNameIllegalFileName() {
@@ -336,16 +328,17 @@ public class LoaderTest {
   }
 
   /**
-   * Test that when loadLine is called with a valid route and there is a route file currently
-   * open the route is added to that file.
+   * Test that when loadLine is called with a valid route and there is a route file currently open
+   * the route is added to that file.
    */
   @Test
-  public void testLoadLineRouteAddedToExistingFile() throws FileNotFoundException, FileSystemException, SQLException {
+  public void testLoadLineRouteAddedToExistingFile()
+      throws FileNotFoundException, FileSystemException, SQLException {
     loader.loadFile("../seng202_project/src/test/java/TestFiles/singleRoute.csv", "Route");
     loader.loadLine("2G,1654,IKT,2937,YKS,2923,,0,A81", "Route");
     Route[] expected = new Route[2];
-    expected[0] = new Route("2B",410,"EGO",6156,"KZN",2990,"",0,"CR2".split(" "));
-    expected[1] = new Route("2G",1654,"IKT",2937,"YKS",2923,"",0,"A81".split(" "));
+    expected[0] = new Route("2B", 410, "EGO", 6156, "KZN", 2990, "", 0, "CR2".split(" "));
+    expected[1] = new Route("2G", 1654, "IKT", 2937, "YKS", 2923, "", 0, "A81".split(" "));
     assertArrayEquals(expected, storage.getRoutes().toArray());
   }
 
@@ -354,12 +347,24 @@ public class LoaderTest {
    * open the route is added to that file.
    */
   @Test
-  public void testLoadLineAirlineAddedToExistingFile() throws FileNotFoundException, FileSystemException, SQLException {
+  public void testLoadLineAirlineAddedToExistingFile()
+      throws FileNotFoundException, FileSystemException, SQLException {
     loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
-    loader.loadLine("2508,\"Galaxy Air\",\\N,\"7O\",\"GAL\",\"GALAXY\",\"Kyrgyzstan\",\"N\"", "Airline");
+    loader.loadLine(
+        "2508,\"Galaxy Air\",\\N,\"7O\",\"GAL\",\"GALAXY\",\"Kyrgyzstan\",\"N\"", "Airline");
     Airline[] expected = new Airline[2];
-    expected[0] = new Airline(6,"223 Flight Unit State Airline","\\N","","CHD","CHKALOVSK-AVIA","Russia",false);
-    expected[1] = new Airline(2508,"Galaxy Air","\\N","7O","GAL","GALAXY","Kyrgyzstan",false);
+    expected[0] =
+        new Airline(
+            6,
+            "223 Flight Unit State Airline",
+            "\\N",
+            "",
+            "CHD",
+            "CHKALOVSK-AVIA",
+            "Russia",
+            false);
+    expected[1] =
+        new Airline(2508, "Galaxy Air", "\\N", "7O", "GAL", "GALAXY", "Kyrgyzstan", false);
     assertArrayEquals(expected, storage.getAirlines().toArray());
   }
 
@@ -368,12 +373,41 @@ public class LoaderTest {
    * open the route is added to that file.
    */
   @Test
-  public void testLoadLineAirportAddedToExistingFile() throws FileNotFoundException, FileSystemException, SQLException {
+  public void testLoadLineAirportAddedToExistingFile()
+      throws FileNotFoundException, FileSystemException, SQLException {
     loader.loadFile("../seng202_project/src/test/java/TestFiles/singleairport.csv", "Airport");
-    loader.loadLine("7800,\"Essen HBF\",\"Essen\",\"Germany\",\"ESX\",\"ESSE\",51.451389,7.0138,1000,1,\"E\",\"Europe/Berlin\"", "Airport");
+    loader.loadLine(
+        "7800,\"Essen HBF\",\"Essen\",\"Germany\",\"ESX\",\"ESSE\",51.451389,7.0138,1000,1,\"E\",\"Europe/Berlin\"",
+        "Airport");
     Airport[] expected = new Airport[2];
-    expected[0] = new Airport(14,"Husavik","Husavik","Iceland","HZK","BIHU",65.952328,-17.425978,48,0,"N","Atlantic/Reykjavik");
-    expected[1] = new Airport(7800,"Essen HBF","Essen","Germany","ESX","ESSE",51.451389,7.0138,1000,1,"E","Europe/Berlin");
+    expected[0] =
+        new Airport(
+            14,
+            "Husavik",
+            "Husavik",
+            "Iceland",
+            "HZK",
+            "BIHU",
+            65.952328,
+            -17.425978,
+            48,
+            0,
+            "N",
+            "Atlantic/Reykjavik");
+    expected[1] =
+        new Airport(
+            7800,
+            "Essen HBF",
+            "Essen",
+            "Germany",
+            "ESX",
+            "ESSE",
+            51.451389,
+            7.0138,
+            1000,
+            1,
+            "E",
+            "Europe/Berlin");
     assertArrayEquals(expected, storage.getAirports().toArray());
   }
 
@@ -383,7 +417,9 @@ public class LoaderTest {
    */
   @Test
   public void testloadLineNewFileCreated() throws SQLException {
-    loader.loadLine("7800,\"Essen HBF\",\"Essen\",\"Germany\",\"ESX\",\"ESSE\",51.451389,7.0138,1000,1,\"E\",\"Europe/Berlin\"", "Airport");
+    loader.loadLine(
+        "7800,\"Essen HBF\",\"Essen\",\"Germany\",\"ESX\",\"ESSE\",51.451389,7.0138,1000,1,\"E\",\"Europe/Berlin\"",
+        "Airport");
     assertEquals("singleEntryAirports.csv", storage.getCurrentAirportFile());
   }
 
@@ -393,41 +429,38 @@ public class LoaderTest {
    */
   @Test
   public void testloadLineAddToNewFile() throws SQLException {
-    loader.loadLine("2508,\"Galaxy Air\",\\N,\"7O\",\"GAL\",\"GALAXY\",\"Kyrgyzstan\",\"N\"", "Airline");
+    loader.loadLine(
+        "2508,\"Galaxy Air\",\\N,\"7O\",\"GAL\",\"GALAXY\",\"Kyrgyzstan\",\"N\"", "Airline");
     Airline[] expected = new Airline[1];
-    expected[0] = new Airline(2508,"Galaxy Air","\\N","7O","GAL","GALAXY","Kyrgyzstan",false);
+    expected[0] =
+        new Airline(2508, "Galaxy Air", "\\N", "7O", "GAL", "GALAXY", "Kyrgyzstan", false);
     assertArrayEquals(expected, storage.getAirlines().toArray());
   }
 
-  /**
-   * Test that checkFile returns the expected error message when called with a valid file.
-   */
+  /** Test that checkFile returns the expected error message when called with a valid file. */
   @Test
   public void testCheckFileValidErrorMessage() throws FileNotFoundException, FileSystemException {
-    String message = loader.checkFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
+    String message =
+        loader.checkFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
     assertEquals("File uploaded with 0 invalid lines rejected.\n", message);
   }
 
-  /**
-   * Test that checkFile raises a runtime exception when called with an invalid file.
-   */
+  /** Test that checkFile raises a runtime exception when called with an invalid file. */
   @Test
   public void testCheckFileInvalidErrorMessage() throws FileNotFoundException, FileSystemException {
     try {
-      loader.checkFile("../seng202_project/src/test/java/TestFiles/singleairlinewrong.csv", "Airline");
+      loader.checkFile(
+          "../seng202_project/src/test/java/TestFiles/singleairlinewrong.csv", "Airline");
       fail();
     } catch (RuntimeException e) {
       assertTrue(true);
     }
   }
 
-  /**
-   * Test that checkFile doesn't upload any data when called with a valid file.
-   */
+  /** Test that checkFile doesn't upload any data when called with a valid file. */
   @Test
   public void testCheckFileDoesntUploadData() throws FileNotFoundException, FileSystemException {
     loader.checkFile("../seng202_project/src/test/java/TestFiles/singleairline.csv", "Airline");
     assertTrue(storage.getAirlines().isEmpty());
   }
-
 }
